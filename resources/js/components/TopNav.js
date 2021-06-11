@@ -114,7 +114,7 @@ const TopNav = (props) => {
 			</header>
 			<br />
 			<br />
-			<br className={"hidden"} />
+			<br />
 		</div>
 	)
 }

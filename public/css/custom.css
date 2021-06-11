@@ -94,11 +94,11 @@ a:focus {
     background-color: #ffffff;
 }
 
-.mysonar-btn:focus {
+/* .mysonar-btn:focus {
     background-color: #2f2f2f;
     font-size: 12px;
     color: #ffffff;
-}
+} */
 
 .mysonar-btn.white-btn {
     border-color: #ffffff;
@@ -106,10 +106,10 @@ a:focus {
     background-color: transparent;
 }
 
-.mysonar-btn.white-btn:focus {
+/* .mysonar-btn.white-btn:focus {
     background-color: #ffffff;
     color: #2f2f2f;
-}
+} */
 
 .mysonar-btn.green-btn {
     border-color: green;
@@ -117,10 +117,10 @@ a:focus {
     background-color: transparent;
 }
 
-.mysonar-btn.green-btn:focus {
+/* .mysonar-btn.green-btn:focus {
     background-color: green;
     color: #ffffff;
-}
+} */
 
 .mysonar-btn.btn-2 {
     background-color: #2f2f2f;
@@ -146,10 +146,10 @@ a:focus {
     z-index: -100;
 }
 
-.mysonar-btn.btn-3:focus {
+/* .mysonar-btn.btn-3:focus {
     background-color: #232323;
     color: #ffffff;
-}
+} */
 
 /* :: Header Area CSS */
 .header-area {

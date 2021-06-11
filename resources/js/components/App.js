@@ -14,6 +14,7 @@ import VideoCharts from '../pages/VideoCharts'
 
 function App() {
 
+	// Declare states
 	const [url, setUrl] = useState('http://localhost:3000')
 	const [auth, setAuth] = useState({
 		"name": "Guest",
@@ -27,12 +28,14 @@ function App() {
 	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
 	const [postComments, setPostComments] = useState([])
+	const [polls, setPolls] = useState([])
 	const [videos, setVideos] = useState([])
 	const [boughtVideos, setBoughtVideos] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
+	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
 		setTimeout(() => setErrors([]), 3000);
 		setTimeout(() => setMessage(''), 3000);
@@ -80,6 +83,8 @@ function App() {
 		fetchBoughtVideos()
 
 		fetchCartVideos()
+
+		fetchPolls()
 
 	}, [])
 
@@ -129,6 +134,13 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch post comments']))
 	}
 
+	// Fetch Polls
+	const fetchPolls = () => {
+		axios.get(`${url}/api/polls`)
+			.then((res) => setPolls(res.data))
+			.catch(() => setErrors(['Failed to fetch polls']))
+	}
+
 	// Fetch Decos
 	const fetchDecos = () => {
 		axios.get(`${url}/api/decos`)
@@ -164,7 +176,7 @@ function App() {
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, users, videos, posts, setPosts, postLikes, setPostLikes, postComments, decos, follows, setFollows, boughtVideos, cartVideos, setCartVideos }} />
+					<Index {...{ url, auth, setMessage, setErrors, users, videos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, boughtVideos, cartVideos, setCartVideos }} />
 				)} />
 				<Route path="/post-create" exact render={(props) => (
 					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
