@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PostCommentLikes;
 use App\PostComments;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,19 @@ class PostCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        /* Create new post */
+        $postComment = new PostComments;
+        $postComment->post_id = $request->input('post');
+        $postComment->username = auth()->user()->username;
+        $postComment->text = $request->input('text');
+        $postComment->media = "";
+        $postComment->save();
+
+        return response("Comment sent", 200);
     }
 
     /**
@@ -78,8 +91,12 @@ class PostCommentsController extends Controller
      * @param  \App\PostComments  $postComments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostComments $postComments)
+    public function destroy($id)
     {
-        //
+        $postComment = PostComments::where('id', $id)->first();
+        $deleteCLikes = PostCommentLikes::where('comment_id', $id)->delete();
+        PostComments::find($id)->delete();
+
+        return response("Comment deleted", 200);
     }
 }

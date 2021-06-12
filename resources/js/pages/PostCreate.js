@@ -26,6 +26,7 @@ const PostCreate = (props) => {
 
 	// Get history for page location
 	const history = useHistory()
+	
 	// Assign id to element
 	const mediaInput = React.useRef(null)
 

@@ -10,6 +10,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Index from '../pages/Index'
 import PostCreate from '../pages/PostCreate'
+import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
 	const [postComments, setPostComments] = useState([])
+	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
 	const [videos, setVideos] = useState([])
 	const [boughtVideos, setBoughtVideos] = useState([])
@@ -86,6 +88,8 @@ function App() {
 
 		fetchPolls()
 
+		fetchPostCommentLikes()
+
 	}, [])
 
 	//Fetch Auth
@@ -134,6 +138,13 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch post comments']))
 	}
 
+	// Fetch Post Comment likes
+	const fetchPostCommentLikes = () => {
+		axios.get(`${url}/api/post-comment-likes`)
+			.then((res) => setPostCommentLikes(res.data))
+			.catch(() => setErrors(['failed to fetch post comment likes']))
+	}
+
 	// Fetch Polls
 	const fetchPolls = () => {
 		axios.get(`${url}/api/polls`)
@@ -176,10 +187,30 @@ function App() {
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, users, videos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, boughtVideos, cartVideos, setCartVideos }} />
+					<Index {...{
+						url, auth,
+						setMessage, setErrors,
+						users,
+						videos,
+						posts, setPosts, postLikes, setPostLikes, postComments,
+						polls, setPolls,
+						decos,
+						follows, setFollows,
+						boughtVideos,
+						cartVideos, setCartVideos
+					}} />
 				)} />
 				<Route path="/post-create" exact render={(props) => (
 					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
+				)} />
+				<Route path="/post-show/:id" exact render={(props) => (
+					<PostShow {...{
+						url, auth,
+						setMessage, setErrors,
+						users,
+						postComments, setPostComments, postCommentLikes, setPostCommentLikes,
+						decos
+					}} />
 				)} />
 				<Route path="/video-charts" exact component={VideoCharts} />
 				<Messages {...{ message, errors }} />

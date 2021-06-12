@@ -43,7 +43,7 @@ Route::resources([
     'posts' => 'PostsController',
     'post-likes' => 'PostLikesController',
     'post-comments' => 'PostCommentsController',
-    'post-comments-likes' => 'PostCommentLikesController',
+    'post-comment-likes' => 'PostCommentLikesController',
     'polls' => 'PollsController',
     'audios' => 'AudiosController',
     'audio-likes' => 'AudioLikesController',

@@ -11,7 +11,7 @@ const TopNav = (props) => {
 	const [menu, setMenu] = useState("")
 	const location = useLocation()
 	var display
-	location.pathname == "/post-create" ? display = "none" : display = ""
+	location.pathname == "/post-create" || location.pathname.match(/post-show/) ? display = "none" : display = ""
 
 	return (
 		<div id="MyElement" style={{ display: display }} className={menu}>

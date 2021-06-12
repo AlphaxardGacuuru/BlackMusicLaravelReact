@@ -262,7 +262,7 @@ const Index = (props) => {
 											style={{ borderRadius: "10px" }}>
 											<div className="thumbnail"
 												style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-												<Link href='/video-charts/{video.id}'>
+												<Link to='/video-charts/{video.id}'>
 													<Img src={video.thumbnail} width="160em" height="90em" />
 												</Link>
 											</div>
@@ -330,8 +330,7 @@ const Index = (props) => {
 									</div>
 								</div>
 								<div className='media-body'>
-									<h6
-										className="media-heading m-0"
+									<h6 className="media-heading m-0"
 										style={{
 											width: "100%",
 											whiteSpace: "nowrap",
@@ -550,7 +549,7 @@ const Index = (props) => {
 									<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
 
 									{/* Post comments */}
-									<Link to={"post-comments/" + post.id}>
+									<Link to={"post-show/" + post.id}>
 										<svg className="bi bi-chat ml-5" width="1.2em" height="1.2em" viewBox="0 0 16 16"
 											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd"
@@ -611,7 +610,7 @@ const Index = (props) => {
 									key={index}
 									className="media p-2 border-bottom">
 									<div className="media-left thumbnail">
-										<Link href='/video-charts/{video.id}'>
+										<Link to='/video-charts/{video.id}'>
 											<Img src={video.thumbnail} width="160em" height="90em" />
 										</Link>
 									</div>
