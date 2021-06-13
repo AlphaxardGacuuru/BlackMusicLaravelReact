@@ -70802,9 +70802,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/Login */ "./resources/js/pages/Login.js");
 /* harmony import */ var _pages_Register__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/Register */ "./resources/js/pages/Register.js");
 /* harmony import */ var _pages_Index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/Index */ "./resources/js/pages/Index.js");
-/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
-/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
-/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Profile */ "./resources/js/pages/Profile.js");
+/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
+/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
+/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -70822,6 +70823,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -71284,6 +71286,9 @@ function App() {
         setErrors: setErrors,
         users: users,
         videos: videos,
+        boughtVideos: boughtVideos,
+        cartVideos: cartVideos,
+        setCartVideos: setCartVideos,
         posts: posts,
         setPosts: setPosts,
         postLikes: postLikes,
@@ -71293,17 +71298,40 @@ function App() {
         setPolls: setPolls,
         decos: decos,
         follows: follows,
-        setFollows: setFollows,
+        setFollows: setFollows
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/profile",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        setMessage: setMessage,
+        setErrors: setErrors,
+        setAuth: setAuth,
+        url: url,
+        users: users,
+        videos: videos,
         boughtVideos: boughtVideos,
         cartVideos: cartVideos,
-        setCartVideos: setCartVideos
+        setCartVideos: setCartVideos,
+        posts: posts,
+        setPosts: setPosts,
+        postLikes: postLikes,
+        setPostLikes: setPostLikes,
+        postComments: postComments,
+        polls: polls,
+        setPolls: setPolls,
+        decos: decos,
+        follows: follows,
+        setFollows: setFollows
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/post-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_12__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -71315,7 +71343,7 @@ function App() {
     path: "/post-show/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_13__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -71331,7 +71359,7 @@ function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-charts",
     exact: true,
-    component: _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
     message: message,
     errors: errors
@@ -71858,8 +71886,6 @@ var TopNavLinks = function TopNavLinks(props) {
     e.preventDefault();
     axios.get('/sanctum/csrf-cookie').then(function () {
       axios.post("".concat(props.url, "/api/logout")).then(function (res) {
-        console.log(res); // const resStatus = res.statusText
-
         props.setMessage("Logged out");
         axios.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth({
@@ -72240,6 +72266,7 @@ var Index = function Index(props) {
     });
   };
 
+  var percentage = 100;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.auth.account_type == 'musician' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "post-create",
     id: "floatBtn"
@@ -72270,7 +72297,7 @@ var Index = function Index(props) {
       borderRadius: "50%"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/users/" + props.auth.username
+    to: "/profile/" + props.auth.username
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: '/storage/' + props.auth.pp,
     width: "100px",
@@ -72343,7 +72370,7 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/home/{musician.username}"
+      to: "/profile/".concat(musician.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: '/storage/profile-pics/male_avatar.png',
       width: "30px",
@@ -72482,7 +72509,7 @@ var Index = function Index(props) {
         borderRadius: "50%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "/home/{post.username}"
+      href: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(props.users.find(function (user) {
         return user.username == post.username;
@@ -72540,7 +72567,7 @@ var Index = function Index(props) {
       alt: 'post-media',
       width: "100%",
       height: "auto"
-    })), post.parameter_1 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 > 1 ? props.polls.some(function (poll) {
+    })), post.parameter_1 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_1;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
@@ -72561,20 +72588,36 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_1);
       }
     }) : props.polls.some(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn btn-2 mb-1",
-      btnText: post.parameter_1,
-      btnStyle: {
-        width: "100%"
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_1;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_1;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn mb-1",
-      btnText: post.parameter_1,
-      btnStyle: {
-        width: "100%"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
       }
-    }) : "", post.parameter_2 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 > 1 ? props.polls.some(function (poll) {
+    }, post.parameter_1)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_1)) : "", post.parameter_2 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_2;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
@@ -72595,20 +72638,36 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_2);
       }
     }) : props.polls.some(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn btn-2 mb-1",
-      btnText: post.parameter_2,
-      btnStyle: {
-        width: "100%"
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_2;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_2;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn mb-1",
-      btnText: post.parameter_2,
-      btnStyle: {
-        width: "100%"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
       }
-    }) : "", post.parameter_3 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 > 1 ? props.polls.some(function (poll) {
+    }, post.parameter_2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_2)) : "", post.parameter_3 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_3;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
@@ -72629,20 +72688,36 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_3);
       }
     }) : props.polls.some(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn btn-2 mb-1",
-      btnText: post.parameter_3,
-      btnStyle: {
-        width: "100%"
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_3;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_3;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn mb-1",
-      btnText: post.parameter_3,
-      btnStyle: {
-        width: "100%"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
       }
-    }) : "", post.parameter_4 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 > 1 ? props.polls.some(function (poll) {
+    }, post.parameter_3)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_3)) : "", post.parameter_4 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_4;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
@@ -72663,20 +72738,36 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_4);
       }
     }) : props.polls.some(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn btn-2 mb-1",
-      btnText: post.parameter_4,
-      btnStyle: {
-        width: "100%"
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_4;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_4;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn mb-1",
-      btnText: post.parameter_4,
-      btnStyle: {
-        width: "100%"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
       }
-    }) : "", post.parameter_5 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 > 1 ? props.polls.some(function (poll) {
+    }, post.parameter_4)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_4)) : "", post.parameter_5 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_5;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
@@ -72697,22 +72788,42 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_5);
       }
     }) : props.polls.some(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn btn-2 mb-1",
-      btnText: post.parameter_5,
-      btnStyle: {
-        width: "100%"
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_5;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_5;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: "mysonar-btn mb-1",
-      btnText: post.parameter_5,
-      btnStyle: {
-        width: "100%"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
       }
-    }) : "", post.parameter_1 && props.polls.filter(function (poll) {
-      return poll.username == props.auth.username && poll.post_id == post.id;
-    }).length, post.parameter_1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.postLikes.find(function (postLike) {
+    }, post.parameter_5)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_5)) : "", post.parameter_1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      style: {
+        color: "grey"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes:", post.parameter_1 && props.polls.filter(function (poll) {
+      return poll.post_id == post.id;
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), props.postLikes.find(function (postLike) {
       return postLike.post_id == post.id && postLike.username == props.auth.username;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
@@ -72733,7 +72844,9 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       fillRule: "evenodd",
       d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postLikes.filter(function (postLike) {
+      return postLike.post_id == post.id;
+    }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       onClick: function onClick(e) {
         e.preventDefault();
@@ -72748,9 +72861,9 @@ var Index = function Index(props) {
       viewBox: "0 0 16 16"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postLikes.filter(function (postLike) {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postLikes.filter(function (postLike) {
       return postLike.post_id == post.id;
-    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "post-show/" + post.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-chat ml-5",
@@ -73660,6 +73773,27 @@ var PostShow = function PostShow(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PostShow);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Profile.js":
+/*!***************************************!*\
+  !*** ./resources/js/pages/Profile.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Profile = function Profile() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Profile);
 
 /***/ }),
 

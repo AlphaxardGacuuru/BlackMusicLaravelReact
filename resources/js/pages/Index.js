@@ -106,6 +106,8 @@ const Index = (props) => {
 		})
 	}
 
+	var percentage = 100
+
 	return (
 		<>
 			{/* Post button */}
@@ -127,7 +129,7 @@ const Index = (props) => {
 					<div className="d-flex border">
 						<div className="p-2">
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
-								<Link to={"/users/" + props.auth.username}>
+								<Link to={"/profile/" + props.auth.username}>
 									<Img
 										src={'/storage/' + props.auth.pp}
 										width="100px"
@@ -208,7 +210,7 @@ const Index = (props) => {
 						}).slice(0, 10).map((musician, index) => (
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
-									<Link to='/home/{musician.username}'>
+									<Link to={`/profile/${musician.username}`}>
 										<Img src={'/storage/profile-pics/male_avatar.png'} width="30px" height="30px" alt="musician" />
 									</Link>
 								</div>
@@ -323,7 +325,7 @@ const Index = (props) => {
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<a href='/home/{post.username}'>
+										<a href={`/profile/${post.username}`}>
 											<Img src={`/storage/${props.users.find((user) => user.username == post.username).pp}`}
 												width="40px" height="40px" alt={'avatar'} />
 										</a>
@@ -368,7 +370,7 @@ const Index = (props) => {
 
 									{/* Show poll */}
 									{post.parameter_1 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) > 1) ?
+										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
 											props.polls.some((poll) => {
 												return poll.username == props.auth.username &&
 													poll.post_id == post.id &&
@@ -385,20 +387,33 @@ const Index = (props) => {
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
 											: props.polls.some((poll) => {
-												return poll.username == props.auth.username && poll.post_id == post.id
+												// Get percentage votes for poll
+												percentage = props.polls
+													.filter((poll) => poll.post_id == post.id &&
+														poll.parameter == post.parameter_1)
+													.length * 100 /
+													props.polls.filter((poll) => poll.post_id == post.id).length
+
+												return poll.username == props.auth.username &&
+													poll.post_id == post.id &&
+													poll.parameter == post.parameter_1
 											}) ?
-												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
-													btnText={post.parameter_1}
-													btnStyle={{ width: "100%" }} />
-												: <Button
-													btnClass={"mysonar-btn mb-1"}
-													btnText={post.parameter_1}
-													btnStyle={{ width: "100%" }} />
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														{post.parameter_1}
+													</div>
+												</div>
+												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														{post.parameter_1}
+													</div>
+												</div>
 										: ""}
 
 									{post.parameter_2 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) > 1) ?
+										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
 											props.polls.some((poll) => {
 												return poll.username == props.auth.username &&
 													poll.post_id == post.id &&
@@ -415,20 +430,33 @@ const Index = (props) => {
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
 											: props.polls.some((poll) => {
-												return poll.username == props.auth.username && poll.post_id == post.id
+												// Get percentage votes for poll
+												percentage = props.polls
+													.filter((poll) => poll.post_id == post.id &&
+														poll.parameter == post.parameter_2)
+													.length * 100 /
+													props.polls.filter((poll) => poll.post_id == post.id).length
+
+												return poll.username == props.auth.username &&
+													poll.post_id == post.id &&
+													poll.parameter == post.parameter_2
 											}) ?
-												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
-													btnText={post.parameter_2}
-													btnStyle={{ width: "100%" }} />
-												: <Button
-													btnClass={"mysonar-btn mb-1"}
-													btnText={post.parameter_2}
-													btnStyle={{ width: "100%" }} />
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														{post.parameter_2}
+													</div>
+												</div>
+												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														{post.parameter_2}
+													</div>
+												</div>
 										: ""}
 
 									{post.parameter_3 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) > 1) ?
+										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
 											props.polls.some((poll) => {
 												return poll.username == props.auth.username &&
 													poll.post_id == post.id &&
@@ -445,20 +473,33 @@ const Index = (props) => {
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
 											: props.polls.some((poll) => {
-												return poll.username == props.auth.username && poll.post_id == post.id
+												// Get percentage votes for poll
+												percentage = props.polls
+													.filter((poll) => poll.post_id == post.id &&
+														poll.parameter == post.parameter_3)
+													.length * 100 /
+													props.polls.filter((poll) => poll.post_id == post.id).length
+
+												return poll.username == props.auth.username &&
+													poll.post_id == post.id &&
+													poll.parameter == post.parameter_3
 											}) ?
-												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
-													btnText={post.parameter_3}
-													btnStyle={{ width: "100%" }} />
-												: <Button
-													btnClass={"mysonar-btn mb-1"}
-													btnText={post.parameter_3}
-													btnStyle={{ width: "100%" }} />
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														{post.parameter_3}
+													</div>
+												</div>
+												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														{post.parameter_3}
+													</div>
+												</div>
 										: ""}
 
 									{post.parameter_4 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) > 1) ?
+										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
 											props.polls.some((poll) => {
 												return poll.username == props.auth.username &&
 													poll.post_id == post.id &&
@@ -475,20 +516,33 @@ const Index = (props) => {
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
 											: props.polls.some((poll) => {
-												return poll.username == props.auth.username && poll.post_id == post.id
+												// Get percentage votes for poll
+												percentage = props.polls
+													.filter((poll) => poll.post_id == post.id &&
+														poll.parameter == post.parameter_4)
+													.length * 100 /
+													props.polls.filter((poll) => poll.post_id == post.id).length
+
+												return poll.username == props.auth.username &&
+													poll.post_id == post.id &&
+													poll.parameter == post.parameter_4
 											}) ?
-												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
-													btnText={post.parameter_4}
-													btnStyle={{ width: "100%" }} />
-												: <Button
-													btnClass={"mysonar-btn mb-1"}
-													btnText={post.parameter_4}
-													btnStyle={{ width: "100%" }} />
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														{post.parameter_4}
+													</div>
+												</div>
+												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														{post.parameter_4}
+													</div>
+												</div>
 										: ""}
 
 									{post.parameter_5 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) > 1) ?
+										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
 											props.polls.some((poll) => {
 												return poll.username == props.auth.username &&
 													poll.post_id == post.id &&
@@ -505,38 +559,59 @@ const Index = (props) => {
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
 											: props.polls.some((poll) => {
-												return poll.username == props.auth.username && poll.post_id == post.id
+												// Get percentage votes for poll
+												percentage = props.polls
+													.filter((poll) => poll.post_id == post.id &&
+														poll.parameter == post.parameter_5)
+													.length * 100 /
+													props.polls.filter((poll) => poll.post_id == post.id).length
+
+												return poll.username == props.auth.username &&
+													poll.post_id == post.id &&
+													poll.parameter == post.parameter_5
 											}) ?
-												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
-													btnText={post.parameter_5}
-													btnStyle={{ width: "100%" }} />
-												: <Button
-													btnClass={"mysonar-btn mb-1"}
-													btnText={post.parameter_5}
-													btnStyle={{ width: "100%" }} />
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														{post.parameter_5}
+													</div>
+												</div> :
+												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
+													<div className='progress-bar'
+														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														{post.parameter_5}
+													</div>
+												</div>
 										: ""}
 
 									{/* Total votes */}
-									{post.parameter_1 && props.polls.filter((poll) => {
-										return poll.username == props.auth.username && poll.post_id == post.id
-									}).length}
-									{post.parameter_1 && <br />}
+									{post.parameter_1 &&
+										<small style={{ color: "grey" }}>
+											<i>
+												Total votes:
+												{post.parameter_1 && props.polls.filter((poll) => {
+													return poll.post_id == post.id
+												}).length}
+											</i>
+											<br />
+										</small>}
 
 									{/* Post likes */}
 									{props.postLikes.find((postLike) => {
 										return postLike.post_id == post.id && postLike.username == props.auth.username
-									}) ? <a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
-										e.preventDefault()
-										onPostLike(post.id)
-									}}>
-										<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-											className='bi bi-heart-fill' viewBox='0 0 16 16'>
-											<path fillRule='evenodd'
-												d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-										</svg>
-									</a>
-										: <a href='#' onClick={(e) => {
+									}) ?
+										<a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
+											e.preventDefault()
+											onPostLike(post.id)
+										}}>
+											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
+												className='bi bi-heart-fill' viewBox='0 0 16 16'>
+												<path fillRule='evenodd'
+													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
+											</svg>
+											<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
+										</a> :
+										<a href="#" onClick={(e) => {
 											e.preventDefault()
 											onPostLike(post.id)
 										}}>
@@ -545,8 +620,8 @@ const Index = (props) => {
 												<path
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
+											<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
 										</a>}
-									<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
 
 									{/* Post comments */}
 									<Link to={"post-show/" + post.id}>

@@ -9,6 +9,7 @@ import BottomNav from './BottomNav'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Index from '../pages/Index'
+import Profile from '../pages/Profile'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
@@ -187,30 +188,16 @@ function App() {
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/" exact render={(props) => (
-					<Index {...{
-						url, auth,
-						setMessage, setErrors,
-						users,
-						videos,
-						posts, setPosts, postLikes, setPostLikes, postComments,
-						polls, setPolls,
-						decos,
-						follows, setFollows,
-						boughtVideos,
-						cartVideos, setCartVideos
-					}} />
+					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
+				)} />
+				<Route path="/profile" exact render={(props) => (
+					<Profile {...{ setMessage, setErrors, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
 				<Route path="/post-create" exact render={(props) => (
 					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
 				)} />
 				<Route path="/post-show/:id" exact render={(props) => (
-					<PostShow {...{
-						url, auth,
-						setMessage, setErrors,
-						users,
-						postComments, setPostComments, postCommentLikes, setPostCommentLikes,
-						decos
-					}} />
+					<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
 				)} />
 				<Route path="/video-charts" exact component={VideoCharts} />
 				<Messages {...{ message, errors }} />
