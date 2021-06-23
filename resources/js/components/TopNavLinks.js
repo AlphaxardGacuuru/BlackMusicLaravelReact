@@ -158,7 +158,7 @@ const TopNavLinks = (props) => {
 				</a>
 				<div style={{ borderRadius: "0" }} className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<Link to="/home"
+					<Link to={`/profile/${props.auth.username}`}
 						className="p-3 dropdown-item border-bottom">
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>

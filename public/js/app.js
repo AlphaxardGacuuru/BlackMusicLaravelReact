@@ -71302,12 +71302,13 @@ function App() {
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/profile",
+    path: "/profile/:username",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_11__["default"], {
         setMessage: setMessage,
         setErrors: setErrors,
+        auth: auth,
         setAuth: setAuth,
         url: url,
         users: users,
@@ -71857,7 +71858,9 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), location.pathname.match(/profile/) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TopNav);
@@ -72098,7 +72101,7 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "dropdown-menu dropdown-menu-right m-0 p-0",
     "aria-labelledby": "dropdownMenuButton"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/home",
+    to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
@@ -72924,7 +72927,7 @@ var Index = function Index(props) {
     return !props.boughtVideos.some(function (boughtVideo) {
       return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
     });
-  }).map(function (video, index) {
+  }).slice(0, 10).map(function (video, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
       className: "media p-2 border-bottom"
@@ -73787,10 +73790,741 @@ var PostShow = function PostShow(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
 
-var Profile = function Profile() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+
+
+
+
+var Profile = function Profile(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      username = _useParams.username; // Function for following musicians
+
+
+  var onFollow = function onFollow(musician) {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(props.url, "/api/follows"), {
+        musician: musician
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/follows")).then(function (res) {
+          return props.setFollows(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for adding video to cart
+
+
+  var onCartVideos = function onCartVideos(video) {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(props.url, "/api/cart-videos"), {
+        video: video
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for liking posts
+
+
+  var onPostLike = function onPostLike(post) {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(props.url, "/api/post-likes"), {
+        post: post
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/post-likes")).then(function (res) {
+          return props.setPostLikes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for deleting posts
+
+
+  var onDeletePost = function onDeletePost(id) {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for voting in poll
+
+
+  var onPoll = function onPoll(post, parameter) {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(props.url, "/api/polls"), {
+        post: post,
+        parameter: parameter
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/polls")).then(function (res) {
+          return props.setPolls(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  var percentage = 100;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row p-0 m-0",
+    style: {
+      backgroundImage: "url('/storage/img/headphones.jpg')",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      position: "relative",
+      height: "100%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-12 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      marginTop: "100px",
+      top: "70px",
+      left: "10px"
+    },
+    className: "avatar-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    style: {
+      position: "absolute",
+      zIndex: "99"
+    },
+    imgClass: "avatar hover-img",
+    src: "/storage/".concat(props.users.filter(function (user) {
+      return user.username == username;
+    }).map(function (user) {
+      return user.pp;
+    }))
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-10"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.auth.username == username ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/profile/edit"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "float-right mysonar-btn"
+  }, "edit profile")) : props.boughtVideos.find(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username && boughtVideo.artist == username;
+  }) || props.auth.username == "@blackmusic" ? props.follows.find(function (follow) {
+    return follow.followed == username && follow.username == props.auth.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: 'btn btn-light float-right rounded-0',
+    onClick: function onClick() {
+      return onFollow(username);
+    }
+  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-check",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"
+  }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: 'mysonar-btn float-right',
+    onClick: function onClick() {
+      return onFollow(username);
+    },
+    btnText: 'follow'
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: 'mysonar-btn float-right',
+    onClick: function onClick() {
+      return props.setErrors(["You must have bought atleast one song by ".concat(username)]);
+    },
+    btnText: 'follow'
+  }), props.users.filter(function (user) {
+    return user.username == username;
+  }).map(function (user, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, user.bio));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, "Following", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.follows.filter(function (follow) {
+    return follow.follower == username;
+  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, "Fans", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.follows.filter(function (follow) {
+    return follow.followed == username;
+  }).length - 1))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-1"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Posts")), props.posts.filter(function (post) {
+    return post.username == username;
+  }).filter(function (post) {
+    return props.follows.some(function (follow) {
+      return follow.followed == post.username && follow.username == props.auth.username;
+    });
+  }).map(function (post, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: index,
+      className: "media p-2 border-bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-left"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "avatar-thumbnail-xs",
+      style: {
+        borderRadius: "50%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "/profile/".concat(post.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: "/storage/".concat(props.users.find(function (user) {
+        return user.username == post.username;
+      }).pp),
+      width: "40px",
+      height: "40px",
+      alt: 'avatar'
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-body"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "media-heading m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
+      return user.username == post.username;
+    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, post.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        color: "gold"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-circle",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        fontSize: "10px"
+      }
+    }, " ", props.decos.filter(function (deco) {
+      return deco.username == post.username;
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "float-right mr-1"
+    }, post.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
+    }, post.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "mb-1",
+      style: {
+        borderTopLeftRadius: "10px",
+        borderTopRightRadius: "10px",
+        borderBottomRightRadius: "10px",
+        borderBottomLeftRadius: "10px",
+        overflow: "hidden"
+      }
+    }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: "/storage/".concat(post.media),
+      alt: 'post-media',
+      width: "100%",
+      height: "auto"
+    })), post.parameter_1 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_1;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn btn-2 mb-1",
+      btnText: post.parameter_1,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_1);
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn mb-1",
+      btnText: post.parameter_1,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_1);
+      }
+    }) : props.polls.some(function (poll) {
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_1;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_1;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
+      }
+    }, post.parameter_1)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_1)) : "", post.parameter_2 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_2;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn btn-2 mb-1",
+      btnText: post.parameter_2,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_2);
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn mb-1",
+      btnText: post.parameter_2,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_2);
+      }
+    }) : props.polls.some(function (poll) {
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_2;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_2;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
+      }
+    }, post.parameter_2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_2)) : "", post.parameter_3 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_3;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn btn-2 mb-1",
+      btnText: post.parameter_3,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_3);
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn mb-1",
+      btnText: post.parameter_3,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_3);
+      }
+    }) : props.polls.some(function (poll) {
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_3;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_3;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
+      }
+    }, post.parameter_3)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_3)) : "", post.parameter_4 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_4;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn btn-2 mb-1",
+      btnText: post.parameter_4,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_4);
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn mb-1",
+      btnText: post.parameter_4,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_4);
+      }
+    }) : props.polls.some(function (poll) {
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_4;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_4;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
+      }
+    }, post.parameter_4)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_4)) : "", post.parameter_5 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_5;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn btn-2 mb-1",
+      btnText: post.parameter_5,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_5);
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: "mysonar-btn mb-1",
+      btnText: post.parameter_5,
+      btnStyle: {
+        width: "100%"
+      },
+      onClick: function onClick() {
+        return onPoll(post.id, post.parameter_5);
+      }
+    }) : props.polls.some(function (poll) {
+      // Get percentage votes for poll
+      percentage = props.polls.filter(function (poll) {
+        return poll.post_id == post.id && poll.parameter == post.parameter_5;
+      }).length * 100 / props.polls.filter(function (poll) {
+        return poll.post_id == post.id;
+      }).length;
+      return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_5;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "#232323"
+      }
+    }, post.parameter_5)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress rounded-0 mb-1",
+      style: {
+        height: '33px'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "progress-bar",
+      style: {
+        width: "".concat(percentage, "%"),
+        backgroundColor: "grey"
+      }
+    }, post.parameter_5)) : "", post.parameter_1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      style: {
+        color: "grey"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes:", post.parameter_1 && props.polls.filter(function (poll) {
+      return poll.post_id == post.id;
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), props.postLikes.find(function (postLike) {
+      return postLike.post_id == post.id && postLike.username == props.auth.username;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      style: {
+        color: "#cc3300"
+      },
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onPostLike(post.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "1.2em",
+      height: "1.2em",
+      fill: "currentColor",
+      className: "bi bi-heart-fill",
+      viewBox: "0 0 16 16"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postLikes.filter(function (postLike) {
+      return postLike.post_id == post.id;
+    }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onPostLike(post.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "1.2em",
+      height: "1.2em",
+      fill: "currentColor",
+      className: "bi bi-heart",
+      viewBox: "0 0 16 16"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postLikes.filter(function (postLike) {
+      return postLike.post_id == post.id;
+    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "post-show/" + post.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-chat ml-5",
+      width: "1.2em",
+      height: "1.2em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.postComments.filter(function (postComment) {
+      return postComment.post_id == post.id;
+    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropup float-right"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      role: "button",
+      id: "dropdownMenuLink",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-three-dots-vertical",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropdown-menu dropdown-menu-right p-0",
+      style: {
+        borderRadius: "0"
+      }
+    }, post.username !== props.auth.username ? post.username !== "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      className: "dropdown-item",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onFollow(post.username);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Unfollow")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      className: "dropdown-item",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onDeletePost(post.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete post"))))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.videos.filter(function (video) {
+    return video.username == username;
+  }).filter(function (video) {
+    return !props.boughtVideos.some(function (boughtVideo) {
+      return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
+    });
+  }).map(function (video, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: index,
+      className: "media p-2 border-bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-left thumbnail"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/video-charts/{video.id}"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: video.thumbnail,
+      width: "160em",
+      height: "90em"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-body ml-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0 pt-2 pr-1 pl-1",
+      style: {
+        width: "150px",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, video.username)), props.cartVideos.find(function (cartVideo) {
+      return cartVideo.video_id == video.id && cartVideo.username == props.auth.username;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-light mb-1 rounded-0",
+      style: {
+        minWidth: '40px',
+        height: '33px'
+      },
+      onClick: function onClick() {
+        return onCartVideos(video.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-cart3",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "mysonar-btn mb-1",
+      style: {
+        minWidth: '40px',
+        height: '33px'
+      },
+      onClick: function onClick() {
+        return onCartVideos(video.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-cart3",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: 'btn mysonar-btn green-btn float-right',
+      btnText: 'buy'
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3"
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Profile);

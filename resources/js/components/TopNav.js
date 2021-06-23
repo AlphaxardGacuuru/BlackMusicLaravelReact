@@ -114,7 +114,8 @@ const TopNav = (props) => {
 			</header>
 			<br />
 			<br />
-			<br />
+			{/* Remove for profile page for better background image */}
+			{location.pathname.match(/profile/) ? <br className="hidden"/> : <br />}
 		</div>
 	)
 }

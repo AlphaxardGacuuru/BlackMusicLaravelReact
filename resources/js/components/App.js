@@ -190,8 +190,8 @@ function App() {
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
-				<Route path="/profile" exact render={(props) => (
-					<Profile {...{ setMessage, setErrors, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
+				<Route path="/profile/:username" exact render={(props) => (
+					<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
 				<Route path="/post-create" exact render={(props) => (
 					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
