@@ -145,7 +145,7 @@ const Profile = (props) => {
 					{/* Check whether user has bought at least one song from musician */}
 					{/* Check whether user has followed musician and display appropriate button */}
 					{props.auth.username == username ?
-						<Link to="/profile/edit">
+						<Link to="/profile-edit">
 							<button className="float-right mysonar-btn">edit profile</button>
 						</Link>
 						: props.boughtVideos.find((boughtVideo) => {

@@ -10,6 +10,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Index from '../pages/Index'
 import Profile from '../pages/Profile'
+import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
@@ -190,15 +191,23 @@ function App() {
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
+
 				<Route path="/profile/:username" exact render={(props) => (
 					<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
+
+				<Route path="/profile-edit" exact render={(props) => (
+					<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
+				)} />
+
 				<Route path="/post-create" exact render={(props) => (
 					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
 				)} />
+
 				<Route path="/post-show/:id" exact render={(props) => (
 					<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
 				)} />
+				
 				<Route path="/video-charts" exact component={VideoCharts} />
 				<Messages {...{ message, errors }} />
 				<BottomNav />

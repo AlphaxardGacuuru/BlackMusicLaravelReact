@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -69,7 +70,48 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'string|nullable|max:20',
+            'phone' => 'string|nullable|startsWith:07|min:10|max:10',
+            'profile-pic' => 'image|nullable|max:9999',
+            'bio' => 'string|nullable|max:50',
+            'withdrawal' => 'string|nullable',
+        ]);
+
+        /* Handle file upload */
+        if ($request->hasFile('profile-pic')) {
+            $pp = $request->file('profile-pic')->store('public/profile-pics');
+            if (auth()->user()->pp != 'profile-pics/male_avatar.png') {
+                Storage::delete('public/' . auth()->user()->pp);
+            }
+            $pp = substr($pp, 7);
+        }
+
+        /* Update profile */
+        $user = User::find($id);
+        if ($request->filled('name')) {
+            $user->name = $request->input('name');
+        }
+
+        if ($request->filled('phone')) {
+            $user->phone = $request->input('phone');
+        }
+
+        if ($request->hasFile('profile-pic')) {
+            $user->pp = $pp;
+        }
+
+        if ($request->filled('bio')) {
+            $user->bio = $request->input('bio');
+        }
+
+        if ($request->filled('withdrawal')) {
+            $user->withdrawal = $request->input('withdrawal');
+        }
+
+		$user->save();
+		
+        return response("Account updated", 200);
     }
 
     /**

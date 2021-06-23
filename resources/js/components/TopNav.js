@@ -44,8 +44,8 @@ const TopNav = (props) => {
 												d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
 										</svg>
 									</span>
-								Home
-                    		</Link>
+									Home
+								</Link>
 							</li>
 							<li className='nav-item active'>
 								<Link to='/video-charts' className='nav-link' onClick={() => setMenu("")}>
@@ -58,8 +58,8 @@ const TopNav = (props) => {
 												d="M6 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1zm.94 6.44l4.95-2.83-2.83 4.95-4.95 2.83 2.83-4.95z" />
 										</svg>
 									</span>
-								Discover
-                    		</Link>
+									Discover
+								</Link>
 							</li>
 							<li className='nav-item active'>
 								<Link to='/library' className='nav-link' onClick={() => setMenu("")}>
@@ -70,8 +70,8 @@ const TopNav = (props) => {
 												d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
 										</svg>
 									</span>
-								Library
-                    		</Link>
+									Library
+								</Link>
 							</li>
 						</ul>
 					</nav>
@@ -99,7 +99,13 @@ const TopNav = (props) => {
 											<TopnavLinks {...props} />}
 									</div>
 									{/* <!-- Menu Icon --> */}
-									<a href="#" className="hidden" id="menuIcon" onClick={() => setMenu("menu-open")}>
+									<a href="#"
+										className="hidden"
+										id="menuIcon"
+										onClick={(e) => {
+											e.preventDefault()
+											setMenu("menu-open")
+										}}>
 										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#fff"
 											className="bi bi-list" viewBox="0 0 16 16">
 											<path fillRule="evenodd"
@@ -115,7 +121,7 @@ const TopNav = (props) => {
 			<br />
 			<br />
 			{/* Remove for profile page for better background image */}
-			{location.pathname.match(/profile/) ? <br className="hidden"/> : <br />}
+			{location.pathname.match(/profile/) ? <br className="hidden" /> : <br />}
 		</div>
 	)
 }
