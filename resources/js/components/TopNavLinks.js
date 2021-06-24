@@ -4,6 +4,9 @@ import Img from "./Img"
 
 const TopNavLinks = (props) => {
 
+	// Get number of items in video cart
+	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
+
 	const logout = (e) => {
 		e.preventDefault()
 
@@ -52,7 +55,7 @@ const TopNavLinks = (props) => {
 				</svg>
 				<span className="badge badge-danger rounded-circle"
 					style={{ position: "absolute", right: "10.5em", top: "0.5em", border: "solid #232323" }}>
-					{props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length}
+					{vidCartItems > 0 && vidCartItems}
 				</span>
 			</Link>
 

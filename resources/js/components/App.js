@@ -17,6 +17,7 @@ import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
 import Cart from '../pages/Cart'
+import Library from '../pages/Library'
 
 function App() {
 
@@ -216,6 +217,11 @@ function App() {
 				)} />
 
 				<Route path="/video-charts" exact component={VideoCharts} />
+
+				<Route path="/library" exact render={(props) => (
+					<Library {...{ auth, videos, boughtVideos }} />
+				)} />
+
 				<Messages {...{ message, errors }} />
 				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />
 			</>

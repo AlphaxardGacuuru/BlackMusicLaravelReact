@@ -28,6 +28,7 @@ const Cart = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
+				<br className="hidden" />
 				<center><h1>Cart</h1></center>
 				<hr />
 				{props.cartVideos

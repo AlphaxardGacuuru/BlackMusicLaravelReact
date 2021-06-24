@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
 const Bottomnav = (props) => {
+
 	const location = useLocation()
+
+	// Get number of items in video cart
+	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
 
 	return (
 		<div className="row m-0 p-0">
@@ -61,7 +65,7 @@ const Bottomnav = (props) => {
 									top: "0.5em",
 									border: "solid #232323"
 								}}>
-								{props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length}
+								{vidCartItems > 0 && vidCartItems}
 							</span>
 						</Link>
 						<Link to="/library"
