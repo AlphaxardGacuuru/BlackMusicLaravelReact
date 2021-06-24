@@ -41,51 +41,21 @@ const TopNavLinks = (props) => {
 				</svg>
 			</Link>
 
-			{/* Cart Dropdown */}
-			<div className="dropdown mr-2">
-				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					<svg className="bi bi-cart3" width="1em" height="1em" viewBox="0 0 16 16"
-						fill="#fff" xmlns="http://www.w3.org/2000/svg">
-						<path fillRule="evenodd"
-							d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-					</svg>
-				</a>
-				<span className="badge badge-danger rounded-circle hidden"
-					style={{ padding: "3px 5px", position: "absolute", right: "-3px", top: "-3px", border: "solid #232323" }}>
-
+			{/* Cart */}
+			<Link to="/cart"
+				className="hidden"
+				aria-expanded="false">
+				<svg className="bi bi-cart3" width="1em" height="1em" viewBox="0 0 16 16"
+					fill="#fff" xmlns="http://www.w3.org/2000/svg">
+					<path fillRule="evenodd"
+						d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+				</svg>
+				<span className="badge badge-danger rounded-circle"
+					style={{ position: "absolute", right: "10.5em", top: "0.5em", border: "solid #232323" }}>
+					{props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length}
 				</span>
-				<div style={{ borderRadius: "0" }} className="dropdown-menu dropdown-menu-right"
-					aria-labelledby="dropdownMenuButton">
-					<a className="dropdown-item border-bottom" href="#">
-						<h4>Shopping Cart</h4>
-					</a>
-					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
+			</Link>
 
-						<div className='media p-2 border-bottom'>
-							<div className='media-left thumbnail'>
-								<Link to='/video-charts'>
-									<img src=''
-										width="160em" height="90em" />
-								</Link>
-							</div>
-							<div className='media-body ml-2'>
-								<h6 className="m-0"
-									style={{ width: "160px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}></h6>
-								<h6 style={{ width: "140px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-									<small></small>
-								</h6>
-								<h6 style={{ color: "green" }}>KES 20</h6>
-							</div>
-						</div>
-						<Link className="dropdown-item p-2" to="/cart">
-							<center>
-								<h6>Checkout</h6>
-							</center>
-						</Link>
-					</div>
-				</div>
-			</div>
 			{/* Notification Dropdown */}
 			<div className="dropdown mr-2">
 				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -116,8 +86,7 @@ const TopNavLinks = (props) => {
 						<div className='p-2 border-bottom'>
 							<a href='#'>
 								<p>
-									<small> just Decorated
-                                                                you.</small>
+									<small> just Decorated you.</small>
 								</p>
 							</a>
 						</div>
@@ -129,8 +98,7 @@ const TopNavLinks = (props) => {
 						<div className='p-1 border-bottom'>
 							<a href='#'>
 								<p className="m-0">
-									<small> became a
-                                                                fan.</small>
+									<small> became a fan.</small>
 								</p>
 							</a>
 						</div>
@@ -149,6 +117,7 @@ const TopNavLinks = (props) => {
 					</div>
 				</div>
 			</div>
+
 			{/* Avatar Dropdown */}
 			<div className="dropdown">
 				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"

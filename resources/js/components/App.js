@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+
 import Messages from './Messages'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
+
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Index from '../pages/Index'
@@ -14,6 +16,7 @@ import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
+import Cart from '../pages/Cart'
 
 function App() {
 
@@ -185,7 +188,7 @@ function App() {
 	return (
 		<Router>
 			<>
-				<TopNav {...{ url, auth, setMessage, setErrors, setAuth }} />
+				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/" exact render={(props) => (
@@ -207,10 +210,14 @@ function App() {
 				<Route path="/post-show/:id" exact render={(props) => (
 					<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
 				)} />
-				
+
+				<Route path="/cart" exact render={(props) => (
+					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos }} />
+				)} />
+
 				<Route path="/video-charts" exact component={VideoCharts} />
 				<Messages {...{ message, errors }} />
-				<BottomNav />
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />
 			</>
 		</Router>
 	);

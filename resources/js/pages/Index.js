@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import Button from '../components/Button'
 import axios from 'axios'
 import { some } from 'lodash'
 
 const Index = (props) => {
+	
+	const history = useHistory()
+
 	// Function for following musicians
 	const onFollow = (musician) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
@@ -35,6 +38,27 @@ const Index = (props) => {
 			}).then((res) => {
 				props.setMessage(res.data)
 				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -306,7 +330,10 @@ const Index = (props) => {
 													</svg>
 												</button>}
 											<br />
-											<Button btnClass={'btn mysonar-btn green-btn'} btnText={'buy'} />
+											<Button
+												btnClass={'btn mysonar-btn green-btn'}
+												btnText={'buy'}
+												onClick={() => onBuyVideos(video.id)} />
 										</span>
 									))}
 							<br />
@@ -683,8 +710,7 @@ const Index = (props) => {
 							))
 						.slice(0, 10)
 						.map((video, index) => (
-							<div
-								key={index}
+							<div key={index}
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
 									<Link to='/video-charts/{video.id}'>
