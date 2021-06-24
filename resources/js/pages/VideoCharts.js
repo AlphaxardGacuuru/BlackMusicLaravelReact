@@ -1,66 +1,73 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import Button from '../components/Button'
-import { useState, useEffect } from 'react'
 
-const VideoCharts = () => {
-	const [auth, setAuth] = useState([])
-	const [users, setUsers] = useState([])
-	const [videos, setVideos] = useState([])
+const VideoCharts = (props) => {
 
-	useEffect(() => {
-		// For Auth
-		const getAuth = async () => {
-			const authFromServer = await fetchAuth()
-			setAuth(authFromServer)
-		}
+	const history = useHistory()
 
-		getAuth()
+	const [chart, setChart] = useState(0)
+	const [genre, setGenre] = useState(0)
 
-		// For Users
-		const getUsers = async () => {
-			const usersFromServer = await fetchUsers()
-			setUsers(usersFromServer)
-		}
+	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"]
+	const genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]
 
-		getUsers()
-
-		// For Videos
-		const getVideos = async () => {
-			const videosFromServer = await fetchVideos()
-			setVideos(videosFromServer)
-		}
-
-		getVideos()
-	}, [])
-
-	//Fetch Auth
-	const fetchAuth = async () => {
-		const res = await fetch(`http://localhost:8000/home`)
-		const data = res.json()
-
-		return data
+	// Set class for chart link
+	const onChart = (key) => {
+		setChart(key)
 	}
 
-	//Fetch Users
-	const fetchUsers = async () => {
-		const res = await fetch(`http://localhost:8000/users`)
-		const data = res.json()
-
-		return data
+	// Set class for genre link
+	const onGenre = (key) => {
+		setGenre(key)
 	}
 
-	//Fetch Videos
-	const fetchVideos = async () => {
-		const res = await fetch(`http://localhost:8000/videos`)
-		const data = res.json()
+	// Function for adding video to cart
+	const onCartVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
 
-		return data
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				setTimeout(() => history.push('/cart'), 1000)
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
 	}
 
 	return (
-		<div>
+		<>
 			{/* Carousel */}
 			<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
 				<ol className="carousel-indicators">
@@ -69,13 +76,17 @@ const VideoCharts = () => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div className="carousel-inner">
-					<div className="carousel-item active" style={{ overflow: "hidden;" }}>
-						<img className="d-block w-100" src="/storage/img/headphones/jpg" alt={"Thumbnail"} />
-						<div className="carousel-caption d-none d-md-block">
-							<h5 style={{ color: "gold" }}>name</h5>
-							<p style={{ color: "gold" }} >username</p>
-						</div>
-					</div>
+					{props.videos
+						.slice(0, 3)
+						.map((video, key) => (
+							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden;" }}>
+								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
+								<div className="carousel-caption d-none d-md-block">
+									<h5 style={{ color: "gold" }}>{video.name}</h5>
+									<p style={{ color: "gold" }} >{video.username}</p>
+								</div>
+							</div>
+						))}
 				</div>
 				<a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -89,7 +100,7 @@ const VideoCharts = () => {
 			{/*  Carousel End  */}
 
 			{/* <!-- Scroll menu - */}
-			<div div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
+			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
 				<span>
 					<a href="#">
 						<h3 className="active-scrollmenu">Video</h3>
@@ -101,125 +112,38 @@ const VideoCharts = () => {
 					</a>
 				</span>
 			</div>
+
+			{/* List of Charts */}
 			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
-				<span>
-					<a href="/video-charts/newlyReleased/All">
-						<h5>Newly Released</h5>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/trending/All">
-						<h5>Trending</h5>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/topDownloaded/All">
-						<h5>Top Downloaded</h5>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/topLoved/All">
-						<h5>Top Loved</h5>
-					</a>
-				</span>
+				{charts.map((chartItem, key) => (
+					<span key={key}>
+						<a href="#" onClick={(e) => {
+							e.preventDefault()
+							onChart(key)
+						}}>
+							<h5 className={chart == key ? "active-scrollmenu" : ""}>{chartItem}</h5>
+						</a>
+					</span>
+				))}
 			</div>
 
-			<div id="video-chartsMenu" className="hidden-scroll" style={{ margin: "0 0 0 0" }}>
-				<span>
-					<a href="/video-charts/$chart/All">
-						<h6>All</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Afro">
-						<h6>Afro</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Benga">
-						<h6>Benga</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Blues">
-						<h6>Blues</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Boomba">
-						<h6 $BoombaClass>Boomba</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Country">
-						<h6 $CountryClass>Country</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Cultural">
-						<h6 $CulturalClass>Cultural</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/EDM">
-						<h6 $EDMClass>EDM</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Genge">
-						<h6 $GengeClass>Genge</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Gospel">
-						<h6 $GospelClass>Gospel</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Hiphop">
-						<h6 $HiphopClass>Hiphop</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Jazz">
-						<h6 $JazzClass>Jazz</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/MoK">
-						<h6 $MoKClass>Music of Kenya</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Pop">
-						<h6 $PopClass>Pop</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/RandB">
-						<h6 $RandBClass>R&B</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Rock">
-						<h6 $RockClass>Rock</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Sesube">
-						<h6 $SesubeClass>Sesube</h6>
-					</a>
-				</span>
-				<span>
-					<a href="/video-charts/$chart/Taarab">
-						<h6 $TaarabClass>Taarab</h6>
-					</a>
-				</span>
+			{/* List of Genres */}
+			<div id="video-chartsMenu" className="hidden-scroll m-0">
+				{genres.map((genreItem, key) => (
+					<span key={key}>
+						<a href="#" onClick={(e) => {
+							e.preventDefault()
+							onGenre(key)
+						}}>
+							<h6 className={genre == key && "active-scrollmenu"}>{genreItem}</h6>
+						</a>
+					</span>
+				))}
 			</div>
-			{/* <!-- End of scroll menu - */}
+			{/* End of List Genres */}
 
 			{/* <!-- Chart Area - */}
-			<div className="row hidden">
+			<div className="row">
 				<div className="col-sm-12">
 
 					{/* <!-- ****** Artists Area Start ****** - */}
@@ -229,24 +153,36 @@ const VideoCharts = () => {
 						{/*  Echo Artists according to most songs sold in one week  */}
 						{/*  Fetch Artists End  */}
 						{/*  Echo Artists  */}
-						<span className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-							<center>
-								<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-									<a href='/home/$musicianusername'>
-										<img src="/storage/$musicianpp" width='150px' height='150px' alt='' />
-									</a>
-								</div>
-								<h6 style={{ width: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-									name
-                        		</h6>
-								<h6 h6 style={{ width: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-									<small>$musician username</small>
-								</h6>
-							</center>
-						</span>
-
-						{/* <!-- The actual snackbar for following message - */}
-						<div id='checker'>You must have bought atleast 1 song by that Musician</div>
+						{props.users
+							.filter((user) => user.account_type == "musician")
+							.map((musician, key) => (
+								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
+									<center>
+										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+											<a href='/home/$musicianusername'>
+												<Img src={`/storage/${musician.pp}`} width='150px' height='150px' />
+											</a>
+										</div>
+										<h6 className="mt-2"
+											style={{
+												width: "100px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											{musician.name}
+										</h6>
+										<h6 h6 style={{
+											width: "100px",
+											whiteSpace: "nowrap",
+											overflow: "hidden",
+											textOverflow: "clip"
+										}}>
+											<small>{musician.username}</small>
+										</h6>
+									</center>
+								</span>
+							))}
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -254,93 +190,141 @@ const VideoCharts = () => {
 
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
-					<div>
-						<span className="card m-1 pb-2"
-							style={{ borderRadius: "10px", display: "inlineBlock", textAlign: "center" }}>
-							<div className="thumbnail" style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-								<a href='/video-charts/ $videoid '>
-									<img src=' $videothumbnail ' width="160em" height="90em" />
-								</a>
-							</div>
-							<h6 className="m-0 p-0"
-								style={{ width: "150px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-								$video name</h6>
-							<h6 className="m-0 p-0">
-								<small> $video username  $video ft</small>
-							</h6>
-							<h6>
-								<small className="m-0 p-0">
-									$video bought_videos  Downloads
-                                </small>
-							</h6>
-						</span>
+					<div className="hidden">
+						{props.videos
+							.filter((video) => !props.boughtVideos
+								.some((boughtVideo) =>
+									boughtVideo.video_id == video.id &&
+									boughtVideo.username == props.auth.username
+								)).map((video, key) => (
+									<span key={key} className="card m-1 pb-2"
+										style={{
+											borderRadius: "10px",
+											display: "inline-block",
+											textAlign: "center"
+										}}>
+										<div className="thumbnail"
+											style={{
+												borderTopLeftRadius: "10px",
+												borderTopRightRadius: "10px"
+											}}>
+											<Link to={`/video-charts/${video.id}`}>
+												<Img src={video.thumbnail} width="160em" height="90em" />
+											</Link>
+										</div>
+										<h6 className="m-0 pt-2 pr-1 pl-1"
+											style={{
+												width: "150px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											{video.name}
+										</h6>
+										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+											<small>{video.username} {video.ft}</small>
+										</h6>
+										{props.cartVideos
+											.find((cartVideo) => {
+												return cartVideo.video_id == video.id &&
+													cartVideo.username == props.auth.username
+											}) ? <button
+												className="btn btn-light mb-1 rounded-0"
+												style={{ minWidth: '90px', height: '33px' }}
+												onClick={() => onCartVideos(video.id)}>
+											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+												<path fillRule='evenodd'
+													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+											</svg>
+										</button>
+											: <button
+												className="mysonar-btn mb-1"
+												style={{ minWidth: '90px', height: '33px' }}
+												onClick={() => onCartVideos(video.id)}>
+												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+													<path fillRule='evenodd'
+														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+												</svg>
+											</button>}
+										<br />
+										<Button
+											btnClass={'btn mysonar-btn green-btn'}
+											btnText={'buy'}
+											onClick={() => onBuyVideos(video.id)} />
+									</span>
+								))}
 					</div>
 					{/* <!-- ****** Songs Area End ****** - */}
-					{/* <!-- End of Chart Area - */}
-				</div>
-			</div>
 
-			{/* For mobile */}
-			<div className="row anti-hidden">
-				<div className="col-sm-12">
-					<div className="p-2">
-						<h5>Artists</h5>
-						<div className="hidden-scroll border-bottom">
-							<span className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-								<center>
-									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-										<a href='/home/ $musicianusername '>
-											<img src="/storage/ $musicianpp " width='150px' height='150px' alt='' />
-										</a>
+					{/* For mobile */}
+					<div className="anti-hidden">
+						{props.videos
+							.filter((video) => !props.boughtVideos
+								.some((boughtVideo) =>
+									boughtVideo.video_id == video.id &&
+									boughtVideo.username == props.auth.username
+								))
+							.slice(0, 10)
+							.map((video, index) => (
+								<div key={index}
+									className="media p-2 border-bottom">
+									<div className="media-left thumbnail">
+										<Link to='/video-charts/{video.id}'>
+											<Img src={video.thumbnail} width="160em" height="90em" />
+										</Link>
 									</div>
-									<h6 className="p-0 m-0"
-										style={{ width: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-										name
-                            		</h6>
-									<h6 className="p-0 mt-0 mr-0 ml-0" style={{ width: "100px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-										<small> $musician username</small>
-									</h6>
-								</center>
-							</span>
-
-							{/* <!-- The actual snackbar for following message - */}
-							<div id='checker'>You must have bought atleast 1 song by that Musician</div>
-							<br />
-							<br />
-						</div>
-						{/* Artists Area end */}
-
-						{/* Songs area start */}
-						<div className="media p-2 border-bottom">
-							<div className="media-left thumbnail">
-								<a href='/video-charts/ $videoid '>
-									<img src=' $videothumbnail ' width="160em" height="90em" />
-								</a>
-							</div>
-							<div className="media-body ml-2">
-								<h6 className="m-0"
-									style={{ width: "150px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "clip" }}>
-									$video name</h6>
-								<h6 className="m-0">
-									<small> $video username  $video ft</small>
-								</h6>
-								<h6>
-									<small className="m-0">
-										$video bought_videos  count Downloads
-                                    </small>
-								</h6>
-								<a href='#' style={{ color: "#000" }}>
-									$cart
-                                </a>
-								<a href='#' style={{ color: "#000" }}>
-									$bbtn
-                                </a>
-							</div>
-						</div>
+									<div className="media-body ml-2">
+										<h6
+											className="m-0 pt-2 pr-1 pl-1"
+											style={{
+												width: "150px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											{video.name}
+										</h6>
+										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+											<small>{video.username}</small>
+										</h6>
+										{props.cartVideos
+											.find((cartVideo) => {
+												return cartVideo.video_id == video.id &&
+													cartVideo.username == props.auth.username
+											}) ? <button
+												className="btn btn-light mb-1 rounded-0"
+												style={{ minWidth: '40px', height: '33px' }}
+												onClick={() => onCartVideos(video.id)}>
+											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+												<path fillRule='evenodd'
+													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+											</svg>
+										</button>
+											: <button
+												className="mysonar-btn mb-1"
+												style={{ minWidth: '40px', height: '33px' }}
+												onClick={() => onCartVideos(video.id)}>
+												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+													<path fillRule='evenodd'
+														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+												</svg>
+											</button>}
+										<Button
+											btnClass={'btn mysonar-btn green-btn float-right'}
+											btnText={'buy'}
+											onClick={() => onBuyVideos(video.id)} />
+									</div>
+								</div>
+							))}
+						{/* <!-- End of Chart Area - */}
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

@@ -34,7 +34,10 @@ const TopNav = (props) => {
 					<nav>
 						<ul>
 							<li className='nav-item active'>
-								<Link to='/' className='nav-link' onClick={() => setMenu("")}>
+								<Link to='/'
+									style={{ color: location.pathname == "/" ? "gold" : "white" }}
+									className='nav-link'
+									onClick={() => setMenu("")}>
 									<span style={{ float: "left", paddingRight: "20px" }}>
 										<svg className="bi bi-house" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +51,10 @@ const TopNav = (props) => {
 								</Link>
 							</li>
 							<li className='nav-item active'>
-								<Link to='/video-charts' className='nav-link' onClick={() => setMenu("")}>
+								<Link to='/video-charts'
+									style={{ color: location.pathname == "/video-charts" ? "gold" : "white" }}
+									className='nav-link'
+									onClick={() => setMenu("")}>
 									<span style={{ float: "left", paddingRight: "20px" }}>
 										<svg className="bi bi-compass" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +68,10 @@ const TopNav = (props) => {
 								</Link>
 							</li>
 							<li className='nav-item active'>
-								<Link to='/library' className='nav-link' onClick={() => setMenu("")}>
+								<Link to='/library'
+									style={{ color: location.pathname == "/library" ? "gold" : "white" }}
+									className='nav-link'
+									onClick={() => setMenu("")}>
 									<span style={{ float: "left", paddingRight: "20px" }}>
 										<svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +130,9 @@ const TopNav = (props) => {
 			<br />
 			<br />
 			{/* Remove for profile page for better background image */}
-			{location.pathname.match(/profile/) ? <br className="hidden" /> : <br />}
+			{location.pathname.match(/profile/) || location.pathname.match(/video-charts/) ?
+				<br className="hidden" /> :
+				<br />}
 		</div>
 	)
 }

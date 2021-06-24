@@ -216,7 +216,9 @@ function App() {
 					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos }} />
 				)} />
 
-				<Route path="/video-charts" exact component={VideoCharts} />
+				<Route path="/video-charts" exact render={(props) => (
+					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, follows, setFollows }} />
+				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<Library {...{ auth, videos, boughtVideos }} />
