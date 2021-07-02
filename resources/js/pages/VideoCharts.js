@@ -12,6 +12,7 @@ const VideoCharts = (props) => {
 	//Declare States 
 	const [chart, setChart] = useState(0)
 	const [genre, setGenre] = useState(0)
+	const [artistsArray, setArtistsArray] = useState([])
 	const [videosArray, setVideosArray] = useState([])
 
 	// Array for links
@@ -41,21 +42,27 @@ const VideoCharts = (props) => {
 
 	// Array for video id and frequency
 	var keysArray = []
+	var keysArrayTwo = []
 
 	// Generate Arrays
 	chartList.forEach((video) => {
 
 		// Set variable for id to be fetched
 		if (chart == 0) {
-			var getId = video.id
+			var getId = video.username
+			var getIdTwo = video.id
 		} else if (chart == 1) {
-			var getId = video.video_id
+			var getId = video.artist
+			var getIdTwo = video.video_id
 		} else if (chart == 2) {
-			var getId = video.video_id
+			var getId = video.artist
+			var getIdTwo = video.video_id
 		} else {
-			var getId = video.video_id
+			var getId = props.videos.find((item) => item.id == video.video_id).username
+			var getIdTwo = video.video_id
 		}
 
+		// Populate Artists array
 		if (keysArray.some((index) => index.key == getId)) {
 			// Increment value if it exists
 			var item = keysArray.find((index) => index.key == getId)
@@ -64,13 +71,25 @@ const VideoCharts = (props) => {
 			// Add item if it doesn't exist
 			keysArray.push({ key: getId, value: 1 })
 		}
+
+		// Populate videos array
+		if (keysArrayTwo.some((index) => index.key == getIdTwo)) {
+			// Increment value if it exists
+			var item = keysArrayTwo.find((index) => index.key == getIdTwo)
+			item && item.value++
+		} else {
+			// Add item if it doesn't exist
+			keysArrayTwo.push({ key: getIdTwo, value: 1 })
+		}
 	})
 
 	// Sort array in descending order depending on the value
 	keysArray.sort((a, b) => b.value - a.value)
+	keysArrayTwo.sort((a, b) => b.value - a.value)
 
 	// Set state after sometime to prevent too many re-renders
-	setTimeout(() => setVideosArray(keysArray), 100)
+	setTimeout(() => setArtistsArray(keysArray), 1000)
+	setTimeout(() => setVideosArray(keysArrayTwo), 1000)
 
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
@@ -200,16 +219,16 @@ const VideoCharts = (props) => {
 						{/*  Echo Artists according to most songs sold in one week  */}
 						{/*  Fetch Artists End  */}
 						{/*  Echo Artists  */}
-						{videosArray.map((musician, key) => (
+						{artistsArray.map((artistArray, key) => (
 							<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
 								<center>
 									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 										<a href='/home/$musicianusername'>
 											<Img src={`/storage/${props.users.find((user) => {
-												return user.username == props.videos.find((video) => {
-													return videosArray.some((videoArray) => videoArray.key == video.id)
-												}).username
-											}).pp}`} width='150px' height='150px' />
+												return user.username == artistArray.key
+											}).pp}`}
+												width='150px'
+												height='150px' />
 										</a>
 									</div>
 									<h6 className="mt-2"
@@ -220,9 +239,7 @@ const VideoCharts = (props) => {
 											textOverflow: "clip"
 										}}>
 										{props.users.find((user) => {
-											return user.username == props.videos.find((video) => {
-												return videosArray.some((videoArray) => videoArray.key == video.id)
-											}).username
+											return user.username == artistArray.key
 										}).name}
 									</h6>
 									<h6 h6 style={{
@@ -232,11 +249,7 @@ const VideoCharts = (props) => {
 										textOverflow: "clip"
 									}}>
 										<small>
-											{props.users.find((user) => {
-												return user.username == props.videos.find((video) => {
-													return videosArray.some((videoArray) => videoArray.key == video.id)
-												}).username
-											}).username}
+											{artistArray.key}
 										</small>
 									</h6>
 								</center>
@@ -250,135 +263,147 @@ const VideoCharts = (props) => {
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
 					<div className="hidden">
-						{props.videos
-							.filter((video) => !props.boughtVideos
-								.some((boughtVideo) =>
-									boughtVideo.video_id == video.id &&
-									boughtVideo.username == props.auth.username
-								)).map((video, key) => (
-									<span key={key} className="card m-1 pb-2"
-										style={{
-											borderRadius: "10px",
-											display: "inline-block",
-											textAlign: "center"
-										}}>
-										<div className="thumbnail"
-											style={{
-												borderTopLeftRadius: "10px",
-												borderTopRightRadius: "10px"
-											}}>
-											<Link to={`/video-charts/${video.id}`}>
-												<Img src={video.thumbnail} width="160em" height="90em" />
-											</Link>
-										</div>
-										<h6 className="m-0 pt-2 pr-1 pl-1"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{video.name}
-										</h6>
-										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-											<small>{video.username} {video.ft}</small>
-										</h6>
-										{props.cartVideos
-											.find((cartVideo) => {
-												return cartVideo.video_id == video.id &&
-													cartVideo.username == props.auth.username
-											}) ? <button
-												className="btn btn-light mb-1 rounded-0"
-												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
-											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-												<path fillRule='evenodd'
-													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-											</svg>
-										</button>
-											: <button
-												className="mysonar-btn mb-1"
-												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
-												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-												</svg>
-											</button>}
-										<br />
-										<Button
-											btnClass={'btn mysonar-btn green-btn'}
-											btnText={'buy'}
-											onClick={() => onBuyVideos(video.id)} />
-									</span>
-								))}
+						{videosArray.map((videoArray, key) => (
+							<span key={key} className="card m-1 pb-2"
+								style={{
+									borderRadius: "10px",
+									display: "inline-block",
+									textAlign: "center"
+								}}>
+								<div className="thumbnail"
+									style={{
+										borderTopLeftRadius: "10px",
+										borderTopRightRadius: "10px"
+									}}>
+									<Link to={`/video-charts/${videoArray.key}`}>
+										<Img src={props.videos.find((video) => {
+											return video.id == videoArray.key
+										}).thumbnail} width="160em" height="90em" />
+									</Link>
+								</div>
+								<h6 className="m-0 pt-2 pr-1 pl-1"
+									style={{
+										width: "150px",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip"
+									}}>{props.videos.find((video) => {
+										return video.id == videoArray.key
+									}).name}
+								</h6>
+								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+									<small>
+										{props.videos.find((video) => {
+											return video.id == videoArray.key
+										}).username}
+
+										{props.videos.find((video) => {
+											return video.id == videoArray.key
+										}).ft}</small>
+								</h6>
+								{props.cartVideos
+									.find((cartVideo) => {
+										return cartVideo.video_id == videoArray.key &&
+											cartVideo.username == props.auth.username
+									}) ? <button
+										className="btn btn-light mb-1 rounded-0"
+										style={{ minWidth: '90px', height: '33px' }}
+										onClick={() => onCartVideos(videoArray.key)}>
+									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+										fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+										<path fillRule='evenodd'
+											d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+									</svg>
+								</button>
+									: <button
+										className="mysonar-btn mb-1"
+										style={{ minWidth: '90px', height: '33px' }}
+										onClick={() => onCartVideos(videoArray.key)}>
+										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+											<path fillRule='evenodd'
+												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+										</svg>
+									</button>}
+								<br />
+								<Button
+									btnClass={'btn mysonar-btn green-btn'}
+									btnText={'buy'}
+									onClick={() => onBuyVideos(videoArray.key)} />
+							</span>
+						))}
 					</div>
 					{/* <!-- ****** Songs Area End ****** - */}
 
 					{/* For mobile */}
 					<div className="anti-hidden">
-						{props.videos
-							.filter((video) => !props.boughtVideos
-								.some((boughtVideo) =>
-									boughtVideo.video_id == video.id &&
-									boughtVideo.username == props.auth.username
-								))
-							.slice(0, 10)
-							.map((video, index) => (
-								<div key={index}
-									className="media p-2 border-bottom">
-									<div className="media-left thumbnail">
-										<Link to='/video-charts/{video.id}'>
-											<Img src={video.thumbnail} width="160em" height="90em" />
-										</Link>
-									</div>
-									<div className="media-body ml-2">
-										<h6
-											className="m-0 pt-2 pr-1 pl-1"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{video.name}
-										</h6>
-										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-											<small>{video.username}</small>
-										</h6>
-										{props.cartVideos
-											.find((cartVideo) => {
-												return cartVideo.video_id == video.id &&
-													cartVideo.username == props.auth.username
-											}) ? <button
-												className="btn btn-light mb-1 rounded-0"
-												style={{ minWidth: '40px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
+						{videosArray.map((videoArray, key) => (
+							<div key={key}
+								className="media p-2 border-bottom">
+								<div className="media-left thumbnail">
+									<Link to={`/video-charts/${videoArray.key}`}>
+										<Img src={props.videos.find((video) => {
+											return video.id == videoArray.key
+										}).thumbnail}
+											width="160em"
+											height="90em" />
+									</Link>
+								</div>
+								<div className="media-body ml-2">
+									<h6
+										className="m-0 pt-2 pr-1 pl-1"
+										style={{
+											width: "150px",
+											whiteSpace: "nowrap",
+											overflow: "hidden",
+											textOverflow: "clip"
+										}}>
+										{props.videos.find((video) => {
+											return video.id == videoArray.key
+										}).name}
+									</h6>
+									<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+										<small>
+											{props.videos.find((video) => {
+												return video.id == videoArray.key
+											}).username}
+
+											{props.videos.find((video) => {
+												return video.id == videoArray.key
+											}).ft}
+										</small>
+									</h6>
+									{props.cartVideos
+										.find((cartVideo) => {
+											return cartVideo.video_id == videoArray.key &&
+												cartVideo.username == props.auth.username
+										}) ? <button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '40px', height: '33px' }}
+											onClick={() => onCartVideos(videoArray.key)}>
+										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+											<path fillRule='evenodd'
+												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+										</svg>
+									</button>
+										: <button
+											className="mysonar-btn mb-1"
+											style={{ minWidth: '40px', height: '33px' }}
+											onClick={() => onCartVideos(videoArray.key)}>
 											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 												<path fillRule='evenodd'
 													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
 											</svg>
-										</button>
-											: <button
-												className="mysonar-btn mb-1"
-												style={{ minWidth: '40px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
-												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-												</svg>
-											</button>}
-										<Button
-											btnClass={'btn mysonar-btn green-btn float-right'}
-											btnText={'buy'}
-											onClick={() => onBuyVideos(video.id)} />
-									</div>
+										</button>}
+									<Button
+										btnClass={'btn mysonar-btn green-btn float-right'}
+										btnText={'buy'}
+										onClick={() => onBuyVideos(videoArray.key)} />
 								</div>
-							))}
+							</div>
+						))}
 						{/* <!-- End of Chart Area - */}
 					</div>
 				</div>
