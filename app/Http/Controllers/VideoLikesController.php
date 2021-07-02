@@ -14,7 +14,7 @@ class VideoLikesController extends Controller
      */
     public function index()
     {
-        //
+        return VideoLikes::all();
     }
 
     /**

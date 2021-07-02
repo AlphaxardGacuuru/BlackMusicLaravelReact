@@ -70920,13 +70920,18 @@ function App() {
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      decos = _useState28[0],
-      setDecos = _useState28[1];
+      videoLikes = _useState28[0],
+      setVideoLikes = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      follows = _useState30[0],
-      setFollows = _useState30[1]; // Reset Messages and Errors to null after 3 seconds
+      decos = _useState30[0],
+      setDecos = _useState30[1];
+
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState32 = _slicedToArray(_useState31, 2),
+      follows = _useState32[0],
+      setFollows = _useState32[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -71062,6 +71067,7 @@ function App() {
     fetchFollows();
     fetchBoughtVideos();
     fetchCartVideos();
+    fetchVideoLikes();
     fetchPolls();
     fetchPostCommentLikes();
   }, []); //Fetch Auth
@@ -71251,6 +71257,15 @@ function App() {
     })["catch"](function () {
       return setErrors(['Failed to fetch cart videos']);
     });
+  }; // Fetch Liked Videos
+
+
+  var fetchVideoLikes = function fetchVideoLikes() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-likes")).then(function (res) {
+      return setVideoLikes(res.data);
+    })["catch"](function () {
+      return setErrors("Failed to fetch video likes");
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -71406,6 +71421,7 @@ function App() {
         boughtVideos: boughtVideos,
         cartVideos: cartVideos,
         setCartVideos: setCartVideos,
+        videoLikes: videoLikes,
         follows: follows,
         setFollows: setFollows
       });
@@ -75144,7 +75160,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var VideoCharts = function VideoCharts(props) {
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //Declare States 
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -75156,6 +75172,12 @@ var VideoCharts = function VideoCharts(props) {
       genre = _useState4[0],
       setGenre = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      videosArray = _useState6[0],
+      setVideosArray = _useState6[1]; // Array for links
+
+
   var charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"];
   var genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]; // Set class for chart link
 
@@ -75166,8 +75188,58 @@ var VideoCharts = function VideoCharts(props) {
 
   var onGenre = function onGenre(key) {
     setGenre(key);
-  }; // Function for adding video to cart
+  }; // Set state for chart list
 
+
+  if (chart == 0) {
+    var chartList = props.videos;
+  } else if (chart == 1) {
+    var chartList = props.boughtVideos;
+  } else if (chart == 2) {
+    var chartList = props.boughtVideos;
+  } else {
+    var chartList = props.videoLikes;
+  } // Array for video id and frequency
+
+
+  var keysArray = []; // Generate Arrays
+
+  chartList.forEach(function (video) {
+    // Set variable for id to be fetched
+    if (chart == 0) {
+      var getId = video.id;
+    } else if (chart == 1) {
+      var getId = video.video_id;
+    } else if (chart == 2) {
+      var getId = video.video_id;
+    } else {
+      var getId = video.video_id;
+    }
+
+    if (keysArray.some(function (index) {
+      return index.key == getId;
+    })) {
+      // Increment value if it exists
+      var item = keysArray.find(function (index) {
+        return index.key == getId;
+      });
+      item && item.value++;
+    } else {
+      // Add item if it doesn't exist
+      keysArray.push({
+        key: getId,
+        value: 1
+      });
+    }
+  }); // Sort array in descending order depending on the value
+
+  keysArray.sort(function (a, b) {
+    return b.value - a.value;
+  }); // Set state after sometime to prevent too many re-renders
+
+  setTimeout(function () {
+    return setVideosArray(keysArray);
+  }, 100); // Function for adding video to cart
 
   var onCartVideos = function onCartVideos(video) {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -75242,7 +75314,7 @@ var VideoCharts = function VideoCharts(props) {
       key: key,
       className: "carousel-item ".concat(key == 0 && 'active'),
       style: {
-        overflow: "hidden;"
+        overflow: "hidden"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       imgClass: "d-block w-100",
@@ -75321,7 +75393,7 @@ var VideoCharts = function VideoCharts(props) {
         onGenre(key);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: genre == key && "active-scrollmenu"
+      className: genre == key ? "active-scrollmenu" : ""
     }, genreItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -75329,9 +75401,7 @@ var VideoCharts = function VideoCharts(props) {
     className: "col-sm-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll"
-  }, props.users.filter(function (user) {
-    return user.account_type == "musician";
-  }).map(function (musician, key) {
+  }, videosArray.map(function (musician, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
       className: "pt-0 pl-0 pr-0 pb-2",
@@ -75346,7 +75416,13 @@ var VideoCharts = function VideoCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "/home/$musicianusername"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(musician.pp),
+      src: "/storage/".concat(props.users.find(function (user) {
+        return user.username == props.videos.find(function (video) {
+          return videosArray.some(function (videoArray) {
+            return videoArray.key == video.id;
+          });
+        }).username;
+      }).pp),
       width: "150px",
       height: "150px"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -75357,7 +75433,13 @@ var VideoCharts = function VideoCharts(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    }, props.users.find(function (user) {
+      return user.username == props.videos.find(function (video) {
+        return videosArray.some(function (videoArray) {
+          return videoArray.key == video.id;
+        });
+      }).username;
+    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       h6: true,
       style: {
         width: "100px",
@@ -75365,7 +75447,13 @@ var VideoCharts = function VideoCharts(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, musician.username))));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.users.find(function (user) {
+      return user.username == props.videos.find(function (video) {
+        return videosArray.some(function (videoArray) {
+          return videoArray.key == video.id;
+        });
+      }).username;
+    }).username))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, props.videos.filter(function (video) {

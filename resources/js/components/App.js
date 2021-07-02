@@ -40,6 +40,7 @@ function App() {
 	const [videos, setVideos] = useState([])
 	const [boughtVideos, setBoughtVideos] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
+	const [videoLikes, setVideoLikes] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -91,6 +92,8 @@ function App() {
 		fetchBoughtVideos()
 
 		fetchCartVideos()
+
+		fetchVideoLikes()
 
 		fetchPolls()
 
@@ -186,6 +189,13 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch cart videos']))
 	}
 
+	// Fetch Liked Videos
+	const fetchVideoLikes = () => {
+		axios.get(`${url}/api/video-likes`)
+			.then((res) => setVideoLikes(res.data))
+			.catch(() => setErrors("Failed to fetch video likes"))
+	}
+
 	return (
 		<Router>
 			<>
@@ -217,7 +227,7 @@ function App() {
 				)} />
 
 				<Route path="/video-charts" exact render={(props) => (
-					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, follows, setFollows }} />
+					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (

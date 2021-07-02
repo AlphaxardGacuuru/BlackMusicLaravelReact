@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import Button from '../components/Button'
@@ -9,9 +9,12 @@ const VideoCharts = (props) => {
 
 	const history = useHistory()
 
+	//Declare States 
 	const [chart, setChart] = useState(0)
 	const [genre, setGenre] = useState(0)
+	const [videosArray, setVideosArray] = useState([])
 
+	// Array for links
 	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"]
 	const genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]
 
@@ -24,6 +27,50 @@ const VideoCharts = (props) => {
 	const onGenre = (key) => {
 		setGenre(key)
 	}
+
+	// Set state for chart list
+	if (chart == 0) {
+		var chartList = props.videos
+	} else if (chart == 1) {
+		var chartList = props.boughtVideos
+	} else if (chart == 2) {
+		var chartList = props.boughtVideos
+	} else {
+		var chartList = props.videoLikes
+	}
+
+	// Array for video id and frequency
+	var keysArray = []
+
+	// Generate Arrays
+	chartList.forEach((video) => {
+
+		// Set variable for id to be fetched
+		if (chart == 0) {
+			var getId = video.id
+		} else if (chart == 1) {
+			var getId = video.video_id
+		} else if (chart == 2) {
+			var getId = video.video_id
+		} else {
+			var getId = video.video_id
+		}
+
+		if (keysArray.some((index) => index.key == getId)) {
+			// Increment value if it exists
+			var item = keysArray.find((index) => index.key == getId)
+			item && item.value++
+		} else {
+			// Add item if it doesn't exist
+			keysArray.push({ key: getId, value: 1 })
+		}
+	})
+
+	// Sort array in descending order depending on the value
+	keysArray.sort((a, b) => b.value - a.value)
+
+	// Set state after sometime to prevent too many re-renders
+	setTimeout(() => setVideosArray(keysArray), 100)
 
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
@@ -79,7 +126,7 @@ const VideoCharts = (props) => {
 					{props.videos
 						.slice(0, 3)
 						.map((video, key) => (
-							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden;" }}>
+							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
 								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
 								<div className="carousel-caption d-none d-md-block">
 									<h5 style={{ color: "gold" }}>{video.name}</h5>
@@ -135,7 +182,7 @@ const VideoCharts = (props) => {
 							e.preventDefault()
 							onGenre(key)
 						}}>
-							<h6 className={genre == key && "active-scrollmenu"}>{genreItem}</h6>
+							<h6 className={genre == key ? "active-scrollmenu" : ""}>{genreItem}</h6>
 						</a>
 					</span>
 				))}
@@ -153,36 +200,48 @@ const VideoCharts = (props) => {
 						{/*  Echo Artists according to most songs sold in one week  */}
 						{/*  Fetch Artists End  */}
 						{/*  Echo Artists  */}
-						{props.users
-							.filter((user) => user.account_type == "musician")
-							.map((musician, key) => (
-								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-									<center>
-										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-											<a href='/home/$musicianusername'>
-												<Img src={`/storage/${musician.pp}`} width='150px' height='150px' />
-											</a>
-										</div>
-										<h6 className="mt-2"
-											style={{
-												width: "100px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{musician.name}
-										</h6>
-										<h6 h6 style={{
+						{videosArray.map((musician, key) => (
+							<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
+								<center>
+									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+										<a href='/home/$musicianusername'>
+											<Img src={`/storage/${props.users.find((user) => {
+												return user.username == props.videos.find((video) => {
+													return videosArray.some((videoArray) => videoArray.key == video.id)
+												}).username
+											}).pp}`} width='150px' height='150px' />
+										</a>
+									</div>
+									<h6 className="mt-2"
+										style={{
 											width: "100px",
 											whiteSpace: "nowrap",
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-											<small>{musician.username}</small>
-										</h6>
-									</center>
-								</span>
-							))}
+										{props.users.find((user) => {
+											return user.username == props.videos.find((video) => {
+												return videosArray.some((videoArray) => videoArray.key == video.id)
+											}).username
+										}).name}
+									</h6>
+									<h6 h6 style={{
+										width: "100px",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip"
+									}}>
+										<small>
+											{props.users.find((user) => {
+												return user.username == props.videos.find((video) => {
+													return videosArray.some((videoArray) => videoArray.key == video.id)
+												}).username
+											}).username}
+										</small>
+									</h6>
+								</center>
+							</span>
+						))}
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
