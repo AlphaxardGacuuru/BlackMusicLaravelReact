@@ -75167,7 +75167,7 @@ var VideoCharts = function VideoCharts(props) {
       chart = _useState2[0],
       setChart = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("All"),
       _useState4 = _slicedToArray(_useState3, 2),
       genre = _useState4[0],
       setGenre = _useState4[1];
@@ -75210,7 +75210,15 @@ var VideoCharts = function VideoCharts(props) {
   var keysArray = [];
   var keysArrayTwo = []; // Generate Arrays
 
-  chartList.forEach(function (video) {
+  chartList.filter(function (video) {
+    // Filter for genres
+    // If genre is All then allow all videos
+    if (genre == "All") {
+      return true;
+    }
+
+    return video.genre == genre;
+  }).forEach(function (video) {
     // Set variable for id to be fetched
     if (chart == 0) {
       var getId = video.username;
@@ -75243,7 +75251,7 @@ var VideoCharts = function VideoCharts(props) {
         key: getId,
         value: 1
       });
-    } // Populate videos array
+    } // Populate Videos array
 
 
     if (keysArrayTwo.some(function (index) {
@@ -75359,11 +75367,11 @@ var VideoCharts = function VideoCharts(props) {
       className: "carousel-caption d-none d-md-block"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
       style: {
-        color: "gold"
+        color: "white"
       }
     }, video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       style: {
-        color: "gold"
+        color: "white"
       }
     }, video.username)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -75426,10 +75434,10 @@ var VideoCharts = function VideoCharts(props) {
       href: "#",
       onClick: function onClick(e) {
         e.preventDefault();
-        onGenre(key);
+        onGenre(genreItem);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: genre == key ? "active-scrollmenu" : ""
+      className: genre == genreItem ? "active-scrollmenu" : ""
     }, genreItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -75468,7 +75476,6 @@ var VideoCharts = function VideoCharts(props) {
     }, props.users.find(function (user) {
       return user.username == artistArray.key;
     }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      h6: true,
       style: {
         width: "100px",
         whiteSpace: "nowrap",

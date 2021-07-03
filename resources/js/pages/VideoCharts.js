@@ -11,7 +11,7 @@ const VideoCharts = (props) => {
 
 	//Declare States 
 	const [chart, setChart] = useState(0)
-	const [genre, setGenre] = useState(0)
+	const [genre, setGenre] = useState("All")
 	const [artistsArray, setArtistsArray] = useState([])
 	const [videosArray, setVideosArray] = useState([])
 
@@ -45,7 +45,16 @@ const VideoCharts = (props) => {
 	var keysArrayTwo = []
 
 	// Generate Arrays
-	chartList.forEach((video) => {
+	chartList.filter((video) => {
+		// Filter for genres
+		// If genre is All then allow all videos
+		if (genre == "All") {
+			return true
+		}
+
+		return video.genre == genre
+
+	}).forEach((video) => {
 
 		// Set variable for id to be fetched
 		if (chart == 0) {
@@ -72,7 +81,7 @@ const VideoCharts = (props) => {
 			keysArray.push({ key: getId, value: 1 })
 		}
 
-		// Populate videos array
+		// Populate Videos array
 		if (keysArrayTwo.some((index) => index.key == getIdTwo)) {
 			// Increment value if it exists
 			var item = keysArrayTwo.find((index) => index.key == getIdTwo)
@@ -148,8 +157,8 @@ const VideoCharts = (props) => {
 							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
 								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
 								<div className="carousel-caption d-none d-md-block">
-									<h5 style={{ color: "gold" }}>{video.name}</h5>
-									<p style={{ color: "gold" }} >{video.username}</p>
+									<h5 style={{ color: "white" }}>{video.name}</h5>
+									<p style={{ color: "white" }} >{video.username}</p>
 								</div>
 							</div>
 						))}
@@ -199,9 +208,9 @@ const VideoCharts = (props) => {
 					<span key={key}>
 						<a href="#" onClick={(e) => {
 							e.preventDefault()
-							onGenre(key)
+							onGenre(genreItem)
 						}}>
-							<h6 className={genre == key ? "active-scrollmenu" : ""}>{genreItem}</h6>
+							<h6 className={genre == genreItem ? "active-scrollmenu" : ""}>{genreItem}</h6>
 						</a>
 					</span>
 				))}
@@ -242,7 +251,7 @@ const VideoCharts = (props) => {
 											return user.username == artistArray.key
 										}).name}
 									</h6>
-									<h6 h6 style={{
+									<h6 style={{
 										width: "100px",
 										whiteSpace: "nowrap",
 										overflow: "hidden",
