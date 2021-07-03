@@ -232,13 +232,13 @@ const VideoCharts = (props) => {
 							<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
 								<center>
 									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-										<a href='/home/$musicianusername'>
+										<Link to={"/profile/" + artistArray.key}>
 											<Img src={`/storage/${props.users.find((user) => {
 												return user.username == artistArray.key
 											}).pp}`}
 												width='150px'
 												height='150px' />
-										</a>
+										</Link>
 									</div>
 									<h6 className="mt-2"
 										style={{
@@ -284,7 +284,7 @@ const VideoCharts = (props) => {
 										borderTopLeftRadius: "10px",
 										borderTopRightRadius: "10px"
 									}}>
-									<Link to={`/video-charts/${videoArray.key}`}>
+									<Link to={`/video-show/${videoArray.key}`}>
 										<Img src={props.videos.find((video) => {
 											return video.id == videoArray.key
 										}).thumbnail} width="160em" height="90em" />
@@ -350,7 +350,7 @@ const VideoCharts = (props) => {
 							<div key={key}
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
-									<Link to={`/video-charts/${videoArray.key}`}>
+									<Link to={`/video-show/${videoArray.key}`}>
 										<Img src={props.videos.find((video) => {
 											return video.id == videoArray.key
 										}).thumbnail}

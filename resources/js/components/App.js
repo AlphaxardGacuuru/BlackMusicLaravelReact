@@ -16,6 +16,7 @@ import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import VideoCharts from '../pages/VideoCharts'
+import VideoShow from '../pages/VideoShow'
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
 
@@ -228,6 +229,10 @@ function App() {
 
 				<Route path="/video-charts" exact render={(props) => (
 					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows }} />
+				)} />
+
+				<Route path="/video-show/:video" exact render={(props) => (
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (
