@@ -10,60 +10,64 @@ const VideoCharts = (props) => {
 	const history = useHistory()
 
 	//Declare States 
-	const [chart, setChart] = useState(0)
+	const [chart, setChart] = useState("Newly Released")
 	const [genre, setGenre] = useState("All")
-	const [artistsArray, setArtistsArray] = useState([])
-	const [videosArray, setVideosArray] = useState([])
 
 	// Array for links
 	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"]
 	const genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]
 
 	// Set class for chart link
-	const onChart = (key) => {
-		setChart(key)
+	const onChart = (chartItem) => {
+		setChart(chartItem)
 	}
 
 	// Set class for genre link
-	const onGenre = (key) => {
-		setGenre(key)
+	const onGenre = (genreItem) => {
+		setGenre(genreItem)
 	}
 
 	// Set state for chart list
-	if (chart == 0) {
+	if (chart == "Newly Released") {
 		var chartList = props.videos
-	} else if (chart == 1) {
+	} else if (chart == "Trending") {
 		var chartList = props.boughtVideos
-	} else if (chart == 2) {
+	} else if (chart == "Top Downloaded") {
 		var chartList = props.boughtVideos
 	} else {
 		var chartList = props.videoLikes
 	}
 
 	// Array for video id and frequency
-	var keysArray = []
-	var keysArrayTwo = []
+	var artistsArray = []
+	var videosArray = []
 
 	// Generate Arrays
-	chartList.filter((video) => {
+	chartList.filter((item) => {
 		// Filter for genres
 		// If genre is All then allow all videos
 		if (genre == "All") {
 			return true
-		}
+		} else {
 
-		return video.genre == genre
+			// For Newly Released
+			if (chart == "Newly Released") {
+				return item.genre == genre
+			}
+
+			return props.videos.find((video) => video.id == item.video_id).genre == genre
+		}
 
 	}).forEach((video) => {
 
 		// Set variable for id to be fetched
-		if (chart == 0) {
+		if (chart == "Newly Released") {
 			var getId = video.username
 			var getIdTwo = video.id
-		} else if (chart == 1) {
+		} else if (chart == "Trending") {
 			var getId = video.artist
 			var getIdTwo = video.video_id
-		} else if (chart == 2) {
+		} else if (chart == "Top Downloaded") {
 			var getId = video.artist
 			var getIdTwo = video.video_id
 		} else {
@@ -72,33 +76,30 @@ const VideoCharts = (props) => {
 		}
 
 		// Populate Artists array
-		if (keysArray.some((index) => index.key == getId)) {
+		if (artistsArray.some((index) => index.key == getId)) {
 			// Increment value if it exists
-			var item = keysArray.find((index) => index.key == getId)
+			var item = artistsArray.find((index) => index.key == getId)
 			item && item.value++
 		} else {
 			// Add item if it doesn't exist
-			keysArray.push({ key: getId, value: 1 })
+			artistsArray.push({ key: getId, value: 1 })
 		}
 
 		// Populate Videos array
-		if (keysArrayTwo.some((index) => index.key == getIdTwo)) {
+		if (videosArray.some((index) => index.key == getIdTwo)) {
 			// Increment value if it exists
-			var item = keysArrayTwo.find((index) => index.key == getIdTwo)
+			var item = videosArray.find((index) => index.key == getIdTwo)
 			item && item.value++
 		} else {
 			// Add item if it doesn't exist
-			keysArrayTwo.push({ key: getIdTwo, value: 1 })
+			videosArray.push({ key: getIdTwo, value: 1 })
 		}
 	})
 
 	// Sort array in descending order depending on the value
-	keysArray.sort((a, b) => b.value - a.value)
-	keysArrayTwo.sort((a, b) => b.value - a.value)
-
-	// Set state after sometime to prevent too many re-renders
-	setTimeout(() => setArtistsArray(keysArray), 1000)
-	setTimeout(() => setVideosArray(keysArrayTwo), 1000)
+	artistsArray.sort((a, b) => b.value - a.value)
+	videosArray.sort((a, b) => b.value - a.value)
+	console.log(artistsArray)
 
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
@@ -194,9 +195,9 @@ const VideoCharts = (props) => {
 					<span key={key}>
 						<a href="#" onClick={(e) => {
 							e.preventDefault()
-							onChart(key)
+							onChart(chartItem)
 						}}>
-							<h5 className={chart == key ? "active-scrollmenu" : ""}>{chartItem}</h5>
+							<h5 className={chart == chartItem ? "active-scrollmenu" : ""}>{chartItem}</h5>
 						</a>
 					</span>
 				))}

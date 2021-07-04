@@ -235,7 +235,7 @@ const Index = (props) => {
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<Link to={`/profile/${musician.username}`}>
-										<Img src={'/storage/profile-pics/male_avatar.png'} width="30px" height="30px" alt="musician" />
+										<Img src={`/storage/${musician.pp}`} width="30px" height="30px" alt="musician" />
 									</Link>
 								</div>
 								<div className='media-body'>
@@ -288,7 +288,7 @@ const Index = (props) => {
 											style={{ borderRadius: "10px" }}>
 											<div className="thumbnail"
 												style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-												<Link to='/video-charts/{video.id}'>
+												<Link to={`/video-show/${video.id}`}>
 													<Img src={video.thumbnail} width="160em" height="90em" />
 												</Link>
 											</div>
@@ -712,7 +712,7 @@ const Index = (props) => {
 							<div key={index}
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
-									<Link to='/video-charts/{video.id}'>
+									<Link to={`/video-show/${video.id}`}>
 										<Img src={video.thumbnail} width="160em" height="90em" />
 									</Link>
 								</div>

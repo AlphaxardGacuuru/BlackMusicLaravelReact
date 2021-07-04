@@ -42,6 +42,8 @@ function App() {
 	const [boughtVideos, setBoughtVideos] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
 	const [videoLikes, setVideoLikes] = useState([])
+	const [videoComments, setVideoComments] = useState([])
+	const [videoCommentLikes, setVideoCommentLikes] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -82,9 +84,13 @@ function App() {
 
 		getPosts()
 
+		fetchPolls()
+
 		fetchPostLikes()
 
 		fetchPostComments()
+
+		fetchPostCommentLikes()
 
 		fetchDecos()
 
@@ -96,9 +102,9 @@ function App() {
 
 		fetchVideoLikes()
 
-		fetchPolls()
+		fetchVideoComments()
 
-		fetchPostCommentLikes()
+		fetchVideoCommentLikes()
 
 	}, [])
 
@@ -194,7 +200,21 @@ function App() {
 	const fetchVideoLikes = () => {
 		axios.get(`${url}/api/video-likes`)
 			.then((res) => setVideoLikes(res.data))
-			.catch(() => setErrors("Failed to fetch video likes"))
+			.catch(() => setErrors(["Failed to fetch video likes"]))
+	}
+
+	// Fetch Videos Comments
+	const fetchVideoComments = () => {
+		axios.get(`${url}/api/video-comments`)
+			.then((res) => setVideoComments(res.data))
+			.catch(() => setErrors(["Failed to fetch video comments"]))
+	}
+
+	// Fetch Videos Comments Likes
+	const fetchVideoCommentLikes = () => {
+		axios.get(`${url}/api/video-comment-likes`)
+			.then((res) => setVideoCommentLikes(res.data))
+			.catch(() => setErrors(["Failed to fetch video comment likes"]))
 	}
 
 	return (
@@ -231,8 +251,8 @@ function App() {
 					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows }} />
 				)} />
 
-				<Route path="/video-show/:video" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows }} />
+				<Route path="/video-show/:show" exact render={(props) => (
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, videoComments, videoCommentLikes, follows, setFollows }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (

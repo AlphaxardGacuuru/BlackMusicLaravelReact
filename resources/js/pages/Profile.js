@@ -584,7 +584,7 @@ const Profile = (props) => {
 									key={index}
 									className="media p-2 border-bottom">
 									<div className="media-left thumbnail">
-										<Link to='/video-charts/{video.id}'>
+										<Link to={`/video-show/${video.id}`}>
 											<Img src={video.thumbnail} width="160em" height="90em" />
 										</Link>
 									</div>

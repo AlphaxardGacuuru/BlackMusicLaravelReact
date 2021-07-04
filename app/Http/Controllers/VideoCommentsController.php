@@ -14,7 +14,7 @@ class VideoCommentsController extends Controller
      */
     public function index()
     {
-        //
+        return VideoComments::all();
     }
 
     /**
