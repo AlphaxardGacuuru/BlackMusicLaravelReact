@@ -17,7 +17,7 @@ const Library = (props) => {
 						<div key={key}
 							className="media p-2 border-bottom">
 							<div className="media-left thumbnail">
-								<Link to='/video-charts/{video.id}'>
+								<Link to={`/video-show/${boughtVideo.video_id}`}>
 									<Img src={props.videos
 										.find((video) => video.id == boughtVideo.video_id)
 										.thumbnail}

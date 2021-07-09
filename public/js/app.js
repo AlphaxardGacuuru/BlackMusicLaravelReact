@@ -71474,8 +71474,11 @@ function App() {
         cartVideos: cartVideos,
         setCartVideos: setCartVideos,
         videoLikes: videoLikes,
+        setVideoLikes: setVideoLikes,
         videoComments: videoComments,
+        setVideoComments: setVideoComments,
         videoCommentLikes: videoCommentLikes,
+        setVideoCommentLikes: setVideoCommentLikes,
         follows: follows,
         setFollows: setFollows
       });
@@ -72671,7 +72674,7 @@ var Index = function Index(props) {
   }, props.videos.filter(function (video) {
     return !props.boughtVideos.some(function (boughtVideo) {
       return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
-    });
+    }) && video.username != props.auth.username;
   }).map(function (video, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: index,
@@ -72763,8 +72766,8 @@ var Index = function Index(props) {
       style: {
         borderRadius: "50%"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "/profile/".concat(post.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(props.users.find(function (user) {
         return user.username == post.username;
@@ -73294,7 +73297,7 @@ var Library = function Library(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-charts/{video.id}"
+      to: "/video-show/".concat(boughtVideo.video_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: props.videos.find(function (video) {
         return video.id == boughtVideo.video_id;
@@ -74341,10 +74344,16 @@ var Profile = function Profile(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-4"
+    className: "col-sm-4 mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Posts")), props.posts.filter(function (post) {
+    className: "col-sm-4 mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Posts")), !props.posts.some(function (post) {
+    return post.username == username;
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "grey"
+    }
+  }, username, " does not have any posts")), props.posts.filter(function (post) {
     return post.username == username;
   }).filter(function (post) {
     return props.follows.some(function (follow) {
@@ -74770,8 +74779,14 @@ var Profile = function Profile(props) {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete post"))))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.videos.filter(function (video) {
+    className: "col-sm-3 mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), !props.videos.some(function (video) {
+    return video.username == username;
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "grey"
+    }
+  }, username, " does not have any videos")), props.videos.filter(function (video) {
     return video.username == username;
   }).filter(function (video) {
     return !props.boughtVideos.some(function (boughtVideo) {
@@ -75327,8 +75342,7 @@ var VideoCharts = function VideoCharts(props) {
   });
   videosArray.sort(function (a, b) {
     return b.value - a.value;
-  });
-  console.log(artistsArray); // Function for adding video to cart
+  }); // Function for adding video to cart
 
   var onCartVideos = function onCartVideos(video) {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -75490,7 +75504,9 @@ var VideoCharts = function VideoCharts(props) {
     className: "col-sm-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll"
-  }, artistsArray.map(function (artistArray, key) {
+  }, artistsArray.filter(function (artist) {
+    return artist.key != props.auth.username;
+  }).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
       className: "pt-0 pl-0 pr-0 pb-2",
@@ -75768,10 +75784,39 @@ var VideoShow = function VideoShow(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
       text = _useState2[0],
-      setText = _useState2[1]; // Arrays for dates
+      setText = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tabClass = _useState4[0],
+      setTabClass = _useState4[1]; // Arrays for dates
 
 
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Function for following musicians
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Function for liking video
+
+  var onVideoLike = function onVideoLike() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(props.url, "/api/video-likes"), {
+        video: show
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/video-likes")).then(function (res) {
+          return props.setVideoLikes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for following musicians
+
 
   var onFollow = function onFollow(musician) {
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
@@ -75875,17 +75920,38 @@ var VideoShow = function VideoShow(props) {
     className: "col-sm-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-7"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "resp-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+  }, props.boughtVideos.some(function (boughtVideo) {
+    return boughtVideo.id == showVideo.id && boughtVideo.username == props.auth.username || props.auth.username == "@blackmusic" || props.auth.username == showVideo.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
     className: "resp-iframe",
     width: "880px",
     height: "495px",
     src: "".concat(showVideo.video, "/?autoplay=1"),
     frameBorder: "0",
-    allow: "accelerometer; encrypted-media; gyroscope; picture-in-picture; allowfullscreen"
+    allow: "accelerometer",
+    "encrypted-media": "true",
+    gyroscope: "true",
+    "picture-in-picture": "true",
+    allowFullScreen: true
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+    className: "resp-iframe",
+    width: "880px",
+    height: "495px",
+    src: "".concat(showVideo.video, "?autoplay=1&end=10&controls=0"),
+    frameBorder: "0",
+    allow: "accelerometer",
+    "encrypted-media": "true",
+    gyroscope: "true",
+    "picture-in-picture": "true",
+    allowFullScreen: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 border-bottom"
+    className: "d-flex flex-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mr-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "m-0 p-0",
     style: {
@@ -75894,7 +75960,76 @@ var VideoShow = function VideoShow(props) {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showVideo.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.album), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, new Date(showVideo.created_at).getDay(), " " + months[new Date(showVideo.created_at).getMonth()], " " + new Date(showVideo.created_at).getFullYear()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showVideo.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.album), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, new Date(showVideo.created_at).getDay(), " " + months[new Date(showVideo.created_at).getMonth()], " " + new Date(showVideo.created_at).getFullYear())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mr-2"
+  }, props.videoLikes.find(function (videoLike) {
+    return videoLike.video_id == show && videoLike.username == props.auth.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "#cc3300"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onVideoLike();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1.2em",
+    height: "1.2em",
+    fill: "currentColor",
+    className: "bi bi-heart-fill",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.videoLikes.filter(function (videoLike) {
+    return videoLike.video_id == show;
+  }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onVideoLike();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1.2em",
+    height: "1.2em",
+    fill: "currentColor",
+    className: "bi bi-heart",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.videoLikes.filter(function (videoLike) {
+    return videoLike.video_id == show;
+  }).length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "whatsapp://send?text=https://music.black.co.ke/video-show/".concat(show)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-reply",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 border-bottom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    href: "#collapseExample",
+    className: "mysonar-btn",
+    "data-toggle": "collapse",
+    "aria-expanded": "false",
+    "aria-controls": "collapseExample"
+  }, "Read more"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "collapse",
+    id: "collapseExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card card-body"
+  }, showVideo.description))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media"
@@ -75961,32 +76096,27 @@ var VideoShow = function VideoShow(props) {
       return props.setErrors(["You must have bought atleast one song by ".concat(showArtist.username)]);
     },
     btnText: 'follow'
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "panel single-accordion"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    role: "button",
-    className: "collapsed",
-    "aria-expanded": "true",
-    "aria-controls": "collapseTwo",
-    "data-parent": "#accordion",
-    "data-toggle": "collapse",
-    href: "#collapseTwo"
-  }, "read more", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "accor-open"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-plus",
-    "aria-hidden": "true"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "accor-close"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus",
-    "aria-hidden": "true"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "collapseTwo",
-    className: "accordion-content collapse"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " $show description")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 flex-fill anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: tabClass == "comments" ? "active-scrollmenu" : "p-2",
+    onClick: function onClick() {
+      return setTabClass("comments");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Comments"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 flex-fill anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: tabClass == "recommended" ? "active-scrollmenu" : "p-1",
+    onClick: function onClick() {
+      return setTabClass("recommended");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: tabClass == "comments" ? "" : "hidden"
+  }, props.boughtVideos.find(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username && boughtVideo.artist == showArtist.username && boughtVideo.video_id == show;
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
@@ -76011,7 +76141,7 @@ var VideoShow = function VideoShow(props) {
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
   })))), props.videoComments.filter(function (comment) {
-    return comment.post_id == id;
+    return comment.video_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
@@ -76137,11 +76267,129 @@ var VideoShow = function VideoShow(props) {
         onDeleteComment(comment.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment"))))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: tabClass == "recommended" ? "" : "col-sm-3 hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Up next")), !props.boughtVideos.some(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username;
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "grey"
+    }
+  }, "You haven't bought any videos")), props.boughtVideos.filter(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username && boughtVideo.video_id != show;
+  }).map(function (boughtVideo, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key,
+      className: "media p-2 border-bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-left thumbnail"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/video-show/".concat(boughtVideo.video_id)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }).thumbnail,
+      width: "160em",
+      height: "90em"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-body ml-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0 pt-2 pr-1 pl-1",
+      style: {
+        width: "150px",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, props.videos.find(function (video) {
+      return video.id == boughtVideo.video_id;
+    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.videos.find(function (video) {
+      return video.id == boughtVideo.video_id;
+    }).username))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mt-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs to watch")), props.videos.filter(function (video) {
+    return !props.boughtVideos.some(function (boughtVideo) {
+      return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
+    }) && video.username != props.auth.username && video.id != show;
+  }).slice(0, 10).map(function (video, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: index,
+      className: "media p-2 border-bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-left thumbnail"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/video-show/".concat(video.id)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: video.thumbnail,
+      width: "160em",
+      height: "90em"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-body ml-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0 pt-2 pr-1 pl-1",
+      style: {
+        width: "150px",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, video.username)), props.cartVideos.find(function (cartVideo) {
+      return cartVideo.video_id == video.id && cartVideo.username == props.auth.username;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-light mb-1 rounded-0",
+      style: {
+        minWidth: '40px',
+        height: '33px'
+      },
+      onClick: function onClick() {
+        return onCartVideos(video.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-cart3",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "mysonar-btn mb-1",
+      style: {
+        minWidth: '40px',
+        height: '33px'
+      },
+      onClick: function onClick() {
+        return onCartVideos(video.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-cart3",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      btnClass: 'btn mysonar-btn green-btn float-right',
+      btnText: 'buy',
+      onClick: function onClick() {
+        return onBuyVideos(video.id);
+      }
+    })));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 hidden"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   }));
 };

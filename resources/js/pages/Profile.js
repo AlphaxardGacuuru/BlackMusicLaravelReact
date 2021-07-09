@@ -127,8 +127,8 @@ const Profile = (props) => {
 							<Img style={{ position: "absolute", zIndex: "99" }}
 								imgClass="avatar hover-img"
 								src={`/storage/${props.users
-										.filter((user) => user.username == username)
-										.map((user) => user.pp)
+									.filter((user) => user.username == username)
+									.map((user) => user.pp)
 									}`} />
 						</div>
 					</div>
@@ -207,11 +207,15 @@ const Profile = (props) => {
 			<hr />
 
 			<div className="row">
-				<div className="col-sm-4">
+				<div className="col-sm-4 mb-5">
 					<center><h3>Audios</h3></center>
 				</div>
-				<div className="col-sm-4">
+				<div className="col-sm-4 mb-5">
 					<center><h3>Posts</h3></center>
+					{!props.posts.some((post) => post.username == username) &&
+						<center>
+							<h6 style={{ color: "grey" }}>{username} does not have any posts</h6>
+						</center>}
 
 					{/* <!-- Posts area --> */}
 					{props.posts
@@ -569,8 +573,12 @@ const Profile = (props) => {
 					{/* <!-- Posts area end --> */}
 
 				</div>
-				<div className="col-sm-3">
+				<div className="col-sm-3 mb-5">
 					<center><h3>Videos</h3></center>
+					{!props.videos.some((video) => video.username == username) &&
+						<center>
+							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
+						</center>}
 
 					{/* <!-- Song suggestion area --> */}
 					{props.videos

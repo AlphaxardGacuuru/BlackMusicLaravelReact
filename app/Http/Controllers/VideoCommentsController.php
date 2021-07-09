@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\VideoComments;
+use App\VideoCommentLikes;
 use Illuminate\Http\Request;
 
 class VideoCommentsController extends Controller
@@ -35,7 +36,18 @@ class VideoCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required'
+        ]);
+
+        /* Create new post */
+        $videoComment = new VideoComments;
+        $videoComment->video_id = $request->input('video');
+        $videoComment->username = auth()->user()->username;
+        $videoComment->text = $request->input('text');
+        $videoComment->save();
+
+        return response('Comment Posted', 200);
     }
 
     /**
@@ -78,8 +90,12 @@ class VideoCommentsController extends Controller
      * @param  \App\VideoComments  $videoComments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VideoComments $videoComments)
+    public function destroy($id)
     {
-        //
+        $videoComment = VideoComments::where('id', $id)->first();
+        VideoCommentLikes::where('comment_id', $id)->delete();
+        VideoComments::find($id)->delete();
+
+        return response('Comment deleted', 200);
     }
 }

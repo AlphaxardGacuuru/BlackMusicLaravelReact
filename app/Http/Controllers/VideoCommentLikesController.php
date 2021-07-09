@@ -35,7 +35,23 @@ class VideoCommentLikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $videoCommentLikeCount = VideoCommentLikes::where('comment_id', $request->input('comment'))
+            ->where('username', auth()->user()->username)->count();
+
+        if ($videoCommentLikeCount > 0) {
+            VideoCommentLikes::where('comment_id', $request->input('comment'))
+                ->where('username', auth()->user()->username)->delete();
+
+            $message = "Like removed";
+        } else {
+            $videoCommentLike = new VideoCommentLikes;
+            $videoCommentLike->comment_id = $request->input('comment');
+            $videoCommentLike->username = auth()->user()->username;
+            $videoCommentLike->save();
+            $message = "Comment liked";
+        }
+
+        return response($message, 200);
     }
 
     /**

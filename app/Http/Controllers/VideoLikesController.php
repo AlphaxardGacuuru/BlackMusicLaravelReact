@@ -35,7 +35,23 @@ class VideoLikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $videoLikeCount = VideoLikes::where('video_id', $request->input('video'))
+            ->where('username', auth()->user()->username)->count();
+
+        if ($videoLikeCount > 0) {
+            VideoLikes::where('video_id', $request->input('video'))->where('username', auth()->user()->username)->delete();
+
+            $message = "Like removed";
+        } else {
+            $videoLike = new VideoLikes;
+            $videoLike->video_id = $request->input('video');
+            $videoLike->username = auth()->user()->username;
+            $videoLike->save();
+
+            $message = "Video liked";
+        }
+
+        return response($message, 200);
     }
 
     /**

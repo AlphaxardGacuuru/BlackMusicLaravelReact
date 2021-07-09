@@ -99,7 +99,6 @@ const VideoCharts = (props) => {
 	// Sort array in descending order depending on the value
 	artistsArray.sort((a, b) => b.value - a.value)
 	videosArray.sort((a, b) => b.value - a.value)
-	console.log(artistsArray)
 
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
@@ -229,42 +228,43 @@ const VideoCharts = (props) => {
 						{/*  Echo Artists according to most songs sold in one week  */}
 						{/*  Fetch Artists End  */}
 						{/*  Echo Artists  */}
-						{artistsArray.map((artistArray, key) => (
-							<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-								<center>
-									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-										<Link to={"/profile/" + artistArray.key}>
-											<Img src={`/storage/${props.users.find((user) => {
+						{artistsArray.filter((artist) => artist.key != props.auth.username)
+							.map((artistArray, key) => (
+								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
+									<center>
+										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+											<Link to={"/profile/" + artistArray.key}>
+												<Img src={`/storage/${props.users.find((user) => {
+													return user.username == artistArray.key
+												}).pp}`}
+													width='150px'
+													height='150px' />
+											</Link>
+										</div>
+										<h6 className="mt-2"
+											style={{
+												width: "100px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											{props.users.find((user) => {
 												return user.username == artistArray.key
-											}).pp}`}
-												width='150px'
-												height='150px' />
-										</Link>
-									</div>
-									<h6 className="mt-2"
-										style={{
+											}).name}
+										</h6>
+										<h6 style={{
 											width: "100px",
 											whiteSpace: "nowrap",
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-										{props.users.find((user) => {
-											return user.username == artistArray.key
-										}).name}
-									</h6>
-									<h6 style={{
-										width: "100px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-										<small>
-											{artistArray.key}
-										</small>
-									</h6>
-								</center>
-							</span>
-						))}
+											<small>
+												{artistArray.key}
+											</small>
+										</h6>
+									</center>
+								</span>
+							))}
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}

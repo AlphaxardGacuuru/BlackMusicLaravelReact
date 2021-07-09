@@ -252,7 +252,7 @@ function App() {
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, videoComments, videoCommentLikes, follows, setFollows }} />
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, follows, setFollows }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (
