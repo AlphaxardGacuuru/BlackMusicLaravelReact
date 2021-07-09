@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams } from "react-router-dom";
+import { useState } from 'react'
 import Img from '../components/Img'
 import Button from '../components/Button'
 import axios from 'axios'
@@ -7,6 +8,8 @@ import axios from 'axios'
 const Profile = (props) => {
 
 	let { username } = useParams();
+
+	const [tabClass, setTabClass] = useState("audios")
 
 	// Function for following musicians
 	const onFollow = (musician) => {
@@ -137,7 +140,7 @@ const Profile = (props) => {
 			{/* <!-- End of Profile pic area --> */}
 
 			{/* {{-- Profile Area --}} */}
-			<div className="row">
+			<div className="row border-bottom">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-10">
 					<br />
@@ -204,14 +207,34 @@ const Profile = (props) => {
 			</div>
 			{/* {{-- End of Profile Area --}} */}
 
-			<hr />
+			{/* Tab for Comment and Up Next */}
+			<div className="d-flex">
+				<div className="p-2 flex-fill anti-hidden">
+					<h4 className={tabClass == "audios" ? "active-scrollmenu" : "p-2"}
+						onClick={() => setTabClass("audios")}>
+						<center>Audios</center>
+					</h4>
+				</div>
+				<div className="p-2 flex-fill anti-hidden">
+					<h4 className={tabClass == "posts" ? "active-scrollmenu" : "p-1"}
+						onClick={() => setTabClass("posts")}>
+						<center>Posts</center>
+					</h4>
+				</div>
+				<div className="p-2 flex-fill anti-hidden">
+					<h4 className={tabClass == "videos" ? "active-scrollmenu" : "p-1"}
+						onClick={() => setTabClass("videos")}>
+						<center>Videos</center>
+					</h4>
+				</div>
+			</div>
 
 			<div className="row">
-				<div className="col-sm-4 mb-5">
-					<center><h3>Audios</h3></center>
+				<div className={tabClass == "audios" ? "col-sm-4" : "col-sm-4 hidden"}>
+					<center className="hidden"><h4>Audios</h4></center>
 				</div>
-				<div className="col-sm-4 mb-5">
-					<center><h3>Posts</h3></center>
+				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
+					<center className="hidden"><h4>Posts</h4></center>
 					{!props.posts.some((post) => post.username == username) &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any posts</h6>
@@ -573,8 +596,8 @@ const Profile = (props) => {
 					{/* <!-- Posts area end --> */}
 
 				</div>
-				<div className="col-sm-3 mb-5">
-					<center><h3>Videos</h3></center>
+				<div className={tabClass == "videos" ? "col-sm-4" : "col-sm-4 hidden"}>
+					<center className="hidden"><h4>Videos</h4></center>
 					{!props.videos.some((video) => video.username == username) &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
