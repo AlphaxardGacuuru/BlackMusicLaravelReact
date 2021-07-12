@@ -19,6 +19,7 @@ import VideoCharts from '../pages/VideoCharts'
 import VideoShow from '../pages/VideoShow'
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
+import Videos from '../pages/Videos'
 
 function App() {
 
@@ -257,6 +258,10 @@ function App() {
 
 				<Route path="/library" exact render={(props) => (
 					<Library {...{ auth, videos, boughtVideos }} />
+				)} />
+
+				<Route path="/videos" exact render={(props) => (
+					<Videos {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos }} />
 				)} />
 
 				<Messages {...{ message, errors }} />

@@ -144,8 +144,6 @@ const Index = (props) => {
 					</svg>
 				</Link>}
 
-			<br className="hidden" />
-
 			{/* <!-- Profile info area --> */}
 			<div className="row">
 				<div className="col-sm-1 hidden"></div>

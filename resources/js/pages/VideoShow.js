@@ -136,7 +136,6 @@ const VideoShow = (props) => {
 		<div className="row">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-7">
-				<br className="hidden" />
 				<div className="resp-container">
 					{props.boughtVideos.some((boughtVideo) => {
 						return boughtVideo.id == showVideo.id &&
@@ -450,7 +449,6 @@ const VideoShow = (props) => {
 
 			{/* -- Up next area -- */}
 			<div className={tabClass == "recommended" ? "" : "col-sm-3 hidden"}>
-				<br className="hidden" />
 				<div className="p-2">
 					<h5>Up next</h5>
 				</div>
