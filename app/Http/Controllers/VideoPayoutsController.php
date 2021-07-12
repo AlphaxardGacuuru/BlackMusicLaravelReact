@@ -14,7 +14,7 @@ class VideoPayoutsController extends Controller
      */
     public function index()
     {
-        //
+        return VideoPayouts::all();
     }
 
     /**

@@ -56,6 +56,7 @@ Route::resources([
     'video-comments' => 'VideoCommentsController',
     'video-comment-likes' => 'VideoCommentLikesController',
     'video-albums' => 'VideoAlbumsController',
+    'video-payouts' => 'VideoPayoutsController',
     'bought-videos' => 'BoughtVideosController',
     'video-notifications' => 'VideoNotificationsController',
     'library' => 'BoughtVideosController',
@@ -67,5 +68,5 @@ Route::resources([
     'search' => 'SearchController',
     'admin' => 'PayoutsController',
     'notifications' => 'NotificationsController',
-	'decos' => 'DecosController',
+    'decos' => 'DecosController',
 ]);

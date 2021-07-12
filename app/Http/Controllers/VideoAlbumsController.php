@@ -14,7 +14,7 @@ class VideoAlbumsController extends Controller
      */
     public function index()
     {
-        //
+        return VideoAlbums::all();
     }
 
     /**

@@ -45,6 +45,8 @@ function App() {
 	const [videoLikes, setVideoLikes] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
+	const [videoAlbums, setVideoAlbums] = useState([])
+	const [videoPayouts, setVideoPayouts] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -106,6 +108,10 @@ function App() {
 		fetchVideoComments()
 
 		fetchVideoCommentLikes()
+
+		fetchVideoAlbums()
+
+		// fetchVideoPayouts()
 
 	}, [])
 
@@ -218,6 +224,20 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch video comment likes"]))
 	}
 
+	// Fetch Video Albums
+	const fetchVideoAlbums = () => {
+		axios.get(`${url}/api/video-albums`)
+			.then((res) => setVideoAlbums(res.data))
+			.catch(() => setErrors(["Failed to fetch video albums"]))
+	}
+
+	// Fetch Video Payouts
+	const fetchVideoPayouts = () => {
+		axios.get(`${url}/api/video-payouts`)
+			.then((res) => setVideoPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch video payouts"]))
+	}
+
 	return (
 		<Router>
 			<>
@@ -261,7 +281,7 @@ function App() {
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
-					<Videos {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos }} />
+					<Videos {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoLikes, videoAlbums, videoPayouts }} />
 				)} />
 
 				<Messages {...{ message, errors }} />
