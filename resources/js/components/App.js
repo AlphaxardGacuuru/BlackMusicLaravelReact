@@ -20,6 +20,7 @@ import VideoShow from '../pages/VideoShow'
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
 import Videos from '../pages/Videos'
+import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 
 function App() {
 
@@ -283,6 +284,14 @@ function App() {
 				<Route path="/videos" exact render={(props) => (
 					<Videos {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoLikes, videoAlbums, videoPayouts }} />
 				)} />
+
+				<Route
+					path="/video-album-create"
+					exact
+					render={(props) => (
+						<VideoAlbumCreate
+							{...{ url, auth, setMessage, setErrors, users }} />
+					)} />
 
 				<Messages {...{ message, errors }} />
 				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />

@@ -35,7 +35,25 @@ class VideoAlbumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'cover' => 'required|image|max:1999',
+        ]);
+
+        /* Handle file upload */
+        if ($request->hasFile('cover')) {
+            $vCover = $request->file('cover')->store('public/video-album-covers');
+            $vCover = substr($vCover, 7);
+        }
+
+        /* Create new video album */
+        $vAlbum = new VideoAlbums;
+        $vAlbum->name = $request->input('name');
+        $vAlbum->username = auth()->user()->username;
+        $vAlbum->cover = $vCover;
+        $vAlbum->released = $request->input('released');
+        $vAlbum->save();
+
+        return response('Video Album Created', 200);
     }
 
     /**

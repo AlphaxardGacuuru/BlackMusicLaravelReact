@@ -22,7 +22,7 @@ const Videos = (props) => {
 						<Link to="/videos/create" className="btn sonar-btn">upload video</Link>
 						<br />
 						<br />
-						<Link to="/video-albums/create" className="btn sonar-btn">create video album</Link>
+						<Link to="/video-album-create" className="btn sonar-btn">create video album</Link>
 					</center>
 				</div>
 			</div>
@@ -197,7 +197,7 @@ const Videos = (props) => {
 								<div className="media">
 									<div className="media-left">
 										<Link to={`/video-albums/${videoAlbum.id}`}>
-											<Img src={`/storage/${videoAlbum.id}`}
+											<Img src={`/storage/${videoAlbum.cover}`}
 												width="auto"
 												height="100"
 												alt={"album cover"} />
@@ -300,6 +300,8 @@ const Videos = (props) => {
 											</tbody>
 										))}
 								</table>
+								<br />
+								<br />
 							</div>
 						))}
 				</div>
