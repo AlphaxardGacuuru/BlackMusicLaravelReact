@@ -21,6 +21,7 @@ import Cart from '../pages/Cart'
 import Library from '../pages/Library'
 import Videos from '../pages/Videos'
 import VideoAlbumCreate from '../pages/VideoAlbumCreate'
+import VideoCreate from '../pages/VideoCreate'
 
 function App() {
 
@@ -290,7 +291,15 @@ function App() {
 					exact
 					render={(props) => (
 						<VideoAlbumCreate
-							{...{ url, auth, setMessage, setErrors, users }} />
+							{...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
+					)} />
+
+				<Route
+					path="/video-create"
+					exact
+					render={(props) => (
+						<VideoCreate
+							{...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
 					)} />
 
 				<Messages {...{ message, errors }} />

@@ -19,7 +19,7 @@ const Videos = (props) => {
 						<Link to="/audios" className="btn sonar-btn">go to audios</Link>
 						<br />
 						<br />
-						<Link to="/videos/create" className="btn sonar-btn">upload video</Link>
+						<Link to="/video-create" className="btn sonar-btn">upload video</Link>
 						<br />
 						<br />
 						<Link to="/video-album-create" className="btn sonar-btn">create video album</Link>

@@ -46,6 +46,7 @@ const VideoAlbumCreate = (props) => {
 			axios.post(`${props.url}/api/video-albums`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
+					axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
 					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
@@ -146,7 +147,7 @@ const VideoAlbumCreate = (props) => {
 										<br />
 										<br />
 
-										<button type="submit" className="sonar-btn">create album</button>
+										<Button type="submit" btnClass="sonar-btn" btnText="create album" />
 
 										<br />
 										<br />
