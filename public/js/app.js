@@ -76220,7 +76220,6 @@ var VideoCreate = function VideoCreate(props) {
     name: "ft",
     className: "form-control",
     placeholder: "Featuring Artist e.g. @JohnDoe",
-    required: true,
     onChange: function onChange(e) {
       setFt(e.target.value);
     }
@@ -76302,9 +76301,10 @@ var VideoCreate = function VideoCreate(props) {
     onChange: function onChange(e) {
       setDescription(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "reset"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "reset",
+    className: "sonar-btn"
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "sonar-btn",
     type: "button",
     "data-toggle": "collapse",

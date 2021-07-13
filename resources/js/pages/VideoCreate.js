@@ -15,7 +15,7 @@ const VideoCreate = (props) => {
 	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
-	
+
 	// Get history for page location
 	const history = useHistory()
 
@@ -121,7 +121,6 @@ const VideoCreate = (props) => {
 											name="ft"
 											className="form-control"
 											placeholder="Featuring Artist e.g. @JohnDoe"
-											required={true}
 											onChange={(e) => { setFt(e.target.value) }} />
 
 										<br />
@@ -197,7 +196,7 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
-										<Button btnText="reset" />
+										<button type="reset" className="sonar-btn">reset</button>
 										<br />
 										<br />
 

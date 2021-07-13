@@ -37,7 +37,7 @@ class VideosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'video-name' => 'required|string',
+            'name' => 'required|string',
             'video' => 'required|regex:/^https:\/\/youtu.be\/[A-z0-9]+/',
         ]);
 
