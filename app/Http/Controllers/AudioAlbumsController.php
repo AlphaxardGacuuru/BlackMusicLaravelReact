@@ -14,7 +14,7 @@ class AudioAlbumsController extends Controller
      */
     public function index()
     {
-        //
+        return AudioAlbums::all();
     }
 
     /**
@@ -35,7 +35,25 @@ class AudioAlbumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'cover' => 'required|image|max:1999',
+        ]);
+
+/* Handle file upload */
+        if ($request->hasFile('cover')) {
+            $aCover = $request->file('cover')->store('public/audio-album-covers');
+            $aCover = substr($aCover, 7);
+        }
+
+/* Create new video album */
+        $aAlbum = new AudioAlbums;
+        $aAlbum->name = $request->input('name');
+        $aAlbum->username = auth()->user()->username;
+        $aAlbum->cover = $aCover;
+        $aAlbum->released = $request->input('released');
+        $aAlbum->save();
+
+        return response('Audio Album Created', 200);
     }
 
     /**

@@ -37,8 +37,9 @@ class VideosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
             'video' => 'required|regex:/^https:\/\/youtu.be\/[A-z0-9]+/',
+            'name' => 'required|string',
+            'ft' => 'nullable|exists:users,username',
         ]);
 
         /* Handle file upload */
@@ -55,17 +56,9 @@ class VideosController extends Controller
         $video->video = substr_replace($request->input('video'), 'https://www.youtube.com/embed', 0, 16);
         $video->name = $request->input('name');
         $video->username = auth()->user()->username;
-        if ($request->ft) {
-            $ftCheck = User::where('username', $request->ft)->count();
-            if ($ftCheck > 0) {
-                $video->ft = $request->input('ft') ? $request->input('ft') : "";
-            } else {
-                return response('Featuring artist must have an account.', 400);
-            }
-        }
+        $video->ft = $request->input('ft') ? $request->input('ft') : "";
         $video->album = $request->input('album');
         $video->genre = $request->input('genre');
-
         /* Generate thumbnail */
         $thumbnail = substr($video->video, 30);
         $thumbnail = "https://img.youtube.com/vi/" . $thumbnail . "/hqdefault.jpg";

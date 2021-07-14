@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Img from '../components/Img'
 
-const Videos = (props) => {
+const Audios = (props) => {
 
 	// Arrays for dates
 	const months = [
@@ -29,13 +29,13 @@ const Videos = (props) => {
 			<div className="row">
 				<div className="col-sm-12">
 					<center>
-						<Link to="/audios" className="btn sonar-btn">go to audios</Link>
+						<Link to="/videos" className="btn sonar-btn">go to videos</Link>
 						<br />
 						<br />
-						<Link to="/video-create" className="btn sonar-btn">upload video</Link>
+						<Link to="/audio-create" className="btn sonar-btn">upload audio</Link>
 						<br />
 						<br />
-						<Link to="/video-album-create" className="btn sonar-btn">create video album</Link>
+						<Link to="/audio-album-create" className="btn sonar-btn">create audio album</Link>
 					</center>
 				</div>
 			</div>
@@ -47,20 +47,20 @@ const Videos = (props) => {
 						<tbody>
 							<tr>
 								<th className="border-top-0">
-									<h5>Videos</h5>
+									<h5>Audios</h5>
 								</th>
 								<th className="border-top-0">
-									<h5>{props.videos.filter((video) => video.username == props.auth.username).length}</h5>
+									<h5>{props.audios.filter((audio) => audio.username == props.auth.username).length}</h5>
 								</th>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
 								<th>
-									<h5>Video Albums</h5>
+									<h5>Audio Albums</h5>
 								</th>
 								<th>
-									<h5>{props.videoAlbums.filter((videoAlbum) => videoAlbum.username == props.auth.username).length}</h5>
+									<h5>{props.audioAlbums.filter((audioAlbum) => audioAlbum.username == props.auth.username).length}</h5>
 								</th>
 							</tr>
 						</tbody>
@@ -70,7 +70,7 @@ const Videos = (props) => {
 									<h5>Downloads</h5>
 								</td>
 								<td>
-									<h5>{props.boughtVideos.filter((boughtVideo) => boughtVideo.artist == props.auth.username).length}</h5>
+									<h5>{props.boughtAudios.filter((boughtAudio) => boughtAudio.artist == props.auth.username).length}</h5>
 								</td>
 							</tr>
 						</tbody>
@@ -92,8 +92,8 @@ const Videos = (props) => {
 								<td>
 									<h5 style={{ color: "green" }}>
 										KES
-										<span> {props.boughtVideos.filter((boughtVideo) => {
-											return boughtVideo.artist == props.auth.username
+										<span> {props.boughtAudios.filter((boughtAudio) => {
+											return boughtAudio.artist == props.auth.username
 										}).length * 10}</span>
 									</h5>
 								</td>
@@ -122,7 +122,7 @@ const Videos = (props) => {
 									<h5>Thumbnail</h5>
 								</th>
 								<th>
-									<h5>Video Name</h5>
+									<h5>Audio Name</h5>
 								</th>
 								<th>
 									<h5>ft</h5>
@@ -153,48 +153,48 @@ const Videos = (props) => {
 								</th>
 							</tr>
 						</tbody>
-						{props.videos.filter((video) => {
-							return video.username == props.auth.username &&
-								video.genre == "Single"
-						}).map((video, key) => (
+						{props.audios.filter((audio) => {
+							return audio.username == props.auth.username &&
+								audio.genre == "Single"
+						}).map((audio, key) => (
 							<tbody key={key}>
 								<tr>
 									<td>
-										<Link to={`/video-show/${video.id}`}>
+										<Link to={`/audio-show/${audio.id}`}>
 											<Img
-												src={video.thumbnail}
+												src={audio.thumbnail}
 												width="160em"
 												height="90em" />
 										</Link>
 									</td>
-									<td>{video.name}</td>
-									<td>{video.ft}</td>
-									<td>{video.genre}</td>
-									<td>{video.description}</td>
+									<td>{audio.name}</td>
+									<td>{audio.ft}</td>
+									<td>{audio.genre}</td>
+									<td>{audio.description}</td>
 									<td>
-										{props.boughtVideos.filter((boughtVideo) => {
-											return boughtVideo.video_id == video.id
+										{props.boughtAudios.filter((boughtAudio) => {
+											return boughtAudio.video_id == audio.id
 										}).length}
 									</td>
 									<td style={{ color: "green" }}>
-										KES <span>{props.boughtVideos.filter((boughtVideo) => {
-											return boughtVideo.video_id == video.id
+										KES <span>{props.boughtAudios.filter((boughtAudio) => {
+											return boughtAudio.video_id == audio.id
 										}).length * 10}
 										</span>
 									</td>
 									<td>
-										{props.videoLikes.filter((videoLike) => {
-											return videoLike.video_id == video.id
+										{props.audioLikes.filter((audioLike) => {
+											return audioLike.video_id == audio.id
 										}).length
 										}</td>
-									<td>{video.released}</td>
+									<td>{audio.released}</td>
 									<td>
-										{new Date(video.created_at).getDay()}
-										{" " + months[new Date(video.created_at).getMonth()]}
-										{" " + new Date(video.created_at).getFullYear()}
+										{new Date(audio.created_at).getDay()}
+										{" " + months[new Date(audio.created_at).getMonth()]}
+										{" " + new Date(audio.created_at).getFullYear()}
 									</td>
 									<td>
-										<Link to={`/videos-edit/${video.id}`}>
+										<Link to={`/audios-edit/${audio.id}`}>
 											<button className='mysonar-btn'>edit</button>
 										</Link>
 									</td>
@@ -204,26 +204,26 @@ const Videos = (props) => {
 					</table>
 					<br />
 					<br />
-					{props.videoAlbums
-						.filter((videoAlbum) => videoAlbum.username == props.auth.username)
-						.map((videoAlbum, key) => (
+					{props.audioAlbums
+						.filter((audioAlbum) => audioAlbum.username == props.auth.username)
+						.map((audioAlbum, key) => (
 							<div key={key}>
 								<div className="media">
 									<div className="media-left">
-										<Link to={`/video-albums/${videoAlbum.id}`}>
-											<Img src={`/storage/${videoAlbum.cover}`}
+										<Link to={`/audio-albums/${audioAlbum.id}`}>
+											<Img src={`/storage/${audioAlbum.cover}`}
 												width="auto"
 												height="100"
 												alt={"album cover"} />
 										</Link>
 									</div>
 									<div className="media-body p-2">
-										<small>Video Album</small>
-										<h1>{videoAlbum.name}</h1>
+										<small>Audio Album</small>
+										<h1>{audioAlbum.name}</h1>
 										<h6>
-											{new Date(videoAlbum.created_at).getDay()}
-											{" " + months[new Date(videoAlbum.created_at).getMonth()]}
-											{" " + new Date(videoAlbum.created_at).getFullYear()}
+											{new Date(audioAlbum.created_at).getDay()}
+											{" " + months[new Date(audioAlbum.created_at).getMonth()]}
+											{" " + new Date(audioAlbum.created_at).getFullYear()}
 										</h6>
 									</div>
 								</div>
@@ -235,7 +235,7 @@ const Videos = (props) => {
 												<h5>Thumbnail</h5>
 											</th>
 											<th>
-												<h5>Video Name</h5>
+												<h5>Audio Name</h5>
 											</th>
 											<th>
 												<h5>ft</h5>
@@ -266,13 +266,13 @@ const Videos = (props) => {
 											</th>
 										</tr>
 									</tbody>
-									{props.videos
-										.filter((video) => video.album == videoAlbum.id)
+									{props.audios
+										.filter((audio) => audio.album == audioAlbum.id)
 										.map((albumItem, key) => (
 											<tbody key={key}>
 												<tr>
 													<td>
-														<Link to={`/video-show/${albumItem.id}`}>
+														<Link to={`/audio-show/${albumItem.id}`}>
 															<Img src={albumItem.thumbnail}
 																width="160em"
 																height="90em"
@@ -284,19 +284,19 @@ const Videos = (props) => {
 													<td>{albumItem.genre}</td>
 													<td>{albumItem.description}</td>
 													<td>
-														{props.boughtVideos.filter((boughtVideo) => {
-															return boughtVideo.video_id == albumItem.id
+														{props.boughtAudios.filter((boughtAudio) => {
+															return boughtAudio.video_id == albumItem.id
 														}).length}
 													</td>
 													<td style={{ color: "green" }}>
-														KES <span>{props.boughtVideos.filter((boughtVideo) => {
-															return boughtVideo.video_id == albumItem.id
+														KES <span>{props.boughtAudios.filter((boughtAudio) => {
+															return boughtAudio.video_id == albumItem.id
 														}).length * 10}
 														</span>
 													</td>
 													<td>
-														{props.videoLikes.filter((videoLike) => {
-															return videoLike.video_id == albumItem.id
+														{props.audioLikes.filter((audioLike) => {
+															return audioLike.video_id == albumItem.id
 														}).length
 														}</td>
 													<td>{albumItem.released}</td>
@@ -306,7 +306,7 @@ const Videos = (props) => {
 														{" " + new Date(albumItem.created_at).getFullYear()}
 													</td>
 													<td>
-														<Link to={`/videos-edit/${albumItem.id}`}>
+														<Link to={`/audios-edit/${albumItem.id}`}>
 															<button className='mysonar-btn'>edit</button>
 														</Link>
 													</td>
@@ -325,5 +325,4 @@ const Videos = (props) => {
 	)
 }
 
-export default Videos
-
+export default Audios

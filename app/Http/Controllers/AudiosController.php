@@ -14,7 +14,7 @@ class AudiosController extends Controller
      */
     public function index()
     {
-        //
+        return Audios::all();
     }
 
     /**

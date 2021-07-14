@@ -14,7 +14,7 @@ class AudioLikesController extends Controller
      */
     public function index()
     {
-        //
+        return AudioLikes::all();
     }
 
     /**

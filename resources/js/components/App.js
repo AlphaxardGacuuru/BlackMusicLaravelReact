@@ -22,6 +22,8 @@ import Library from '../pages/Library'
 import Videos from '../pages/Videos'
 import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import VideoCreate from '../pages/VideoCreate'
+import Audios from '../pages/Audios'
+import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 
 function App() {
 
@@ -49,6 +51,10 @@ function App() {
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
 	const [videoAlbums, setVideoAlbums] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
+	const [audios, setAudios] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState([])
+	const [audioLikes, setAudioLikes] = useState([])
+	const [audioAlbums, setAudioAlbums] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -114,6 +120,14 @@ function App() {
 		fetchVideoAlbums()
 
 		// fetchVideoPayouts()
+
+		fetchAudios()
+
+		fetchAudioAlbums()
+
+		fetchBoughtAudios()
+
+		fetchAudioLikes()
 
 	}, [])
 
@@ -240,6 +254,34 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch video payouts"]))
 	}
 
+	// Fetch Audios
+	const fetchAudios = () => {
+		axios.get(`${url}/api/audios`)
+			.then((res) => setAudios(res.data))
+			.catch(() => setErrors(["Failed to fetch audios"]))
+	}
+
+	// Fetch Audio Albums
+	const fetchAudioAlbums = () => {
+		axios.get(`${url}/api/audio-albums`)
+			.then((res) => setAudioAlbums(res.data))
+			.catch(() => setErrors(["Failed to fetch audio albums"]))
+	}
+
+	// Fetch Bought Audios
+	const fetchBoughtAudios = () => {
+		axios.get(`${url}/api/bought-audios`)
+			.then((res) => setBoughtAudios(res.data))
+			.catch(() => setErrors(["Failed to fetch bought audios"]))
+	}
+
+	// Fetch Audio Likes
+	const fetchAudioLikes = () => {
+		axios.get(`${url}/api/audio-likes`)
+			.then((res) => setAudioLikes(res.data))
+			.catch(() => setErrors(["Failed to fetch audio likes"]))
+	}
+
 	return (
 		<Router>
 			<>
@@ -300,6 +342,22 @@ function App() {
 					render={(props) => (
 						<VideoCreate
 							{...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
+					)} />
+
+				<Route
+					path="/audios"
+					exact
+					render={(props) => (
+						<Audios
+							{...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
+					)} />
+
+				<Route
+					path="/audio-album-create"
+					exact
+					render={(props) => (
+						<AudioAlbumCreate
+							{...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
 					)} />
 
 				<Messages {...{ message, errors }} />

@@ -14,7 +14,7 @@ class BoughtAudiosController extends Controller
      */
     public function index()
     {
-        //
+        return BoughtAudios::all();
     }
 
     /**

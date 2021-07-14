@@ -44,7 +44,6 @@ const VideoCreate = (props) => {
 					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
-
 					var resError
 					var newError = []
 					for (resError in resErrors) {
@@ -116,6 +115,10 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
+										<label htmlFor="">
+											Featuring Artist
+											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
+										</label>
 										<input
 											type="text"
 											name="ft"
