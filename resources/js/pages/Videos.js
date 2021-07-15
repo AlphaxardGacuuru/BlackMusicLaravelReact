@@ -155,7 +155,7 @@ const Videos = (props) => {
 						</tbody>
 						{props.videos.filter((video) => {
 							return video.username == props.auth.username &&
-								video.genre == "Single"
+								video.album == "Single"
 						}).map((video, key) => (
 							<tbody key={key}>
 								<tr>

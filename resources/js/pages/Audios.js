@@ -155,14 +155,14 @@ const Audios = (props) => {
 						</tbody>
 						{props.audios.filter((audio) => {
 							return audio.username == props.auth.username &&
-								audio.genre == "Single"
+								audio.album == "Single"
 						}).map((audio, key) => (
 							<tbody key={key}>
 								<tr>
 									<td>
 										<Link to={`/audio-show/${audio.id}`}>
 											<Img
-												src={audio.thumbnail}
+												src={`storage/${audio.thumbnail}`}
 												width="160em"
 												height="90em" />
 										</Link>
@@ -273,7 +273,8 @@ const Audios = (props) => {
 												<tr>
 													<td>
 														<Link to={`/audio-show/${albumItem.id}`}>
-															<Img src={albumItem.thumbnail}
+															<Img
+																src={`storage/${albumItem.thumbnail}`}
 																width="160em"
 																height="90em"
 																alt={"thumbnail"} />

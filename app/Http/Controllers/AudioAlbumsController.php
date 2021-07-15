@@ -39,13 +39,13 @@ class AudioAlbumsController extends Controller
             'cover' => 'required|image|max:1999',
         ]);
 
-/* Handle file upload */
+        /* Handle file upload */
         if ($request->hasFile('cover')) {
             $aCover = $request->file('cover')->store('public/audio-album-covers');
             $aCover = substr($aCover, 7);
         }
 
-/* Create new video album */
+        /* Create new video album */
         $aAlbum = new AudioAlbums;
         $aAlbum->name = $request->input('name');
         $aAlbum->username = auth()->user()->username;

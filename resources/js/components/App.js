@@ -24,6 +24,7 @@ import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import VideoCreate from '../pages/VideoCreate'
 import Audios from '../pages/Audios'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
+import AudioCreate from '../pages/AudioCreate'
 
 function App() {
 
@@ -358,6 +359,14 @@ function App() {
 					render={(props) => (
 						<AudioAlbumCreate
 							{...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+					)} />
+
+				<Route
+					path="/audio-create"
+					exact
+					render={(props) => (
+						<AudioCreate
+							{...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
 					)} />
 
 				<Messages {...{ message, errors }} />

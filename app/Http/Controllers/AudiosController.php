@@ -35,7 +35,39 @@ class AudiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'audio' => 'required',
+            'thumbnail' => 'required',
+            'name' => 'required|string',
+            'ft' => 'nullable|exists:users,username',
+        ]);
+
+		/* Handle audio upload */
+        if ($request->hasFile('audio')) {
+            $song = $request->file('audio')->store('public/audios');
+            $song = substr($song, 7);
+        }
+
+        /* Handle thumbnail upload */
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
+            $thumbnail = substr($thumbnail, 7);
+        }
+
+        /* Create new audio song */
+        $audio = new Audios;
+        $audio->name = $request->input('name');
+        $audio->username = auth()->user()->username;
+        $audio->ft = $request->input('ft') ? $request->input('ft') : "";
+        $audio->album = $request->input('album');
+        $audio->genre = $request->input('genre');
+        $audio->audio = $song;
+        $audio->thumbnail = $thumbnail;
+        $audio->description = $request->input('description');
+        $audio->released = $request->input('released');
+        $audio->save();
+
+        return response('Audio Uploaded', 200);
     }
 
     /**
