@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AudioComments;
+use App\AudioCommentLikes;
 use Illuminate\Http\Request;
 
 class AudioCommentsController extends Controller
@@ -14,7 +15,7 @@ class AudioCommentsController extends Controller
      */
     public function index()
     {
-        //
+        return AudioComments::all();
     }
 
     /**
@@ -35,7 +36,18 @@ class AudioCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        /* Create new post */
+        $audioComment = new AudioComments;
+        $audioComment->audio_id = $request->input('audio');
+        $audioComment->username = auth()->user()->username;
+        $audioComment->text = $request->input('text');
+        $audioComment->save();
+
+        return response('Comment Posted', 200);
     }
 
     /**
@@ -78,8 +90,12 @@ class AudioCommentsController extends Controller
      * @param  \App\AudioComments  $audioComments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AudioComments $audioComments)
+    public function destroy($id)
     {
-        //
+        $audioComment = AudioComments::where('id', $id)->first();
+        AudioCommentLikes::where('comment_id', $id)->delete();
+        AudioComments::find($id)->delete();
+
+        return response('Comment deleted', 200);
     }
 }

@@ -25,6 +25,7 @@ import VideoCreate from '../pages/VideoCreate'
 import Audios from '../pages/Audios'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioCreate from '../pages/AudioCreate'
+import AudioShow from '../pages/AudioShow'
 
 function App() {
 
@@ -45,17 +46,20 @@ function App() {
 	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
 	const [videos, setVideos] = useState([])
-	const [boughtVideos, setBoughtVideos] = useState([])
-	const [cartVideos, setCartVideos] = useState([])
 	const [videoLikes, setVideoLikes] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
+	const [cartVideos, setCartVideos] = useState([])
+	const [boughtVideos, setBoughtVideos] = useState([])
 	const [videoAlbums, setVideoAlbums] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
 	const [audios, setAudios] = useState([])
-	const [boughtAudios, setBoughtAudios] = useState([])
 	const [audioLikes, setAudioLikes] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
+	const [audioComments, setAudioComments] = useState([])
+	const [audioCommentLikes, setAudioCommentLikes] = useState([])
+	const [cartAudios, setCartAudios] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -130,6 +134,14 @@ function App() {
 
 		fetchAudioLikes()
 
+		fetchAudioComments()
+
+		fetchAudioCommentLikes()
+
+		fetchCartAudios()
+
+		fetchBoughtAudios()
+
 	}, [])
 
 	//Fetch Auth
@@ -143,14 +155,6 @@ function App() {
 	//Fetch Users
 	const fetchUsers = async () => {
 		const res = await fetch(`${url}/api/users`)
-		const data = res.json()
-
-		return data
-	}
-
-	//Fetch Videos
-	const fetchVideos = async () => {
-		const res = await fetch(`${url}/api/videos`)
 		const data = res.json()
 
 		return data
@@ -206,18 +210,12 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch follows']))
 	}
 
-	// Fetch Bought Videos
-	const fetchBoughtVideos = () => {
-		axios.get(`${url}/api/bought-videos`)
-			.then((res) => setBoughtVideos(res.data))
-			.catch(() => setErrors(['Failed to fetch bought videos']))
-	}
+	//Fetch Videos
+	const fetchVideos = async () => {
+		const res = await fetch(`${url}/api/videos`)
+		const data = res.json()
 
-	// Fetch Cart Videos
-	const fetchCartVideos = () => {
-		axios.get(`${url}/api/cart-videos`)
-			.then((res) => setCartVideos(res.data))
-			.catch(() => setErrors(['Failed to fetch cart videos']))
+		return data
 	}
 
 	// Fetch Liked Videos
@@ -248,6 +246,20 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch video albums"]))
 	}
 
+	// Fetch Cart Videos
+	const fetchCartVideos = () => {
+		axios.get(`${url}/api/cart-videos`)
+			.then((res) => setCartVideos(res.data))
+			.catch(() => setErrors(['Failed to fetch cart videos']))
+	}
+
+	// Fetch Bought Videos
+	const fetchBoughtVideos = () => {
+		axios.get(`${url}/api/bought-videos`)
+			.then((res) => setBoughtVideos(res.data))
+			.catch(() => setErrors(['Failed to fetch bought videos']))
+	}
+
 	// Fetch Video Payouts
 	const fetchVideoPayouts = () => {
 		axios.get(`${url}/api/video-payouts`)
@@ -269,18 +281,39 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch audio albums"]))
 	}
 
-	// Fetch Bought Audios
-	const fetchBoughtAudios = () => {
-		axios.get(`${url}/api/bought-audios`)
-			.then((res) => setBoughtAudios(res.data))
-			.catch(() => setErrors(["Failed to fetch bought audios"]))
-	}
-
 	// Fetch Audio Likes
 	const fetchAudioLikes = () => {
 		axios.get(`${url}/api/audio-likes`)
 			.then((res) => setAudioLikes(res.data))
 			.catch(() => setErrors(["Failed to fetch audio likes"]))
+	}
+
+	// Fetch Audio Comments
+	const fetchAudioComments = () => {
+		axios.get(`${url}/api/audio-comments`)
+			.then((res) => setAudioComments(res.data))
+			.catch(() => setErrors(["Failed to fetch audio comments"]))
+	}
+
+	// Fetch Audio Comments Likes
+	const fetchAudioCommentLikes = () => {
+		axios.get(`${url}/api/audio-comment-likes`)
+			.then((res) => setAudioCommentLikes(res.data))
+			.catch(() => setErrors(['Failed to fetch audio comment likes']))
+	}
+
+	// Fetch Cart Audios
+	const fetchCartAudios = () => {
+		axios.get(`${url}/api/cart-audios`)
+			.then((res) => setCartAudios(res.data))
+			.catch(() => setErrors(['Failed to fetch cart audios']))
+	}
+
+	// Fetch Bought Audios
+	const fetchBoughtAudios = () => {
+		axios.get(`${url}/api/bought-audios`)
+			.then((res) => setBoughtAudios(res.data))
+			.catch(() => setErrors(["Failed to fetch bought audios"]))
 	}
 
 	return (
@@ -367,6 +400,14 @@ function App() {
 					render={(props) => (
 						<AudioCreate
 							{...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+					)} />
+
+				<Route
+					path="/audio-show/:show"
+					exact
+					render={(props) => (
+						<AudioShow
+							{...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, follows, setFollows }} />
 					)} />
 
 				<Messages {...{ message, errors }} />

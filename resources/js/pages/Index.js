@@ -286,7 +286,10 @@ const Index = (props) => {
 										className="card pt-0 pl-0 pr-0 pb-2"
 										style={{ borderRadius: "10px" }}>
 										<div className="thumbnail"
-											style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
+											style={{
+												borderTopLeftRadius: "10px",
+												borderTopRightRadius: "10px"
+											}}>
 											<Link to={`/video-show/${video.id}`}>
 												<Img src={video.thumbnail} width="160em" height="90em" />
 											</Link>

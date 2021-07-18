@@ -14,7 +14,7 @@ class AudioCommentLikesController extends Controller
      */
     public function index()
     {
-        //
+        return AudioCommentLikes::all();
     }
 
     /**
@@ -35,7 +35,23 @@ class AudioCommentLikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $audioCommentLikeCount = AudioCommentLikes::where('comment_id', $request->input('comment'))
+            ->where('username', auth()->user()->username)->count();
+
+        if ($audioCommentLikeCount > 0) {
+            AudioCommentLikes::where('comment_id', $request->input('comment'))
+                ->where('username', auth()->user()->username)->delete();
+
+            $message = "Like removed";
+        } else {
+            $audioCommentLike = new AudioCommentLikes;
+            $audioCommentLike->comment_id = $request->input('comment');
+            $audioCommentLike->username = auth()->user()->username;
+            $audioCommentLike->save();
+            $message = "Comment liked";
+        }
+
+        return response($message, 200);
     }
 
     /**

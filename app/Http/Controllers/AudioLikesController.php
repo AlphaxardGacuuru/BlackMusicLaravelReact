@@ -35,7 +35,23 @@ class AudioLikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $audioLikeCount = AudioLikes::where('audio_id', $request->input('audio'))
+            ->where('username', auth()->user()->username)->count();
+
+        if ($audioLikeCount > 0) {
+            AudioLikes::where('audio_id', $request->input('audio'))->where('username', auth()->user()->username)->delete();
+
+            $message = "Like removed";
+        } else {
+            $audioLike = new AudioLikes;
+            $audioLike->audio_id = $request->input('audio');
+            $audioLike->username = auth()->user()->username;
+            $audioLike->save();
+
+            $message = "Audio liked";
+        }
+
+        return response($message, 200);
     }
 
     /**

@@ -14,7 +14,7 @@ class CartAudiosController extends Controller
      */
     public function index()
     {
-        //
+        return CartAudios::all();
     }
 
     /**

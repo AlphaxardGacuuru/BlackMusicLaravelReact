@@ -3,22 +3,21 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from 'react'
 import Img from '../components/Img'
 import Button from '../components/Button'
-import axios from 'axios'
 
-const VideoShow = (props) => {
+const AudioShow = (props) => {
 
 	let { show } = useParams();
 
-	// Get video to show
-	if (props.videos.find((video) => video.id == show)) {
-		var showVideo = props.videos.find((video) => video.id == show)
+	// Get audio to show
+	if (props.audios.find((audio) => audio.id == show)) {
+		var showAudio = props.audios.find((audio) => audio.id == show)
 	} else {
-		var showVideo = []
+		var showAudio = []
 	}
 
-	// Get artist of video to show 
-	if (props.users.find((user) => user.username == showVideo.username)) {
-		var showArtist = props.users.find((user) => user.username == showVideo.username)
+	// Get artist of audio to show 
+	if (props.users.find((user) => user.username == showAudio.username)) {
+		var showArtist = props.users.find((user) => user.username == showAudio.username)
 	} else {
 		var showArtist = []
 	}
@@ -27,16 +26,189 @@ const VideoShow = (props) => {
 	const [tabClass, setTabClass] = useState("comments")
 
 	// Arrays for dates
-	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	const months = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	];
 
-	// Function for liking video
-	const onVideoLike = () => {
+	const [playBtn, setPlayBtn] = useState(false)
+	const progress = React.useRef(null)
+	const progressContainer = React.useRef(null)
+	var progressWidth
+	var currTime = React.useRef(null)
+	var durTime = React.useRef(null)
+
+	// Song titles
+	const songs = ['hey', 'summer', 'ukulele'];
+
+	// Keep track of song
+	let songIndex = 2;
+
+	// Initially load song details into DOM
+	loadSong(songs[songIndex]);
+
+	// Update song details
+	let title;
+	let audioSrc;
+	let coverSrc;
+
+	function loadSong(song) {
+		title = song;
+		audioSrc = `/storage/audios/${song}.mp3`;
+		coverSrc = `/storage/audio-thumbnails/${song}.jpg`;
+	}
+
+	const [audio, setAudio] = useState(new Audio(audioSrc))
+
+	// Play song
+	const playSong = () => {
+		setPlayBtn(true)
+		audio.play();
+	}
+
+	// Pause song
+	const pauseSong = () => {
+		setPlayBtn(false)
+		audio.pause();
+	}
+
+	// Previous song
+	const prevSong = () => {
+		songIndex--;
+
+		if (songIndex < 0) {
+			songIndex = songs.length - 1;
+		}
+
+		loadSong(songs[songIndex]);
+
+		// setAudio(new Audio(audioSrc))
+
+		playSong();
+	}
+
+	// Next song
+	const nextSong = () => {
+		songIndex++;
+
+		if (songIndex > songs.length - 1) {
+			songIndex = 0;
+		}
+
+		loadSong(songs[songIndex]);
+
+		// setAudio(new Audio(audioSrc))
+
+		playSong();
+	}
+
+	// Update progress bar
+	function updateProgress(e) {
+		const { duration, currentTime } = e.srcElement;
+		const progressPercent = (currentTime / duration) * 100;
+		progressWidth = `${progressPercent}%`;
+	}
+
+	// Set progress bar
+	function setProgress(e) {
+		const width = this.clientWidth;
+		const clickX = e.offsetX;
+		const duration = audio.duration;
+
+		audio.currentTime = (clickX / width) * duration;
+	}
+
+	//get duration & currentTime for Time of song
+	function DurTime(e) {
+		const { duration, currentTime } = e.srcElement;
+		var sec;
+		var sec_d;
+
+		// define minutes currentTime
+		let min = (currentTime == null) ? 0 :
+			Math.floor(currentTime / 60);
+		min = min < 10 ? '0' + min : min;
+
+		// define seconds currentTime
+		function get_sec(x) {
+			if (Math.floor(x) >= 60) {
+
+				for (var i = 1; i <= 60; i++) {
+					if (Math.floor(x) >= (60 * i) && Math.floor(x) < (60 * (i + 1))) {
+						sec = Math.floor(x) - (60 * i);
+						sec = sec < 10 ? '0' + sec : sec;
+					}
+				}
+			} else {
+				sec = Math.floor(x);
+				sec = sec < 10 ? '0' + sec : sec;
+			}
+		}
+
+		get_sec(currentTime, sec);
+
+		// change currentTime DOM
+		currTime = min + ':' + sec;
+
+		// define minutes duration
+		let min_d = (isNaN(duration) === true) ? '0' :
+			Math.floor(duration / 60);
+		min_d = min_d < 10 ? '0' + min_d : min_d;
+
+
+		function get_sec_d(x) {
+			if (Math.floor(x) >= 60) {
+
+				for (var i = 1; i <= 60; i++) {
+					if (Math.floor(x) >= (60 * i) && Math.floor(x) < (60 * (i + 1))) {
+						sec_d = Math.floor(x) - (60 * i);
+						sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
+					}
+				}
+			} else {
+				sec_d = (isNaN(duration) === true) ? '0' :
+					Math.floor(x);
+				sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
+			}
+		}
+
+		// define seconds duration
+		get_sec_d(duration);
+
+		// change duration DOM
+		durTime = min_d + ':' + sec_d;
+
+	};
+
+	// Time/song update
+	audio.addEventListener('timeupdate', updateProgress);
+
+	// Song ends
+	audio.addEventListener('ended', nextSong);
+
+	// Time of song
+	audio.addEventListener('timeupdate', DurTime);
+
+	// console.log(progressWidth)
+
+	// Function for liking audio
+	const onAudioLike = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-likes`, {
-				video: show
+			axios.post(`${props.url}/api/audio-likes`, {
+				audio: show
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-likes`).then((res) => props.setVideoLikes(res.data))
+				axios.get(`${props.url}/api/audio-likes`).then((res) => props.setAudioLikes(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -74,12 +246,12 @@ const VideoShow = (props) => {
 		e.preventDefault()
 
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-comments`, {
-				video: show,
+			axios.post(`${props.url}/api/audio-comments`, {
+				audio: show,
 				text: text
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comments`).then((res) => props.setVideoComments(res.data))
+				axios.get(`${props.url}/api/audio-comments`).then((res) => props.setAudioComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -97,11 +269,11 @@ const VideoShow = (props) => {
 	// Function for liking posts
 	const onCommentLike = (comment) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-comment-likes`, {
+			axios.post(`${props.url}/api/audio-comment-likes`, {
 				comment: comment
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comment-likes`).then((res) => props.setVideoCommentLikes(res.data))
+				axios.get(`${props.url}/api/audio-comment-likes`).then((res) => props.setAudioCommentLikes(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -117,9 +289,9 @@ const VideoShow = (props) => {
 	// Function for deleting comments
 	const onDeleteComment = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/video-comments/${id}`).then((res) => {
+			axios.delete(`${props.url}/api/audio-comments/${id}`).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comments`).then((res) => props.setVideoComments(res.data))
+				axios.get(`${props.url}/api/audio-comments`).then((res) => props.setAudioComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -134,38 +306,99 @@ const VideoShow = (props) => {
 
 	return (
 		<div className="row">
-			<div className="col-sm-1"></div>
-			<div className="col-sm-7">
-				<div className="resp-container">
-					{props.boughtVideos.some((boughtVideo) => {
-						return boughtVideo.id == showVideo.id &&
-							boughtVideo.username == props.auth.username ||
-							props.auth.username == "@blackmusic" ||
-							props.auth.username == showVideo.username
-					}) ?
-						<iframe className='resp-iframe'
-							width='880px'
-							height='495px'
-							src={`${showVideo.video}/?autoplay=1`}
-							frameBorder='0'
-							allow='accelerometer'
-							encrypted-media="true"
-							gyroscope="true"
-							picture-in-picture="true"
-							allowFullScreen>
-						</iframe> :
-						<iframe className='resp-iframe'
-							width='880px'
-							height='495px'
-							src={`${showVideo.video}?autoplay=1&end=10&controls=0`}
-							frameBorder='0'
-							allow='accelerometer'
-							encrypted-media="true"
-							gyroscope="true"
-							picture-in-picture="true"
-							allowFullScreen>
-						</iframe>}
+			<div className="col-sm-4"></div>
+			<div className="col-sm-4">
+				<div
+					className="ml-2 mr-2"
+					style={{
+						borderTopLeftRadius: "10px",
+						borderTopRightRadius: "10px",
+						borderBottomRightRadius: "10px",
+						borderBottomLeftRadius: "10px",
+						overflow: "hidden"
+					}}>
+					<center>
+						<Img src={coverSrc} alt="music-cover" />
+					</center>
 				</div>
+
+				{/* <!-- Progress Container --> */}
+				<div
+					className="progress m-2 mt-4 mb-3"
+					style={{ height: "5px" }}>
+					<div
+						className="progress-bar"
+						style={{
+							background: "#232323",
+							width: `${progressWidth}`,
+							height: "5px"
+						}}>
+					</div>
+				</div>
+
+				<div className="d-flex justify-content-center">
+					<div className="p-2">
+						<button
+							className="mysonar-btn"
+							style={{ color: "#232323" }}
+							onClick={prevSong}>
+
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								className="bi bi-skip-backward"
+								viewBox="0 0 16 16">
+								<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
+							</svg>
+						</button>
+					</div>
+					<div className="p-2">
+						<button
+							className="mysonar-btn"
+							onClick={playBtn ? pauseSong : playSong}>
+							{playBtn ?
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									className="bi bi-pause"
+									viewBox="0 0 16 16">
+									<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+								</svg> :
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									className="bi bi-play"
+									viewBox="0 0 16 16">
+									<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+								</svg>
+							}
+						</button>
+					</div>
+					<div className="p-2">
+						<button
+							className="mysonar-btn"
+							style={{ color: "#232323" }}
+							onClick={nextSong}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								className="bi bi-skip-forward"
+								viewBox="0 0 16 16">
+								<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
+							</svg>
+						</button>
+					</div>
+				</div>
+				<h4>{title}</h4>
+
 				<div className="d-flex flex-row">
 					<div className="p-2 mr-auto">
 						<h6 className="m-0 p-0"
@@ -175,26 +408,26 @@ const VideoShow = (props) => {
 								overflow: "hidden",
 								textOverflow: "clip"
 							}}>
-							<small>Song name {showVideo.name}</small>
+							<small>Song name {showAudio.name}</small>
 						</h6>
-						<small>Album</small> <span>{showVideo.album}</span><br />
-						<small>Genre</small> <span>{showVideo.genre}</span><br />
+						<small>Album</small> <span>{showAudio.album}</span><br />
+						<small>Genre</small> <span>{showAudio.genre}</span><br />
 						<small>Posted</small> <span>
-							{new Date(showVideo.created_at).getDay()}
-							{" " + months[new Date(showVideo.created_at).getMonth()]}
-							{" " + new Date(showVideo.created_at).getFullYear()}
+							{new Date(showAudio.created_at).getDay()}
+							{" " + months[new Date(showAudio.created_at).getMonth()]}
+							{" " + new Date(showAudio.created_at).getFullYear()}
 						</span>
 					</div>
 
-					{/* Video likes */}
+					{/* Audio likes */}
 					<div className="p-2 mr-2">
-						{props.videoLikes.find((videoLike) => {
-							return videoLike.video_id == show &&
-								videoLike.username == props.auth.username
+						{props.audioLikes.find((audioLike) => {
+							return audioLike.audio_id == show &&
+								audioLike.username == props.auth.username
 						}) ? <a href="#" style={{ color: "#cc3300" }}
 							onClick={(e) => {
 								e.preventDefault()
-								onVideoLike()
+								onAudioLike()
 							}}>
 							<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
 								className='bi bi-heart-fill' viewBox='0 0 16 16'>
@@ -202,12 +435,12 @@ const VideoShow = (props) => {
 									d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 							</svg>
 
-							<small> {props.videoLikes.filter((videoLike) => videoLike.video_id == show).length}
+							<small> {props.audioLikes.filter((audioLike) => audioLike.audio_id == show).length}
 							</small>
 						</a>
 							: <a href='#' onClick={(e) => {
 								e.preventDefault()
-								onVideoLike()
+								onAudioLike()
 							}}>
 								<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
 									className='bi bi-heart' viewBox='0 0 16 16'>
@@ -215,14 +448,14 @@ const VideoShow = (props) => {
 										d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 								</svg>
 
-								<small> {props.videoLikes.filter((videoLike) => videoLike.video_id == show).length}
+								<small> {props.audioLikes.filter((audioLike) => audioLike.audio_id == show).length}
 								</small>
 							</a>}
 					</div>
 
 					{/* Share button */}
 					<div className="p-2">
-						<a href={`whatsapp://send?text=https://music.black.co.ke/video-show/${show}`}>
+						<a href={`whatsapp://send?text=https://music.black.co.ke/audio-show/${show}`}>
 							<svg className='bi bi-reply' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor'
 								xmlns='http://www.w3.org/2000/svg'>
 								<path fillRule='evenodd'
@@ -232,7 +465,7 @@ const VideoShow = (props) => {
 						</a>
 					</div>
 				</div>
-				{/* Video Area End */}
+				{/* Audio Area End */}
 
 				{/* <!-- Read more section --> */}
 				<div className="p-2 border-bottom">
@@ -246,7 +479,7 @@ const VideoShow = (props) => {
 					</button>
 					<div className="collapse" id="collapseExample">
 						<div className="card card-body">
-							{showVideo.description}
+							{showAudio.description}
 						</div>
 					</div>
 				</div>
@@ -281,9 +514,9 @@ const VideoShow = (props) => {
 
 							{/* Check whether user has bought at least one song from musician */}
 							{/* Check whether user has followed musician and display appropriate button */}
-							{props.boughtVideos.find((boughtVideo) => {
-								return boughtVideo.username == props.auth.username &&
-									boughtVideo.artist == showArtist.username
+							{props.boughtAudios.find((boughtAudio) => {
+								return boughtAudio.username == props.auth.username &&
+									boughtAudio.artist == showArtist.username
 							}) || props.auth.username == "@blackmusic" ? props.follows.find((follow) => {
 								return follow.followed == showArtist.username && follow.username == props.auth.username
 							}) ? <button className={'btn btn-light float-right rounded-0'}
@@ -326,10 +559,10 @@ const VideoShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{props.boughtVideos.find((boughtVideo) => {
-						return boughtVideo.username == props.auth.username &&
-							boughtVideo.artist == showArtist.username &&
-							boughtVideo.video_id == show || 
+					{props.boughtAudios.find((boughtAudio) => {
+						return boughtAudio.username == props.auth.username &&
+							boughtAudio.artist == showArtist.username &&
+							boughtAudio.audio_id == show ||
 							props.auth.username == "@blackmusic"
 					}) && <div className='media p-2 border-bottom'>
 							<div className="media-left">
@@ -355,8 +588,8 @@ const VideoShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{props.videoComments
-						.filter((comment) => comment.video_id == show)
+					{props.audioComments
+						.filter((comment) => comment.audio_id == show)
 						.map((comment, index) => (
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
@@ -394,7 +627,7 @@ const VideoShow = (props) => {
 									<p className="mb-0">{comment.text}</p>
 
 									{/* Comment likes */}
-									{props.videoCommentLikes.find((commentLike) => {
+									{props.audioCommentLikes.find((commentLike) => {
 										return commentLike.comment_id == comment.id &&
 											commentLike.username == props.auth.username
 									}) ? <a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
@@ -417,7 +650,7 @@ const VideoShow = (props) => {
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
 										</a>}
-									<small> {props.videoCommentLikes.filter((commentLike) => commentLike.comment_id == comment.id).length}
+									<small> {props.audioCommentLikes.filter((commentLike) => commentLike.comment_id == comment.id).length}
 									</small>
 
 									{/* <!-- Default dropup button --> */}
@@ -447,123 +680,9 @@ const VideoShow = (props) => {
 				</div>
 			</div>
 			{/* <!-- End of Comment Section --> */}
-
-			{/* -- Up next area -- */}
-			<div className={tabClass == "recommended" ? "" : "col-sm-3 hidden"}>
-				<div className="p-2">
-					<h5>Up next</h5>
-				</div>
-				{!props.boughtVideos.some((boughtVideo) => {
-					return boughtVideo.username == props.auth.username
-				}) &&
-					<center>
-						<h6 style={{ color: "grey" }}>You haven't bought any videos</h6>
-					</center>}
-
-				{props.boughtVideos
-					.filter((boughtVideo) => boughtVideo.username == props.auth.username &&
-						boughtVideo.video_id != show)
-					.map((boughtVideo, key) => (
-						<div key={key}
-							className="media p-2 border-bottom">
-							<div className="media-left thumbnail">
-								<Link to={`/video-show/${boughtVideo.video_id}`}>
-									<Img src={props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.thumbnail}
-										width="160em"
-										height="90em" />
-								</Link>
-							</div>
-							<div className="media-body ml-2">
-								<h6 className="m-0 pt-2 pr-1 pl-1"
-									style={{
-										width: "150px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.name}
-								</h6>
-								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.username}</small>
-								</h6>
-							</div>
-						</div>
-					))}
-				{/* <!-- End of Up next Area --> */}
-
-				<div className="p-2 mt-5">
-					<h5>Songs to watch</h5>
-				</div>
-				{props.videos
-					.filter((video) => !props.boughtVideos
-						.some((boughtVideo) =>
-							boughtVideo.video_id == video.id &&
-							boughtVideo.username == props.auth.username
-						) && video.username != props.auth.username && video.id != show)
-					.slice(0, 10)
-					.map((video, index) => (
-						<div key={index}
-							className="media p-2 border-bottom">
-							<div className="media-left thumbnail">
-								<Link to={`/video-show/${video.id}`}>
-									<Img src={video.thumbnail} width="160em" height="90em" />
-								</Link>
-							</div>
-							<div className="media-body ml-2">
-								<h6
-									className="m-0 pt-2 pr-1 pl-1"
-									style={{
-										width: "150px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{video.name}
-								</h6>
-								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>{video.username}</small>
-								</h6>
-								{props.cartVideos
-									.find((cartVideo) => {
-										return cartVideo.video_id == video.id &&
-											cartVideo.username == props.auth.username
-									}) ? <button
-										className="btn btn-light mb-1 rounded-0"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartVideos(video.id)}>
-									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-										fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-										<path fillRule='evenodd'
-											d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-									</svg>
-								</button>
-									: <button
-										className="mysonar-btn mb-1"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartVideos(video.id)}>
-										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
-									</button>}
-								<Button
-									btnClass={'btn mysonar-btn green-btn float-right'}
-									btnText={'buy'}
-									onClick={() => onBuyVideos(video.id)} />
-							</div>
-						</div>
-					))}
-			</div>
-			<div className="col-sm-1"></div>
-		</div >
+			<div className="col-sm-4"></div>
+		</div>
 	)
 }
 
-export default VideoShow
+export default AudioShow

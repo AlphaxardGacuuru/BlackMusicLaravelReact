@@ -70816,6 +70816,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Audios__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../pages/Audios */ "./resources/js/pages/Audios.js");
 /* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
 /* harmony import */ var _pages_AudioCreate__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pages/AudioCreate */ "./resources/js/pages/AudioCreate.js");
+/* harmony import */ var _pages_AudioShow__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../pages/AudioShow */ "./resources/js/pages/AudioShow.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -70833,6 +70834,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -70924,28 +70926,28 @@ function App() {
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      boughtVideos = _useState24[0],
-      setBoughtVideos = _useState24[1];
+      videoLikes = _useState24[0],
+      setVideoLikes = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState26 = _slicedToArray(_useState25, 2),
-      cartVideos = _useState26[0],
-      setCartVideos = _useState26[1];
+      videoComments = _useState26[0],
+      setVideoComments = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      videoLikes = _useState28[0],
-      setVideoLikes = _useState28[1];
+      videoCommentLikes = _useState28[0],
+      setVideoCommentLikes = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      videoComments = _useState30[0],
-      setVideoComments = _useState30[1];
+      cartVideos = _useState30[0],
+      setCartVideos = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      videoCommentLikes = _useState32[0],
-      setVideoCommentLikes = _useState32[1];
+      boughtVideos = _useState32[0],
+      setBoughtVideos = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
@@ -70964,28 +70966,43 @@ function App() {
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      boughtAudios = _useState40[0],
-      setBoughtAudios = _useState40[1];
+      audioLikes = _useState40[0],
+      setAudioLikes = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      audioLikes = _useState42[0],
-      setAudioLikes = _useState42[1];
+      audioAlbums = _useState42[0],
+      setAudioAlbums = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      audioAlbums = _useState44[0],
-      setAudioAlbums = _useState44[1];
+      audioComments = _useState44[0],
+      setAudioComments = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      decos = _useState46[0],
-      setDecos = _useState46[1];
+      audioCommentLikes = _useState46[0],
+      setAudioCommentLikes = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      follows = _useState48[0],
-      setFollows = _useState48[1]; // Reset Messages and Errors to null after 3 seconds
+      cartAudios = _useState48[0],
+      setCartAudios = _useState48[1];
+
+  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState50 = _slicedToArray(_useState49, 2),
+      boughtAudios = _useState50[0],
+      setBoughtAudios = _useState50[1];
+
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState52 = _slicedToArray(_useState51, 2),
+      decos = _useState52[0],
+      setDecos = _useState52[1];
+
+  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState54 = _slicedToArray(_useState53, 2),
+      follows = _useState54[0],
+      setFollows = _useState54[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -71132,6 +71149,10 @@ function App() {
     fetchAudioAlbums();
     fetchBoughtAudios();
     fetchAudioLikes();
+    fetchAudioComments();
+    fetchAudioCommentLikes();
+    fetchCartAudios();
+    fetchBoughtAudios();
   }, []); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
@@ -71189,10 +71210,10 @@ function App() {
     return function fetchUsers() {
       return _ref6.apply(this, arguments);
     };
-  }(); //Fetch Videos
+  }(); //Fetch Posts
 
 
-  var fetchVideos = /*#__PURE__*/function () {
+  var fetchPosts = /*#__PURE__*/function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
       var res, data;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
@@ -71200,7 +71221,7 @@ function App() {
           switch (_context7.prev = _context7.next) {
             case 0:
               _context7.next = 2;
-              return fetch("".concat(url, "/api/videos"));
+              return fetch("".concat(url, "/api/posts"));
 
             case 2:
               res = _context7.sent;
@@ -71215,37 +71236,8 @@ function App() {
       }, _callee7);
     }));
 
-    return function fetchVideos() {
-      return _ref7.apply(this, arguments);
-    };
-  }(); //Fetch Posts
-
-
-  var fetchPosts = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              _context8.next = 2;
-              return fetch("".concat(url, "/api/posts"));
-
-            case 2:
-              res = _context8.sent;
-              data = res.json();
-              return _context8.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context8.stop();
-          }
-        }
-      }, _callee8);
-    }));
-
     return function fetchPosts() {
-      return _ref8.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }(); // Fetch Post Likes
 
@@ -71301,25 +71293,36 @@ function App() {
     })["catch"](function () {
       return setErrors(['Failed to fetch follows']);
     });
-  }; // Fetch Bought Videos
+  }; //Fetch Videos
 
 
-  var fetchBoughtVideos = function fetchBoughtVideos() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
-      return setBoughtVideos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch bought videos']);
-    });
-  }; // Fetch Cart Videos
+  var fetchVideos = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+      var res, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              _context8.next = 2;
+              return fetch("".concat(url, "/api/videos"));
 
+            case 2:
+              res = _context8.sent;
+              data = res.json();
+              return _context8.abrupt("return", data);
 
-  var fetchCartVideos = function fetchCartVideos() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-      return setCartVideos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch cart videos']);
-    });
-  }; // Fetch Liked Videos
+            case 5:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+
+    return function fetchVideos() {
+      return _ref8.apply(this, arguments);
+    };
+  }(); // Fetch Liked Videos
 
 
   var fetchVideoLikes = function fetchVideoLikes() {
@@ -71355,6 +71358,24 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch video albums"]);
     });
+  }; // Fetch Cart Videos
+
+
+  var fetchCartVideos = function fetchCartVideos() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
+      return setCartVideos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch cart videos']);
+    });
+  }; // Fetch Bought Videos
+
+
+  var fetchBoughtVideos = function fetchBoughtVideos() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
+      return setBoughtVideos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch bought videos']);
+    });
   }; // Fetch Video Payouts
 
 
@@ -71382,15 +71403,6 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch audio albums"]);
     });
-  }; // Fetch Bought Audios
-
-
-  var fetchBoughtAudios = function fetchBoughtAudios() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
-      return setBoughtAudios(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch bought audios"]);
-    });
   }; // Fetch Audio Likes
 
 
@@ -71399,6 +71411,42 @@ function App() {
       return setAudioLikes(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audio likes"]);
+    });
+  }; // Fetch Audio Comments
+
+
+  var fetchAudioComments = function fetchAudioComments() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
+      return setAudioComments(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio comments"]);
+    });
+  }; // Fetch Audio Comments Likes
+
+
+  var fetchAudioCommentLikes = function fetchAudioCommentLikes() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comment-likes")).then(function (res) {
+      return setAudioCommentLikes(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch audio comment likes']);
+    });
+  }; // Fetch Cart Audios
+
+
+  var fetchCartAudios = function fetchCartAudios() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
+      return setCartAudios(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch cart audios']);
+    });
+  }; // Fetch Bought Audios
+
+
+  var fetchBoughtAudios = function fetchBoughtAudios() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
+      return setBoughtAudios(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch bought audios"]);
     });
   };
 
@@ -71677,6 +71725,31 @@ function App() {
         setErrors: setErrors,
         setAudios: setAudios,
         audioAlbums: audioAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/audio-show/:show",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        users: users,
+        decos: decos,
+        audios: audios,
+        boughtAudios: boughtAudios,
+        cartAudios: cartAudios,
+        setCartAudios: setCartAudios,
+        audioLikes: audioLikes,
+        setAudioLikes: setAudioLikes,
+        audioComments: audioComments,
+        setAudioComments: setAudioComments,
+        audioCommentLikes: audioCommentLikes,
+        setAudioCommentLikes: setAudioCommentLikes,
+        follows: follows,
+        setFollows: setFollows
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -73014,6 +73087,762 @@ var AudioCreate = function AudioCreate(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AudioCreate);
+
+/***/ }),
+
+/***/ "./resources/js/pages/AudioShow.js":
+/*!*****************************************!*\
+  !*** ./resources/js/pages/AudioShow.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+var AudioShow = function AudioShow(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      show = _useParams.show; // Get audio to show
+
+
+  if (props.audios.find(function (audio) {
+    return audio.id == show;
+  })) {
+    var showAudio = props.audios.find(function (audio) {
+      return audio.id == show;
+    });
+  } else {
+    var showAudio = [];
+  } // Get artist of audio to show 
+
+
+  if (props.users.find(function (user) {
+    return user.username == showAudio.username;
+  })) {
+    var showArtist = props.users.find(function (user) {
+      return user.username == showAudio.username;
+    });
+  } else {
+    var showArtist = [];
+  }
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      text = _useState2[0],
+      setText = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tabClass = _useState4[0],
+      setTabClass = _useState4[1]; // Arrays for dates
+
+
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      playBtn = _useState6[0],
+      setPlayBtn = _useState6[1];
+
+  var progress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var progressContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var progressWidth;
+  var currTime = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var durTime = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Song titles
+
+  var songs = ['hey', 'summer', 'ukulele']; // Keep track of song
+
+  var songIndex = 2; // Initially load song details into DOM
+
+  loadSong(songs[songIndex]); // Update song details
+
+  var title;
+  var audioSrc;
+  var coverSrc;
+
+  function loadSong(song) {
+    title = song;
+    audioSrc = "/storage/audios/".concat(song, ".mp3");
+    coverSrc = "/storage/audio-thumbnails/".concat(song, ".jpg");
+  }
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Audio(audioSrc)),
+      _useState8 = _slicedToArray(_useState7, 2),
+      audio = _useState8[0],
+      setAudio = _useState8[1]; // Play song
+
+
+  var playSong = function playSong() {
+    setPlayBtn(true);
+    audio.play();
+  }; // Pause song
+
+
+  var pauseSong = function pauseSong() {
+    setPlayBtn(false);
+    audio.pause();
+  }; // Previous song
+
+
+  var prevSong = function prevSong() {
+    songIndex--;
+
+    if (songIndex < 0) {
+      songIndex = songs.length - 1;
+    }
+
+    loadSong(songs[songIndex]); // setAudio(new Audio(audioSrc))
+
+    playSong();
+  }; // Next song
+
+
+  var nextSong = function nextSong() {
+    songIndex++;
+
+    if (songIndex > songs.length - 1) {
+      songIndex = 0;
+    }
+
+    loadSong(songs[songIndex]); // setAudio(new Audio(audioSrc))
+
+    playSong();
+  }; // Update progress bar
+
+
+  function updateProgress(e) {
+    var _e$srcElement = e.srcElement,
+        duration = _e$srcElement.duration,
+        currentTime = _e$srcElement.currentTime;
+    var progressPercent = currentTime / duration * 100;
+    progressWidth = "".concat(progressPercent, "%");
+  } // Set progress bar
+
+
+  function setProgress(e) {
+    var width = this.clientWidth;
+    var clickX = e.offsetX;
+    var duration = audio.duration;
+    audio.currentTime = clickX / width * duration;
+  } //get duration & currentTime for Time of song
+
+
+  function DurTime(e) {
+    var _e$srcElement2 = e.srcElement,
+        duration = _e$srcElement2.duration,
+        currentTime = _e$srcElement2.currentTime;
+    var sec;
+    var sec_d; // define minutes currentTime
+
+    var min = currentTime == null ? 0 : Math.floor(currentTime / 60);
+    min = min < 10 ? '0' + min : min; // define seconds currentTime
+
+    function get_sec(x) {
+      if (Math.floor(x) >= 60) {
+        for (var i = 1; i <= 60; i++) {
+          if (Math.floor(x) >= 60 * i && Math.floor(x) < 60 * (i + 1)) {
+            sec = Math.floor(x) - 60 * i;
+            sec = sec < 10 ? '0' + sec : sec;
+          }
+        }
+      } else {
+        sec = Math.floor(x);
+        sec = sec < 10 ? '0' + sec : sec;
+      }
+    }
+
+    get_sec(currentTime, sec); // change currentTime DOM
+
+    currTime = min + ':' + sec; // define minutes duration
+
+    var min_d = isNaN(duration) === true ? '0' : Math.floor(duration / 60);
+    min_d = min_d < 10 ? '0' + min_d : min_d;
+
+    function get_sec_d(x) {
+      if (Math.floor(x) >= 60) {
+        for (var i = 1; i <= 60; i++) {
+          if (Math.floor(x) >= 60 * i && Math.floor(x) < 60 * (i + 1)) {
+            sec_d = Math.floor(x) - 60 * i;
+            sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
+          }
+        }
+      } else {
+        sec_d = isNaN(duration) === true ? '0' : Math.floor(x);
+        sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
+      }
+    } // define seconds duration
+
+
+    get_sec_d(duration); // change duration DOM
+
+    durTime = min_d + ':' + sec_d;
+  }
+
+  ; // Time/song update
+
+  audio.addEventListener('timeupdate', updateProgress); // Song ends
+
+  audio.addEventListener('ended', nextSong); // Time of song
+
+  audio.addEventListener('timeupdate', DurTime); // console.log(progressWidth)
+  // Function for liking audio
+
+  var onAudioLike = function onAudioLike() {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/audio-likes"), {
+        audio: show
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios.get("".concat(props.url, "/api/audio-likes")).then(function (res) {
+          return props.setAudioLikes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for following musicians
+
+
+  var onFollow = function onFollow(musician) {
+    axios.get('/sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/follows"), {
+        musician: musician
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios.get("".concat(props.url, "/api/follows")).then(function (res) {
+          return props.setFollows(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for posting comment
+
+
+  var onComment = function onComment(e) {
+    e.preventDefault();
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/audio-comments"), {
+        audio: show,
+        text: text
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
+          return props.setAudioComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+    setText("");
+  }; // Function for liking posts
+
+
+  var onCommentLike = function onCommentLike(comment) {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/audio-comment-likes"), {
+        comment: comment
+      }).then(function (res) {
+        props.setMessage(res.data);
+        axios.get("".concat(props.url, "/api/audio-comment-likes")).then(function (res) {
+          return props.setAudioCommentLikes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for deleting comments
+
+
+  var onDeleteComment = function onDeleteComment(id) {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios["delete"]("".concat(props.url, "/api/audio-comments/").concat(id)).then(function (res) {
+        props.setMessage(res.data);
+        axios.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
+          return props.setAudioComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-2 mr-2",
+    style: {
+      borderTopLeftRadius: "10px",
+      borderTopRightRadius: "10px",
+      borderBottomRightRadius: "10px",
+      borderBottomLeftRadius: "10px",
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: coverSrc,
+    alt: "music-cover"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress m-2 mt-4 mb-3",
+    style: {
+      height: "5px"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      background: "#232323",
+      width: "".concat(progressWidth),
+      height: "5px"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    style: {
+      color: "#232323"
+    },
+    onClick: prevSong
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-skip-backward",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    onClick: playBtn ? pauseSong : playSong
+  }, playBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-pause",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-play",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    style: {
+      color: "#232323"
+    },
+    onClick: nextSong
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-skip-forward",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mr-auto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "m-0 p-0",
+    style: {
+      width: "200px",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showAudio.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showAudio.album), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showAudio.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, new Date(showAudio.created_at).getDay(), " " + months[new Date(showAudio.created_at).getMonth()], " " + new Date(showAudio.created_at).getFullYear())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mr-2"
+  }, props.audioLikes.find(function (audioLike) {
+    return audioLike.audio_id == show && audioLike.username == props.auth.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "#cc3300"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onAudioLike();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1.2em",
+    height: "1.2em",
+    fill: "currentColor",
+    className: "bi bi-heart-fill",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.audioLikes.filter(function (audioLike) {
+    return audioLike.audio_id == show;
+  }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onAudioLike();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1.2em",
+    height: "1.2em",
+    fill: "currentColor",
+    className: "bi bi-heart",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.audioLikes.filter(function (audioLike) {
+    return audioLike.audio_id == show;
+  }).length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "whatsapp://send?text=https://music.black.co.ke/audio-show/".concat(show)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-reply",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 border-bottom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    href: "#collapseExample",
+    className: "mysonar-btn",
+    "data-toggle": "collapse",
+    "aria-expanded": "false",
+    "aria-controls": "collapseExample"
+  }, "Read more"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "collapse",
+    id: "collapseExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card card-body"
+  }, showAudio.description))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 border-bottom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/profile/".concat(showArtist.username)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: "/storage/" + showArtist.pp,
+    width: "40px",
+    height: "40px"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "m-0 p-0",
+    style: {
+      width: "140px",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.name, " ", showArtist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "gold",
+      paddingTop: "10px"
+    },
+    className: "fa fa-circle-o"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.decos.filter(function (deco) {
+    return deco.username == showArtist.username;
+  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "1rem"
+    }
+  }, "\u2022"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.follows.filter(function (follow) {
+    return follow.username == showArtist.username;
+  }).length, " fans"), props.boughtAudios.find(function (boughtAudio) {
+    return boughtAudio.username == props.auth.username && boughtAudio.artist == showArtist.username;
+  }) || props.auth.username == "@blackmusic" ? props.follows.find(function (follow) {
+    return follow.followed == showArtist.username && follow.username == props.auth.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: 'btn btn-light float-right rounded-0',
+    onClick: function onClick() {
+      return onFollow(showArtist.username);
+    }
+  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-check",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"
+  }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: 'mysonar-btn float-right',
+    onClick: function onClick() {
+      return onFollow(showArtist.username);
+    },
+    btnText: 'follow'
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: 'mysonar-btn float-right',
+    onClick: function onClick() {
+      return props.setErrors(["You must have bought atleast one song by ".concat(showArtist.username)]);
+    },
+    btnText: 'follow'
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 flex-fill anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: tabClass == "comments" ? "active-scrollmenu" : "p-2",
+    onClick: function onClick() {
+      return setTabClass("comments");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Comments"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 flex-fill anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: tabClass == "recommended" ? "active-scrollmenu" : "p-1",
+    onClick: function onClick() {
+      return setTabClass("recommended");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: tabClass == "comments" ? "" : "hidden"
+  }, props.boughtAudios.find(function (boughtAudio) {
+    return boughtAudio.username == props.auth.username && boughtAudio.artist == showArtist.username && boughtAudio.audio_id == show || props.auth.username == "@blackmusic";
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media p-2 border-bottom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media-left"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: "/storage/" + props.auth.pp,
+    width: "40px",
+    height: "40px"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "media-body contact-form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: onComment
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    placeholder: "Add a comment",
+    value: text,
+    onChange: function onChange(e) {
+      return setText(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    type: "submit",
+    btnClass: "mysonar-btn float-right",
+    btnText: "Comment"
+  })))), props.audioComments.filter(function (comment) {
+    return comment.audio_id == show;
+  }).map(function (comment, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: index,
+      className: "media p-2 border-bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-left"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "avatar-thumbnail-xs",
+      style: {
+        borderRadius: "50%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/home/".concat(comment.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: "/storage/".concat(props.users.find(function (user) {
+        return user.username == comment.username;
+      }).pp),
+      width: "40px",
+      height: "40px"
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "media-body"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "media-heading m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
+      return user.username == comment.username;
+    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        color: "gold"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-circle",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        fontSize: "10px"
+      }
+    }, " ", props.decos.filter(function (deco) {
+      return deco.username == comment.username;
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "float-right mr-1"
+    }, new Date(comment.created_at).toDateString()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
+    }, comment.text), props.audioCommentLikes.find(function (commentLike) {
+      return commentLike.comment_id == comment.id && commentLike.username == props.auth.username;
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      style: {
+        color: "#cc3300"
+      },
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onCommentLike(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "1.2em",
+      height: "1.2em",
+      fill: "currentColor",
+      className: "bi bi-heart-fill",
+      viewBox: "0 0 16 16"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onCommentLike(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "1.2em",
+      height: "1.2em",
+      fill: "currentColor",
+      className: "bi bi-heart",
+      viewBox: "0 0 16 16"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.audioCommentLikes.filter(function (commentLike) {
+      return commentLike.comment_id == comment.id;
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropup float-right"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      role: "button",
+      id: "dropdownMenuLink",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "bi bi-three-dots-vertical",
+      width: "1em",
+      height: "1em",
+      viewBox: "0 0 16 16",
+      fill: "currentColor",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fillRule: "evenodd",
+      d: "M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropdown-menu dropdown-menu-right p-0",
+      style: {
+        borderRadius: "0"
+      }
+    }, comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      className: "dropdown-item",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onDeleteComment(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment"))))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AudioShow);
 
 /***/ }),
 
@@ -77603,7 +78432,7 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
   }, props.boughtVideos.find(function (boughtVideo) {
-    return boughtVideo.username == props.auth.username && boughtVideo.artist == showArtist.username && boughtVideo.video_id == show;
+    return boughtVideo.username == props.auth.username && boughtVideo.artist == showArtist.username && boughtVideo.video_id == show || props.auth.username == "@blackmusic";
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
