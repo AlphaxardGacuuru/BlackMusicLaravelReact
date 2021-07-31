@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, useParams } from "react-router-dom";
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Img from '../components/Img'
 import Button from '../components/Button'
+import { queue } from 'jquery';
 
 const AudioShow = (props) => {
 
@@ -41,165 +42,65 @@ const AudioShow = (props) => {
 		"December"
 	];
 
+	// Set State
 	const [playBtn, setPlayBtn] = useState(false)
-	const progress = React.useRef(null)
-	const progressContainer = React.useRef(null)
-	var progressWidth
-	var currTime = React.useRef(null)
-	var durTime = React.useRef(null)
+	const [dur, setDur] = useState(0)
+	const [volume, setVolume] = useState(0.3)
+	const [currentTime, setCurrentTime] = useState(0)
 
-	// Song titles
-	const songs = ['hey', 'summer', 'ukulele'];
+	// Set Refs
+	const audio = React.useRef(null)
+	const audioProgress = React.useRef(null)
+	const audioContainer = React.useRef()
+	const volumeProgress = React.useRef()
+	const volumeContainer = React.useRef()
 
-	// Keep track of song
-	let songIndex = 2;
-
-	// Initially load song details into DOM
-	loadSong(songs[songIndex]);
-
-	// Update song details
-	let title;
-	let audioSrc;
-	let coverSrc;
-
-	function loadSong(song) {
-		title = song;
-		audioSrc = `/storage/audios/${song}.mp3`;
-		coverSrc = `/storage/audio-thumbnails/${song}.jpg`;
-	}
-
-	const [audio, setAudio] = useState(new Audio(audioSrc))
+	const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + ~~(s) }
 
 	// Play song
 	const playSong = () => {
 		setPlayBtn(true)
-		audio.play();
+		audio.current.play();
 	}
 
 	// Pause song
 	const pauseSong = () => {
 		setPlayBtn(false)
-		audio.pause();
+		audio.current.pause();
 	}
 
 	// Previous song
 	const prevSong = () => {
-		songIndex--;
-
-		if (songIndex < 0) {
-			songIndex = songs.length - 1;
-		}
-
-		loadSong(songs[songIndex]);
-
-		// setAudio(new Audio(audioSrc))
-
 		playSong();
 	}
 
 	// Next song
 	const nextSong = () => {
-		songIndex++;
-
-		if (songIndex > songs.length - 1) {
-			songIndex = 0;
-		}
-
-		loadSong(songs[songIndex]);
-
-		// setAudio(new Audio(audioSrc))
-
 		playSong();
 	}
 
-	// Update progress bar
-	function updateProgress(e) {
-		const { duration, currentTime } = e.srcElement;
-		const progressPercent = (currentTime / duration) * 100;
-		progressWidth = `${progressPercent}%`;
+	// Update audio progress bar
+	function updateProgress() {
+		const progressPercent = (audio.current.currentTime / audio.current.duration) * 100;
+		audioProgress.current.style.width = `${progressPercent}%`; audio.current.currentTime
 	}
 
-	// Set progress bar
+	// Set audio progress bar
 	function setProgress(e) {
-		const width = this.clientWidth;
-		const clickX = e.offsetX;
-		const duration = audio.duration;
-
-		audio.currentTime = (clickX / width) * duration;
+		const width = audioContainer.current.clientWidth;
+		const clickX = e.nativeEvent.offsetX
+		var seekTo = (clickX / width) * audio.current.duration
+		audio.current.currentTime = seekTo
+		console.log(audio.current.data)
 	}
 
-	//get duration & currentTime for Time of song
-	function DurTime(e) {
-		const { duration, currentTime } = e.srcElement;
-		var sec;
-		var sec_d;
-
-		// define minutes currentTime
-		let min = (currentTime == null) ? 0 :
-			Math.floor(currentTime / 60);
-		min = min < 10 ? '0' + min : min;
-
-		// define seconds currentTime
-		function get_sec(x) {
-			if (Math.floor(x) >= 60) {
-
-				for (var i = 1; i <= 60; i++) {
-					if (Math.floor(x) >= (60 * i) && Math.floor(x) < (60 * (i + 1))) {
-						sec = Math.floor(x) - (60 * i);
-						sec = sec < 10 ? '0' + sec : sec;
-					}
-				}
-			} else {
-				sec = Math.floor(x);
-				sec = sec < 10 ? '0' + sec : sec;
-			}
-		}
-
-		get_sec(currentTime, sec);
-
-		// change currentTime DOM
-		currTime = min + ':' + sec;
-
-		// define minutes duration
-		let min_d = (isNaN(duration) === true) ? '0' :
-			Math.floor(duration / 60);
-		min_d = min_d < 10 ? '0' + min_d : min_d;
-
-
-		function get_sec_d(x) {
-			if (Math.floor(x) >= 60) {
-
-				for (var i = 1; i <= 60; i++) {
-					if (Math.floor(x) >= (60 * i) && Math.floor(x) < (60 * (i + 1))) {
-						sec_d = Math.floor(x) - (60 * i);
-						sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
-					}
-				}
-			} else {
-				sec_d = (isNaN(duration) === true) ? '0' :
-					Math.floor(x);
-				sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
-			}
-		}
-
-		// define seconds duration
-		get_sec_d(duration);
-
-		// change duration DOM
-		durTime = min_d + ':' + sec_d;
-
-	};
-
-	// Time/song update
-	audio.addEventListener('timeupdate', updateProgress);
-
-	// Song ends
-	audio.addEventListener('ended', nextSong);
-
-	// Time of song
-	audio.addEventListener('timeupdate', DurTime);
-
-	// console.log(progressWidth)
+	// Set volume progress bar
+	const onSetVolume = (e) => {
+		const width = volumeContainer.current.clientWidth;
+		const clickX = e.nativeEvent.offsetX
+		audio.current.volume = clickX / width
+		setVolume(clickX / width)
+	}
 
 	// Function for liking audio
 	const onAudioLike = () => {
@@ -318,31 +219,57 @@ const AudioShow = (props) => {
 						overflow: "hidden"
 					}}>
 					<center>
-						<Img src={coverSrc} alt="music-cover" />
+						<Img
+							src={`/storage/${showAudio.thumbnail}`}
+							width="100%"
+							height="auto"
+							alt="music-cover" />
 					</center>
 				</div>
 
+				<audio
+					onTimeUpdate={(e) => {
+						updateProgress()
+						setCurrentTime(e.target.currentTime)
+					}}
+					onCanPlay={(e) => setDur(e.target.duration)}
+					ref={audio}
+					type="audio/mpeg"
+					preload='true'
+					src={`/storage/${showAudio.audio}`} />
+
 				{/* <!-- Progress Container --> */}
 				<div
-					className="progress m-2 mt-4 mb-3"
-					style={{ height: "5px" }}>
+					ref={audioContainer}
+					className="progress ml-2 mr-2 mt-4"
+					style={{ height: "5px" }}
+					onClick={setProgress}>
 					<div
+						ref={audioProgress}
 						className="progress-bar"
 						style={{
 							background: "#232323",
-							width: `${progressWidth}`,
 							height: "5px"
 						}}>
 					</div>
 				</div>
 
-				<div className="d-flex justify-content-center">
-					<div className="p-2">
-						<button
-							className="mysonar-btn"
-							style={{ color: "#232323" }}
-							onClick={prevSong}>
-
+				<div style={{ cursor: "pointer" }} className="d-flex justify-content-between">
+					<div style={{ cursor: "pointer" }} className="p-2">{fmtMSS(currentTime)}</div>
+					<div style={{ cursor: "pointer" }} className="p-2">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							className="bi bi-shuffle"
+							viewBox="0 0 16 16">
+							<path fillRule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z" />
+							<path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
+						</svg>
+					</div>
+					<div style={{ cursor: "pointer" }} className="p-2">
+						<span onClick={prevSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="16"
@@ -352,17 +279,16 @@ const AudioShow = (props) => {
 								viewBox="0 0 16 16">
 								<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
 							</svg>
-						</button>
+						</span>
 					</div>
-					<div className="p-2">
-						<button
-							className="mysonar-btn"
+					<div style={{ cursor: "pointer" }} className="p-2">
+						<span
 							onClick={playBtn ? pauseSong : playSong}>
 							{playBtn ?
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
+									width="2em"
+									height="2em"
 									fill="currentColor"
 									className="bi bi-pause"
 									viewBox="0 0 16 16">
@@ -370,21 +296,18 @@ const AudioShow = (props) => {
 								</svg> :
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
+									width="2em"
+									height="2em"
 									fill="currentColor"
 									className="bi bi-play"
 									viewBox="0 0 16 16">
 									<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
 								</svg>
 							}
-						</button>
+						</span>
 					</div>
-					<div className="p-2">
-						<button
-							className="mysonar-btn"
-							style={{ color: "#232323" }}
-							onClick={nextSong}>
+					<div style={{ cursor: "pointer" }} className="p-2">
+						<span onClick={nextSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="16"
@@ -394,10 +317,45 @@ const AudioShow = (props) => {
 								viewBox="0 0 16 16">
 								<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
 							</svg>
-						</button>
+						</span>
+					</div>
+					<div style={{ cursor: "pointer" }} className="p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-repeat" viewBox="0 0 16 16">
+							<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+							<path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+						</svg>
+					</div>
+					<div style={{ cursor: "pointer" }} className="p-2">{fmtMSS(dur)}</div>
+				</div>
+
+				{/* <!-- Volume Container --> */}
+				<div className="d-flex justify-content-end">
+					<div style={{ cursor: "pointer" }} className="volume-show">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-volume-up" viewBox="0 0 16 16">
+							<path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />
+							<path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z" />
+							<path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z" />
+						</svg>
+					</div>
+					<div
+						ref={volumeContainer}
+						className="progress volume-hide ml-2 mr-2 mt-2 float-right"
+						style={{
+							height: "5px",
+							width: "25%"
+						}}
+						onClick={onSetVolume}>
+						<div
+							ref={volumeProgress}
+							className="progress-bar"
+							style={{
+								background: "#232323",
+								height: "5px",
+								width: Math.round(volume * 100)
+							}}>
+						</div>
 					</div>
 				</div>
-				<h4>{title}</h4>
 
 				<div className="d-flex flex-row">
 					<div className="p-2 mr-auto">
@@ -505,10 +463,20 @@ const AudioShow = (props) => {
 							<span style={{
 								color: "gold",
 								paddingTop: "10px"
-							}}
-								className='fa fa-circle-o'>
+							}}>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									className="bi bi-circle"
+									viewBox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+								</svg>
 							</span>
-							<small>{props.decos.filter((deco) => deco.username == showArtist.username).length}</small>
+							<small className="ml-1 mr-1">
+								{props.decos.filter((deco) => deco.username == showArtist.username).length}
+							</small>
 							<span style={{ fontSize: "1rem" }}>&#x2022;</span>
 							<small> {props.follows.filter((follow) => follow.username == showArtist.username).length} fans</small>
 
@@ -527,10 +495,10 @@ const AudioShow = (props) => {
 										d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
 								</svg>
 							</button>
-								: <Button btnClass={'mysonar-btn float-right'}
+								: <Button btnclassName={'mysonar-btn float-right'}
 									onClick={() => onFollow(showArtist.username)}
 									btnText={'follow'} />
-								: <Button btnClass={'mysonar-btn float-right'}
+								: <Button btnclassName={'mysonar-btn float-right'}
 									onClick={() =>
 										props.setErrors([`You must have bought atleast one song by ${showArtist.username}`])}
 									btnText={'follow'} />}
@@ -678,9 +646,12 @@ const AudioShow = (props) => {
 						))
 					}
 				</div>
+				
 			</div>
 			{/* <!-- End of Comment Section --> */}
-			<div className="col-sm-4"></div>
+			<div className="col-sm-4">
+
+			</div>
 		</div>
 	)
 }

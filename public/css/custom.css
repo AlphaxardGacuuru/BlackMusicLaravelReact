@@ -1281,3 +1281,12 @@ html, body {
   border: 1px solid #ccc;
   border-top: none;
 }
+
+/* Change Audio and Volume Progress Bar heights on hover */
+/* .volume-show:hover + .volume-hide {
+	display: block;
+}
+
+.volume-hide {
+	display: none;
+} */

@@ -73104,6 +73104,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -73115,6 +73117,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -73159,155 +73162,85 @@ var AudioShow = function AudioShow(props) {
       setTabClass = _useState4[1]; // Arrays for dates
 
 
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Set State
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState6 = _slicedToArray(_useState5, 2),
       playBtn = _useState6[0],
       setPlayBtn = _useState6[1];
 
-  var progress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
-  var progressContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
-  var progressWidth;
-  var currTime = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
-  var durTime = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Song titles
-
-  var songs = ['hey', 'summer', 'ukulele']; // Keep track of song
-
-  var songIndex = 2; // Initially load song details into DOM
-
-  loadSong(songs[songIndex]); // Update song details
-
-  var title;
-  var audioSrc;
-  var coverSrc;
-
-  function loadSong(song) {
-    title = song;
-    audioSrc = "/storage/audios/".concat(song, ".mp3");
-    coverSrc = "/storage/audio-thumbnails/".concat(song, ".jpg");
-  }
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(new Audio(audioSrc)),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState8 = _slicedToArray(_useState7, 2),
-      audio = _useState8[0],
-      setAudio = _useState8[1]; // Play song
+      dur = _useState8[0],
+      setDur = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
+      _useState10 = _slicedToArray(_useState9, 2),
+      volume = _useState10[0],
+      setVolume = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      currentTime = _useState12[0],
+      setCurrentTime = _useState12[1]; // Set Refs
+
+
+  var audio = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var audioProgress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var audioContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
+  var volumeProgress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
+  var volumeContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
+
+  var fmtMSS = function fmtMSS(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + ~~s;
+  }; // Play song
 
 
   var playSong = function playSong() {
     setPlayBtn(true);
-    audio.play();
+    audio.current.play();
   }; // Pause song
 
 
   var pauseSong = function pauseSong() {
     setPlayBtn(false);
-    audio.pause();
+    audio.current.pause();
   }; // Previous song
 
 
   var prevSong = function prevSong() {
-    songIndex--;
-
-    if (songIndex < 0) {
-      songIndex = songs.length - 1;
-    }
-
-    loadSong(songs[songIndex]); // setAudio(new Audio(audioSrc))
-
     playSong();
   }; // Next song
 
 
   var nextSong = function nextSong() {
-    songIndex++;
-
-    if (songIndex > songs.length - 1) {
-      songIndex = 0;
-    }
-
-    loadSong(songs[songIndex]); // setAudio(new Audio(audioSrc))
-
     playSong();
-  }; // Update progress bar
+  }; // Update audio progress bar
 
 
-  function updateProgress(e) {
-    var _e$srcElement = e.srcElement,
-        duration = _e$srcElement.duration,
-        currentTime = _e$srcElement.currentTime;
-    var progressPercent = currentTime / duration * 100;
-    progressWidth = "".concat(progressPercent, "%");
-  } // Set progress bar
+  function updateProgress() {
+    var progressPercent = audio.current.currentTime / audio.current.duration * 100;
+    audioProgress.current.style.width = "".concat(progressPercent, "%");
+    audio.current.currentTime;
+  } // Set audio progress bar
 
 
   function setProgress(e) {
-    var width = this.clientWidth;
-    var clickX = e.offsetX;
-    var duration = audio.duration;
-    audio.currentTime = clickX / width * duration;
-  } //get duration & currentTime for Time of song
+    var width = audioContainer.current.clientWidth;
+    var clickX = e.nativeEvent.offsetX;
+    var seekTo = clickX / width * audio.current.duration;
+    audio.current.currentTime = seekTo;
+    console.log(audio.current.data);
+  } // Set volume progress bar
 
 
-  function DurTime(e) {
-    var _e$srcElement2 = e.srcElement,
-        duration = _e$srcElement2.duration,
-        currentTime = _e$srcElement2.currentTime;
-    var sec;
-    var sec_d; // define minutes currentTime
+  var onSetVolume = function onSetVolume(e) {
+    var width = volumeContainer.current.clientWidth;
+    var clickX = e.nativeEvent.offsetX;
+    audio.current.volume = clickX / width;
+    setVolume(clickX / width);
+  }; // Function for liking audio
 
-    var min = currentTime == null ? 0 : Math.floor(currentTime / 60);
-    min = min < 10 ? '0' + min : min; // define seconds currentTime
-
-    function get_sec(x) {
-      if (Math.floor(x) >= 60) {
-        for (var i = 1; i <= 60; i++) {
-          if (Math.floor(x) >= 60 * i && Math.floor(x) < 60 * (i + 1)) {
-            sec = Math.floor(x) - 60 * i;
-            sec = sec < 10 ? '0' + sec : sec;
-          }
-        }
-      } else {
-        sec = Math.floor(x);
-        sec = sec < 10 ? '0' + sec : sec;
-      }
-    }
-
-    get_sec(currentTime, sec); // change currentTime DOM
-
-    currTime = min + ':' + sec; // define minutes duration
-
-    var min_d = isNaN(duration) === true ? '0' : Math.floor(duration / 60);
-    min_d = min_d < 10 ? '0' + min_d : min_d;
-
-    function get_sec_d(x) {
-      if (Math.floor(x) >= 60) {
-        for (var i = 1; i <= 60; i++) {
-          if (Math.floor(x) >= 60 * i && Math.floor(x) < 60 * (i + 1)) {
-            sec_d = Math.floor(x) - 60 * i;
-            sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
-          }
-        }
-      } else {
-        sec_d = isNaN(duration) === true ? '0' : Math.floor(x);
-        sec_d = sec_d < 10 ? '0' + sec_d : sec_d;
-      }
-    } // define seconds duration
-
-
-    get_sec_d(duration); // change duration DOM
-
-    durTime = min_d + ':' + sec_d;
-  }
-
-  ; // Time/song update
-
-  audio.addEventListener('timeupdate', updateProgress); // Song ends
-
-  audio.addEventListener('ended', nextSong); // Time of song
-
-  audio.addEventListener('timeupdate', DurTime); // console.log(progressWidth)
-  // Function for liking audio
 
   var onAudioLike = function onAudioLike() {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -73445,29 +73378,69 @@ var AudioShow = function AudioShow(props) {
       overflow: "hidden"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: coverSrc,
+    src: "/storage/".concat(showAudio.thumbnail),
+    width: "100%",
+    height: "auto",
     alt: "music-cover"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress m-2 mt-4 mb-3",
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+    onTimeUpdate: function onTimeUpdate(e) {
+      updateProgress();
+      setCurrentTime(e.target.currentTime);
+    },
+    onCanPlay: function onCanPlay(e) {
+      return setDur(e.target.duration);
+    },
+    ref: audio,
+    type: "audio/mpeg",
+    preload: "true",
+    src: "/storage/".concat(showAudio.audio)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: audioContainer,
+    className: "progress ml-2 mr-2 mt-4",
     style: {
       height: "5px"
-    }
+    },
+    onClick: setProgress
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: audioProgress,
     className: "progress-bar",
     style: {
       background: "#232323",
-      width: "".concat(progressWidth),
       height: "5px"
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "mysonar-btn",
     style: {
-      color: "#232323"
+      cursor: "pointer"
     },
+    className: "d-flex justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "p-2"
+  }, fmtMSS(currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-shuffle",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: prevSong
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -73479,14 +73452,16 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
     className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "mysonar-btn",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: playBtn ? pauseSong : playSong
   }, playBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
+    width: "2em",
+    height: "2em",
     fill: "currentColor",
     className: "bi bi-pause",
     viewBox: "0 0 16 16"
@@ -73494,20 +73469,19 @@ var AudioShow = function AudioShow(props) {
     d: "M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"
   })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
+    width: "2em",
+    height: "2em",
     fill: "currentColor",
     className: "bi bi-play",
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "mysonar-btn",
     style: {
-      color: "#232323"
+      cursor: "pointer"
     },
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: nextSong
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -73518,7 +73492,65 @@ var AudioShow = function AudioShow(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-arrow-repeat",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "p-2"
+  }, fmtMSS(dur))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      cursor: "pointer"
+    },
+    className: "volume-show"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-volume-up",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: volumeContainer,
+    className: "progress volume-hide ml-2 mr-2 mt-2 float-right",
+    style: {
+      height: "5px",
+      width: "25%"
+    },
+    onClick: onSetVolume
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: volumeProgress,
+    className: "progress-bar",
+    style: {
+      background: "#232323",
+      height: "5px",
+      width: Math.round(volume * 100)
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-auto"
@@ -73625,9 +73657,19 @@ var AudioShow = function AudioShow(props) {
     style: {
       color: "gold",
       paddingTop: "10px"
-    },
-    className: "fa fa-circle-o"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.decos.filter(function (deco) {
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    className: "bi bi-circle",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1 mr-1"
+  }, props.decos.filter(function (deco) {
     return deco.username == showArtist.username;
   }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -73655,13 +73697,13 @@ var AudioShow = function AudioShow(props) {
     fillRule: "evenodd",
     d: "M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"
   }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: 'mysonar-btn float-right',
+    btnclassName: 'mysonar-btn float-right',
     onClick: function onClick() {
       return onFollow(showArtist.username);
     },
     btnText: 'follow'
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: 'mysonar-btn float-right',
+    btnclassName: 'mysonar-btn float-right',
     onClick: function onClick() {
       return props.setErrors(["You must have bought atleast one song by ".concat(showArtist.username)]);
     },
@@ -77256,7 +77298,7 @@ var VideoCharts = function VideoCharts(props) {
       setGenre = _useState4[1]; // Array for links
 
 
-  var charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"];
+  var charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"];
   var genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]; // Set class for chart link
 
   var onChart = function onChart(chartItem) {
@@ -77477,7 +77519,7 @@ var VideoCharts = function VideoCharts(props) {
     href: "#"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "active-scrollmenu"
-  }, "Video"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "Videos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/audio-charts/newlyReleased/All"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",

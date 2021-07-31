@@ -14,7 +14,7 @@ const VideoCharts = (props) => {
 	const [genre, setGenre] = useState("All")
 
 	// Array for links
-	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Loved"]
+	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"]
 	const genres = ["All", "Afro", "Benga", "Blues", "Boomba", "Country", "Cultural", "EDM", "Genge", "Gospel", "Hiphop", "Jazz", "Music of Kenya", "Pop", "R&B", "Rock", "Sesube", "Taarab"]
 
 	// Set class for chart link
@@ -178,7 +178,7 @@ const VideoCharts = (props) => {
 			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
 				<span>
 					<a href="#">
-						<h3 className="active-scrollmenu">Video</h3>
+						<h3 className="active-scrollmenu">Videos</h3>
 					</a>
 				</span>
 				<span>
