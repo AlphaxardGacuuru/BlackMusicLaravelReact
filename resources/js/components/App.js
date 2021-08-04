@@ -343,7 +343,7 @@ function App() {
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
-					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos }} />
+					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos, cartAudios, setCartAudios, audios }} />
 				)} />
 
 				<Route path="/video-charts" exact render={(props) => (
