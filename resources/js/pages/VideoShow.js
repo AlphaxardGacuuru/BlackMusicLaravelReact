@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useState } from 'react'
 import Img from '../components/Img'
 import Button from '../components/Button'
@@ -8,6 +8,8 @@ import axios from 'axios'
 const VideoShow = (props) => {
 
 	let { show } = useParams();
+
+	let history = useHistory()
 
 	// Get video to show
 	if (props.videos.find((video) => video.id == show)) {
@@ -130,6 +132,47 @@ const VideoShow = (props) => {
 				props.setErrors(newError)
 			})
 		})
+	}
+
+	// Function for adding video to cart
+	const onCartVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				history.push('/cart')
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
 	}
 
 	return (
@@ -329,7 +372,7 @@ const VideoShow = (props) => {
 					{props.boughtVideos.find((boughtVideo) => {
 						return boughtVideo.username == props.auth.username &&
 							boughtVideo.artist == showArtist.username &&
-							boughtVideo.video_id == show || 
+							boughtVideo.video_id == show ||
 							props.auth.username == "@blackmusic"
 					}) && <div className='media p-2 border-bottom'>
 							<div className="media-left">
@@ -497,6 +540,7 @@ const VideoShow = (props) => {
 					))}
 				{/* <!-- End of Up next Area --> */}
 
+				{/* Songs to watch Area */}
 				<div className="p-2 mt-5">
 					<h5>Songs to watch</h5>
 				</div>
@@ -562,7 +606,7 @@ const VideoShow = (props) => {
 					))}
 			</div>
 			<div className="col-sm-1"></div>
-		</div >
+		</div>
 	)
 }
 

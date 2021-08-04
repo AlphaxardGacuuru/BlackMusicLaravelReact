@@ -35,7 +35,21 @@ class CartAudiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* Check if item is already in cart */
+        $acartCheck = CartAudios::where('audio_id', $request->input('audio'))->where('username', auth()->user()->username)->count();
+        /* Insert or Remove from cart */
+        if ($acartCheck == 0) {
+            $cartAudios = new CartAudios;
+            $cartAudios->audio_id = $request->input('audio');
+            $cartAudios->username = auth()->user()->username;
+            $cartAudios->save();
+            $message = 'Audio added to Cart';
+        } else {
+            CartAudios::where('audio_id', $request->input('audio'))->where('username', auth()->user()->username)->delete();
+            $message = 'Audio removed from Cart';
+        }
+
+        return response($message, 200);
     }
 
     /**
