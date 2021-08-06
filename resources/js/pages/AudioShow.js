@@ -123,6 +123,27 @@ const AudioShow = (props) => {
 	function updateProgress() {
 		const progressPercent = (audio.current.currentTime / audio.current.duration) * 100;
 		audioProgress.current.style.width = `${progressPercent}%`; audio.current.currentTime
+
+		{/* Pause at 10s if user has not bought the audio */ }
+		const hasBought = props.boughtAudios.some((boughtAudio) => {
+			return boughtAudio.id == showAudio.id &&
+				boughtAudio.username == props.auth.username ||
+				props.auth.username == "@blackmusic" ||
+				props.auth.username == showAudio.username
+		})
+		props.boughtAudios.find((boughtAudio) => {
+			return boughtAudio.username == props.auth.username &&
+				boughtAudio.artist == showArtist.username &&
+				boughtAudio.audio_id == show ||
+				props.auth.username == "@blackmusic"
+		})
+
+		if (!hasBought) {
+			if (audio.current.currentTime >= 10) {
+				pauseSong()
+				props.setErrors([`Buy song to continue!`])
+			}
+		}
 	}
 
 	// Set audio progress bar
@@ -131,7 +152,6 @@ const AudioShow = (props) => {
 		const clickX = e.nativeEvent.offsetX
 		var seekTo = (clickX / width) * audio.current.duration
 		audio.current.currentTime = seekTo
-		console.log(audio.current.data)
 	}
 
 	// Set volume progress bar
@@ -324,7 +344,7 @@ const AudioShow = (props) => {
 					ref={audio}
 					type="audio/mpeg"
 					preload='true'
-					autoPlay={false}
+					autoPlay={true}
 					end={10}
 					src={`/storage/${showAudio.audio}`} />
 

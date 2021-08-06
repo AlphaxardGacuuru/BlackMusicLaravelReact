@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Videos;
+use App\VideoAlbums;
 use Illuminate\Http\Request;
 
 class VideosController extends Controller
@@ -66,6 +67,19 @@ class VideosController extends Controller
         $video->description = $request->input('description');
         $video->released = $request->input('released');
         $video->save();
+
+		// Check if Single Album exists
+        $singleCheck = VideoAlbums::where('username', auth()->user()->username)->where('name', 'Singles')->first();
+
+        if (!$singleCheck) {
+
+            /* Create new video album */
+            $vAlbum = new VideoAlbums;
+            $vAlbum->name = "Single";
+            $vAlbum->username = auth()->user()->username;
+            $vAlbum->cover = "video-album-covers/musical-note.png";
+            $vAlbum->save();
+        }
 
         return response('Video Uploaded', 200);
     }

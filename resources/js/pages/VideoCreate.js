@@ -11,7 +11,7 @@ const VideoCreate = (props) => {
 	const [video, setVideo] = useState("")
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
-	const [album, setAlbum] = useState("Single")
+	const [album, setAlbum] = useState("Singles")
 	const [genre, setGenre] = useState("Afro")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")

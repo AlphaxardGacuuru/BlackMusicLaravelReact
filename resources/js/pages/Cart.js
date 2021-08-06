@@ -48,7 +48,6 @@ const Cart = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
-				<br className="hidden" />
 				<center><h1>Cart</h1></center>
 				<hr />
 				{/* Cart Videos */}
@@ -61,7 +60,7 @@ const Cart = (props) => {
 						<div key={key}
 							className="media p-2 border-bottom">
 							<div className="media-left thumbnail">
-								<Link to={`/video-charts/${cartVideo.video_id}`}>
+								<Link to={`/video-show/${cartVideo.video_id}`}>
 									<Img src={props.videos
 										.find((video) => video.id == cartVideo.video_id)
 										.thumbnail}
@@ -69,6 +68,7 @@ const Cart = (props) => {
 										height="90em" />
 								</Link>
 							</div>
+
 							<div className="media-body ml-2">
 								<h6 className="m-0 pt-2 pr-1 pl-1"
 									style={{

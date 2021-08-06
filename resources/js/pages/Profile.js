@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useState } from 'react'
 import Img from '../components/Img'
 import Button from '../components/Button'
@@ -9,7 +9,12 @@ const Profile = (props) => {
 
 	let { username } = useParams();
 
+	let history = useHistory()
+
 	const [tabClass, setTabClass] = useState("audios")
+
+	// Arrays for dates
+	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 	// Function for following musicians
 	const onFollow = (musician) => {
@@ -19,26 +24,6 @@ const Profile = (props) => {
 			}).then((res) => {
 				props.setMessage(res.data)
 				axios.get(`${props.url}/api/follows`).then((res) => props.setFollows(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -111,6 +96,88 @@ const Profile = (props) => {
 	}
 
 	var percentage = 100
+
+	// Function for adding audio to cart
+	const onCartAudios = (audio) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-audios`, {
+				audio: audio
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying audio to cart
+	const onBuyAudios = (audio) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-audios`, {
+				audio: audio
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				history.push('/cart')
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
+
+	// Function for adding video to cart
+	const onCartVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				props.setMessage(res.data)
+				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				history.push('/cart')
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		});
+	}
 
 	return (
 		<>
@@ -207,10 +274,10 @@ const Profile = (props) => {
 			</div>
 			{/* {{-- End of Profile Area --}} */}
 
-			{/* Tab for Comment and Up Next */}
+			{/* Tabs for Audios, Posts and Videos */}
 			<div className="d-flex">
 				<div className="p-2 flex-fill anti-hidden">
-					<h4 className={tabClass == "audios" ? "active-scrollmenu" : "p-2"}
+					<h4 className={tabClass == "audios" ? "active-scrollmenu" : "p-1"}
 						onClick={() => setTabClass("audios")}>
 						<center>Audios</center>
 					</h4>
@@ -230,8 +297,114 @@ const Profile = (props) => {
 			</div>
 
 			<div className="row">
-				<div className={tabClass == "audios" ? "col-sm-4" : "col-sm-4 hidden"}>
+				<div className="col-sm-1"></div>
+				<div className={tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Audios</h4></center>
+					{!props.audios.some((audio) => audio.username == username) &&
+						<center>
+							<h6 style={{ color: "grey" }}>{username} does not have any audios</h6>
+						</center>}
+
+					{/* <!-- Audios Area --> */}
+					{props.audioAlbums
+						.filter((audioAlbum) => audioAlbum.username == username)
+						.map((audioAlbum, key) => (
+							<div key={key} className="mb-5">
+								<div className="media">
+									<div className="media-left">
+										<Img src={`/storage/${audioAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
+									</div>
+									<div className="media-body p-2">
+										<small>Audio Album</small>
+										<h1>{audioAlbum.name}</h1>
+										<h6>
+											{new Date(audioAlbum.created_at).getDay()}
+											{" " + months[new Date(audioAlbum.created_at).getMonth()]}
+											{" " + new Date(audioAlbum.created_at).getFullYear()}
+										</h6>
+									</div>
+								</div>
+								{props.audios
+									.filter((audio) => audio.username == username && audio.album == audioAlbum.id)
+									.map((audio, index) => (
+										<div
+											key={index}
+											className="d-flex p-2 border-bottom">
+											<div
+												className="thumbnail"
+												style={{
+													width: "50px",
+													height: "50px"
+												}}>
+												<Link to={`/audio-show/${audio.id}`}>
+													<Img src={`/storage/${audio.thumbnail}`} width="100%" height="50px" />
+												</Link>
+											</div>
+											<div className="ml-2 mr-auto">
+												<h6
+													className="mb-0 pb-0"
+													style={{
+														whiteSpace: "nowrap",
+														overflow: "hidden",
+														textOverflow: "clip"
+													}}>
+													{audio.name}
+												</h6>
+												<h6 className="mt-0 pt-0">
+													<small>{audio.username}</small>
+												</h6>
+											</div>
+											<div className="">
+												{!props.boughtAudios
+													.some((boughtAudio) => {
+														return boughtAudio.audio_id == audio.id &&
+															boughtAudio.username == props.auth.username
+													}) ?
+													props.cartAudios
+														.find((cartAudio) => {
+															return cartAudio.audio_id == audio.id &&
+																cartAudio.username == props.auth.username
+														}) ?
+														<button
+															className="btn btn-light rounded-0"
+															style={{ minWidth: '40px', height: '33px' }}
+															onClick={() => onCartAudios(audio.id)}>
+															<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+																fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+																<path fillRule='evenodd'
+																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+															</svg>
+														</button> :
+														<button
+															className="mysonar-btn"
+															style={{ minWidth: '40px', height: '33px' }}
+															onClick={() => onCartAudios(audio.id)}>
+															<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+																fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+																<path fillRule='evenodd'
+																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+															</svg>
+														</button> : ""}
+											</div>
+											<div className="ml-2">
+												{!props.boughtAudios
+													.some((boughtAudio) => {
+														return boughtAudio.audio_id == audio.id &&
+															boughtAudio.username == props.auth.username
+													}) &&
+													<Button
+														btnClass={'btn mysonar-btn green-btn float-right'}
+														btnText={'buy'}
+														onClick={() => onBuyAudios(audio.id)} />}
+											</div>
+										</div>
+									))}
+							</div>
+						))}
+					{/* <!-- Audios Area End --> */}
 				</div>
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
@@ -596,75 +769,106 @@ const Profile = (props) => {
 					{/* <!-- Posts area end --> */}
 
 				</div>
-				<div className={tabClass == "videos" ? "col-sm-4" : "col-sm-4 hidden"}>
+				<div className={tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Videos</h4></center>
 					{!props.videos.some((video) => video.username == username) &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
 						</center>}
 
-					{/* <!-- Song suggestion area --> */}
-					{props.videos
-						.filter((video) => video.username == username)
-						.filter((video) => !props.boughtVideos
-							.some((boughtVideo) =>
-								boughtVideo.video_id == video.id &&
-								boughtVideo.username == props.auth.username
-							)).map((video, index) => (
-								<div
-									key={index}
-									className="media p-2 border-bottom">
-									<div className="media-left thumbnail">
-										<Link to={`/video-show/${video.id}`}>
-											<Img src={video.thumbnail} width="160em" height="90em" />
-										</Link>
+					{/* <!-- Videos Area --> */}
+					{props.videoAlbums
+						.filter((videoAlbum) => videoAlbum.username == username)
+						.map((videoAlbum, key) => (
+							<div key={key} className="mb-5">
+								<div className="media">
+									<div className="media-left">
+										<Img src={`/storage/${videoAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
 									</div>
-									<div className="media-body ml-2">
-										<h6
-											className="m-0 pt-2 pr-1 pl-1"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{video.name}
+									<div className="media-body p-2">
+										<small>Video Album</small>
+										<h1>{videoAlbum.name}</h1>
+										<h6>
+											{new Date(videoAlbum.created_at).getDay()}
+											{" " + months[new Date(videoAlbum.created_at).getMonth()]}
+											{" " + new Date(videoAlbum.created_at).getFullYear()}
 										</h6>
-										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-											<small>{video.username}</small>
-										</h6>
-										{props.cartVideos
-											.find((cartVideo) => {
-												return cartVideo.video_id == video.id &&
-													cartVideo.username == props.auth.username
-											}) ? <button
-												className="btn btn-light mb-1 rounded-0"
-												style={{ minWidth: '40px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
-											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-												<path fillRule='evenodd'
-													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-											</svg>
-										</button>
-											: <button
-												className="mysonar-btn mb-1"
-												style={{ minWidth: '40px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
-												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-												</svg>
-											</button>}
-										<Button btnClass={'btn mysonar-btn green-btn float-right'} btnText={'buy'} />
 									</div>
 								</div>
-							))}
-					{/* <!-- End of Song Suggestion Area --> */}
+								{props.videos
+									.filter((video) => video.username == username && video.album == videoAlbum.id)
+									.map((video, index) => (
+										<div key={index}
+											className="media p-2 border-bottom">
+											<div className="media-left thumbnail">
+												<Link to={`/video-show/${video.id}`}>
+													<Img src={video.thumbnail} width="160em" height="90em" />
+												</Link>
+											</div>
+											<div className="media-body ml-2">
+												<h6
+													className="m-0 pt-2 pr-1 pl-1"
+													style={{
+														width: "150px",
+														whiteSpace: "nowrap",
+														overflow: "hidden",
+														textOverflow: "clip"
+													}}>
+													{video.name}
+												</h6>
+												<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pb-0">
+													<small>{video.username}</small>
+												</h6>
+												{!props.boughtVideos
+													.some((boughtVideo) => {
+														return boughtVideo.video_id == video.id &&
+															boughtVideo.username == props.auth.username
+													}) ?
+													props.cartVideos
+														.find((cartVideo) => {
+															return cartVideo.video_id == video.id &&
+																cartVideo.username == props.auth.username
+														}) ? <button
+															className="btn btn-light mb-1 rounded-0"
+															style={{ minWidth: '40px', height: '33px' }}
+															onClick={() => onCartVideos(video.id)}>
+														<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+															fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+															<path fillRule='evenodd'
+																d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+														</svg>
+													</button>
+														: <button
+															className="mysonar-btn mb-1"
+															style={{ minWidth: '40px', height: '33px' }}
+															onClick={() => onCartVideos(video.id)}>
+															<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+																fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+																<path fillRule='evenodd'
+																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+															</svg>
+														</button> : ""}
+												{!props.boughtVideos
+													.some((boughtVideo) => {
+														return boughtVideo.video_id == video.id &&
+															boughtVideo.username == props.auth.username
+													}) &&
+													<Button
+														btnClass={'btn mysonar-btn green-btn float-right'}
+														btnText={'buy'}
+														onClick={() => onBuyVideos(video.id)} />}
+											</div>
+										</div>
+									))}
+							</div>
+						))}
+					{/* <!-- End of Videos Area --> */}
 
 				</div>
-				<div className="col-sm-3"></div>
+				<div className="col-sm-1"></div>
 			</div>
 		</>
 	)
