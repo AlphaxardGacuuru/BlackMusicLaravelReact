@@ -7,9 +7,9 @@ const Library = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
-				<br className="hidden" />
 				<center><h1>Library</h1></center>
 				<hr />
+				<center><h3>Videos</h3></center>
 
 				{props.boughtVideos
 					.filter((boughtVideo) => boughtVideo.username == props.auth.username)
@@ -41,6 +41,55 @@ const Library = (props) => {
 									<small>{props.videos
 										.find((video) => video.id == boughtVideo.video_id)
 										.username}</small>
+								</h6>
+							</div>
+						</div>
+					))}
+
+				<center><h3 className="mt-5">Audios</h3></center>
+
+				{props.boughtAudios
+					.filter((boughtAudio) => boughtAudio.username == props.auth.username)
+					.map((boughtAudio, key) => (
+						<div
+							key={key}
+							className="d-flex p-2 border-bottom">
+							<div
+								className="thumbnail"
+								style={{
+									width: "50px",
+									height: "50px"
+								}}>
+								<Link to={`/audio-show/${boughtAudio.audio_id}`}>
+									<Img src={`/storage/${props.audios
+										.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
+										width="100%"
+										height="50px" />
+								</Link>
+							</div>
+							<div className="ml-2 mr-auto">
+								<h6
+									className="mb-0 pb-0"
+									style={{
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip"
+									}}>
+									{props.audios
+										.find((audio) => audio.id == boughtAudio.audio_id)
+										.name}
+								</h6>
+								<h6 className="mt-0 pt-0">
+									<small>
+										{props.audios
+											.find((audio) => audio.id == boughtAudio.audio_id)
+											.username}
+									</small>
+									<small className="ml-1">
+										{props.audios
+											.find((audio) => audio.id == boughtAudio.audio_id)
+											.ft}
+									</small>
 								</h6>
 							</div>
 						</div>

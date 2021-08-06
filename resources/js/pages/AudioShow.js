@@ -826,9 +826,16 @@ const AudioShow = (props) => {
 										.name}
 								</h6>
 								<h6 className="mt-0 pt-0">
-									<small>{props.audios
-										.find((audio) => audio.id == boughtAudio.audio_id)
-										.username}</small>
+									<small>
+										{props.audios
+											.find((audio) => audio.id == boughtAudio.audio_id)
+											.username}
+									</small>
+									<small className="ml-1">
+										{props.audios
+											.find((audio) => audio.id == boughtAudio.audio_id)
+											.ft}
+									</small>
 								</h6>
 							</div>
 						</div>
@@ -872,6 +879,7 @@ const AudioShow = (props) => {
 								</h6>
 								<h6 className="mt-0 pt-0">
 									<small>{audio.username}</small>
+									<small className="ml-1">{audio.ft}</small>
 								</h6>
 							</div>
 							<div className="">

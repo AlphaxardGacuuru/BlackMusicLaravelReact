@@ -531,9 +531,16 @@ const VideoShow = (props) => {
 										.name}
 								</h6>
 								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.username}</small>
+									<small>
+										{props.videos
+											.find((video) => video.id == boughtVideo.video_id)
+											.username}
+									</small>
+									<small className="ml-1">
+										{props.videos
+											.find((video) => video.id == boughtVideo.video_id)
+											.ft}
+									</small>
 								</h6>
 							</div>
 						</div>
@@ -572,6 +579,7 @@ const VideoShow = (props) => {
 								</h6>
 								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
 									<small>{video.username}</small>
+									<small className="ml-1">{video.ft}</small>
 								</h6>
 								{props.cartVideos
 									.find((cartVideo) => {

@@ -6,6 +6,8 @@ const TopNavLinks = (props) => {
 
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
+	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length
+	const cartItems = vidCartItems + audCartItems
 
 	const logout = (e) => {
 		e.preventDefault()
@@ -55,9 +57,10 @@ const TopNavLinks = (props) => {
 				</svg>
 				<span className="badge badge-danger rounded-circle"
 					style={{ position: "absolute", right: "10.5em", top: "0.5em", border: "solid #232323" }}>
-					{vidCartItems > 0 && vidCartItems}
+					{cartItems > 0 && cartItems}
 				</span>
 			</Link>
+			{/* Cart End */}
 
 			{/* Notification Dropdown */}
 			<div className="dropdown mr-2">
@@ -120,6 +123,7 @@ const TopNavLinks = (props) => {
 					</div>
 				</div>
 			</div>
+			{/* Notification Dropdown End */}
 
 			{/* Avatar Dropdown */}
 			<div className="dropdown">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\AudioAlbums;
 use App\Audios;
 use Illuminate\Http\Request;
 
@@ -67,19 +66,6 @@ class AudiosController extends Controller
         $audio->description = $request->input('description');
         $audio->released = $request->input('released');
         $audio->save();
-
-        // Check if Single Album exists
-        $singleCheck = AudioAlbums::where('username', auth()->user()->username)->where('name', 'Singles')->first();
-
-        if (!$singleCheck) {
-
-            /* Create new video album */
-            $aAlbum = new AudioAlbums;
-            $aAlbum->name = "Single";
-            $aAlbum->username = auth()->user()->username;
-            $aAlbum->cover = "audio-album-covers/musical-note.png";
-            $aAlbum->save();
-        }
 
         return response('Audio Uploaded', 200);
     }

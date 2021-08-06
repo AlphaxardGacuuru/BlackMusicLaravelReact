@@ -320,7 +320,7 @@ function App() {
 	return (
 		<Router>
 			<>
-				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />
+				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/" exact render={(props) => (
@@ -365,7 +365,7 @@ function App() {
 					)} />
 
 				<Route path="/library" exact render={(props) => (
-					<Library {...{ auth, videos, boughtVideos }} />
+					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
