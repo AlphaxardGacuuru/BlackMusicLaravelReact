@@ -5,20 +5,7 @@ import Img from '../components/Img'
 const Audios = (props) => {
 
 	// Arrays for dates
-	const months = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	];
+	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 	return (
 		<div className="sonar-call-to-action-area section-padding-0-100">

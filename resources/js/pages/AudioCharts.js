@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import Button from '../components/Button'
 
-const VideoCharts = (props) => {
+const AudioCharts = (props) => {
 
 	const history = useHistory()
 
@@ -29,23 +29,23 @@ const VideoCharts = (props) => {
 
 	// Set state for chart list
 	if (chart == "Newly Released") {
-		var chartList = props.videos
+		var chartList = props.audios
 	} else if (chart == "Trending") {
-		var chartList = props.boughtVideos
+		var chartList = props.boughtAudios
 	} else if (chart == "Top Downloaded") {
-		var chartList = props.boughtVideos
+		var chartList = props.boughtAudios
 	} else {
-		var chartList = props.videoLikes
+		var chartList = props.audioLikes
 	}
 
-	// Array for video id and frequency
+	// Array for audio id and frequency
 	var artistsArray = []
-	var videosArray = []
+	var audiosArray = []
 
 	// Generate Arrays
 	chartList.filter((item) => {
 		// Filter for genres
-		// If genre is All then allow all videos
+		// If genre is All then allow all audios
 		if (genre == "All") {
 			return true
 		} else {
@@ -55,24 +55,24 @@ const VideoCharts = (props) => {
 				return item.genre == genre
 			}
 
-			return props.videos.find((video) => video.id == item.video_id).genre == genre
+			return props.audios.find((audio) => audio.id == item.audio_id).genre == genre
 		}
 
-	}).forEach((video) => {
+	}).forEach((audio) => {
 
 		// Set variable for id to be fetched
 		if (chart == "Newly Released") {
-			var getId = video.username
-			var getIdTwo = video.id
+			var getId = audio.username
+			var getIdTwo = audio.id
 		} else if (chart == "Trending") {
-			var getId = video.artist
-			var getIdTwo = video.video_id
+			var getId = audio.artist
+			var getIdTwo = audio.audio_id
 		} else if (chart == "Top Downloaded") {
-			var getId = video.artist
-			var getIdTwo = video.video_id
+			var getId = audio.artist
+			var getIdTwo = audio.audio_id
 		} else {
-			var getId = props.videos.find((item) => item.id == video.video_id).username
-			var getIdTwo = video.video_id
+			var getId = props.audios.find((item) => item.id == audio.audio_id).username
+			var getIdTwo = audio.audio_id
 		}
 
 		// Populate Artists array
@@ -85,29 +85,29 @@ const VideoCharts = (props) => {
 			artistsArray.push({ key: getId, value: 1 })
 		}
 
-		// Populate Videos array
-		if (videosArray.some((index) => index.key == getIdTwo)) {
+		// Populate audios array
+		if (audiosArray.some((index) => index.key == getIdTwo)) {
 			// Increment value if it exists
-			var item = videosArray.find((index) => index.key == getIdTwo)
+			var item = audiosArray.find((index) => index.key == getIdTwo)
 			item && item.value++
 		} else {
 			// Add item if it doesn't exist
-			videosArray.push({ key: getIdTwo, value: 1 })
+			audiosArray.push({ key: getIdTwo, value: 1 })
 		}
 	})
 
 	// Sort array in descending order depending on the value
 	artistsArray.sort((a, b) => b.value - a.value)
-	videosArray.sort((a, b) => b.value - a.value)
+	audiosArray.sort((a, b) => b.value - a.value)
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
+	// Function for adding audio to cart
+	const onCartAudios = (audio) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
+			axios.post(`${props.url}/api/cart-audios`, {
+				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -120,15 +120,15 @@ const VideoCharts = (props) => {
 		});
 	}
 
-	// Function for buying video to cart
-	const onBuyVideos = (video) => {
+	// Function for buying audio to cart
+	const onBuyAudios = (audio) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
+			axios.post(`${props.url}/api/cart-audios`, {
+				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
-				setTimeout(() => history.push('/cart'), 1000)
+				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -151,14 +151,18 @@ const VideoCharts = (props) => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div className="carousel-inner">
-					{props.videos
+					{props.audios
 						.slice(0, 3)
-						.map((video, key) => (
+						.map((audio, key) => (
 							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
-								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
+								<Img
+									imgClass={"d-block w-100"}
+									src={`/storage/${audio.thumbnail}`}
+									height="auto"
+									width="100%" />
 								<div className="carousel-caption d-none d-md-block">
-									<h5 style={{ color: "white" }}>{video.name}</h5>
-									<p style={{ color: "white" }} >{video.username}</p>
+									<h5 style={{ color: "white" }}>{audio.name}</h5>
+									<p style={{ color: "white" }} >{audio.username}</p>
 								</div>
 							</div>
 						))}
@@ -177,13 +181,13 @@ const VideoCharts = (props) => {
 			{/* <!-- Scroll menu - */}
 			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
 				<span>
-					<Link to="#">
-						<h3 className="active-scrollmenu">Videos</h3>
+					<Link to="/video-charts">
+						<h3>Videos</h3>
 					</Link>
 				</span>
 				<span>
 					<Link to="/audio-charts">
-						<h3>Audios</h3>
+						<h3 className="active-scrollmenu">Audios</h3>
 					</Link>
 				</span>
 			</div>
@@ -203,7 +207,7 @@ const VideoCharts = (props) => {
 			</div>
 
 			{/* List of Genres */}
-			<div id="video-chartsMenu" className="hidden-scroll m-0">
+			<div id="audio-chartsMenu" className="hidden-scroll m-0">
 				{genres.map((genreItem, key) => (
 					<span key={key}>
 						<a href="#" onClick={(e) => {
@@ -265,58 +269,65 @@ const VideoCharts = (props) => {
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
-					<br />
+				</div>
+			</div>
 
-					{/* <!-- ****** Songs Area ****** - */}
-					<h5>Songs</h5>
-					<div className="hidden">
-						{videosArray.map((videoArray, key) => (
-							<span key={key} className="card m-1 pb-2"
+			<br />
+
+			{/* <!-- ****** Songs Area ****** - */}
+			<div className="row">
+				<div className="col-sm-1"></div>
+				<div className="col-sm-10">
+					<h5 className="p-2">Songs</h5>
+					{audiosArray.map((audioArray, key) => (
+						<div
+							key={key}
+							className="d-flex p-2 border-bottom">
+							<div
+								className="thumbnail"
 								style={{
-									borderRadius: "10px",
-									display: "inline-block",
-									textAlign: "center"
+									width: "50px",
+									height: "50px"
 								}}>
-								<div className="thumbnail"
+								<Link to={`/audio-show/${audioArray.key}`}>
+									<Img src={`storage/${props.audios.find((audio) => {
+										return audio.id == audioArray.key
+									}).thumbnail}`} width="100%" height="50px" />
+								</Link>
+							</div>
+							<div className="ml-2 mr-auto">
+								<h6
+									className="mb-0 pb-0"
 									style={{
-										borderTopLeftRadius: "10px",
-										borderTopRightRadius: "10px"
-									}}>
-									<Link to={`/video-show/${videoArray.key}`}>
-										<Img src={props.videos.find((video) => {
-											return video.id == videoArray.key
-										}).thumbnail} width="160em" height="90em" />
-									</Link>
-								</div>
-								<h6 className="m-0 pt-2 pr-1 pl-1"
-									style={{
-										width: "150px",
 										whiteSpace: "nowrap",
 										overflow: "hidden",
 										textOverflow: "clip"
-									}}>{props.videos.find((video) => {
-										return video.id == videoArray.key
+									}}>{props.audios.find((audio) => {
+										return audio.id == audioArray.key
 									}).name}
 								</h6>
-								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+								<h6 className="mt-0 pt-0">
 									<small>
-										{props.videos.find((video) => {
-											return video.id == videoArray.key
+										{props.audios.find((audio) => {
+											return audio.id == audioArray.key
 										}).username}
-
-										{props.videos.find((video) => {
-											return video.id == videoArray.key
+									</small>
+									<small className="ml-1">
+										{props.audios.find((audio) => {
+											return audio.id == audioArray.key
 										}).ft}
 									</small>
 								</h6>
-								{props.cartVideos
-									.find((cartVideo) => {
-										return cartVideo.video_id == videoArray.key &&
-											cartVideo.username == props.auth.username
+							</div>
+							<div className="">
+								{props.cartAudios
+									.find((cartAudio) => {
+										return cartAudio.audio_id == audioArray.key &&
+											cartAudio.username == props.auth.username
 									}) ? <button
-										className="btn btn-light mb-1 rounded-0"
-										style={{ minWidth: '90px', height: '33px' }}
-										onClick={() => onCartVideos(videoArray.key)}>
+										className="btn btn-light rounded-0"
+										style={{ minWidth: '40px', height: '33px' }}
+										onClick={() => onCartAudios(audioArray.key)}>
 									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 										fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 										<path fillRule='evenodd'
@@ -324,100 +335,30 @@ const VideoCharts = (props) => {
 									</svg>
 								</button>
 									: <button
-										className="mysonar-btn mb-1"
-										style={{ minWidth: '90px', height: '33px' }}
-										onClick={() => onCartVideos(videoArray.key)}>
+										className="mysonar-btn"
+										style={{ minWidth: '40px', height: '33px' }}
+										onClick={() => onCartAudios(audio.id)}>
 										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 											<path fillRule='evenodd'
 												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
 										</svg>
 									</button>}
-								<br />
-								<Button
-									btnClass={'btn mysonar-btn green-btn'}
-									btnText={'buy'}
-									onClick={() => onBuyVideos(videoArray.key)} />
-							</span>
-						))}
-					</div>
-					{/* <!-- ****** Songs Area End ****** - */}
-
-					{/* For mobile */}
-					<div className="anti-hidden">
-						{videosArray.map((videoArray, key) => (
-							<div key={key}
-								className="media p-2 border-bottom">
-								<div className="media-left thumbnail">
-									<Link to={`/video-show/${videoArray.key}`}>
-										<Img src={props.videos.find((video) => {
-											return video.id == videoArray.key
-										}).thumbnail}
-											width="160em"
-											height="90em" />
-									</Link>
-								</div>
-								<div className="media-body ml-2">
-									<h6
-										className="m-0 pt-2 pr-1 pl-1"
-										style={{
-											width: "150px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-										{props.videos.find((video) => {
-											return video.id == videoArray.key
-										}).name}
-									</h6>
-									<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-										<small>
-											{props.videos.find((video) => {
-												return video.id == videoArray.key
-											}).username}
-
-											{props.videos.find((video) => {
-												return video.id == videoArray.key
-											}).ft}
-										</small>
-									</h6>
-									{props.cartVideos
-										.find((cartVideo) => {
-											return cartVideo.video_id == videoArray.key &&
-												cartVideo.username == props.auth.username
-										}) ? <button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px' }}
-											onClick={() => onCartVideos(videoArray.key)}>
-										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
-									</button>
-										: <button
-											className="mysonar-btn mb-1"
-											style={{ minWidth: '40px', height: '33px' }}
-											onClick={() => onCartVideos(videoArray.key)}>
-											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-												<path fillRule='evenodd'
-													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-											</svg>
-										</button>}
-									<Button
-										btnClass={'btn mysonar-btn green-btn float-right'}
-										btnText={'buy'}
-										onClick={() => onBuyVideos(videoArray.key)} />
-								</div>
 							</div>
-						))}
-						{/* <!-- End of Chart Area - */}
-					</div>
+							<div className="ml-2">
+								<Button
+									btnClass={'btn mysonar-btn green-btn float-right'}
+									btnText={'buy'}
+									onClick={() => onBuyAudios(audioArray.key)} />
+							</div>
+						</div>
+					))}
+					{/* <!-- ****** Songs Area End ****** - */}
 				</div>
+				<div className="col-sm-1"></div>
 			</div>
 		</>
 	)
 }
 
-export default VideoCharts
+export default AudioCharts
