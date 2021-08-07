@@ -27,6 +27,7 @@ import VideoCreate from '../pages/VideoCreate'
 import Audios from '../pages/Audios'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioCreate from '../pages/AudioCreate'
+import Admin from '../pages/Admin'
 
 function App() {
 
@@ -383,22 +384,22 @@ function App() {
 					)} />
 
 				<Route path="/audios" exact render={(props) => (
-						<Audios
-							{...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
+						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
 					)} />
 
 				<Route path="/audio-create" exact render={(props) => (
-						<AudioCreate
-							{...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+						<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
 					)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
-						<AudioAlbumCreate
-							{...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
-					)} />
+						<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+				)} />
 
+				<Route path="/admin" exact render={(props) => (
+					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, audios, boughtAudios }} />
+				)} />
 				<Messages {...{ message, errors }} />
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos }} />
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
 			</>
 		</Router>
 	);

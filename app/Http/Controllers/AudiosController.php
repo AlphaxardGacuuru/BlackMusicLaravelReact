@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Audios;
 use Illuminate\Http\Request;
 
@@ -66,6 +67,13 @@ class AudiosController extends Controller
         $audio->description = $request->input('description');
         $audio->released = $request->input('released');
         $audio->save();
+
+		// Check if user is musician
+		$accountCheck = User::where('username', auth()->user()->username)->first();
+
+		if ($accountCheck == "Normal") {
+			
+		}
 
         return response('Audio Uploaded', 200);
     }

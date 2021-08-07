@@ -342,7 +342,7 @@ const AudioCharts = (props) => {
 										: <button
 											className="mysonar-btn"
 											style={{ minWidth: '40px', height: '33px' }}
-											onClick={() => onCartAudios(audio.id)}>
+											onClick={() => onCartAudios(audioArray.key)}>
 											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 												<path fillRule='evenodd'

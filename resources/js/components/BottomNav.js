@@ -8,6 +8,8 @@ const Bottomnav = (props) => {
 
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
+	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length
+	const cartItems = vidCartItems + audCartItems
 
 	return (
 		<div className="row m-0 p-0">
@@ -65,7 +67,7 @@ const Bottomnav = (props) => {
 									top: "0.5em",
 									border: "solid #232323"
 								}}>
-								{vidCartItems > 0 && vidCartItems}
+								{cartItems > 0 && cartItems}
 							</span>
 						</Link>
 						<Link to="/library"

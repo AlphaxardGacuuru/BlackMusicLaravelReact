@@ -387,7 +387,7 @@ const VideoCharts = (props) => {
 												return video.id == videoArray.key
 											}).username}
 										</small>
-										<small>
+										<small className="ml-1">
 											{props.videos.find((video) => {
 												return video.id == videoArray.key
 											}).ft}
