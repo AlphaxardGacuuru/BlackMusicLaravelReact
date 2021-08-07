@@ -15,18 +15,23 @@ import Profile from '../pages/Profile'
 import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
+
 import VideoCharts from '../pages/VideoCharts'
 import VideoShow from '../pages/VideoShow'
 import AudioCharts from '../pages/AudioCharts'
 import AudioShow from '../pages/AudioShow'
+
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
+
 import Videos from '../pages/Videos'
-import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import VideoCreate from '../pages/VideoCreate'
+import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import Audios from '../pages/Audios'
-import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioCreate from '../pages/AudioCreate'
+import AudioAlbumCreate from '../pages/AudioAlbumCreate'
+import AudioAlbumEdit from '../pages/AudioAlbumEdit'
+
 import Admin from '../pages/Admin'
 
 function App() {
@@ -361,9 +366,9 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-						<AudioShow
-							{...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, follows, setFollows }} />
-					)} />
+					<AudioShow
+						{...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, follows, setFollows }} />
+				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios }} />
@@ -374,25 +379,31 @@ function App() {
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (
-						<VideoCreate
-							{...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
-					)} />
+					<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
+				)} />
 
 				<Route path="/video-album-create" exact render={(props) => (
-						<VideoAlbumCreate
-							{...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
-					)} />
+					<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
+				)} />
+
+				<Route path="/video-album-edit" exact render={(props) => (
+					<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
+				)} />
 
 				<Route path="/audios" exact render={(props) => (
-						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
-					)} />
+					<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
+				)} />
 
 				<Route path="/audio-create" exact render={(props) => (
-						<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
-					)} />
+					<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
-						<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+					<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+				)} />
+
+				<Route path="/audio-album-edit/:id" exact render={(props) => (
+					<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
 				)} />
 
 				<Route path="/admin" exact render={(props) => (

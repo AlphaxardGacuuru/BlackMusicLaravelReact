@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Img from '../components/Img'
+import Button from '../components/Button'
 
 const Audios = (props) => {
 
@@ -105,39 +106,17 @@ const Audios = (props) => {
 					<table className="table table-responsive table-hover">
 						<tbody>
 							<tr>
-								<th>
-									<h5>Thumbnail</h5>
-								</th>
-								<th>
-									<h5>Audio Name</h5>
-								</th>
-								<th>
-									<h5>ft</h5>
-								</th>
-								<th>
-									<h5>Genre</h5>
-								</th>
-								<th>
-									<h5>Description</h5>
-								</th>
-								<th>
-									<h5>Downloads</h5>
-								</th>
-								<th>
-									<h5 style={{ color: "green" }}>Revenue</h5>
-								</th>
-								<th>
-									<h5>Likes</h5>
-								</th>
-								<th>
-									<h5>Released</h5>
-								</th>
-								<th>
-									<h5>Uploaded</h5>
-								</th>
-								<th>
-									<h5></h5>
-								</th>
+								<th><h5>Thumbnail</h5></th>
+								<th><h5>Audio Name</h5></th>
+								<th><h5>ft</h5></th>
+								<th><h5>Genre</h5></th>
+								<th><h5>Description</h5></th>
+								<th><h5>Downloads</h5></th>
+								<th><h5 style={{ color: "green" }}>Revenue</h5></th>
+								<th><h5>Likes</h5></th>
+								<th><h5>Released</h5></th>
+								<th><h5>Uploaded</h5></th>
+								<th><h5></h5></th>
 							</tr>
 						</tbody>
 						{props.audios.filter((audio) => {
@@ -195,16 +174,14 @@ const Audios = (props) => {
 						.filter((audioAlbum) => audioAlbum.username == props.auth.username)
 						.map((audioAlbum, key) => (
 							<div key={key}>
-								<div className="media">
-									<div className="media-left">
-										<Link to={`/audio-albums/${audioAlbum.id}`}>
-											<Img src={`/storage/${audioAlbum.cover}`}
-												width="auto"
-												height="100"
-												alt={"album cover"} />
-										</Link>
+								<div className="d-flex">
+									<div className="p-2">
+										<Img src={`/storage/${audioAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
 									</div>
-									<div className="media-body p-2">
+									<div className="p-2">
 										<small>Audio Album</small>
 										<h1>{audioAlbum.name}</h1>
 										<h6>
@@ -212,6 +189,9 @@ const Audios = (props) => {
 											{" " + months[new Date(audioAlbum.created_at).getMonth()]}
 											{" " + new Date(audioAlbum.created_at).getFullYear()}
 										</h6>
+									</div>
+									<div className="p-2">
+										<Link to={`/audio-album-edit/${audioAlbum.id}`} className="btn mysonar-btn">edit</Link>
 									</div>
 								</div>
 								<br />
