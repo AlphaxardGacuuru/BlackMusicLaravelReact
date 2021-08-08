@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AudioAlbums;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AudioAlbumsController extends Controller
 {
@@ -85,9 +86,37 @@ class AudioAlbumsController extends Controller
      * @param  \App\AudioAlbums  $audioAlbums
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AudioAlbums $audioAlbums)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'cover' => 'nullable|image|max:1999',
+        ]);
+
+        /* Handle file upload */
+        if ($request->hasFile('cover')) {
+            $aCover = $request->file('cover')->store('public/audio-album-covers');
+            $aCover = substr($aCover, 7);
+            Storage::delete('public/' . AudioAlbums::where('id', $id)->first()->cover);
+        }
+
+        /* Create new video album */
+        $aAlbum = AudioAlbums::find($id);
+
+        if ($request->filled('name')) {
+            $aAlbum->name = $request->input('name');
+        }
+
+        if ($request->hasFile('cover')) {
+            $aAlbum->cover = $aCover;
+        }
+
+        if ($request->filled('released')) {
+            $aAlbum->released = $request->input('released');
+        }
+
+        $aAlbum->save();
+
+        return response("Audio Album Edited", 200);
     }
 
     /**

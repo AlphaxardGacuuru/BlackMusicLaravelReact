@@ -47,7 +47,6 @@ const ProfileEdit = (props) => {
 				setBio("")
 			}).catch(err => {
 				const resErrors = err.response.data.errors
-
 				var resError
 				var newError = []
 				for (resError in resErrors) {

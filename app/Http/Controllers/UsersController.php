@@ -89,6 +89,7 @@ class UsersController extends Controller
 
         /* Update profile */
         $user = User::find($id);
+		
         if ($request->filled('name')) {
             $user->name = $request->input('name');
         }

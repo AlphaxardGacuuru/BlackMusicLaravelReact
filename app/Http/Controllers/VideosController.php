@@ -67,6 +67,15 @@ class VideosController extends Controller
         $video->released = $request->input('released');
         $video->save();
 
+		// Check if user is musician
+        $accountCheck = User::where('username', auth()->user()->username)->first();
+
+        if ($accountCheck->account_type == "normal") {
+            $user = User::find($accountCheck->id);
+            $user->account_type = "musician";
+            $user->save();
+        }
+
         return response('Video Uploaded', 200);
     }
 

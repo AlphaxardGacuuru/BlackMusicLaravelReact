@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Audios;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AudiosController extends Controller
 {
@@ -68,12 +69,14 @@ class AudiosController extends Controller
         $audio->released = $request->input('released');
         $audio->save();
 
-		// Check if user is musician
-		$accountCheck = User::where('username', auth()->user()->username)->first();
+        // Check if user is musician
+        $accountCheck = User::where('username', auth()->user()->username)->first();
 
-		if ($accountCheck == "Normal") {
-			
-		}
+        if ($accountCheck->account_type == "normal") {
+            $user = User::find($accountCheck->id);
+            $user->account_type = "musician";
+            $user->save();
+        }
 
         return response('Audio Uploaded', 200);
     }
@@ -107,9 +110,52 @@ class AudiosController extends Controller
      * @param  \App\Audios  $audios
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Audios $audios)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'nullable|string',
+            'ft' => 'nullable|exists:users,username',
+        ]);
+
+        /* Handle thumbnail upload */
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
+            Storage::delete('public/' . Audios::where('id', $id)->first()->thumbnail);
+            $thumbnail = substr($thumbnail, 7);
+        }
+
+        $audio = Audios::find($id);
+
+        if ($request->filled('name')) {
+            $audio->name = $request->input('name');
+        }
+
+        if ($request->filled('ft')) {
+            $audio->ft = $request->input('ft');
+        }
+
+        if ($request->filled('album')) {
+            $audio->album = $request->input('album');
+        }
+
+        if ($request->filled('genre')) {
+            $audio->genre = $request->input('genre');
+        }
+
+        if ($request->filled('phone')) {
+            $audio->thumbnail = $thumbnail;
+        }
+
+        if ($request->filled('description')) {
+            $audio->description = $request->input('description');
+        }
+
+        if ($request->filled('released')) {
+            $audio->released = $request->input('released');
+        }
+
+        $audio->save();
+
     }
 
     /**

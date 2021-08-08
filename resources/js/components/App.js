@@ -27,6 +27,7 @@ import Library from '../pages/Library'
 import Videos from '../pages/Videos'
 import VideoCreate from '../pages/VideoCreate'
 import VideoAlbumCreate from '../pages/VideoAlbumCreate'
+import VideoAlbumEdit from '../pages/VideoAlbumEdit'
 import Audios from '../pages/Audios'
 import AudioCreate from '../pages/AudioCreate'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
@@ -386,7 +387,7 @@ function App() {
 					<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
 				)} />
 
-				<Route path="/video-album-edit" exact render={(props) => (
+				<Route path="/video-album-edit/:id" exact render={(props) => (
 					<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
 				)} />
 

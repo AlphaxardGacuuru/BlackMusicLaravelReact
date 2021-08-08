@@ -42,6 +42,7 @@ const AudioAlbumEdit = (props) => {
 		formData.append("name", name);
 		formData.append("released", released);
 		cover && formData.append("cover", cover);
+		formData.append("_method", 'put');
 
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
@@ -50,10 +51,9 @@ const AudioAlbumEdit = (props) => {
 				.then((res) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/audio-albums`).then((res) => props.setAudioAlbums(res.data))
-					setTimeout(() => history.push('/audios'), 1000)
+					setPreview()
 				}).catch(err => {
 					const resErrors = err.response.data.errors
-
 					var resError
 					var newError = []
 					for (resError in resErrors) {
@@ -159,12 +159,10 @@ const AudioAlbumEdit = (props) => {
 												<path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
 											</svg>
 										</div>
-
 										<br />
 										<br />
 
 										<Button type="submit" btnText="edit album" />
-
 										<br />
 										<br />
 

@@ -34,9 +34,7 @@ const Audios = (props) => {
 					<table className='table'>
 						<tbody>
 							<tr>
-								<th className="border-top-0">
-									<h5>Audios</h5>
-								</th>
+								<th className="border-top-0"><h5>Audios</h5></th>
 								<th className="border-top-0">
 									<h5>{props.audios.filter((audio) => audio.username == props.auth.username).length}</h5>
 								</th>
@@ -44,130 +42,128 @@ const Audios = (props) => {
 						</tbody>
 						<tbody>
 							<tr>
-								<th>
-									<h5>Audio Albums</h5>
-								</th>
-								<th>
-									<h5>{props.audioAlbums.filter((audioAlbum) => audioAlbum.username == props.auth.username).length}</h5>
+								<th><h5>Audio Albums</h5></th>
+								<th><h5>{props.audioAlbums
+									.filter((audioAlbum) => audioAlbum.username == props.auth.username).length}</h5>
 								</th>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<td className="border-right-0">
-									<h5>Downloads</h5>
-								</td>
-								<td>
-									<h5>{props.boughtAudios.filter((boughtAudio) => boughtAudio.artist == props.auth.username).length}</h5>
+								<td className="border-right-0"><h5>Downloads</h5></td>
+								<td><h5>{props.boughtAudios
+									.filter((boughtAudio) => boughtAudio.artist == props.auth.username).length}</h5>
 								</td>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<td>
-									<h6>Unpaid</h6>
-								</td>
-								<td>
-									<h6></h6>
+								<td><h6>Unpaid</h6></td>
+								<td><h6></h6></td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td><h5>Revenue</h5></td>
+								<td><h5 style={{ color: "green" }}>
+									KES
+									<span> {props.boughtAudios.filter((boughtAudio) => {
+										return boughtAudio.artist == props.auth.username
+									}).length * 10}</span>
+								</h5>
 								</td>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<td>
-									<h5>Revenue</h5>
-								</td>
-								<td>
-									<h5 style={{ color: "green" }}>
-										KES
-										<span> {props.boughtAudios.filter((boughtAudio) => {
-											return boughtAudio.artist == props.auth.username
-										}).length * 10}</span>
-									</h5>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td>
-									<h6>Unpaid</h6>
-								</td>
-								<td>
-									<h6 style={{ color: "green" }}>KES</h6>
-								</td>
+								<td><h6>Unpaid</h6></td>
+								<td><h6 style={{ color: "green" }}>KES</h6></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 
 				<div className="col-sm-9">
-					<h1>Singles</h1>
-					<br />
-					<table className="table table-responsive table-hover">
-						<tbody>
-							<tr>
-								<th><h5>Thumbnail</h5></th>
-								<th><h5>Audio Name</h5></th>
-								<th><h5>ft</h5></th>
-								<th><h5>Genre</h5></th>
-								<th><h5>Description</h5></th>
-								<th><h5>Downloads</h5></th>
-								<th><h5 style={{ color: "green" }}>Revenue</h5></th>
-								<th><h5>Likes</h5></th>
-								<th><h5>Released</h5></th>
-								<th><h5>Uploaded</h5></th>
-								<th><h5></h5></th>
-							</tr>
-						</tbody>
-						{props.audios.filter((audio) => {
-							return audio.username == props.auth.username &&
-								audio.album == "Single"
-						}).map((audio, key) => (
-							<tbody key={key}>
+					<div>
+						<div className="d-flex">
+							<div className="p-2">
+								<Img src={`/storage/audio-album-covers/musical-note.png`}
+									width="auto"
+									height="100"
+									alt={"album cover"} />
+							</div>
+							<div className="p-2">
+								<small>Audio Album</small>
+								<h1>Singles</h1>
+							</div>
+						</div>
+						<br />
+						<table className="table table-responsive table-hover">
+							<tbody>
 								<tr>
-									<td>
-										<Link to={`/audio-show/${audio.id}`}>
-											<Img
-												src={`storage/${audio.thumbnail}`}
-												width="160em"
-												height="90em" />
-										</Link>
-									</td>
-									<td>{audio.name}</td>
-									<td>{audio.ft}</td>
-									<td>{audio.genre}</td>
-									<td>{audio.description}</td>
-									<td>
-										{props.boughtAudios.filter((boughtAudio) => {
-											return boughtAudio.video_id == audio.id
-										}).length}
-									</td>
-									<td style={{ color: "green" }}>
-										KES <span>{props.boughtAudios.filter((boughtAudio) => {
-											return boughtAudio.video_id == audio.id
-										}).length * 10}
-										</span>
-									</td>
-									<td>
-										{props.audioLikes.filter((audioLike) => {
-											return audioLike.video_id == audio.id
-										}).length
-										}</td>
-									<td>{audio.released}</td>
-									<td>
-										{new Date(audio.created_at).getDay()}
-										{" " + months[new Date(audio.created_at).getMonth()]}
-										{" " + new Date(audio.created_at).getFullYear()}
-									</td>
-									<td>
-										<Link to={`/audios-edit/${audio.id}`}>
-											<button className='mysonar-btn'>edit</button>
-										</Link>
-									</td>
+									<th><h5>Thumbnail</h5></th>
+									<th><h5>Audio Name</h5></th>
+									<th><h5>ft</h5></th>
+									<th><h5>Genre</h5></th>
+									<th><h5>Description</h5></th>
+									<th><h5>Downloads</h5></th>
+									<th><h5 style={{ color: "green" }}>Revenue</h5></th>
+									<th><h5>Likes</h5></th>
+									<th><h5>Released</h5></th>
+									<th><h5>Uploaded</h5></th>
+									<th><h5></h5></th>
 								</tr>
 							</tbody>
-						))}
-					</table>
+							{props.audios.filter((audio) => {
+								return audio.username == props.auth.username &&
+									audio.album == ""
+							}).map((audio, key) => (
+								<tbody key={key}>
+									<tr>
+										<td>
+											<Link to={`/audio-show/${audio.id}`}>
+												<Img
+													src={`storage/${audio.thumbnail}`}
+													width="100%"
+													height="50px" />
+											</Link>
+										</td>
+										<td>{audio.name}</td>
+										<td>{audio.ft}</td>
+										<td>{audio.genre}</td>
+										<td>{audio.description}</td>
+										<td>
+											{props.boughtAudios.filter((boughtAudio) => {
+												return boughtAudio.video_id == audio.id
+											}).length}
+										</td>
+										<td style={{ color: "green" }}>
+											KES <span>{props.boughtAudios.filter((boughtAudio) => {
+												return boughtAudio.video_id == audio.id
+											}).length * 10}
+											</span>
+										</td>
+										<td>
+											{props.audioLikes.filter((audioLike) => {
+												return audioLike.video_id == audio.id
+											}).length
+											}</td>
+										<td>{audio.released}</td>
+										<td>
+											{new Date(audio.created_at).getDay()}
+											{" " + months[new Date(audio.created_at).getMonth()]}
+											{" " + new Date(audio.created_at).getFullYear()}
+										</td>
+										<td>
+											<Link to={`/audios-edit/${audio.id}`}>
+												<button className='mysonar-btn'>edit</button>
+											</Link>
+										</td>
+									</tr>
+								</tbody>
+							))}
+						</table>
+					</div>
 					<br />
 					<br />
 					{props.audioAlbums
@@ -195,7 +191,7 @@ const Audios = (props) => {
 									</div>
 								</div>
 								<br />
-								<table className="table table-hover">
+								<table className="table table-responsive table-hover">
 									<tbody>
 										<tr>
 											<th>
@@ -242,8 +238,8 @@ const Audios = (props) => {
 														<Link to={`/audio-show/${albumItem.id}`}>
 															<Img
 																src={`storage/${albumItem.thumbnail}`}
-																width="160em"
-																height="90em"
+																width="100%"
+																height="50px"
 																alt={"thumbnail"} />
 														</Link>
 													</td>

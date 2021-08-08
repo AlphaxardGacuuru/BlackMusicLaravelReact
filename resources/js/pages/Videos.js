@@ -113,111 +113,100 @@ const Videos = (props) => {
 				</div>
 
 				<div className="col-sm-9">
-					<h1>Singles</h1>
-					<br />
-					<table className="table table-responsive table-hover">
-						<tbody>
-							<tr>
-								<th>
-									<h5>Thumbnail</h5>
-								</th>
-								<th>
-									<h5>Video Name</h5>
-								</th>
-								<th>
-									<h5>ft</h5>
-								</th>
-								<th>
-									<h5>Genre</h5>
-								</th>
-								<th>
-									<h5>Description</h5>
-								</th>
-								<th>
-									<h5>Downloads</h5>
-								</th>
-								<th>
-									<h5 style={{ color: "green" }}>Revenue</h5>
-								</th>
-								<th>
-									<h5>Likes</h5>
-								</th>
-								<th>
-									<h5>Released</h5>
-								</th>
-								<th>
-									<h5>Uploaded</h5>
-								</th>
-								<th>
-									<h5></h5>
-								</th>
-							</tr>
-						</tbody>
-						{props.videos.filter((video) => {
-							return video.username == props.auth.username &&
-								video.album == "Single"
-						}).map((video, key) => (
-							<tbody key={key}>
+					<div>
+						<div className="d-flex">
+							<div className="p-2">
+								<Img src={`/storage/video-album-covers/musical-note.png`}
+									width="auto"
+									height="100"
+									alt={"album cover"} />
+							</div>
+							<div className="p-2">
+								<small>Video Album</small>
+								<h1>Singles</h1>
+							</div>
+						</div>
+						<br />
+						<table className="table table-responsive table-hover">
+							<tbody>
 								<tr>
-									<td>
-										<Link to={`/video-show/${video.id}`}>
-											<Img
-												src={video.thumbnail}
-												width="160em"
-												height="90em" />
-										</Link>
-									</td>
-									<td>{video.name}</td>
-									<td>{video.ft}</td>
-									<td>{video.genre}</td>
-									<td>{video.description}</td>
-									<td>
-										{props.boughtVideos.filter((boughtVideo) => {
-											return boughtVideo.video_id == video.id
-										}).length}
-									</td>
-									<td style={{ color: "green" }}>
-										KES <span>{props.boughtVideos.filter((boughtVideo) => {
-											return boughtVideo.video_id == video.id
-										}).length * 10}
-										</span>
-									</td>
-									<td>
-										{props.videoLikes.filter((videoLike) => {
-											return videoLike.video_id == video.id
-										}).length
-										}</td>
-									<td>{video.released}</td>
-									<td>
-										{new Date(video.created_at).getDay()}
-										{" " + months[new Date(video.created_at).getMonth()]}
-										{" " + new Date(video.created_at).getFullYear()}
-									</td>
-									<td>
-										<Link to={`/videos-edit/${video.id}`}>
-											<button className='mysonar-btn'>edit</button>
-										</Link>
-									</td>
+									<th><h5>Thumbnail</h5></th>
+									<th><h5>Video Name</h5></th>
+									<th><h5>ft</h5></th>
+									<th><h5>Genre</h5></th>
+									<th><h5>Description</h5></th>
+									<th><h5>Downloads</h5></th>
+									<th><h5 style={{ color: "green" }}>Revenue</h5></th>
+									<th><h5>Likes</h5></th>
+									<th><h5>Released</h5></th>
+									<th><h5>Uploaded</h5></th>
+									<th><h5></h5></th>
 								</tr>
 							</tbody>
-						))}
-					</table>
+							{props.videos.filter((video) => {
+								return video.username == props.auth.username &&
+									video.album == ""
+							}).map((video, key) => (
+								<tbody key={key}>
+									<tr>
+										<td>
+											<Link to={`/video-show/${video.id}`}>
+												<Img
+													src={video.thumbnail}
+													width="160em"
+													height="90em" />
+											</Link>
+										</td>
+										<td>{video.name}</td>
+										<td>{video.ft}</td>
+										<td>{video.genre}</td>
+										<td>{video.description}</td>
+										<td>
+											{props.boughtVideos.filter((boughtVideo) => {
+												return boughtVideo.video_id == video.id
+											}).length}
+										</td>
+										<td style={{ color: "green" }}>
+											KES <span>{props.boughtVideos.filter((boughtVideo) => {
+												return boughtVideo.video_id == video.id
+											}).length * 10}
+											</span>
+										</td>
+										<td>
+											{props.videoLikes.filter((videoLike) => {
+												return videoLike.video_id == video.id
+											}).length
+											}</td>
+										<td>{video.released}</td>
+										<td>
+											{new Date(video.created_at).getDay()}
+											{" " + months[new Date(video.created_at).getMonth()]}
+											{" " + new Date(video.created_at).getFullYear()}
+										</td>
+										<td>
+											<Link to={`/videos-edit/${video.id}`}>
+												<button className='mysonar-btn'>edit</button>
+											</Link>
+										</td>
+									</tr>
+								</tbody>
+							))}
+						</table>
+					</div>
 					<br />
 					<br />
 					{props.videoAlbums
 						.filter((videoAlbum) => videoAlbum.username == props.auth.username)
 						.map((videoAlbum, key) => (
 							<div key={key}>
-								<div className="media">
-									<div className="media-left">
-										<Link to={`/video-albums/${videoAlbum.id}`}>
-											<Img src={`/storage/${videoAlbum.cover}`}
-												width="auto"
-												height="100"
-												alt={"album cover"} />
-										</Link>
+								<div className="d-flex">
+									<div className="p-2">
+										<Img src={`/storage/${videoAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
 									</div>
-									<div className="media-body p-2">
+									<div className="p-2">
 										<small>Video Album</small>
 										<h1>{videoAlbum.name}</h1>
 										<h6>
@@ -226,9 +215,12 @@ const Videos = (props) => {
 											{" " + new Date(videoAlbum.created_at).getFullYear()}
 										</h6>
 									</div>
+									<div className="p-2">
+										<Link to={`/video-album-edit/${videoAlbum.id}`} className="btn mysonar-btn">edit</Link>
+									</div>
 								</div>
 								<br />
-								<table className="table table-hover">
+								<table className="table table-responsive table-hover">
 									<tbody>
 										<tr>
 											<th>
@@ -272,7 +264,7 @@ const Videos = (props) => {
 											<tbody key={key}>
 												<tr>
 													<td>
-														<Link to={`/video-show/${albumItem.id}`}>
+														<Link to={`/video-album-edit/${albumItem.id}`}>
 															<Img src={albumItem.thumbnail}
 																width="160em"
 																height="90em"
