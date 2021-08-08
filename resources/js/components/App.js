@@ -26,10 +26,12 @@ import Library from '../pages/Library'
 
 import Videos from '../pages/Videos'
 import VideoCreate from '../pages/VideoCreate'
+import VideoEdit from '../pages/VideoEdit'
 import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import VideoAlbumEdit from '../pages/VideoAlbumEdit'
 import Audios from '../pages/Audios'
 import AudioCreate from '../pages/AudioCreate'
+import AudioEdit from '../pages/AudioEdit'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
@@ -383,6 +385,10 @@ function App() {
 					<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
 				)} />
 
+				<Route path="/video-edit/:id" exact render={(props) => (
+					<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
+				)} />
+
 				<Route path="/video-album-create" exact render={(props) => (
 					<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
 				)} />
@@ -397,6 +403,10 @@ function App() {
 
 				<Route path="/audio-create" exact render={(props) => (
 					<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+				)} />
+
+				<Route path="/audio-edit/:id" exact render={(props) => (
+					<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
 				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (

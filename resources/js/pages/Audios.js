@@ -155,7 +155,7 @@ const Audios = (props) => {
 											{" " + new Date(audio.created_at).getFullYear()}
 										</td>
 										<td>
-											<Link to={`/audios-edit/${audio.id}`}>
+											<Link to={`/audio-edit/${audio.id}`}>
 												<button className='mysonar-btn'>edit</button>
 											</Link>
 										</td>
@@ -270,7 +270,7 @@ const Audios = (props) => {
 														{" " + new Date(albumItem.created_at).getFullYear()}
 													</td>
 													<td>
-														<Link to={`/audios-edit/${albumItem.id}`}>
+														<Link to={`/audio-edit/${albumItem.id}`}>
 															<button className='mysonar-btn'>edit</button>
 														</Link>
 													</td>

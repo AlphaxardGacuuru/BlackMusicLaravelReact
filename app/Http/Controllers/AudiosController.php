@@ -120,8 +120,8 @@ class AudiosController extends Controller
         /* Handle thumbnail upload */
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
-            Storage::delete('public/' . Audios::where('id', $id)->first()->thumbnail);
             $thumbnail = substr($thumbnail, 7);
+            Storage::delete('public/' . Audios::where('id', $id)->first()->thumbnail);
         }
 
         $audio = Audios::find($id);
@@ -142,7 +142,7 @@ class AudiosController extends Controller
             $audio->genre = $request->input('genre');
         }
 
-        if ($request->filled('phone')) {
+        if ($request->hasFile('thumbnail')) {
             $audio->thumbnail = $thumbnail;
         }
 
@@ -156,6 +156,7 @@ class AudiosController extends Controller
 
         $audio->save();
 
+        return response("Audio Edited", 200);
     }
 
     /**

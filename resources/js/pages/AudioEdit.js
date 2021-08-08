@@ -1,14 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import Button from '../components/Button'
+import Img from '../components/Img'
 
-const AudioCreate = (props) => {
+const AudioEdit = (props) => {
+
+	let { id } = useParams();
+
+	// Get Audio Album info
+	const editAudio = props.audios.find((audio) => audio.id == id)
 
 	// Declare states
-	const [audio, setAudio] = useState()
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
 	const [album, setAlbum] = useState("")
@@ -18,20 +22,8 @@ const AudioCreate = (props) => {
 	const [preview, setPreview] = useState()
 	const [thumbnail, setThumbnail] = useState()
 
-	// Get history for page location
-	const history = useHistory()
-
 	// Assign id to element
-	const audioInput = React.useRef(null)
 	const mediaInput = React.useRef(null)
-
-	// Fire when image is choosen
-	var onAudioChange = event => {
-		if (event.target.files && event.target.files[0]) {
-			var aud = event.target.files[0];
-			setAudio(aud)
-		}
-	};
 
 	// Fire when image is choosen
 	var onImageChange = event => {
@@ -49,7 +41,6 @@ const AudioCreate = (props) => {
 		e.preventDefault()
 
 		// Add form data to FormData object
-		formData.append("audio", audio);
 		formData.append("thumbnail", thumbnail);
 		formData.append("name", name);
 		formData.append("ft", ft);
@@ -57,15 +48,16 @@ const AudioCreate = (props) => {
 		formData.append("genre", genre);
 		formData.append("released", released);
 		formData.append("description", description);
+		formData.append("_method", 'put');
 
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/audios`, formData)
+			axios.post(`${props.url}/api/audios/${id}`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/audios`).then((res) => props.setAudios(res.data))
-					setTimeout(() => history.push('/audios'), 1000)
+					setPreview()
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -111,20 +103,44 @@ const AudioCreate = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div className="contact-form text-center call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
-								<h2>Upload your audio</h2>
-								<h5>It's free</h5>
+								<h2>Edit Audio</h2>
+								{editAudio &&
+									<div className="d-flex p-2">
+										<div
+											className="thumbnail"
+											style={{
+												width: "50px",
+												height: "50px"
+											}}>
+											<Img src={`/storage/${editAudio.thumbnail}`}
+												width="100%"
+												height="50px" />
+										</div>
+										<div className="mr-auto pl-2">
+											<h6
+												className="mb-0 pb-0"
+												style={{
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												{editAudio.name}
+											</h6>
+											<h6 className="pl-2 mt-0 pt-0">
+												<small>{editAudio.username}</small>
+												<small className="ml-1">{editAudio.ft}</small>
+											</h6>
+										</div>
+									</div>}
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
-
 										<input
 											type="text"
 											name="name"
 											className="form-control"
 											placeholder="Audio name"
-											required={true}
 											onChange={(e) => { setName(e.target.value) }} />
-
 										<br />
 										<br />
 
@@ -138,15 +154,14 @@ const AudioCreate = (props) => {
 											className="form-control"
 											placeholder="Featuring Artist e.g. @JohnDoe"
 											onChange={(e) => { setFt(e.target.value) }} />
-
 										<br />
 										<br />
 
 										<select
 											name='album'
 											className='form-control'
-											required={true}
 											onChange={(e) => { setAlbum(e.target.value) }}>
+											<option value defaultValue>Select Album</option>
 											<option value="">Single</option>
 											{props.audioAlbums
 												.filter((audioAlbum) => audioAlbum.username == props.auth.username)
@@ -154,7 +169,6 @@ const AudioCreate = (props) => {
 													<option key={key} value={audioAlbum.id}>{audioAlbum.name}</option>
 												))}
 										</select>
-
 										<br />
 										<br />
 
@@ -162,8 +176,8 @@ const AudioCreate = (props) => {
 											name='genre'
 											className='form-control'
 											placeholder='Select audio genre'
-											required={true}
 											onChange={(e) => { setGenre(e.target.value) }}>
+											<option defaultValue>Select Genre</option>
 											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>
@@ -182,7 +196,6 @@ const AudioCreate = (props) => {
 											<option value="Sesube">Sesube</option>
 											<option value="Taarab">Taarab</option>
 										</select>
-
 										<br />
 										<br />
 
@@ -193,9 +206,7 @@ const AudioCreate = (props) => {
 											name="released"
 											className="form-control"
 											placeholder="Released"
-											required={true}
 											onChange={(e) => { setReleased(e.target.value) }} />
-
 										<br />
 										<br />
 
@@ -206,8 +217,8 @@ const AudioCreate = (props) => {
 											placeholder="Say something about your song"
 											cols="30"
 											rows="10"
-											required={true}
-											onChange={(e) => { setDescription(e.target.value) }}></textarea>
+											onChange={(e) => { setDescription(e.target.value) }}>
+										</textarea>
 
 										<label>Upload Audio Thumbnail</label>
 										<div
@@ -243,27 +254,6 @@ const AudioCreate = (props) => {
 												<path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
 											</svg>
 										</div>
-
-										<br />
-										<br />
-
-										<label>Upload Audio</label>
-										{/* Hidden file input */}
-										<input
-											type='file'
-											style={{ display: 'none' }}
-											ref={audioInput}
-											onChange={onAudioChange} />
-
-										<div
-											className="p-2"
-											style={{ backgroundColor: "#232323", color: "white" }}
-											onClick={() => audioInput.current.click()}>
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-mic" viewBox="0 0 16 16">
-												<path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
-												<path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z" />
-											</svg>
-										</div>
 										<br />
 										<br />
 
@@ -271,29 +261,7 @@ const AudioCreate = (props) => {
 										<br />
 										<br />
 
-										{/* {{-- Collapse --}} */}
-										<button className="sonar-btn" type="button" data-toggle="collapse" data-target="#collapseExample"
-											aria-expanded="false" aria-controls="collapseExample">
-											next
-										</button>
-										<div className="collapse" id="collapseExample">
-											<div className="">
-												<br />
-												<h3>Before you upload</h3>
-												<h6>By uploading you agree that you <b>own</b> this song.</h6>
-												<h6>Audios are sold at
-													<b style={{ color: "green" }}> KES 100</b>, Black Music takes
-													<b style={{ color: "green" }}> 50% (KES 50)</b> and the musician takes
-													<b style={{ color: "green" }}> 50% (KES 50)</b>.</h6>
-												<h6>You will be paid
-													<b> weekly</b>, via Mpesa to
-													<b style={{ color: "dodgerblue" }}>{props.auth.phone}</b>.
-												</h6>
-												<br />
-												<Button btnText="upload audio" />
-											</div>
-										</div>
-										{/* {{-- Collapse End --}} */}
+										<Button btnText="edit audio" />
 									</form>
 									<br />
 									<Link to="/audios" className="btn sonar-btn">studio</Link>
@@ -303,8 +271,8 @@ const AudioCreate = (props) => {
 					</div>
 				</div>
 			</div>
-		</div >
+		</div>
 	)
 }
 
-export default AudioCreate
+export default AudioEdit

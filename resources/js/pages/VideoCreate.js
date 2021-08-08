@@ -134,7 +134,7 @@ const VideoCreate = (props) => {
 											className='form-control'
 											required={true}
 											onChange={(e) => { setAlbum(e.target.value) }}>
-											<option value="Single">Single</option>
+											<option value="">Single</option>
 											{props.videoAlbums
 												.filter((videoAlbum) => videoAlbum.username == props.auth.username)
 												.map((videoAlbum, key) => (

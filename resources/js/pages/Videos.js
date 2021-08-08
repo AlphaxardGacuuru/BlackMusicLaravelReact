@@ -184,7 +184,7 @@ const Videos = (props) => {
 											{" " + new Date(video.created_at).getFullYear()}
 										</td>
 										<td>
-											<Link to={`/videos-edit/${video.id}`}>
+											<Link to={`/video-edit/${video.id}`}>
 												<button className='mysonar-btn'>edit</button>
 											</Link>
 										</td>
@@ -298,7 +298,7 @@ const Videos = (props) => {
 														{" " + new Date(albumItem.created_at).getFullYear()}
 													</td>
 													<td>
-														<Link to={`/videos-edit/${albumItem.id}`}>
+														<Link to={`/video-edit/${albumItem.id}`}>
 															<button className='mysonar-btn'>edit</button>
 														</Link>
 													</td>
