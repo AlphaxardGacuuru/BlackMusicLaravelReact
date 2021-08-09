@@ -16,7 +16,7 @@ const AudioEdit = (props) => {
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
 	const [album, setAlbum] = useState("")
-	const [genre, setGenre] = useState("Afro")
+	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
 	const [preview, setPreview] = useState()
@@ -50,7 +50,7 @@ const AudioEdit = (props) => {
 		formData.append("description", description);
 		formData.append("_method", 'put');
 
-		// Send data to PostsController
+		// Send data to AudiosController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/audios/${id}`, formData)

@@ -67,7 +67,7 @@ class VideosController extends Controller
         $video->released = $request->input('released');
         $video->save();
 
-		// Check if user is musician
+        // Check if user is musician
         $accountCheck = User::where('username', auth()->user()->username)->first();
 
         if ($accountCheck->account_type == "normal") {
@@ -108,9 +108,38 @@ class VideosController extends Controller
      * @param  \App\Videos  $videos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Videos $videos)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'nullable|string',
+            'ft' => 'nullable|exists:users,username',
+        ]);
+
+        /* Create new video song */
+            $video = Videos::find($id);
+
+        if ($request->filled('name')) {
+            $video->name = $request->input('name');
+        }
+        if ($request->filled('ft')) {
+            $video->ft = $request->input('ft');
+        }
+        if ($request->filled('album')) {
+            $video->album = $request->input('album');
+        }
+        if ($request->filled('genre')) {
+            $video->genre = $request->input('genre');
+        }
+        if ($request->filled('description')) {
+            $video->description = $request->input('description');
+        }
+        if ($request->filled('released')) {
+            $video->released = $request->input('released');
+        }
+
+        $video->save();
+
+        return response('Video Edited', 200);
     }
 
     /**

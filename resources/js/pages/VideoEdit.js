@@ -1,23 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import Button from '../components/Button'
+import Img from '../components/Img'
 
-const VideoCreate = (props) => {
+const VideoEdit = (props) => {
+
+	let { id } = useParams();
+
+	// Get Audio Album info
+	const editVideo = props.videos.find((video) => video.id == id)
 
 	// Declare states
-	const [video, setVideo] = useState("")
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
 	const [album, setAlbum] = useState("")
-	const [genre, setGenre] = useState("Afro")
+	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
-
-	// Get history for page location
-	const history = useHistory()
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -26,22 +27,21 @@ const VideoCreate = (props) => {
 		e.preventDefault()
 
 		// Add form data to FormData object
-		formData.append("video", video);
 		formData.append("name", name);
 		formData.append("ft", ft);
 		formData.append("album", album);
 		formData.append("genre", genre);
 		formData.append("released", released);
 		formData.append("description", description);
+		formData.append("_method", 'put');
 
-		// Send data to PostsController
+		// Send data to VideosController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/videos`, formData)
+			axios.post(`${props.url}/api/videos/${id}`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/videos`).then((res) => props.setVideos(res.data))
-					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -87,27 +87,39 @@ const VideoCreate = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div className="contact-form text-center call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
-								<h2>Upload your video</h2>
-								<h5>It's free</h5>
+								<h2>Edit Video</h2>
+								{editVideo &&
+									<div className="d-flex p-2">
+										<div className="thumbnail">
+											<Img
+												src={editVideo.thumbnail}
+												width="160em"
+												height="90em" />
+										</div>
+										<div className="ml-1">
+											<h6 className="m-0 pr-1"
+												style={{
+													width: "150px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												{editVideo.name}
+											</h6>
+											<h6 className="mt-0 mb-2 pt-0 pr-1 pb-0">
+												<small>{editVideo.username}</small>
+												<small className="ml-1">{editVideo.ft}</small>
+											</h6>
+										</div>
+									</div>}
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
 										<input
 											type="text"
-											name="video"
-											className="form-control"
-											placeholder="Video URL from YouTube"
-											required={true}
-											onChange={(e) => { setVideo(e.target.value) }} />
-										<br />
-										<br />
-
-										<input
-											type="text"
 											name="name"
 											className="form-control"
 											placeholder="Video name"
-											required={true}
 											onChange={(e) => { setName(e.target.value) }} />
 										<br />
 										<br />
@@ -128,8 +140,8 @@ const VideoCreate = (props) => {
 										<select
 											name='album'
 											className='form-control'
-											required={true}
 											onChange={(e) => { setAlbum(e.target.value) }}>
+											<option value defaultValue>Select Album</option>
 											<option value="">Single</option>
 											{props.videoAlbums
 												.filter((videoAlbum) => videoAlbum.username == props.auth.username)
@@ -144,8 +156,8 @@ const VideoCreate = (props) => {
 											name='genre'
 											className='form-control'
 											placeholder='Select video genre'
-											required={true}
 											onChange={(e) => { setGenre(e.target.value) }}>
+											<option value defaultValue>Select Genre</option>
 											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>
@@ -174,7 +186,6 @@ const VideoCreate = (props) => {
 											name="released"
 											className="form-control"
 											placeholder="Released"
-											required={true}
 											onChange={(e) => { setReleased(e.target.value) }} />
 										<br />
 										<br />
@@ -186,7 +197,6 @@ const VideoCreate = (props) => {
 											placeholder="Say something about your song"
 											cols="30"
 											rows="10"
-											required={true}
 											onChange={(e) => { setDescription(e.target.value) }}></textarea>
 										<br />
 										<br />
@@ -194,30 +204,7 @@ const VideoCreate = (props) => {
 										<button type="reset" className="sonar-btn">reset</button>
 										<br />
 										<br />
-
-										{/* {{-- Collapse --}} */}
-										<button className="sonar-btn" type="button" data-toggle="collapse" data-target="#collapseExample"
-											aria-expanded="false" aria-controls="collapseExample">
-											next
-										</button>
-										<div className="collapse" id="collapseExample">
-											<div className="">
-												<br />
-												<h3>Before you upload</h3>
-												<h6>By uploading you agree that you <b>own</b> this song.</h6>
-												<h6>Videos are sold at
-													<b style={{ color: "green" }}> KES 200</b>, Black Music takes
-													<b style={{ color: "green" }}> 50% (KES 100)</b> and the musician takes
-													<b style={{ color: "green" }}> 50% (KES 100)</b>.</h6>
-												<h6>You will be paid
-													<b> weekly</b>, via Mpesa to
-													<b style={{ color: "dodgerblue" }}>{props.auth.phone}</b>.
-												</h6>
-												<br />
-												<Button btnText="upload video" />
-											</div>
-										</div>
-										{/* {{-- Collapse End --}} */}
+										<Button btnText="edit video" />
 									</form>
 									<br />
 									<Link to="/videos" className="btn sonar-btn">studio</Link>
@@ -231,4 +218,4 @@ const VideoCreate = (props) => {
 	)
 }
 
-export default VideoCreate
+export default VideoEdit
