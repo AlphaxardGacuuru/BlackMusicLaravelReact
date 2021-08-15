@@ -12,7 +12,7 @@ const AudioCreate = (props) => {
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
 	const [album, setAlbum] = useState("")
-	const [genre, setGenre] = useState("Afro")
+	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
 	const [preview, setPreview] = useState()
@@ -116,7 +116,6 @@ const AudioCreate = (props) => {
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
-
 										<input
 											type="text"
 											name="name"
@@ -124,7 +123,6 @@ const AudioCreate = (props) => {
 											placeholder="Audio name"
 											required={true}
 											onChange={(e) => { setName(e.target.value) }} />
-
 										<br />
 										<br />
 
@@ -138,7 +136,6 @@ const AudioCreate = (props) => {
 											className="form-control"
 											placeholder="Featuring Artist e.g. @JohnDoe"
 											onChange={(e) => { setFt(e.target.value) }} />
-
 										<br />
 										<br />
 
@@ -147,14 +144,13 @@ const AudioCreate = (props) => {
 											className='form-control'
 											required={true}
 											onChange={(e) => { setAlbum(e.target.value) }}>
-											<option value="">Single</option>
+											<option defaultValue value="">Select Album</option>
 											{props.audioAlbums
 												.filter((audioAlbum) => audioAlbum.username == props.auth.username)
 												.map((audioAlbum, key) => (
 													<option key={key} value={audioAlbum.id}>{audioAlbum.name}</option>
 												))}
 										</select>
-
 										<br />
 										<br />
 
@@ -164,6 +160,7 @@ const AudioCreate = (props) => {
 											placeholder='Select audio genre'
 											required={true}
 											onChange={(e) => { setGenre(e.target.value) }}>
+											<option defaultValue value="">Select Genre</option>
 											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>

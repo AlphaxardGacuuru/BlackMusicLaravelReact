@@ -141,8 +141,6 @@ const VideoEdit = (props) => {
 											name='album'
 											className='form-control'
 											onChange={(e) => { setAlbum(e.target.value) }}>
-											<option value defaultValue>Select Album</option>
-											<option value="">Single</option>
 											{props.videoAlbums
 												.filter((videoAlbum) => videoAlbum.username == props.auth.username)
 												.map((videoAlbum, key) => (
@@ -157,7 +155,6 @@ const VideoEdit = (props) => {
 											className='form-control'
 											placeholder='Select video genre'
 											onChange={(e) => { setGenre(e.target.value) }}>
-											<option value defaultValue>Select Genre</option>
 											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>

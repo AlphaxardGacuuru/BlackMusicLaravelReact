@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AudioAlbums;
 use App\User;
+use App\VideoAlbums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -89,7 +91,7 @@ class UsersController extends Controller
 
         /* Update profile */
         $user = User::find($id);
-		
+
         if ($request->filled('name')) {
             $user->name = $request->input('name');
         }
@@ -102,6 +104,24 @@ class UsersController extends Controller
             $user->pp = $pp;
         }
 
+        if ($request->filled('account_type')) {
+            $user->account_type = $request->input('account_type');
+
+            /* Create new video album */
+            $aAlbum = new AudioAlbums;
+            $aAlbum->name = "Singles";
+            $aAlbum->username = auth()->user()->username;
+            $aAlbum->cover = "audio-album-covers/musical-note.png";
+            $aAlbum->save();
+
+            /* Create new video album */
+            $vAlbum = new VideoAlbums;
+            $vAlbum->name = "Singles";
+            $vAlbum->username = auth()->user()->username;
+            $vAlbum->cover = "video-album-covers/musical-note.png";
+            $vAlbum->save();
+        }
+
         if ($request->filled('bio')) {
             $user->bio = $request->input('bio');
         }
@@ -110,8 +130,8 @@ class UsersController extends Controller
             $user->withdrawal = $request->input('withdrawal');
         }
 
-		$user->save();
-		
+        $user->save();
+
         return response("Account updated", 200);
     }
 

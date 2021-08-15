@@ -31,13 +31,6 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
 
-// Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/products', 'ProductController@store');
-    Route::put('/products/{id}', 'ProductController@update');
-    Route::delete('/products/{id}', 'ProductController@destroy');
-});
-
 Route::resources([
     'users' => 'UsersController',
     'posts' => 'PostsController',

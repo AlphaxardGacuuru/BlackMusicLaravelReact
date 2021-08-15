@@ -17,7 +17,7 @@ const VideoAlbumEdit = (props) => {
 
 	// Declare states
 	const [name, setName] = useState("")
-	const [released, setReleased] = useState("")
+	const [released, setReleased] = useState()
 	const [preview, setPreview] = useState()
 	const [cover, setCover] = useState()
 
@@ -107,7 +107,6 @@ const VideoAlbumEdit = (props) => {
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
-
 										<input
 											type="text"
 											name="name"

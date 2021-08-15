@@ -11,10 +11,10 @@ const VideoCreate = (props) => {
 	const [video, setVideo] = useState("")
 	const [name, setName] = useState("")
 	const [ft, setFt] = useState("")
-	const [album, setAlbum] = useState("")
-	const [genre, setGenre] = useState("Afro")
-	const [released, setReleased] = useState("")
-	const [description, setDescription] = useState("")
+	const [album, setAlbum] = useState()
+	const [genre, setGenre] = useState()
+	const [released, setReleased] = useState()
+	const [description, setDescription] = useState()
 
 	// Get history for page location
 	const history = useHistory()
@@ -130,7 +130,7 @@ const VideoCreate = (props) => {
 											className='form-control'
 											required={true}
 											onChange={(e) => { setAlbum(e.target.value) }}>
-											<option value="">Single</option>
+											<option defaultValue value="">Select Album</option>
 											{props.videoAlbums
 												.filter((videoAlbum) => videoAlbum.username == props.auth.username)
 												.map((videoAlbum, key) => (
@@ -146,6 +146,7 @@ const VideoCreate = (props) => {
 											placeholder='Select video genre'
 											required={true}
 											onChange={(e) => { setGenre(e.target.value) }}>
+											<option defaultValue value="">Select Genre</option>
 											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>

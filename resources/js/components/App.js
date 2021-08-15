@@ -361,7 +361,7 @@ function App() {
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, follows, setFollows }} />
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, follows, setFollows }} />
 				)} />
 
 				<Route path="/audio-charts" exact render={(props) => (
@@ -378,7 +378,7 @@ function App() {
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
-					<Videos {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoLikes, videoAlbums, videoPayouts }} />
+					<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoLikes, videoAlbums, setVideoAlbums, videoPayouts, setAudioAlbums }} />
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (

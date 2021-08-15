@@ -55,6 +55,13 @@ const AudioShow = (props) => {
 		var showArtist = []
 	}
 
+	var hasBought = props.boughtAudios.some((boughtAudio) => {
+		return boughtAudio.audio_id == showAudio.id &&
+			boughtAudio.username == props.auth.username ||
+			props.auth.username == "@blackmusic" ||
+			props.auth.username == showAudio.username
+	})
+
 	// Arrays for dates
 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -544,7 +551,7 @@ const AudioShow = (props) => {
 					</div>
 
 					{/* Share button */}
-					<div className="p-2">
+					<div className="p-2 mr-2">
 						<a href={`whatsapp://send?text=https://music.black.co.ke/audio-show/${show}`}>
 							<svg className='bi bi-reply' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor'
 								xmlns='http://www.w3.org/2000/svg'>
@@ -553,6 +560,11 @@ const AudioShow = (props) => {
 							</svg>
 							<b> SHARE</b>
 						</a>
+					</div>
+
+					{/* Download button */}
+					<div className="p-2">
+						<Button btnClass="mysonar-btn" btnText="download" />
 					</div>
 				</div>
 
@@ -659,12 +671,8 @@ const AudioShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{props.boughtAudios.find((boughtAudio) => {
-						return boughtAudio.username == props.auth.username &&
-							boughtAudio.artist == showArtist.username &&
-							boughtAudio.audio_id == show ||
-							props.auth.username == "@blackmusic"
-					}) && <div className='media p-2 border-bottom'>
+					{hasBought &&
+						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
 							</div>
@@ -688,19 +696,19 @@ const AudioShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{props.audioComments
+					{hasBought && props.audioComments
 						.filter((comment) => comment.audio_id == show)
 						.map((comment, index) => (
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<Link to={`/home/${comment.username}`}>
+										<Link to={`/profile/${comment.username}`}>
 											<Img src={`/storage/${props.users.find((user) => user.username == comment.username).pp}`}
 												width="40px" height="40px" />
 										</Link>
 									</div>
 								</div>
-								<div className='media-body'>
+								<div className="media-body ml-2">
 									<h6 className="media-heading m-0"
 										style={{
 											width: "100%",
@@ -716,10 +724,10 @@ const AudioShow = (props) => {
 												<path fillRule="evenodd"
 													d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											</svg>
+											<span className="ml-1" style={{ fontSize: "10px" }}>
+												{props.decos.filter((deco) => deco.username == comment.username).length}
+											</span>
 										</span>
-										<span style={{ fontSize: "10px" }}> {props.decos.filter((deco) => {
-											return deco.username == comment.username
-										}).length}</span>
 										<small>
 											<i className="float-right mr-1">{new Date(comment.created_at).toDateString()}</i>
 										</small>
@@ -730,17 +738,22 @@ const AudioShow = (props) => {
 									{props.audioCommentLikes.find((commentLike) => {
 										return commentLike.comment_id == comment.id &&
 											commentLike.username == props.auth.username
-									}) ? <a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
-										e.preventDefault()
-										onCommentLike(comment.id)
-									}}>
-										<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-											className='bi bi-heart-fill' viewBox='0 0 16 16'>
-											<path fillRule='evenodd'
-												d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-										</svg>
-									</a>
-										: <a href='#' onClick={(e) => {
+									}) ?
+										<a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
+											e.preventDefault()
+											onCommentLike(comment.id)
+										}}>
+											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
+												className='bi bi-heart-fill' viewBox='0 0 16 16'>
+												<path fillRule='evenodd'
+													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
+											</svg>
+											<small className="ml-1">
+												{props.audioCommentLikes
+													.filter((commentLike) => commentLike.comment_id == comment.id).length}
+											</small>
+										</a> :
+										<a href='#' onClick={(e) => {
 											e.preventDefault()
 											onCommentLike(comment.id)
 										}}>
@@ -749,10 +762,11 @@ const AudioShow = (props) => {
 												<path
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
+											<small className="ml-1">
+												{props.audioCommentLikes
+													.filter((commentLike) => commentLike.comment_id == comment.id).length}
+											</small>
 										</a>}
-									<small> {props.audioCommentLikes
-										.filter((commentLike) => commentLike.comment_id == comment.id).length}
-									</small>
 
 									{/* <!-- Default dropup button --> */}
 									<div className="dropup float-right">
