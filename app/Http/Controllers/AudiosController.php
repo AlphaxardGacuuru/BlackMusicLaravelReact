@@ -87,9 +87,11 @@ class AudiosController extends Controller
      * @param  \App\Audios  $audios
      * @return \Illuminate\Http\Response
      */
-    public function show(Audios $audios)
+    public function show($id)
     {
-        //
+        $audioItem = Audios::where('id', $id)->first();
+
+        return response()->download('public/' . $audioItem->audio, $audioItem->name);
     }
 
     /**

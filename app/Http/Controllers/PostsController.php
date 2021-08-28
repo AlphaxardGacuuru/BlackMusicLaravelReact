@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Polls;
-use App\Post;
 use App\PostCommentLikes;
 use App\PostComments;
 use App\PostLikes;

@@ -25,12 +25,16 @@ const VideoShow = (props) => {
 		var showArtist = []
 	}
 
-	var hasBought = props.boughtVideos.some((boughtVideo) => {
+	var hasBought = false
+
+	if (props.boughtVideos.some((boughtVideo) => {
 		return boughtVideo.video_id == showVideo.id &&
 			boughtVideo.username == props.auth.username ||
 			props.auth.username == "@blackmusic" ||
 			props.auth.username == showVideo.username
-	})
+	})) {
+		hasBought = true
+	}
 
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
@@ -213,8 +217,9 @@ const VideoShow = (props) => {
 							<small>Song name {showVideo.name}</small>
 						</h6>
 						<small>Album</small> <span>
-							{props.videoAlbums.length &&
-								props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name}
+							{showVideo.album ?
+								props.videoAlbums.length &&
+								props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
 						</span><br />
 						<small>Genre</small> <span>{showVideo.genre}</span><br />
 						<small>Posted</small> <span>

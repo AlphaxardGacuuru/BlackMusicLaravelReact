@@ -59,7 +59,9 @@ function App() {
 	const [videoLikes, setVideoLikes] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
+	const [cartAudios, setCartAudios] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState([])
 	const [boughtVideos, setBoughtVideos] = useState([])
 	const [videoAlbums, setVideoAlbums] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
@@ -68,8 +70,6 @@ function App() {
 	const [audioAlbums, setAudioAlbums] = useState([])
 	const [audioComments, setAudioComments] = useState([])
 	const [audioCommentLikes, setAudioCommentLikes] = useState([])
-	const [cartAudios, setCartAudios] = useState([])
-	const [boughtAudios, setBoughtAudios] = useState([])
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 
@@ -122,6 +122,8 @@ function App() {
 
 		fetchFollows()
 
+		fetchBoughtAudios()
+
 		fetchBoughtVideos()
 
 		fetchCartVideos()
@@ -140,8 +142,6 @@ function App() {
 
 		fetchAudioAlbums()
 
-		fetchBoughtAudios()
-
 		fetchAudioLikes()
 
 		fetchAudioComments()
@@ -149,8 +149,6 @@ function App() {
 		fetchAudioCommentLikes()
 
 		fetchCartAudios()
-
-		fetchBoughtAudios()
 
 	}, [])
 
@@ -369,8 +367,7 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow
-						{...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, follows, setFollows }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (
