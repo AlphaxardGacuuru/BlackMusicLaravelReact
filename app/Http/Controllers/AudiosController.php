@@ -37,48 +37,48 @@ class AudiosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'audio' => 'required',
-            'thumbnail' => 'required',
-            'name' => 'required|string',
-            'ft' => 'nullable|exists:users,username',
-        ]);
-
-        /* Handle audio upload */
-        if ($request->hasFile('audio')) {
-            $song = $request->file('audio')->store('public/audios');
-            $song = substr($song, 7);
-        }
-
-        /* Handle thumbnail upload */
-        if ($request->hasFile('thumbnail')) {
-            $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
+        if ($request->hasFile('filepond-thumbnail')) {
+            /* Handle thumbnail upload */
+            $thumbnail = $request->file('filepond-thumbnail')->store('public/audio-thumbnails');
             $thumbnail = substr($thumbnail, 7);
+            return $thumbnail;
+        } elseif ($request->hasFile('filepond-audio')) {
+            /* Handle audio upload */
+            $song = $request->file('filepond-audio')->store('public/audios');
+            $song = substr($song, 7);
+            return $song;
+        } else {
+            $this->validate($request, [
+                'audio' => 'required',
+                'thumbnail' => 'required',
+                'name' => 'required|string',
+                'ft' => 'nullable|exists:users,username',
+            ]);
+
+            /* Create new audio song */
+            $audio = new Audios;
+            $audio->name = $request->input('name');
+            $audio->username = auth()->user()->username;
+            $audio->ft = $request->input('ft') ? $request->input('ft') : "";
+            $audio->album = $request->input('album');
+            $audio->genre = $request->input('genre');
+            $audio->audio = $request->input('audio');
+            $audio->thumbnail = $request->input('thumbnail');
+            $audio->description = $request->input('description');
+            $audio->released = $request->input('released');
+            $audio->save();
+
+            // Check if user is musician
+            $accountCheck = User::where('username', auth()->user()->username)->first();
+
+            if ($accountCheck->account_type == "normal") {
+                $user = User::find($accountCheck->id);
+                $user->account_type = "musician";
+                $user->save();
+            }
+
+            return response('Audio Uploaded', 200);
         }
-
-        /* Create new audio song */
-        $audio = new Audios;
-        $audio->name = $request->input('name');
-        $audio->username = auth()->user()->username;
-        $audio->ft = $request->input('ft') ? $request->input('ft') : "";
-        $audio->album = $request->input('album');
-        $audio->genre = $request->input('genre');
-        $audio->audio = $song;
-        $audio->thumbnail = $thumbnail;
-        $audio->description = $request->input('description');
-        $audio->released = $request->input('released');
-        $audio->save();
-
-        // Check if user is musician
-        $accountCheck = User::where('username', auth()->user()->username)->first();
-
-        if ($accountCheck->account_type == "normal") {
-            $user = User::find($accountCheck->id);
-            $user->account_type = "musician";
-            $user->save();
-        }
-
-        return response('Audio Uploaded', 200);
     }
 
     /**
@@ -114,51 +114,55 @@ class AudiosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'nullable|string',
-            'ft' => 'nullable|exists:users,username',
-        ]);
+        if ($request->hasFile('filepond')) {
+            $request->file('filepond')->store('public/audios');
+        } else {
+            $this->validate($request, [
+                'name' => 'nullable|string',
+                'ft' => 'nullable|exists:users,username',
+            ]);
 
-        /* Handle thumbnail upload */
-        if ($request->hasFile('thumbnail')) {
-            $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
-            $thumbnail = substr($thumbnail, 7);
-            Storage::delete('public/' . Audios::where('id', $id)->first()->thumbnail);
+            /* Handle thumbnail upload */
+            if ($request->hasFile('thumbnail')) {
+                $thumbnail = $request->file('thumbnail')->store('public/audio-thumbnails');
+                $thumbnail = substr($thumbnail, 7);
+                Storage::delete('public/' . Audios::where('id', $id)->first()->thumbnail);
+            }
+
+            $audio = Audios::find($id);
+
+            if ($request->filled('name')) {
+                $audio->name = $request->input('name');
+            }
+
+            if ($request->filled('ft')) {
+                $audio->ft = $request->input('ft');
+            }
+
+            if ($request->filled('album')) {
+                $audio->album = $request->input('album');
+            }
+
+            if ($request->filled('genre')) {
+                $audio->genre = $request->input('genre');
+            }
+
+            if ($request->hasFile('thumbnail')) {
+                $audio->thumbnail = $thumbnail;
+            }
+
+            if ($request->filled('description')) {
+                $audio->description = $request->input('description');
+            }
+
+            if ($request->filled('released')) {
+                $audio->released = $request->input('released');
+            }
+
+            $audio->save();
+
+            return response("Audio Edited", 200);
         }
-
-        $audio = Audios::find($id);
-
-        if ($request->filled('name')) {
-            $audio->name = $request->input('name');
-        }
-
-        if ($request->filled('ft')) {
-            $audio->ft = $request->input('ft');
-        }
-
-        if ($request->filled('album')) {
-            $audio->album = $request->input('album');
-        }
-
-        if ($request->filled('genre')) {
-            $audio->genre = $request->input('genre');
-        }
-
-        if ($request->hasFile('thumbnail')) {
-            $audio->thumbnail = $thumbnail;
-        }
-
-        if ($request->filled('description')) {
-            $audio->description = $request->input('description');
-        }
-
-        if ($request->filled('released')) {
-            $audio->released = $request->input('released');
-        }
-
-        $audio->save();
-
-        return response("Audio Edited", 200);
     }
 
     /**
@@ -167,8 +171,17 @@ class AudiosController extends Controller
      * @param  \App\Audios  $audios
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Audios $audios)
+    public function destroy($id)
     {
-        //
+		// Check file extension and handle filepond delete accordingly
+        $ext = substr($id, -3);
+
+		// If image
+        if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
+            return Storage::delete('public/audio-thumbnails/' . $id);
+			// If audio
+        } elseif ($ext == 'mp3' || $ext == 'mp4' || $ext == 'm4A' || $ext == 'wav' || $ext == 'aac') {
+            return Storage::delete('public/audios/' . $id);
+        }
     }
 }

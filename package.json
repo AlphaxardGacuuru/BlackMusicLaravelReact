@@ -24,9 +24,17 @@
         "react-dom": "^16.2.0",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
-        "sass-loader": "^8.0.0"
+        "sass-loader": "^8.0.0",
+        "webpack-dev-server": "^4.0.0"
     },
     "dependencies": {
+        "filepond": "^4.29.0",
+        "filepond-plugin-file-validate-type": "^1.2.6",
+        "filepond-plugin-image-crop": "^2.0.6",
+        "filepond-plugin-image-exif-orientation": "^1.0.11",
+        "filepond-plugin-image-preview": "^4.6.8",
+        "filepond-plugin-image-transform": "^3.8.7",
+        "react-filepond": "^7.1.1",
         "react-router-dom": "^5.2.0",
         "react-social-login-buttons": "^3.4.0"
     }

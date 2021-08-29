@@ -308,6 +308,7 @@ const AudioShow = (props) => {
 		});
 	}
 
+	// Function for downloading audio
 	const onDownload = () => {
 		window.open(`${props.url}/api/audios/${showAudio.id}`)
 		props.setMessage(`Downloading ${showAudio.name}`)
