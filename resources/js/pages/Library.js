@@ -18,9 +18,8 @@ const Library = (props) => {
 							className="media p-2 border-bottom">
 							<div className="media-left thumbnail">
 								<Link to={`/video-show/${boughtVideo.video_id}`}>
-									<Img src={props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.thumbnail}
+									<Img
+										src={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
 										width="160em"
 										height="90em" />
 								</Link>
@@ -61,8 +60,8 @@ const Library = (props) => {
 									height: "50px"
 								}}>
 								<Link to={`/audio-show/${boughtAudio.audio_id}`}>
-									<Img src={`/storage/${props.audios
-										.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
+									<Img
+										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
 										width="100%"
 										height="50px" />
 								</Link>

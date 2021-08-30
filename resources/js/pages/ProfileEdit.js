@@ -4,28 +4,41 @@ import axios from 'axios';
 import Img from '../components/Img'
 import Button from '../components/Button'
 
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform
+);
+
 const ProfileEdit = (props) => {
 
 	// Declare states
 	const [name, setName] = useState("")
 	const [bio, setBio] = useState("")
-	const [media, setMedia] = useState()
-	const [preview, setPreview] = useState()
 
-	// Assign id to element
-	const mediaInput = React.useRef(null)
+	// Get csrf token
+	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
-
-	// Fire when image is choosen
-	var onImageChange = event => {
-		if (event.target.files && event.target.files[0]) {
-			var img = event.target.files[0];
-			setMedia(img)
-			setPreview(URL.createObjectURL(img))
-		}
-	};
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -33,8 +46,6 @@ const ProfileEdit = (props) => {
 		// Add form data to FormData object
 		name && formData.append("name", name);
 		bio && formData.append("bio", bio);
-		// If media has been selected then append the file to FormData object
-		media && formData.append("profile-pic", media);
 		formData.append("_method", 'put');
 
 		// Send data to UsersController
@@ -67,31 +78,30 @@ const ProfileEdit = (props) => {
 					<center>
 						<h1>EDIT PROFILE</h1>
 						<br />
-						<div className="avatar-container border">
-							<Img imgClass="avatar hover-img" src={`/storage/${props.auth.pp}`} />
-							<div className="overlay">
-								<Button
-									btnText={"edit"}
-									btnClass={"edit-button mysonar-btn"}
-									onClick={() => mediaInput.current.click()} />
-							</div>
+						<label htmlFor="">Profile Pic</label>
+						<div className="avatar-container">
+							<FilePond
+								name="filepond-profile-pic"
+								labelIdle='Drag & Drop your image or <span class="filepond--label-action"> Browse </span>'
+								stylePanelLayout="compact circle"
+								imageCropAspectRatio="1:1"
+								acceptedFileTypes={['image/*']}
+								stylePanelAspectRatio="1:1"
+								allowRevert={false}
+								server={{
+									url: `${props.url}/api`,
+									process: {
+										url: `/users`,
+										headers: { 'X-CSRF-TOKEN': token.content },
+										onload: res => {
+											props.setMessage("Account updated")
+											axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
+										},
+									}
+								}} />
 						</div>
 
-						<img
-							src={preview}
-							width="100%"
-							height="auto" />
-
 						<form onSubmit={onSubmit}>
-
-							<input
-								type="file"
-								name="profile-pic"
-								className="form-control"
-								style={{ display: "none" }}
-								ref={mediaInput}
-								onChange={onImageChange} />
-
 							<label htmlFor="" className="float-left">Name</label>
 							<input
 								type="text"

@@ -92688,7 +92688,20 @@ function App() {
       polls = _useState20[0],
       setPolls = _useState20[1];
 
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
+    "id": 91,
+    "video": "https://www.youtube.com/embed/EdKKYry-FwQ",
+    "name": "Kenyan Shrap Gang Type Beat Supreme",
+    "username": "@sammyking",
+    "ft": "",
+    "album": "",
+    "genre": "Hiphop",
+    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
+    "description": "",
+    "released": null,
+    "created_at": "2020-05-08T12:41:00.000000Z",
+    "updated_at": "2021-03-15T17:43:59.000000Z"
+  }]),
       _useState22 = _slicedToArray(_useState21, 2),
       videos = _useState22[0],
       setVideos = _useState22[1];
@@ -92738,7 +92751,20 @@ function App() {
       videoPayouts = _useState40[0],
       setVideoPayouts = _useState40[1];
 
-  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
+    "id": 15,
+    "audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
+    "name": "Audio 1",
+    "username": "@blackmusic",
+    "ft": "",
+    "album": "6",
+    "genre": "Hiphop",
+    "thumbnail": "audio-thumbnails/qkKbj8XDU8c72J2rkUi06vkaTlYxLiMzTb0HpQuE.jpg",
+    "description": "Audio 1",
+    "released": "2021-08-13",
+    "created_at": "2021-08-14T21:23:39.000000Z",
+    "updated_at": "2021-08-14T21:23:39.000000Z"
+  }]),
       _useState42 = _slicedToArray(_useState41, 2),
       audios = _useState42[0],
       setAudios = _useState42[1];
@@ -95432,7 +95458,8 @@ var AudioCreate = function AudioCreate(props) {
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
       files = _useState20[0],
-      setFiles = _useState20[1];
+      setFiles = _useState20[1]; // Get csrf token
+
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
 
@@ -97062,7 +97089,12 @@ var AudioShow = function AudioShow(props) {
         height: "50px"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/audio-show/".concat(boughtAudio.audio_id)
+      to: "/audio-show/".concat(boughtAudio.audio_id),
+      onClick: window.scrollBy({
+        top: -window.innerHeight,
+        right: 0,
+        behavior: "smooth"
+      })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(props.audios.find(function (audio) {
         return audio.id == boughtAudio.audio_id;
@@ -97106,7 +97138,12 @@ var AudioShow = function AudioShow(props) {
         height: "50px"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/audio-show/".concat(audio.id)
+      to: "/audio-show/".concat(audio.id),
+      onClick: window.scrollBy({
+        top: -window.innerHeight,
+        right: 0,
+        behavior: "smooth"
+      })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(audio.thumbnail),
       width: "100%",
@@ -100458,6 +100495,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-filepond */ "./node_modules/react-filepond/dist/react-filepond.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_filepond__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -100474,7 +100527,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // Import React FilePond
 
+ // Import FilePond styles
+
+ // Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+
+
+
+
+
+
+ // Register the plugins
+
+Object(react_filepond__WEBPACK_IMPORTED_MODULE_4__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default.a);
 
 var ProfileEdit = function ProfileEdit(props) {
   // Declare states
@@ -100486,38 +100553,18 @@ var ProfileEdit = function ProfileEdit(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
       bio = _useState4[0],
-      setBio = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState6 = _slicedToArray(_useState5, 2),
-      media = _useState6[0],
-      setMedia = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState8 = _slicedToArray(_useState7, 2),
-      preview = _useState8[0],
-      setPreview = _useState8[1]; // Assign id to element
+      setBio = _useState4[1]; // Get csrf token
 
 
-  var mediaInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Declare new FormData object for form data
+  var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
 
-  var formData = new FormData(); // Fire when image is choosen
-
-  var onImageChange = function onImageChange(event) {
-    if (event.target.files && event.target.files[0]) {
-      var img = event.target.files[0];
-      setMedia(img);
-      setPreview(URL.createObjectURL(img));
-    }
-  };
+  var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Add form data to FormData object
 
     name && formData.append("name", name);
-    bio && formData.append("bio", bio); // If media has been selected then append the file to FormData object
-
-    media && formData.append("profile-pic", media);
+    bio && formData.append("bio", bio);
     formData.append("_method", 'put'); // Send data to UsersController
     // Get csrf cookie from Laravel inorder to send a POST request
 
@@ -100551,35 +100598,36 @@ var ProfileEdit = function ProfileEdit(props) {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "contact-form form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "EDIT PROFILE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "avatar-container border"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    imgClass: "avatar hover-img",
-    src: "/storage/".concat(props.auth.pp)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "overlay"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "edit",
-    btnClass: "edit-button mysonar-btn",
-    onClick: function onClick() {
-      return mediaInput.current.click();
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "EDIT PROFILE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Profile Pic"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
+    name: "filepond-profile-pic",
+    labelIdle: "Drag & Drop your image or <span class=\"filepond--label-action\"> Browse </span>",
+    stylePanelLayout: "compact circle",
+    imageCropAspectRatio: "1:1",
+    acceptedFileTypes: ['image/*'],
+    stylePanelAspectRatio: "1:1",
+    allowRevert: false,
+    server: {
+      url: "".concat(props.url, "/api"),
+      process: {
+        url: "/users",
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          props.setMessage("Account updated");
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
+            return props.setAuth(res.data);
+          });
+        }
+      }
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: preview,
-    width: "100%",
-    height: "auto"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: onSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "file",
-    name: "profile-pic",
-    className: "form-control",
-    style: {
-      display: "none"
-    },
-    ref: mediaInput,
-    onChange: onImageChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "",
     className: "float-left"
   }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -102922,7 +102970,12 @@ var VideoShow = function VideoShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-show/".concat(boughtVideo.video_id)
+      to: "/video-show/".concat(boughtVideo.video_id),
+      onClick: window.scrollBy({
+        top: -window.innerHeight,
+        right: 0,
+        behavior: "smooth"
+      })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: props.videos.find(function (video) {
         return video.id == boughtVideo.video_id;
@@ -102963,7 +103016,12 @@ var VideoShow = function VideoShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-show/".concat(video.id)
+      to: "/video-show/".concat(video.id),
+      onClick: window.scrollBy({
+        top: -window.innerHeight,
+        right: 0,
+        behavior: "smooth"
+      })
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: video.thumbnail,
       width: "160em",

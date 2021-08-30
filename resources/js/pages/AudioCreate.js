@@ -43,6 +43,7 @@ const AudioCreate = (props) => {
 	const [thumbnail, setThumbnail] = useState("")
 	const [files, setFiles] = useState([]);
 
+	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Get history for page location

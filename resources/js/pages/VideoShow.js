@@ -518,10 +518,16 @@ const VideoShow = (props) => {
 						<div key={key}
 							className="media p-2 border-bottom">
 							<div className="media-left thumbnail">
-								<Link to={`/video-show/${boughtVideo.video_id}`}>
-									<Img src={props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.thumbnail}
+								<Link
+									to={`/video-show/${boughtVideo.video_id}`}
+									onClick={
+										window.scrollBy({
+											top: -window.innerHeight,
+											right: 0,
+											behavior: "smooth"
+										})}>
+									<Img
+										src={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
 										width="160em"
 										height="90em" />
 								</Link>
@@ -570,7 +576,14 @@ const VideoShow = (props) => {
 						<div key={index}
 							className="media p-2 border-bottom">
 							<div className="media-left thumbnail">
-								<Link to={`/video-show/${video.id}`}>
+								<Link
+									to={`/video-show/${video.id}`}
+									onClick={
+										window.scrollBy({
+											top: -window.innerHeight,
+											right: 0,
+											behavior: "smooth"
+										})}>
 									<Img src={video.thumbnail} width="160em" height="90em" />
 								</Link>
 							</div>

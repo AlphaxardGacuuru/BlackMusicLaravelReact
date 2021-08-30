@@ -38,7 +38,22 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* Handle file upload */
+        if ($request->hasFile('filepond-profile-pic')) {
+            $pp = $request->file('filepond-profile-pic')->store('public/profile-pics');
+            $pp = substr($pp, 7);
+
+            // Delete profile pic
+            if (auth()->user()->pp != 'profile-pics/male_avatar.png') {
+                Storage::delete('public/' . auth()->user()->pp);
+            }
+
+            $user = User::find(auth()->user()->id);
+            $user->pp = $pp;
+            $user->save();
+
+            return response("Account updated", 200);
+        }
     }
 
     /**
@@ -75,19 +90,10 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'string|nullable|max:20',
             'phone' => 'string|nullable|startsWith:07|min:10|max:10',
-            'profile-pic' => 'image|nullable|max:9999',
+            'filepond-profile-pic' => 'nullable|max:9999',
             'bio' => 'string|nullable|max:50',
             'withdrawal' => 'string|nullable',
         ]);
-
-        /* Handle file upload */
-        if ($request->hasFile('profile-pic')) {
-            $pp = $request->file('profile-pic')->store('public/profile-pics');
-            if (auth()->user()->pp != 'profile-pics/male_avatar.png') {
-                Storage::delete('public/' . auth()->user()->pp);
-            }
-            $pp = substr($pp, 7);
-        }
 
         /* Update profile */
         $user = User::find($id);
@@ -98,10 +104,6 @@ class UsersController extends Controller
 
         if ($request->filled('phone')) {
             $user->phone = $request->input('phone');
-        }
-
-        if ($request->hasFile('profile-pic')) {
-            $user->pp = $pp;
         }
 
         if ($request->filled('account_type')) {

@@ -55,7 +55,20 @@ function App() {
 	const [postComments, setPostComments] = useState([])
 	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
-	const [videos, setVideos] = useState([])
+	const [videos, setVideos] = useState([{
+		"id": 91,
+		"video": "https://www.youtube.com/embed/EdKKYry-FwQ",
+		"name": "Kenyan Shrap Gang Type Beat Supreme",
+		"username": "@sammyking",
+		"ft": "",
+		"album": "",
+		"genre": "Hiphop",
+		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
+		"description": "",
+		"released": null,
+		"created_at": "2020-05-08T12:41:00.000000Z",
+		"updated_at": "2021-03-15T17:43:59.000000Z"
+	}])
 	const [videoLikes, setVideoLikes] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
@@ -65,7 +78,20 @@ function App() {
 	const [boughtVideos, setBoughtVideos] = useState([])
 	const [videoAlbums, setVideoAlbums] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
-	const [audios, setAudios] = useState([])
+	const [audios, setAudios] = useState([{
+		"id": 15,
+		"audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
+		"name": "Audio 1",
+		"username": "@blackmusic",
+		"ft": "",
+		"album": "6",
+		"genre": "Hiphop",
+		"thumbnail": "audio-thumbnails/qkKbj8XDU8c72J2rkUi06vkaTlYxLiMzTb0HpQuE.jpg",
+		"description": "Audio 1",
+		"released": "2021-08-13",
+		"created_at": "2021-08-14T21:23:39.000000Z",
+		"updated_at": "2021-08-14T21:23:39.000000Z"
+	}])
 	const [audioLikes, setAudioLikes] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
 	const [audioComments, setAudioComments] = useState([])

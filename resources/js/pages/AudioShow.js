@@ -826,9 +826,16 @@ const AudioShow = (props) => {
 									width: "50px",
 									height: "50px"
 								}}>
-								<Link to={`/audio-show/${boughtAudio.audio_id}`}>
-									<Img src={`/storage/${props.audios
-										.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
+								<Link
+									to={`/audio-show/${boughtAudio.audio_id}`}
+									onClick={
+										window.scrollBy({
+											top: -window.innerHeight,
+											right: 0,
+											behavior: "smooth"
+										})}>
+									<Img
+										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
 										width="100%"
 										height="50px" />
 								</Link>
@@ -883,7 +890,14 @@ const AudioShow = (props) => {
 									width: "50px",
 									height: "50px"
 								}}>
-								<Link to={`/audio-show/${audio.id}`}>
+								<Link
+									to={`/audio-show/${audio.id}`}
+									onClick={
+										window.scrollBy({
+											top: -window.innerHeight,
+											right: 0,
+											behavior: "smooth"
+										})}>
 									<Img src={`/storage/${audio.thumbnail}`} width="100%" height="50px" />
 								</Link>
 							</div>
