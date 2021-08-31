@@ -204,7 +204,7 @@ const VideoEdit = (props) => {
 										<Button btnText="edit video" />
 									</form>
 									<br />
-									<Link to="/videos" className="btn sonar-btn">studio</Link>
+									<Link to="/videos" className="btn sonar-btn btn-2">studio</Link>
 								</div>
 							</div>
 						</div>

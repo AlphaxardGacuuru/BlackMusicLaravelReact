@@ -173,15 +173,17 @@ class AudiosController extends Controller
      */
     public function destroy($id)
     {
-		// Check file extension and handle filepond delete accordingly
+        // Check file extension and handle filepond delete accordingly
         $ext = substr($id, -3);
 
-		// If image
+        // If image
         if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
-            return Storage::delete('public/audio-thumbnails/' . $id);
-			// If audio
+            Storage::delete('public/audio-thumbnails/' . $id);
+            return response("Audio thumbnail deleted", 200);
+            // If audio
         } elseif ($ext == 'mp3' || $ext == 'mp4' || $ext == 'm4A' || $ext == 'wav' || $ext == 'aac') {
-            return Storage::delete('public/audios/' . $id);
+            Storage::delete('public/audios/' . $id);
+            return response("Audio deleted", 200);
         }
     }
 }

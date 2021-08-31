@@ -82,7 +82,7 @@ const ProfileEdit = (props) => {
 						<div className="avatar-container">
 							<FilePond
 								name="filepond-profile-pic"
-								labelIdle='Drag & Drop your image or <span class="filepond--label-action"> Browse </span>'
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
 								stylePanelLayout="compact circle"
 								imageCropAspectRatio="1:1"
 								acceptedFileTypes={['image/*']}

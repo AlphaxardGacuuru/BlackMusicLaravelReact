@@ -5,6 +5,30 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import Button from '../components/Button'
 
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform
+);
+
 const VideoCreate = (props) => {
 
 	// Declare states
@@ -15,6 +39,9 @@ const VideoCreate = (props) => {
 	const [genre, setGenre] = useState()
 	const [released, setReleased] = useState()
 	const [description, setDescription] = useState()
+
+	// Get csrf token
+	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Get history for page location
 	const history = useHistory()
@@ -92,16 +119,6 @@ const VideoCreate = (props) => {
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
-										<input
-											type="text"
-											name="video"
-											className="form-control"
-											placeholder="Video URL from YouTube"
-											required={true}
-											onChange={(e) => { setVideo(e.target.value) }} />
-										<br />
-										<br />
-
 										<input
 											type="text"
 											name="name"
@@ -188,7 +205,38 @@ const VideoCreate = (props) => {
 											cols="30"
 											rows="10"
 											required={true}
-											onChange={(e) => { setDescription(e.target.value) }}></textarea>
+											onChange={(e) => { setDescription(e.target.value) }}>
+										</textarea>
+
+										<label>Upload Video</label>
+										<FilePond
+											name="filepond-video"
+											labelIdle='Drag & Drop your Video or <span class="filepond--label-action"> Browse </span>'
+											stylePanelLayout=""
+											acceptedFileTypes={['video/*']}
+											stylePanelAspectRatio="16:9"
+											allowRevert={true}
+											// chunkUploads="true"
+											// chunkForce="true"
+											// chunkSize=""
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/videos/filepond/video",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => {
+														setVideo(res)
+													},
+													onerror: (response) => console.log(response)
+												},
+												revert: {
+													url: `/${video}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => {
+														props.setMessage(res)
+													},
+												},
+											}} />
 										<br />
 										<br />
 
@@ -212,7 +260,7 @@ const VideoCreate = (props) => {
 													<b style={{ color: "green" }}> 50% (KES 100)</b>.</h6>
 												<h6>You will be paid
 													<b> weekly</b>, via Mpesa to
-													<b style={{ color: "dodgerblue" }}>{props.auth.phone}</b>.
+													<b style={{ color: "dodgerblue" }}> {props.auth.phone}</b>.
 												</h6>
 												<br />
 												<Button btnText="upload video" />
@@ -221,7 +269,7 @@ const VideoCreate = (props) => {
 										{/* {{-- Collapse End --}} */}
 									</form>
 									<br />
-									<Link to="/videos" className="btn sonar-btn">studio</Link>
+									<Link to="/videos" className="btn sonar-btn btn-2">studio</Link>
 								</div>
 							</div>
 						</div>

@@ -272,6 +272,7 @@ const AudioCreate = (props) => {
 
 										<FilePond
 											name="filepond-thumbnail"
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
 											imageCropAspectRatio="1:1"
 											acceptedFileTypes={['image/*']}
 											stylePanelAspectRatio="16:9"
@@ -289,7 +290,7 @@ const AudioCreate = (props) => {
 													url: `/audios/${thumbnail.substr(17)}`,
 													headers: { 'X-CSRF-TOKEN': token.content },
 													onload: res => {
-														console.log(res)
+														props.setMessage(res)
 													},
 												},
 											}} />
@@ -319,6 +320,7 @@ const AudioCreate = (props) => {
 
 										<FilePond
 											name="filepond-audio"
+											labelIdle='Drag & Drop your Audio or <span class="filepond--label-action"> Browse </span>'
 											acceptedFileTypes={['audio/*']}
 											allowRevert={true}
 											server={{
@@ -334,7 +336,7 @@ const AudioCreate = (props) => {
 													url: `/${audio}`,
 													headers: { 'X-CSRF-TOKEN': token.content },
 													onload: res => {
-														console.log(res)
+														props.setMessage(res)
 													},
 												},
 											}} />
@@ -361,7 +363,7 @@ const AudioCreate = (props) => {
 													<b style={{ color: "green" }}> 50% (KES 50)</b>.</h6>
 												<h6>You will be paid
 													<b> weekly</b>, via Mpesa to
-													<b style={{ color: "dodgerblue" }}>{props.auth.phone}</b>.
+													<b style={{ color: "dodgerblue" }}> {props.auth.phone}</b>.
 												</h6>
 												<br />
 												<Button btnText="upload audio" />
@@ -370,7 +372,7 @@ const AudioCreate = (props) => {
 										{/* {{-- Collapse End --}} */}
 									</form>
 									<br />
-									<Link to="/audios" className="btn sonar-btn">studio</Link>
+									<Link to="/audios" className="btn sonar-btn btn-2">studio</Link>
 								</div>
 							</div>
 						</div>

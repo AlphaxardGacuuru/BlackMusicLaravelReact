@@ -17,7 +17,7 @@ const Audios = (props) => {
 			<div className="row">
 				<div className="col-sm-12">
 					<center>
-						<Link to="/videos" className="btn sonar-btn">go to videos</Link>
+						<Link to="/videos" className="btn sonar-btn btn-2">go to videos</Link>
 						<br />
 						<br />
 						<Link to="/audio-create" className="btn sonar-btn">upload audio</Link>

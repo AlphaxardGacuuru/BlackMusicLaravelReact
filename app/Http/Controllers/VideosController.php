@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Videos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VideosController extends Controller
 {
@@ -36,47 +37,45 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'video' => 'required|regex:/^https:\/\/youtu.be\/[A-z0-9]+/',
-            'name' => 'required|string',
-            'ft' => 'nullable|exists:users,username',
-        ]);
+        if ($request->hasFile('filepond-video')) {
+            /* Handle thumbnail upload */
+            $video = $request->file('filepond-video')->store('public/videos');
+            $video = substr($video, 7);
+            return $video;
+        } else {
+            $this->validate($request, [
+                'video' => 'required|string',
+                'name' => 'required|string',
+                'ft' => 'nullable|exists:users,username',
+            ]);
 
-        /* Handle file upload */
-        /* if ($request->hasFile('video')) {
-        Storage::putFile('public/video-uploads', $request->file('video'));
-        $path = $request->file('video')->hashName();
-        return $path = $request->file('video')->hashName();
+            /* Create new video song */
+            $video = new Videos;
+            $video->video = $request->input('video');
+            $video->name = $request->input('name');
+            $video->username = auth()->user()->username;
+            $video->ft = $request->input('ft') ? $request->input('ft') : NULL;
+            $video->album = $request->input('album');
+            $video->genre = $request->input('genre');
+            /* Generate thumbnail */
+            // $thumbnail = substr($video->video, 30);
+            // $thumbnail = "https://img.youtube.com/vi/" . $thumbnail . "/hqdefault.jpg";
+            // $video->thumbnail = $thumbnail;
+            $video->description = $request->input('description');
+            $video->released = $request->input('released');
+            $video->save();
+
+            // Check if user is musician
+            $accountCheck = User::where('username', auth()->user()->username)->first();
+
+            if ($accountCheck->account_type == "normal") {
+                $user = User::find($accountCheck->id);
+                $user->account_type = "musician";
+                $user->save();
+            }
+
+            return response('Video Uploaded', 200);
         }
-        return ''; */
-
-        /* Create new video song */
-        $video = new Videos;
-        /* Change url to enable embedding */
-        $video->video = substr_replace($request->input('video'), 'https://www.youtube.com/embed', 0, 16);
-        $video->name = $request->input('name');
-        $video->username = auth()->user()->username;
-        $video->ft = $request->input('ft') ? $request->input('ft') : "";
-        $video->album = $request->input('album');
-        $video->genre = $request->input('genre');
-        /* Generate thumbnail */
-        $thumbnail = substr($video->video, 30);
-        $thumbnail = "https://img.youtube.com/vi/" . $thumbnail . "/hqdefault.jpg";
-        $video->thumbnail = $thumbnail;
-        $video->description = $request->input('description');
-        $video->released = $request->input('released');
-        $video->save();
-
-        // Check if user is musician
-        $accountCheck = User::where('username', auth()->user()->username)->first();
-
-        if ($accountCheck->account_type == "normal") {
-            $user = User::find($accountCheck->id);
-            $user->account_type = "musician";
-            $user->save();
-        }
-
-        return response('Video Uploaded', 200);
     }
 
     /**
@@ -116,7 +115,7 @@ class VideosController extends Controller
         ]);
 
         /* Create new video song */
-            $video = Videos::find($id);
+        $video = Videos::find($id);
 
         if ($request->filled('name')) {
             $video->name = $request->input('name');
@@ -148,8 +147,18 @@ class VideosController extends Controller
      * @param  \App\Videos  $videos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Videos $videos)
+    public function destroy($id)
     {
-        //
+        Storage::delete('public/videos/' . $id);
+		return response("Video deleted", 200);
+    }
+
+    /* Filepond */
+    public function filepond(Request $request, $id)
+    {
+        /* Handle thumbnail upload */
+        $video = $request->file('filepond-video')->store('public/videos');
+        $video = substr($video, 7);
+        return $video;
     }
 }

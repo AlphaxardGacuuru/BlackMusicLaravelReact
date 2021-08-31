@@ -64,7 +64,7 @@ const Videos = (props) => {
 			<div className="row" style={{ display: main }}>
 				<div className="col-sm-12">
 					<center>
-						<Link to="/audios" className="btn sonar-btn">go to audios</Link>
+						<Link to="/audios" className="btn sonar-btn btn-2">go to audios</Link>
 						<br />
 						<br />
 						<Link to="/video-create" className="btn sonar-btn">upload video</Link>

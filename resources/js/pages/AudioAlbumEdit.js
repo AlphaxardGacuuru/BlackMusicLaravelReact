@@ -166,7 +166,7 @@ const AudioAlbumEdit = (props) => {
 										<br />
 										<br />
 
-										<Link to="/audios" className="btn sonar-btn">studio</Link>
+										<Link to="/audios" className="btn sonar-btn btn-2">studio</Link>
 									</form>
 								</div>
 							</div>
