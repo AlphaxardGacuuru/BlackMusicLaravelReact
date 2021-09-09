@@ -100,6 +100,11 @@ const AudioCharts = (props) => {
 	artistsArray.sort((a, b) => b.value - a.value)
 	audiosArray.sort((a, b) => b.value - a.value)
 
+	// Reverse list if chart is Newly Released
+	if (chart == "Newly Released") {
+		audiosArray.reverse()
+	}
+
 	// Function for adding audio to cart
 	const onCartAudios = (audio) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -235,9 +240,9 @@ const AudioCharts = (props) => {
 									<center>
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artistArray.key}>
-												<Img src={`/storage/${props.users.find((user) => {
-													return user.username == artistArray.key
-												}).pp}`}
+												<Img src={`/storage/${props.users
+													.find((user) => user.username == artistArray.key) &&
+													props.users.find((user) => user.username == artistArray.key).pp}`}
 													width='150px'
 													height='150px' />
 											</Link>
@@ -249,9 +254,8 @@ const AudioCharts = (props) => {
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											{props.users.find((user) => {
-												return user.username == artistArray.key
-											}).name}
+											{props.users.find((user) => user.username == artistArray.key) &&
+												props.users.find((user) => user.username == artistArray.key).name}
 										</h6>
 										<h6 style={{
 											width: "100px",

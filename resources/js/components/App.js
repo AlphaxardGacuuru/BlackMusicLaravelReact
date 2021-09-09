@@ -49,7 +49,25 @@ function App() {
 	})
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
-	const [users, setUsers] = useState([])
+	const [users, setUsers] = useState([{
+		"id": 1,
+		"name": "Marvin Unruly",
+		"username": "@unruly",
+		"email": "mmwanzi76@gmail.com",
+		"email_verified_at": null,
+		"phone": "0",
+		"gender": "male",
+		"account_type": "normal",
+		"account_type_2": "",
+		"pp": "profile-pics/male_avatar.png",
+		"pb": "img/male_avatar.png",
+		"bio": "Limitless",
+		"dob": "",
+		"location": null,
+		"withdrawal": "",
+		"created_at": "-000001-11-30T00:00:00.000000Z",
+		"updated_at": "2020-10-22T20:07:37.000000Z"
+	}])
 	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
 	const [postComments, setPostComments] = useState([])
@@ -350,9 +368,178 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch bought audios"]))
 	}
 
+
+	// Audio Player
+	const [show, setShow] = useState(0)
+	const [playBtn, setPlayBtn] = useState(true)
+	const [shuffle, setShuffle] = useState(false)
+	const [loop, setLoop] = useState(false)
+	const [dur, setDur] = useState(0)
+	const [volume, setVolume] = useState(0.3)
+	const [currentTime, setCurrentTime] = useState(0)
+	const [progressPercent, setProgressPercent] = useState()
+
+	// Listen for show change and autoplay song
+	useEffect(() => {
+		var playPromise = audio.current.play();
+
+		if (playPromise !== undefined) {
+			playPromise.then(_ => {
+				// Automatic playback started!
+				// Show playing UI.
+				setPlayBtn(true)
+			})
+				.catch(error => {
+					// Auto-play was prevented
+					// Show paused UI.
+					setPlayBtn(false)
+				});
+		}
+	}, [show])
+
+	// Set Refs
+	const audio = React.useRef(null)
+	const audioProgress = React.useRef(null)
+	const audioContainer = React.useRef()
+	const volumeProgress = React.useRef()
+	const volumeContainer = React.useRef()
+	
+	// Get audio to show
+	if (audios.find((audio) => audio.id == show)) {
+		var showAudio = audios.find((audio) => audio.id == show)
+	} else {
+		var showAudio = []
+	}
+
+	// Get artist of audio to show 
+	if (users.find((user) => user.username == showAudio.username)) {
+		var showArtist = users.find((user) => user.username == showAudio.username)
+	} else {
+		var showArtist = []
+	}
+
+	// Song titles
+	var songs = [];
+
+	// Add bought song ids to songs array
+	boughtAudios
+		.filter((boughtAudio) => boughtAudio.username == auth.username)
+		.map((boughtAudio) => (songs.push(boughtAudio.audio_id)))
+
+	// Keep track of song
+	let songIndex = songs.indexOf(show.toString())
+
+	const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (10 < s ? ':' : ':0') + ~~(s) }
+
+	var hasBought = false
+
+	if (boughtAudios.some((boughtAudio) => {
+		return boughtAudio.audio_id == showAudio.id &&
+			boughtAudio.username == auth.username ||
+			auth.username == "@blackmusic" ||
+			auth.username == showAudio.username
+	})) {
+		hasBought = true
+	}
+
+	// Play song
+	const playSong = () => {
+		setPlayBtn(true)
+		audio.current.play();
+	}
+
+	// Pause song
+	const pauseSong = () => {
+		setPlayBtn(false)
+		audio.current.pause();
+	}
+
+	// Previous song
+	const prevSong = () => {
+		songIndex--;
+
+		if (loop) {
+			if (songIndex < 0) {
+				songIndex = songs.length - 1;
+			}
+		} else {
+			if (songIndex < 0) {
+				songIndex = 0
+			}
+		}
+
+		// Shuffle
+		if (shuffle) {
+			const max = songs.length - 1
+			const min = 0
+			songIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		setShow(songs[songIndex])
+	}
+
+	// Next song
+	const nextSong = () => {
+		songIndex++;
+
+		// Loop
+		if (loop) {
+			if (songIndex > songs.length - 1) {
+				songIndex = 0
+			}
+		} else {
+			if (songIndex > songs.length - 1) {
+				songIndex = songs.length - 1
+			}
+		}
+
+		// Shuffle
+		if (shuffle) {
+			const max = songs.length - 1
+			const min = 0
+			songIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		setShow(songs[songIndex])
+	}
+
+	// Update audio progress bar
+	function updateProgress() {
+		const progress = (audio.current.currentTime / audio.current.duration) * 100;
+		progress >= 0 && setProgressPercent(progress)
+		// audioProgress.current.style.width = `${progressPercent}%`;
+
+		{/* Pause at 10s if user has not bought the audio */ }
+		if (!hasBought) {
+			if (audio.current.currentTime >= 10) {
+				pauseSong()
+				setErrors([`Buy song to continue!`])
+			}
+		}
+	}
+
+	// Set audio progress bar
+	function setProgress(e) {
+		const width = audioContainer.current.clientWidth;
+		const clickX = e.nativeEvent.offsetX
+		var seekTo = (clickX / width) * audio.current.duration
+		audio.current.currentTime = seekTo
+	}
+
+	// Set volume progress bar
+	const onSetVolume = (e) => {
+		const width = volumeContainer.current.clientWidth;
+		const clickX = e.nativeEvent.offsetX
+		audio.current.volume = clickX / width
+		setVolume(clickX / width)
+	}
+
+	// Song ends
+	// audio.current.addEventListener('ended', nextSong);
+
 	return (
-		<Router>
-			<>
+		<>
+			<Router>
 				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
 				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
 				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
@@ -393,11 +580,11 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (
-					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios }} />
+					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
@@ -444,9 +631,23 @@ function App() {
 					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, audios, boughtAudios }} />
 				)} />
 				<Messages {...{ message, errors }} />
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
-			</>
-		</Router>
+
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong }} />
+			</Router>
+
+			<audio
+				onTimeUpdate={(e) => {
+					updateProgress()
+					setCurrentTime(e.target.currentTime)
+				}}
+				onCanPlay={(e) => setDur(e.target.duration)}
+				ref={audio}
+				type="audio/*"
+				preload='true'
+				// autoPlay={true}
+				src={`/storage/${audios.find((audio) => audio.id == show) &&
+					audios.find((audio) => audio.id == show).audio}`} />
+		</>
 	);
 }
 

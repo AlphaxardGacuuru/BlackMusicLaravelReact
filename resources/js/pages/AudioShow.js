@@ -12,157 +12,27 @@ const AudioShow = (props) => {
 
 	let history = useHistory()
 
+	// Set Show if it's equal to 0
+	props.show == 0 && setTimeout(() => props.setShow(show), 1000)
+
 	// Set State
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
-	const [playBtn, setPlayBtn] = useState(true)
-	const [dur, setDur] = useState(0)
-	const [volume, setVolume] = useState(0.3)
-	const [currentTime, setCurrentTime] = useState(0)
-	const [shuffle, setShuffle] = useState(false)
-	const [loop, setLoop] = useState(false)
-
-	// Set Refs
-	const audio = React.useRef(null)
-	const audioProgress = React.useRef(null)
-	const audioContainer = React.useRef()
-	const volumeProgress = React.useRef()
-	const volumeContainer = React.useRef()
-
-	// Song titles
-	var songs = [];
-
-	// Add bought song ids to songs array
-	props.boughtAudios
-		.filter((boughtAudio) => boughtAudio.username == props.auth.username)
-		.map((boughtAudio) => (songs.push(boughtAudio.audio_id)))
-
-	// Keep track of song
-	let songIndex = songs.indexOf(show.toString())
-
-	const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (10 < s ? ':' : ':0') + ~~(s) }
 
 	// Get audio to show
-	if (props.audios.find((audio) => audio.id == show)) {
-		var showAudio = props.audios.find((audio) => audio.id == show)
-	} else {
-		var showAudio = []
-	}
+	if (props.audios.find((audio) => audio.id == props.show)) {
+		var showAudio = props.audios.find((audio) => audio.id == props.show)
 
-	// Get artist of audio to show 
-	if (props.users.find((user) => user.username == showAudio.username)) {
+		// Get artist of audio to show 
 		var showArtist = props.users.find((user) => user.username == showAudio.username)
 	} else {
+		var showAudio = []
 		var showArtist = []
 	}
 
-	var hasBought = false
-
-	if (props.boughtAudios.some((boughtAudio) => {
-		return boughtAudio.audio_id == showAudio.id &&
-			boughtAudio.username == props.auth.username ||
-			props.auth.username == "@blackmusic" ||
-			props.auth.username == showAudio.username
-	})) {
-		hasBought = true
-	}
 
 	// Arrays for dates
 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-	// Play song
-	const playSong = () => {
-		setPlayBtn(true)
-		audio.current.play();
-	}
-
-	// Pause song
-	const pauseSong = () => {
-		setPlayBtn(false)
-		audio.current.pause();
-	}
-
-	// Previous song
-	const prevSong = () => {
-		songIndex--;
-
-		if (loop) {
-			if (songIndex < 0) {
-				songIndex = songs.length - 1;
-			}
-		} else {
-			if (songIndex < 0) {
-				songIndex = 0
-			}
-		}
-
-		// Shuffle
-		if (shuffle) {
-			const max = songs.length - 1
-			const min = 0
-			songIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-
-		show != songs[songIndex] && history.push(`/audio-show/${songs[songIndex]}`, 1000);
-	}
-
-	// Next song
-	const nextSong = () => {
-		songIndex++;
-
-		// Loop
-		if (loop) {
-			if (songIndex > songs.length - 1) {
-				songIndex = 0
-			}
-		} else {
-			if (songIndex > songs.length - 1) {
-				songIndex = songs.length - 1
-			}
-		}
-
-		// Shuffle
-		if (shuffle) {
-			const max = songs.length - 1
-			const min = 0
-			songIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-
-		show != songs[songIndex] && history.push(`/audio-show/${songs[songIndex]}`, 1000);
-	}
-
-	// Update audio progress bar
-	function updateProgress() {
-		const progressPercent = (audio.current.currentTime / audio.current.duration) * 100;
-		audioProgress.current.style.width = `${progressPercent}%`; audio.current.currentTime
-
-		{/* Pause at 10s if user has not bought the audio */ }
-		if (!hasBought) {
-			if (audio.current.currentTime >= 10) {
-				pauseSong()
-				props.setErrors([`Buy song to continue!`])
-			}
-		}
-	}
-
-	// Set audio progress bar
-	function setProgress(e) {
-		const width = audioContainer.current.clientWidth;
-		const clickX = e.nativeEvent.offsetX
-		var seekTo = (clickX / width) * audio.current.duration
-		audio.current.currentTime = seekTo
-	}
-
-	// Set volume progress bar
-	const onSetVolume = (e) => {
-		const width = volumeContainer.current.clientWidth;
-		const clickX = e.nativeEvent.offsetX
-		audio.current.volume = clickX / width
-		setVolume(clickX / width)
-	}
-
-	// Song ends
-	// audio.current.addEventListener('ended', nextSong);
 
 	// Function for liking audio
 	const onAudioLike = () => {
@@ -332,39 +202,25 @@ const AudioShow = (props) => {
 					<center>
 						<Img
 							src={`/storage/${showAudio.thumbnail}`}
-							style={{
-							}}
 							width="100%"
 							height="auto"
 							alt="music-cover" />
 					</center>
 				</div>
 
-				<audio
-					onTimeUpdate={(e) => {
-						updateProgress()
-						setCurrentTime(e.target.currentTime)
-					}}
-					onCanPlay={(e) => setDur(e.target.duration)}
-					ref={audio}
-					type="audio/mpeg"
-					preload='true'
-					autoPlay={false}
-					end={10}
-					src={`/storage/${showAudio.audio}`} />
-
 				{/* <!-- Progress Container --> */}
 				<div
-					ref={audioContainer}
+					ref={props.audioContainer}
 					className="progress ml-2 mr-2 mt-4"
 					style={{ height: "5px" }}
-					onClick={setProgress}>
+					onClick={props.setProgress}>
 					<div
-						ref={audioProgress}
+						ref={props.audioProgress}
 						className="progress-bar"
 						style={{
 							background: "#232323",
-							height: "5px"
+							height: "5px",
+							width: props.progressPercent
 						}}>
 					</div>
 				</div>
@@ -372,14 +228,17 @@ const AudioShow = (props) => {
 
 				{/* Audio Controls */}
 				<div className="d-flex justify-content-between">
-					<div style={{ cursor: "pointer" }} className="p-2">{fmtMSS(currentTime)}</div>
+					<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.currentTime)}</div>
 					<div
 						style={{
 							cursor: "pointer",
-							color: shuffle && "#FFD700"
+							color: props.shuffle && "#FFD700"
 						}}
 						className="p-2"
-						onClick={() => setShuffle(shuffle ? false : true)}>
+						onClick={() => {
+							props.setShuffle(props.shuffle ? false : true)
+							props.setLoop(props.loop && false)
+						}}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -392,7 +251,7 @@ const AudioShow = (props) => {
 						</svg>
 					</div>
 					<div style={{ cursor: "pointer" }} className="p-2">
-						<span onClick={prevSong}>
+						<span onClick={props.prevSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="16"
@@ -406,8 +265,8 @@ const AudioShow = (props) => {
 					</div>
 					<div style={{ cursor: "pointer" }} className="p-2">
 						<span
-							onClick={playBtn ? pauseSong : playSong}>
-							{playBtn ?
+							onClick={props.playBtn ? props.pauseSong : props.playSong}>
+							{props.playBtn ?
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="2em"
@@ -430,7 +289,7 @@ const AudioShow = (props) => {
 						</span>
 					</div>
 					<div style={{ cursor: "pointer" }} className="p-2">
-						<span onClick={nextSong}>
+						<span onClick={props.nextSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="16"
@@ -445,10 +304,13 @@ const AudioShow = (props) => {
 					<div
 						style={{
 							cursor: "pointer",
-							color: loop && "#FFD700"
+							color: props.loop && "#FFD700"
 						}}
 						className="p-2"
-						onClick={() => setLoop(loop ? false : true)}>
+						onClick={() => {
+							props.setLoop(props.loop ? false : true)
+							props.setShuffle(props.shuffle && false)
+						}}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -460,7 +322,7 @@ const AudioShow = (props) => {
 							<path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
 						</svg>
 					</div>
-					<div style={{ cursor: "pointer" }} className="p-2">{fmtMSS(dur)}</div>
+					<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.dur)}</div>
 				</div>
 
 				<div className="d-flex justify-content-end">
@@ -473,20 +335,20 @@ const AudioShow = (props) => {
 						</svg>
 					</div>
 					<div
-						ref={volumeContainer}
+						ref={props.volumeContainer}
 						className="progress volume-hide ml-2 mr-2 mt-2 float-right"
 						style={{
 							height: "5px",
 							width: "25%"
 						}}
-						onClick={onSetVolume}>
+						onClick={props.onSetVolume}>
 						<div
-							ref={volumeProgress}
+							ref={props.volumeProgress}
 							className="progress-bar"
 							style={{
 								background: "#232323",
 								height: "5px",
-								width: Math.round(volume * 100)
+								width: Math.round(props.volume * 100)
 							}}>
 						</div>
 					</div>
@@ -494,12 +356,6 @@ const AudioShow = (props) => {
 				{/* Audio Controls End */}
 
 				<div className="d-flex justify-content-between">
-					{/* Download button */}
-					{hasBought &&
-						<div className="p-2">
-							<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
-						</div>}
-
 					{/* Audio likes */}
 					<div className="p-2 mr-2">
 						{props.audioLikes.find((audioLike) => {
@@ -545,6 +401,12 @@ const AudioShow = (props) => {
 							<b> SHARE</b>
 						</a>
 					</div>
+
+					{/* Download button */}
+					{props.hasBought &&
+						<div className="p-2">
+							<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
+						</div>}
 				</div>
 
 				{/* Audio Info Area */}
@@ -595,8 +457,8 @@ const AudioShow = (props) => {
 				<div className="p-2 border-bottom">
 					<div className='media'>
 						<div className='media-left'>
-							<Link to={`/profile/${showArtist.username}`}>
-								<Img src={"/storage/" + showArtist.pp} width={"40px"} height={"40px"} />
+							<Link to={`/profile/${showArtist && showArtist.username}`}>
+								<Img src={`/storage/${showArtist && showArtist.pp}`} width={"40px"} height={"40px"} />
 							</Link>
 						</div>
 						<div className='media-body'>
@@ -607,7 +469,7 @@ const AudioShow = (props) => {
 									overflow: "hidden",
 									textOverflow: "clip"
 								}}>
-								<small>{showArtist.name} {showArtist.username}</small>
+								<small>{showArtist && showArtist.name} {showArtist && showArtist.username}</small>
 							</h6>
 							<span style={{
 								color: "gold",
@@ -676,7 +538,7 @@ const AudioShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{hasBought &&
+					{props.hasBought &&
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
@@ -701,7 +563,7 @@ const AudioShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{hasBought &&
+					{props.hasBought &&
 						props.audioComments
 							.filter((comment) => comment.audio_id == show)
 							.map((comment, index) => (
@@ -814,8 +676,7 @@ const AudioShow = (props) => {
 					</center>}
 
 				{props.boughtAudios
-					.filter((boughtAudio) => boughtAudio.username == props.auth.username &&
-						boughtAudio.audio_id != show)
+					.filter((boughtAudio) => boughtAudio.username == props.auth.username && boughtAudio.audio_id != props.show)
 					.map((boughtAudio, key) => (
 						<div
 							key={key}
@@ -835,7 +696,8 @@ const AudioShow = (props) => {
 											behavior: "smooth"
 										})}>
 									<Img
-										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
+										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
 										width="100%"
 										height="50px" />
 								</Link>
@@ -848,20 +710,17 @@ const AudioShow = (props) => {
 										overflow: "hidden",
 										textOverflow: "clip"
 									}}>
-									{props.audios
-										.find((audio) => audio.id == boughtAudio.audio_id)
-										.name}
+									{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+										props.audios.find((audio) => audio.id == boughtAudio.audio_id).name}
 								</h6>
 								<h6 className="mt-0 pt-0">
 									<small>
-										{props.audios
-											.find((audio) => audio.id == boughtAudio.audio_id)
-											.username}
+										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).username}
 									</small>
 									<small className="ml-1">
-										{props.audios
-											.find((audio) => audio.id == boughtAudio.audio_id)
-											.ft}
+										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).ft}
 									</small>
 								</h6>
 							</div>

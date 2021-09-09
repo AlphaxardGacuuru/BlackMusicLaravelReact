@@ -19,7 +19,8 @@ const Library = (props) => {
 							<div className="media-left thumbnail">
 								<Link to={`/video-show/${boughtVideo.video_id}`}>
 									<Img
-										src={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
+										src={props.videos.find((video) => video.id == boughtVideo.video_id) &&
+											props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
 										width="160em"
 										height="90em" />
 								</Link>
@@ -32,14 +33,16 @@ const Library = (props) => {
 										overflow: "hidden",
 										textOverflow: "clip"
 									}}>
-									{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.name}
+									{props.videos.find((video) => video.id == boughtVideo.video_id) &&
+										props.videos.find((video) => video.id == boughtVideo.video_id).name}
 								</h6>
 								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.username}</small>
+									<small>{props.videos.find((video) => video.id == boughtVideo.video_id) &&
+										props.videos.find((video) => video.id == boughtVideo.video_id).username}</small>
+									<small className="ml-1">
+										{props.videos.find((video) => video.id == boughtVideo.video_id) &&
+											props.videos.find((video) => video.id == boughtVideo.video_id).ft}
+									</small>
 								</h6>
 							</div>
 						</div>
@@ -52,16 +55,13 @@ const Library = (props) => {
 					.map((boughtAudio, key) => (
 						<div
 							key={key}
-							className="d-flex p-2 border-bottom">
-							<div
-								className="thumbnail"
-								style={{
-									width: "50px",
-									height: "50px"
-								}}>
+							className="d-flex p-2 border-bottom"
+							onClick={() => props.setShow(boughtAudio.audio_id)}>
+							<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
 								<Link to={`/audio-show/${boughtAudio.audio_id}`}>
 									<Img
-										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
+										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
 										width="100%"
 										height="50px" />
 								</Link>
@@ -74,20 +74,17 @@ const Library = (props) => {
 										overflow: "hidden",
 										textOverflow: "clip"
 									}}>
-									{props.audios
-										.find((audio) => audio.id == boughtAudio.audio_id)
-										.name}
+									{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+										props.audios.find((audio) => audio.id == boughtAudio.audio_id).name}
 								</h6>
 								<h6 className="mt-0 pt-0">
 									<small>
-										{props.audios
-											.find((audio) => audio.id == boughtAudio.audio_id)
-											.username}
+										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).username}
 									</small>
 									<small className="ml-1">
-										{props.audios
-											.find((audio) => audio.id == boughtAudio.audio_id)
-											.ft}
+										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == boughtAudio.audio_id).ft}
 									</small>
 								</h6>
 							</div>

@@ -222,9 +222,9 @@ const Index = (props) => {
 						<div className="p-2 border-bottom">
 							<h2>Musicians to follow</h2>
 						</div>
-						{/* Filter users and get only musicians, 
-						should not be @blackmusic and the current user. 
-						Also slice to limit to 10 */}
+						{/* Filter users and get only musicians */}
+						{/* should not be @blackmusic and the current user. */}
+						{/* Slice to limit to 10 */}
 						{props.users.filter((musician) => {
 							return musician.account_type == 'musician' &&
 								musician.username != '@blackmusic' &&
@@ -280,6 +280,7 @@ const Index = (props) => {
 										boughtVideo.video_id == video.id &&
 										boughtVideo.username == props.auth.username
 									) && video.username != props.auth.username)
+								.reverse()
 								.map((video, index) => (
 									<span
 										key={index}

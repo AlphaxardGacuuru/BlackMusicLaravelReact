@@ -91,7 +91,7 @@ class AudiosController extends Controller
     {
         $audioItem = Audios::where('id', $id)->first();
 
-        return response()->download('public/' . $audioItem->audio, $audioItem->name);
+        return response()->download('storage/' . $audioItem->audio, $audioItem->name);
     }
 
     /**

@@ -186,49 +186,46 @@ const VideoShow = (props) => {
 		});
 	}
 
+	// Function for downloading audio
+	const onDownload = () => {
+		window.open(`${props.url}/api/videos/${showVideo.id}`)
+		props.setMessage(`Downloading ${showVideo.name}`)
+	}
+
 	return (
 		<div className="row">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-7">
-				<div className="resp-container">
-					<iframe className='resp-iframe'
-						width='880px'
-						height='495px'
-						src={hasBought ?
-							`${showVideo.video}/?autoplay=1` :
-							`${showVideo.video}?autoplay=1&end=10&controls=0`}
-						frameBorder='0'
-						allow='accelerometer'
-						encrypted-media="true"
-						gyroscope="true"
-						picture-in-picture="true"
-						allowFullScreen>
-					</iframe>
-				</div>
-				<div className="d-flex flex-row">
-					<div className="p-2 mr-auto">
-						<h6 className="m-0 p-0"
-							style={{
-								width: "200px",
-								whiteSpace: "nowrap",
-								overflow: "hidden",
-								textOverflow: "clip"
-							}}>
-							<small>Song name {showVideo.name}</small>
-						</h6>
-						<small>Album</small> <span>
-							{showVideo.album ?
-								props.videoAlbums.length &&
-								props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
-						</span><br />
-						<small>Genre</small> <span>{showVideo.genre}</span><br />
-						<small>Posted</small> <span>
-							{new Date(showVideo.created_at).getDay()}
-							{" " + months[new Date(showVideo.created_at).getMonth()]}
-							{" " + new Date(showVideo.created_at).getFullYear()}
-						</span>
-					</div>
+				{showVideo.video ?
+					showVideo.video.match(/https/) ?
+						<div className="resp-container">
+							<iframe className='resp-iframe'
+								width='880px'
+								height='495px'
+								src={hasBought ?
+									`${showVideo.video}/?autoplay=1` :
+									`${showVideo.video}?autoplay=1&end=10&controls=0`}
+								frameBorder='0'
+								allow='accelerometer'
+								encrypted-media="true"
+								gyroscope="true"
+								picture-in-picture="true"
+								allowFullScreen>
+							</iframe>
+						</div> :
+						<div className="resp-container">
+							<video
+								className="resp-iframe"
+								width="880px"
+								height="495px"
+								controls
+								controlsList="nodownload"
+								autoPlay>
+								<source src={`storage/${showVideo.video}`} type="video/mp4" />
+							</video>
+						</div> : ""}
 
+				<div className="d-flex justify-content-between">
 					{/* Video likes */}
 					<div className="p-2 mr-2">
 						{props.videoLikes.find((videoLike) => {
@@ -273,6 +270,37 @@ const VideoShow = (props) => {
 							</svg>
 							<b> SHARE</b>
 						</a>
+					</div>
+
+					{/* Download button */}
+					{hasBought &&
+						<div className="p-2">
+							<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
+						</div>}
+				</div>
+
+				<div className="d-flex flex-row">
+					<div className="p-2 mr-auto">
+						<h6 className="m-0 p-0"
+							style={{
+								width: "200px",
+								whiteSpace: "nowrap",
+								overflow: "hidden",
+								textOverflow: "clip"
+							}}>
+							<small>Song name {showVideo.name}</small>
+						</h6>
+						<small>Album</small> <span>
+							{showVideo.album ?
+								props.videoAlbums.length &&
+								props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
+						</span><br />
+						<small>Genre</small> <span>{showVideo.genre}</span><br />
+						<small>Posted</small> <span>
+							{new Date(showVideo.created_at).getDay()}
+							{" " + months[new Date(showVideo.created_at).getMonth()]}
+							{" " + new Date(showVideo.created_at).getFullYear()}
+						</span>
 					</div>
 				</div>
 				{/* Video Area End */}

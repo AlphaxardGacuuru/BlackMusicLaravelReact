@@ -54,7 +54,7 @@ class VideosController extends Controller
             $video->video = $request->input('video');
             $video->name = $request->input('name');
             $video->username = auth()->user()->username;
-            $video->ft = $request->input('ft') ? $request->input('ft') : NULL;
+            $video->ft = $request->input('ft') ? $request->input('ft') : null;
             $video->album = $request->input('album');
             $video->genre = $request->input('genre');
             /* Generate thumbnail */
@@ -84,9 +84,11 @@ class VideosController extends Controller
      * @param  \App\Videos  $videos
      * @return \Illuminate\Http\Response
      */
-    public function show(Videos $videos)
+    public function show($id)
     {
-        //
+        $videoItem = Videos::where('id', $id)->first();
+
+        return response()->download('storage/' . $videoItem->video, $videoItem->name);
     }
 
     /**
@@ -150,7 +152,7 @@ class VideosController extends Controller
     public function destroy($id)
     {
         Storage::delete('public/videos/' . $id);
-		return response("Video deleted", 200);
+        return response("Video deleted", 200);
     }
 
     /* Filepond */

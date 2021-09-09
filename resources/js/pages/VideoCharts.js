@@ -49,7 +49,6 @@ const VideoCharts = (props) => {
 		if (genre == "All") {
 			return true
 		} else {
-
 			// For Newly Released
 			if (chart == "Newly Released") {
 				return item.genre == genre
@@ -57,7 +56,6 @@ const VideoCharts = (props) => {
 
 			return props.videos.find((video) => video.id == item.video_id).genre == genre
 		}
-
 	}).forEach((video) => {
 
 		// Set variable for id to be fetched
@@ -99,7 +97,12 @@ const VideoCharts = (props) => {
 	// Sort array in descending order depending on the value
 	artistsArray.sort((a, b) => b.value - a.value)
 	videosArray.sort((a, b) => b.value - a.value)
-
+	
+	// Reverse list if chart is Newly Released
+	if (chart == "Newly Released") {
+	videosArray.reverse()
+	}
+	
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -231,9 +234,9 @@ const VideoCharts = (props) => {
 									<center>
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artistArray.key}>
-												<Img src={`/storage/${props.users.find((user) => {
-													return user.username == artistArray.key
-												}).pp}`}
+												<Img src={`/storage/${props.users
+													.find((user) => artistArray.key == user.username) &&
+													props.users.find((user) => artistArray.key == user.username).pp}`}
 													width='150px'
 													height='150px' />
 											</Link>
@@ -245,9 +248,8 @@ const VideoCharts = (props) => {
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											{props.users.find((user) => {
-												return user.username == artistArray.key
-											}).name}
+											{props.users.find((user) => user.username == artistArray.key) &&
+												props.users.find((user) => user.username == artistArray.key).name}
 										</h6>
 										<h6 style={{
 											width: "100px",
