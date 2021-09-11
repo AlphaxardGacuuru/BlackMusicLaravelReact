@@ -97,12 +97,12 @@ const VideoCharts = (props) => {
 	// Sort array in descending order depending on the value
 	artistsArray.sort((a, b) => b.value - a.value)
 	videosArray.sort((a, b) => b.value - a.value)
-	
+
 	// Reverse list if chart is Newly Released
 	if (chart == "Newly Released") {
-	videosArray.reverse()
+		videosArray.reverse()
 	}
-	
+
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -285,9 +285,13 @@ const VideoCharts = (props) => {
 										borderTopRightRadius: "10px"
 									}}>
 									<Link to={`/video-show/${videoArray.key}`}>
-										<Img src={props.videos.find((video) => {
-											return video.id == videoArray.key
-										}).thumbnail} width="160em" height="90em" />
+										<Img
+											src={props.videos
+												.find((video) => video.id == videoArray.key).thumbnail.match(/https/) ?
+												props.videos.find((video) => video.id == videoArray.key).thumbnail :
+												`storage/${props.videos.find((video) => video.id == videoArray.key).thumbnail}`}
+											width="160em"
+											height="90em" />
 									</Link>
 								</div>
 								<h6 className="m-0 pt-2 pr-1 pl-1"
@@ -363,9 +367,10 @@ const VideoCharts = (props) => {
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
 									<Link to={`/video-show/${videoArray.key}`}>
-										<Img src={props.videos.find((video) => {
-											return video.id == videoArray.key
-										}).thumbnail}
+										<Img
+											src={props.videos.find((video) => video.id == videoArray.key).thumbnail.match(/https/) ?
+												props.videos.find((video) => video.id == videoArray.key).thumbnail :
+												`storage/${props.videos.find((video) => video.id == videoArray.key).thumbnail}`}
 											width="160em"
 											height="90em" />
 									</Link>

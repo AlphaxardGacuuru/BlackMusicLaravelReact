@@ -185,7 +185,10 @@ const Videos = (props) => {
 											<tbody key={key}>
 												<tr>
 													<td>
-														<Img src={albumItem.thumbnail}
+														<Img
+															src={albumItem.thumbnail.match(/https/) ?
+																albumItem.thumbnail :
+																`storage/${albumItem.thumbnail}`}
 															width="160em"
 															height="90em"
 															alt={"thumbnail"} />

@@ -292,7 +292,12 @@ const Index = (props) => {
 												borderTopRightRadius: "10px"
 											}}>
 											<Link to={`/video-show/${video.id}`}>
-												<Img src={video.thumbnail} width="160em" height="90em" />
+												<Img
+													src={video.thumbnail.match(/http/) ?
+														video.thumbnail :
+														`storage/${video.thumbnail}`}
+													width="160em"
+													height="90em" />
 											</Link>
 										</div>
 										<h6 className="m-0 pt-2 pr-1 pl-1"
@@ -716,7 +721,12 @@ const Index = (props) => {
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
 									<Link to={`/video-show/${video.id}`}>
-										<Img src={video.thumbnail} width="160em" height="90em" />
+										<Img
+											src={video.thumbnail.match(/http/) ?
+												video.thumbnail :
+												`storage/${video.thumbnail}`}
+											width="160em"
+											height="90em" />
 									</Link>
 								</div>
 								<div className="media-body ml-2">

@@ -218,10 +218,14 @@ const VideoShow = (props) => {
 								className="resp-iframe"
 								width="880px"
 								height="495px"
-								controls
+								controls={hasBought && true}
 								controlsList="nodownload"
 								autoPlay>
-								<source src={`storage/${showVideo.video}`} type="video/mp4" />
+								<source
+									src={hasBought ?
+										`storage/${showVideo.video}` :
+										`storage/${showVideo.video}#t=1,10`}
+									type="video/mp4" />
 							</video>
 						</div> : ""}
 

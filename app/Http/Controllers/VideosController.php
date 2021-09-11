@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+// FFMpeg
+// namespace ProtoneMedia\LaravelFFMpeg;
+
 use App\User;
 use App\Videos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
+// FFMpeg
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+
+// use ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider;
 
 class VideosController extends Controller
 {
@@ -38,11 +46,13 @@ class VideosController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('filepond-video')) {
-            /* Handle thumbnail upload */
+            /* Handle video upload */
             $video = $request->file('filepond-video')->store('public/videos');
             $video = substr($video, 7);
+
             return $video;
         } else {
+            // Handle form for video
             $this->validate($request, [
                 'video' => 'required|string',
                 'name' => 'required|string',
@@ -61,6 +71,10 @@ class VideosController extends Controller
             // $thumbnail = substr($video->video, 30);
             // $thumbnail = "https://img.youtube.com/vi/" . $thumbnail . "/hqdefault.jpg";
             // $video->thumbnail = $thumbnail;
+            $thumbnail = substr($request->input('video'), 7);
+            $thumbnail = substr($thumbnail, 0, strpos($thumbnail, "."));
+			$thumbnail = 'video-thumbnails/' . $thumbnail . '.png';
+            $video->thumbnail = $thumbnail;
             $video->description = $request->input('description');
             $video->released = $request->input('released');
             $video->save();
@@ -160,7 +174,16 @@ class VideosController extends Controller
     {
         /* Handle thumbnail upload */
         $video = $request->file('filepond-video')->store('public/videos');
-        $video = substr($video, 7);
-        return $video;
+        $videoShort = substr($video, 7);
+        $videoName = substr($video, 14);
+        $videoName = substr($videoName, 0, strpos($videoName, "."));
+
+        // Create frame from Video
+        FFMpeg::open($video)
+            ->getFrameFromSeconds(5)
+            ->export()
+            ->save('public/video-thumbnails/' . $videoName . '.png');
+
+        return $videoShort;
     }
 }

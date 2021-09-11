@@ -92,7 +92,9 @@ const VideoEdit = (props) => {
 									<div className="d-flex p-2">
 										<div className="thumbnail">
 											<Img
-												src={editVideo.thumbnail}
+												src={editVideo.thumbnail.match(/https/) ?
+													editVideo.thumbnail :
+													`storage/${editVideo.thumbnail}`}
 												width="160em"
 												height="90em" />
 										</div>
