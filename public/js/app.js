@@ -6623,6 +6623,181 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+/***/ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * FilePondPluginFileValidateSize 2.2.4
+ * Licensed under MIT, https://opensource.org/licenses/MIT/
+ * Please visit https://pqina.nl/filepond/ for details.
+ */
+
+/* eslint-disable */
+
+(function(global, factory) {
+     true
+        ? (module.exports = factory())
+        : undefined;
+})(this, function() {
+    'use strict';
+
+    var plugin = function plugin(_ref) {
+        var addFilter = _ref.addFilter,
+            utils = _ref.utils;
+        // get quick reference to Type utils
+        var Type = utils.Type,
+            replaceInString = utils.replaceInString,
+            toNaturalFileSize = utils.toNaturalFileSize;
+
+        // filtering if an item is allowed in hopper
+        addFilter('ALLOW_HOPPER_ITEM', function(file, _ref2) {
+            var query = _ref2.query;
+            if (!query('GET_ALLOW_FILE_SIZE_VALIDATION')) {
+                return true;
+            }
+
+            var sizeMax = query('GET_MAX_FILE_SIZE');
+            if (sizeMax !== null && file.size >= sizeMax) {
+                return false;
+            }
+
+            var sizeMin = query('GET_MIN_FILE_SIZE');
+            if (sizeMin !== null && file.size <= sizeMin) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // called for each file that is loaded
+        // right before it is set to the item state
+        // should return a promise
+        addFilter('LOAD_FILE', function(file, _ref3) {
+            var query = _ref3.query;
+            return new Promise(function(resolve, reject) {
+                // if not allowed, all fine, exit
+                if (!query('GET_ALLOW_FILE_SIZE_VALIDATION')) {
+                    return resolve(file);
+                }
+
+                // check if file should be filtered
+                var fileFilter = query('GET_FILE_VALIDATE_SIZE_FILTER');
+                if (fileFilter && !fileFilter(file)) {
+                    return resolve(file);
+                }
+
+                // reject or resolve based on file size
+                var sizeMax = query('GET_MAX_FILE_SIZE');
+                if (sizeMax !== null && file.size >= sizeMax) {
+                    reject({
+                        status: {
+                            main: query('GET_LABEL_MAX_FILE_SIZE_EXCEEDED'),
+                            sub: replaceInString(query('GET_LABEL_MAX_FILE_SIZE'), {
+                                filesize: toNaturalFileSize(
+                                    sizeMax,
+                                    '.',
+                                    query('GET_FILE_SIZE_BASE')
+                                ),
+                            }),
+                        },
+                    });
+
+                    return;
+                }
+
+                // reject or resolve based on file size
+                var sizeMin = query('GET_MIN_FILE_SIZE');
+                if (sizeMin !== null && file.size <= sizeMin) {
+                    reject({
+                        status: {
+                            main: query('GET_LABEL_MIN_FILE_SIZE_EXCEEDED'),
+                            sub: replaceInString(query('GET_LABEL_MIN_FILE_SIZE'), {
+                                filesize: toNaturalFileSize(
+                                    sizeMin,
+                                    '.',
+                                    query('GET_FILE_SIZE_BASE')
+                                ),
+                            }),
+                        },
+                    });
+
+                    return;
+                }
+
+                // returns the current option value
+                var totalSizeMax = query('GET_MAX_TOTAL_FILE_SIZE');
+                if (totalSizeMax !== null) {
+                    // get the current total file size
+                    var currentTotalSize = query('GET_ACTIVE_ITEMS').reduce(function(total, item) {
+                        return total + item.fileSize;
+                    }, 0);
+
+                    // get the size of the new file
+                    if (currentTotalSize > totalSizeMax) {
+                        reject({
+                            status: {
+                                main: query('GET_LABEL_MAX_TOTAL_FILE_SIZE_EXCEEDED'),
+                                sub: replaceInString(query('GET_LABEL_MAX_TOTAL_FILE_SIZE'), {
+                                    filesize: toNaturalFileSize(totalSizeMax),
+                                }),
+                            },
+                        });
+
+                        return;
+                    }
+                }
+
+                // file is fine, let's pass it back
+                resolve(file);
+            });
+        });
+
+        return {
+            options: {
+                // Enable or disable file type validation
+                allowFileSizeValidation: [true, Type.BOOLEAN],
+
+                // Max individual file size in bytes
+                maxFileSize: [null, Type.INT],
+
+                // Min individual file size in bytes
+                minFileSize: [null, Type.INT],
+
+                // Max total file size in bytes
+                maxTotalFileSize: [null, Type.INT],
+
+                // Filter the files that need to be validated for size
+                fileValidateSizeFilter: [null, Type.FUNCTION],
+
+                // error labels
+                labelMinFileSizeExceeded: ['File is too small', Type.STRING],
+                labelMinFileSize: ['Minimum file size is {filesize}', Type.STRING],
+
+                labelMaxFileSizeExceeded: ['File is too large', Type.STRING],
+                labelMaxFileSize: ['Maximum file size is {filesize}', Type.STRING],
+
+                labelMaxTotalFileSizeExceeded: ['Maximum total size exceeded', Type.STRING],
+                labelMaxTotalFileSize: ['Maximum total file size is {filesize}', Type.STRING],
+            },
+        };
+    };
+
+    // fire pluginloaded event if running in browser, this allows registering the plugin when using async script tags
+    var isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+    if (isBrowser) {
+        document.dispatchEvent(new CustomEvent('FilePond:pluginloaded', { detail: plugin }));
+    }
+
+    return plugin;
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js":
 /*!****************************************************************************************************!*\
   !*** ./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js ***!
@@ -93916,6 +94091,9 @@ function App() {
     cartVideos: cartVideos,
     cartAudios: cartAudios,
     audios: audios,
+    audioProgress: audioProgress,
+    audioContainer: audioContainer,
+    progressPercent: progressPercent,
     show: show,
     setShow: setShow,
     playBtn: playBtn,
@@ -94031,6 +94209,23 @@ var Bottomnav = function Bottomnav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomNav menu-content-area header-social-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: props.audioContainer,
+    className: "progress",
+    style: {
+      height: "3px",
+      background: "#232323",
+      borderRadius: "0px",
+      display: checkLocation && "none"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: props.audioProgress,
+    className: "progress-bar rounded-0",
+    style: {
+      background: "#FFD700",
+      height: "5px",
+      width: props.progressPercent
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid menu-area d-flex text-white"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
     ref: props.audio,
@@ -94114,7 +94309,8 @@ var Bottomnav = function Bottomnav(props) {
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       cursor: "pointer",
-      display: checkLocation && "none"
+      display: checkLocation && "none",
+      color: "#FFD700"
     },
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -95798,8 +95994,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
 /* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
-/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -95829,9 +96027,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  // Register the plugins
 
-Object(react_filepond__WEBPACK_IMPORTED_MODULE_4__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default.a);
+Object(react_filepond__WEBPACK_IMPORTED_MODULE_4__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default.a, filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 var AudioCreate = function AudioCreate(props) {
   // Declare states
@@ -96126,6 +96325,7 @@ var AudioCreate = function AudioCreate(props) {
     labelIdle: "Drag & Drop your Audio or <span class=\"filepond--label-action\"> Browse </span>",
     acceptedFileTypes: ['audio/*'],
     allowRevert: true,
+    maxFileSize: "50000000",
     server: {
       url: "".concat(props.url, "/api"),
       process: {
@@ -97721,16 +97921,7 @@ var Cart = function Cart(props) {
     });
   };
 
-  var onCheckout = function onCheckout() {
-    {
-      /* Check if user has items in carts */
-    }
-    props.cartAudios.filter(function (cartAudio) {
-      return cartAudio.username = props.auth.username;
-    }).length + props.cartVideos.filter(function (cartVideo) {
-      return cartVideo.username == props.auth.username;
-    }).length;
-  };
+  var onCheckout = function onCheckout() {};
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -97738,10 +97929,7 @@ var Cart = function Cart(props) {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "counter",
-    "data-target": "300"
-  }, "10"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartVideos.filter(function (cartVideo) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartVideos.filter(function (cartVideo) {
     return cartVideo.username == props.auth.username;
   }).map(function (cartVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -97754,7 +97942,11 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: props.videos.find(function (video) {
         return video.id == cartVideo.video_id;
-      }).thumbnail,
+      }).thumbnail.match(/http/) ? props.videos.find(function (video) {
+        return video.id == cartVideo.video_id;
+      }).thumbnail : "storage/".concat(props.videos.find(function (video) {
+        return video.id == cartVideo.video_id;
+      }).thumbnail),
       width: "160em",
       height: "90em"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -97801,11 +97993,11 @@ var Cart = function Cart(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, "Sub Total")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Sub Total"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, videoTotalCash))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, videoTotalCash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "mt-5"
   }, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartAudios.filter(function (cartAudio) {
     return cartAudio.username == props.auth.username;
@@ -97824,6 +98016,8 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(props.audios.find(function (audio) {
         return audio.id == cartAudio.audio_id;
+      }) && props.audios.find(function (audio) {
+        return audio.id == cartAudio.audio_id;
       }).thumbnail),
       width: "100%",
       height: "50px"
@@ -97837,6 +98031,8 @@ var Cart = function Cart(props) {
         textOverflow: "clip"
       }
     }, props.audios.find(function (audio) {
+      return audio.id == cartAudio.audio_id;
+    }) && props.audios.find(function (audio) {
       return audio.id == cartAudio.audio_id;
     }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "mt-0 pt-0"
@@ -97870,13 +98066,16 @@ var Cart = function Cart(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, "Sub Total")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Sub Total"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, audioTotalCash))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: "mysonar-btn mt-4 mb-4 float-right",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, audioTotalCash)))), videoTotal + audioTotal > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn mt-5 mb-4",
     btnText: "checkout",
+    btnStyle: {
+      width: "100%"
+    },
     onClick: function onClick(e) {
       e.preventDefault();
       setBottomMenu("menu-open");
@@ -97907,11 +98106,32 @@ var Cart = function Cart(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "text-success"
-  }, "KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: "mysonar-btn white-btn mt-3",
-    btnText: "pay"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "text-white"
+  }, "Videos ", videoTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "text-white mb-2"
+  }, "Audios ", audioTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    style: {
+      borderBottom: "1px solid grey"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "text-success mb-2"
+  }, "Total KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    style: {
+      borderBottom: "1px solid grey"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "p-2"
+  }, "Mpesa (STK Push) ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.auth.phone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    style: {
+      borderBottom: "1px solid grey"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn green-btn",
+    btnText: "pay",
+    btnStyle: {
+      width: "80%"
+    }
   }))));
 };
 
@@ -102100,8 +102320,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
 /* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
-/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_12__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -102131,9 +102353,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  // Register the plugins
 
-Object(react_filepond__WEBPACK_IMPORTED_MODULE_4__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default.a);
+Object(react_filepond__WEBPACK_IMPORTED_MODULE_4__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_6___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_10___default.a, filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 var VideoCreate = function VideoCreate(props) {
   // Declare states
@@ -102211,6 +102434,14 @@ var VideoCreate = function VideoCreate(props) {
 
         props.setErrors(newError);
       });
+    });
+  };
+
+  var onPatch = function onPatch() {
+    return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/videos/filepond/video")).then(function (res) {
+      return console.log(res.data);
+    })["catch"](function (err) {
+      return console.log(err.data);
     });
   };
 
@@ -102363,25 +102594,23 @@ var VideoCreate = function VideoCreate(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Video"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-video",
     labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action\"> Browse </span>",
-    stylePanelLayout: "",
     acceptedFileTypes: ['video/*'],
     stylePanelAspectRatio: "16:9",
-    allowRevert: true // chunkUploads="true"
-    // chunkForce="true"
-    // chunkSize=""
-    ,
+    maxFileSize: "100000000",
+    minFileSize: "10000000",
+    allowRevert: true,
     server: {
       url: "".concat(props.url, "/api"),
       process: {
-        url: "/videos/filepond/video",
+        url: "/videos",
         headers: {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
           setVideo(res);
         },
-        onerror: function onerror(response) {
-          return console.log(response);
+        onerror: function onerror(err) {
+          return console.log(err);
         }
       },
       revert: {

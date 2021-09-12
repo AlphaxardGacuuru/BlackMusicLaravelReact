@@ -56,9 +56,6 @@ const Cart = (props) => {
 	}
 
 	const onCheckout = () => {
-		{/* Check if user has items in carts */ }
-		props.cartAudios.filter((cartAudio) => cartAudio.username = props.auth.username).length +
-			props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
 	}
 
 	return (
@@ -67,20 +64,21 @@ const Cart = (props) => {
 				<div className="col-sm-4"></div>
 				<div className="col-sm-4">
 					<center><h1>Cart</h1></center>
-					<div className="counter" data-target="300">10</div>
-					<hr />
 					{/* Cart Videos */}
 					<center><h3>Videos</h3></center>
 					<hr />
 					{props.cartVideos
-						.filter((cartVideo) => {
-							return cartVideo.username == props.auth.username
-						}).map((cartVideo, key) => (
+						.filter((cartVideo) => cartVideo.username == props.auth.username)
+						.map((cartVideo, key) => (
 							<div key={key}
 								className="media p-2 border-bottom">
 								<div className="media-left thumbnail">
 									<Link to={`/video-show/${cartVideo.video_id}`}>
-										<Img src={props.videos.find((video) => video.id == cartVideo.video_id).thumbnail}
+										<Img
+											src={props.videos
+												.find((video) => video.id == cartVideo.video_id).thumbnail.match(/http/) ?
+												props.videos.find((video) => video.id == cartVideo.video_id).thumbnail :
+												`storage/${props.videos.find((video) => video.id == cartVideo.video_id).thumbnail}`}
 											width="160em"
 											height="90em" />
 									</Link>
@@ -115,11 +113,11 @@ const Cart = (props) => {
 						))}
 					<div className="d-flex justify-content-between">
 						<div className="p-2">
-							<h4 className="text-success">Sub Total</h4>
+							<h4 className="text-success"><b>Sub Total</b></h4>
 						</div>
 						<div className="p-2">
 							<h4 className="text-success">
-								{videoTotalCash}
+								<b>{videoTotalCash}</b>
 							</h4>
 						</div>
 					</div>
@@ -129,20 +127,14 @@ const Cart = (props) => {
 					<center><h3 className="mt-5">Audios</h3></center>
 					<hr />
 					{props.cartAudios
-						.filter((cartAudio) => {
-							return cartAudio.username == props.auth.username
-						}).map((cartAudio, key) => (
-							<div
-								key={key}
-								className="d-flex p-2 border-bottom">
-								<div
-									className="thumbnail"
-									style={{
-										width: "50px",
-										height: "50px"
-									}}>
+						.filter((cartAudio) => cartAudio.username == props.auth.username)
+						.map((cartAudio, key) => (
+							<div key={key} className="d-flex p-2 border-bottom">
+								<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
 									<Link to={`/audio-show/${cartAudio.audio_id}`}>
-										<Img src={`/storage/${props.audios.find((audio) => audio.id == cartAudio.audio_id).thumbnail}`}
+										<Img
+											src={`/storage/${props.audios.find((audio) => audio.id == cartAudio.audio_id) &&
+												props.audios.find((audio) => audio.id == cartAudio.audio_id).thumbnail}`}
 											width="100%"
 											height="50px" />
 									</Link>
@@ -155,7 +147,8 @@ const Cart = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-										{props.audios.find((audio) => audio.id == cartAudio.audio_id).name}
+										{props.audios.find((audio) => audio.id == cartAudio.audio_id) &&
+											props.audios.find((audio) => audio.id == cartAudio.audio_id).name}
 									</h6>
 									<h6 className="mt-0 pt-0">
 										<small>{cartAudio.username}</small>
@@ -182,24 +175,26 @@ const Cart = (props) => {
 						))}
 					<div className="d-flex justify-content-between">
 						<div className="p-2">
-							<h4 className="text-success">Sub Total</h4>
+							<h4 className="text-success"><b>Sub Total</b></h4>
 						</div>
 						<div className="p-2">
 							<h4 className="text-success">
-								{audioTotalCash}
+								<b>{audioTotalCash}</b>
 							</h4>
 						</div>
 					</div>
 					{/* Cart Audios End */}
 
 					{/* Checkout button*/}
-					<Button
-						btnClass="mysonar-btn mt-4 mb-4 float-right"
-						btnText="checkout"
-						onClick={(e) => {
-							e.preventDefault()
-							setBottomMenu("menu-open")
-						}} />
+					{(videoTotal + audioTotal) > 0 &&
+						<Button
+							btnClass="mysonar-btn mt-5 mb-4"
+							btnText="checkout"
+							btnStyle={{ width: "100%" }}
+							onClick={(e) => {
+								e.preventDefault()
+								setBottomMenu("menu-open")
+							}} />}
 
 				</div>
 				<div className="col-sm-4"></div>
@@ -228,10 +223,23 @@ const Cart = (props) => {
 							</svg>
 						</div>
 					</div>
-					<h3 className="text-success">KES {total}</h3>
+
+					{/* <center> */}
+					<h5 className="text-white">Videos {videoTotal}</h5>
+					<h5 className="text-white mb-2">Audios {audioTotal}</h5>
+					<hr style={{ borderBottom: "1px solid grey" }} />
+
+					<h3 className="text-success mb-2">Total KES {total}</h3>
+					<hr style={{ borderBottom: "1px solid grey" }} />
+
+					<h5 className="p-2">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
+					<hr style={{ borderBottom: "1px solid grey" }} />
+
 					<Button
-						btnClass="mysonar-btn white-btn mt-3"
-						btnText="pay" />
+						btnClass="mysonar-btn green-btn"
+						btnText="pay"
+						btnStyle={{ width: "80%" }} />
+					{/* </center> */}
 				</div>
 			</div>
 			{/* Sliding Bottom Nav  end */}

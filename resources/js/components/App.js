@@ -632,7 +632,7 @@ function App() {
 				)} />
 				<Messages {...{ message, errors }} />
 
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong }} />
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong }} />
 			</Router>
 
 			<audio

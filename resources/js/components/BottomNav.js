@@ -25,6 +25,23 @@ const Bottomnav = (props) => {
 			<br />
 			<div className="col-sm-12 m-0 p-0">
 				<div className="bottomNav menu-content-area header-social-area">
+
+					{/* <!-- Progress Container --> */}
+					<div
+						ref={props.audioContainer}
+						className="progress"
+						style={{ height: "3px", background: "#232323", borderRadius: "0px", display: checkLocation && "none" }}>
+						<div
+							ref={props.audioProgress}
+							className="progress-bar rounded-0"
+							style={{
+								background: "#FFD700",
+								height: "5px",
+								width: props.progressPercent
+							}}>
+						</div>
+					</div>
+
 					{/* Audio Player */}
 					<div className="container-fluid menu-area d-flex text-white">
 
@@ -85,7 +102,7 @@ const Bottomnav = (props) => {
 								</svg>
 							</span>
 						</div>
-						<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
+						<div style={{ cursor: "pointer", display: checkLocation && "none", color: "#FFD700" }} className="p-2">
 							<span
 								onClick={props.playBtn ? props.pauseSong : props.playSong}>
 								{props.playBtn ?

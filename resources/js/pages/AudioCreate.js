@@ -18,6 +18,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 // Register the plugins
@@ -26,7 +27,8 @@ registerPlugin(
 	FilePondPluginImagePreview,
 	FilePondPluginFileValidateType,
 	FilePondPluginImageCrop,
-	FilePondPluginImageTransform
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateSize
 );
 
 const AudioCreate = (props) => {
@@ -323,6 +325,7 @@ const AudioCreate = (props) => {
 											labelIdle='Drag & Drop your Audio or <span class="filepond--label-action"> Browse </span>'
 											acceptedFileTypes={['audio/*']}
 											allowRevert={true}
+											maxFileSize="50000000"
 											server={{
 												url: `${props.url}/api`,
 												process: {

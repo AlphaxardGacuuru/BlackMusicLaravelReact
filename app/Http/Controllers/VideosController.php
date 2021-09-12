@@ -48,9 +48,17 @@ class VideosController extends Controller
         if ($request->hasFile('filepond-video')) {
             /* Handle video upload */
             $video = $request->file('filepond-video')->store('public/videos');
-            $video = substr($video, 7);
+            $videoShort = substr($video, 7);
+            $videoName = substr($video, 14);
+            $videoName = substr($videoName, 0, strpos($videoName, "."));
 
-            return $video;
+            // Create frame from Video
+            FFMpeg::open($video)
+                ->getFrameFromSeconds(5)
+                ->export()
+                ->save('public/video-thumbnails/' . $videoName . '.png');
+
+            return $videoShort;
         } else {
             // Handle form for video
             $this->validate($request, [
@@ -73,7 +81,7 @@ class VideosController extends Controller
             // $video->thumbnail = $thumbnail;
             $thumbnail = substr($request->input('video'), 7);
             $thumbnail = substr($thumbnail, 0, strpos($thumbnail, "."));
-			$thumbnail = 'video-thumbnails/' . $thumbnail . '.png';
+            $thumbnail = 'video-thumbnails/' . $thumbnail . '.png';
             $video->thumbnail = $thumbnail;
             $video->description = $request->input('description');
             $video->released = $request->input('released');
@@ -167,23 +175,5 @@ class VideosController extends Controller
     {
         Storage::delete('public/videos/' . $id);
         return response("Video deleted", 200);
-    }
-
-    /* Filepond */
-    public function filepond(Request $request, $id)
-    {
-        /* Handle thumbnail upload */
-        $video = $request->file('filepond-video')->store('public/videos');
-        $videoShort = substr($video, 7);
-        $videoName = substr($video, 14);
-        $videoName = substr($videoName, 0, strpos($videoName, "."));
-
-        // Create frame from Video
-        FFMpeg::open($video)
-            ->getFrameFromSeconds(5)
-            ->export()
-            ->save('public/video-thumbnails/' . $videoName . '.png');
-
-        return $videoShort;
     }
 }

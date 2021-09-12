@@ -18,6 +18,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 // Register the plugins
@@ -26,7 +27,8 @@ registerPlugin(
 	FilePondPluginImagePreview,
 	FilePondPluginFileValidateType,
 	FilePondPluginImageCrop,
-	FilePondPluginImageTransform
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateSize
 );
 
 const VideoCreate = (props) => {
@@ -80,6 +82,10 @@ const VideoCreate = (props) => {
 				})
 		})
 	}
+
+	const onPatch = () => axios.post(`${props.url}/api/videos/filepond/video`)
+		.then((res) => console.log(res.data))
+		.catch((err) => console.log(err.data))
 
 	return (
 		<div>
@@ -212,22 +218,20 @@ const VideoCreate = (props) => {
 										<FilePond
 											name="filepond-video"
 											labelIdle='Drag & Drop your Video or <span class="filepond--label-action"> Browse </span>'
-											stylePanelLayout=""
 											acceptedFileTypes={['video/*']}
 											stylePanelAspectRatio="16:9"
+											maxFileSize="100000000"
+											minFileSize="10000000"
 											allowRevert={true}
-											// chunkUploads="true"
-											// chunkForce="true"
-											// chunkSize=""
 											server={{
 												url: `${props.url}/api`,
 												process: {
-													url: "/videos/filepond/video",
+													url: "/videos",
 													headers: { 'X-CSRF-TOKEN': token.content },
 													onload: res => {
 														setVideo(res)
 													},
-													onerror: (response) => console.log(response)
+													onerror: (err) => console.log(err)
 												},
 												revert: {
 													url: `/${video}`,

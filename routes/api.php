@@ -63,6 +63,3 @@ Route::resources([
     'video-payouts' => 'VideoPayoutsController',
     'video-notifications' => 'VideoNotificationsController',
 ]);
-
-// Filepond Video
-Route::any('videos/filepond/{video}', 'VideosController@filepond');

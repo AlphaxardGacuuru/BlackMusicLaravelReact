@@ -681,14 +681,12 @@ const AudioShow = (props) => {
 						<div
 							key={key}
 							className="d-flex p-2 border-bottom">
-							<div
-								className="thumbnail"
+							<div className="thumbnail"
 								style={{
 									width: "50px",
 									height: "50px"
 								}}>
-								<Link
-									to={`/audio-show/${boughtAudio.audio_id}`}
+								<Link to={`/audio-show/${boughtAudio.audio_id}`}
 									onClick={
 										window.scrollBy({
 											top: -window.innerHeight,
