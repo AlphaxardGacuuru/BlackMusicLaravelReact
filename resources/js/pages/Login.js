@@ -9,9 +9,9 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 const Login = ({ setMessage, setErrors, setAuth, url }) => {
 
 	const [phone, setPhone] = useState('07')
-	
-	const history = useHistory()
 
+	const history = useHistory()
+	console.log(`${url}/api/login`)
 	const onSubmit = (e) => {
 		e.preventDefault()
 
