@@ -92808,7 +92808,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function App() {
   // Declare states
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('http://localhost:3000'),
+  // const [url, setUrl] = useState('http://localhost:3000')
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('https://test.black.co.ke'),
       _useState2 = _slicedToArray(_useState, 2),
       url = _useState2[0],
       setUrl = _useState2[1];

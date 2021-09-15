@@ -404,7 +404,7 @@ function App() {
 	const audioContainer = React.useRef()
 	const volumeProgress = React.useRef()
 	const volumeContainer = React.useRef()
-	
+
 	// Get audio to show
 	if (audios.find((audio) => audio.id == show)) {
 		var showAudio = audios.find((audio) => audio.id == show)
@@ -542,8 +542,12 @@ function App() {
 		<>
 			<Router>
 				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
-				<Route path="/login" exact render={(props) => (<Login {...{ setMessage, setErrors, setAuth, url }} />)} />
-				<Route path="/register" exact render={(props) => (<Register {...{ setMessage, setErrors, setAuth, url }} />)} />
+				<Route path="/login" exact render={(props) => (
+					<Login {...{ setMessage, setErrors, setAuth, url }} />
+				)} />
+				<Route path="/register" exact render={(props) => (
+					<Register {...{ setMessage, setErrors, setAuth, url }} />
+				)} />
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows }} />
 				)} />
