@@ -97921,7 +97921,17 @@ var Cart = function Cart(props) {
     });
   };
 
-  var onCheckout = function onCheckout() {};
+  var onPay = function onPay() {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.get("".concat(props.url, "/api/kopokopo"), {
+        amount: total
+      }).then(function (res) {
+        props.setMessage(res.data);
+      })["catch"](function (err) {
+        props.setErrors(['Failed']);
+      });
+    });
+  };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -98121,7 +98131,7 @@ var Cart = function Cart(props) {
       borderBottom: "1px solid grey"
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "p-2"
+    className: "text-success"
   }, "Mpesa (STK Push) ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.auth.phone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     style: {
       borderBottom: "1px solid grey"
@@ -98131,7 +98141,8 @@ var Cart = function Cart(props) {
     btnText: "pay",
     btnStyle: {
       width: "80%"
-    }
+    },
+    onClick: onPay
   }))));
 };
 

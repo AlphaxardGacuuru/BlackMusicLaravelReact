@@ -35,7 +35,7 @@ class KopokopoController extends Controller
 
         if ($result['status'] == 'success') {
             $data = $result['data'];
-            echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
+            // echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
 
         // STKPush
@@ -43,23 +43,24 @@ class KopokopoController extends Controller
         $response = $stk->initiateIncomingPayment([
             'paymentChannel' => 'M-PESA STK Push',
             'tillNumber' => 'K000000',
-            'firstName' => 'Jane',
+            'firstName' => auth()->user()->name,
             'lastName' => 'Doe',
-            'phoneNumber' => '+254700364446',
-            'amount' => 3455,
+            'phoneNumber' => substr_replace(auth()->user()->phone, '+254', 0, -9),
+            'amount' => 200,
             'currency' => 'KES',
-            'email' => 'alphaxardgacuuru47@gmail.com',
+            'email' => auth()->user()->email,
             'callbackUrl' => 'http://localhost:3000/api/kopokopo',
             'accessToken' => $data['accessToken'],
         ]);
 
         if ($response['status'] == 'success') {
             $data = $result['data'];
-            echo "The resource location is:" . json_encode($response['location']);
+            // echo "The resource location is:" . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/incoming_payments/247b1bd8-f5a0-4b71-a898-f62f67b8ae1c'
+            return response($response['status'], 200);
+        } else {
+            return response($response, 400);
         }
-
-        // return "you're here";
     }
 
     /**

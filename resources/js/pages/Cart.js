@@ -55,7 +55,16 @@ const Cart = (props) => {
 		});
 	}
 
-	const onCheckout = () => {
+	const onPay = () => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.get(`${props.url}/api/kopokopo`, {
+				amount: total,
+			}).then((res) => {
+				props.setMessage(res.data)
+			}).catch((err) => {
+				props.setErrors(['Failed'])
+			})
+		});
 	}
 
 	return (
@@ -232,13 +241,14 @@ const Cart = (props) => {
 					<h3 className="text-success mb-2">Total KES {total}</h3>
 					<hr style={{ borderBottom: "1px solid grey" }} />
 
-					<h5 className="p-2">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
+					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
 					<hr style={{ borderBottom: "1px solid grey" }} />
 
 					<Button
 						btnClass="mysonar-btn green-btn"
 						btnText="pay"
-						btnStyle={{ width: "80%" }} />
+						btnStyle={{ width: "80%" }}
+						onClick={onPay} />
 					{/* </center> */}
 				</div>
 			</div>
