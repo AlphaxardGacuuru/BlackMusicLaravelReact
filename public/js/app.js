@@ -99242,7 +99242,6 @@ var Login = function Login(_ref) {
       setPhone = _useState2[1];
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
-  console.log("".concat(url, "/api/login"));
 
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
@@ -99270,6 +99269,7 @@ var Login = function Login(_ref) {
         }
 
         setErrors(newError);
+        console.log(phone);
       });
     });
     setPhone('07');

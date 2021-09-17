@@ -11,7 +11,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 	const [phone, setPhone] = useState('07')
 
 	const history = useHistory()
-	console.log(`${url}/api/login`)
+	
 	const onSubmit = (e) => {
 		e.preventDefault()
 
@@ -33,6 +33,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 					newError.push(resErrors[resError])
 				}
 				setErrors(newError)
+				console.log(phone)
 			});
 		});
 
