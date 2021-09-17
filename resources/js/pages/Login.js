@@ -32,7 +32,8 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
-				setErrors(err.response)
+				setErrors(newError)
+				console.log(err.response)
 			});
 		});
 

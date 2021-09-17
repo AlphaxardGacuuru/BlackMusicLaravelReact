@@ -99268,7 +99268,8 @@ var Login = function Login(_ref) {
           newError.push(resErrors[resError]);
         }
 
-        setErrors(err.response);
+        setErrors(newError);
+        console.log(err.response);
       });
     });
     setPhone('07');
