@@ -38,10 +38,8 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 import Admin from '../pages/Admin'
 
 function App() {
-
 	// Declare states
-	// const [url, setUrl] = useState('http://localhost:3000')
-	const [url, setUrl] = useState('https://test.black.co.ke')
+	const [url, setUrl] = useState(window.location.href.match(/https/) ? 'https://test.black.co.ke' : 'http://localhost:3000')
 	const [auth, setAuth] = useState({
 		"name": "Guest",
 		"username": "@guest",
