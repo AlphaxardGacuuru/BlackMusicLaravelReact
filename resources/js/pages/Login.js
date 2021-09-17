@@ -32,8 +32,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
-				setErrors(newError)
-				console.log(phone)
+				setErrors(err.response)
 			});
 		});
 
