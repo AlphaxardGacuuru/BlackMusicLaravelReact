@@ -11,7 +11,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 	const [phone, setPhone] = useState('07')
 
 	const history = useHistory()
-	
+
 	const onSubmit = (e) => {
 		e.preventDefault()
 
@@ -27,11 +27,15 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				setTimeout(() => history.push('/'), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors
+
+				// Get validation errors
 				var resError
 				var newError = []
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				setErrors(newError)
 				console.log(err.response)
 			});

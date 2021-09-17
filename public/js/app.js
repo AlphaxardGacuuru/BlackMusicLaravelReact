@@ -99260,14 +99260,17 @@ var Login = function Login(_ref) {
           return history.push('/');
         }, 1000);
       })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
+        var resErrors = err.response.data.errors; // Get validation errors
+
         var resError;
         var newError = [];
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         setErrors(newError);
         console.log(err.response);
       });
