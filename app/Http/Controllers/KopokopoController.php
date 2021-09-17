@@ -49,7 +49,7 @@ class KopokopoController extends Controller
             'amount' => 200,
             'currency' => 'KES',
             'email' => auth()->user()->email,
-            'callbackUrl' => 'http://localhost:3000/api/kopokopo',
+            'callbackUrl' => 'https://test.black.co.ke/api/kopokopo',
             'accessToken' => $data['accessToken'],
         ]);
 
@@ -81,7 +81,9 @@ class KopokopoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$kopokopo = new Kopokopo;
+		$kopokopo->sender_phone = $request->status;
+		$kopokopo->save();
     }
 
     /**
