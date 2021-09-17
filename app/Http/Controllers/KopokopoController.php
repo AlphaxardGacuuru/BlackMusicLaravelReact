@@ -82,7 +82,7 @@ class KopokopoController extends Controller
     public function store(Request $request)
     {
 		$kopokopo = new Kopokopo;
-		$kopokopo->sender_phone = $request->status;
+		$kopokopo->sender_phone = "request";
 		$kopokopo->save();
     }
 
