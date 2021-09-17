@@ -25,7 +25,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Auth::routes();
 // Route::post('logout', 'Auth\LoginController@logout');
-Route::get('home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('home', 'HomeController@index')->name('home');
+});
 
 // Social logins
 Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
@@ -45,7 +47,7 @@ Route::resources([
     'decos' => 'DecosController',
     'follows' => 'FollowsController',
     'follow-notifications' => 'FollowNotificationsController',
-	'kopokopo' => 'KopokopoController',
+    'kopokopo' => 'KopokopoController',
     'notifications' => 'NotificationsController',
     'posts' => 'PostsController',
     'post-likes' => 'PostLikesController',
