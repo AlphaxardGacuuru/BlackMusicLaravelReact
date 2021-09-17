@@ -40,11 +40,14 @@ const Index = (props) => {
 				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
+				// Get validation errors
 				var resError
 				var newError = []
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		});

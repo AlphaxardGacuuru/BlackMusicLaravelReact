@@ -98214,14 +98214,17 @@ var Index = function Index(props) {
           return props.setCartVideos(res.data);
         });
       })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
+        var resErrors = err.response.data.errors; // Get validation errors
+
         var resError;
         var newError = [];
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });

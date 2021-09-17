@@ -27,7 +27,6 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				setTimeout(() => history.push('/'), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors
-
 				// Get validation errors
 				var resError
 				var newError = []
