@@ -17,12 +17,20 @@ class KopokopoController extends Controller
      */
     public function index()
     {
+$kopokopo = new Kopokopo;
+$kopokopo->sender_phone = "request";
+$kopokopo->save();
+
         // Do not hard code these values
         $options = [
             'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
+            // 'clientId' => 'o7wE4rdF-bXJV8JbPknbribTxjTxiEVD-Qn44KGjo_E',
             'clientSecret' => 'AWmptk5WjDpTau9PIELbVBqiw3pDiM5dlILssKX9N3E',
+            // 'clientSecret' => 'nkOf5bqUP_5wSMquZIhUa_GvRAkNIkBOCMqGwGuMc3w',
             'apiKey' => '6rgIMwloH24KVndBVEMVpdFpoSG4L0tQd3YpcADyIpA',
+            // 'apiKey' => '1aa7d918b8a4cd2472d74dc90e429edd4cd6d999',
             'baseUrl' => 'https://sandbox.kopokopo.com',
+            // 'baseUrl' => 'https: //app.kopokopo.com',
         ];
 
         $K2 = new K2($options);
@@ -81,9 +89,9 @@ class KopokopoController extends Controller
      */
     public function store(Request $request)
     {
-		$kopokopo = new Kopokopo;
-		$kopokopo->sender_phone = "request";
-		$kopokopo->save();
+        $kopokopo = new Kopokopo;
+        $kopokopo->sender_phone = "request";
+        $kopokopo->save();
     }
 
     /**
