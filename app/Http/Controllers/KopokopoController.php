@@ -86,8 +86,9 @@ class KopokopoController extends Controller
     public function store(Request $request)
     {
         $kopokopo = new Kopokopo;
-        $kopokopo->sender_phone = $request->senderPhoneNumber;
-        $kopokopo->first_name = 'name';
+        $kopokopo->sender_phone = $request->input('senderPhoneNumber');
+        $kopokopo->first_name = $request->input('senderPhoneNumber');
+        // $kopokopo->first_name = 'name';
         $kopokopo->save();
 
         // foreach ($request as $key => $value) {
