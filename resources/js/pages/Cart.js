@@ -240,7 +240,6 @@ const Cart = (props) => {
 					{/* <hr style={{ borderBottom: "1px solid grey" }} /> */}
 
 					<h4 className="text-success mb-2">Total KES {total}</h4>
-					<br />
 
 					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
 					<br />
