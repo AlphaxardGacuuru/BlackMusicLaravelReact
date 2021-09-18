@@ -17,10 +17,6 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-$kopokopo = new Kopokopo;
-$kopokopo->sender_phone = "request";
-$kopokopo->save();
-
         // Do not hard code these values
         $options = [
             'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
@@ -90,7 +86,7 @@ $kopokopo->save();
     public function store(Request $request)
     {
         $kopokopo = new Kopokopo;
-        $kopokopo->sender_phone = "request";
+        $kopokopo->sender_phone = $request->status;
         $kopokopo->save();
     }
 
