@@ -60,9 +60,9 @@ const Cart = (props) => {
 			axios.get(`${props.url}/api/kopokopo`, {
 				amount: total,
 			}).then((res) => {
-				props.setMessage(res.data)
+				props.setMessage('Request Sent')
 			}).catch((err) => {
-				props.setErrors(['Failed'])
+				props.setErrors(['Request Failed'])
 			})
 		});
 	}
@@ -236,13 +236,11 @@ const Cart = (props) => {
 					{/* <center> */}
 					<h5 className="text-white">Videos {videoTotal}</h5>
 					<h5 className="text-white mb-2">Audios {audioTotal}</h5>
-					<hr style={{ borderBottom: "1px solid grey" }} />
+					{/* <hr style={{ borderBottom: "1px solid grey" }} /> */}
 
-					<h3 className="text-success mb-2">Total KES {total}</h3>
-					<hr style={{ borderBottom: "1px solid grey" }} />
+					<h4 className="text-success mb-2">Total KES {total}</h4>
 
 					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
-					<hr style={{ borderBottom: "1px solid grey" }} />
 
 					<Button
 						btnClass="mysonar-btn green-btn"
