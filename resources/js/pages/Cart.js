@@ -236,11 +236,14 @@ const Cart = (props) => {
 					{/* <center> */}
 					<h5 className="text-white">Videos {videoTotal}</h5>
 					<h5 className="text-white mb-2">Audios {audioTotal}</h5>
+					<br />
 					{/* <hr style={{ borderBottom: "1px solid grey" }} /> */}
 
 					<h4 className="text-success mb-2">Total KES {total}</h4>
+					<br />
 
 					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
+					<br />
 
 					<Button
 						btnClass="mysonar-btn green-btn"
