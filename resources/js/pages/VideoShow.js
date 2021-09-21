@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link, useParams, useHistory } from "react-router-dom";
 import { useState } from 'react'
+import axios from 'axios'
+
 import Img from '../components/Img'
 import Button from '../components/Button'
-import axios from 'axios'
+import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
 
 const VideoShow = (props) => {
 
@@ -277,10 +279,12 @@ const VideoShow = (props) => {
 					</div>
 
 					{/* Download button */}
-					{hasBought &&
-						<div className="p-2">
-							<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
-						</div>}
+					{hasBought ?
+						showVideo.video.match(/https/) ?
+							<div className="p-2">
+								<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
+							</div> : ""
+						: ""}
 				</div>
 
 				<div className="d-flex flex-row">
@@ -362,7 +366,8 @@ const VideoShow = (props) => {
 							}) || props.auth.username == "@blackmusic" ?
 								props.follows.find((follow) => {
 									return follow.followed == showArtist.username &&
-										follow.username == props.auth.username
+										follow.username == props.auth.username ||
+										follow.username != "@blackmusic"
 								}) ?
 									<button className={'btn btn-light float-right rounded-0'}
 										onClick={() => onFollow(showArtist.username)}>
@@ -547,49 +552,22 @@ const VideoShow = (props) => {
 					.filter((boughtVideo) => boughtVideo.username == props.auth.username &&
 						boughtVideo.video_id != show)
 					.map((boughtVideo, key) => (
-						<div key={key}
-							className="media p-2 border-bottom">
-							<div className="media-left thumbnail">
-								<Link
-									to={`/video-show/${boughtVideo.video_id}`}
-									onClick={
-										window.scrollBy({
-											top: -window.innerHeight,
-											right: 0,
-											behavior: "smooth"
-										})}>
-									<Img
-										src={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
-										width="160em"
-										height="90em" />
-								</Link>
-							</div>
-							<div className="media-body ml-2">
-								<h6 className="m-0 pt-2 pr-1 pl-1"
-									style={{
-										width: "150px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{props.videos
-										.find((video) => video.id == boughtVideo.video_id)
-										.name}
-								</h6>
-								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>
-										{props.videos
-											.find((video) => video.id == boughtVideo.video_id)
-											.username}
-									</small>
-									<small className="ml-1">
-										{props.videos
-											.find((video) => video.id == boughtVideo.video_id)
-											.ft}
-									</small>
-								</h6>
-							</div>
-						</div>
+						<VideoMediaHorizontal
+							key={key}
+							onClick={() => props.setShow(0)}
+							// onClick={
+							// 	window.scrollBy({
+							// 		top: -window.innerHeight,
+							// 		right: 0,
+							// 		behavior: "smooth"
+							// 	})}
+							setShow={props.setShow}
+							link={`/video-show/${boughtVideo.video_id}`}
+							thumbnail={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
+							name={props.videos.find((video) => video.id == boughtVideo.video_id).name}
+							username={props.videos.find((video) => video.id == boughtVideo.video_id).username}
+							ft={props.videos.find((video) => video.id == boughtVideo.video_id).ft}
+							showCartandBuyButton={false} />
 					))}
 				{/* <!-- End of Up next Area --> */}
 
@@ -604,66 +582,33 @@ const VideoShow = (props) => {
 							boughtVideo.username == props.auth.username
 						) && video.username != props.auth.username && video.id != show)
 					.slice(0, 10)
-					.map((video, index) => (
-						<div key={index}
-							className="media p-2 border-bottom">
-							<div className="media-left thumbnail">
-								<Link
-									to={`/video-show/${video.id}`}
-									onClick={
-										window.scrollBy({
-											top: -window.innerHeight,
-											right: 0,
-											behavior: "smooth"
-										})}>
-									<Img src={video.thumbnail} width="160em" height="90em" />
-								</Link>
-							</div>
-							<div className="media-body ml-2">
-								<h6
-									className="m-0 pt-2 pr-1 pl-1"
-									style={{
-										width: "150px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{video.name}
-								</h6>
-								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-									<small>{video.username}</small>
-									<small className="ml-1">{video.ft}</small>
-								</h6>
-								{props.cartVideos
-									.find((cartVideo) => {
+					.map((video, key) => (
+						<VideoMediaHorizontal
+							key={key}
+							onClick={() => props.setShow(0)}
+							// onClick={
+							// 	window.scrollBy({
+							// 		top: -window.innerHeight,
+							// 		right: 0,
+							// 		behavior: "smooth"
+							// 	})}
+							setShow={props.setShow}
+							link={`/video-show/${video.id}`}
+							thumbnail={video.thumbnail}
+							name={video.name}
+							username={video.username}
+							ft={video.ft}
+							videoInCart={
+								props.cartVideos
+									.some((cartVideo) => {
 										return cartVideo.video_id == video.id &&
 											cartVideo.username == props.auth.username
-									}) ? <button
-										className="btn btn-light mb-1 rounded-0"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartVideos(video.id)}>
-									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-										fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-										<path fillRule='evenodd'
-											d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-									</svg>
-								</button>
-									: <button
-										className="mysonar-btn mb-1"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartVideos(video.id)}>
-										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
-									</button>}
-								<Button
-									btnClass={'btn mysonar-btn green-btn float-right'}
-									btnText={'buy'}
-									onClick={() => onBuyVideos(video.id)} />
-							</div>
-						</div>
+									})
+							}
+							hasBoughtVideo={!hasBought}
+							videoId={video.id}
+							onCartVideos={onCartVideos}
+							onBuyVideos={onBuyVideos} />
 					))}
 			</div>
 			<div className="col-sm-1"></div>

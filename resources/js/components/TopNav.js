@@ -52,7 +52,10 @@ const TopNav = (props) => {
 							</li>
 							<li className='nav-item active'>
 								<Link to='/video-charts'
-									style={{ color: location.pathname == "/video-charts" ? "gold" : "white" }}
+									style={{
+										color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ?
+											"gold" : "white"
+									}}
 									className='nav-link'
 									onClick={() => setMenu("")}>
 									<span style={{ float: "left", paddingRight: "20px" }}>

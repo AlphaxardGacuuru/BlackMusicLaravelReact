@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link, useParams, useHistory } from "react-router-dom";
 import { useState } from 'react'
+import axios from 'axios'
+
 import Img from '../components/Img'
 import Button from '../components/Button'
-import axios from 'axios'
+import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
+import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
 
 const Profile = (props) => {
 
@@ -331,78 +334,32 @@ const Profile = (props) => {
 									{props.audios
 										.filter((audio) => audio.username == username && audio.album == audioAlbum.id)
 										.map((audio, index) => (
-											<div
+											<AudioMediaHorizontal
 												key={index}
-												className="d-flex p-2 border-bottom">
-												<div
-													className="thumbnail"
-													style={{
-														width: "50px",
-														height: "50px"
-													}}>
-													<Link to={`/audio-show/${audio.id}`}>
-														<Img src={`/storage/${audio.thumbnail}`} width="100%" height="50px" />
-													</Link>
-												</div>
-												<div className="ml-2 mr-auto">
-													<h6
-														className="mb-0 pb-0"
-														style={{
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}>
-														{audio.name}
-													</h6>
-													<h6 className="mt-0 pt-0">
-														<small>{audio.username}</small>
-														<small className="ml-1">{audio.ft}</small>
-													</h6>
-												</div>
-												<div className="">
-													{!props.boughtAudios
+												onClick={() => props.setShow(0)}
+												setShow={props.setShow}
+												link={`/audio-show/${audio.id}`}
+												thumbnail={audio.thumbnail.match(/http/) ? audio.thumbnail : `storage/${audio.thumbnail}`}
+												name={audio.name}
+												username={props.audios.find((audio) => audio.id == audio.id).username}
+												ft={audio.ft}
+												hasBoughtAudio={
+													!props.boughtAudios
 														.some((boughtAudio) => {
 															return boughtAudio.audio_id == audio.id &&
 																boughtAudio.username == props.auth.username
-														}) ?
-														props.cartAudios
-															.find((cartAudio) => {
-																return cartAudio.audio_id == audio.id &&
-																	cartAudio.username == props.auth.username
-															}) ?
-															<button
-																className="btn btn-light rounded-0"
-																style={{ minWidth: '40px', height: '33px' }}
-																onClick={() => onCartAudios(audio.id)}>
-																<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-																	fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-																	<path fillRule='evenodd'
-																		d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-																</svg>
-															</button> :
-															<button
-																className="mysonar-btn"
-																style={{ minWidth: '40px', height: '33px' }}
-																onClick={() => onCartAudios(audio.id)}>
-																<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-																	fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-																	<path fillRule='evenodd'
-																		d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-																</svg>
-															</button> : ""}
-												</div>
-												<div className="ml-2">
-													{!props.boughtAudios
-														.some((boughtAudio) => {
-															return boughtAudio.audio_id == audio.id &&
-																boughtAudio.username == props.auth.username
-														}) &&
-														<Button
-															btnClass={'btn mysonar-btn green-btn float-right'}
-															btnText={'buy'}
-															onClick={() => onBuyAudios(audio.id)} />}
-												</div>
-											</div>
+														})
+												}
+												audioInCart={
+													props.cartAudios
+														.some((cartAudio) => {
+															return cartAudio.audio_id == audio.id &&
+																cartAudio.username == props.auth.username
+														})
+												}
+												audioId={audio.id}
+												onCartAudios={onCartAudios}
+												onBuyAudios={onBuyAudios} />
 										))}
 								</div>
 							))}
@@ -804,73 +761,32 @@ const Profile = (props) => {
 									{props.videos
 										.filter((video) => video.username == username && video.album == videoAlbum.id)
 										.map((video, index) => (
-											<div key={index}
-												className="media p-2 border-bottom">
-												<div className="media-left thumbnail">
-													<Link to={`/video-show/${video.id}`}>
-														<Img
-															src={video.thumbnail.match(/https/) ?
-																video.thumbnail :
-																`storage/${video.thumbnail}`}
-															width="160em"
-															height="90em" />
-													</Link>
-												</div>
-												<div className="media-body ml-2">
-													<h6
-														className="m-0 pt-2 pr-1 pl-1"
-														style={{
-															width: "150px",
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}>
-														{video.name}
-													</h6>
-													<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pb-0">
-														<small>{video.username}</small>
-														<small className="ml-1">{video.ft}</small>
-													</h6>
-													{!props.boughtVideos
+											<VideoMediaHorizontal
+												key={index}
+												onClick={() => props.setShow(0)}
+												setShow={props.setShow}
+												link={`/video-show/${video.id}`}
+												thumbnail={video.thumbnail.match(/http/) ? video.thumbnail : `storage/${video.thumbnail}`}
+												name={video.name}
+												username={props.videos.find((video) => video.id == video.id).username}
+												ft={video.ft}
+												hasBoughtVideo={
+													!props.boughtVideos
 														.some((boughtVideo) => {
 															return boughtVideo.video_id == video.id &&
 																boughtVideo.username == props.auth.username
-														}) ?
-														props.cartVideos
-															.find((cartVideo) => {
-																return cartVideo.video_id == video.id &&
-																	cartVideo.username == props.auth.username
-															}) ? <button
-																className="btn btn-light mb-1 rounded-0"
-																style={{ minWidth: '40px', height: '33px' }}
-																onClick={() => onCartVideos(video.id)}>
-															<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-																fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-																<path fillRule='evenodd'
-																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-															</svg>
-														</button>
-															: <button
-																className="mysonar-btn mb-1"
-																style={{ minWidth: '40px', height: '33px' }}
-																onClick={() => onCartVideos(video.id)}>
-																<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-																	fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-																	<path fillRule='evenodd'
-																		d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-																</svg>
-															</button> : ""}
-													{!props.boughtVideos
-														.some((boughtVideo) => {
-															return boughtVideo.video_id == video.id &&
-																boughtVideo.username == props.auth.username
-														}) &&
-														<Button
-															btnClass={'btn mysonar-btn green-btn float-right'}
-															btnText={'buy'}
-															onClick={() => onBuyVideos(video.id)} />}
-												</div>
-											</div>
+														})
+												}
+												videoInCart={
+													props.cartVideos
+														.some((cartVideo) => {
+															return cartVideo.video_id == video.id &&
+																cartVideo.username == props.auth.username
+														})
+												}
+												videoId={video.id}
+												onCartVideos={onCartVideos}
+												onBuyVideos={onBuyVideos} />
 										))}
 								</div>
 							))}

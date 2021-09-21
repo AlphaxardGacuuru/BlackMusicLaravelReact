@@ -172,7 +172,7 @@ const Bottomnav = (props) => {
 								textAlign: "center",
 								fontSize: "10px",
 								fontWeight: "100",
-								color: location.pathname == "/video-charts" ? "gold" : "white"
+								color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
 							}}>
 							<span style={{ fontSize: "20px" }} className="nav-link">
 								<svg className="bi bi-compass" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"

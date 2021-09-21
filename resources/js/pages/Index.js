@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-import Img from '../components/Img'
-import Button from '../components/Button'
 import axios from 'axios'
 import { some } from 'lodash'
+
+import Img from '../components/Img'
+import Button from '../components/Button'
+import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 
 const Index = (props) => {
 
@@ -248,19 +250,21 @@ const Index = (props) => {
 									{props.boughtVideos.find((boughtVideo) => {
 										return boughtVideo.username == props.auth.username &&
 											boughtVideo.artist == musician.username
-									}) || props.auth.username == "@blackmusic" ? props.follows.find((follow) => {
-										return follow.followed == musician.username && follow.username == props.auth.username
-									}) ? <button className={'btn btn-light float-right rounded-0'}
-										onClick={() => onFollow(musician.username)}>
-										Followed
-										<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-										</svg>
-									</button>
-										: <Button btnClass={'mysonar-btn float-right'}
-											onClick={() => onFollow(musician.username)}
-											btnText={'follow'} />
+									}) || props.auth.username == "@blackmusic" ?
+										props.follows.find((follow) => {
+											return follow.followed == musician.username &&
+												follow.username == props.auth.username
+										}) ? <button className={'btn btn-light float-right rounded-0'}
+											onClick={() => onFollow(musician.username)}>
+											Followed
+											<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+												<path fillRule='evenodd'
+													d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
+											</svg>
+										</button>
+											: <Button btnClass={'mysonar-btn float-right'}
+												onClick={() => onFollow(musician.username)}
+												btnText={'follow'} />
 										: <Button btnClass={'mysonar-btn float-right'}
 											onClick={() =>
 												props.setErrors([`You must have bought atleast one song by ${musician.username}`])}
@@ -720,62 +724,32 @@ const Index = (props) => {
 							))
 						.slice(0, 10)
 						.map((video, index) => (
-							<div key={index}
-								className="media p-2 border-bottom">
-								<div className="media-left thumbnail">
-									<Link to={`/video-show/${video.id}`}>
-										<Img
-											src={video.thumbnail.match(/http/) ?
-												video.thumbnail :
-												`storage/${video.thumbnail}`}
-											width="160em"
-											height="90em" />
-									</Link>
-								</div>
-								<div className="media-body ml-2">
-									<h6
-										className="m-0 pt-2 pr-1 pl-1"
-										style={{
-											width: "150px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-										{video.name}
-									</h6>
-									<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-										<small>{video.username}</small>
-									</h6>
-									{props.cartVideos
-										.find((cartVideo) => {
+							<VideoMediaHorizontal
+								key={index}
+								onClick={() => props.setShow(0)}
+								setShow={props.setShow}
+								link={`/video-show/${video.id}`}
+								thumbnail={video.thumbnail.match(/http/) ? video.thumbnail : `storage/${video.thumbnail}`}
+								name={video.name}
+								username={props.videos.find((video) => video.id == video.id).username}
+								ft={video.ft}
+								hasBoughtVideo={
+									!props.boughtVideos
+										.some((boughtVideo) => {
+											return boughtVideo.video_id == video.id &&
+												boughtVideo.username == props.auth.username
+										})
+								}
+								videoInCart={
+									props.cartVideos
+										.some((cartVideo) => {
 											return cartVideo.video_id == video.id &&
 												cartVideo.username == props.auth.username
-										}) ? <button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px' }}
-											onClick={() => onCartVideos(video.id)}>
-										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
-									</button>
-										: <button
-											className="mysonar-btn mb-1"
-											style={{ minWidth: '40px', height: '33px' }}
-											onClick={() => onCartVideos(video.id)}>
-											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-												<path fillRule='evenodd'
-													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-											</svg>
-										</button>}
-									<Button
-										btnClass={'btn mysonar-btn green-btn float-right'}
-										btnText={'buy'}
-										onClick={() => onBuyVideos(video.id)} />
-								</div>
-							</div>
+										})
+								}
+								videoId={video.id}
+								onCartVideos={onCartVideos}
+								onBuyVideos={onBuyVideos} />
 						))}
 				</div>
 				{/* <!-- End of Song Suggestion Area --> */}

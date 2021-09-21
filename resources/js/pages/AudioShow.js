@@ -2,9 +2,11 @@ import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
+import axios from 'axios';
+
 import Img from '../components/Img'
 import Button from '../components/Button'
-import axios from 'axios';
+import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
 
 const AudioShow = (props) => {
 
@@ -678,51 +680,27 @@ const AudioShow = (props) => {
 				{props.boughtAudios
 					.filter((boughtAudio) => boughtAudio.username == props.auth.username && boughtAudio.audio_id != props.show)
 					.map((boughtAudio, key) => (
-						<div
+						<AudioMediaHorizontal
 							key={key}
-							className="d-flex p-2 border-bottom">
-							<div className="thumbnail"
-								style={{
-									width: "50px",
-									height: "50px"
-								}}>
-								<Link to={`/audio-show/${boughtAudio.audio_id}`}
-									onClick={
-										window.scrollBy({
-											top: -window.innerHeight,
-											right: 0,
-											behavior: "smooth"
-										})}>
-									<Img
-										src={`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
-											props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`}
-										width="100%"
-										height="50px" />
-								</Link>
-							</div>
-							<div className="ml-2 mr-auto">
-								<h6
-									className="mb-0 pb-0"
-									style={{
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
-										props.audios.find((audio) => audio.id == boughtAudio.audio_id).name}
-								</h6>
-								<h6 className="mt-0 pt-0">
-									<small>
-										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
-											props.audios.find((audio) => audio.id == boughtAudio.audio_id).username}
-									</small>
-									<small className="ml-1">
-										{props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
-											props.audios.find((audio) => audio.id == boughtAudio.audio_id).ft}
-									</small>
-								</h6>
-							</div>
-						</div>
+							setShow={props.setShow}
+							link={`/audio-show/${boughtAudio.audio_id}`}
+							thumbnail={
+								`/storage/${props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id).thumbnail}`
+							}
+							name={
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id).name
+							}
+							username={
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id).username
+							}
+							ft={
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
+								props.audios.find((audio) => audio.id == boughtAudio.audio_id).ft
+							}
+							showCartandBuyButton={false} />
 					))}
 				{/* <!-- End of Up next Area --> */}
 
@@ -737,75 +715,26 @@ const AudioShow = (props) => {
 							boughtAudio.username == props.auth.username
 						) && audio.username != props.auth.username && audio.id != show)
 					.slice(0, 10)
-					.map((audio, index) => (
-						<div
-							key={index}
-							className="d-flex p-2 border-bottom">
-							<div
-								className="thumbnail"
-								style={{
-									width: "50px",
-									height: "50px"
-								}}>
-								<Link
-									to={`/audio-show/${audio.id}`}
-									onClick={
-										window.scrollBy({
-											top: -window.innerHeight,
-											right: 0,
-											behavior: "smooth"
-										})}>
-									<Img src={`/storage/${audio.thumbnail}`} width="100%" height="50px" />
-								</Link>
-							</div>
-							<div className="ml-2 mr-auto">
-								<h6
-									className="mb-0 pb-0"
-									style={{
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{audio.name}
-								</h6>
-								<h6 className="mt-0 pt-0">
-									<small>{audio.username}</small>
-									<small className="ml-1">{audio.ft}</small>
-								</h6>
-							</div>
-							<div className="">
-								{props.cartAudios
-									.find((cartAudio) => {
+					.map((audio, key) => (
+						<AudioMediaHorizontal
+							key={key}
+							setShow={props.setShow}
+							link={`/audio-show/${audio.id}`}
+							thumbnail={`/storage/${audio.thumbnail}`}
+							name={audio.name}
+							username={audio.username}
+							ft={audio.ft}
+							hasBoughtAudio={!props.hasBought}
+							audioInCart={
+								props.cartAudios
+									.some((cartAudio) => {
 										return cartAudio.audio_id == audio.id &&
 											cartAudio.username == props.auth.username
-									}) ? <button
-										className="btn btn-light rounded-0"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartAudios(audio.id)}>
-									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-										fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-										<path fillRule='evenodd'
-											d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-									</svg>
-								</button>
-									: <button
-										className="mysonar-btn"
-										style={{ minWidth: '40px', height: '33px' }}
-										onClick={() => onCartAudios(audio.id)}>
-										<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-											fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
-									</button>}
-							</div>
-							<div className="ml-2">
-								<Button
-									btnClass={'btn mysonar-btn green-btn float-right'}
-									btnText={'buy'}
-									onClick={() => onBuyAudios(audio.id)} />
-							</div>
-						</div>
+									})
+							}
+							audioId={audio.id}
+							onCartAudios={onCartAudios}
+							onBuyAudios={onBuyAudios} />
 					))}
 			</div>
 			{/* <!-- End of Song Suggestion Area --> */}

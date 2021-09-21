@@ -7,6 +7,7 @@ const Img = ({ src, width, height, imgClass, alt }) => {
 }
 
 Img.defaultProps = {
+	src: '/storage/img/musical-note.png',
 	alt: 'image',
 }
 
