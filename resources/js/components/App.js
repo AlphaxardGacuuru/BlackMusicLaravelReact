@@ -11,6 +11,10 @@ import BottomNav from './BottomNav'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Index from '../pages/Index'
+import Search from '../pages/Search'
+import Cart from '../pages/Cart'
+import Library from '../pages/Library'
+
 import Profile from '../pages/Profile'
 import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
@@ -18,17 +22,14 @@ import PostShow from '../pages/PostShow'
 
 import VideoCharts from '../pages/VideoCharts'
 import VideoShow from '../pages/VideoShow'
-import AudioCharts from '../pages/AudioCharts'
-import AudioShow from '../pages/AudioShow'
-
-import Cart from '../pages/Cart'
-import Library from '../pages/Library'
-
 import Videos from '../pages/Videos'
 import VideoCreate from '../pages/VideoCreate'
 import VideoEdit from '../pages/VideoEdit'
 import VideoAlbumCreate from '../pages/VideoAlbumCreate'
 import VideoAlbumEdit from '../pages/VideoAlbumEdit'
+
+import AudioCharts from '../pages/AudioCharts'
+import AudioShow from '../pages/AudioShow'
 import Audios from '../pages/Audios'
 import AudioCreate from '../pages/AudioCreate'
 import AudioEdit from '../pages/AudioEdit'
@@ -377,6 +378,7 @@ function App() {
 	const [volume, setVolume] = useState(0.3)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [progressPercent, setProgressPercent] = useState()
+	const [audioLoader, setAudioLoader] = useState(true)
 
 	// Listen for show change and autoplay song
 	useEffect(() => {
@@ -387,11 +389,13 @@ function App() {
 				// Automatic playback started!
 				// Show playing UI.
 				setPlayBtn(true)
+				setAudioLoader(false)
 			})
 				.catch(error => {
 					// Auto-play was prevented
 					// Show paused UI.
 					setPlayBtn(false)
+					setAudioLoader(true)
 				});
 		}
 	}, [show])
@@ -540,15 +544,31 @@ function App() {
 		<>
 			<Router>
 				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
+
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />
 				)} />
 				<Route path="/register" exact render={(props) => (
 					<Register {...{ setMessage, setErrors, setAuth, url }} />
 				)} />
+				
+
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
 				)} />
+
+				<Route path="/search" exact render={(props) = (
+					<Search {...{ url, auth, setMessage, setErrors, artists, videos, videoAlbums, audios, audioAlbums }} />
+				)} />
+
+				<Route path="/cart" exact render={(props) => (
+					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos, cartAudios, setCartAudios, audios }} />
+				)} />
+
+				<Route path="/library" exact render={(props) => (
+					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
+				)} />
+
 
 				<Route path="/profile/:username" exact render={(props) => (
 					<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
@@ -566,28 +586,13 @@ function App() {
 					<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
 				)} />
 
-				<Route path="/cart" exact render={(props) => (
-					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos, cartAudios, setCartAudios, audios }} />
-				)} />
-
+				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (
 					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
 					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, follows, setFollows, setShow }} />
-				)} />
-
-				<Route path="/audio-charts" exact render={(props) => (
-					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setShow }} />
-				)} />
-
-				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS }} />
-				)} />
-
-				<Route path="/library" exact render={(props) => (
-					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
@@ -610,6 +615,16 @@ function App() {
 					<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
 				)} />
 
+
+				{/* Audio Routes */}
+				<Route path="/audio-charts" exact render={(props) => (
+					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setShow }} />
+				)} />
+
+				<Route path="/audio-show/:show" exact render={(props) => (
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+				)} />
+
 				<Route path="/audios" exact render={(props) => (
 					<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
 				)} />
@@ -629,6 +644,7 @@ function App() {
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
 					<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
 				)} />
+
 
 				<Route path="/admin" exact render={(props) => (
 					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, audios, boughtAudios }} />

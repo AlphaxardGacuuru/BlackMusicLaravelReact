@@ -92734,27 +92734,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/Login */ "./resources/js/pages/Login.js");
 /* harmony import */ var _pages_Register__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/Register */ "./resources/js/pages/Register.js");
 /* harmony import */ var _pages_Index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/Index */ "./resources/js/pages/Index.js");
-/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Profile */ "./resources/js/pages/Profile.js");
-/* harmony import */ var _pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/ProfileEdit */ "./resources/js/pages/ProfileEdit.js");
-/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
-/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
-/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
-/* harmony import */ var _pages_VideoShow__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pages/VideoShow */ "./resources/js/pages/VideoShow.js");
-/* harmony import */ var _pages_AudioCharts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../pages/AudioCharts */ "./resources/js/pages/AudioCharts.js");
-/* harmony import */ var _pages_AudioShow__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../pages/AudioShow */ "./resources/js/pages/AudioShow.js");
-/* harmony import */ var _pages_Cart__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../pages/Cart */ "./resources/js/pages/Cart.js");
-/* harmony import */ var _pages_Library__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../pages/Library */ "./resources/js/pages/Library.js");
-/* harmony import */ var _pages_Videos__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../pages/Videos */ "./resources/js/pages/Videos.js");
-/* harmony import */ var _pages_VideoCreate__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../pages/VideoCreate */ "./resources/js/pages/VideoCreate.js");
-/* harmony import */ var _pages_VideoEdit__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pages/VideoEdit */ "./resources/js/pages/VideoEdit.js");
-/* harmony import */ var _pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pages/VideoAlbumCreate */ "./resources/js/pages/VideoAlbumCreate.js");
-/* harmony import */ var _pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../pages/VideoAlbumEdit */ "./resources/js/pages/VideoAlbumEdit.js");
-/* harmony import */ var _pages_Audios__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../pages/Audios */ "./resources/js/pages/Audios.js");
-/* harmony import */ var _pages_AudioCreate__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../pages/AudioCreate */ "./resources/js/pages/AudioCreate.js");
-/* harmony import */ var _pages_AudioEdit__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../pages/AudioEdit */ "./resources/js/pages/AudioEdit.js");
-/* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
-/* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
-/* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
+/* harmony import */ var _pages_Search__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Search */ "./resources/js/pages/Search.js");
+/* harmony import */ var _pages_Cart__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/Cart */ "./resources/js/pages/Cart.js");
+/* harmony import */ var _pages_Library__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/Library */ "./resources/js/pages/Library.js");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/Profile */ "./resources/js/pages/Profile.js");
+/* harmony import */ var _pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/ProfileEdit */ "./resources/js/pages/ProfileEdit.js");
+/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
+/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
+/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
+/* harmony import */ var _pages_VideoShow__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../pages/VideoShow */ "./resources/js/pages/VideoShow.js");
+/* harmony import */ var _pages_Videos__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../pages/Videos */ "./resources/js/pages/Videos.js");
+/* harmony import */ var _pages_VideoCreate__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../pages/VideoCreate */ "./resources/js/pages/VideoCreate.js");
+/* harmony import */ var _pages_VideoEdit__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../pages/VideoEdit */ "./resources/js/pages/VideoEdit.js");
+/* harmony import */ var _pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pages/VideoAlbumCreate */ "./resources/js/pages/VideoAlbumCreate.js");
+/* harmony import */ var _pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pages/VideoAlbumEdit */ "./resources/js/pages/VideoAlbumEdit.js");
+/* harmony import */ var _pages_AudioCharts__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../pages/AudioCharts */ "./resources/js/pages/AudioCharts.js");
+/* harmony import */ var _pages_AudioShow__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../pages/AudioShow */ "./resources/js/pages/AudioShow.js");
+/* harmony import */ var _pages_Audios__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../pages/Audios */ "./resources/js/pages/Audios.js");
+/* harmony import */ var _pages_AudioCreate__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../pages/AudioCreate */ "./resources/js/pages/AudioCreate.js");
+/* harmony import */ var _pages_AudioEdit__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../pages/AudioEdit */ "./resources/js/pages/AudioEdit.js");
+/* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
+/* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
+/* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -92772,6 +92773,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -93476,7 +93478,12 @@ function App() {
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState70 = _slicedToArray(_useState69, 2),
       progressPercent = _useState70[0],
-      setProgressPercent = _useState70[1]; // Listen for show change and autoplay song
+      setProgressPercent = _useState70[1];
+
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState72 = _slicedToArray(_useState71, 2),
+      audioLoader = _useState72[0],
+      setAudioLoader = _useState72[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -93487,10 +93494,12 @@ function App() {
         // Automatic playback started!
         // Show playing UI.
         setPlayBtn(true);
+        setAudioLoader(false);
       })["catch"](function (error) {
         // Auto-play was prevented
         // Show paused UI.
         setPlayBtn(false);
+        setAudioLoader(true);
       });
     }
   }, [show]); // Set Refs
@@ -93698,10 +93707,54 @@ function App() {
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/search",
+    exact: true,
+    render: props = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Search__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      url: url,
+      auth: auth,
+      setMessage: setMessage,
+      setErrors: setErrors,
+      artists: artists,
+      videos: videos,
+      videoAlbums: videoAlbums,
+      audios: audios,
+      audioAlbums: audioAlbums
+    })
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/cart",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        cartVideos: cartVideos,
+        setCartVideos: setCartVideos,
+        videos: videos,
+        cartAudios: cartAudios,
+        setCartAudios: setCartAudios,
+        audios: audios
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/library",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        auth: auth,
+        videos: videos,
+        boughtVideos: boughtVideos,
+        audios: audios,
+        boughtAudios: boughtAudios,
+        setShow: setShow
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/profile/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_14__["default"], {
         setMessage: setMessage,
         setErrors: setErrors,
         auth: auth,
@@ -93735,7 +93788,7 @@ function App() {
     path: "/profile-edit",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_15__["default"], {
         setMessage: setMessage,
         setErrors: setErrors,
         auth: auth,
@@ -93749,7 +93802,7 @@ function App() {
     path: "/post-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_16__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93761,7 +93814,7 @@ function App() {
     path: "/post-show/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_17__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93775,27 +93828,10 @@ function App() {
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/cart",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_19__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        cartVideos: cartVideos,
-        setCartVideos: setCartVideos,
-        videos: videos,
-        cartAudios: cartAudios,
-        setCartAudios: setCartAudios,
-        audios: audios
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-charts",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCharts__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCharts__WEBPACK_IMPORTED_MODULE_18__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93815,7 +93851,7 @@ function App() {
     path: "/video-show/:show",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoShow__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoShow__WEBPACK_IMPORTED_MODULE_19__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93839,10 +93875,82 @@ function App() {
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/videos",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        users: users,
+        setUsers: setUsers,
+        videos: videos,
+        boughtVideos: boughtVideos,
+        videoLikes: videoLikes,
+        videoAlbums: videoAlbums,
+        setVideoAlbums: setVideoAlbums,
+        videoPayouts: videoPayouts,
+        setAudioAlbums: setAudioAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/video-create",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_21__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        setVideos: setVideos,
+        videoAlbums: videoAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/video-edit/:id",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_22__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        videos: videos,
+        setVideos: setVideos,
+        videoAlbums: videoAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/video-album-create",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_23__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        setVideoAlbums: setVideoAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/video-album-edit/:id",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        url: url,
+        auth: auth,
+        setMessage: setMessage,
+        setErrors: setErrors,
+        videoAlbums: videoAlbums,
+        setVideoAlbums: setVideoAlbums
+      });
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-charts",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCharts__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCharts__WEBPACK_IMPORTED_MODULE_25__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93862,7 +93970,7 @@ function App() {
     path: "/audio-show/:show",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_26__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -93910,99 +94018,15 @@ function App() {
         setProgress: setProgress,
         progressPercent: progressPercent,
         onSetVolume: onSetVolume,
-        fmtMSS: fmtMSS
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/library",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_20__["default"], {
-        auth: auth,
-        videos: videos,
-        boughtVideos: boughtVideos,
-        audios: audios,
-        boughtAudios: boughtAudios,
-        setShow: setShow
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/videos",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_21__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        users: users,
-        setUsers: setUsers,
-        videos: videos,
-        boughtVideos: boughtVideos,
-        videoLikes: videoLikes,
-        videoAlbums: videoAlbums,
-        setVideoAlbums: setVideoAlbums,
-        videoPayouts: videoPayouts,
-        setAudioAlbums: setAudioAlbums
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/video-create",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_22__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        setVideos: setVideos,
-        videoAlbums: videoAlbums
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/video-edit/:id",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_23__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        videos: videos,
-        setVideos: setVideos,
-        videoAlbums: videoAlbums
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/video-album-create",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_24__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        setVideoAlbums: setVideoAlbums
-      });
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/video-album-edit/:id",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_25__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        videoAlbums: videoAlbums,
-        setVideoAlbums: setVideoAlbums
+        fmtMSS: fmtMSS,
+        audioLoader: audioLoader
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audios",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_26__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_27__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94019,7 +94043,7 @@ function App() {
     path: "/audio-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_27__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_28__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94032,7 +94056,7 @@ function App() {
     path: "/audio-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_29__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94046,7 +94070,7 @@ function App() {
     path: "/audio-album-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_29__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_30__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94058,7 +94082,7 @@ function App() {
     path: "/audio-album-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_31__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94071,7 +94095,7 @@ function App() {
     path: "/admin",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_31__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_32__["default"], {
         url: url,
         auth: auth,
         setMessage: setMessage,
@@ -94175,8 +94199,10 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     height: "50px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-2 mr-auto"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: props.link,
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      cursor: "pointer"
+    },
     onClick: function onClick() {
       return props.setShow(props.audioId);
     }
@@ -94318,9 +94344,7 @@ var Bottomnav = function Bottomnav(props) {
     return cartAudio.username == props.auth.username;
   }).length;
   var cartItems = vidCartItems + audCartItems;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row m-0 p-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     style: {
       display: checkLocation && "none"
     }
@@ -94328,9 +94352,15 @@ var Bottomnav = function Bottomnav(props) {
     style: {
       display: checkLocation && "none"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-12 m-0 p-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    style: {
+      display: checkLocation && "none"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "anti-hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "anti-hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomNav menu-content-area header-social-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     ref: props.audioContainer,
@@ -94350,7 +94380,7 @@ var Bottomnav = function Bottomnav(props) {
       width: props.progressPercent
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid menu-area d-flex text-white"
+    className: "container-fluid menu-area d-flex text-white hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
     ref: props.audio,
     type: "audio/*",
@@ -94475,6 +94505,8 @@ var Bottomnav = function Bottomnav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid menu-area d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
@@ -94712,7 +94744,7 @@ var Messages = function Messages(_ref) {
   }, message), errors.map(function (error, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "bg-danger p-2",
+      className: "bg-danger p-2 mt-2",
       style: {
         borderRadius: "30px"
       }
@@ -94901,6 +94933,17 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
   }, "Black Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "contact-form hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    name: "search",
+    className: "form-control",
+    placeholder: "Search songs and artists",
+    style: {
+      textColor: "white",
+      color: "white",
+      width: "400px"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-social-area d-flex align-items-center"
@@ -95780,7 +95823,17 @@ var AudioCharts = function AudioCharts(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("All"),
       _useState4 = _slicedToArray(_useState3, 2),
       genre = _useState4[0],
-      setGenre = _useState4[1]; // Array for links
+      setGenre = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
+      _useState6 = _slicedToArray(_useState5, 2),
+      artistSlice = _useState6[0],
+      setArtistSlice = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
+      _useState8 = _slicedToArray(_useState7, 2),
+      audioSlice = _useState8[0],
+      setAudioSlice = _useState8[1]; // Array for links
 
 
   var charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"];
@@ -95936,6 +95989,16 @@ var AudioCharts = function AudioCharts(props) {
         props.setErrors(newError);
       });
     });
+  }; // Function for loading more artists
+
+
+  var onArtistSlice = function onArtistSlice() {
+    setArtistSlice(artistSlice + 10);
+  }; // Function for loading more audios
+
+
+  var onAudioSlice = function onAudioSlice() {
+    setAudioSlice(audioSlice + 8);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96052,7 +96115,7 @@ var AudioCharts = function AudioCharts(props) {
     className: "hidden-scroll"
   }, artistsArray.filter(function (artist) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
-  }).map(function (artistArray, key) {
+  }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
       className: "pt-0 pl-0 pr-0 pb-2",
@@ -96094,7 +96157,17 @@ var AudioCharts = function AudioCharts(props) {
         textOverflow: "clip"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, artistArray.key))));
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card avatar-thumbnail ml-3",
+    style: {
+      borderRadius: "50%",
+      width: "50px",
+      height: "50px"
+    },
+    onClick: onArtistSlice
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: '/storage/img/musical-note.png'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
@@ -96102,7 +96175,7 @@ var AudioCharts = function AudioCharts(props) {
     className: "col-sm-10"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "p-2"
-  }, "Songs"), audiosArray.map(function (audioArray, key) {
+  }, "Songs"), audiosArray.slice(0, audioSlice).map(function (audioArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: key,
       setShow: props.setShow,
@@ -96133,7 +96206,13 @@ var AudioCharts = function AudioCharts(props) {
       onCartAudios: onCartAudios,
       onBuyAudios: onBuyAudios
     });
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+    className: "my-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn",
+    btnText: "load more",
+    onClick: onAudioSlice
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   })));
 };
@@ -97190,7 +97269,10 @@ var AudioShow = function AudioShow(props) {
       width: "auto",
       maxHeight: "495px"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, props.audioLoader ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "sonar-load",
+    className: "mt-5 mb-5"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: "/storage/".concat(showAudio.thumbnail),
     width: "100%",
     height: "auto",
@@ -97741,6 +97823,7 @@ var AudioShow = function AudioShow(props) {
       }) && props.audios.find(function (audio) {
         return audio.id == boughtAudio.audio_id;
       }).ft,
+      audioId: boughtAudio.audio_id,
       showCartandBuyButton: false
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99117,6 +99200,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
+/* harmony import */ var _components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js");
+
+
 
 
 
@@ -99131,101 +99218,67 @@ var Library = function Library(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.boughtVideos.filter(function (boughtVideo) {
     return boughtVideo.username == props.auth.username;
   }).map(function (boughtVideo, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_3__["default"], {
       key: key,
-      className: "media p-2 border-bottom"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "media-left thumbnail"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-show/".concat(boughtVideo.video_id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: props.videos.find(function (video) {
+      onClick: function onClick() {
+        return props.setShow(0);
+      },
+      setShow: props.setShow,
+      link: "/video-show/".concat(boughtVideo.video_id),
+      thumbnail: props.videos.find(function (video) {
         return video.id == boughtVideo.video_id;
       }) && props.videos.find(function (video) {
         return video.id == boughtVideo.video_id;
       }).thumbnail,
-      width: "160em",
-      height: "90em"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "media-body ml-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "m-0 pt-2 pr-1 pl-1",
-      style: {
-        width: "150px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }) && props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }) && props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }).username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }) && props.videos.find(function (video) {
-      return video.id == boughtVideo.video_id;
-    }).ft))));
+      name: props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }) && props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }).name,
+      username: props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }) && props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }).username,
+      ft: props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }) && props.videos.find(function (video) {
+        return video.id == boughtVideo.video_id;
+      }).ft,
+      showCartandBuyButton: false
+    });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "mt-5"
   }, "Audios")), props.boughtAudios.filter(function (boughtAudio) {
     return boughtAudio.username == props.auth.username;
   }).map(function (boughtAudio, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: key,
-      className: "d-flex p-2 border-bottom",
-      onClick: function onClick() {
-        return props.setShow(boughtAudio.audio_id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "thumbnail",
-      style: {
-        width: "50px",
-        height: "50px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/audio-show/".concat(boughtAudio.audio_id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(props.audios.find(function (audio) {
+      setShow: props.setShow,
+      link: "/audio-show/".concat(boughtAudio.audio_id),
+      thumbnail: "/storage/".concat(props.audios.find(function (audio) {
         return audio.id == boughtAudio.audio_id;
       }) && props.audios.find(function (audio) {
         return audio.id == boughtAudio.audio_id;
       }).thumbnail),
-      width: "100%",
-      height: "50px"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ml-2 mr-auto"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mb-0 pb-0",
-      style: {
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }) && props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-0 pt-0"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }) && props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }).username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }) && props.audios.find(function (audio) {
-      return audio.id == boughtAudio.audio_id;
-    }).ft))));
+      name: props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }) && props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }).name,
+      username: props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }) && props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }).username,
+      ft: props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }) && props.audios.find(function (audio) {
+        return audio.id == boughtAudio.audio_id;
+      }).ft,
+      audioId: boughtAudio.audio_id,
+      showCartandBuyButton: false
+    });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
@@ -99247,9 +99300,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
-/* harmony import */ var react_social_login_buttons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-social-login-buttons */ "./node_modules/react-social-login-buttons/dist/index.js");
-/* harmony import */ var react_social_login_buttons__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-social-login-buttons */ "./node_modules/react-social-login-buttons/dist/index.js");
+/* harmony import */ var react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99261,7 +99316,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -99285,15 +99339,15 @@ var Login = function Login(_ref) {
 
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
-    axios.get('/sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(url, "/api/login"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(url, "/api/login"), {
         phone: phone,
         password: phone,
         remember: 'checked'
       }).then(function (res) {
         // const resStatus = res.statusText
         setMessage("Logged in");
-        axios.get("".concat(url, "/api/home")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
         });
         setTimeout(function () {
@@ -99315,6 +99369,14 @@ var Login = function Login(_ref) {
       });
     });
     setPhone('07');
+  };
+
+  var onSocial = function onSocial(website) {
+    window.location.href = "".concat(url, "/api/login/").concat(website); // axios.get('/sanctum/csrf-cookie').then(() => {
+    // 	axios.get(`${url}/api/home/${website}`)
+    // 		.then((res) => console.log(res.response.data.message))
+    // 		.catch((err) => console.log(err.response.data.errors))
+    // })
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99356,7 +99418,7 @@ var Login = function Login(_ref) {
     className: "form-group row mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-8 offset-md-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "submit",
     btnText: 'Login'
   })))))))));
@@ -101273,6 +101335,37 @@ var Register = function Register(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/pages/Search.js":
+/*!**************************************!*\
+  !*** ./resources/js/pages/Search.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Search = function Search() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-2"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-2"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Search);
+
+/***/ }),
+
 /***/ "./resources/js/pages/VideoAlbumCreate.js":
 /*!************************************************!*\
   !*** ./resources/js/pages/VideoAlbumCreate.js ***!
@@ -101729,7 +101822,17 @@ var VideoCharts = function VideoCharts(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("All"),
       _useState4 = _slicedToArray(_useState3, 2),
       genre = _useState4[0],
-      setGenre = _useState4[1]; // Array for links
+      setGenre = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
+      _useState6 = _slicedToArray(_useState5, 2),
+      artistSlice = _useState6[0],
+      setArtistSlice = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(8),
+      _useState8 = _slicedToArray(_useState7, 2),
+      videoSlice = _useState8[0],
+      setVideoSlice = _useState8[1]; // Array for links
 
 
   var charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"];
@@ -101887,6 +101990,16 @@ var VideoCharts = function VideoCharts(props) {
         props.setErrors(newError);
       });
     });
+  }; // Function for loading more artists
+
+
+  var onArtistSlice = function onArtistSlice() {
+    setArtistSlice(artistSlice + 10);
+  }; // Function for loading more videos
+
+
+  var onVideoSlice = function onVideoSlice() {
+    setVideoSlice(videoSlice + 8);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102001,7 +102114,7 @@ var VideoCharts = function VideoCharts(props) {
     className: "hidden-scroll"
   }, artistsArray.filter(function (artist) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
-  }).map(function (artistArray, key) {
+  }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
       className: "pt-0 pl-0 pr-0 pb-2",
@@ -102043,9 +102156,19 @@ var VideoCharts = function VideoCharts(props) {
         textOverflow: "clip"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, artistArray.key))));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card avatar-thumbnail ml-3",
+    style: {
+      borderRadius: "50%",
+      width: "50px",
+      height: "50px"
+    },
+    onClick: onArtistSlice
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: '/storage/img/musical-note.png'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
-  }, videosArray.map(function (videoArray, key) {
+  }, videosArray.slice(0, videoSlice).map(function (videoArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
       className: "card m-1 pb-2",
@@ -102141,9 +102264,13 @@ var VideoCharts = function VideoCharts(props) {
         return onBuyVideos(videoArray.key);
       }
     }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn my-5",
+    btnText: "load more",
+    onClick: onVideoSlice
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "anti-hidden"
-  }, videosArray.map(function (videoArray, key) {
+  }, videosArray.slice(0, videoSlice).map(function (videoArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: key,
       onClick: function onClick() {
@@ -102177,7 +102304,13 @@ var VideoCharts = function VideoCharts(props) {
       onCartVideos: onCartVideos,
       onBuyVideos: onBuyVideos
     });
-  })))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+    className: "my-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn",
+    btnText: "load more",
+    onClick: onVideoSlice
+  }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VideoCharts);

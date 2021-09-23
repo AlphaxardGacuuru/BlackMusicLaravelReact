@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+
 import Img from "./Img"
 import AuthLinks from "./AuthLinks"
 import TopnavLinks from "./TopNavLinks"
@@ -101,6 +102,20 @@ const TopNav = (props) => {
 								{/* <!-- Logo Area  --> */}
 								<div className="logo-area">
 									<Link to="/">Black Music</Link>
+								</div>
+
+								{/* <-- Contact form --> */}
+								<div className="contact-form hidden">
+									<input
+										name="search"
+										className="form-control"
+										placeholder="Search songs and artists"
+										style={{
+											textColor: "white",
+											color: "white",
+											width: "400px"
+										}} />
+									{/* <Button btnText="Search" btnClass="mysonar-btn float-right" style={{ display: "inline" }} /> */}
 								</div>
 
 								<div className="menu-content-area d-flex align-items-center">

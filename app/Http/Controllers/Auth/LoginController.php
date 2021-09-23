@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -60,22 +61,41 @@ class LoginController extends Controller
     {
         $user = Socialite::driver($website)->stateless()->user();
 
-        $emailCheck = User::where('email', $user->getEmail())->first();
+        // OAuth Two Providers
+        $token = $user->token;
+        $refreshToken = $user->refreshToken; // not always provided
+        $expiresIn = $user->expiresIn;
+
+        $user = Socialite::driver('github')->userFromToken($token);
+
+        $dbUser = User::where('email', $user->getEmail())->first();
         $usernameCheck = User::where('email', $user->getEmail())->first()->username;
-        if ($usernameCheck) {
-            /* Login if user is found in database */
-            Auth::login($emailCheck);
-            return redirect('posts');
-        } else {
-            $try = "two";
-            return view('auth.login')->with(['try' => $try, 'gotEmail' => $user->getEmail()]);
-        }
+
+        $createUser = new User;
+        $createUser->email = $user->getEmail();
+        $createUser->save();
+
+        // $user->getName();
+        // $user->getEmail();
+        // $user->getAvatar();
+
+        /* Check if user exists */
+        /* Login if user is found in database */
+        // if ($usernameCheck) {
+        //     Auth::login($emailCheck);
+        //     return redirect('posts');
+
+        // } else {
+        //     $try = "two";
+        //     return view('auth.login')->with(['try' => $try, 'gotEmail' => $user->getEmail()]);
+
+        // }
     }
 
-	/* 
-	*
-	* Register user
-	*/
+    /*
+     *
+     * Register user
+     */
     public function register(Request $request)
     {
         $fields = $request->validate([
@@ -89,10 +109,10 @@ class LoginController extends Controller
         ]);
     }
 
-	/* 
-	*
-	* Login User
-	 */
+    /*
+     *
+     * Login User
+     */
     // public function login(Request $request)
     // {
     //     $fields = $request->validate([
@@ -101,10 +121,10 @@ class LoginController extends Controller
 
     //     // Fetch User
     //     $user = User::where('phone', $fields['phone'])->first();
-		
+
     //     $token = $user->createToken('normal')->plainTextToken;
-		
-	// 	// Auth::login($user);
+
+    //     // Auth::login($user);
 
     //     $response = [
     //         'user' => auth()->user(),

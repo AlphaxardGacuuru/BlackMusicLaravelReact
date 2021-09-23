@@ -19,14 +19,14 @@ class KopokopoController extends Controller
     {
         // Do not hard code these values
         $options = [
-            'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
-            // 'clientId' => 'o7wE4rdF-bXJV8JbPknbribTxjTxiEVD-Qn44KGjo_E',
-            'clientSecret' => 'AWmptk5WjDpTau9PIELbVBqiw3pDiM5dlILssKX9N3E',
-            // 'clientSecret' => 'nkOf5bqUP_5wSMquZIhUa_GvRAkNIkBOCMqGwGuMc3w',
-            'apiKey' => '6rgIMwloH24KVndBVEMVpdFpoSG4L0tQd3YpcADyIpA',
-            // 'apiKey' => '1aa7d918b8a4cd2472d74dc90e429edd4cd6d999',
-            'baseUrl' => 'https://sandbox.kopokopo.com',
-            // 'baseUrl' => 'https: //app.kopokopo.com',
+            // 'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
+            'clientId' => 'o7wE4rdF-bXJV8JbPknbribTxjTxiEVD-Qn44KGjo_E',
+            // 'clientSecret' => 'AWmptk5WjDpTau9PIELbVBqiw3pDiM5dlILssKX9N3E',
+            'clientSecret' => 'nkOf5bqUP_5wSMquZIhUa_GvRAkNIkBOCMqGwGuMc3w',
+            // 'apiKey' => '6rgIMwloH24KVndBVEMVpdFpoSG4L0tQd3YpcADyIpA',
+            'apiKey' => '1aa7d918b8a4cd2472d74dc90e429edd4cd6d999',
+            // 'baseUrl' => 'https://sandbox.kopokopo.com',
+            'baseUrl' => 'https://app.kopokopo.com',
         ];
 
         $K2 = new K2($options);
@@ -46,7 +46,8 @@ class KopokopoController extends Controller
         $stk = $K2->StkService();
         $response = $stk->initiateIncomingPayment([
             'paymentChannel' => 'M-PESA STK Push',
-            'tillNumber' => 'K000000',
+            // 'tillNumber' => 'K000000',
+            'tillNumber' => 'K433842',
             'firstName' => auth()->user()->name,
             'lastName' => 'Doe',
             'phoneNumber' => substr_replace(auth()->user()->phone, '+254', 0, -9),
@@ -59,7 +60,7 @@ class KopokopoController extends Controller
 
         if ($response['status'] == 'success') {
             $data = $result['data'];
-            // echo "The resource location is:" . json_encode($response['location']);
+            echo "The resource location is:" . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/incoming_payments/247b1bd8-f5a0-4b71-a898-f62f67b8ae1c'
             return response($response['status'], 200);
         } else {
@@ -96,6 +97,28 @@ class KopokopoController extends Controller
         //         return $key1;
         //     }
         // }
+
+        // $kopokopo->data = $request->id;
+        // $kopokopo->data = $request->type;
+        // $kopokopo->data = $request->initiationTime;
+        // $kopokopo->data = $request->status;
+        // $kopokopo->data = $request->eventType;
+        // $kopokopo->data = $request->resourceId;
+        // $kopokopo->data = $request->reference;
+        // $kopokopo->data = $request->originationTime;
+        // $kopokopo->data = $request->senderPhoneNumber;
+        // $kopokopo->data = $request->amount;
+        // $kopokopo->data = $request->currency;
+        // $kopokopo->data = $request->tillNumber;
+        // $kopokopo->data = $request->system;
+        // $kopokopo->data = $request->senderFirstName;
+        // $kopokopo->data = $request->senderMiddleName;
+        // $kopokopo->data = $request->senderLastName;
+        // $kopokopo->data = $request->resourceStatus;
+        // $kopokopo->data = $request->errors;
+        // $kopokopo->data = $request->metadata;
+        // $kopokopo->data = $request->linkSelf;
+        // $kopokopo->data = $request->callbackUrl;
     }
 
     /**

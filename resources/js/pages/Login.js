@@ -1,10 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import {
+	GithubLoginButton,
+	GoogleLoginButton,
+	FacebookLoginButton,
+	TwitterLoginButton
+} from "react-social-login-buttons";
+import axios from 'axios';
+
 import Button from '../components/Button'
-import { GithubLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { FacebookLoginButton } from "react-social-login-buttons";
 
 const Login = ({ setMessage, setErrors, setAuth, url }) => {
 
@@ -42,6 +47,16 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 		setPhone('07')
 	}
 
+	const onSocial = (website) => {
+		window.location.href = `${url}/api/login/${website}`
+
+		// axios.get('/sanctum/csrf-cookie').then(() => {
+		// 	axios.get(`${url}/api/home/${website}`)
+		// 		.then((res) => console.log(res.response.data.message))
+		// 		.catch((err) => console.log(err.response.data.errors))
+		// })
+	}
+
 	return (
 		<div className="container">
 			<div className="row justify-content-center">
@@ -68,13 +83,21 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 									</div>
 								</div>
 							</form>
-							{/* <GithubLoginButton onClick={() => alert("Hello")} /> */}
-							{/* <GoogleLoginButton onClick={() => alert("Hello")} /> */}
-							{/* <FacebookLoginButton onClick={() => alert("Hello")} /> */}
 						</div>
 					</div>
 				</div>
 			</div>
+
+			{/* <div className="row">
+				<div className="col-sm-2"></div>
+				<div className="col-sm-8">
+					<GithubLoginButton className="mt-2" onClick={() => onSocial("github")} />
+					<GoogleLoginButton className="mt-2" onClick={() => onSocial("google")} />
+					<FacebookLoginButton className="mt-2" onClick={() => onSocial("facebook")} />
+					<TwitterLoginButton className="mt-2" onClick={() => onSocial("twitter")} />
+				</div>
+				<div className="col-sm-2"></div>
+			</div> */}
 		</div>
 	)
 }

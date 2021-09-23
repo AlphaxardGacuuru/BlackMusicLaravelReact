@@ -18,132 +18,133 @@ const Bottomnav = (props) => {
 	const cartItems = vidCartItems + audCartItems
 
 	return (
-		<div className="row m-0 p-0">
+		<>
 			<br style={{ display: checkLocation && "none" }} />
 			<br style={{ display: checkLocation && "none" }} />
-			<br />
-			<br />
-			<div className="col-sm-12 m-0 p-0">
-				<div className="bottomNav menu-content-area header-social-area">
-
-					{/* <!-- Progress Container --> */}
+			<br style={{ display: checkLocation && "none" }} />
+			<br className="anti-hidden" />
+			<br className="anti-hidden" />
+			{/* // <div className="col-sm-12 m-0 p-0"> */}
+			<div className="bottomNav menu-content-area header-social-area">
+				{/* <!-- Progress Container --> */}
+				<div
+					ref={props.audioContainer}
+					className="progress"
+					style={{ height: "3px", background: "#232323", borderRadius: "0px", display: checkLocation && "none" }}>
 					<div
-						ref={props.audioContainer}
-						className="progress"
-						style={{ height: "3px", background: "#232323", borderRadius: "0px", display: checkLocation && "none" }}>
-						<div
-							ref={props.audioProgress}
-							className="progress-bar rounded-0"
-							style={{
-								background: "#FFD700",
-								height: "5px",
-								width: props.progressPercent
-							}}>
-						</div>
+						ref={props.audioProgress}
+						className="progress-bar rounded-0"
+						style={{
+							background: "#FFD700",
+							height: "5px",
+							width: props.progressPercent
+						}}>
 					</div>
+				</div>
 
-					{/* Audio Player */}
-					<div className="container-fluid menu-area d-flex text-white">
+				{/* Audio Player */}
+				<div className="container-fluid menu-area d-flex text-white hidden">
 
-						<audio
-							ref={props.audio}
-							type="audio/*"
-							preload='true'
-							autoPlay={false}
-							end={10}
-							src={`/storage/${props.audios.find((audio) => audio.id == props.show) &&
-								props.audios.find((audio) => audio.id == props.show).audio}`} />
+					<audio
+						ref={props.audio}
+						type="audio/*"
+						preload='true'
+						autoPlay={false}
+						end={10}
+						src={`/storage/${props.audios.find((audio) => audio.id == props.show) &&
+							props.audios.find((audio) => audio.id == props.show).audio}`} />
 
-						<div style={{ display: checkLocation && "none" }}>
-							{/* <!-- Close Icon --> */}
-							<span onClick={() => props.setShow(0)}>
-								<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-x"
-									viewBox="0 0 16 16">
-									<path
-										d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-								</svg>
-							</span>
-						</div>
-						<div className="p-2 mr-auto" style={{ display: checkLocation && "none" }} >
-							<Link to={`/audio-show/${props.show}`}>
-								<h6
-									className="mb-0 pb-0"
-									style={{
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip",
-										color: "white"
-									}}>
+					<div style={{ display: checkLocation && "none" }}>
+						{/* <!-- Close Icon --> */}
+						<span onClick={() => props.setShow(0)}>
+							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-x"
+								viewBox="0 0 16 16">
+								<path
+									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+							</svg>
+						</span>
+					</div>
+					<div className="p-2 mr-auto" style={{ display: checkLocation && "none" }} >
+						<Link to={`/audio-show/${props.show}`}>
+							<h6
+								className="mb-0 pb-0"
+								style={{
+									whiteSpace: "nowrap",
+									overflow: "hidden",
+									textOverflow: "clip",
+									color: "white"
+								}}>
+								{props.audios.find((audio) => audio.id == props.show) &&
+									props.audios.find((audio) => audio.id == props.show).name}
+							</h6>
+							<h6 className="mt-0 pt-0" style={{ color: "white" }}>
+								<small>
 									{props.audios.find((audio) => audio.id == props.show) &&
-										props.audios.find((audio) => audio.id == props.show).name}
-								</h6>
-								<h6 className="mt-0 pt-0" style={{ color: "white" }}>
-									<small>
-										{props.audios.find((audio) => audio.id == props.show) &&
-											props.audios.find((audio) => audio.id == props.show).username}
-									</small>
-									<small className="ml-1">
-										{props.audios.find((audio) => audio.id == props.show) &&
-											props.audios.find((audio) => audio.id == props.show).ft}
-									</small>
-								</h6>
-							</Link>
-						</div>
-						<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
-							<span onClick={props.prevSong}>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									className="bi bi-skip-backward"
-									viewBox="0 0 16 16">
-									<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
-								</svg>
-							</span>
-						</div>
-						<div style={{ cursor: "pointer", display: checkLocation && "none", color: "#FFD700" }} className="p-2">
-							<span
-								onClick={props.playBtn ? props.pauseSong : props.playSong}>
-								{props.playBtn ?
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="2em"
-										height="2em"
-										fill="currentColor"
-										className="bi bi-pause"
-										viewBox="0 0 16 16">
-										<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-									</svg> :
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="2em"
-										height="2em"
-										fill="currentColor"
-										className="bi bi-play"
-										viewBox="0 0 16 16">
-										<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-									</svg>
-								}
-							</span>
-						</div>
-						<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
-							<span onClick={props.nextSong}>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									className="bi bi-skip-forward"
-									viewBox="0 0 16 16">
-									<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
-								</svg>
-							</span>
-						</div>
+										props.audios.find((audio) => audio.id == props.show).username}
+								</small>
+								<small className="ml-1">
+									{props.audios.find((audio) => audio.id == props.show) &&
+										props.audios.find((audio) => audio.id == props.show).ft}
+								</small>
+							</h6>
+						</Link>
 					</div>
-					{/* Audio Player End */}
+					<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
+						<span onClick={props.prevSong}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								className="bi bi-skip-backward"
+								viewBox="0 0 16 16">
+								<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
+							</svg>
+						</span>
+					</div>
+					<div style={{ cursor: "pointer", display: checkLocation && "none", color: "#FFD700" }} className="p-2">
+						<span
+							onClick={props.playBtn ? props.pauseSong : props.playSong}>
+							{props.playBtn ?
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="2em"
+									height="2em"
+									fill="currentColor"
+									className="bi bi-pause"
+									viewBox="0 0 16 16">
+									<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+								</svg> :
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="2em"
+									height="2em"
+									fill="currentColor"
+									className="bi bi-play"
+									viewBox="0 0 16 16">
+									<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+								</svg>
+							}
+						</span>
+					</div>
+					<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
+						<span onClick={props.nextSong}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								className="bi bi-skip-forward"
+								viewBox="0 0 16 16">
+								<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
+							</svg>
+						</span>
+					</div>
+				</div>
+				{/* Audio Player End */}
 
-					{/* Bottom Nav */}
+				{/* Bottom Nav */}
+				<div className="anti-hidden">
 					<div className="container-fluid menu-area d-flex justify-content-between">
 						{/* Home */}
 						<Link
@@ -253,10 +254,10 @@ const Bottomnav = (props) => {
 						</Link>
 						{/* Library End */}
 					</div>
-					{/* Bottom Nav End */}
 				</div>
+				{/* Bottom Nav End */}
 			</div>
-		</div>
+		</>
 	)
 }
 

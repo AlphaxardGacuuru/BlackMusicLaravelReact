@@ -190,6 +190,16 @@ const AudioShow = (props) => {
 		<div className="row">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-7">
+				{/* <div
+									className="spinner-border text-dark"
+									style={{
+										borderTopWidth: "2px",
+										borderBottomWidth: "2px",
+										borderLeftWidth: "2px",
+										width: "100px",
+										height: "100px",
+									}}>
+								</div> */}
 				<div
 					className="ml-2 mr-2"
 					style={{
@@ -199,14 +209,16 @@ const AudioShow = (props) => {
 						borderBottomLeftRadius: "10px",
 						overflow: "hidden",
 						width: "auto",
-						maxHeight: "495px"
+						maxHeight: "495px",
 					}}>
 					<center>
-						<Img
-							src={`/storage/${showAudio.thumbnail}`}
-							width="100%"
-							height="auto"
-							alt="music-cover" />
+						{props.audioLoader ?
+							<div id="sonar-load" className="mt-5 mb-5"></div> :
+							<Img
+								src={`/storage/${showAudio.thumbnail}`}
+								width="100%"
+								height="auto"
+								alt="music-cover" />}
 					</center>
 				</div>
 
@@ -700,6 +712,7 @@ const AudioShow = (props) => {
 								props.audios.find((audio) => audio.id == boughtAudio.audio_id) &&
 								props.audios.find((audio) => audio.id == boughtAudio.audio_id).ft
 							}
+							audioId={boughtAudio.audio_id}
 							showCartandBuyButton={false} />
 					))}
 				{/* <!-- End of Up next Area --> */}

@@ -1083,7 +1083,7 @@ div.hidden-scroll span {
     transition-duration: 500ms;
     background-color: #232323;
     padding: 0px 0px;
-    display: none;
+    /* display: none; */
 }
 
 .bottomNav .logo-area a {
@@ -1095,7 +1095,7 @@ div.hidden-scroll span {
 @media only screen and (max-width: 767px) {
     .bottomNav .logo-area a {
         font-size: 24px;
-        display: block;
+        /* display: block; */
     }
 }
 
@@ -1113,14 +1113,14 @@ div.hidden-scroll span {
     .bottomNav .menu-content-area .header-social-area a {
         padding: 0 0px;
         font-size: 14px;
-        display: block;
+        /* display: block; */
     }
 }
 
 @media only screen and (max-width: 767px) {
     .bottomNav .menu-content-area .header-social-area {
         margin-right: 15px;
-        display: block;
+        /* display: block; */
     }
 }
 
@@ -1131,7 +1131,7 @@ div.hidden-scroll span {
 @media only screen and (max-width: 767px) {
     .bottomNav {
         padding: 0px 0;
-        display: block;
+        /* display: block; */
     }
 }
 
@@ -1461,3 +1461,81 @@ html, body {
     bottom: 0;
 }
 /* Bottom slide Nav End */
+
+
+#preloader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -ms-grid-row-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #232323;
+  background: transparent;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000000; 
+}
+
+#sonar-load {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px;
+  border-style: solid;
+  border-color: transparent;
+  /* border-top-color: #f8f5f5; */
+  border-top-color: #232323;
+  -webkit-animation: sonar 2400ms linear infinite;
+  animation: sonar 2400ms linear infinite;
+  z-index: 999; }
+  #sonar-load:before {
+    content: "";
+    position: absolute;
+    top: 7.5px;
+    left: 7.5px;
+    right: 7.5px;
+    bottom: 7.5px;
+    border-radius: 50%;
+    border: 3px;
+    border-style: solid;
+    border-color: transparent;
+    /* border-top-color: #f8f5f5; */
+    border-top-color: #232323;
+    -webkit-animation: sonar 2700ms linear infinite;
+    animation: sonar 2700ms linear infinite; }
+  #sonar-load:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 50%;
+    border: 3px;
+    border-style: solid;
+    border-color: transparent;
+    /* border-top-color: #f8f5f5; */
+    border-top-color: #232323;
+    -webkit-animation: sonar 1800ms linear infinite;
+    animation: sonar 1800ms linear infinite; }
+
+@-webkit-keyframes sonar {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes sonar {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }

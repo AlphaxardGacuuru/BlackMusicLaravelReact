@@ -29,8 +29,10 @@ Auth::routes();
 Route::get('home', 'HomeController@index')->name('home');
 
 // Social logins
-Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
+// Route::group(['middleware' => ['web']], function () {
+    Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
+    Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
+// });
 
 Route::resources([
     'audios' => 'AudiosController',
@@ -46,7 +48,7 @@ Route::resources([
     'decos' => 'DecosController',
     'follows' => 'FollowsController',
     'follow-notifications' => 'FollowNotificationsController',
-	'kopokopo' => 'KopokopoController',
+    'kopokopo' => 'KopokopoController',
     'notifications' => 'NotificationsController',
     'posts' => 'PostsController',
     'post-likes' => 'PostLikesController',

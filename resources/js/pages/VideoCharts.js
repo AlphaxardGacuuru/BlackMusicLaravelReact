@@ -13,6 +13,8 @@ const VideoCharts = (props) => {
 	//Declare States 
 	const [chart, setChart] = useState("Newly Released")
 	const [genre, setGenre] = useState("All")
+	const [artistSlice, setArtistSlice] = useState(10)
+	const [videoSlice, setVideoSlice] = useState(8)
 
 	// Array for links
 	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"]
@@ -145,6 +147,16 @@ const VideoCharts = (props) => {
 		});
 	}
 
+	// Function for loading more artists
+	const onArtistSlice = () => {
+		setArtistSlice(artistSlice + 10)
+	}
+
+	// Function for loading more videos
+	const onVideoSlice = () => {
+		setVideoSlice(videoSlice + 8)
+	}
+
 	return (
 		<>
 			{/* Carousel */}
@@ -230,6 +242,7 @@ const VideoCharts = (props) => {
 					<div className="hidden-scroll">
 						{/*  Echo Artists  */}
 						{artistsArray.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
+							.slice(0, artistSlice)
 							.map((artistArray, key) => (
 								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
 									<center>
@@ -265,6 +278,24 @@ const VideoCharts = (props) => {
 									</center>
 								</span>
 							))}
+
+						{/* Load More button */}
+						<span>
+							<center>
+								<div
+									className="card avatar-thumbnail ml-3"
+									style={{ borderRadius: "50%", width: "50px", height: "50px" }}
+									onClick={onArtistSlice}>
+									<Img src={'/storage/img/musical-note.png'} />
+								</div>
+								<br />
+								<br />
+								<br />
+								<br />
+							</center>
+						</span>
+						{/* Load More button End */}
+						
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -273,7 +304,7 @@ const VideoCharts = (props) => {
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
 					<div className="hidden">
-						{videosArray.map((videoArray, key) => (
+						{videosArray.slice(0, videoSlice).map((videoArray, key) => (
 							<span key={key} className="card m-1 pb-2"
 								style={{
 									borderRadius: "10px",
@@ -361,9 +392,16 @@ const VideoCharts = (props) => {
 					</div>
 					{/* <!-- ****** Songs Area End ****** - */}
 
+					<center>
+						<Button
+							btnClass="mysonar-btn my-5"
+							btnText="load more"
+							onClick={onVideoSlice} />
+					</center>
+
 					{/* For mobile */}
 					<div className="anti-hidden">
-						{videosArray.map((videoArray, key) => (
+						{videosArray.slice(0, videoSlice).map((videoArray, key) => (
 							<VideoMediaHorizontal
 								key={key}
 								onClick={() => props.setShow(0)}
@@ -395,6 +433,13 @@ const VideoCharts = (props) => {
 								onCartVideos={onCartVideos}
 								onBuyVideos={onBuyVideos} />
 						))}
+
+						{/* Load More button */}
+						<center className="my-4">
+							<Button btnClass="mysonar-btn" btnText="load more" onClick={onVideoSlice} />
+						</center>
+						{/* Load More button End */}
+
 						{/* <!-- End of Chart Area - */}
 					</div>
 				</div>

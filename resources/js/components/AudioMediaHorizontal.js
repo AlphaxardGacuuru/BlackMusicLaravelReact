@@ -13,7 +13,7 @@ const AudioMediaHorizontal = (props) => {
 				</Link>
 			</div>
 			<div className="ml-2 mr-auto">
-				<Link to={props.link} onClick={() => props.setShow(props.audioId)}>
+				<span style={{ cursor: "pointer" }} onClick={() => props.setShow(props.audioId)}>
 					<h6
 						className="mb-0 pb-0"
 						style={{
@@ -27,7 +27,7 @@ const AudioMediaHorizontal = (props) => {
 						<small>{props.username}</small>
 						<small className="ml-1">{props.ft}</small>
 					</h6>
-				</Link>
+				</span>
 			</div>
 			{props.showCartandBuyButton ?
 				props.hasBoughtAudio ?
