@@ -72,8 +72,16 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 									</label>
 
 									<div className="col-md-6">
-										<input id="phone" type="text" className="form-control"
-											name="phone" value={phone} onChange={(e) => { setPhone(e.target.value) }} required autoComplete="phone" autoFocus />
+										<input
+											id="phone"
+											type="text"
+											className="form-control"
+											name="phone"
+											value={phone}
+											onChange={(e) => { setPhone(e.target.value) }}
+											required={true}
+											autoComplete="phone"
+											autoFocus={true} />
 									</div>
 								</div>
 
@@ -84,6 +92,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 								</div>
 							</form>
 						</div>
+						
 					</div>
 				</div>
 			</div>

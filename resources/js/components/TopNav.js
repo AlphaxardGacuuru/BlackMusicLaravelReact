@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link, useLocation, useHistory } from 'react-router-dom'
+import { useState } from 'react'
 
 import Img from "./Img"
 import AuthLinks from "./AuthLinks"
@@ -10,7 +9,11 @@ import TopnavLinks from "./TopNavLinks"
 const TopNav = (props) => {
 
 	const [menu, setMenu] = useState("")
+
 	const location = useLocation()
+
+	const history = useHistory()
+
 	var display
 	location.pathname == "/post-create" || location.pathname.match(/post-show/) ? display = "none" : display = ""
 
@@ -114,8 +117,12 @@ const TopNav = (props) => {
 											textColor: "white",
 											color: "white",
 											width: "400px"
+										}}
+										onChange={(e) => {
+											var regex = new RegExp(e.target.value, 'gi');
+											props.setSearch(regex)
+											history.push("/search")
 										}} />
-									{/* <Button btnText="Search" btnClass="mysonar-btn float-right" style={{ display: "inline" }} /> */}
 								</div>
 
 								<div className="menu-content-area d-flex align-items-center">

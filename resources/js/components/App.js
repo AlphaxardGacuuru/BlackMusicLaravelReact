@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 
 import Messages from './Messages'
@@ -540,10 +540,20 @@ function App() {
 	// Song ends
 	// audio.current.addEventListener('ended', nextSong);
 
+	// Search State
+	const [search, setSearch] = useState("!@#$%^&")
+
+	const searchInput = useRef(null)
+
+	// Function to focus on search input
+	const onSearchIconClick = () => {
+		searchInput.current.focus()
+	}
+
 	return (
 		<>
 			<Router>
-				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios }} />
+				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch }} />
 
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />
@@ -551,14 +561,14 @@ function App() {
 				<Route path="/register" exact render={(props) => (
 					<Register {...{ setMessage, setErrors, setAuth, url }} />
 				)} />
-				
+
 
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
 				)} />
 
-				<Route path="/search" exact render={(props) = (
-					<Search {...{ url, auth, setMessage, setErrors, artists, videos, videoAlbums, audios, audioAlbums }} />
+				<Route path="/search" exact render={(props) => (
+					<Search {...{ url, auth, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
@@ -651,7 +661,7 @@ function App() {
 				)} />
 				<Messages {...{ message, errors }} />
 
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong }} />
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, onSearchIconClick }} />
 			</Router>
 
 			<audio

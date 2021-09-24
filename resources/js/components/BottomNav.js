@@ -195,7 +195,8 @@ const Bottomnav = (props) => {
 								fontSize: "10px",
 								fontWeight: "100",
 								color: location.pathname == "/search" ? "gold" : "white"
-							}}>
+							}}
+							onClick={location.pathname == "/search" && props.onSearchIconClick}>
 							<span style={{ fontSize: "20px" }} className="nav-link">
 								<svg className="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg">

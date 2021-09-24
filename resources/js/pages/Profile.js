@@ -325,7 +325,7 @@ const Profile = (props) => {
 											<small>Audio Album</small>
 											<h1>{audioAlbum.name}</h1>
 											<h6>
-												{new Date(audioAlbum.created_at).getDay()}
+												{new Date(audioAlbum.created_at).getDate()}
 												{" " + months[new Date(audioAlbum.created_at).getMonth()]}
 												{" " + new Date(audioAlbum.created_at).getFullYear()}
 											</h6>
@@ -752,7 +752,7 @@ const Profile = (props) => {
 											<small>Video Album</small>
 											<h1>{videoAlbum.name}</h1>
 											<h6>
-												{new Date(videoAlbum.created_at).getDay()}
+												{new Date(videoAlbum.created_at).getDate()}
 												{" " + months[new Date(videoAlbum.created_at).getMonth()]}
 												{" " + new Date(videoAlbum.created_at).getFullYear()}
 											</h6>
