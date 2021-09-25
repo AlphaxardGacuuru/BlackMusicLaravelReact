@@ -97,7 +97,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				</div>
 			</div>
 
-			{/* <div className="row">
+			<div className="row">
 				<div className="col-sm-2"></div>
 				<div className="col-sm-8">
 					<GithubLoginButton className="mt-2" onClick={() => onSocial("github")} />
@@ -106,7 +106,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 					<TwitterLoginButton className="mt-2" onClick={() => onSocial("twitter")} />
 				</div>
 				<div className="col-sm-2"></div>
-			</div> */}
+			</div>
 		</div>
 	)
 }

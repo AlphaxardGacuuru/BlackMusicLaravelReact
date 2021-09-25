@@ -41,7 +41,7 @@ class KopokopoController extends Controller
             $data = $result['data'];
             echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
-
+		
         // STKPush
         $stk = $K2->StkService();
         $response = $stk->initiateIncomingPayment([
