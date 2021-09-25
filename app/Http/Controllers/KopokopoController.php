@@ -26,7 +26,7 @@ class KopokopoController extends Controller
             // 'apiKey' => '6rgIMwloH24KVndBVEMVpdFpoSG4L0tQd3YpcADyIpA',
             'apiKey' => '1aa7d918b8a4cd2472d74dc90e429edd4cd6d999',
             // 'baseUrl' => 'https://sandbox.kopokopo.com',
-            'baseUrl' => 'https://app.kopokopo.com',
+            'baseUrl' => 'https://app.kopokopo.com/applications',
         ];
 
         $K2 = new K2($options);
@@ -39,7 +39,7 @@ class KopokopoController extends Controller
 
         if ($result['status'] == 'success') {
             $data = $result['data'];
-            // echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
+            echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
 
         // STKPush
@@ -60,7 +60,7 @@ class KopokopoController extends Controller
 
         if ($response['status'] == 'success') {
             $data = $result['data'];
-            echo "The resource location is:" . json_encode($response['location']);
+            echo "The resource location is: " . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/incoming_payments/247b1bd8-f5a0-4b71-a898-f62f67b8ae1c'
             return response($response['status'], 200);
         } else {

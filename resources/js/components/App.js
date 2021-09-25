@@ -368,7 +368,6 @@ function App() {
 			.catch(() => setErrors(["Failed to fetch bought audios"]))
 	}
 
-
 	// Audio Player
 	const [show, setShow] = useState(0)
 	const [playBtn, setPlayBtn] = useState(true)
@@ -547,8 +546,43 @@ function App() {
 
 	// Function to focus on search input
 	const onSearchIconClick = () => {
-		searchInput.current.focus()
+		window.location.href.match("/search") && searchInput.current.focus()
 	}
+
+	//Register service worker
+	// if ('serviceWorker' in navigator) {
+	// 	window.addEventListener('load', () => {
+	// 		navigator.serviceWorker.register('/sw.js')
+	// 			.then((reg) => console.log('Service worker registered', reg))
+	// 			.catch((err) => console.log('Service worker not registered', err));
+	// 	})
+	// }
+
+	// // Install button
+	// let deferredPrompt;
+	// // Listen to the install prompt
+	// window.addEventListener('beforeinstallprompt', (e) => {
+	// 	deferredPrompt = e;
+	// 	// Show the button
+	// 	btnAdd.style.display = 'block';
+
+	// 	// Action when button is clicked
+	// 	btnAdd.addEventListener('click', (e) => {
+	// 		// Show install banner
+	// 		deferredPrompt.prompt();
+	// 		// Check if the user accepted
+	// 		// deferredPrompt.userChoice.then((choiceResult) => {
+	// 		// 	if(choiceResult.outcome === 'accepted') {
+	// 		// 		btnAdd.innerHTML = 'User accepted';
+	// 		// 	}
+	// 		// 	deferredPrompt = null;
+	// 		// });
+
+	// 		window.addEventListener('appinstalled', (evt) => {
+	// 			btnAdd.innerHTML = 'Installed';
+	// 		});
+	// 	});
+	// });
 
 	return (
 		<>

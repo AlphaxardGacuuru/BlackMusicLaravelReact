@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +7,7 @@
     <meta name="theme-color" content="#232323" />
     {{-- iOS Safari --}}
     <meta name="apple-mobile-web-app-status-bar-style" content="#232323">
+    <meta name="description" content="The best Kenyan Online Music Store" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
     {{-- Manifest --}}
-    {{-- <link rel="manifest" type="application/manifest+json" href="manifest.webmanifest"> --}}
+    <link rel="manifest" type="application/manifest+json" href="manifest.webmanifest">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

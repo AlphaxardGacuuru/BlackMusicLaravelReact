@@ -93658,8 +93658,39 @@ function App() {
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
   var onSearchIconClick = function onSearchIconClick() {
-    searchInput.current.focus();
-  };
+    window.location.href.match("/search") && searchInput.current.focus();
+  }; //Register service worker
+  // if ('serviceWorker' in navigator) {
+  // 	window.addEventListener('load', () => {
+  // 		navigator.serviceWorker.register('/sw.js')
+  // 			.then((reg) => console.log('Service worker registered', reg))
+  // 			.catch((err) => console.log('Service worker not registered', err));
+  // 	})
+  // }
+  // // Install button
+  // let deferredPrompt;
+  // // Listen to the install prompt
+  // window.addEventListener('beforeinstallprompt', (e) => {
+  // 	deferredPrompt = e;
+  // 	// Show the button
+  // 	btnAdd.style.display = 'block';
+  // 	// Action when button is clicked
+  // 	btnAdd.addEventListener('click', (e) => {
+  // 		// Show install banner
+  // 		deferredPrompt.prompt();
+  // 		// Check if the user accepted
+  // 		// deferredPrompt.userChoice.then((choiceResult) => {
+  // 		// 	if(choiceResult.outcome === 'accepted') {
+  // 		// 		btnAdd.innerHTML = 'User accepted';
+  // 		// 	}
+  // 		// 	deferredPrompt = null;
+  // 		// });
+  // 		window.addEventListener('appinstalled', (evt) => {
+  // 			btnAdd.innerHTML = 'Installed';
+  // 		});
+  // 	});
+  // });
+
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], {
     url: url,
@@ -94596,7 +94627,7 @@ var Bottomnav = function Bottomnav(props) {
       fontSize: "10px",
       fontWeight: "100"
     }, "color", location.pathname == "/search" ? "gold" : "white"),
-    onClick: location.pathname == "/search" && props.onSearchIconClick
+    onClick: props.onSearchIconClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "20px"
