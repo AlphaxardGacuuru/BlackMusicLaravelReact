@@ -70,6 +70,7 @@ class LoginController extends Controller
         echo $user->getName() . "<br>";
         echo $user->getEmail() . "<br>";
         echo $user->getAvatar() . "<br>";
+        echo "<image src='" . getAvatar() . "' />";
 
         $dbUser = User::where('email', $user->getEmail())->first();
         $usernameCheck = User::where('email', $user->getEmail())->first()->username;
