@@ -66,7 +66,8 @@ class LoginController extends Controller
         // $refreshToken = $user->refreshToken; // not always provided
         // $expiresIn = $user->expiresIn;
 
-        $user = Socialite::driver($website)->userFromToken($token);
+        // $user = Socialite::driver($website)->userFromToken($token);
+        $user = Socialite::driver($website)->user();
 
         echo $user->getName() . "<br>";
         echo $user->getEmail() . "<br>";
