@@ -48,13 +48,13 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 	}
 
 	const onSocial = (website) => {
-		window.location.href = `${url}/api/login/${website}`
+		// window.location.href = `${url}/api/login/${website}`
 
-		// axios.get('/sanctum/csrf-cookie').then(() => {
-		// 	axios.get(`${url}/api/home/${website}`)
-		// 		.then((res) => console.log(res.response.data.message))
-		// 		.catch((err) => console.log(err.response.data.errors))
-		// })
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.get(`${url}/api/login/${website}`)
+				.then((res) => console.log(res.response.data.message))
+				.catch((err) => console.log(err.response.data.errors))
+		})
 	}
 
 	return (
@@ -87,25 +87,18 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 
 								<div className="form-group row mb-0">
 									<div className="col-md-8 offset-md-4">
-										<Button type="submit" btnText={'Login'} />
+										<Button type="submit" btnClass="mysonar-btn float-right" btnText={'Login'} />
 									</div>
 								</div>
 							</form>
+							<GithubLoginButton className="mt-2" onClick={() => onSocial("github")} />
+							<GoogleLoginButton className="mt-2" onClick={() => onSocial("google")} />
+							<FacebookLoginButton className="mt-2" onClick={() => onSocial("facebook")} />
+							<TwitterLoginButton className="mt-2" onClick={() => onSocial("twitter")} />
 						</div>
 						
 					</div>
 				</div>
-			</div>
-
-			<div className="row">
-				<div className="col-sm-2"></div>
-				<div className="col-sm-8">
-					<GithubLoginButton className="mt-2" onClick={() => onSocial("github")} />
-					<GoogleLoginButton className="mt-2" onClick={() => onSocial("google")} />
-					<FacebookLoginButton className="mt-2" onClick={() => onSocial("facebook")} />
-					<TwitterLoginButton className="mt-2" onClick={() => onSocial("twitter")} />
-				</div>
-				<div className="col-sm-2"></div>
 			</div>
 		</div>
 	)

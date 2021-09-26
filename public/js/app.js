@@ -99437,11 +99437,14 @@ var Login = function Login(_ref) {
   };
 
   var onSocial = function onSocial(website) {
-    window.location.href = "".concat(url, "/api/login/").concat(website); // axios.get('/sanctum/csrf-cookie').then(() => {
-    // 	axios.get(`${url}/api/home/${website}`)
-    // 		.then((res) => console.log(res.response.data.message))
-    // 		.catch((err) => console.log(err.response.data.errors))
-    // })
+    // window.location.href = `${url}/api/login/${website}`
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(url, "/api/login/").concat(website)).then(function (res) {
+        return console.log(res.response.data.message);
+      })["catch"](function (err) {
+        return console.log(err.response.data.errors);
+      });
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99485,14 +99488,9 @@ var Login = function Login(_ref) {
     className: "col-md-8 offset-md-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "submit",
+    btnClass: "mysonar-btn float-right",
     btnText: 'Login'
-  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-2"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
     className: "mt-2",
     onClick: function onClick() {
       return onSocial("github");
@@ -99512,9 +99510,7 @@ var Login = function Login(_ref) {
     onClick: function onClick() {
       return onSocial("twitter");
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-2"
-  })));
+  }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);
