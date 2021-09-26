@@ -59,7 +59,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($website)
     {
-        $user = Socialite::driver($website)->stateless()->user();
+        $user = Socialite::driver($website)->user();
 
         // OAuth Two Providers
         $token = $user->token;
@@ -67,10 +67,10 @@ class LoginController extends Controller
         $expiresIn = $user->expiresIn;
 
         $user = Socialite::driver($website)->userFromToken($token);
-		
-        echo $user->getName();
-        echo $user->getEmail();
-        echo $user->getAvatar();
+
+        echo $user->getName() . "<br>";
+        echo $user->getEmail() . "<br>";
+        echo $user->getAvatar() . "<br>";
 
         $dbUser = User::where('email', $user->getEmail())->first();
         $usernameCheck = User::where('email', $user->getEmail())->first()->username;
