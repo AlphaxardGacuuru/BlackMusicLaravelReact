@@ -62,9 +62,9 @@ class LoginController extends Controller
         $user = Socialite::driver($website)->user();
 
         // OAuth Two Providers
-        $token = $user->token;
+        // $token = $user->token;
         // $refreshToken = $user->refreshToken; // not always provided
-        $expiresIn = $user->expiresIn;
+        // $expiresIn = $user->expiresIn;
 
         $user = Socialite::driver($website)->userFromToken($token);
 
