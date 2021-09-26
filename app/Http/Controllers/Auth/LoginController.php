@@ -66,7 +66,11 @@ class LoginController extends Controller
         $refreshToken = $user->refreshToken; // not always provided
         $expiresIn = $user->expiresIn;
 
-        $user = Socialite::driver('github')->userFromToken($token);
+        $user = Socialite::driver($website)->userFromToken($token);
+		
+        echo $user->getName();
+        echo $user->getEmail();
+        echo $user->getAvatar();
 
         $dbUser = User::where('email', $user->getEmail())->first();
         $usernameCheck = User::where('email', $user->getEmail())->first()->username;
@@ -74,10 +78,6 @@ class LoginController extends Controller
         $createUser = new User;
         $createUser->email = $user->getEmail();
         // $createUser->save();
-
-        echo $user->getName();
-        echo $user->getEmail();
-        echo $user->getAvatar();
 
         /* Check if user exists */
         /* Login if user is found in database */
