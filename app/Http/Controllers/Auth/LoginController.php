@@ -73,11 +73,11 @@ class LoginController extends Controller
 
         $createUser = new User;
         $createUser->email = $user->getEmail();
-        $createUser->save();
+        // $createUser->save();
 
-        // $user->getName();
-        // $user->getEmail();
-        // $user->getAvatar();
+        echo $user->getName();
+        echo $user->getEmail();
+        echo $user->getAvatar();
 
         /* Check if user exists */
         /* Login if user is found in database */
