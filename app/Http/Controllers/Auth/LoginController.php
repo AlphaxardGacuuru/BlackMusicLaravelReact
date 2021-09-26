@@ -59,8 +59,6 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($website)
     {
-        $user = Socialite::driver($website)->user();
-
         // OAuth Two Providers
         // $token = $user->token;
         // $refreshToken = $user->refreshToken; // not always provided
