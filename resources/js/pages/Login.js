@@ -118,10 +118,10 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 						</div>
 					</div>
 					<div className="p-2">
-						<GithubLoginButton className="mt-2" onClick={() => onSocial("github")} />
-						<GoogleLoginButton className="mt-2" onClick={() => onSocial("google")} />
-						<FacebookLoginButton className="mt-2" onClick={() => onSocial("facebook")} />
-						<TwitterLoginButton className="mt-2" onClick={() => onSocial("twitter")} />
+						<GithubLoginButton className="mt-2 rounded-0" onClick={() => onSocial("github")} />
+						<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />
+						<FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} />
+						<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
 					</div>
 				</div>
 			</div>

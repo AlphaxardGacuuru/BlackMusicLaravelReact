@@ -88,7 +88,7 @@ class LoginController extends Controller
 		// }
 
         if ($dbUser->email) {
-            Auth::login($dbUser->email, true);
+            Auth::login($user->getEmail(), true);
             return redirect('/');
 
         } else {

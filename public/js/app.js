@@ -99499,22 +99499,22 @@ var Login = function Login(_ref) {
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
-    className: "mt-2",
+    className: "mt-2 rounded-0",
     onClick: function onClick() {
       return onSocial("github");
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GoogleLoginButton"], {
-    className: "mt-2",
+    className: "mt-2 rounded-0",
     onClick: function onClick() {
       return onSocial("google");
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["FacebookLoginButton"], {
-    className: "mt-2",
+    className: "mt-2 rounded-0",
     onClick: function onClick() {
       return onSocial("facebook");
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["TwitterLoginButton"], {
-    className: "mt-2",
+    className: "mt-2 rounded-0",
     onClick: function onClick() {
       return onSocial("twitter");
     }
