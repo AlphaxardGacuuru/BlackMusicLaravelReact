@@ -81,8 +81,8 @@ class LoginController extends Controller
         /* Check if user exists */
         /* Login if user is found in database */
         if ($dbUser->email) {
-            // Auth::login($dbUser->email);
-            return redirect('/');
+            Auth::login($dbUser->email);
+            return redirect('/#/register');
 
         } else {
             return redirect('/#/register');
