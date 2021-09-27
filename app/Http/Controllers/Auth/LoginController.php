@@ -80,14 +80,14 @@ class LoginController extends Controller
 
         /* Check if user exists */
         /* Login if user is found in database */
-        // if ($dbUser->email) {
-        //     Auth::login($dbUser->phone);
-        //     return redirect('/');
+        if ($dbUser->email) {
+            // Auth::login($dbUser->email);
+            return redirect('/');
 
-        // } else {
-        //     return redirect('/#/register');
+        } else {
+            return redirect('/#/register');
 
-        // }
+        }
     }
 
     /*
