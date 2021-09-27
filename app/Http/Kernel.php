@@ -15,8 +15,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        // \Illuminate\Session\Middleware\StartSession::class,
+        // \Illuminate\View\Middleware\ShareErrorsFromSession::class,
 
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
         'api' => [
             // \App\Http\Middleware\EncryptCookies::class,
             // \Illuminate\Session\Middleware\StartSession::class,
-            // EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
 
             // 'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

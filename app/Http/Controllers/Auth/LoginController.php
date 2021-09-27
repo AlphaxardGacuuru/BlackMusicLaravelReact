@@ -73,7 +73,6 @@ class LoginController extends Controller
         echo "<image src='" . $user->getAvatar() . "' />";
 
         $dbUser = User::where('email', $user->getEmail())->first();
-        $usernameCheck = User::where('email', $user->getEmail())->first()->username;
 
         $createUser = new User;
         $createUser->email = $user->getEmail();
@@ -81,15 +80,14 @@ class LoginController extends Controller
 
         /* Check if user exists */
         /* Login if user is found in database */
-        // if ($usernameCheck) {
-        //     Auth::login($emailCheck);
-        //     return redirect('posts');
+        if ($dbUser->email) {
+            Auth::login($dbUser->phone);
+            return redirect('/');
 
-        // } else {
-        //     $try = "two";
-        //     return view('auth.login')->with(['try' => $try, 'gotEmail' => $user->getEmail()]);
+        } else {
+            return redirect('/#/register');
 
-        // }
+        }
     }
 
     /*

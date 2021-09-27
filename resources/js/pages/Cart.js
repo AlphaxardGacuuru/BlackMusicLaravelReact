@@ -215,11 +215,11 @@ const Cart = (props) => {
 					<div className="d-flex align-items-center justify-content-between">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
-							<Link to="/">Payment</Link>
+							<a href="#">Payment</a>
 						</div>
 
 						{/* <!-- Close Icon --> */}
-						<div className="closeIcon p-2 float-right" onClick={() => setBottomMenu("")}>
+						<div className="closeIcon p-2 float-right text-dark" onClick={() => setBottomMenu("")}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="40"
@@ -234,13 +234,14 @@ const Cart = (props) => {
 					</div>
 
 					{/* <center> */}
-					{videoTotal > 0 && <h5 className="text-white">Videos {videoTotal}</h5>}
-					{audioTotal > 0 && <h5 className="text-white mb-2">Audios {audioTotal}</h5>}
-					<hr style={{ borderBottom: "1px solid grey" }} />
+					{videoTotal > 0 && <h5 className="">Videos {videoTotal}</h5>}
+					{audioTotal > 0 && <h5 className="mb-2">Audios {audioTotal}</h5>}
+					{/* <hr style={{ borderBottom: "1px solid lightgrey" }} /> */}
 
 					<h4 className="text-success mb-2">Total KES {total}</h4>
 					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
-					<hr style={{ borderBottom: "1px solid grey" }} />
+					{/* <hr style={{ borderBottom: "1px solid lightgrey" }} /> */}
+					<br />
 
 					<Button
 						btnClass="mysonar-btn green-btn"

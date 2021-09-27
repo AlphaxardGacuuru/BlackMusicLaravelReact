@@ -98335,10 +98335,10 @@ var Cart = function Cart(props) {
     className: "d-flex align-items-center justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo-area p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
   }, "Payment")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
+    className: "closeIcon p-2 float-right text-dark",
     onClick: function onClick() {
       return setBottomMenu("");
     }
@@ -98352,22 +98352,14 @@ var Cart = function Cart(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
   })))), videoTotal > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "text-white"
+    className: ""
   }, "Videos ", videoTotal), audioTotal > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "text-white mb-2"
-  }, "Audios ", audioTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    style: {
-      borderBottom: "1px solid grey"
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "mb-2"
+  }, "Audios ", audioTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success mb-2"
   }, "Total KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "text-success"
-  }, "Mpesa (STK Push) ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.auth.phone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    style: {
-      borderBottom: "1px solid grey"
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "Mpesa (STK Push) ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.auth.phone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     btnClass: "mysonar-btn green-btn",
     btnText: "pay",
     btnStyle: {
@@ -99437,17 +99429,10 @@ var Login = function Login(_ref) {
   };
 
   var onSocial = function onSocial(website) {
-    // window.location.href = `${url}/api/login/${website}`
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(url, "/api/login/").concat(website)).then(function (res) {
-        return console.log(res.response.data.message);
-      })["catch"](function (err) {
-        return console.log(err.response.data.errors);
-      });
-    });
+    window.location.href = "".concat(url, "/api/login/").concat(website);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row justify-content-center"
@@ -99490,7 +99475,30 @@ var Login = function Login(_ref) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: 'Login'
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
+  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-open"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "logo-area p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/"
+  }, "Login")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right text-dark"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "40",
+    height: "40",
+    fill: "currentColor",
+    className: "bi bi-x",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
     className: "mt-2",
     onClick: function onClick() {
       return onSocial("github");
@@ -99510,7 +99518,7 @@ var Login = function Login(_ref) {
     onClick: function onClick() {
       return onSocial("twitter");
     }
-  }))))));
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);

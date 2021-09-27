@@ -1323,7 +1323,7 @@ html, body {
     width: 50%;
     /* height: 100%; */
     bottom: -500px;
-    background-color: #232323;
+    background-color: #ffffff;
     z-index: 999;
     text-align: center;
     -webkit-box-orient: vertical;
@@ -1363,7 +1363,7 @@ html, body {
 } */
 
 .bottomMenu .logo-area a {
-    color: #ffffff;
+    color: #232323;
     font-size: 30px;
     display: block;
     font-weight: 100;
@@ -1377,7 +1377,7 @@ html, body {
 
 .bottomMenu p {
     margin-bottom: 0;
-    color: #ffffff;
+    color: #232323;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1388,11 +1388,11 @@ html, body {
 
 .bottomMenu a {
     font-weight: 300;
-    color: #ffffff;
+    color: #232323;
 }
 
 .bottomMenu .nav-link {
-    color: #ffffff;
+    color: #232323;
     font-size: 18px;
     position: relative;
     z-index: 1;
