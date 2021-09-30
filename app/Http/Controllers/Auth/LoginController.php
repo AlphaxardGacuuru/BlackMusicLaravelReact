@@ -84,8 +84,8 @@ class LoginController extends Controller
 
         // Check if user exists
         if ($dbUser->exists()) {
-            if ($dbUser->username && $dbUser->phone) {
-				
+            if ($dbUser->first()->username && $dbUser->first()->phone) {
+
                 $currentUser = User::find($dbUser->id);
 
                 Auth::login($currentUser, true);
