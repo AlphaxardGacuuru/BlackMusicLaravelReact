@@ -124,6 +124,8 @@ class LoginController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->pp = $request->input('avatar');
+        $user->username = $request->input('username');
+        $user->phone = $request->input('phone');
         $user->save();
 
         Auth::login($user, true);
