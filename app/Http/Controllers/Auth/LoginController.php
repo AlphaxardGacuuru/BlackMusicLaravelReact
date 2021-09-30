@@ -115,6 +115,11 @@ class LoginController extends Controller
     // Update Use on Login
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'username' => ['required', 'string', 'startsWith:@', 'min:2', 'max:15', 'regex:/^\S+$/'],
+            'phone' => ['required', 'string', 'startsWith:07', 'min:10', 'max:10'],
+        ]);
+
         $user = User::find($request->input('id'));
         $user->name = $request->input('name');
         $user->email = $request->input('email');
