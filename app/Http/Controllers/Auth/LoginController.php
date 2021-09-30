@@ -80,17 +80,27 @@ class LoginController extends Controller
         }
 
         // Get Database User
-        $dbUser = User::where('email', $user->getEmail())->first();
+        $dbUser = User::where('email', $user->getEmail());
 
         // Check if user exists
-        if ($dbUser) {
+        if ($dbUser->exists()) {
+            if ($dbUser->username && $dbUser->phone) {
+				
+                $currentUser = User::find($dbUser->id);
 
-            $currentUser = User::find($dbUser->id);
+                Auth::login($currentUser, true);
 
-            Auth::login($currentUser, true);
+                return redirect()->intended();
 
-            return redirect()->intended();
+            } else {
+                $name = $user->getName();
+                $email = $user->getEmail();
+                $avatar = $user->getAvatar();
+                // Remove forward slashes
+                $avatar = str_replace("/", " ", $avatar);
 
+                return redirect('/#/register/' . $name . '/' . $email . '/' . $avatar);
+            }
         } else {
             $name = $user->getName();
             $email = $user->getEmail();
@@ -99,7 +109,6 @@ class LoginController extends Controller
             $avatar = str_replace("/", " ", $avatar);
 
             return redirect('/#/register/' . $name . '/' . $email . '/' . $avatar);
-
         }
     }
 
