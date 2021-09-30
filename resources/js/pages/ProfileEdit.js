@@ -94,6 +94,7 @@ const ProfileEdit = (props) => {
 										url: `/users`,
 										headers: { 'X-CSRF-TOKEN': token.content },
 										onload: res => {
+											console.log(res.response.data)
 											props.setMessage("Account updated")
 											axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
 										},

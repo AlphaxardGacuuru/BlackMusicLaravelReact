@@ -100998,6 +100998,7 @@ var ProfileEdit = function ProfileEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
+          console.log(res.response.data);
           props.setMessage("Account updated");
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
             return props.setAuth(res.data);
@@ -101130,7 +101131,7 @@ var Register = function Register(props) {
   var onUpdate = function onUpdate() {
     // Get user id
     var id = props.users.find(function (user) {
-      return user.username == username || user.username == phone;
+      return user.username == username;
     }).id;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/login/update"), {
