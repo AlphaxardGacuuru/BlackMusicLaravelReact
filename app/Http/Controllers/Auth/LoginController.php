@@ -88,7 +88,7 @@ class LoginController extends Controller
 
                 $currentUser = User::find($dbUser->id);
 
-                Auth::login($currentUser, true);
+                Auth::login($dbUser->first(), true);
 
                 return redirect()->intended();
 
