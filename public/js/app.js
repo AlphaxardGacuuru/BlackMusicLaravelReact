@@ -101130,11 +101130,11 @@ var Register = function Register(props) {
   var onUpdate = function onUpdate() {
     // Get user id
     var id = props.users.find(function (user) {
-      return user.username == username;
-    });
+      return user.username == username || user.username == phone;
+    }).id;
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/login/update"), {
-        id: id.id,
+        id: id,
         name: name,
         email: email,
         avatar: avatar,

@@ -29,11 +29,11 @@ const Register = (props) => {
 
 	const onUpdate = () => {
 		// Get user id
-		const id = props.users.find((user) => user.username == username)
+		const id = props.users.find((user) => user.username == username || user.username == phone).id
 
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/login/update`, {
-				id: id.id,
+				id: id,
 				name: name,
 				email: email,
 				avatar: avatar,
