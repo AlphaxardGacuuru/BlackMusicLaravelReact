@@ -130,8 +130,13 @@ const TopNavLinks = (props) => {
 			<div className="dropdown">
 				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">
-					<Img src={`/storage/${props.auth.pp}`}
-						imgClass={"rounded-circle"} width="25px" height="25px" alt="Avatar" />
+					<Img src={props.auth.pp.match(/https/) ?
+						`/storage/${props.auth.pp}` :
+						props.auth.pp}
+						imgClass={"rounded-circle"}
+						width="25px"
+						height="25px"
+						alt="Avatar" />
 				</a>
 				<div style={{ borderRadius: "0" }} className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
