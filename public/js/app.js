@@ -94995,7 +94995,7 @@ var TopNavLinks = function TopNavLinks(props) {
     "aria-haspopup": "true",
     "aria-expanded": "false"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: props.auth.pp.match(/https/) ? props.auth.pp : "/storage/".concat(props.auth.pp),
+    src: props.auth.pp.match(/http/) ? props.auth.pp : "/storage/".concat(props.auth.pp),
     imgClass: "rounded-circle",
     width: "25px",
     height: "25px",

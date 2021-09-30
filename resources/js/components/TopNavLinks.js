@@ -135,7 +135,7 @@ const TopNavLinks = (props) => {
 					data-toggle="dropdown"
 					aria-haspopup="true"
 					aria-expanded="false">
-					<Img src={props.auth.pp.match(/https/) ?
+					<Img src={props.auth.pp.match(/http/) ?
 						props.auth.pp :
 						`/storage/${props.auth.pp}`}
 						imgClass={"rounded-circle"}
