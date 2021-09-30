@@ -92992,7 +92992,12 @@ function App() {
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
       follows = _useState54[0],
-      setFollows = _useState54[1]; // Reset Messages and Errors to null after 3 seconds
+      setFollows = _useState54[1];
+
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState56 = _slicedToArray(_useState55, 2),
+      sms = _useState56[0],
+      setSMS = _useState56[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93034,456 +93039,225 @@ function App() {
       };
     }();
 
-    getAuth(); // For Users
+    getAuth(); // Fetch Audio Albums
 
-    var getUsers = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var usersFromServer;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return fetchUsers();
-
-              case 2:
-                usersFromServer = _context2.sent;
-                setUsers(usersFromServer);
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      return function getUsers() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    getUsers(); // For Videos
-
-    var getVideos = /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var videosFromServer;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return fetchVideos();
-
-              case 2:
-                videosFromServer = _context3.sent;
-                setVideos(videosFromServer);
-
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }));
-
-      return function getVideos() {
-        return _ref3.apply(this, arguments);
-      };
-    }();
-
-    getVideos(); // For Posts
-
-    var getPosts = /*#__PURE__*/function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var postsFromServer;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return fetchPosts();
-
-              case 2:
-                postsFromServer = _context4.sent;
-                setPosts(postsFromServer);
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }));
-
-      return function getPosts() {
-        return _ref4.apply(this, arguments);
-      };
-    }();
-
-    getPosts();
-    fetchPolls();
-    fetchPostLikes();
-    fetchPostComments();
-    fetchPostCommentLikes();
-    fetchDecos();
-    fetchFollows();
-    fetchBoughtAudios();
-    fetchBoughtVideos();
-    fetchCartVideos();
-    fetchVideoLikes();
-    fetchVideoComments();
-    fetchVideoCommentLikes();
-    fetchVideoAlbums(); // fetchVideoPayouts()
-
-    fetchAudios();
-    fetchAudioAlbums();
-    fetchAudioLikes();
-    fetchAudioComments();
-    fetchAudioCommentLikes();
-    fetchCartAudios();
-  }, []); //Fetch Auth
-
-  var fetchAuth = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return fetch("".concat(url, "/api/home"));
-
-            case 2:
-              res = _context5.sent;
-              data = res.json();
-              return _context5.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function fetchAuth() {
-      return _ref5.apply(this, arguments);
-    };
-  }(); //Fetch Users
-
-
-  var fetchUsers = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              _context6.next = 2;
-              return fetch("".concat(url, "/api/users"));
-
-            case 2:
-              res = _context6.sent;
-              data = res.json();
-              return _context6.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }));
-
-    return function fetchUsers() {
-      return _ref6.apply(this, arguments);
-    };
-  }(); //Fetch Posts
-
-
-  var fetchPosts = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-              _context7.next = 2;
-              return fetch("".concat(url, "/api/posts"));
-
-            case 2:
-              res = _context7.sent;
-              data = res.json();
-              return _context7.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7);
-    }));
-
-    return function fetchPosts() {
-      return _ref7.apply(this, arguments);
-    };
-  }(); // Fetch Post Likes
-
-
-  var fetchPostLikes = function fetchPostLikes() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-likes")).then(function (res) {
-      return setPostLikes(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch post likes']);
-    });
-  }; // Fetch Post Comments
-
-
-  var fetchPostComments = function fetchPostComments() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comments")).then(function (res) {
-      return setPostComments(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch post comments']);
-    });
-  }; // Fetch Post Comment likes
-
-
-  var fetchPostCommentLikes = function fetchPostCommentLikes() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comment-likes")).then(function (res) {
-      return setPostCommentLikes(res.data);
-    })["catch"](function () {
-      return setErrors(['failed to fetch post comment likes']);
-    });
-  }; // Fetch Polls
-
-
-  var fetchPolls = function fetchPolls() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/polls")).then(function (res) {
-      return setPolls(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch polls']);
-    });
-  }; // Fetch Decos
-
-
-  var fetchDecos = function fetchDecos() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/decos")).then(function (res) {
-      return setDecos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch decos']);
-    });
-  }; // Fetch Follows
-
-
-  var fetchFollows = function fetchFollows() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
-      return setFollows(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch follows']);
-    });
-  }; //Fetch Videos
-
-
-  var fetchVideos = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              _context8.next = 2;
-              return fetch("".concat(url, "/api/videos"));
-
-            case 2:
-              res = _context8.sent;
-              data = res.json();
-              return _context8.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context8.stop();
-          }
-        }
-      }, _callee8);
-    }));
-
-    return function fetchVideos() {
-      return _ref8.apply(this, arguments);
-    };
-  }(); // Fetch Liked Videos
-
-
-  var fetchVideoLikes = function fetchVideoLikes() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-likes")).then(function (res) {
-      return setVideoLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video likes"]);
-    });
-  }; // Fetch Videos Comments
-
-
-  var fetchVideoComments = function fetchVideoComments() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comments")).then(function (res) {
-      return setVideoComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comments"]);
-    });
-  }; // Fetch Videos Comments Likes
-
-
-  var fetchVideoCommentLikes = function fetchVideoCommentLikes() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comment-likes")).then(function (res) {
-      return setVideoCommentLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comment likes"]);
-    });
-  }; // Fetch Video Albums
-
-
-  var fetchVideoAlbums = function fetchVideoAlbums() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-      return setVideoAlbums(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video albums"]);
-    });
-  }; // Fetch Cart Videos
-
-
-  var fetchCartVideos = function fetchCartVideos() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-      return setCartVideos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch cart videos']);
-    });
-  }; // Fetch Bought Videos
-
-
-  var fetchBoughtVideos = function fetchBoughtVideos() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
-      return setBoughtVideos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch bought videos']);
-    });
-  }; // Fetch Video Payouts
-
-
-  var fetchVideoPayouts = function fetchVideoPayouts() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
-      return setVideoPayouts(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video payouts"]);
-    });
-  }; // Fetch Audios
-
-
-  var fetchAudios = function fetchAudios() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-      return setAudios(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audios"]);
-    });
-  }; // Fetch Audio Albums
-
-
-  var fetchAudioAlbums = function fetchAudioAlbums() {
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
       return setAudioAlbums(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audio albums"]);
-    });
-  }; // Fetch Audio Likes
+    }); // Fetch Audio Comments Likes
 
-
-  var fetchAudioLikes = function fetchAudioLikes() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-likes")).then(function (res) {
-      return setAudioLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio likes"]);
-    });
-  }; // Fetch Audio Comments
-
-
-  var fetchAudioComments = function fetchAudioComments() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
-      return setAudioComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio comments"]);
-    });
-  }; // Fetch Audio Comments Likes
-
-
-  var fetchAudioCommentLikes = function fetchAudioCommentLikes() {
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comment-likes")).then(function (res) {
       return setAudioCommentLikes(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch audio comment likes']);
-    });
-  }; // Fetch Cart Audios
+    }); // Fetch Audio Comments
 
-
-  var fetchCartAudios = function fetchCartAudios() {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
-      return setCartAudios(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
+      return setAudioComments(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch cart audios']);
-    });
-  }; // Fetch Bought Audios
+      return setErrors(["Failed to fetch audio comments"]);
+    }); // Fetch Audio Likes
 
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-likes")).then(function (res) {
+      return setAudioLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio likes"]);
+    }); // Fetch Audios
 
-  var fetchBoughtAudios = function fetchBoughtAudios() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
+      return setAudios(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audios"]);
+    }); // Fetch Bought Audios
+
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
       return setBoughtAudios(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch bought audios"]);
-    });
-  }; // Audio Player
+    }); // Fetch Bought Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
+      return setBoughtVideos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch bought videos']);
+    }); // Fetch Cart Audios
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
+      return setCartAudios(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch cart audios']);
+    }); // Fetch Cart Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
+      return setCartVideos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch cart videos']);
+    }); // Fetch Decos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/decos")).then(function (res) {
+      return setDecos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch decos']);
+    }); // Fetch Follows
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
+      return setFollows(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch follows']);
+    }); // Fetch Polls
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/polls")).then(function (res) {
+      return setPolls(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch polls']);
+    }); // Fetch Post Comment likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comment-likes")).then(function (res) {
+      return setPostCommentLikes(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post comment likes']);
+    }); // Fetch Post Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comments")).then(function (res) {
+      return setPostComments(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post comments']);
+    }); // Fetch Post Likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-likes")).then(function (res) {
+      return setPostLikes(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post likes']);
+    }); //Fetch Posts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
+      return setPosts(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch posts']);
+    }); //Fetch SMS
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/sms")).then(function (res) {
+      return setSMS(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch SMSs']);
+    }); //Fetch Users
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/users")).then(function (res) {
+      return setUsers(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch users']);
+    }); // Fetch Video Albums
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
+      return setVideoAlbums(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video albums"]);
+    }); // Fetch Video Comments Likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comment-likes")).then(function (res) {
+      return setVideoCommentLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video comment likes"]);
+    }); // Fetch Video Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comments")).then(function (res) {
+      return setVideoComments(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video comments"]);
+    }); // Fetch Liked Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-likes")).then(function (res) {
+      return setVideoLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video likes"]);
+    }); //Fetch Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
+      return setVideos(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch videos"]);
+    }); // Fetch Video Payouts
+    // axios.get(`${url}/api/video-payouts`)
+    // 	.then((res) => setVideoPayouts(res.data))
+    // 	.catch(() => setErrors(["Failed to fetch video payouts"]))
+  }, []); //Fetch Auth
+
+  var fetchAuth = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var res, data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return fetch("".concat(url, "/api/home"));
+
+            case 2:
+              res = _context2.sent;
+              data = res.json();
+              return _context2.abrupt("return", data);
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function fetchAuth() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  /*
+  * Audio Player */
 
 
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState56 = _slicedToArray(_useState55, 2),
-      show = _useState56[0],
-      setShow = _useState56[1];
-
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState58 = _slicedToArray(_useState57, 2),
-      playBtn = _useState58[0],
-      setPlayBtn = _useState58[1];
+      show = _useState58[0],
+      setShow = _useState58[1];
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState60 = _slicedToArray(_useState59, 2),
-      shuffle = _useState60[0],
-      setShuffle = _useState60[1];
+      playBtn = _useState60[0],
+      setPlayBtn = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState62 = _slicedToArray(_useState61, 2),
-      loop = _useState62[0],
-      setLoop = _useState62[1];
+      shuffle = _useState62[0],
+      setShuffle = _useState62[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState64 = _slicedToArray(_useState63, 2),
-      dur = _useState64[0],
-      setDur = _useState64[1];
+      loop = _useState64[0],
+      setLoop = _useState64[1];
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState66 = _slicedToArray(_useState65, 2),
-      volume = _useState66[0],
-      setVolume = _useState66[1];
+      dur = _useState66[0],
+      setDur = _useState66[1];
 
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
       _useState68 = _slicedToArray(_useState67, 2),
-      currentTime = _useState68[0],
-      setCurrentTime = _useState68[1];
+      volume = _useState68[0],
+      setVolume = _useState68[1];
 
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState70 = _slicedToArray(_useState69, 2),
-      progressPercent = _useState70[0],
-      setProgressPercent = _useState70[1];
+      currentTime = _useState70[0],
+      setCurrentTime = _useState70[1];
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState72 = _slicedToArray(_useState71, 2),
-      audioLoader = _useState72[0],
-      setAudioLoader = _useState72[1]; // Listen for show change and autoplay song
+      progressPercent = _useState72[0],
+      setProgressPercent = _useState72[1];
+
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState74 = _slicedToArray(_useState73, 2),
+      audioLoader = _useState74[0],
+      setAudioLoader = _useState74[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -93650,10 +93424,10 @@ function App() {
   // Search State
 
 
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState74 = _slicedToArray(_useState73, 2),
-      search = _useState74[0],
-      setSearch = _useState74[1];
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState76 = _slicedToArray(_useState75, 2),
+      search = _useState76[0],
+      setSearch = _useState76[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -93714,14 +93488,17 @@ function App() {
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/register",
+    path: "/register/:name/:email/:avatar",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Register__WEBPACK_IMPORTED_MODULE_9__["default"], {
         setMessage: setMessage,
         setErrors: setErrors,
         setAuth: setAuth,
-        url: url
+        url: url,
+        users: users,
+        sms: sms,
+        setSMS: setSMS
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -94361,7 +94138,7 @@ var AuthLinks = function AuthLinks() {
     to: "/login"
   }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "display-4",
-    to: "/register"
+    to: "/register/Name/Email/Avatar"
   }, "Register"));
 };
 
@@ -99484,26 +99261,10 @@ var Login = function Login(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo-area p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "/"
-  }, "Login")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right text-dark"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "40",
-    height: "40",
-    fill: "currentColor",
-    className: "bi bi-x",
-    viewBox: "0 0 16 16"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    href: "#"
+  }, "Login"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GithubLoginButton"], {
-    className: "mt-2 rounded-0",
-    onClick: function onClick() {
-      return onSocial("github");
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GoogleLoginButton"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["GoogleLoginButton"], {
     className: "mt-2 rounded-0",
     onClick: function onClick() {
       return onSocial("google");
@@ -101296,8 +101057,10 @@ var ProfileEdit = function ProfileEdit(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -101315,12 +101078,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Register = function Register(_ref) {
-  var setMessage = _ref.setMessage,
-      setErrors = _ref.setErrors,
-      setAuth = _ref.setAuth;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+var Register = function Register(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+      name = _useParams.name,
+      email = _useParams.email,
+      avatar = _useParams.avatar;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
       setUsername = _useState2[1];
@@ -101330,21 +101095,51 @@ var Register = function Register(_ref) {
       phone = _useState4[0],
       setPhone = _useState4[1];
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      code = _useState6[0],
+      setCode = _useState6[1];
 
-  var onSubmit = function onSubmit(e) {
-    e.preventDefault();
-    axios.get('/sanctum/csrf-cookie').then(function () {
-      axios.post('http://localhost:8000/api/register', {
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      verifyPhone = _useState8[0],
+      setVerifyPhone = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      verify = _useState10[0],
+      setVerify = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      checkDelivery = _useState12[0],
+      setCheckDelivery = _useState12[1];
+
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])(); // Remove all spaces from avatar
+
+  avatar = avatar.replace(/\s/g, "/"); // Show error on space in username
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    username.indexOf(" ") > -1 && props.setErrors(['Username cannot have spaces']);
+  }, [username]);
+
+  var onUpdate = function onUpdate() {
+    // Get user id
+    var id = props.users.find(function (user) {
+      return user.username == username;
+    }).id;
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/login/update"), {
+        id: id,
+        name: name,
+        email: email,
+        avatar: avatar,
         username: username,
-        phone: phone,
-        password: phone,
-        password_confirmation: phone
+        phone: phone
       }).then(function (res) {
-        var resStatus = res.statusText;
-        setMessage("Account created");
-        axios.get('http://localhost:8000/api/home').then(function (res) {
-          return setAuth([res.data]);
+        props.setMessage("Account Updated");
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
+          return props.setAuth(res.data);
         });
         setTimeout(function () {
           return history.push('/');
@@ -101356,15 +101151,118 @@ var Register = function Register(_ref) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
-        setErrors(newError);
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
       });
     });
-    setPhone('07');
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  var onRegister = function onRegister() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/register"), {
+        name: name,
+        email: email,
+        avatar: avatar,
+        username: username,
+        phone: phone,
+        remember: 'on'
+      }).then(function (res) {
+        props.setMessage("Account created");
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
+          return props.setAuth(res.data);
+        });
+        setTimeout(function () {
+          return history.push('/');
+        }, 1000);
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  var onSubmit = function onSubmit(e) {
+    e.preventDefault(); // Check if phone exists
+
+    if (props.users.some(function (user) {
+      return user.phone == phone;
+    })) {
+      // // Open PullUp
+      // setTimeout(() => setVerifyPhone("menu-open"), 2000)
+      // function getRandomNumberBetween(min, max) {
+      // 	return Math.floor(Math.random() * (max - min + 1) + min);
+      // }
+      // const number = getRandomNumberBetween(1000, 9999)
+      // setCode(number)
+      // // Send SMS
+      // axios.get('/sanctum/csrf-cookie').then(() => {
+      // 	axios.post(`${props.url}/api/sms`, {
+      // 		phone: phone,
+      // 		message: number
+      // 	}).then((res) => {
+      // 		props.setMessage(res.data)
+      // 	}).catch((err) => {
+      // 		const resErrors = err.response.data.errors
+      // 		// Get validation errors
+      // 		var resError
+      // 		var newError = []
+      // 		for (resError in resErrors) {
+      // 			newError.push(resErrors[resError])
+      // 		}
+      // 		// Get other errors
+      // 		newError.push(err.response.data.message)
+      // 		props.setErrors(newError)
+      // 	})
+      // })
+      onUpdate();
+    } else if (props.users.some(function (user) {
+      return user.username == username && user.id < 100;
+    })) {
+      // If user in older than id 100 allow
+      onUpdate();
+    } else {
+      onRegister();
+    }
+  };
+
+  var confirmed;
+
+  if (verify == code) {
+    confirmed = true;
+  } // // Check for delivery
+  // if (checkDelivery) {
+  // 	// Check if message has failed every two seconds and show error message
+  // 	setTimeout(() => {
+  // 		axios.get(`${props.url}/api/sms`)
+  // 			.then((res) => props.setSMS(res.data))
+  // 	}, 3000)
+  // 	// Format phone
+  // 	var betterPhone = phone.substr(1, 9)
+  // 	betterPhone = "+254" + betterPhone
+  // 	// Set error if user has blocked promotional messages
+  // 	props.sms.find((sms) => {
+  // 		console.log(sms.number == betterPhone)
+  // 		sms.number == betterPhone &&
+  // 			// sms.failure_reason == "UserInBlackList"
+  // 			sms.status == "Success"
+  // 	}) &&
+  // 		props.setErrors(["SMS Failed because you've blocked promotional messages"])
+  // }
+
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row justify-content-center"
@@ -101392,12 +101290,11 @@ var Register = function Register(_ref) {
     type: "text",
     className: "form-control",
     name: "username",
-    placeholder: "username",
+    placeholder: "@johndoe",
     onChange: function onChange(e) {
-      setUsername(e.target.value);
+      return setUsername(e.target.value);
     },
     required: true,
-    autoComplete: "username",
     autoFocus: true
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row"
@@ -101413,19 +101310,47 @@ var Register = function Register(_ref) {
     name: "phone",
     value: phone,
     onChange: function onChange(e) {
-      setPhone(e.target.value);
+      return setPhone(e.target.value);
     },
-    required: true,
-    autoComplete: "phone",
-    autoFocus: true
+    required: true
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-8 offset-md-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
-    btnText: 'Register'
-  })))))))));
+    btnClass: "mysonar-btn float-right",
+    btnText: 'register'
+  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: verifyPhone
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "logo-area p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, "Verify Phone"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 contact-form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "text-danger"
+  }, "Make sure that you've alowed promotional messages!"), confirmed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn mb-2",
+    btnText: 'register',
+    onClick: function onClick() {
+      onUpdate();
+      setVerifyPhone("");
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "number",
+    name: "verify",
+    placeholder: "0000",
+    className: "form-control",
+    onChange: function onChange(e) {
+      return setVerify(Number(e.target.value));
+    }
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Register);

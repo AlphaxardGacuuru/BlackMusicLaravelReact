@@ -1,6 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,27 +10,26 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
- */
+//  */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// Public Routes
-// Login/Register
-// Route::post('login', 'Auth\LoginController@login');
-// Route::post('register', 'Auth\LoginController@register');
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Auth::routes();
-// Route::post('logout', 'Auth\LoginController@logout');
-
-Route::get('home', 'HomeController@index')->name('home');
 
 // Social logins
-// Route::group(['middleware' => ['web']], function () {
-    Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
-    Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
-// });
+Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
+
+// Update on Login Route
+Route::post('login/update', 'Auth\LoginController@update'); 
+
+// Register page
+// Route::get('register', 'Auth\LoginController@index');
+// Route::post('register', 'Auth\LoginController@register');
+
+Route::get('home', 'HomeController@index')->name('home');
 
 Route::resources([
     'audios' => 'AudiosController',
@@ -57,6 +54,7 @@ Route::resources([
     'polls' => 'PollsController',
     'referrals' => 'ReferralsController',
     'search' => 'SearchController',
+	'sms' => 'SMSController',
     'users' => 'UsersController',
     'videos' => 'VideosController',
     'video-likes' => 'VideoLikesController',

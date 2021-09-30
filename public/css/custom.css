@@ -669,7 +669,7 @@ a:focus {
   /* border-radius: 2px; Rounded borders */
   /* padding: 16px; Padding */
   position: fixed; /* Sit on top of the screen */
-  z-index: 999999; /* Add a z-index if needed */
+  z-index: 10000002; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */
   bottom: 30px; /* 30px from the bottom */
 }
@@ -1324,7 +1324,8 @@ html, body {
     /* height: 100%; */
     bottom: -500px;
     background-color: #ffffff;
-    z-index: 999;
+    /* z-index: 999; */
+    z-index: 1000001;
     text-align: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

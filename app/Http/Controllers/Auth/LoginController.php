@@ -59,59 +59,62 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($website)
     {
-        // OAuth Two Providers
-        // $token = $user->token;
-        // $refreshToken = $user->refreshToken; // not always provided
-        // $expiresIn = $user->expiresIn;
-
-        // $user = Socialite::driver($website)->userFromToken($token);
         $user = Socialite::driver($website)->user();
 
-        echo $user->getName() . "<br>";
-        echo $user->getEmail() . "<br>";
-        echo $user->getAvatar() . "<br>";
-        echo "<image src='" . $user->getAvatar() . "' />";
+        if ($user->getName()) {
+            $name = $user->getName();
+        } else {
+            $name = " ";
+        }
 
+        if ($user->getEmail()) {
+            $email = $user->getEmail();
+        } else {
+            return redirect('/');
+        }
+
+        if ($user->getAvatar()) {
+            $avatar = $user->getAvatar();
+        } else {
+            $avatar = "profile-pics/male_avatar.png";
+        }
+
+        // Get Database User
         $dbUser = User::where('email', $user->getEmail())->first();
 
-        $createUser = new User;
-        $createUser->email = $user->getEmail();
-        // $createUser->save();
+        // Check if user exists
+        if ($user->getEmail() == $dbUser->email) {
 
-        /* Check if user exists */
-        /* Login if user is found in database */
-        // if (Auth::attempt(['email' => $user->email], true)) {
-        //     // Authentication passed...
-        //     return redirect()->intended();
-        // } else {
-		// 	return "didn't work";
-		// }
+            $currentUser = User::find($dbUser->id);
 
-        if ($dbUser->email) {
-            Auth::login($user->getEmail(), true);
-            return redirect('/');
+            Auth::login($currentUser, true);
+
+            return redirect()->intended();
 
         } else {
-            return redirect('/#/register');
+            $name = $user->getName();
+            $email = $user->getEmail();
+            $avatar = $user->getAvatar();
+            // Remove forward slashes
+            $avatar = str_replace("/", " ", $avatar);
+
+            return redirect('/#/register/' . $name . '/' . $email . '/' . $avatar);
 
         }
     }
 
-    /*
-     *
-     * Register user
-     */
-    public function register(Request $request)
+    // Update Use on Login
+    public function update(Request $request)
     {
-        $fields = $request->validate([
-            'username' => ['required', 'string', 'startsWith:@', 'min:2', 'max:15', 'unique:users'],
-            'phone' => ['required', 'string', 'startsWith:07', 'min:10', 'max:10', 'unique:users'],
-        ]);
+        $user = User::find($request->input('id'));
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->pp = $request->input('avatar');
+        $user->save();
 
-        return User::create([
-            'username' => $fields['username'],
-            'phone' => $fields['phone'],
-        ]);
+        Auth::login($user, true);
+
+        return redirect('/');
     }
 
     /*
@@ -142,7 +145,5 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         return Auth::logout();
-
-        // return auth()->user()->tokens()->delete();
     }
 }
