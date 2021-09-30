@@ -83,7 +83,7 @@ class LoginController extends Controller
         $dbUser = User::where('email', $user->getEmail())->first();
 
         // Check if user exists
-        if ($user->getEmail() == $dbUser->email) {
+        if ($dbUser) {
 
             $currentUser = User::find($dbUser->id);
 
