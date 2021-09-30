@@ -101003,6 +101003,9 @@ var ProfileEdit = function ProfileEdit(props) {
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
             return props.setAuth(res.data);
           });
+        },
+        onerror: function onerror(err) {
+          return console.log(err);
         }
       }
     }
