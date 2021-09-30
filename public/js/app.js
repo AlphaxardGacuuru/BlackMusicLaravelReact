@@ -94995,7 +94995,7 @@ var TopNavLinks = function TopNavLinks(props) {
     "aria-haspopup": "true",
     "aria-expanded": "false"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: props.auth.pp.match(/https/) ? "/storage/".concat(props.auth.pp) : props.auth.pp,
+    src: props.auth.pp.match(/https/) ? props.auth.pp : "/storage/".concat(props.auth.pp),
     imgClass: "rounded-circle",
     width: "25px",
     height: "25px",
@@ -98577,6 +98577,8 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
       src: "/storage/".concat(props.users.find(function (user) {
         return user.username == post.username;
+      }) && props.users.find(function (user) {
+        return user.username == post.username;
       }).pp),
       width: "40px",
       height: "40px",
@@ -98592,6 +98594,8 @@ var Index = function Index(props) {
         textOverflow: "clip"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
+      return user.username == post.username;
+    }) && props.users.find(function (user) {
       return user.username == post.username;
     }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, post.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       style: {

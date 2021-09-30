@@ -367,8 +367,11 @@ const Index = (props) => {
 							<div className='media-left'>
 								<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 									<Link to={`/profile/${post.username}`}>
-										<Img src={`/storage/${props.users.find((user) => user.username == post.username).pp}`}
-											width="40px" height="40px" alt={'avatar'} />
+										<Img src={`/storage/${props.users.find((user) => user.username == post.username) &&
+											props.users.find((user) => user.username == post.username).pp}`}
+											width="40px"
+											height="40px"
+											alt={'avatar'} />
 									</Link>
 								</div>
 							</div>
@@ -380,7 +383,8 @@ const Index = (props) => {
 										overflow: "hidden",
 										textOverflow: "clip"
 									}}>
-									<b>{props.users.find((user) => user.username == post.username).name}</b>
+									<b>{props.users.find((user) => user.username == post.username) &&
+										props.users.find((user) => user.username == post.username).name}</b>
 									<small>{post.username} </small>
 									<span style={{ color: "gold" }}>
 										<svg className="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16"

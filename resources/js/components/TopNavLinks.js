@@ -128,11 +128,16 @@ const TopNavLinks = (props) => {
 
 			{/* Avatar Dropdown */}
 			<div className="dropdown">
-				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
+				<a
+					href="#"
+					role="button"
+					id="dropdownMenuLink"
+					data-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false">
 					<Img src={props.auth.pp.match(/https/) ?
-						`/storage/${props.auth.pp}` :
-						props.auth.pp}
+						props.auth.pp :
+						`/storage/${props.auth.pp}`}
 						imgClass={"rounded-circle"}
 						width="25px"
 						height="25px"
