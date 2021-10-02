@@ -97,7 +97,7 @@ const ProfileEdit = (props) => {
 											props.setMessage("Account updated")
 											axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
 										},
-										onerror: (err) => console.log(err)
+										onerror: (err) => console.log()
 									}
 								}} />
 						</div>

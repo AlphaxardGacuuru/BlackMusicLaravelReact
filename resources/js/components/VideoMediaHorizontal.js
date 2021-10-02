@@ -6,8 +6,8 @@ import Button from '../components/Button'
 
 const VideoMediaHorizontal = (props) => {
 	return (
-		<div className="media p-2 border-bottom">
-			<div className="media-left thumbnail" onClick={() => props.setShow(0)}>
+		<div className="d-flex p-2 border-bottom">
+			<div className="thumbnail" onClick={() => props.setShow(0)}>
 				<Link to={props.link}>
 					<Img
 						src={props.thumbnail}
@@ -15,10 +15,9 @@ const VideoMediaHorizontal = (props) => {
 						height="90em" />
 				</Link>
 			</div>
-			<div className="media-body ml-2">
+			<div className="ml-2 mr-auto flex-grow-1">
 				<Link to={props.link}>
-					<h6
-						className="m-0 pt-2 pr-1 pl-1"
+					<h6 className="mb-0"
 						style={{
 							width: "150px",
 							whiteSpace: "nowrap",
@@ -27,13 +26,9 @@ const VideoMediaHorizontal = (props) => {
 						}}>
 						{props.name}
 					</h6>
-					<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-						<small>
-							{props.username}
-						</small>
-						<small className="ml-1">
-							{props.ft}
-						</small>
+					<h6 className="mb-3">
+						<small>{props.username}</small>
+						<small className="ml-1">{props.ft}</small>
 					</h6>
 				</Link>
 				{props.showCartandBuyButton ?
@@ -67,7 +62,7 @@ const VideoMediaHorizontal = (props) => {
 							</> : ""
 					: ""}
 			</div>
-		</div >
+		</div>
 	)
 }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 // Kopokopo dependency
 use App\Kopokopo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Kopokopo\SDK\K2;
 
 class KopokopoController extends Controller
@@ -17,6 +16,8 @@ class KopokopoController extends Controller
      */
     public function index()
     {
+		return Kopokopo::all();
+		
         // Do not hard code these values
         $options = [
             // 'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
@@ -87,10 +88,33 @@ class KopokopoController extends Controller
     public function store(Request $request)
     {
         $kopokopo = new Kopokopo;
-        $kopokopo->sender_phone = $request->input('senderPhoneNumber');
-        $kopokopo->first_name = $request->input('senderPhoneNumber');
-        // $kopokopo->first_name = 'name';
+        $kopokopo->sender_phone = $request->input('sender_phone');
+        $kopokopo->first_name = $request->input('first_name');
+        $kopokopo->last_name = $request->input('last_name');
+        $kopokopo->amount = $request->input('amount');
+        $kopokopo->reference = $request->input('transaction_reference');
+        $kopokopo->middle_name = $request->input('middle_name');
+        $kopokopo->service_name = $request->input('service_name');
+        $kopokopo->business_number = $request->input('business_number');
+        $kopokopo->internal_transaction_id = $request->input('internal_transaction_id');
+        $kopokopo->transaction_timestamp = $request->input('transaction_timestamp');
+        $kopokopo->transaction_type = $request->input('transaction_type');
+        $kopokopo->account_number = $request->input('account_number');
+        $kopokopo->currency = $request->input('currency');
+        $kopokopo->signature = $request->input('signature');
         $kopokopo->save();
+
+        return response()->json([
+            'status' => '01',
+            'description' => 'Accepted',
+            'subscriber_message' => 'Thank you John Doe for your payment of Ksh 4000. We value your business',
+        ]);
+
+        // $kopokopo = new Kopokopo;
+        // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
+        // $kopokopo->first_name = $request->input('senderPhoneNumber');
+        // // $kopokopo->first_name = 'name';
+        // $kopokopo->save();
 
         // foreach ($request as $key => $value) {
         //     foreach ($value as $key1 => $value1) {

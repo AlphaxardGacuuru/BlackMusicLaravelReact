@@ -255,14 +255,15 @@ const AudioCharts = (props) => {
 									<center>
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artistArray.key}>
-												<Img src={`/storage/${props.users
-													.find((user) => user.username == artistArray.key) &&
-													props.users.find((user) => user.username == artistArray.key).pp}`}
+												<Img src={
+													`/storage/${props.users.find((user) => user.username == artistArray.key) &&
+													props.users.find((user) => user.username == artistArray.key).pp}`
+												}
 													width='150px'
 													height='150px' />
 											</Link>
 										</div>
-										<h6 className="mt-2"
+										<h6 className="mt-2 mb-0"
 											style={{
 												width: "100px",
 												whiteSpace: "nowrap",
@@ -302,7 +303,7 @@ const AudioCharts = (props) => {
 							</center>
 						</span>
 						{/* Load More button End */}
-						
+
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}

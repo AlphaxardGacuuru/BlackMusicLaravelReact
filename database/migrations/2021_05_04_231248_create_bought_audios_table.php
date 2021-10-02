@@ -17,6 +17,7 @@ class CreateBoughtAudiosTable extends Migration
             $table->id();
             $table->string('audio_id')->nullable();
             $table->string('reference')->nullable();
+            $table->string('price')->nullable();
             $table->string('username')->nullable();
             $table->string('name')->nullable();
             $table->string('artist')->nullable();

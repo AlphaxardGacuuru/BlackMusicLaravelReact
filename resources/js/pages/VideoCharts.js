@@ -248,14 +248,15 @@ const VideoCharts = (props) => {
 									<center>
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artistArray.key}>
-												<Img src={`/storage/${props.users
-													.find((user) => artistArray.key == user.username) &&
-													props.users.find((user) => artistArray.key == user.username).pp}`}
+												<Img src={
+													`/storage/${props.users.find((user) => artistArray.key == user.username) &&
+													props.users.find((user) => artistArray.key == user.username).pp}`
+												}
 													width='150px'
 													height='150px' />
 											</Link>
 										</div>
-										<h6 className="mt-2"
+										<h6 className="mt-2 mb-0"
 											style={{
 												width: "100px",
 												whiteSpace: "nowrap",
@@ -271,9 +272,7 @@ const VideoCharts = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-											<small>
-												{artistArray.key}
-											</small>
+											{artistArray.key}
 										</h6>
 									</center>
 								</span>
@@ -282,8 +281,7 @@ const VideoCharts = (props) => {
 						{/* Load More button */}
 						<span>
 							<center>
-								<div
-									className="card avatar-thumbnail ml-3"
+								<div className="card avatar-thumbnail ml-3"
 									style={{ borderRadius: "50%", width: "50px", height: "50px" }}
 									onClick={onArtistSlice}>
 									<Img src={'/storage/img/musical-note.png'} />
@@ -295,7 +293,7 @@ const VideoCharts = (props) => {
 							</center>
 						</span>
 						{/* Load More button End */}
-						
+
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -394,7 +392,7 @@ const VideoCharts = (props) => {
 
 					<center>
 						<Button
-							btnClass="mysonar-btn my-5"
+							btnClass="mysonar-btn my-5 hidden"
 							btnText="load more"
 							onClick={onVideoSlice} />
 					</center>

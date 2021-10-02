@@ -119,6 +119,7 @@ function App() {
 	const [decos, setDecos] = useState([])
 	const [follows, setFollows] = useState([])
 	const [sms, setSMS] = useState([])
+	const [kopokopo, setKopokopo] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
@@ -189,6 +190,11 @@ function App() {
 		axios.get(`${url}/api/follows`)
 			.then((res) => setFollows(res.data))
 			.catch(() => setErrors(['Failed to fetch follows']))
+
+		// Fetch Kopokopo
+		axios.get(`${url}/api/kopokopo`)
+			.then((res) => setKopokopo(res.data))
+			.catch(() => setErrors(['Failed to fetch kopokopo']))
 
 		// Fetch Polls
 		axios.get(`${url}/api/polls`)
@@ -509,7 +515,7 @@ function App() {
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
-					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, videos, cartAudios, setCartAudios, audios }} />
+					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setBoughtVideos, videos, cartAudios, setCartAudios, setBoughtAudios, audios, setShow }} />
 				)} />
 
 				<Route path="/library" exact render={(props) => (
@@ -596,6 +602,7 @@ function App() {
 				<Route path="/admin" exact render={(props) => (
 					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, audios, boughtAudios }} />
 				)} />
+
 				<Messages {...{ message, errors }} />
 
 				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, onSearchIconClick }} />
