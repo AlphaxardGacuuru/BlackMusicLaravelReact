@@ -99489,8 +99489,7 @@ var Login = function Login(_ref) {
       setPhone(e.target.value);
     },
     required: true,
-    autoComplete: "phone",
-    autoFocus: true
+    autoComplete: "phone"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

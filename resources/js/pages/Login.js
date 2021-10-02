@@ -74,8 +74,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 												value={phone}
 												onChange={(e) => { setPhone(e.target.value) }}
 												required={true}
-												autoComplete="phone"
-												autoFocus={true} />
+												autoComplete="phone" />
 										</div>
 									</div>
 
