@@ -10,11 +10,9 @@ import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
 const Cart = (props) => {
 
 	const [bottomMenu, setBottomMenu] = useState()
-	const [receipt, setReceipt] = useState("menu-open")
+	const [receipt, setReceipt] = useState()
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
-
-	console.log(receiptVideos)
 
 	// Calculate totals
 	const videoTotal = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
@@ -70,6 +68,7 @@ const Cart = (props) => {
 
 			// Check payment after every 2s
 			var intervalId = window.setInterval(() => {
+				// Try and buy videos
 				axios.post(`${props.url}/api/bought-videos`)
 					.then((res) => {
 						console.log(res.data.length)
@@ -81,6 +80,35 @@ const Cart = (props) => {
 							clearInterval(intervalId)
 							props.setMessage(res.data.length + " Videos bought")
 							axios.get(`${props.url}/api/bought-videos`).then((res) => props.setBoughtVideos(res.data))
+						}
+						// Stop loop after 60s
+						setTimeout(() => {
+							clearInterval(intervalId)
+							setBottomMenu()
+						}, 60000)
+
+					}).catch((err) => {
+						const resErrors = err.response.data.errors
+						var resError
+						var newError = []
+						for (resError in resErrors) {
+							newError.push(resErrors[resError])
+						}
+						props.setErrors(newError)
+					})
+
+				// Try and buy audios
+				axios.post(`${props.url}/api/bought-audios`)
+					.then((res) => {
+						console.log(res.data.length)
+						// If videos are bought stop checking
+						if (res.data.length > 0) {
+							setReceiptAudios(res.data)
+							setBottomMenu()
+							setReceipt("menu-open")
+							clearInterval(intervalId)
+							setTimeout(() => props.setMessage(res.data.length + " Audios bought"), 5000)
+							axios.get(`${props.url}/api/bought-audios`).then((res) => props.setBoughtAudios(res.data))
 						}
 						// Stop loop after 60s
 						setTimeout(() => {
@@ -389,7 +417,7 @@ const Cart = (props) => {
 						{/* Cart Videos End */}
 
 						{/* Cart Audios */}
-						<center><h4 className="mt-5">Audios</h4></center>
+						<center><h4 className="mt-4">Audios</h4></center>
 						{receiptAudios.map((receiptAudio, key) => (
 							<AudioMediaHorizontal
 								key={key}

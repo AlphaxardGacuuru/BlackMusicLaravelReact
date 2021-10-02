@@ -94465,7 +94465,7 @@ var Bottomnav = function Bottomnav(props) {
     style: {
       fontSize: "12px",
       position: "absolute",
-      right: "8em",
+      right: "9em",
       bottom: "1.5em",
       border: "solid #232323"
     }
@@ -97889,7 +97889,7 @@ var Cart = function Cart(props) {
       bottomMenu = _useState2[0],
       setBottomMenu = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("menu-open"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
       receipt = _useState4[0],
       setReceipt = _useState4[1];
@@ -97902,9 +97902,8 @@ var Cart = function Cart(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
       receiptAudios = _useState8[0],
-      setReceiptAudios = _useState8[1];
+      setReceiptAudios = _useState8[1]; // Calculate totals
 
-  console.log(receiptVideos); // Calculate totals
 
   var videoTotal = props.cartVideos.filter(function (cartVideo) {
     return cartVideo.username == props.auth.username;
@@ -97973,6 +97972,7 @@ var Cart = function Cart(props) {
       // axios.post(`${props.url}/api/kopokopo`)
       // Check payment after every 2s
       var intervalId = window.setInterval(function () {
+        // Try and buy videos
         axios.post("".concat(props.url, "/api/bought-videos")).then(function (res) {
           console.log(res.data.length); // If videos are bought stop checking
 
@@ -97984,6 +97984,39 @@ var Cart = function Cart(props) {
             props.setMessage(res.data.length + " Videos bought");
             axios.get("".concat(props.url, "/api/bought-videos")).then(function (res) {
               return props.setBoughtVideos(res.data);
+            });
+          } // Stop loop after 60s
+
+
+          setTimeout(function () {
+            clearInterval(intervalId);
+            setBottomMenu();
+          }, 60000);
+        })["catch"](function (err) {
+          var resErrors = err.response.data.errors;
+          var resError;
+          var newError = [];
+
+          for (resError in resErrors) {
+            newError.push(resErrors[resError]);
+          }
+
+          props.setErrors(newError);
+        }); // Try and buy audios
+
+        axios.post("".concat(props.url, "/api/bought-audios")).then(function (res) {
+          console.log(res.data.length); // If videos are bought stop checking
+
+          if (res.data.length > 0) {
+            setReceiptAudios(res.data);
+            setBottomMenu();
+            setReceipt("menu-open");
+            clearInterval(intervalId);
+            setTimeout(function () {
+              return props.setMessage(res.data.length + " Audios bought");
+            }, 5000);
+            axios.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
+              return props.setBoughtAudios(res.data);
             });
           } // Stop loop after 60s
 
@@ -98317,7 +98350,7 @@ var Cart = function Cart(props) {
       }).id
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "mt-5"
+    className: "mt-4"
   }, "Audios")), receiptAudios.map(function (receiptAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: key,

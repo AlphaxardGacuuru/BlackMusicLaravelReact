@@ -228,7 +228,7 @@ const Bottomnav = (props) => {
 								style={{
 									fontSize: "12px",
 									position: "absolute",
-									right: "8em",
+									right: "9em",
 									bottom: "1.5em",
 									border: "solid #232323"
 								}}>
