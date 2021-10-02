@@ -94441,6 +94441,7 @@ var Bottomnav = function Bottomnav(props) {
       textAlign: "center",
       fontSize: "10px",
       fontWeight: "100",
+      position: "relative",
       color: location.pathname == "/cart" ? "gold" : "white"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -94462,9 +94463,10 @@ var Bottomnav = function Bottomnav(props) {
     className: "badge badge-danger rounded-circle",
     style: {
       fontSize: "12px",
+      fontWeight: "100",
       position: "absolute",
-      right: "9em",
-      bottom: "1.5em",
+      right: "0.5rem",
+      bottom: "1rem",
       border: "solid #232323"
     }
   }, cartItems > 0 && cartItems)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
