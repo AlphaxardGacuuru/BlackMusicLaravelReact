@@ -16,7 +16,7 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-		return Kopokopo::all();
+		// return Kopokopo::all();
 		
         // Do not hard code these values
         $options = [
