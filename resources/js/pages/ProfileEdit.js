@@ -128,8 +128,8 @@ const ProfileEdit = (props) => {
 								type="reset"
 								className="sonar-btn">reset</button>
 
-							<br className="anti-hidden" />
-							<br className="anti-hidden" />
+							<br />
+							<br />
 
 							<Button
 								type="submit"

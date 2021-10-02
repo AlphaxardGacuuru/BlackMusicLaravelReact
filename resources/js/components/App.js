@@ -192,9 +192,9 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch follows']))
 
 		// Fetch Kopokopo
-		axios.get(`${url}/api/kopokopo`)
-			.then((res) => setKopokopo(res.data))
-			.catch(() => setErrors(['Failed to fetch kopokopo']))
+		// axios.get(`${url}/api/kopokopo`)
+		// 	.then((res) => setKopokopo(res.data))
+		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
 
 		// Fetch Polls
 		axios.get(`${url}/api/polls`)

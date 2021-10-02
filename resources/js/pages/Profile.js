@@ -215,6 +215,7 @@ const Profile = (props) => {
 				<div className="col-sm-10">
 					<br />
 					<br />
+					<br className="anti-hidden" />
 					{/* Check whether user has bought at least one song from musician */}
 					{/* Check whether user has followed musician and display appropriate button */}
 					{props.auth.username == username ?
