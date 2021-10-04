@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AudioAlbums;
+use App\Mail\WelcomeMail;
 use App\User;
 use App\VideoAlbums;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
@@ -27,7 +29,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        Mail::to(auth()->user())
+            ->send(new WelcomeMail);
     }
 
     /**

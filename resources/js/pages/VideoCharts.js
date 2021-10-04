@@ -148,14 +148,22 @@ const VideoCharts = (props) => {
 	}
 
 	// Function for loading more artists
-	const onArtistSlice = () => {
-		setArtistSlice(artistSlice + 10)
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollLeft >= (e.target.scrollWidth - (e.target.scrollWidth / 3));
+
+		if (bottom) {
+			setArtistSlice(artistSlice + 10)
+		}
 	}
 
-	// Function for loading more videos
-	const onVideoSlice = () => {
-		setVideoSlice(videoSlice + 8)
-	}
+	// Load more on page bottom
+	window.onscroll = function (ev) {
+		const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
+
+		if (bottom) {
+			setVideoSlice(videoSlice + 8)
+		}
+	};
 
 	return (
 		<>
@@ -239,7 +247,7 @@ const VideoCharts = (props) => {
 
 					{/* <!-- ****** Artists Area Start ****** - */}
 					<h5>Artists</h5>
-					<div className="hidden-scroll">
+					<div className="hidden-scroll" onScroll={handleScroll}>
 						{/*  Echo Artists  */}
 						{artistsArray.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
 							.slice(0, artistSlice)
@@ -277,23 +285,6 @@ const VideoCharts = (props) => {
 									</center>
 								</span>
 							))}
-
-						{/* Load More button */}
-						<span>
-							<center>
-								<div className="card avatar-thumbnail ml-3"
-									style={{ borderRadius: "50%", width: "50px", height: "50px" }}
-									onClick={onArtistSlice}>
-									<Img src={'/storage/img/musical-note.png'} />
-								</div>
-								<br />
-								<br />
-								<br />
-								<br />
-							</center>
-						</span>
-						{/* Load More button End */}
-
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -301,7 +292,7 @@ const VideoCharts = (props) => {
 
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
-					<div className="hidden">
+					<div className="hidden" onScroll={handleScroll}>
 						{videosArray.slice(0, videoSlice).map((videoArray, key) => (
 							<span key={key} className="card m-1 pb-2"
 								style={{
@@ -390,13 +381,6 @@ const VideoCharts = (props) => {
 					</div>
 					{/* <!-- ****** Songs Area End ****** - */}
 
-					<center>
-						<Button
-							btnClass="mysonar-btn my-5 hidden"
-							btnText="load more"
-							onClick={onVideoSlice} />
-					</center>
-
 					{/* For mobile */}
 					<div className="anti-hidden">
 						{videosArray.slice(0, videoSlice).map((videoArray, key) => (
@@ -431,12 +415,6 @@ const VideoCharts = (props) => {
 								onCartVideos={onCartVideos}
 								onBuyVideos={onBuyVideos} />
 						))}
-
-						{/* Load More button */}
-						<center className="my-4">
-							<Button btnClass="mysonar-btn" btnText="load more" onClick={onVideoSlice} />
-						</center>
-						{/* Load More button End */}
 
 						{/* <!-- End of Chart Area - */}
 					</div>

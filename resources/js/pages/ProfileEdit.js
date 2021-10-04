@@ -111,8 +111,19 @@ const ProfileEdit = (props) => {
 								placeholder={props.auth.name}
 								value={name}
 								onChange={(e) => { setName(e.target.value) }} />
-
 							<br />
+
+							<label htmlFor="" className="float-left">Phone</label>
+							<input
+								type="text"
+								name="phone"
+								className="form-control"
+								placeholder={props.auth.phone}
+							// value={bio}
+							// onChange={(e) => { setBio(e.target.value) }}
+							/>
+							<br />
+
 							<label htmlFor="" className="float-left">Bio</label>
 							<input
 								type="text"
@@ -121,7 +132,28 @@ const ProfileEdit = (props) => {
 								placeholder={props.auth.bio}
 								value={bio}
 								onChange={(e) => { setBio(e.target.value) }} />
+							<br />
 
+							<label htmlFor="" className="float-left">Account</label>
+							<input
+								type="text"
+								name="account"
+								className="form-control"
+								placeholder={props.auth.account_type}
+							// value={bio}
+							// onChange={(e) => { setBio(e.target.value) }}
+							/>
+							<br />
+
+							<label htmlFor="" className="float-left">Withdrawal</label>
+							<input
+								type="number"
+								name="withdrawal"
+								className="form-control"
+								placeholder={props.auth.withdrawal}
+							// value={withdrawal}
+							// onChange={(e) => { setBio(e.target.value) }}
+							/>
 							<br />
 
 							<button

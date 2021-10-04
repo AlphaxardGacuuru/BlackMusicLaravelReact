@@ -71,7 +71,6 @@ const Cart = (props) => {
 				// Try and buy videos
 				axios.post(`${props.url}/api/bought-videos`)
 					.then((res) => {
-						console.log(res.data.length)
 						// If videos are bought stop checking
 						if (res.data.length > 0) {
 							setReceiptVideos(res.data)
@@ -100,7 +99,6 @@ const Cart = (props) => {
 				// Try and buy audios
 				axios.post(`${props.url}/api/bought-audios`)
 					.then((res) => {
-						console.log(res.data.length)
 						// If videos are bought stop checking
 						if (res.data.length > 0) {
 							setReceiptAudios(res.data)
@@ -145,9 +143,8 @@ const Cart = (props) => {
 					{props.cartVideos
 						.filter((cartVideo) => cartVideo.username == props.auth.username)
 						.map((cartVideo, key) => (
-							<div key={key}
-								className="media p-2 border-bottom">
-								<div className="media-left thumbnail">
+							<div key={key} className="d-flex p-2 border-bottom">
+								<div className="thumbnail">
 									<Link to={`/video-show/${cartVideo.video_id}`}>
 										<Img
 											src={props.videos.find((video) => video.id == cartVideo.video_id) ?
@@ -158,9 +155,8 @@ const Cart = (props) => {
 											height="90em" />
 									</Link>
 								</div>
-
-								<div className="media-body ml-2">
-									<h6 className="m-0 pt-2 pr-1 pl-1"
+								<div className="ml-2 mr-auto flex-grow-1">
+									<h6 className="mb-0"
 										style={{
 											width: "150px",
 											whiteSpace: "nowrap",
@@ -170,7 +166,7 @@ const Cart = (props) => {
 										{props.videos.find((video) => video.id == cartVideo.video_id) &&
 											props.videos.find((video) => video.id == cartVideo.video_id).name}
 									</h6>
-									<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+									<h6>
 										<small>{props.videos.find((video) => video.id == cartVideo.video_id) &&
 											props.videos.find((video) => video.id == cartVideo.video_id).username}</small>
 									</h6>

@@ -151,14 +151,22 @@ const AudioCharts = (props) => {
 	}
 
 	// Function for loading more artists
-	const onArtistSlice = () => {
-		setArtistSlice(artistSlice + 10)
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollLeft >= (e.target.scrollWidth - (e.target.scrollWidth / 3));
+
+		if (bottom) {
+			setArtistSlice(artistSlice + 10)
+		}
 	}
 
-	// Function for loading more audios
-	const onAudioSlice = () => {
-		setAudioSlice(audioSlice + 8)
-	}
+	// Load more on page bottom
+	window.onscroll = function (ev) {
+		const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
+
+		if (bottom) {
+			setAudioSlice(audioSlice + 8)
+		}
+	};
 
 	return (
 		<>
@@ -246,7 +254,7 @@ const AudioCharts = (props) => {
 
 					{/* <!-- ****** Artists Area Start ****** - */}
 					<h5>Artists</h5>
-					<div className="hidden-scroll">
+					<div className="hidden-scroll" onScroll={handleScroll}>
 						{/*  Echo Artists  */}
 						{artistsArray.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
 							.slice(0, artistSlice)
@@ -279,31 +287,11 @@ const AudioCharts = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-											<small>
-												{artistArray.key}
-											</small>
+											<small>{artistArray.key}</small>
 										</h6>
 									</center>
 								</span>
 							))}
-
-						{/* Load More button */}
-						<span>
-							<center>
-								<div
-									className="card avatar-thumbnail ml-3"
-									style={{ borderRadius: "50%", width: "50px", height: "50px" }}
-									onClick={onArtistSlice}>
-									<Img src={'/storage/img/musical-note.png'} />
-								</div>
-								<br />
-								<br />
-								<br />
-								<br />
-							</center>
-						</span>
-						{/* Load More button End */}
-
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -348,13 +336,6 @@ const AudioCharts = (props) => {
 							onCartAudios={onCartAudios}
 							onBuyAudios={onBuyAudios} />
 					))}
-
-					{/* Load More button */}
-					<center className="my-4">
-						<Button btnClass="mysonar-btn" btnText="load more" onClick={onAudioSlice} />
-					</center>
-					{/* Load More button End */}
-
 					{/* <!-- ****** Songs Area End ****** - */}
 				</div>
 				<div className="col-sm-1"></div>

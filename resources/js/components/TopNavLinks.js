@@ -48,16 +48,20 @@ const TopNavLinks = (props) => {
 				</Link>}
 
 			{/* Cart */}
-			<Link to="/cart"
-				className="hidden"
-				aria-expanded="false">
+			<Link to="/cart" className="hidden" aria-expanded="false">
 				<svg className="bi bi-cart3" width="1em" height="1em" viewBox="0 0 16 16"
 					fill="#fff" xmlns="http://www.w3.org/2000/svg">
 					<path fillRule="evenodd"
 						d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
 				</svg>
 				<span className="badge badge-danger rounded-circle"
-					style={{ position: "absolute", right: "10.5em", top: "0.5em", border: "solid #232323" }}>
+					style={{
+						fontWeight: "100",
+						position: "absolute",
+						right: "10.5em",
+						top: "0.5em",
+						border: "solid #232323"
+					}}>
 					{cartItems > 0 && cartItems}
 				</span>
 			</Link>
@@ -65,62 +69,49 @@ const TopNavLinks = (props) => {
 
 			{/* Notification Dropdown */}
 			<div className="dropdown mr-2">
-				<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					<svg className="bi bi-bell" width="1em" height="1em" viewBox="0 0 16 16"
-						fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<a href="#"
+					role="button"
+					id="dropdownMenuLink"
+					data-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false">
+					<svg className="bi bi-bell" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
 						<path fillRule="evenodd"
 							d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
 					</svg>
 				</a>
 				<span className="badge badge-danger rounded-circle hidden"
-					style={{ padding: "3px 5px", position: "absolute", right: "-3px", top: "-3px", border: "solid #232323" }}>
-
+					style={{
+						padding: "3px 5px",
+						position: "absolute",
+						right: "-3px",
+						top: "-3px",
+						border: "solid #232323"
+					}}>
 				</span>
-				<div style={{ borderRadius: "0" }} className="dropdown-menu dropdown-menu-right"
+				<div style={{ borderRadius: "0" }}
+					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<a className="dropdown-item border-bottom" href="#">
+					<Link to="#" className="p-2 dropdown-item border-bottom">
 						<h4>Notifications</h4>
-					</a>
+					</Link>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
-
-						<div className='border-bottom'>
-							<a href='#' className="p-2">
-								<h6></h6>
-							</a>
-						</div>
-						<div className='p-2 border-bottom'>
-							<a href='#'>
-								<p>
-									<small> just Decorated you.</small>
-								</p>
-							</a>
-						</div>
-						<div className='p-2 border-bottom'>
-							<a href='#'>
-								<h6 style={{ color: "purple" }}>New Fans</h6>
-							</a>
-						</div>
-						<div className='p-1 border-bottom'>
-							<a href='#'>
-								<p className="m-0">
-									<small> became a fan.</small>
-								</p>
-							</a>
-						</div>
-						<div className='p-1 border-bottom'>
-							<a href='#'>
-								<h6>Songs Bought</h6>
-							</a>
-						</div>
-						<div className='p-1 border-bottom'>
-							<a href='#'>
-								<p className="m-0">
-									<small> just bought</small>
-								</p>
-							</a>
-						</div>
+						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
+							<small> just Decorated you.</small>
+						</Link>
+						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
+							<h6 style={{ color: "purple" }}>New Fans</h6>
+						</Link>
+						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
+							<small> became a fan.</small>
+						</Link>
+						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
+							<h6>Songs Bought</h6>
+						</Link>
+						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
+							<small> just bought</small>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -128,8 +119,7 @@ const TopNavLinks = (props) => {
 
 			{/* Avatar Dropdown */}
 			<div className="dropdown">
-				<a
-					href="#"
+				<a href="#"
 					role="button"
 					id="dropdownMenuLink"
 					data-toggle="dropdown"
@@ -143,10 +133,10 @@ const TopNavLinks = (props) => {
 						height="25px"
 						alt="Avatar" />
 				</a>
-				<div style={{ borderRadius: "0" }} className="dropdown-menu dropdown-menu-right m-0 p-0"
+				<div style={{ borderRadius: "0" }}
+					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<Link to={`/profile/${props.auth.username}`}
-						className="p-3 dropdown-item border-bottom">
+					<Link to={`/profile/${props.auth.username}`} className="p-3 dropdown-item border-bottom">
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>
 					</Link>
