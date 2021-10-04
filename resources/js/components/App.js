@@ -453,40 +453,39 @@ function App() {
 		window.location.href.match("/search") && searchInput.current.focus()
 	}
 
-	//Register service worker
-	// if ('serviceWorker' in navigator) {
-	// 	window.addEventListener('load', () => {
-	// 		navigator.serviceWorker.register('/sw.js')
-	// 			.then((reg) => console.log('Service worker registered', reg))
-	// 			.catch((err) => console.log('Service worker not registered', err));
-	// 	})
-	// }
+	// Register service worker
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/sw.js')
+				// .then((reg) => console.log('Service worker registered', reg))
+				// .catch((err) => console.log('Service worker not registered', err));
+		})
+	}
 
-	// // Install button
-	// let deferredPrompt;
-	// // Listen to the install prompt
-	// window.addEventListener('beforeinstallprompt', (e) => {
-	// 	deferredPrompt = e;
-	// 	// Show the button
-	// 	btnAdd.style.display = 'block';
+	// Request permission for notifications
+	Notification.requestPermission(
+		function (status) {
+			console.log('Notification permission status: ', status)
+		}
+	)
 
-	// 	// Action when button is clicked
-	// 	btnAdd.addEventListener('click', (e) => {
-	// 		// Show install banner
-	// 		deferredPrompt.prompt();
-	// 		// Check if the user accepted
-	// 		// deferredPrompt.userChoice.then((choiceResult) => {
-	// 		// 	if(choiceResult.outcome === 'accepted') {
-	// 		// 		btnAdd.innerHTML = 'User accepted';
-	// 		// 	}
-	// 		// 	deferredPrompt = null;
-	// 		// });
+	function displayNotification() {
+		if (Notification.permission == 'granted') {
+			navigator.serviceWorker.getRegistration()
+				.then(function (reg) {
 
-	// 		window.addEventListener('appinstalled', (evt) => {
-	// 			btnAdd.innerHTML = 'Installed';
-	// 		});
-	// 	});
-	// });
+					var options = {
+						body: 'Here is a notification body',
+						icon: 'storage/img/musical-note.png',
+						vibrate: [100, 50, 100],
+						// Allows us to identify notification
+						data: { primaryKey: 1 }
+					}
+
+					reg.showNotification('Hello world', options)
+				})
+		}
+	}
 
 	return (
 		<>

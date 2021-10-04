@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import Button from '../components/Button'
 import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
@@ -9,6 +8,8 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 const VideoCharts = (props) => {
 
 	const history = useHistory()
+
+	const location = useLocation()
 
 	//Declare States 
 	const [chart, setChart] = useState("Newly Released")
@@ -157,13 +158,15 @@ const VideoCharts = (props) => {
 	}
 
 	// Load more on page bottom
-	window.onscroll = function (ev) {
-		const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
+	if (location.pathname.match(/video-charts/)) {
+		window.onscroll = function (ev) {
+			const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
 
-		if (bottom) {
-			setVideoSlice(videoSlice + 8)
-		}
-	};
+			if (bottom) {
+				setVideoSlice(videoSlice + 8)
+			}
+		};
+	}
 
 	return (
 		<>

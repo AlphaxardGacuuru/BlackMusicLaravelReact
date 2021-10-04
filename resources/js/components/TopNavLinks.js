@@ -35,6 +35,33 @@ const TopNavLinks = (props) => {
 				});
 		});
 	}
+
+	// Install button
+	let deferredPrompt;
+	// Listen to the install prompt
+	window.addEventListener('beforeinstallprompt', (e) => {
+		deferredPrompt = e;
+		// Show the button
+		btnAdd.style.display = 'block';
+
+		// Action when button is clicked
+		btnAdd.addEventListener('click', (e) => {
+			// Show install banner
+			deferredPrompt.prompt();
+			// Check if the user accepted
+			deferredPrompt.userChoice.then((choiceResult) => {
+				if (choiceResult.outcome === 'accepted') {
+					btnAdd.innerHTML = 'User accepted';
+				}
+				deferredPrompt = null;
+			});
+
+			window.addEventListener('appinstalled', (evt) => {
+				btnAdd.innerHTML = 'Installed';
+			});
+		});
+	});
+
 	return (
 		<>
 			{/* Admin */}
@@ -139,6 +166,12 @@ const TopNavLinks = (props) => {
 					<Link to={`/profile/${props.auth.username}`} className="p-3 dropdown-item border-bottom">
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>
+					</Link>
+					<Link to='/videos'
+						id="btnAdd"
+						className="p-3 dropdown-item border-bottom"
+						style={{ display: "none" }}>
+						<h6></h6>
 					</Link>
 					<Link to='/videos' className="p-3 dropdown-item border-bottom">
 						<h6>Studio</h6>

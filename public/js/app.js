@@ -93442,38 +93442,37 @@ function App() {
 
   var onSearchIconClick = function onSearchIconClick() {
     window.location.href.match("/search") && searchInput.current.focus();
-  }; //Register service worker
-  // if ('serviceWorker' in navigator) {
-  // 	window.addEventListener('load', () => {
-  // 		navigator.serviceWorker.register('/sw.js')
-  // 			.then((reg) => console.log('Service worker registered', reg))
-  // 			.catch((err) => console.log('Service worker not registered', err));
-  // 	})
-  // }
-  // // Install button
-  // let deferredPrompt;
-  // // Listen to the install prompt
-  // window.addEventListener('beforeinstallprompt', (e) => {
-  // 	deferredPrompt = e;
-  // 	// Show the button
-  // 	btnAdd.style.display = 'block';
-  // 	// Action when button is clicked
-  // 	btnAdd.addEventListener('click', (e) => {
-  // 		// Show install banner
-  // 		deferredPrompt.prompt();
-  // 		// Check if the user accepted
-  // 		// deferredPrompt.userChoice.then((choiceResult) => {
-  // 		// 	if(choiceResult.outcome === 'accepted') {
-  // 		// 		btnAdd.innerHTML = 'User accepted';
-  // 		// 	}
-  // 		// 	deferredPrompt = null;
-  // 		// });
-  // 		window.addEventListener('appinstalled', (evt) => {
-  // 			btnAdd.innerHTML = 'Installed';
-  // 		});
-  // 	});
-  // });
+  }; // Register service worker
 
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js'); // .then((reg) => console.log('Service worker registered', reg))
+      // .catch((err) => console.log('Service worker not registered', err));
+    });
+  } // Request permission for notifications
+
+
+  Notification.requestPermission(function (status) {
+    console.log('Notification permission status: ', status);
+  });
+
+  function displayNotification() {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        var options = {
+          body: 'Here is a notification body',
+          icon: 'storage/img/musical-note.png',
+          vibrate: [100, 50, 100],
+          // Allows us to identify notification
+          data: {
+            primaryKey: 1
+          }
+        };
+        reg.showNotification('Hello world', options);
+      });
+    }
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], {
     url: url,
@@ -94885,8 +94884,32 @@ var TopNavLinks = function TopNavLinks(props) {
         props.setErrors(newError);
       });
     });
-  };
+  }; // Install button
 
+
+  var deferredPrompt; // Listen to the install prompt
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    deferredPrompt = e; // Show the button
+
+    btnAdd.style.display = 'block'; // Action when button is clicked
+
+    btnAdd.addEventListener('click', function (e) {
+      // Show install banner
+      deferredPrompt.prompt(); // Check if the user accepted
+
+      deferredPrompt.userChoice.then(function (choiceResult) {
+        if (choiceResult.outcome === 'accepted') {
+          btnAdd.innerHTML = 'User accepted';
+        }
+
+        deferredPrompt = null;
+      });
+      window.addEventListener('appinstalled', function (evt) {
+        btnAdd.innerHTML = 'Installed';
+      });
+    });
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.auth.username == "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/admin",
     className: "mr-2"
@@ -95011,6 +95034,13 @@ var TopNavLinks = function TopNavLinks(props) {
     to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/videos",
+    id: "btnAdd",
+    className: "p-3 dropdown-item border-bottom",
+    style: {
+      display: "none"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Studio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -95654,9 +95684,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var AudioCharts = function AudioCharts(props) {
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //Declare States 
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("Newly Released"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -95844,13 +95874,15 @@ var AudioCharts = function AudioCharts(props) {
   }; // Load more on page bottom
 
 
-  window.onscroll = function (ev) {
-    var bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - document.body.offsetHeight / 16;
+  if (location.pathname.match(/audio-charts/)) {
+    window.onscroll = function (ev) {
+      var bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - document.body.offsetHeight / 16;
 
-    if (bottom) {
-      setAudioSlice(audioSlice + 8);
-    }
-  };
+      if (bottom) {
+        setAudioSlice(audioSlice + 8);
+      }
+    };
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "carouselExampleIndicators",
@@ -102399,9 +102431,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var VideoCharts = function VideoCharts(props) {
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //Declare States 
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("Newly Released"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102591,13 +102623,15 @@ var VideoCharts = function VideoCharts(props) {
   }; // Load more on page bottom
 
 
-  window.onscroll = function (ev) {
-    var bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - document.body.offsetHeight / 16;
+  if (location.pathname.match(/video-charts/)) {
+    window.onscroll = function (ev) {
+      var bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - document.body.offsetHeight / 16;
 
-    if (bottom) {
-      setVideoSlice(videoSlice + 8);
-    }
-  };
+      if (bottom) {
+        setVideoSlice(videoSlice + 8);
+      }
+    };
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "carouselExampleIndicators",
