@@ -75,29 +75,6 @@ function App() {
 	const [postComments, setPostComments] = useState([])
 	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
-	const [videos, setVideos] = useState([{
-		"id": 91,
-		"video": "https://www.youtube.com/embed/EdKKYry-FwQ",
-		"name": "Kenyan Shrap Gang Type Beat Supreme",
-		"username": "@sammyking",
-		"ft": "",
-		"album": "",
-		"genre": "Hiphop",
-		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-		"description": "",
-		"released": null,
-		"created_at": "2020-05-08T12:41:00.000000Z",
-		"updated_at": "2021-03-15T17:43:59.000000Z"
-	}])
-	const [videoLikes, setVideoLikes] = useState([])
-	const [videoComments, setVideoComments] = useState([])
-	const [videoCommentLikes, setVideoCommentLikes] = useState([])
-	const [cartAudios, setCartAudios] = useState([])
-	const [cartVideos, setCartVideos] = useState([])
-	const [boughtAudios, setBoughtAudios] = useState([])
-	const [boughtVideos, setBoughtVideos] = useState([])
-	const [videoAlbums, setVideoAlbums] = useState([])
-	const [videoPayouts, setVideoPayouts] = useState([])
 	const [audios, setAudios] = useState([{
 		"id": 15,
 		"audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
@@ -112,14 +89,44 @@ function App() {
 		"created_at": "2021-08-14T21:23:39.000000Z",
 		"updated_at": "2021-08-14T21:23:39.000000Z"
 	}])
-	const [audioLikes, setAudioLikes] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
 	const [audioComments, setAudioComments] = useState([])
 	const [audioCommentLikes, setAudioCommentLikes] = useState([])
+	const [audioLikes, setAudioLikes] = useState([])
+	const [audioNotifications, setAudioNotifications] = useState([])
+	const [audioPayouts, setAudioPayouts] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState([])
+	const [boughtVideos, setBoughtVideos] = useState([])
 	const [decos, setDecos] = useState([])
+	const [decoNotifications, setDecoNotifications] = useState([])
 	const [follows, setFollows] = useState([])
+	const [followNotifications, setFollowNotifications] = useState([])
 	const [sms, setSMS] = useState([])
 	const [kopokopo, setKopokopo] = useState([])
+	const [kopokopoNotifications, setKopokopoNotifications] = useState([])
+	const [notifications, setNotifications] = useState([])
+	const [videos, setVideos] = useState([{
+		"id": 91,
+		"video": "https://www.youtube.com/embed/EdKKYry-FwQ",
+		"name": "Kenyan Shrap Gang Type Beat Supreme",
+		"username": "@sammyking",
+		"ft": "",
+		"album": "",
+		"genre": "Hiphop",
+		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
+		"description": "",
+		"released": null,
+		"created_at": "2020-05-08T12:41:00.000000Z",
+		"updated_at": "2021-03-15T17:43:59.000000Z"
+	}])
+	const [videoComments, setVideoComments] = useState([])
+	const [videoCommentLikes, setVideoCommentLikes] = useState([])
+	const [videoLikes, setVideoLikes] = useState([])
+	const [videoNotifications, setVideoNotifications] = useState([])
+	const [cartAudios, setCartAudios] = useState([])
+	const [cartVideos, setCartVideos] = useState([])
+	const [videoAlbums, setVideoAlbums] = useState([])
+	const [videoPayouts, setVideoPayouts] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
@@ -161,6 +168,16 @@ function App() {
 			.then((res) => setAudios(res.data))
 			.catch(() => setErrors(["Failed to fetch audios"]))
 
+		// Fetch Audio Notifications
+		axios.get(`${url}/api/audio-notifications`)
+			.then((res) => setAudioNotifications(res.data))
+			.catch(() => setErrors(["Failed to fetch audio notifications"]))
+
+		// Fetch Audio Payouts
+		axios.get(`${url}/api/audio-payouts`)
+			.then((res) => setAudioPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch audio payouts"]))
+
 		// Fetch Bought Audios
 		axios.get(`${url}/api/bought-audios`)
 			.then((res) => setBoughtAudios(res.data))
@@ -186,15 +203,35 @@ function App() {
 			.then((res) => setDecos(res.data))
 			.catch(() => setErrors(['Failed to fetch decos']))
 
+		// Fetch Decos Notifications
+		axios.get(`${url}/api/deco-notifications`)
+			.then((res) => setDecoNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch decos notifications']))
+
 		// Fetch Follows
 		axios.get(`${url}/api/follows`)
 			.then((res) => setFollows(res.data))
 			.catch(() => setErrors(['Failed to fetch follows']))
 
+		// Fetch Follows Notifications
+		axios.get(`${url}/api/follow-notifications`)
+			.then((res) => setFollowNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch follow notifications']))
+
 		// Fetch Kopokopo
 		// axios.get(`${url}/api/kopokopo`)
 		// 	.then((res) => setKopokopo(res.data))
 		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
+
+		// Fetch Kopokopo
+		axios.get(`${url}/api/kopokopo-notifications`)
+			.then((res) => setKopokopoNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch kopokopo notifications']))
+
+		// Fetch Notifications
+		axios.get(`${url}/api/notifications`)
+			.then((res) => setNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch notifications']))
 
 		// Fetch Polls
 		axios.get(`${url}/api/polls`)
@@ -256,10 +293,15 @@ function App() {
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
 
+		// Fetch Video Notifications
+		axios.get(`${url}/api/video-notifications`)
+			.then((res) => setVideoNotifications(res.data))
+			.catch(() => setErrors(["Failed to fetch video notifications"]))
+
 		// Fetch Video Payouts
-		// axios.get(`${url}/api/video-payouts`)
-		// 	.then((res) => setVideoPayouts(res.data))
-		// 	.catch(() => setErrors(["Failed to fetch video payouts"]))
+		axios.get(`${url}/api/video-payouts`)
+			.then((res) => setVideoPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch video payouts"]))
 
 	}, [])
 
@@ -453,22 +495,29 @@ function App() {
 		window.location.href.match("/search") && searchInput.current.focus()
 	}
 
-	// Register service worker
+	/*
+	*
+	* Register service worker */
 	if ('serviceWorker' in navigator) {
 		window.addEventListener('load', () => {
 			navigator.serviceWorker.register('/sw.js')
-				// .then((reg) => console.log('Service worker registered', reg))
-				// .catch((err) => console.log('Service worker not registered', err));
+			// .then((reg) => console.log('Service worker registered', reg))
+			// .catch((err) => console.log('Service worker not registered', err));
 		})
 	}
+
+	/*
+	*
+	* Notifications */
 
 	// Request permission for notifications
 	Notification.requestPermission(
 		function (status) {
-			console.log('Notification permission status: ', status)
+			// console.log('Notification permission status: ', status)
 		}
 	)
 
+	// Show the notification
 	function displayNotification() {
 		if (Notification.permission == 'granted') {
 			navigator.serviceWorker.getRegistration()
@@ -476,6 +525,17 @@ function App() {
 
 					var options = {
 						body: 'Here is a notification body',
+						actions: [
+							{
+								action: 'explore',
+								title: 'Go to the site',
+								icon: 'storage/img/musical-note.png'
+							}, {
+								action: 'close',
+								title: 'No thank you',
+								icon: 'storage/img/musical-note.png'
+							}
+						],
 						icon: 'storage/img/musical-note.png',
 						vibrate: [100, 50, 100],
 						// Allows us to identify notification
@@ -487,6 +547,25 @@ function App() {
 		}
 	}
 
+	// Close the notification
+	self.addEventListener('notificationclose', function (event) {
+		var notification = event.notification
+		var primaryKey = notificatio.data.primaryKey
+		console.log('Closed notification: ', primaryKey)
+	})
+
+	// Notification Click
+	self.addEventListener('notificationclick', function (event) {
+		var notification = event.notification
+		var action = event.action
+
+		if (action === 'close') {
+			notification.close()
+		} else {
+			clients.openWindow('https://music.black.co.ke')
+		}
+	})
+
 	return (
 		<>
 			<Router>
@@ -495,7 +574,7 @@ function App() {
 						<div id="sonar-load"></div>
 					</div>
 				</div> */}
-				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch }} />
+				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
 
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />
@@ -599,12 +678,21 @@ function App() {
 
 
 				<Route path="/admin" exact render={(props) => (
-					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, audios, boughtAudios }} />
+					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
 				)} />
 
 				<Messages {...{ message, errors }} />
 
 				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, onSearchIconClick }} />
+
+				<center>
+					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
+				</center>
+				<br />
+				<br />
+				<br />
+				<br />
+
 			</Router>
 
 			<audio

@@ -92884,69 +92884,6 @@ function App() {
       setPolls = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
-    "id": 91,
-    "video": "https://www.youtube.com/embed/EdKKYry-FwQ",
-    "name": "Kenyan Shrap Gang Type Beat Supreme",
-    "username": "@sammyking",
-    "ft": "",
-    "album": "",
-    "genre": "Hiphop",
-    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-    "description": "",
-    "released": null,
-    "created_at": "2020-05-08T12:41:00.000000Z",
-    "updated_at": "2021-03-15T17:43:59.000000Z"
-  }]),
-      _useState22 = _slicedToArray(_useState21, 2),
-      videos = _useState22[0],
-      setVideos = _useState22[1];
-
-  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState24 = _slicedToArray(_useState23, 2),
-      videoLikes = _useState24[0],
-      setVideoLikes = _useState24[1];
-
-  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState26 = _slicedToArray(_useState25, 2),
-      videoComments = _useState26[0],
-      setVideoComments = _useState26[1];
-
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState28 = _slicedToArray(_useState27, 2),
-      videoCommentLikes = _useState28[0],
-      setVideoCommentLikes = _useState28[1];
-
-  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState30 = _slicedToArray(_useState29, 2),
-      cartAudios = _useState30[0],
-      setCartAudios = _useState30[1];
-
-  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState32 = _slicedToArray(_useState31, 2),
-      cartVideos = _useState32[0],
-      setCartVideos = _useState32[1];
-
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState34 = _slicedToArray(_useState33, 2),
-      boughtAudios = _useState34[0],
-      setBoughtAudios = _useState34[1];
-
-  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState36 = _slicedToArray(_useState35, 2),
-      boughtVideos = _useState36[0],
-      setBoughtVideos = _useState36[1];
-
-  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState38 = _slicedToArray(_useState37, 2),
-      videoAlbums = _useState38[0],
-      setVideoAlbums = _useState38[1];
-
-  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState40 = _slicedToArray(_useState39, 2),
-      videoPayouts = _useState40[0],
-      setVideoPayouts = _useState40[1];
-
-  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
     "id": 15,
     "audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
     "name": "Audio 1",
@@ -92960,49 +92897,147 @@ function App() {
     "created_at": "2021-08-14T21:23:39.000000Z",
     "updated_at": "2021-08-14T21:23:39.000000Z"
   }]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      audios = _useState22[0],
+      setAudios = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState24 = _slicedToArray(_useState23, 2),
+      audioAlbums = _useState24[0],
+      setAudioAlbums = _useState24[1];
+
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState26 = _slicedToArray(_useState25, 2),
+      audioComments = _useState26[0],
+      setAudioComments = _useState26[1];
+
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState28 = _slicedToArray(_useState27, 2),
+      audioCommentLikes = _useState28[0],
+      setAudioCommentLikes = _useState28[1];
+
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState30 = _slicedToArray(_useState29, 2),
+      audioLikes = _useState30[0],
+      setAudioLikes = _useState30[1];
+
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState32 = _slicedToArray(_useState31, 2),
+      audioNotifications = _useState32[0],
+      setAudioNotifications = _useState32[1];
+
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState34 = _slicedToArray(_useState33, 2),
+      audioPayouts = _useState34[0],
+      setAudioPayouts = _useState34[1];
+
+  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState36 = _slicedToArray(_useState35, 2),
+      boughtAudios = _useState36[0],
+      setBoughtAudios = _useState36[1];
+
+  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState38 = _slicedToArray(_useState37, 2),
+      boughtVideos = _useState38[0],
+      setBoughtVideos = _useState38[1];
+
+  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState40 = _slicedToArray(_useState39, 2),
+      decos = _useState40[0],
+      setDecos = _useState40[1];
+
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      audios = _useState42[0],
-      setAudios = _useState42[1];
+      decoNotifications = _useState42[0],
+      setDecoNotifications = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      audioLikes = _useState44[0],
-      setAudioLikes = _useState44[1];
+      follows = _useState44[0],
+      setFollows = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      audioAlbums = _useState46[0],
-      setAudioAlbums = _useState46[1];
+      followNotifications = _useState46[0],
+      setFollowNotifications = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      audioComments = _useState48[0],
-      setAudioComments = _useState48[1];
+      sms = _useState48[0],
+      setSMS = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      audioCommentLikes = _useState50[0],
-      setAudioCommentLikes = _useState50[1];
+      kopokopo = _useState50[0],
+      setKopokopo = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      decos = _useState52[0],
-      setDecos = _useState52[1];
+      kopokopoNotifications = _useState52[0],
+      setKopokopoNotifications = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
-      follows = _useState54[0],
-      setFollows = _useState54[1];
+      notifications = _useState54[0],
+      setNotifications = _useState54[1];
 
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
+    "id": 91,
+    "video": "https://www.youtube.com/embed/EdKKYry-FwQ",
+    "name": "Kenyan Shrap Gang Type Beat Supreme",
+    "username": "@sammyking",
+    "ft": "",
+    "album": "",
+    "genre": "Hiphop",
+    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
+    "description": "",
+    "released": null,
+    "created_at": "2020-05-08T12:41:00.000000Z",
+    "updated_at": "2021-03-15T17:43:59.000000Z"
+  }]),
       _useState56 = _slicedToArray(_useState55, 2),
-      sms = _useState56[0],
-      setSMS = _useState56[1];
+      videos = _useState56[0],
+      setVideos = _useState56[1];
 
   var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState58 = _slicedToArray(_useState57, 2),
-      kopokopo = _useState58[0],
-      setKopokopo = _useState58[1]; // Reset Messages and Errors to null after 3 seconds
+      videoComments = _useState58[0],
+      setVideoComments = _useState58[1];
+
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState60 = _slicedToArray(_useState59, 2),
+      videoCommentLikes = _useState60[0],
+      setVideoCommentLikes = _useState60[1];
+
+  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState62 = _slicedToArray(_useState61, 2),
+      videoLikes = _useState62[0],
+      setVideoLikes = _useState62[1];
+
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState64 = _slicedToArray(_useState63, 2),
+      videoNotifications = _useState64[0],
+      setVideoNotifications = _useState64[1];
+
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState66 = _slicedToArray(_useState65, 2),
+      cartAudios = _useState66[0],
+      setCartAudios = _useState66[1];
+
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState68 = _slicedToArray(_useState67, 2),
+      cartVideos = _useState68[0],
+      setCartVideos = _useState68[1];
+
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState70 = _slicedToArray(_useState69, 2),
+      videoAlbums = _useState70[0],
+      setVideoAlbums = _useState70[1];
+
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState72 = _slicedToArray(_useState71, 2),
+      videoPayouts = _useState72[0],
+      setVideoPayouts = _useState72[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93074,6 +93109,18 @@ function App() {
       return setAudios(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audios"]);
+    }); // Fetch Audio Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-notifications")).then(function (res) {
+      return setAudioNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio notifications"]);
+    }); // Fetch Audio Payouts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-payouts")).then(function (res) {
+      return setAudioPayouts(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio payouts"]);
     }); // Fetch Bought Audios
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
@@ -93104,17 +93151,41 @@ function App() {
       return setDecos(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch decos']);
+    }); // Fetch Decos Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/deco-notifications")).then(function (res) {
+      return setDecoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch decos notifications']);
     }); // Fetch Follows
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
       return setFollows(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch follows']);
+    }); // Fetch Follows Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follow-notifications")).then(function (res) {
+      return setFollowNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch follow notifications']);
     }); // Fetch Kopokopo
     // axios.get(`${url}/api/kopokopo`)
     // 	.then((res) => setKopokopo(res.data))
     // 	.catch(() => setErrors(['Failed to fetch kopokopo']))
-    // Fetch Polls
+    // Fetch Kopokopo
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-notifications")).then(function (res) {
+      return setKopokopoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch kopokopo notifications']);
+    }); // Fetch Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
+      return setNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch notifications']);
+    }); // Fetch Polls
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/polls")).then(function (res) {
       return setPolls(res.data);
@@ -93186,10 +93257,19 @@ function App() {
       return setVideos(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
+    }); // Fetch Video Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-notifications")).then(function (res) {
+      return setVideoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video notifications"]);
     }); // Fetch Video Payouts
-    // axios.get(`${url}/api/video-payouts`)
-    // 	.then((res) => setVideoPayouts(res.data))
-    // 	.catch(() => setErrors(["Failed to fetch video payouts"]))
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
+      return setVideoPayouts(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video payouts"]);
+    });
   }, []); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
@@ -93223,50 +93303,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState60 = _slicedToArray(_useState59, 2),
-      show = _useState60[0],
-      setShow = _useState60[1];
-
-  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState62 = _slicedToArray(_useState61, 2),
-      playBtn = _useState62[0],
-      setPlayBtn = _useState62[1];
-
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState64 = _slicedToArray(_useState63, 2),
-      shuffle = _useState64[0],
-      setShuffle = _useState64[1];
-
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState66 = _slicedToArray(_useState65, 2),
-      loop = _useState66[0],
-      setLoop = _useState66[1];
-
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState68 = _slicedToArray(_useState67, 2),
-      dur = _useState68[0],
-      setDur = _useState68[1];
-
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
-      _useState70 = _slicedToArray(_useState69, 2),
-      volume = _useState70[0],
-      setVolume = _useState70[1];
-
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState72 = _slicedToArray(_useState71, 2),
-      currentTime = _useState72[0],
-      setCurrentTime = _useState72[1];
-
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState74 = _slicedToArray(_useState73, 2),
-      progressPercent = _useState74[0],
-      setProgressPercent = _useState74[1];
+      show = _useState74[0],
+      setShow = _useState74[1];
 
   var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState76 = _slicedToArray(_useState75, 2),
-      audioLoader = _useState76[0],
-      setAudioLoader = _useState76[1]; // Listen for show change and autoplay song
+      playBtn = _useState76[0],
+      setPlayBtn = _useState76[1];
+
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState78 = _slicedToArray(_useState77, 2),
+      shuffle = _useState78[0],
+      setShuffle = _useState78[1];
+
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState80 = _slicedToArray(_useState79, 2),
+      loop = _useState80[0],
+      setLoop = _useState80[1];
+
+  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState82 = _slicedToArray(_useState81, 2),
+      dur = _useState82[0],
+      setDur = _useState82[1];
+
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+      _useState84 = _slicedToArray(_useState83, 2),
+      volume = _useState84[0],
+      setVolume = _useState84[1];
+
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState86 = _slicedToArray(_useState85, 2),
+      currentTime = _useState86[0],
+      setCurrentTime = _useState86[1];
+
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState88 = _slicedToArray(_useState87, 2),
+      progressPercent = _useState88[0],
+      setProgressPercent = _useState88[1];
+
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState90 = _slicedToArray(_useState89, 2),
+      audioLoader = _useState90[0],
+      setAudioLoader = _useState90[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -93433,16 +93513,19 @@ function App() {
   // Search State
 
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState78 = _slicedToArray(_useState77, 2),
-      search = _useState78[0],
-      setSearch = _useState78[1];
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState92 = _slicedToArray(_useState91, 2),
+      search = _useState92[0],
+      setSearch = _useState92[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
   var onSearchIconClick = function onSearchIconClick() {
     window.location.href.match("/search") && searchInput.current.focus();
-  }; // Register service worker
+  };
+  /*
+  *
+  * Register service worker */
 
 
   if ('serviceWorker' in navigator) {
@@ -93450,18 +93533,30 @@ function App() {
       navigator.serviceWorker.register('/sw.js'); // .then((reg) => console.log('Service worker registered', reg))
       // .catch((err) => console.log('Service worker not registered', err));
     });
-  } // Request permission for notifications
+  }
+  /*
+  *
+  * Notifications */
+  // Request permission for notifications
 
 
-  Notification.requestPermission(function (status) {
-    console.log('Notification permission status: ', status);
-  });
+  Notification.requestPermission(function (status) {// console.log('Notification permission status: ', status)
+  }); // Show the notification
 
   function displayNotification() {
     if (Notification.permission == 'granted') {
       navigator.serviceWorker.getRegistration().then(function (reg) {
         var options = {
           body: 'Here is a notification body',
+          actions: [{
+            action: 'explore',
+            title: 'Go to the site',
+            icon: 'storage/img/musical-note.png'
+          }, {
+            action: 'close',
+            title: 'No thank you',
+            icon: 'storage/img/musical-note.png'
+          }],
           icon: 'storage/img/musical-note.png',
           vibrate: [100, 50, 100],
           // Allows us to identify notification
@@ -93472,8 +93567,25 @@ function App() {
         reg.showNotification('Hello world', options);
       });
     }
-  }
+  } // Close the notification
 
+
+  self.addEventListener('notificationclose', function (event) {
+    var notification = event.notification;
+    var primaryKey = notificatio.data.primaryKey;
+    console.log('Closed notification: ', primaryKey);
+  }); // Notification Click
+
+  self.addEventListener('notificationclick', function (event) {
+    var notification = event.notification;
+    var action = event.action;
+
+    if (action === 'close') {
+      notification.close();
+    } else {
+      clients.openWindow('https://music.black.co.ke');
+    }
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], {
     url: url,
     auth: auth,
@@ -93483,7 +93595,13 @@ function App() {
     cartVideos: cartVideos,
     cartAudios: cartAudios,
     search: search,
-    setSearch: setSearch
+    setSearch: setSearch,
+    notifications: notifications,
+    followNotifications: followNotifications,
+    decoNotifications: decoNotifications,
+    videoNotifications: videoNotifications,
+    audioNotifications: audioNotifications,
+    kopokopoNotifications: kopokopoNotifications
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login",
     exact: true,
@@ -93950,8 +94068,10 @@ function App() {
         decos: decos,
         videos: videos,
         boughtVideos: boughtVideos,
+        videoPayouts: videoPayouts,
         audios: audios,
-        boughtAudios: boughtAudios
+        boughtAudios: boughtAudios,
+        audioPayouts: audioPayouts
       });
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -93979,7 +94099,10 @@ function App() {
     prevSong: prevSong,
     nextSong: nextSong,
     onSearchIconClick: onSearchIconClick
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "mysonar-btn",
+    onClick: displayNotification
+  }, "notify")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
@@ -94872,7 +94995,6 @@ var TopNavLinks = function TopNavLinks(props) {
           });
         });
       })["catch"](function (err) {
-        console.log(err);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -94982,34 +95104,60 @@ var TopNavLinks = function TopNavLinks(props) {
     },
     className: "dropdown-menu dropdown-menu-right m-0 p-0",
     "aria-labelledby": "dropdownMenuButton"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "#",
-    className: "p-2 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Notifications")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       maxHeight: "500px",
       overflowY: "scroll"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/",
-    className: "p-3 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " just Decorated you.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/",
-    className: "p-3 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      color: "purple"
-    }
-  }, "New Fans")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/",
-    className: "p-3 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " became a fan.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/",
-    className: "p-3 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Songs Bought")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/",
-    className: "p-3 dropdown-item border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " just bought"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.notifications.filter(function (notification) {
+    return notification.username == props.auth.username;
+  }).map(function (notification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: "/profile/",
+      className: "p-3 dropdown-item border-bottom text-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, notification.message));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "Decos"), props.decoNotifications.filter(function (decoNotification) {
+    return decoNotification.username == props.auth.username;
+  }).map(function (decoNotification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: "/profile/",
+      className: "p-3 dropdown-item border-bottom text-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, decoNotification.artist, " just Decorated you."));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "New Fans"), props.followNotifications.filter(function (followNotification) {
+    return followNotification.username == props.auth.username;
+  }).map(function (followNotification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: "/profile/",
+      className: "p-3 dropdown-item border-bottom text-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, followNotification.follower, " became a fan."));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "Songs Bought"), props.videoNotifications.filter(function (videoNotification) {
+    return videoNotification.artist == props.auth.username;
+  }).map(function (videoNotification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: "/profile/",
+      className: "p-3 dropdown-item border-bottom text-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoNotification.username, " just bought ", videoNotification.video_id));
+  }), props.audioNotifications.filter(function (audioNotification) {
+    return audioNotification.artist == props.auth.username;
+  }).map(function (audioNotification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: "/profile/",
+      className: "p-3 dropdown-item border-bottom text-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioNotification.username, " just bought ", audioNotification.audio_id));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
@@ -95034,13 +95182,13 @@ var TopNavLinks = function TopNavLinks(props) {
     to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/videos",
+    to: "#",
     id: "btnAdd",
     className: "p-3 dropdown-item border-bottom",
     style: {
       display: "none"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Studio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -95171,10 +95319,10 @@ VideoMediaHorizontal.defaultProps = {
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin.js":
-/*!*************************************!*\
-  !*** ./resources/js/pages/Admin.js ***!
-  \*************************************/
+/***/ "./resources/js/components/button.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/button.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -95184,56 +95332,183 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
+var Button = function Button(_ref) {
+  var btnStyle = _ref.btnStyle,
+      btnClass = _ref.btnClass,
+      btnText = _ref.btnText,
+      onClick = _ref.onClick;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    style: btnStyle,
+    className: btnClass,
+    onClick: onClick
+  }, btnText);
+};
+
+Button.defaultProps = {
+  btnClass: 'sonar-btn'
+};
+/* harmony default export */ __webpack_exports__["default"] = (Button);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Admin.js":
+/*!*************************************!*\
+  !*** ./resources/js/pages/Admin.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/button */ "./resources/js/components/button.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
 var Admin = function Admin(props) {
   // Arrays for dates
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      videoPayouts = _useState2[0],
+      setVideoPayouts = _useState2[1]; // Fetch Video Payouts
+
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/video-payouts/1")).then(function (res) {
+    return setVideoPayouts(res.data);
+  })["catch"](function () {
+    return props.setErrors(["Failed to fetch video payouts"]);
+  }); // Post video payout
+
+  var onVideoPayout = function onVideoPayout(username, amount) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("".concat(props.url, "/api/video-payouts"), {
+        username: username,
+        amount: amount
+      }).then(function (res) {
+        return props.setMessage(res.data);
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-sm-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.users.length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Musicians")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.users.filter(function (user) {
-    return user.account_type == "musician";
-  }).length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Songs")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.videos.length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Songs Bought")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.boughtVideos.length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.length * 20))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "This week")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
-    return (new Date().getTime() - new Date(boughtVideo.created_at).getTime()) / (1000 * 3600 * 24) < 7;
-  }).length * 20))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Profit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.length * 10))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "This week")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
-    return (new Date().getTime() - new Date(boughtVideo.created_at).getTime()) / (1000 * 3600 * 24) < 7;
-  }).length * 10)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-sm-9"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, props.users.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Musicians")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, props.users.filter(function (user) {
+    return user.account_type == "musician";
+  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Songs")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, props.videos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Songs Bought")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, props.boughtVideos.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      color: "green"
+    }
+  }, "KES ", props.boughtVideos.length * 20), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "This week")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      color: "green"
+    }
+  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
+    return (new Date().getTime() - new Date(boughtVideo.created_at).getTime()) / (1000 * 3600 * 24) < 7;
+  }).length * 20), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Profit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      color: "green"
+    }
+  }, "KES ", props.boughtVideos.length * 10), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, "This week")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      color: "green"
+    }
+  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
+    return (new Date().getTime() - new Date(boughtVideo.created_at).getTime()) / (1000 * 3600 * 24) < 7;
+  }).length * 10)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "table table-responsive table-hover"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "User ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gender"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Acc Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Deco"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "DOB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Audios Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Videos Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Date Joined"))), props.users.filter(function (user) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "User ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Gender"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Acc Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Deco"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "DOB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Audios Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Videos Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Date Joined"))), props.users.filter(function (user) {
     return user.account_type == "musician";
   }).reverse(function (a, b) {
     return a - b;
   }).slice(0, 10).map(function (musician, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", {
       key: key
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.gender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.account_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.decos.filter(function (deco) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.gender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.account_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, props.decos.filter(function (deco) {
       return deco.username == musician.username;
-    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.dob), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.boughtAudios.filter(function (boughtAudio) {
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.dob), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, musician.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, props.boughtAudios.filter(function (boughtAudio) {
       return boughtAudio.username == musician.username;
-    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.boughtVideos.filter(function (boughtVideo) {
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, props.boughtVideos.filter(function (boughtVideo) {
       return boughtVideo.username == musician.username;
-    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, new Date(musician.created_at).getDay(), " " + months[new Date(musician.created_at).getMonth()], " " + new Date(musician.created_at).getFullYear())));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, new Date(musician.created_at).getDay(), " " + months[new Date(musician.created_at).getMonth()], " " + new Date(musician.created_at).getFullYear())));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+    className: "table table-responsive table-hover"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Send"))), videoPayouts.map(function (videoPayout, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", {
+      key: key
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      btnClass: "mysonar-btn",
+      btnText: "send",
+      onClick: function onClick() {
+        return onVideoPayout(videoPayout.username, videoPayout.amount);
+      }
+    }))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-sm-1"
   }));
 };

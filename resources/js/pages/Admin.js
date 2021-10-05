@@ -1,90 +1,92 @@
+import axios from 'axios';
 import React from 'react'
+import { useState } from 'react'
+
+import Button from '../components/button'
 
 const Admin = (props) => {
 
 	// Arrays for dates
 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+	const [videoPayouts, setVideoPayouts] = useState([])
+
+	// Fetch Video Payouts
+	axios.get(`${props.url}/api/video-payouts/1`)
+		.then((res) => setVideoPayouts(res.data))
+		.catch(() => props.setErrors(["Failed to fetch video payouts"]))
+
+	// Post video payout
+	const onVideoPayout = (username, amount) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/video-payouts`, {
+				username: username,
+				amount: amount,
+			}).then((res) => props.setMessage(res.data))
+				.catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+
+					newError.push(err.response.data.message)
+					props.setErrors(newError)
+				})
+		})
+	}
+
 	return (
 		<div className="row">
-			<div className="col-sm-2">
-				<table className="table">
-					{/* <!-- Number of Users Start--> */}
-					<tbody>
-						<tr>
-							<td><h4>Users</h4></td>
-							<td>{props.users.length}</td>
-						</tr>
-					</tbody>
+			<div className="col-sm-2"></div>
+			<div className="col-sm-9">
+				{/* <!-- Number of Users Start--> */}
+				<div className="d-flex justify-content-between">
+					<div className="p-2"><h4>Users</h4></div>
+					<div className="p-2">{props.users.length}</div>
 					{/* <!-- Number of Users End --> */}
 					{/* <!-- Number of Musicians Start--> */}
-					<tbody>
-						<tr>
-							<td><h4>Musicians</h4></td>
-							<td>{props.users.filter((user) => user.account_type == "musician").length}</td>
-						</tr>
-					</tbody>
+					<div className="p-2"><h4>Musicians</h4></div>
+					<div className="p-2">{props.users.filter((user) => user.account_type == "musician").length}</div>
 					{/* <!-- Number of Musicians End --> */}
 					{/* <!-- Number of Songs Start --> */}
-					<tbody>
-						<tr>
-							<td><h4>Songs</h4></td>
-							<td>{props.videos.length}</td>
-						</tr>
-					</tbody>
+					<div className="p-2"><h4>Songs</h4></div>
+					<div className="p-2">{props.videos.length}</div>
 					{/* <!-- Number of Songs End --> */}
 					{/* <!-- Number of Songs Bought Start --> */}
-					<tbody>
-						<tr>
-							<td><h4>Songs Bought</h4></td>
-							<td>{props.boughtVideos.length}</td>
-						</tr>
-					</tbody>
-					{/* <!-- Number of Songs Bought End --> */}
-					{/* <!-- Revenue Start --> */}
-					<tbody>
-						<tr>
-							<td><h4>Revenue</h4></td>
-							<td style={{ color: "green" }}>KES {props.boughtVideos.length * 20}</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td><h6>This week</h6></td>
-							<td style={{ color: "green" }}>
-								KES {props.boughtVideos
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() - new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 20}
-							</td>
-						</tr>
-					</tbody>
+					<div className="p-2"><h4>Songs Bought</h4></div>
+					<div className="p-2">{props.boughtVideos.length}</div>
+				</div>
+				{/* <!-- Number of Songs Bought End --> */}
+				{/* <!-- Revenue Start --> */}
+				<div className="d-flex justify-content-between">
+					<div className="p-2"><h4>Revenue</h4></div>
+					<div className="p-2" style={{ color: "green" }}>KES {props.boughtVideos.length * 20}</div>
+					<div className="p-2"><h6>This week</h6></div>
+					<div className="p-2" style={{ color: "green" }}>
+						KES {props.boughtVideos.filter((boughtVideo) => {
+							return ((new Date().getTime() -
+								new Date(boughtVideo.created_at).getTime()) /
+								(1000 * 3600 * 24) < 7)
+						}).length * 20}
+					</div>
 					{/* <!-- Revenue End --> */}
 					{/* <!-- Profit Start --> */}
-					<tbody>
-						<tr>
-							<td><h4>Profit</h4></td>
-							<td style={{ color: "green" }}>KES {props.boughtVideos.length * 10}</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td><h6>This week</h6></td>
-							<td style={{ color: "green" }}>
-								KES {props.boughtVideos
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() - new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 10}
-							</td>
-						</tr>
-					</tbody>
-				</table>
+					<div className="p-2"><h4>Profit</h4></div>
+					<div className="p-2" style={{ color: "green" }}>KES {props.boughtVideos.length * 10}</div>
+					<div className="p-2"><h6>This week</h6></div>
+					<div className="p-2" style={{ color: "green" }}>
+						KES {props.boughtVideos
+							.filter((boughtVideo) => {
+								return ((new Date().getTime() - new Date(boughtVideo.created_at).getTime()) /
+									(1000 * 3600 * 24) < 7)
+							}).length * 10}
+					</div>
+				</div>
 				{/* <!-- Profit End --> */}
 				<br />
-			</div>
-			<div className="col-sm-9">
 				<table className="table table-responsive table-hover">
 					<tbody>
 						<tr>
@@ -139,9 +141,41 @@ const Admin = (props) => {
 							</tbody>
 						))}
 				</table>
+				<br />
+				<br />
+				<h1>Video Payouts</h1>
+				<table className="table table-responsive table-hover">
+					<tbody>
+						<tr>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Amount</th>
+							<th>Send</th>
+						</tr>
+					</tbody>
+					{videoPayouts.map((videoPayout, key) => (
+						<tbody key={key}>
+							<tr>
+								<td>{videoPayout.name}</td>
+								<td>{videoPayout.username}</td>
+								<td>{videoPayout.email}</td>
+								<td>{videoPayout.phone}</td>
+								<td>{videoPayout.amount}</td>
+								<td>
+									<Button
+										btnClass="mysonar-btn"
+										btnText="send"
+										onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
+								</td>
+							</tr>
+						</tbody>
+					))}
+				</table>
 			</div>
 			<div className="col-sm-1"></div>
-		</div>
+		</div >
 	)
 }
 

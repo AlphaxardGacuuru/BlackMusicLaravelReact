@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BoughtVideos;
+use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,10 @@ class VideoPayoutsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $videoPayout = new VideoPayouts;
+        $videoPayout->username = $request->input('username');
+        $videoPayout->amount = $request->input('amount');
+        $videoPayout->save();
     }
 
     /**
@@ -46,7 +51,28 @@ class VideoPayoutsController extends Controller
      */
     public function show(VideoPayouts $videoPayouts)
     {
-        //
+        $musicians = User::where('account_type', 'musician')->get();
+
+        foreach ($musicians as $key => $musician) {
+
+            $totalBoughtVideos20 = BoughtVideos::where('artist', $musician->username)->where('price', 20)->count() * 20;
+            $totalBoughtVideos200 = BoughtVideos::where('artist', $musician->username)->where('price', 200)->count() * 200;
+            $totalVideoPayouts = VideoPayouts::where('username', $musician->username)->sum('amount');
+
+            $balance = ($totalBoughtVideos20 + $totalBoughtVideos200) - $totalVideoPayouts;
+
+            if ($balance != 0) {
+                $videoPayouts[$key] = array(
+                    'name' => $musician->name,
+                    'username' => $musician->username,
+                    'email' => $musician->email,
+                    'phone' => $musician->phone,
+                    'amount' => $balance,
+                );
+            }
+        }
+
+        return $videoPayouts;
     }
 
     /**

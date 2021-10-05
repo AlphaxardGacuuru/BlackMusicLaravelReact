@@ -14,7 +14,7 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return Notifications::all();
     }
 
     /**

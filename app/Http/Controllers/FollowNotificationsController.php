@@ -14,7 +14,7 @@ class FollowNotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return FollowNotifications::all();
     }
 
     /**

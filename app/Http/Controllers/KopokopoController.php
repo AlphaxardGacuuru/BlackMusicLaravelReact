@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // Kopokopo dependency
 use App\Kopokopo;
+use App\KopoKopoNotifications;
 use Illuminate\Http\Request;
 use Kopokopo\SDK\K2;
 
@@ -103,6 +104,13 @@ class KopokopoController extends Controller
         $kopokopo->currency = $request->input('currency');
         $kopokopo->signature = $request->input('signature');
         $kopokopo->save();
+
+		// Create notification
+		$kopokopoNotification = new KopoKopoNotifications;
+		$kopokopoNotification->phone = $request->input('sender_phone');
+		$kopokopoNotification->amount = $request->input('amount');
+		$kopokopoNotification->reference = $request->input('transaction_reference');
+		$kopokopoNotification->save();
 
         return response()->json([
             'status' => '01',

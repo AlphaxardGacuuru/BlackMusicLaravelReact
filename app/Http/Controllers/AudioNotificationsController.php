@@ -14,7 +14,7 @@ class AudioNotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return AudioNotifications::all();
     }
 
     /**

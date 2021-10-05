@@ -14,7 +14,7 @@ class KopoKopoNotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return KopokopoNotifications::all();
     }
 
     /**

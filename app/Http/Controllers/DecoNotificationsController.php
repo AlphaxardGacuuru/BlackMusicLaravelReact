@@ -14,7 +14,7 @@ class DecoNotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return DecoNotifications::all();
     }
 
     /**

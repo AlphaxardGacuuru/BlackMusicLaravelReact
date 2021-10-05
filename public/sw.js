@@ -70,7 +70,7 @@ self.addEventListener('activate', e => {
 
 // Fetch event
 // self.addEventListener('fetch', e => {
-// 	console.log('Fetching')
+// 	// console.log('Fetching')
 // 	e.respondWith(
 // 		fetch(e.request)
 // 			.then(res => {

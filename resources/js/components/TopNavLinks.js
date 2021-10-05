@@ -24,7 +24,6 @@ const TopNavLinks = (props) => {
 					}))
 				})
 				.catch(err => {
-					console.log(err)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -120,25 +119,56 @@ const TopNavLinks = (props) => {
 				<div style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<Link to="#" className="p-2 dropdown-item border-bottom">
-						<h4>Notifications</h4>
-					</Link>
+					<div className="dropdown-header">Notifications</div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
-						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
-							<small> just Decorated you.</small>
-						</Link>
-						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
-							<h6 style={{ color: "purple" }}>New Fans</h6>
-						</Link>
-						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
-							<small> became a fan.</small>
-						</Link>
-						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
-							<h6>Songs Bought</h6>
-						</Link>
-						<Link to={`/profile/`} className="p-3 dropdown-item border-bottom">
-							<small> just bought</small>
-						</Link>
+
+						{/* Get Notifications */}
+						{props.notifications
+							.filter((notification) => notification.username == props.auth.username)
+							.map((notification, key) => (
+								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{notification.message}</h6>
+								</Link>
+							))}
+
+						{/* Get Decos */}
+						<div className="dropdown-header">Decos</div>
+						{props.decoNotifications
+							.filter((decoNotification) => decoNotification.username == props.auth.username)
+							.map((decoNotification, key) => (
+								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{decoNotification.artist} just Decorated you.</h6>
+								</Link>
+							))}
+
+						{/* Get Follow Notifications */}
+						<div className="dropdown-header">New Fans</div>
+						{props.followNotifications
+							.filter((followNotification) => followNotification.username == props.auth.username)
+							.map((followNotification, key) => (
+								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{followNotification.follower} became a fan.</h6>
+								</Link>
+							))}
+
+						<div className="dropdown-header">Songs Bought</div>
+						{/* Get Video Notifications */}
+						{props.videoNotifications
+							.filter((videoNotification) => videoNotification.artist == props.auth.username)
+							.map((videoNotification, key) => (
+								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{videoNotification.username} just bought {videoNotification.video_id}</h6>
+								</Link>
+							))}
+
+						{/* Get Audio Notifications */}
+						{props.audioNotifications
+							.filter((audioNotification) => audioNotification.artist == props.auth.username)
+							.map((audioNotification, key) => (
+								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{audioNotification.username} just bought {audioNotification.audio_id}</h6>
+								</Link>
+							))}
 					</div>
 				</div>
 			</div>
@@ -167,11 +197,11 @@ const TopNavLinks = (props) => {
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>
 					</Link>
-					<Link to='/videos'
+					<Link to='#'
 						id="btnAdd"
 						className="p-3 dropdown-item border-bottom"
 						style={{ display: "none" }}>
-						<h6></h6>
+						<h6>Get App</h6>
 					</Link>
 					<Link to='/videos' className="p-3 dropdown-item border-bottom">
 						<h6>Studio</h6>

@@ -14,7 +14,7 @@ class VideoNotificationsController extends Controller
      */
     public function index()
     {
-        //
+        return VideoNotifications::all();
     }
 
     /**

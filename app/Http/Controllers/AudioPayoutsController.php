@@ -14,7 +14,7 @@ class AudioPayoutsController extends Controller
      */
     public function index()
     {
-        //
+        return AudioPayouts::all();
     }
 
     /**
