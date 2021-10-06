@@ -10,16 +10,44 @@ const Admin = (props) => {
 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 	const [videoPayouts, setVideoPayouts] = useState([])
+	const [audioPayouts, setAudioPayouts] = useState([])
 
 	// Fetch Video Payouts
 	axios.get(`${props.url}/api/video-payouts/1`)
 		.then((res) => setVideoPayouts(res.data))
 		.catch(() => props.setErrors(["Failed to fetch video payouts"]))
 
+	// Fetch Audio Payouts
+	axios.get(`${props.url}/api/audio-payouts/1`)
+		.then((res) => setAudioPayouts(res.data))
+		.catch(() => props.setErrors(["Failed to fetch audio payouts"]))
+
 	// Post video payout
 	const onVideoPayout = (username, amount) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/video-payouts`, {
+				username: username,
+				amount: amount,
+			}).then((res) => props.setMessage(res.data))
+				.catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+
+					newError.push(err.response.data.message)
+					props.setErrors(newError)
+				})
+		})
+	}
+
+	// Post audio payout
+	const onAudioPayout = (username, amount) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/audio-payouts`, {
 				username: username,
 				amount: amount,
 			}).then((res) => props.setMessage(res.data))
@@ -64,7 +92,7 @@ const Admin = (props) => {
 				<div className="d-flex justify-content-between">
 					<div className="p-2"><h4>Revenue</h4></div>
 					<div className="p-2" style={{ color: "green" }}>KES {props.boughtVideos.length * 20}</div>
-					<div className="p-2"><h6>This week</h6></div>
+					<div className="p-2"><h4>This week</h4></div>
 					<div className="p-2" style={{ color: "green" }}>
 						KES {props.boughtVideos.filter((boughtVideo) => {
 							return ((new Date().getTime() -
@@ -86,8 +114,11 @@ const Admin = (props) => {
 					</div>
 				</div>
 				{/* <!-- Profit End --> */}
+
 				<br />
-				<table className="table table-responsive table-hover">
+				<br />
+
+				<table className="table table-responsive table-borderless">
 					<tbody>
 						<tr>
 							<th>User ID</th>
@@ -141,10 +172,13 @@ const Admin = (props) => {
 							</tbody>
 						))}
 				</table>
+
 				<br />
 				<br />
+
+				{/* Video Payouts */}
 				<h1>Video Payouts</h1>
-				<table className="table table-responsive table-hover">
+				<table className="table table-responsive table-borderless thead-light">
 					<tbody>
 						<tr>
 							<th>Name</th>
@@ -173,6 +207,43 @@ const Admin = (props) => {
 						</tbody>
 					))}
 				</table>
+				{/* Video Payouts End */}
+
+				<br />
+				<br />
+
+				{/* Audio Payouts */}
+				<h1>Audio Payouts</h1>
+				<table className="table table-responsive table-borderless thead-light">
+					<tbody>
+						<tr>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Amount</th>
+							<th>Send</th>
+						</tr>
+					</tbody>
+					{audioPayouts.map((audioPayout, key) => (
+						<tbody key={key}>
+							<tr>
+								<td>{audioPayout.name}</td>
+								<td>{audioPayout.username}</td>
+								<td>{audioPayout.email}</td>
+								<td>{audioPayout.phone}</td>
+								<td>{audioPayout.amount}</td>
+								<td>
+									<Button
+										btnClass="mysonar-btn"
+										btnText="send"
+										onClick={() => onAudioPayout(audioPayout.username, audioPayout.amount)} />
+								</td>
+							</tr>
+						</tbody>
+					))}
+				</table>
+				{/* Audio Payouts End */}
 			</div>
 			<div className="col-sm-1"></div>
 		</div >

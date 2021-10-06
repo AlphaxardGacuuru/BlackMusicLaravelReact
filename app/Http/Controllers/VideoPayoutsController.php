@@ -41,6 +41,8 @@ class VideoPayoutsController extends Controller
         $videoPayout->username = $request->input('username');
         $videoPayout->amount = $request->input('amount');
         $videoPayout->save();
+
+		return response("Video Payout Added", 200);
     }
 
     /**

@@ -45,15 +45,6 @@ const Bottomnav = (props) => {
 				{/* Audio Player */}
 				<div className="container-fluid menu-area d-flex text-white hidden">
 
-					<audio
-						ref={props.audio}
-						type="audio/*"
-						preload='true'
-						autoPlay={false}
-						end={10}
-						src={`/storage/${props.audios.find((audio) => audio.id == props.show) &&
-							props.audios.find((audio) => audio.id == props.show).audio}`} />
-
 					<div style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
 						<span onClick={() => props.setShow(0)}>

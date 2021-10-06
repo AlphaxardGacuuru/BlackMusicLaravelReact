@@ -7,6 +7,7 @@ import axios from 'axios';
 import Messages from './Messages'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
+import LoginPopUp from './LoginPopUp';
 
 import Login from '../pages/Login'
 import Register from '../pages/Register'
@@ -510,70 +511,102 @@ function App() {
 	*
 	* Notifications */
 
-	// Request permission for notifications
-	Notification.requestPermission(
-		function (status) {
-			// console.log('Notification permission status: ', status)
-		}
-	)
+	// // Request permission for notifications
+	// Notification.requestPermission(
+	// 	function (status) {
+	// 		// console.log('Notification permission status: ', status)
+	// 	}
+	// )
 
-	// Show the notification
-	function displayNotification() {
-		if (Notification.permission == 'granted') {
-			navigator.serviceWorker.getRegistration()
-				.then(function (reg) {
+	// // Show the notification
+	// function displayNotification() {
+	// 	if (Notification.permission == 'granted') {
+	// 		navigator.serviceWorker.getRegistration()
+	// 			.then(function (reg) {
 
-					var options = {
-						body: 'Here is a notification body',
-						actions: [
-							{
-								action: 'explore',
-								title: 'Go to the site',
-								icon: 'storage/img/musical-note.png'
-							}, {
-								action: 'close',
-								title: 'No thank you',
-								icon: 'storage/img/musical-note.png'
-							}
-						],
-						icon: 'storage/img/musical-note.png',
-						vibrate: [100, 50, 100],
-						// Allows us to identify notification
-						data: { primaryKey: 1 }
-					}
+	// 				var options = {
+	// 					body: 'Here is a notification body',
+	// 					actions: [
+	// 						{
+	// 							action: 'explore',
+	// 							title: 'Go to the site',
+	// 							icon: 'storage/img/musical-note.png'
+	// 						}, {
+	// 							action: 'close',
+	// 							title: 'No thank you',
+	// 							icon: 'storage/img/musical-note.png'
+	// 						}
+	// 					],
+	// 					icon: 'storage/img/musical-note.png',
+	// 					vibrate: [100, 50, 100],
+	// 					// Allows us to identify notification
+	// 					data: { primaryKey: 1 }
+	// 				}
 
-					reg.showNotification('Hello world', options)
-				})
-		}
-	}
+	// 				reg.showNotification('Hello world', options)
+	// 			})
+	// 	}
+	// }
 
-	// Close the notification
-	self.addEventListener('notificationclose', function (event) {
-		var notification = event.notification
-		var primaryKey = notificatio.data.primaryKey
-		console.log('Closed notification: ', primaryKey)
-	})
+	// // Close the notification
+	// self.addEventListener('notificationclose', function (event) {
+	// 	var notification = event.notification
+	// 	var primaryKey = notificatio.data.primaryKey
+	// 	console.log('Closed notification: ', primaryKey)
+	// })
 
-	// Notification Click
-	self.addEventListener('notificationclick', function (event) {
-		var notification = event.notification
-		var action = event.action
+	// // Notification Click
+	// self.addEventListener('notificationclick', function (event) {
+	// 	var notification = event.notification
+	// 	var action = event.action
 
-		if (action === 'close') {
-			notification.close()
-		} else {
-			clients.openWindow('https://music.black.co.ke')
-		}
-	})
+	// 	if (action === 'close') {
+	// 		notification.close()
+	// 	} else {
+	// 		clients.openWindow('https://music.black.co.ke')
+	// 	}
+	// })
+
+	// // Check if user is subscribed to push notifications
+	// navigator.serviceWorker.ready
+	// 	.then(function (reg) {
+	// 		reg.pushManager.getSubscription()
+	// 			.then(function (sub) {
+	// 				if (sub == 'undefined') {
+	// 					// Ask user to register for push
+	// 					console.log("Not")
+	// 				} else {
+	// 					// You have subscription update server
+	// 					console.log("Not")
+	// 				}
+	// 			})
+	// 	})
+
+	// // Subscribe to push service
+	// navigator.serviceWorker.getRegistration()
+	// 	.then(function (reg) {
+	// 		reg.pushManager.subscribe({
+	// 			userVisibleOnly: true
+	// 		}).then(function (sub) {
+	// 			// send sub.toJSON() to server
+	// 			console.log(sub)
+	// 		})
+	// 	})
+
 
 	return (
 		<>
 			<Router>
-				{/* <div id="preloader">
-					<div class="preload-content">
-						<div id="sonar-load"></div>
-					</div>
-				</div> */}
+				{login &&
+					<>
+						<div id="preloader">
+							<div className="preload-content">
+								{/* <div id="sonar-load"></div> */}
+							</div>
+						</div>
+						<LoginPopUp />
+					</>}
+
 				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
 
 				<Route path="/login" exact render={(props) => (
@@ -685,13 +718,13 @@ function App() {
 
 				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, onSearchIconClick }} />
 
-				<center>
+				{/* <center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
 				</center>
 				<br />
 				<br />
 				<br />
-				<br />
+				<br /> */}
 
 			</Router>
 
