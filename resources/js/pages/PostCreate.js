@@ -1,16 +1,44 @@
 import React from 'react'
 import Button from '../components/Button'
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateSize
+);
 
 const PostCreate = (props) => {
 
+	// Get csrf token
+	const token = document.head.querySelector('meta[name="csrf-token"]');
+
 	// Declare states
 	const [text, setText] = useState("")
-	const [media, setMedia] = useState()
-	const [preview, setPreview] = useState()
+	const [media, setMedia] = useState("")
+	// const [preview, setPreview] = useState()
 	const [para1, setPara1] = useState("")
 	const [para2, setPara2] = useState("")
 	const [para3, setPara3] = useState("")
@@ -19,16 +47,16 @@ const PostCreate = (props) => {
 	const [mediaStyle, setMediaStyle] = useState()
 	const [pollStyle, setPollStyle] = useState()
 	const [display1, setDisplay1] = useState("none")
-	const [display2, setDisplay2] = useState(!para1 ? "none" : "inline")
+	const [display2, setDisplay2] = useState("none")
 	const [display3, setDisplay3] = useState("none")
 	const [display4, setDisplay4] = useState("none")
 	const [display5, setDisplay5] = useState("none")
 
 	// Get history for page location
 	const history = useHistory()
-	
+
 	// Assign id to element
-	const mediaInput = React.useRef(null)
+	// const mediaInput = React.useRef(null)
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -100,7 +128,7 @@ const PostCreate = (props) => {
 							placeholder="What's on your mind"
 							onChange={(e) => { setText(e.target.value) }}>
 						</textarea>
-						<div
+						{/* <div
 							className="mb-2"
 							style={{
 								borderTopLeftRadius: "10px",
@@ -113,22 +141,24 @@ const PostCreate = (props) => {
 								src={preview}
 								width="100%"
 								height="auto" />
-						</div>
+						</div> */}
 
 						{/* Hidden file input */}
-						<input
+						{/* <input
 							type='file'
 							id='post-media'
 							style={{ display: 'none' }}
 							ref={mediaInput}
-							onChange={onImageChange} />
+							onChange={onImageChange} /> */}
 
 						<div className="d-flex text-center">
-							<div
-								className="p-2 flex-fill"
+							<div className="p-2 flex-fill"
 								style={{ backgroundColor: "#232323", display: mediaStyle }}
-								onClick={() => setPollStyle("none")}>
-								<span style={{ color: "white" }} onClick={() => mediaInput.current.click()}>
+								onClick={() => {
+									// mediaInput.current.click()
+									setPollStyle("none")
+								}}>
+								<span style={{ color: "white" }}>
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
 										className="bi bi-image" viewBox="0 0 16 16">
 										<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -136,11 +166,13 @@ const PostCreate = (props) => {
 									</svg>
 								</span>
 							</div>
-							<div
-								className="p-2 flex-fill"
+							<div className="p-2 flex-fill"
 								style={{ backgroundColor: "#232323", display: pollStyle }}
-								onClick={() => setMediaStyle("none")}>
-								<span style={{ color: "white" }} onClick={() => setDisplay1("inline")}>
+								onClick={() => {
+									setDisplay1("inline")
+									setMediaStyle("none")
+								}}>
+								<span style={{ color: "white" }}>
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
 										className="bi bi-bar-chart" viewBox="0 0 16 16">
 										<path
@@ -149,6 +181,36 @@ const PostCreate = (props) => {
 								</span>
 							</div>
 						</div>
+
+						{/* Upload Image */}
+						{pollStyle == "none" &&
+							<div className="mt-2">
+								<FilePond
+									name="filepond-media"
+									labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
+									imageCropAspectRatio="1:1"
+									acceptedFileTypes={['image/*']}
+									stylePanelAspectRatio="16:9"
+									allowRevert={true}
+									server={{
+										url: `${props.url}/api`,
+										process: {
+											url: "/posts",
+											headers: { 'X-CSRF-TOKEN': token.content },
+											onload: res => {
+												setMedia(res)
+											},
+										},
+										revert: {
+											url: `/posts/${media.substr(11)}`,
+											headers: { 'X-CSRF-TOKEN': token.content },
+											onload: res => {
+												props.setMessage(res)
+											},
+										},
+									}} />
+							</div>}
+
 						<div>
 							{/* Poll inputs */}
 							<input
@@ -156,39 +218,47 @@ const PostCreate = (props) => {
 								style={{ display: display1 }}
 								className='form-control'
 								placeholder="Parameter 1"
-								onInput={() => setDisplay2("inline")}
-								onChange={(e) => { setPara1(e.target.value) }} />
+								onChange={(e) => {
+									setDisplay2("inline")
+									setPara1(e.target.value)
+								}} />
 
 							<input
 								type='text'
 								style={{ display: display2 }}
 								className='form-control'
 								placeholder='Parameter 2'
-								onInput={() => setDisplay3("inline")}
-								onChange={(e) => { setPara2(e.target.value) }} />
+								onChange={(e) => {
+									setDisplay3("inline")
+									setPara2(e.target.value)
+								}} />
 
 							<input
 								type='text'
 								style={{ display: display3 }}
 								className='form-control'
 								placeholder='Parameter 3'
-								onInput={() => setDisplay4("inline")}
-								onChange={(e) => { setPara3(e.target.value) }} />
+								onChange={(e) => {
+									setDisplay4("inline")
+									setPara3(e.target.value)
+								}} />
 
 							<input
 								type='text'
 								style={{ display: display4 }}
 								className='form-control'
 								placeholder='Parameter 4'
-								onInput={() => setDisplay5("inline")}
-								onChange={(e) => { setPara4(e.target.value) }} />
+								onChange={(e) => {
+									setDisplay5("inline")
+									setPara4(e.target.value)
+								}} />
 
 							<input
 								type='text'
 								style={{ display: display5 }}
 								className='form-control'
 								placeholder='Parameter 5'
-								onChange={(e) => { setPara5(e.target.value) }} />
+								onChange={(e) => setPara5(e.target.value)} />
 						</div>
 					</form>
 				</div>

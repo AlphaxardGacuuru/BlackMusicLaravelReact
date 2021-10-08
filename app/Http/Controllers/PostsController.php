@@ -59,31 +59,40 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'text' => 'required',
-            'media' => 'image|nullable|max:9999',
-        ]);
-
-        /* Handle file upload */
-        if ($request->hasFile('media')) {
-            $path = $request->file('media')->store('public/post-media');
+        if ($request->hasFile('filepond-media')) {
+            /* Handle media upload */
+            $media = $request->file('filepond-media')->store('public/post-media');
+            $media = substr($media, 7);
+            return $media;
         } else {
-            $path = "";
+
+            $this->validate($request, [
+                'text' => 'required',
+                // 'media' => 'image|nullable|max:9999',
+            ]);
+
+            // /* Handle file upload */
+            // if ($request->hasFile('media')) {
+            //     $path = $request->file('media')->store('public/post-media');
+            // } else {
+            //     $path = "";
+            // }
+
+            /* Create new post */
+            $post = new Posts;
+            $post->username = auth()->user()->username;
+            $post->text = $request->input('text');
+            // $post->media = substr($path, 7);
+            $post->media = $request->input('media');
+            $post->parameter_1 = $request->input('para1') ? $request->input('para1') : "";
+            $post->parameter_2 = $request->input('para2') ? $request->input('para2') : "";
+            $post->parameter_3 = $request->input('para3') ? $request->input('para3') : "";
+            $post->parameter_4 = $request->input('para4') ? $request->input('para4') : "";
+            $post->parameter_5 = $request->input('para5') ? $request->input('para5') : "";
+            $post->save();
+
+            return redirect('posts')->with('success', 'Post Sent');
         }
-
-        /* Create new post */
-        $post = new Posts;
-        $post->username = auth()->user()->username;
-        $post->text = $request->input('text');
-        $post->media = substr($path, 7);
-        $post->parameter_1 = $request->input('para1') ? $request->input('para1') : "";
-        $post->parameter_2 = $request->input('para2') ? $request->input('para2') : "";
-        $post->parameter_3 = $request->input('para3') ? $request->input('para3') : "";
-        $post->parameter_4 = $request->input('para4') ? $request->input('para4') : "";
-        $post->parameter_5 = $request->input('para5') ? $request->input('para5') : "";
-        $post->save();
-
-        return redirect('posts')->with('success', 'Post Sent');
     }
 
     /**
@@ -128,17 +137,26 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Posts::where('id', $id)->first();
-        Storage::delete('public/' . $post->media);
-        Polls::where('post_id', $post->id)->delete();
-        $comments = PostComments::where('post_id', $id)->get();
-        foreach ($comments as $comment) {
-            PostCommentLikes::where('comment_id', $comment->id)->delete();
-        }
-        PostComments::where('post_id', $id)->delete();
-        PostLikes::where('post_id', $id)->delete();
-        Posts::find($id)->delete();
+        // Check file extension and handle filepond delete accordingly
+        $ext = substr($id, -3);
 
-		return response("Post deleted", 200);
+        if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
+
+            Storage::delete('public/post-media/' . $id);
+            return response("Post media deleted", 200);
+        } else {
+            $post = Posts::where('id', $id)->first();
+            Storage::delete('public/' . $post->media);
+            Polls::where('post_id', $post->id)->delete();
+            $comments = PostComments::where('post_id', $id)->get();
+            foreach ($comments as $comment) {
+                PostCommentLikes::where('comment_id', $comment->id)->delete();
+            }
+            PostComments::where('post_id', $id)->delete();
+            PostLikes::where('post_id', $id)->delete();
+            Posts::find($id)->delete();
+
+            return response("Post deleted", 200);
+        }
     }
 }

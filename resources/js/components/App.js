@@ -597,7 +597,7 @@ function App() {
 	return (
 		<>
 			<Router>
-				{login &&
+				{false &&
 					<>
 						<div id="preloader">
 							<div className="preload-content">
