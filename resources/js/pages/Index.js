@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory,useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { some } from 'lodash'
 
@@ -28,6 +28,8 @@ const Index = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		});
@@ -72,6 +74,8 @@ const Index = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		});
@@ -92,6 +96,8 @@ const Index = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		})
@@ -110,6 +116,8 @@ const Index = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		})
@@ -131,6 +139,8 @@ const Index = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
 		})
@@ -321,18 +331,20 @@ const Index = (props) => {
 													height="90em" />
 											</Link>
 										</div>
-										<h6 className="m-0 pt-2 pr-1 pl-1"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{video.name}
-										</h6>
-										<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
-											<small>{video.username} {video.ft}</small>
-										</h6>
+										<Link to={`/video-show/${video.id}`}>
+											<h6 className="m-0 pt-2 pr-1 pl-1"
+												style={{
+													width: "150px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												{video.name}
+											</h6>
+											<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+												<small>{video.username} {video.ft}</small>
+											</h6>
+										</Link>
 										{props.cartVideos
 											.find((cartVideo) => {
 												return cartVideo.video_id == video.id &&

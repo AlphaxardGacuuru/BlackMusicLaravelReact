@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+
 import Img from '../components/Img'
 import Button from '../components/Button'
 import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
@@ -158,8 +158,8 @@ const VideoCharts = (props) => {
 	}
 
 	// Load more on page bottom
-	if (location.pathname.match(/video-charts/)) {
-		window.onscroll = function (ev) {
+	window.onscroll = function (ev) {
+		if (location.pathname.match(/video-charts/)) {
 			const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
 
 			if (bottom) {

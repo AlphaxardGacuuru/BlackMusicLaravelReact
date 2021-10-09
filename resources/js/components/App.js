@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useContext, createContext } from 'r
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Redirect, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
-// import { ProvideAuth, Route } from "../auth/Auth.js";
 
 import Messages from './Messages'
 import TopNav from './TopNav'
@@ -597,17 +596,9 @@ function App() {
 	return (
 		<>
 			<Router>
-				{login &&
-					<>
-						<div id="preloader">
-							<div className="preload-content">
-								{/* <div id="sonar-load"></div> */}
-							</div>
-						</div>
-						<LoginPopUp />
-					</>}
+				{login && <LoginPopUp />}
 
-				<TopNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
+				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
 
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />
@@ -621,32 +612,53 @@ function App() {
 				)} />
 
 				<Route path="/search" exact render={(props) => (
-					<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
+					<>
+						<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
+						{auth.username == "@guest" && setTimeout(() => setLogin(true), 1000)}
+					</>
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
-					<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setBoughtVideos, videos, cartAudios, setCartAudios, setBoughtAudios, audios, setShow }} />
+					<>
+						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setBoughtVideos, videos, cartAudios, setCartAudios, setBoughtAudios, audios, setShow }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/library" exact render={(props) => (
-					<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
+					<>
+						<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 
 				<Route path="/profile/:username" exact render={(props) => (
-					<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
+					<>
+						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/profile-edit" exact render={(props) => (
-					<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
+					<>
+						<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/post-create" exact render={(props) => (
-					<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
+					<>
+						<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/post-show/:id" exact render={(props) => (
-					<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
+					<>
+						<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				{/* Video Routes */}
@@ -659,23 +671,38 @@ function App() {
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
-					<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoLikes, videoAlbums, setVideoAlbums, videoPayouts, setAudioAlbums }} />
+					<>
+						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoLikes, videoAlbums, setVideoAlbums, videoPayouts, setAudioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (
-					<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
+					<>
+						<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/video-edit/:id" exact render={(props) => (
-					<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
+					<>
+						<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/video-album-create" exact render={(props) => (
-					<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
+					<>
+						<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/video-album-edit/:id" exact render={(props) => (
-					<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
+					<>
+						<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 
@@ -689,28 +716,46 @@ function App() {
 				)} />
 
 				<Route path="/audios" exact render={(props) => (
-					<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
+					<>
+						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/audio-create" exact render={(props) => (
-					<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+					<>
+						<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/audio-edit/:id" exact render={(props) => (
-					<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
+					<>
+						<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
-					<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+					<>
+						<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
-					<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
+					<>
+						<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 
 				<Route path="/admin" exact render={(props) => (
-					<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
+					<>
+						<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
+						{auth.username == "@guest" && <LoginPopUp />}
+					</>
 				)} />
 
 				<Messages {...{ message, errors }} />

@@ -161,8 +161,8 @@ const AudioCharts = (props) => {
 	}
 
 	// Load more on page bottom
-	if (location.pathname.match(/audio-charts/)) {
-		window.onscroll = function (ev) {
+	window.onscroll = function (ev) {
+		if (location.pathname.match(/audio-charts/)) {
 			const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
 
 			if (bottom) {

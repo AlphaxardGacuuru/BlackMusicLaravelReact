@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const AuthLinks = () => {
+const AuthLinks = (props) => {
 	return (
 		<>
-			<Link className="display-4" to="/login">Login</Link>
-			<Link className="display-4" to="/register/Name/Email/Avatar">Register</Link>
+			<Link className="display-4" to="#" onClick={() => props.setLogin(true)}>Login</Link>
+			{/* <Link className="display-4" to="/register/Name/Email/Avatar">Register</Link> */}
 		</>
 	)
 }
