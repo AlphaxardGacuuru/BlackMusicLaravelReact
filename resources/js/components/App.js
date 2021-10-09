@@ -596,7 +596,7 @@ function App() {
 	return (
 		<>
 			<Router>
-				{login && <LoginPopUp />}
+				{login && <LoginPopUp {...{ url }} />}
 
 				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
 

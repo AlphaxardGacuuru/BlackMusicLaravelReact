@@ -8,10 +8,10 @@ import {
 } from "react-social-login-buttons";
 import axios from 'axios';
 
-const LoginPopUp = () => {
+const LoginPopUp = (props) => {
 
 	const onSocial = (website) => {
-		window.location.href = `${url}/api/login/${website}`
+		window.location.href = `${props.url}/api/login/${website}`
 	}
 
 	return (
