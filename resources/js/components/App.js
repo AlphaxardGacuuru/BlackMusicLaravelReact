@@ -614,21 +614,21 @@ function App() {
 				<Route path="/search" exact render={(props) => (
 					<>
 						<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
-						{auth.username == "@guest" && setTimeout(() => setLogin(true), 1000)}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
 					<>
 						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setBoughtVideos, videos, cartAudios, setCartAudios, setBoughtAudios, audios, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<>
 						<Library {...{ auth, videos, boughtVideos, audios, boughtAudios, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
@@ -636,28 +636,28 @@ function App() {
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
 						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/profile-edit" exact render={(props) => (
 					<>
 						<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/post-create" exact render={(props) => (
 					<>
 						<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
 						<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
@@ -673,35 +673,35 @@ function App() {
 				<Route path="/videos" exact render={(props) => (
 					<>
 						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoLikes, videoAlbums, setVideoAlbums, videoPayouts, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (
 					<>
 						<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/video-edit/:id" exact render={(props) => (
 					<>
 						<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/video-album-create" exact render={(props) => (
 					<>
 						<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/video-album-edit/:id" exact render={(props) => (
 					<>
 						<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
@@ -718,35 +718,35 @@ function App() {
 				<Route path="/audios" exact render={(props) => (
 					<>
 						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/audio-create" exact render={(props) => (
 					<>
 						<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/audio-edit/:id" exact render={(props) => (
 					<>
 						<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
 					<>
 						<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
 					<>
 						<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
@@ -754,7 +754,7 @@ function App() {
 				<Route path="/admin" exact render={(props) => (
 					<>
 						<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
-						{auth.username == "@guest" && <LoginPopUp />}
+						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
