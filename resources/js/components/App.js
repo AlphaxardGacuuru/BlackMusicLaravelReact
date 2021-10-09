@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useContext, createContext } from 'react'
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Route } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import { HashRouter as Router, Route, Redirect, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios';
+// import { ProvideAuth, Route } from "../auth/Auth.js";
 
 import Messages from './Messages'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
-import LoginPopUp from './LoginPopUp';
 
-import Login from '../pages/Login'
-import Register from '../pages/Register'
+import LoginPopUp from '../auth/LoginPopUp';
+import Login from '../auth/Login'
+import Register from '../auth/Register'
+
 import Index from '../pages/Index'
 import Search from '../pages/Search'
 import Cart from '../pages/Cart'
@@ -41,6 +42,7 @@ import Admin from '../pages/Admin'
 
 function App() {
 	// Declare states
+	const [login, setLogin] = useState()
 	const [url, setUrl] = useState(window.location.href.match(/https/) ?
 		'https://test.black.co.ke' :
 		'http://localhost:3000')
@@ -592,12 +594,10 @@ function App() {
 	// 			console.log(sub)
 	// 		})
 	// 	})
-
-
 	return (
 		<>
 			<Router>
-				{false &&
+				{login &&
 					<>
 						<div id="preloader">
 							<div className="preload-content">
@@ -616,13 +616,12 @@ function App() {
 					<Register {...{ setMessage, setErrors, setAuth, url, users, sms, setSMS }} />
 				)} />
 
-
 				<Route path="/" exact render={(props) => (
 					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (
-					<Search {...{ url, auth, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
+					<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
