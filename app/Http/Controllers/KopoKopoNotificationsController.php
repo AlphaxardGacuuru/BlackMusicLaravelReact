@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\KopoKopoNotifications;
+use App\KopokopoNotifications;
 use Illuminate\Http\Request;
 
-class KopoKopoNotificationsController extends Controller
+class KopokopoNotificationsController extends Controller
 {
     /**
      * Display a listing of the resource.
