@@ -53,44 +53,13 @@ function App() {
 	})
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
-	const [users, setUsers] = useState([{
-		"id": 1,
-		"name": "Marvin Unruly",
-		"username": "@unruly",
-		"email": "mmwanzi76@gmail.com",
-		"email_verified_at": null,
-		"phone": "0",
-		"gender": "male",
-		"account_type": "normal",
-		"account_type_2": "",
-		"pp": "profile-pics/male_avatar.png",
-		"pb": "img/male_avatar.png",
-		"bio": "Limitless",
-		"dob": "",
-		"location": null,
-		"withdrawal": "",
-		"created_at": "-000001-11-30T00:00:00.000000Z",
-		"updated_at": "2020-10-22T20:07:37.000000Z"
-	}])
+	const [users, setUsers] = useState([])
 	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
 	const [postComments, setPostComments] = useState([])
 	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
-	const [audios, setAudios] = useState([{
-		"id": 15,
-		"audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
-		"name": "Audio 1",
-		"username": "@blackmusic",
-		"ft": "",
-		"album": "6",
-		"genre": "Hiphop",
-		"thumbnail": "audio-thumbnails/qkKbj8XDU8c72J2rkUi06vkaTlYxLiMzTb0HpQuE.jpg",
-		"description": "Audio 1",
-		"released": "2021-08-13",
-		"created_at": "2021-08-14T21:23:39.000000Z",
-		"updated_at": "2021-08-14T21:23:39.000000Z"
-	}])
+	const [audios, setAudios] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
 	const [audioComments, setAudioComments] = useState([])
 	const [audioCommentLikes, setAudioCommentLikes] = useState([])
@@ -107,20 +76,7 @@ function App() {
 	const [kopokopo, setKopokopo] = useState([])
 	const [kopokopoNotifications, setKopokopoNotifications] = useState([])
 	const [notifications, setNotifications] = useState([])
-	const [videos, setVideos] = useState([{
-		"id": 91,
-		"video": "https://www.youtube.com/embed/EdKKYry-FwQ",
-		"name": "Kenyan Shrap Gang Type Beat Supreme",
-		"username": "@sammyking",
-		"ft": "",
-		"album": "",
-		"genre": "Hiphop",
-		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-		"description": "",
-		"released": null,
-		"created_at": "2020-05-08T12:41:00.000000Z",
-		"updated_at": "2021-03-15T17:43:59.000000Z"
-	}])
+	const [videos, setVideos] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
 	const [videoLikes, setVideoLikes] = useState([])
@@ -487,6 +443,36 @@ function App() {
 	// Song ends
 	// audio.current.addEventListener('ended', nextSong);
 
+	/*
+	*
+	* Media Session Controls */
+	if ('mediaSession' in navigator) {
+
+		navigator.mediaSession.metadata = new MediaMetadata({
+			title: showAudio.name,
+			artist: showArtist.username,
+			album: showAudio.album,
+			artwork: [
+				{ src: showAudio.thumbnail, sizes: '512x512', type: 'image/png' },
+			]
+		});
+
+		let skipTime = 10; // Time to skip in seconds
+
+		navigator.mediaSession.setActionHandler('play', playSong);
+		navigator.mediaSession.setActionHandler('pause', pauseSong);
+		navigator.mediaSession.setActionHandler('seekbackward', function () {
+			// User clicked "Seek Backward" media notification icon.
+			audio.current.currentTime = Math.max(audio.current.currentTime - skipTime, 0);
+		});
+		navigator.mediaSession.setActionHandler('seekforward', function () {
+			// User clicked "Seek Forward" media notification icon.
+			audio.current.currentTime = Math.min(audio.current.currentTime + skipTime, audio.current.duration);
+		});
+		navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+		navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+	}
+
 	// Search State
 	const [search, setSearch] = useState("!@#$%^&")
 
@@ -593,6 +579,7 @@ function App() {
 	// 			console.log(sub)
 	// 		})
 	// 	})
+
 	return (
 		<>
 			<Router>

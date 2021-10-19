@@ -93346,25 +93346,7 @@ function App() {
       errors = _useState10[0],
       setErrors = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
-    "id": 1,
-    "name": "Marvin Unruly",
-    "username": "@unruly",
-    "email": "mmwanzi76@gmail.com",
-    "email_verified_at": null,
-    "phone": "0",
-    "gender": "male",
-    "account_type": "normal",
-    "account_type_2": "",
-    "pp": "profile-pics/male_avatar.png",
-    "pb": "img/male_avatar.png",
-    "bio": "Limitless",
-    "dob": "",
-    "location": null,
-    "withdrawal": "",
-    "created_at": "-000001-11-30T00:00:00.000000Z",
-    "updated_at": "2020-10-22T20:07:37.000000Z"
-  }]),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
       users = _useState12[0],
       setUsers = _useState12[1];
@@ -93394,20 +93376,7 @@ function App() {
       polls = _useState22[0],
       setPolls = _useState22[1];
 
-  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
-    "id": 15,
-    "audio": "audios/TDX5401snYHLg0ODYlG9ODVC1PsEYMhsnC5748JX.mp3",
-    "name": "Audio 1",
-    "username": "@blackmusic",
-    "ft": "",
-    "album": "6",
-    "genre": "Hiphop",
-    "thumbnail": "audio-thumbnails/qkKbj8XDU8c72J2rkUi06vkaTlYxLiMzTb0HpQuE.jpg",
-    "description": "Audio 1",
-    "released": "2021-08-13",
-    "created_at": "2021-08-14T21:23:39.000000Z",
-    "updated_at": "2021-08-14T21:23:39.000000Z"
-  }]),
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
       audios = _useState24[0],
       setAudios = _useState24[1];
@@ -93492,20 +93461,7 @@ function App() {
       notifications = _useState56[0],
       setNotifications = _useState56[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([{
-    "id": 91,
-    "video": "https://www.youtube.com/embed/EdKKYry-FwQ",
-    "name": "Kenyan Shrap Gang Type Beat Supreme",
-    "username": "@sammyking",
-    "ft": "",
-    "album": "",
-    "genre": "Hiphop",
-    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-    "description": "",
-    "released": null,
-    "created_at": "2020-05-08T12:41:00.000000Z",
-    "updated_at": "2021-03-15T17:43:59.000000Z"
-  }]),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState58 = _slicedToArray(_useState57, 2),
       videos = _useState58[0],
       setVideos = _useState58[1];
@@ -94021,7 +93977,38 @@ function App() {
     setVolume(clickX / width);
   }; // Song ends
   // audio.current.addEventListener('ended', nextSong);
-  // Search State
+
+  /*
+  *
+  * Media Session Controls */
+
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: showAudio.name,
+      artist: showArtist.username,
+      album: showAudio.album,
+      artwork: [{
+        src: showAudio.thumbnail,
+        sizes: '512x512',
+        type: 'image/png'
+      }]
+    });
+    var skipTime = 10; // Time to skip in seconds
+
+    navigator.mediaSession.setActionHandler('play', playSong);
+    navigator.mediaSession.setActionHandler('pause', pauseSong);
+    navigator.mediaSession.setActionHandler('seekbackward', function () {
+      // User clicked "Seek Backward" media notification icon.
+      audio.current.currentTime = Math.max(audio.current.currentTime - skipTime, 0);
+    });
+    navigator.mediaSession.setActionHandler('seekforward', function () {
+      // User clicked "Seek Forward" media notification icon.
+      audio.current.currentTime = Math.min(audio.current.currentTime + skipTime, audio.current.duration);
+    });
+    navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+    navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+  } // Search State
 
 
   var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
