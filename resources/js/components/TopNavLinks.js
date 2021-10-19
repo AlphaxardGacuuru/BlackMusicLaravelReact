@@ -245,12 +245,6 @@ const TopNavLinks = (props) => {
 					<Link to='/videos' className="p-3 dropdown-item border-bottom">
 						<h6>Studio</h6>
 					</Link>
-					<Link to="/home/create" className="p-3 dropdown-item border-bottom">
-						<h6>Settings</h6>
-					</Link>
-					<Link to="/help" className="p-3 dropdown-item border-bottom">
-						<h6>Help Centre</h6>
-					</Link>
 					<a href="#" className="p-3 dropdown-item" onClick={logout}>
 						<h6>Logout</h6>
 					</a>
