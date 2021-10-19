@@ -95583,13 +95583,13 @@ var TopNavLinks = function TopNavLinks(props) {
 
       deferredPrompt.userChoice.then(function (choiceResult) {
         if (choiceResult.outcome === 'accepted') {
-          btnAdd.innerHTML = 'User accepted';
+          btnAdd.innerHTML = '<h6>User accepted</h6>';
         }
 
         deferredPrompt = null;
       });
       window.addEventListener('appinstalled', function (evt) {
-        btnAdd.innerHTML = 'Installed';
+        btnAdd.innerHTML = '<h6>Installed</h6>';
       });
     });
   });

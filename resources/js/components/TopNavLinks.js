@@ -50,13 +50,13 @@ const TopNavLinks = (props) => {
 			// Check if the user accepted
 			deferredPrompt.userChoice.then((choiceResult) => {
 				if (choiceResult.outcome === 'accepted') {
-					btnAdd.innerHTML = 'User accepted';
+					btnAdd.innerHTML = '<h6>User accepted</h6>';
 				}
 				deferredPrompt = null;
 			});
 
 			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.innerHTML = 'Installed';
+				btnAdd.innerHTML = '<h6>Installed</h6>';
 			});
 		});
 	});
