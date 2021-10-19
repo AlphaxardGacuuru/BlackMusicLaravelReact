@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import { some } from 'lodash'
 
 import Img from '../components/Img'
 import Button from '../components/Button'

@@ -760,7 +760,7 @@ function App() {
 
 				<Messages {...{ message, errors }} />
 
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, onSearchIconClick }} />
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, audioLoader, onSearchIconClick }} />
 
 				{/* <center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>

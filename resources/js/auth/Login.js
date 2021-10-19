@@ -41,10 +41,6 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 		setPhone('07')
 	}
 
-	const onSocial = (website) => {
-		window.location.href = `${url}/api/login/${website}`
-	}
-
 	return (
 		<div>
 			<div className="container">

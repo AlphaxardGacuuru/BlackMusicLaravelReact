@@ -92744,10 +92744,6 @@ var Login = function Login(_ref) {
     setPhone('07');
   };
 
-  var onSocial = function onSocial(website) {
-    window.location.href = "".concat(url, "/api/login/").concat(website);
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -94679,6 +94675,7 @@ function App() {
     pauseSong: pauseSong,
     prevSong: prevSong,
     nextSong: nextSong,
+    audioLoader: audioLoader,
     onSearchIconClick: onSearchIconClick
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
@@ -94981,6 +94978,20 @@ var Bottomnav = function Bottomnav(props) {
   }) && props.audios.find(function (audio) {
     return audio.id == props.show;
   }).ft)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      display: checkLocation && "none"
+    }
+  }, props.audioLoader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border text-light",
+    style: {
+      borderTopWidth: "2px",
+      borderBottomWidth: "2px",
+      borderLeftWidth: "2px",
+      width: "20px",
+      height: "20px"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       cursor: "pointer",
       display: checkLocation && "none"
@@ -95273,7 +95284,7 @@ __webpack_require__.r(__webpack_exports__);
 var Messages = function Messages(_ref) {
   var message = _ref.message,
       errors = _ref.errors;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     id: "snackbar",
     className: errors.length > 0 || message.length > 0 ? 'show' : ''
   }, message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -95289,7 +95300,7 @@ var Messages = function Messages(_ref) {
         borderRadius: "30px"
       }
     }, error);
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Messages);
@@ -99331,11 +99342,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
-/* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99347,7 +99356,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -99561,7 +99569,7 @@ var Index = function Index(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/" + props.auth.username
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: '/storage/' + props.auth.pp,
     width: "100px",
     height: "100px",
@@ -99634,7 +99642,7 @@ var Index = function Index(props) {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(musician.username)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "/storage/".concat(musician.pp),
       width: "30px",
       height: "30px",
@@ -99663,13 +99671,13 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       fillRule: "evenodd",
       d: "M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"
-    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'mysonar-btn float-right',
       onClick: function onClick() {
         return onFollow(musician.username);
       },
       btnText: 'follow'
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'mysonar-btn float-right',
       onClick: function onClick() {
         return props.setErrors(["You must have bought atleast one song by ".concat(musician.username)]);
@@ -99702,7 +99710,7 @@ var Index = function Index(props) {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/video-show/".concat(video.id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: video.thumbnail.match(/http/) ? video.thumbnail : "storage/".concat(video.thumbnail),
       width: "160em",
       height: "90em"
@@ -99758,7 +99766,7 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       fillRule: "evenodd",
       d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'btn mysonar-btn green-btn',
       btnText: 'buy',
       onClick: function onClick() {
@@ -99782,7 +99790,7 @@ var Index = function Index(props) {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(post.username)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "/storage/".concat(props.users.find(function (user) {
         return user.username == post.username;
       }) && props.users.find(function (user) {
@@ -99838,14 +99846,14 @@ var Index = function Index(props) {
         borderBottomLeftRadius: "10px",
         overflow: "hidden"
       }
-    }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "/storage/".concat(post.media),
       alt: 'post-media',
       width: "100%",
       height: "auto"
     })), post.parameter_1 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_1;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
       btnText: post.parameter_1,
       btnStyle: {
@@ -99854,7 +99862,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onPoll(post.id, post.parameter_1);
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1",
       btnText: post.parameter_1,
       btnStyle: {
@@ -99895,7 +99903,7 @@ var Index = function Index(props) {
       }
     }, post.parameter_1)) : "", post.parameter_2 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_2;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
       btnText: post.parameter_2,
       btnStyle: {
@@ -99904,7 +99912,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onPoll(post.id, post.parameter_2);
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1",
       btnText: post.parameter_2,
       btnStyle: {
@@ -99945,7 +99953,7 @@ var Index = function Index(props) {
       }
     }, post.parameter_2)) : "", post.parameter_3 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_3;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
       btnText: post.parameter_3,
       btnStyle: {
@@ -99954,7 +99962,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onPoll(post.id, post.parameter_3);
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1",
       btnText: post.parameter_3,
       btnStyle: {
@@ -99995,7 +100003,7 @@ var Index = function Index(props) {
       }
     }, post.parameter_3)) : "", post.parameter_4 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_4;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
       btnText: post.parameter_4,
       btnStyle: {
@@ -100004,7 +100012,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onPoll(post.id, post.parameter_4);
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1",
       btnText: post.parameter_4,
       btnStyle: {
@@ -100045,7 +100053,7 @@ var Index = function Index(props) {
       }
     }, post.parameter_4)) : "", post.parameter_5 ? (new Date().getTime() - new Date(post.created_at).getTime()) / 86400000 < 1 ? props.polls.some(function (poll) {
       return poll.username == props.auth.username && poll.post_id == post.id && poll.parameter == post.parameter_5;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn btn-2 mb-1",
       btnText: post.parameter_5,
       btnStyle: {
@@ -100054,7 +100062,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onPoll(post.id, post.parameter_5);
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1",
       btnText: post.parameter_5,
       btnStyle: {
@@ -100201,7 +100209,7 @@ var Index = function Index(props) {
       return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
     });
   }).slice(0, 10).map(function (video, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: index,
       onClick: function onClick() {
         return props.setShow(0);
