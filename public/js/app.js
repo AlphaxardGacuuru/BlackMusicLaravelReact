@@ -93987,12 +93987,8 @@ function App() {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: showAudio.name,
       artist: showArtist.username,
-      album: showAudio.album,
-      artwork: [{
-        src: showAudio.thumbnail,
-        sizes: '512x512',
-        type: 'image/png'
-      }]
+      album: showAudio.album // artwork: [{ src: showAudio.thumbnail, sizes: '512x512', type: 'image/png' }]
+
     });
     var skipTime = 10; // Time to skip in seconds
 

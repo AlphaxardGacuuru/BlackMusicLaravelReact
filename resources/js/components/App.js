@@ -452,9 +452,7 @@ function App() {
 			title: showAudio.name,
 			artist: showArtist.username,
 			album: showAudio.album,
-			artwork: [
-				{ src: showAudio.thumbnail, sizes: '512x512', type: 'image/png' },
-			]
+			// artwork: [{ src: showAudio.thumbnail, sizes: '512x512', type: 'image/png' }]
 		});
 
 		let skipTime = 10; // Time to skip in seconds
