@@ -53,6 +53,10 @@ function App() {
 	})
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
+
+	// For Index
+	const [musicians, setMusicians] = useState([])
+
 	const [users, setUsers] = useState([])
 	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
@@ -100,6 +104,15 @@ function App() {
 			setAuth(authFromServer)
 		}
 		getAuth()
+
+		// Fetch For Index
+		axios.get(`${url}/api/posts`)
+			.then((res) => {
+				setMusicians(res.data.musicians)
+				setPosts(res.data.posts)
+			})
+			.catch(() => setErrors(['Failed to fetch posts']))
+		
 
 		// Fetch Audio Albums
 		axios.get(`${url}/api/audio-albums`)
@@ -210,11 +223,6 @@ function App() {
 		axios.get(`${url}/api/post-likes`)
 			.then((res) => setPostLikes(res.data))
 			.catch(() => setErrors(['Failed to fetch post likes']))
-
-		//Fetch Posts
-		axios.get(`${url}/api/posts`)
-			.then((res) => setPosts(res.data))
-			.catch(() => setErrors(['Failed to fetch posts']))
 
 		//Fetch SMS
 		axios.get(`${url}/api/sms`)
@@ -593,7 +601,7 @@ function App() {
 				)} />
 
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
+					<Index {...{ url, auth, setMessage, setErrors, musicians, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (

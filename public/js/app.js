@@ -92814,7 +92814,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var LoginPopUp = function LoginPopUp(props) {
   var onSocial = function onSocial(website) {
     window.location.href = "".concat(props.url, "/api/login/").concat(website);
@@ -93344,167 +93343,173 @@ function App() {
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
       errors = _useState10[0],
-      setErrors = _useState10[1];
+      setErrors = _useState10[1]; // For Index
+
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      users = _useState12[0],
-      setUsers = _useState12[1];
+      musicians = _useState12[0],
+      setMusicians = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      posts = _useState14[0],
-      setPosts = _useState14[1];
+      users = _useState14[0],
+      setUsers = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      postLikes = _useState16[0],
-      setPostLikes = _useState16[1];
+      posts = _useState16[0],
+      setPosts = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      postComments = _useState18[0],
-      setPostComments = _useState18[1];
+      postLikes = _useState18[0],
+      setPostLikes = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      postCommentLikes = _useState20[0],
-      setPostCommentLikes = _useState20[1];
+      postComments = _useState20[0],
+      setPostComments = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState22 = _slicedToArray(_useState21, 2),
-      polls = _useState22[0],
-      setPolls = _useState22[1];
+      postCommentLikes = _useState22[0],
+      setPostCommentLikes = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      audios = _useState24[0],
-      setAudios = _useState24[1];
+      polls = _useState24[0],
+      setPolls = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState26 = _slicedToArray(_useState25, 2),
-      audioAlbums = _useState26[0],
-      setAudioAlbums = _useState26[1];
+      audios = _useState26[0],
+      setAudios = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      audioComments = _useState28[0],
-      setAudioComments = _useState28[1];
+      audioAlbums = _useState28[0],
+      setAudioAlbums = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      audioCommentLikes = _useState30[0],
-      setAudioCommentLikes = _useState30[1];
+      audioComments = _useState30[0],
+      setAudioComments = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      audioLikes = _useState32[0],
-      setAudioLikes = _useState32[1];
+      audioCommentLikes = _useState32[0],
+      setAudioCommentLikes = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      audioNotifications = _useState34[0],
-      setAudioNotifications = _useState34[1];
+      audioLikes = _useState34[0],
+      setAudioLikes = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      audioPayouts = _useState36[0],
-      setAudioPayouts = _useState36[1];
+      audioNotifications = _useState36[0],
+      setAudioNotifications = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      boughtAudios = _useState38[0],
-      setBoughtAudios = _useState38[1];
+      audioPayouts = _useState38[0],
+      setAudioPayouts = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      boughtVideos = _useState40[0],
-      setBoughtVideos = _useState40[1];
+      boughtAudios = _useState40[0],
+      setBoughtAudios = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      decos = _useState42[0],
-      setDecos = _useState42[1];
+      boughtVideos = _useState42[0],
+      setBoughtVideos = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      decoNotifications = _useState44[0],
-      setDecoNotifications = _useState44[1];
+      decos = _useState44[0],
+      setDecos = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      follows = _useState46[0],
-      setFollows = _useState46[1];
+      decoNotifications = _useState46[0],
+      setDecoNotifications = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      followNotifications = _useState48[0],
-      setFollowNotifications = _useState48[1];
+      follows = _useState48[0],
+      setFollows = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      sms = _useState50[0],
-      setSMS = _useState50[1];
+      followNotifications = _useState50[0],
+      setFollowNotifications = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      kopokopo = _useState52[0],
-      setKopokopo = _useState52[1];
+      sms = _useState52[0],
+      setSMS = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
-      kopokopoNotifications = _useState54[0],
-      setKopokopoNotifications = _useState54[1];
+      kopokopo = _useState54[0],
+      setKopokopo = _useState54[1];
 
   var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState56 = _slicedToArray(_useState55, 2),
-      notifications = _useState56[0],
-      setNotifications = _useState56[1];
+      kopokopoNotifications = _useState56[0],
+      setKopokopoNotifications = _useState56[1];
 
   var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState58 = _slicedToArray(_useState57, 2),
-      videos = _useState58[0],
-      setVideos = _useState58[1];
+      notifications = _useState58[0],
+      setNotifications = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState60 = _slicedToArray(_useState59, 2),
-      videoComments = _useState60[0],
-      setVideoComments = _useState60[1];
+      videos = _useState60[0],
+      setVideos = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState62 = _slicedToArray(_useState61, 2),
-      videoCommentLikes = _useState62[0],
-      setVideoCommentLikes = _useState62[1];
+      videoComments = _useState62[0],
+      setVideoComments = _useState62[1];
 
   var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState64 = _slicedToArray(_useState63, 2),
-      videoLikes = _useState64[0],
-      setVideoLikes = _useState64[1];
+      videoCommentLikes = _useState64[0],
+      setVideoCommentLikes = _useState64[1];
 
   var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState66 = _slicedToArray(_useState65, 2),
-      videoNotifications = _useState66[0],
-      setVideoNotifications = _useState66[1];
+      videoLikes = _useState66[0],
+      setVideoLikes = _useState66[1];
 
   var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState68 = _slicedToArray(_useState67, 2),
-      cartAudios = _useState68[0],
-      setCartAudios = _useState68[1];
+      videoNotifications = _useState68[0],
+      setVideoNotifications = _useState68[1];
 
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState70 = _slicedToArray(_useState69, 2),
-      cartVideos = _useState70[0],
-      setCartVideos = _useState70[1];
+      cartAudios = _useState70[0],
+      setCartAudios = _useState70[1];
 
   var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState72 = _slicedToArray(_useState71, 2),
-      videoAlbums = _useState72[0],
-      setVideoAlbums = _useState72[1];
+      cartVideos = _useState72[0],
+      setCartVideos = _useState72[1];
 
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState74 = _slicedToArray(_useState73, 2),
-      videoPayouts = _useState74[0],
-      setVideoPayouts = _useState74[1]; // Reset Messages and Errors to null after 3 seconds
+      videoAlbums = _useState74[0],
+      setVideoAlbums = _useState74[1];
+
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState76 = _slicedToArray(_useState75, 2),
+      videoPayouts = _useState76[0],
+      setVideoPayouts = _useState76[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93546,7 +93551,14 @@ function App() {
       };
     }();
 
-    getAuth(); // Fetch Audio Albums
+    getAuth(); // Fetch For Index
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
+      setMusicians(res.data.musicians);
+      setPosts(res.data.posts);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch posts']);
+    }); // Fetch Audio Albums
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
       return setAudioAlbums(res.data);
@@ -93676,12 +93688,6 @@ function App() {
       return setPostLikes(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch post likes']);
-    }); //Fetch Posts
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
-      return setPosts(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch posts']);
     }); //Fetch SMS
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/sms")).then(function (res) {
@@ -93770,50 +93776,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState76 = _slicedToArray(_useState75, 2),
-      show = _useState76[0],
-      setShow = _useState76[1];
-
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState78 = _slicedToArray(_useState77, 2),
-      playBtn = _useState78[0],
-      setPlayBtn = _useState78[1];
+      show = _useState78[0],
+      setShow = _useState78[1];
 
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState80 = _slicedToArray(_useState79, 2),
-      shuffle = _useState80[0],
-      setShuffle = _useState80[1];
+      playBtn = _useState80[0],
+      setPlayBtn = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState82 = _slicedToArray(_useState81, 2),
-      loop = _useState82[0],
-      setLoop = _useState82[1];
+      shuffle = _useState82[0],
+      setShuffle = _useState82[1];
 
-  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState84 = _slicedToArray(_useState83, 2),
-      dur = _useState84[0],
-      setDur = _useState84[1];
+      loop = _useState84[0],
+      setLoop = _useState84[1];
 
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState86 = _slicedToArray(_useState85, 2),
-      volume = _useState86[0],
-      setVolume = _useState86[1];
+      dur = _useState86[0],
+      setDur = _useState86[1];
 
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
       _useState88 = _slicedToArray(_useState87, 2),
-      currentTime = _useState88[0],
-      setCurrentTime = _useState88[1];
+      volume = _useState88[0],
+      setVolume = _useState88[1];
 
-  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState90 = _slicedToArray(_useState89, 2),
-      progressPercent = _useState90[0],
-      setProgressPercent = _useState90[1];
+      currentTime = _useState90[0],
+      setCurrentTime = _useState90[1];
 
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState92 = _slicedToArray(_useState91, 2),
-      audioLoader = _useState92[0],
-      setAudioLoader = _useState92[1]; // Listen for show change and autoplay song
+      progressPercent = _useState92[0],
+      setProgressPercent = _useState92[1];
+
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState94 = _slicedToArray(_useState93, 2),
+      audioLoader = _useState94[0],
+      setAudioLoader = _useState94[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -94007,10 +94013,10 @@ function App() {
   } // Search State
 
 
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState94 = _slicedToArray(_useState93, 2),
-      search = _useState94[0],
-      setSearch = _useState94[1];
+  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState96 = _slicedToArray(_useState95, 2),
+      search = _useState96[0],
+      setSearch = _useState96[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94159,6 +94165,7 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
+        musicians: musicians,
         users: users,
         videos: videos,
         boughtVideos: boughtVideos,
@@ -99609,31 +99616,25 @@ var Index = function Index(props) {
     className: "border"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Musicians to follow")), props.users.filter(function (musician) {
-    return musician.account_type == 'musician' && musician.username != '@blackmusic' && musician.username != props.auth.username;
-  }).slice(0, 10).map(function (musician, index) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Musicians to follow")), props.musicians.slice(0, 10).map(function (musician, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: index,
+      key: key,
       className: "media p-2 border-bottom"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(musician.username)
+      to: "/profile/:".concat(musician.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: "/storage/".concat(musician.pp),
+      src: "storage/".concat(musician.pp),
       width: "30px",
       height: "30px",
       alt: "musician"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(musician.username),
+      to: "/profile/".concat(musician.id),
       className: "text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, musician.username))), props.boughtVideos.find(function (boughtVideo) {
-      return boughtVideo.username == props.auth.username && boughtVideo.artist == musician.username;
-    }) || props.auth.username == "@blackmusic" ? props.follows.find(function (follow) {
-      return follow.followed == musician.username && follow.username == props.auth.username;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, musician.username))), musician.hasBought1 ? musician.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: 'btn btn-light float-right rounded-0',
       onClick: function onClick() {
         return onFollow(musician.username);

@@ -246,44 +246,37 @@ const Index = (props) => {
 						<div className="p-2 border-bottom">
 							<h2>Musicians to follow</h2>
 						</div>
-						{/* Filter users and get only musicians */}
-						{/* should not be @blackmusic and the current user. */}
 						{/* Slice to limit to 10 */}
-						{props.users.filter((musician) => {
-							return musician.account_type == 'musician' &&
-								musician.username != '@blackmusic' &&
-								musician.username != props.auth.username
-						}).slice(0, 10)
-							.map((musician, index) => (
-								<div key={index} className='media p-2 border-bottom'>
+						{props.musicians
+							.slice(0, 10)
+							.map((musician, key) => (
+								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>
-										<Link to={`/profile/${musician.username}`}>
-											<Img src={`/storage/${musician.pp}`} width="30px" height="30px" alt="musician" />
+										<Link to={`/profile/:${musician.id}`}>
+											<Img src={`storage/${musician.pp}`}
+												width="30px"
+												height="30px"
+												alt="musician" />
 										</Link>
 									</div>
 									<div className='media-body'>
-										<Link to={`/profile/${musician.username}`} className="text-dark">
+										<Link to={`/profile/${musician.id}`} className="text-dark">
 											<b>{musician.name}</b>
 											<small><i>{musician.username}</i></small>
 										</Link>
 
 										{/* Check whether user has bought at least one song from musician */}
 										{/* Check whether user has followed musician and display appropriate button */}
-										{props.boughtVideos.find((boughtVideo) => {
-											return boughtVideo.username == props.auth.username &&
-												boughtVideo.artist == musician.username
-										}) || props.auth.username == "@blackmusic" ?
-											props.follows.find((follow) => {
-												return follow.followed == musician.username &&
-													follow.username == props.auth.username
-											}) ? <button className={'btn btn-light float-right rounded-0'}
-												onClick={() => onFollow(musician.username)}>
-												Followed
-												<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-												</svg>
-											</button>
+										{musician.hasBought1 ?
+											musician.hasFollowed ?
+												<button className={'btn btn-light float-right rounded-0'}
+													onClick={() => onFollow(musician.username)}>
+													Followed
+													<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+														<path fillRule='evenodd'
+															d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
+													</svg>
+												</button>
 												: <Button btnClass={'mysonar-btn float-right'}
 													onClick={() => onFollow(musician.username)}
 													btnText={'follow'} />
