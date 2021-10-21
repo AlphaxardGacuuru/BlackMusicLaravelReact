@@ -56,11 +56,11 @@ function App() {
 
 	// For Index
 	const [musicians, setMusicians] = useState([])
+	const [videos, setVideos] = useState([])
+	const [posts, setPosts] = useState([])
 
 	const [users, setUsers] = useState([])
-	const [posts, setPosts] = useState([])
 	const [postLikes, setPostLikes] = useState([])
-	const [postComments, setPostComments] = useState([])
 	const [postCommentLikes, setPostCommentLikes] = useState([])
 	const [polls, setPolls] = useState([])
 	const [audios, setAudios] = useState([])
@@ -80,7 +80,6 @@ function App() {
 	const [kopokopo, setKopokopo] = useState([])
 	const [kopokopoNotifications, setKopokopoNotifications] = useState([])
 	const [notifications, setNotifications] = useState([])
-	const [videos, setVideos] = useState([])
 	const [videoComments, setVideoComments] = useState([])
 	const [videoCommentLikes, setVideoCommentLikes] = useState([])
 	const [videoLikes, setVideoLikes] = useState([])
@@ -105,14 +104,15 @@ function App() {
 		}
 		getAuth()
 
-		// Fetch For Index
+		// Fetch for Index
 		axios.get(`${url}/api/posts`)
 			.then((res) => {
 				setMusicians(res.data.musicians)
+				setVideos(res.data.videos)
 				setPosts(res.data.posts)
 			})
-			.catch(() => setErrors(['Failed to fetch posts']))
-		
+			.catch(() => setErrors(['Failed to fetch for Index']))
+
 
 		// Fetch Audio Albums
 		axios.get(`${url}/api/audio-albums`)
@@ -190,11 +190,6 @@ function App() {
 			.catch(() => setErrors(['Failed to fetch follow notifications']))
 
 		// Fetch Kopokopo
-		// axios.get(`${url}/api/kopokopo`)
-		// 	.then((res) => setKopokopo(res.data))
-		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
-
-		// Fetch Kopokopo
 		axios.get(`${url}/api/kopokopo-notifications`)
 			.then((res) => setKopokopoNotifications(res.data))
 			.catch(() => setErrors(['Failed to fetch kopokopo notifications']))
@@ -208,21 +203,6 @@ function App() {
 		axios.get(`${url}/api/polls`)
 			.then((res) => setPolls(res.data))
 			.catch(() => setErrors(['Failed to fetch polls']))
-
-		// Fetch Post Comment likes
-		axios.get(`${url}/api/post-comment-likes`)
-			.then((res) => setPostCommentLikes(res.data))
-			.catch(() => setErrors(['Failed to fetch post comment likes']))
-
-		// Fetch Post Comments
-		axios.get(`${url}/api/post-comments`)
-			.then((res) => setPostComments(res.data))
-			.catch(() => setErrors(['Failed to fetch post comments']))
-
-		// Fetch Post Likes
-		axios.get(`${url}/api/post-likes`)
-			.then((res) => setPostLikes(res.data))
-			.catch(() => setErrors(['Failed to fetch post likes']))
 
 		//Fetch SMS
 		axios.get(`${url}/api/sms`)
@@ -256,7 +236,7 @@ function App() {
 
 		//Fetch Videos
 		axios.get(`${url}/api/videos`)
-			.then((res) => setVideos(res.data))
+			// .then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
 
 		// Fetch Video Notifications
@@ -601,7 +581,7 @@ function App() {
 				)} />
 
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, musicians, users, videos, boughtVideos, cartVideos, setCartVideos, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
+					<Index {...{ url, auth, setMessage, setErrors, musicians, setMusicians, videos, setVideos, posts, setPosts, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (
@@ -628,7 +608,7 @@ function App() {
 
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
-						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, postComments, polls, setPolls, decos, follows, setFollows, setShow }} />
+						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, videos, boughtVideos, cartVideos, setCartVideos, videoAlbums, audios, boughtAudios, cartAudios, setCartAudios, audioAlbums, posts, setPosts, postLikes, setPostLikes, polls, setPolls, decos, follows, setFollows, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
@@ -649,7 +629,7 @@ function App() {
 
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
-						<PostShow {...{ url, auth, setMessage, setErrors, users, postComments, setPostComments, postCommentLikes, setPostCommentLikes, decos }} />
+						<PostShow {...{ url, auth, setMessage, setErrors }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />

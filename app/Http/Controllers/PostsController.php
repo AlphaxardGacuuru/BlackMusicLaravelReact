@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BoughtAudios;
 use App\BoughtVideos;
+use App\CartVideos;
 use App\Follows;
 use App\Polls;
 use App\PostCommentLikes;
@@ -11,6 +12,7 @@ use App\PostComments;
 use App\PostLikes;
 use App\Posts;
 use App\User;
+use App\Videos;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -29,9 +31,11 @@ class PostsController extends Controller
             ->where('account_type', 'musician')
             ->get();
 
-        // Get leaders
+        $musicians = [];
+
+        // Get Musicians
         foreach ($getMusicians as $key => $musician) {
-            // Check if user has followed leader
+            // Check if user has followed Musician
             $hasFollowed = Follows::where('followed', $musician->username)
                 ->where('username', auth()->user()->username)
                 ->exists();
@@ -48,10 +52,9 @@ class PostsController extends Controller
 
             $hasBought1 = ($hasBoughtVideo + $hasBoughtAudio) > 1 ? true : false;
 
-            // Get leaders only
-            $musicians[$key] = array(
-                "username" => $musician->username,
+            array_push($musicians, [
                 "name" => $musician->name,
+                "username" => $musician->username,
                 "account_type" => $musician->account_type,
                 "pp" => $musician->pp,
                 "bio" => $musician->bio,
@@ -60,14 +63,52 @@ class PostsController extends Controller
                 "followers" => $musician->posts->Where('following', auth()->user()->username)->count(),
                 "hasFollowed" => $hasFollowed,
                 "hasBought1" => $hasBought1,
-            );
+            ]);
         }
 
-        $getPosts = Posts::where('username', '!=', 29)->orderBy('id', 'DESC')->get();
+        // Get Videos
+        $getVideos = Videos::where('username', '!=', auth()->user()->username)
+            ->orderBy('id', 'ASC')
+            ->get();
+
+        $videos = [];
+
+        foreach ($getVideos as $key => $video) {
+            // Check if video in cart
+            $inCart = CartVideos::where('video_id', $video->id)
+                ->where('username', auth()->user()->username)
+                ->exists();
+
+            // Check if user has bought video
+            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
+                ->where('video_id', $video->id)
+                ->exists();
+
+            array_push($videos, [
+                "id" => $video->id,
+                "video" => $video->video,
+                "name" => $video->name,
+                "username" => $video->username,
+                "ft" => $video->ft,
+                "album" => $video->album,
+                "genre" => $video->genre,
+                "thumbnail" => $video->thumbnail,
+                "description" => $video->description,
+                "released" => $video->released,
+                "inCart" => $inCart,
+                "hasBoughtVideo" => $hasBoughtVideo,
+                "created_at" => $video->created_at,
+            ]);
+        }
 
         // Get Posts
+        $getPosts = Posts::orderBy('id', 'DESC')->get();
+
+        $posts = [];
+
         foreach ($getPosts as $key => $post) {
-            // Check if user has followed leader
+
+            // Check if user has followed Musician
             $hasFollowed = Follows::where('followed', $post->username)
                 ->where('username', auth()->user()->username)
                 ->exists();
@@ -181,11 +222,12 @@ class PostsController extends Controller
                 ->where('created_at', '>', Carbon::now()->subDays(1)->toDateTimeString())
                 ->exists();
 
-            $posts[$key] = array(
+            array_push($posts, [
                 "id" => $post->id,
                 "name" => $post->users->name,
                 "username" => $post->users->username,
                 "pp" => $post->users->pp,
+                "decos" => $post->users->decos->count(),
                 "text" => $post->text,
                 "media" => $post->media,
                 "parameter_1" => $post->parameter_1,
@@ -210,10 +252,14 @@ class PostsController extends Controller
                 "likes" => $post->postLikes->count(),
                 "comments" => $post->postComments->count(),
                 "created_at" => $post->created_at->format("d F Y"),
-            );
+            ]);
         }
 
-        return ["musicians" => $musicians, "posts" => $posts];
+        return [
+            "musicians" => $musicians,
+            "videos" => $videos,
+            "posts" => $posts,
+        ];
     }
 
     /**
@@ -276,9 +322,32 @@ class PostsController extends Controller
      * @param  \App\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function show(Posts $posts)
+    public function show($id)
     {
-        //
+        $getComments = PostComments::where('post_id', $id)->orderby('id', 'DESC')->get();
+
+        $comments = [];
+
+        foreach ($getComments as $key => $comment) {
+            // Check if user has liked
+            $hasLiked = PostCommentLikes::where('username', auth()->user()->username)
+                ->where('comment_id', $comment->id)
+                ->exists();
+
+            array_push($comments, [
+                "id" => $comment->id,
+                "name" => $comment->users->name,
+                "username" => $comment->users->username,
+                "decos" => $comment->users->decos->count(),
+                "pp" => $comment->users->pp,
+                "text" => $comment->text,
+                "hasLiked" => $hasLiked,
+                "likes" => $comment->postCommentLikes->count(),
+                "created_at" => $comment->created_at->format("d M Y"),
+            ]);
+        }
+
+        return $comments;
     }
 
     /**
@@ -316,7 +385,6 @@ class PostsController extends Controller
         $ext = substr($id, -3);
 
         if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
-
             Storage::delete('public/post-media/' . $id);
             return response("Post media deleted", 200);
         } else {

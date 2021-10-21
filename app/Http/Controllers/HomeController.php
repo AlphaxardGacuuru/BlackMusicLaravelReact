@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Follows;
+use App\Posts;
+use App\Decos;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -23,6 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Auth::user();
+        return [
+            "name" => Auth::user()->name,
+            "username" => Auth::user()->username,
+            "email" => Auth::user()->email,
+            "account_type" => Auth::user()->account_type,
+            "pp" => Auth::user()->pp,
+            "pb" => Auth::user()->pb,
+            "bio" => Auth::user()->bio,
+            "dob" => Auth::user()->dob,
+            "decos" => Decos::where('username', Auth::user()->dob)->count(),
+            "fans" => Follows::where('followed', Auth::user()->username)->count() - 1,
+            "following" => Follows::where('followed', Auth::user()->username)->count(),
+            "posts" => Posts::where('username', Auth::user()->username)->count(),
+            "created_at" => Auth::user()->created_at,
+        ];
     }
 }

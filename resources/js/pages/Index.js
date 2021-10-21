@@ -19,7 +19,11 @@ const Index = (props) => {
 				musician: musician
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/follows`).then((res) => props.setFollows(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => {
+						props.setMusicians(res.data.musicians)
+						props.setPosts(res.data.posts)
+					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -41,7 +45,8 @@ const Index = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setVideos(res.data.videos))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				// Get validation errors
@@ -64,7 +69,8 @@ const Index = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setVideos(res.data.videos))
 				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -87,7 +93,8 @@ const Index = (props) => {
 				post: post
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/post-likes`).then((res) => props.setPostLikes(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data.posts))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -107,7 +114,8 @@ const Index = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/posts`).then((res) => props.setPosts(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data.posts))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -130,7 +138,8 @@ const Index = (props) => {
 				parameter: parameter
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/polls`).then((res) => props.setPolls(res.data))
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data.posts))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -144,8 +153,6 @@ const Index = (props) => {
 			})
 		})
 	}
-
-	var percentage = 100
 
 	// Function for loading more artists
 	const handleScroll = (e) => {
@@ -177,7 +184,7 @@ const Index = (props) => {
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
 								<Link to={"/profile/" + props.auth.username}>
 									<Img
-										src={'/storage/' + props.auth.pp}
+										src={props.auth.pp.match(/http/) ? props.auth.pp : '/storage/' + props.auth.pp}
 										width="100px"
 										height="100px"
 										alt="avatar" />
@@ -185,8 +192,7 @@ const Index = (props) => {
 							</div>
 						</div>
 						<div className="p-2 flex-grow-1">
-							<h5
-								className="m-0 p-0"
+							<h5 className="m-0 p-0"
 								style={{
 									width: "160px",
 									whiteSpace: "nowrap",
@@ -195,8 +201,7 @@ const Index = (props) => {
 								}}>
 								{props.auth.name}
 							</h5>
-							<h6
-								className="m-0 p-0"
+							<h6 className="m-0 p-0"
 								style={{
 									width: "140px",
 									whiteSpace: "nowrap",
@@ -212,27 +217,19 @@ const Index = (props) => {
 										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 								</svg>
 							</span>
-							<span style={{ fontSize: "10px" }}>
-								{props.decos.filter((deco) => {
-									return deco.username == props.auth.username
-								}).length}
-							</span>
+							<span style={{ fontSize: "10px" }}>{props.auth.decos}</span>
 						</div>
 					</div>
 					<div className="d-flex border-bottom border-left border-right">
 						<div className="p-2 flex-fill">
 							<h6>Posts</h6>
-							{props.posts.filter((post) => {
-								return post.username == props.auth.username
-							}).length}
+							{props.auth.posts}
 							<br />
 						</div>
 						<div className="p-2 flex-fill" style={{ color: "purple" }}>
 							<Link to='/fans'>
 								<h6>Fans</h6>
-								{props.follows.filter((follow) => {
-									return follow.followed == props.auth.username
-								}).length - 1}
+								{props.auth.fans}
 								<br />
 							</Link>
 						</div>
@@ -253,7 +250,7 @@ const Index = (props) => {
 								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>
 										<Link to={`/profile/:${musician.id}`}>
-											<Img src={`storage/${musician.pp}`}
+											<Img src={musician.pp.match(/http/) ? musician.pp : `storage/${musician.pp}`}
 												width="30px"
 												height="30px"
 												alt="musician" />
@@ -297,16 +294,10 @@ const Index = (props) => {
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{props.videos
-								.filter((video) => !props.boughtVideos
-									.some((boughtVideo) =>
-										boughtVideo.video_id == video.id &&
-										boughtVideo.username == props.auth.username
-									) && video.username != props.auth.username)
-								.reverse()
+								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)
 								.map((video, index) => (
-									<span
-										key={index}
+									<span key={index}
 										className="card pt-0 pl-0 pr-0 pb-2"
 										style={{ borderRadius: "10px" }}>
 										<div className="thumbnail"
@@ -315,16 +306,15 @@ const Index = (props) => {
 												borderTopRightRadius: "10px"
 											}}>
 											<Link to={`/video-show/${video.id}`}>
-												<Img
-													src={video.thumbnail.match(/http/) ?
-														video.thumbnail :
-														`storage/${video.thumbnail}`}
+												<Img src={video.thumbnail.match(/http/) ?
+													video.thumbnail :
+													`storage/${video.thumbnail}`}
 													width="160em"
 													height="90em" />
 											</Link>
 										</div>
 										<Link to={`/video-show/${video.id}`}>
-											<h6 className="m-0 pt-2 pr-1 pl-1"
+											<h6 className="m-0 pt-2 py-1"
 												style={{
 													width: "150px",
 													whiteSpace: "nowrap",
@@ -333,24 +323,20 @@ const Index = (props) => {
 												}}>
 												{video.name}
 											</h6>
-											<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
+											<h6 className="mt-0 my-1 mb-2 px-0 py-1">
 												<small>{video.username} {video.ft}</small>
 											</h6>
 										</Link>
-										{props.cartVideos
-											.find((cartVideo) => {
-												return cartVideo.video_id == video.id &&
-													cartVideo.username == props.auth.username
-											}) ? <button
-												className="btn btn-light mb-1 rounded-0"
+										{video.inCart ?
+											<button className="btn btn-light mb-1 rounded-0"
 												style={{ minWidth: '90px', height: '33px' }}
 												onClick={() => onCartVideos(video.id)}>
-											<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-												fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-												<path fillRule='evenodd'
-													d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-											</svg>
-										</button>
+												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
+													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+													<path fillRule='evenodd'
+														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
+												</svg>
+											</button>
 											: <button
 												className="mysonar-btn mb-1"
 												style={{ minWidth: '90px', height: '33px' }}
@@ -375,19 +361,14 @@ const Index = (props) => {
 					{/* <!-- ****** Songs Area End ****** --> */}
 
 					{/* <!-- Posts area --> */}
-					{props.posts.filter((post) => {
-						return props.follows.some((follow) => {
-							return follow.followed == post.username &&
-								follow.username == props.auth.username
-						})
-					}).reverse()
+					{props.posts
+						.filter((post) => post.hasFollowed)
 						.map((post, index) => (
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<Link to={`/profile/${post.username}`}>
-											<Img src={`/storage/${props.users.find((user) => user.username == post.username) &&
-												props.users.find((user) => user.username == post.username).pp}`}
+										<Link to={`/profile/${post.user_id}`}>
+											<Img src={post.pp.match(/http/) ? post.pp : `storage/${post.pp}`}
 												width="40px"
 												height="40px"
 												alt={'avatar'} />
@@ -402,19 +383,20 @@ const Index = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-										<b>{props.users.find((user) => user.username == post.username) &&
-											props.users.find((user) => user.username == post.username).name}</b>
-										<small>{post.username} </small>
-										<span style={{ color: "gold" }}>
-											<svg className="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16"
-												fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<b>{post.name}</b>
+										<small>{post.username}</small>
+										<span className="ml-1" style={{ color: "gold" }}>
+											<svg className="bi bi-circle"
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
 												<path fillRule="evenodd"
 													d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											</svg>
 										</span>
-										<span style={{ fontSize: "10px" }}> {props.decos.filter((deco) => {
-											return deco.username == post.username
-										}).length}</span>
+										<span className="ml-1" style={{ fontSize: "10px" }}>{post.decos}</span>
 										<small>
 											<i className="float-right mr-1">{post.created_at}</i>
 										</small>
@@ -429,19 +411,19 @@ const Index = (props) => {
 										borderBottomLeftRadius: "10px",
 										overflow: "hidden"
 									}}>
-										{post.media && <Img src={`/storage/${post.media}`} alt={'post-media'} width="100%" height="auto" />}
+										{post.media &&
+											<Img src={`storage/${post.media}`}
+												alt={'post-media'}
+												width="100%"
+												height="auto" />}
 									</div>
 
 									{/* Show poll */}
 									{post.parameter_1 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
-											props.polls.some((poll) => {
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_1
-											}) ?
+										post.isWithin24Hrs ?
+											post.hasVoted1 ?
 												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
+													btnClass={"mysonar-btn mb-1 btn-2"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
@@ -450,41 +432,32 @@ const Index = (props) => {
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
-											: props.polls.some((poll) => {
-												// Get percentage votes for poll
-												percentage = props.polls
-													.filter((poll) => poll.post_id == post.id &&
-														poll.parameter == post.parameter_1)
-													.length * 100 /
-													props.polls.filter((poll) => poll.post_id == post.id).length
-
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_1
-											}) ?
+											: post.hasVoted1 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														style={{
+															width: `${post.percentage1}%`,
+															backgroundColor: "#232323"
+														}}>
 														{post.parameter_1}
 													</div>
 												</div>
 												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														style={{
+															width: `${post.percentage1}%`,
+															backgroundColor: "grey"
+														}}>
 														{post.parameter_1}
 													</div>
 												</div>
 										: ""}
 
 									{post.parameter_2 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
-											props.polls.some((poll) => {
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_2
-											}) ?
+										post.isWithin24Hrs ?
+											post.hasVoted2 ?
 												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
+													btnClass={"mysonar-btn mb-1 btn-2"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
@@ -493,41 +466,32 @@ const Index = (props) => {
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
-											: props.polls.some((poll) => {
-												// Get percentage votes for poll
-												percentage = props.polls
-													.filter((poll) => poll.post_id == post.id &&
-														poll.parameter == post.parameter_2)
-													.length * 100 /
-													props.polls.filter((poll) => poll.post_id == post.id).length
-
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_2
-											}) ?
+											: post.hasVoted2 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														style={{
+															width: `${post.percentage2}%`,
+															backgroundColor: "#232323"
+														}}>
 														{post.parameter_2}
 													</div>
 												</div>
 												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														style={{
+															width: `${post.percentage2}%`,
+															backgroundColor: "grey"
+														}}>
 														{post.parameter_2}
 													</div>
 												</div>
 										: ""}
 
 									{post.parameter_3 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
-											props.polls.some((poll) => {
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_3
-											}) ?
+										post.isWithin24Hrs ?
+											post.hasVoted3 ?
 												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
+													btnClass={"mysonar-btn mb-1 btn-2"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
@@ -536,41 +500,32 @@ const Index = (props) => {
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
-											: props.polls.some((poll) => {
-												// Get percentage votes for poll
-												percentage = props.polls
-													.filter((poll) => poll.post_id == post.id &&
-														poll.parameter == post.parameter_3)
-													.length * 100 /
-													props.polls.filter((poll) => poll.post_id == post.id).length
-
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_3
-											}) ?
+											: post.hasVoted3 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														style={{
+															width: `${post.percentage3}%`,
+															backgroundColor: "#232323"
+														}}>
 														{post.parameter_3}
 													</div>
 												</div>
 												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														style={{
+															width: `${post.percentage3}%`,
+															backgroundColor: "grey"
+														}}>
 														{post.parameter_3}
 													</div>
 												</div>
 										: ""}
 
 									{post.parameter_4 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
-											props.polls.some((poll) => {
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_4
-											}) ?
+										post.isWithin24Hrs ?
+											post.hasVoted4 ?
 												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
+													btnClass={"mysonar-btn mb-1 btn-2"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
@@ -579,41 +534,29 @@ const Index = (props) => {
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
-											: props.polls.some((poll) => {
-												// Get percentage votes for poll
-												percentage = props.polls
-													.filter((poll) => poll.post_id == post.id &&
-														poll.parameter == post.parameter_4)
-													.length * 100 /
-													props.polls.filter((poll) => poll.post_id == post.id).length
-
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_4
-											}) ?
+											: post.hasVoted4 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														style={{ width: `${post.percentage4}%`, backgroundColor: "#232323" }}>
 														{post.parameter_4}
 													</div>
 												</div>
 												: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														style={{
+															width: `${post.percentage4}%`,
+															backgroundColor: "grey"
+														}}>
 														{post.parameter_4}
 													</div>
 												</div>
 										: ""}
 
 									{post.parameter_5 ?
-										(((new Date().getTime() - new Date(post.created_at).getTime()) / 86400000) < 1) ?
-											props.polls.some((poll) => {
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_5
-											}) ?
+										post.isWithin24Hrs ?
+											post.hasVoted5 ?
 												<Button
-													btnClass={"mysonar-btn btn-2 mb-1"}
+													btnClass={"mysonar-btn mb-1 btn-2"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
@@ -622,27 +565,22 @@ const Index = (props) => {
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
-											: props.polls.some((poll) => {
-												// Get percentage votes for poll
-												percentage = props.polls
-													.filter((poll) => poll.post_id == post.id &&
-														poll.parameter == post.parameter_5)
-													.length * 100 /
-													props.polls.filter((poll) => poll.post_id == post.id).length
-
-												return poll.username == props.auth.username &&
-													poll.post_id == post.id &&
-													poll.parameter == post.parameter_5
-											}) ?
+											: post.hasVoted5 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "#232323" }}>
+														style={{
+															width: `${post.percentage5}%`,
+															backgroundColor: "#232323"
+														}}>
 														{post.parameter_5}
 													</div>
 												</div> :
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${percentage}%`, backgroundColor: "grey" }}>
+														style={{
+															width: `${post.percentage5}%`,
+															backgroundColor: "grey"
+														}}>
 														{post.parameter_5}
 													</div>
 												</div>
@@ -651,71 +589,83 @@ const Index = (props) => {
 									{/* Total votes */}
 									{post.parameter_1 &&
 										<small style={{ color: "grey" }}>
-											<i>
-												Total votes:
-												{post.parameter_1 && props.polls.filter((poll) => {
-													return poll.post_id == post.id
-												}).length}
-											</i>
+											<i>Total votes: {post.totalVotes}</i>
 											<br />
 										</small>}
 
 									{/* Post likes */}
-									{props.postLikes.find((postLike) => {
-										return postLike.post_id == post.id && postLike.username == props.auth.username
-									}) ?
-										<a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
-											e.preventDefault()
-											onPostLike(post.id)
-										}}>
-											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-												className='bi bi-heart-fill' viewBox='0 0 16 16'>
+									{post.hasLiked ?
+										<a href="#"
+											style={{ color: "#cc3300" }}
+											onClick={(e) => {
+												e.preventDefault()
+												onPostLike(post.id)
+											}}>
+											<svg xmlns='http://www.w3.org/2000/svg'
+												width='1.2em'
+												height='1.2em'
+												fill='currentColor'
+												className='bi bi-heart-fill'
+												viewBox='0 0 16 16'>
 												<path fillRule='evenodd'
 													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 											</svg>
-											<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
+											<small className="ml-1">{post.likes}</small>
 										</a> :
 										<a href="#" onClick={(e) => {
 											e.preventDefault()
 											onPostLike(post.id)
 										}}>
-											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-												className='bi bi-heart' viewBox='0 0 16 16'>
+											<svg xmlns='http://www.w3.org/2000/svg'
+												width='1.2em'
+												height='1.2em'
+												fill='currentColor'
+												className='bi bi-heart'
+												viewBox='0 0 16 16'>
 												<path
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
-											<small> {props.postLikes.filter((postLike) => postLike.post_id == post.id).length}</small>
+											<small className="ml-1">{post.likes}</small>
 										</a>}
 
 									{/* Post comments */}
 									<Link to={"post-show/" + post.id}>
-										<svg className="bi bi-chat ml-5" width="1.2em" height="1.2em" viewBox="0 0 16 16"
-											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<svg className="bi bi-chat ml-5"
+											width="1.2em"
+											height="1.2em"
+											viewBox="0 0 16 16"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd"
 												d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 										</svg>
-										<small> {props.postComments.filter((postComment) => {
-											return postComment.post_id == post.id
-										}).length}
-										</small>
+										<small className="ml-1">{post.comments}</small>
 									</Link>
 
 									{/* <!-- Default dropup button --> */}
 									<div className="dropup float-right">
-										<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false">
-											<svg className="bi bi-three-dots-vertical" width="1em" height="1em" viewBox="0 0 16 16"
-												fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<a href="#"
+											role="button"
+											id="dropdownMenuLink"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false">
+											<svg className="bi bi-three-dots-vertical"
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
 												<path fillRule="evenodd"
 													d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 											</svg>
 										</a>
-										<div className="dropdown-menu dropdown-menu-right p-0" style={{ borderRadius: "0" }}>
-											{post.username !== props.auth.username ?
-												post.username !== "@blackmusic" &&
+										<div className="dropdown-menu dropdown-menu-right" style={{ borderRadius: "0" }}>
+											{post.user_id != props.auth.id ?
+												post.user_id != 29 &&
 												<a href="#" className="dropdown-item" onClick={(e) => {
 													e.preventDefault()
-													onFollow(post.username)
+													onFollow(post.user_id)
 												}}>
 													<h6>Unfollow</h6>
 												</a>
@@ -740,11 +690,7 @@ const Index = (props) => {
 						<h5>Songs to watch</h5>
 					</div>
 					{props.videos
-						.filter((video) => !props.boughtVideos
-							.some((boughtVideo) =>
-								boughtVideo.video_id == video.id &&
-								boughtVideo.username == props.auth.username
-							))
+						.filter((video) => !video.hasBoughtVideo)
 						.slice(0, 10)
 						.map((video, index) => (
 							<VideoMediaHorizontal
@@ -754,22 +700,10 @@ const Index = (props) => {
 								link={`/video-show/${video.id}`}
 								thumbnail={video.thumbnail.match(/http/) ? video.thumbnail : `storage/${video.thumbnail}`}
 								name={video.name}
-								username={props.videos.find((video) => video.id == video.id).username}
+								username={video.username}
 								ft={video.ft}
-								hasBoughtVideo={
-									!props.boughtVideos
-										.some((boughtVideo) => {
-											return boughtVideo.video_id == video.id &&
-												boughtVideo.username == props.auth.username
-										})
-								}
-								videoInCart={
-									props.cartVideos
-										.some((cartVideo) => {
-											return cartVideo.video_id == video.id &&
-												cartVideo.username == props.auth.username
-										})
-								}
+								hasBoughtVideo={!video.hasBoughtVideo}
+								videoInCart={video.inCart}
 								videoId={video.id}
 								onCartVideos={onCartVideos}
 								onBuyVideos={onBuyVideos} />
