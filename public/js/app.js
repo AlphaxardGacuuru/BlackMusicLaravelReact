@@ -93359,152 +93359,206 @@ function App() {
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
       posts = _useState16[0],
-      setPosts = _useState16[1];
+      setPosts = _useState16[1]; // For Library
+
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      users = _useState18[0],
-      setUsers = _useState18[1];
+      libraryBoughtVideos = _useState18[0],
+      setLibraryBoughtVideos = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      postLikes = _useState20[0],
-      setPostLikes = _useState20[1];
+      libraryBoughtAudios = _useState20[0],
+      setLibraryBoughtAudios = _useState20[1]; // For Video Charts
+
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState22 = _slicedToArray(_useState21, 2),
-      postCommentLikes = _useState22[0],
-      setPostCommentLikes = _useState22[1];
+      chartVideos = _useState22[0],
+      setChartVideos = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      polls = _useState24[0],
-      setPolls = _useState24[1];
+      chartBoughtVideos = _useState24[0],
+      setChartBoughtVideos = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState26 = _slicedToArray(_useState25, 2),
-      audios = _useState26[0],
-      setAudios = _useState26[1];
+      chartVideoLikes = _useState26[0],
+      setChartVideoLikes = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      audioAlbums = _useState28[0],
-      setAudioAlbums = _useState28[1];
+      chartCartVideos = _useState28[0],
+      setChartCartVideos = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      audioComments = _useState30[0],
-      setAudioComments = _useState30[1];
+      videoChartUsers = _useState30[0],
+      setVideoChartUsers = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      audioCommentLikes = _useState32[0],
-      setAudioCommentLikes = _useState32[1];
+      videoChartFollows = _useState32[0],
+      setVideoChartFollows = _useState32[1]; // For Audio Charts
+
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      audioLikes = _useState34[0],
-      setAudioLikes = _useState34[1];
+      chartAudios = _useState34[0],
+      setChartAudios = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      audioNotifications = _useState36[0],
-      setAudioNotifications = _useState36[1];
+      chartAudioLikes = _useState36[0],
+      setChartAudioLikes = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      audioPayouts = _useState38[0],
-      setAudioPayouts = _useState38[1];
+      chartBoughtAudios = _useState38[0],
+      setChartBoughtAudios = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      boughtAudios = _useState40[0],
-      setBoughtAudios = _useState40[1];
+      chartCartAudios = _useState40[0],
+      setChartCartAudios = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      boughtVideos = _useState42[0],
-      setBoughtVideos = _useState42[1];
+      audioChartUsers = _useState42[0],
+      setAudioChartUsers = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      decos = _useState44[0],
-      setDecos = _useState44[1];
+      audioChartFollows = _useState44[0],
+      setAudioChartFollows = _useState44[1]; // For Cart
+
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      decoNotifications = _useState46[0],
-      setDecoNotifications = _useState46[1];
+      cartVideos = _useState46[0],
+      setCartVideos = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      follows = _useState48[0],
-      setFollows = _useState48[1];
+      cartAudios = _useState48[0],
+      setCartAudios = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      followNotifications = _useState50[0],
-      setFollowNotifications = _useState50[1];
+      boughtVideos = _useState50[0],
+      setBoughtVideos = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      sms = _useState52[0],
-      setSMS = _useState52[1];
+      videoLikes = _useState52[0],
+      setVideoLikes = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
-      kopokopo = _useState54[0],
-      setKopokopo = _useState54[1];
+      audios = _useState54[0],
+      setAudios = _useState54[1];
 
   var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState56 = _slicedToArray(_useState55, 2),
-      kopokopoNotifications = _useState56[0],
-      setKopokopoNotifications = _useState56[1];
+      audioLikes = _useState56[0],
+      setAudioLikes = _useState56[1];
 
   var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState58 = _slicedToArray(_useState57, 2),
-      notifications = _useState58[0],
-      setNotifications = _useState58[1];
+      boughtAudios = _useState58[0],
+      setBoughtAudios = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState60 = _slicedToArray(_useState59, 2),
-      videoComments = _useState60[0],
-      setVideoComments = _useState60[1];
+      users = _useState60[0],
+      setUsers = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState62 = _slicedToArray(_useState61, 2),
-      videoCommentLikes = _useState62[0],
-      setVideoCommentLikes = _useState62[1];
+      audioAlbums = _useState62[0],
+      setAudioAlbums = _useState62[1];
 
   var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState64 = _slicedToArray(_useState63, 2),
-      videoLikes = _useState64[0],
-      setVideoLikes = _useState64[1];
+      audioComments = _useState64[0],
+      setAudioComments = _useState64[1];
 
   var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState66 = _slicedToArray(_useState65, 2),
-      videoNotifications = _useState66[0],
-      setVideoNotifications = _useState66[1];
+      audioCommentLikes = _useState66[0],
+      setAudioCommentLikes = _useState66[1];
 
   var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState68 = _slicedToArray(_useState67, 2),
-      cartAudios = _useState68[0],
-      setCartAudios = _useState68[1];
+      audioNotifications = _useState68[0],
+      setAudioNotifications = _useState68[1];
 
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState70 = _slicedToArray(_useState69, 2),
-      cartVideos = _useState70[0],
-      setCartVideos = _useState70[1];
+      audioPayouts = _useState70[0],
+      setAudioPayouts = _useState70[1];
 
   var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState72 = _slicedToArray(_useState71, 2),
-      videoAlbums = _useState72[0],
-      setVideoAlbums = _useState72[1];
+      decos = _useState72[0],
+      setDecos = _useState72[1];
 
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState74 = _slicedToArray(_useState73, 2),
-      videoPayouts = _useState74[0],
-      setVideoPayouts = _useState74[1]; // Reset Messages and Errors to null after 3 seconds
+      decoNotifications = _useState74[0],
+      setDecoNotifications = _useState74[1];
+
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState76 = _slicedToArray(_useState75, 2),
+      follows = _useState76[0],
+      setFollows = _useState76[1];
+
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState78 = _slicedToArray(_useState77, 2),
+      followNotifications = _useState78[0],
+      setFollowNotifications = _useState78[1];
+
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState80 = _slicedToArray(_useState79, 2),
+      sms = _useState80[0],
+      setSMS = _useState80[1];
+
+  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState82 = _slicedToArray(_useState81, 2),
+      kopokopoNotifications = _useState82[0],
+      setKopokopoNotifications = _useState82[1];
+
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState84 = _slicedToArray(_useState83, 2),
+      notifications = _useState84[0],
+      setNotifications = _useState84[1];
+
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState86 = _slicedToArray(_useState85, 2),
+      videoComments = _useState86[0],
+      setVideoComments = _useState86[1];
+
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState88 = _slicedToArray(_useState87, 2),
+      videoCommentLikes = _useState88[0],
+      setVideoCommentLikes = _useState88[1];
+
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState90 = _slicedToArray(_useState89, 2),
+      videoNotifications = _useState90[0],
+      setVideoNotifications = _useState90[1];
+
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState92 = _slicedToArray(_useState91, 2),
+      videoAlbums = _useState92[0],
+      setVideoAlbums = _useState92[1];
+
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState94 = _slicedToArray(_useState93, 2),
+      videoPayouts = _useState94[0],
+      setVideoPayouts = _useState94[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93554,167 +93608,42 @@ function App() {
       setPosts(res.data.posts);
     })["catch"](function () {
       return setErrors(['Failed to fetch for Index']);
-    }); // Fetch Audio Albums
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
-      return setAudioAlbums(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio albums"]);
-    }); // Fetch Audio Comments Likes
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comment-likes")).then(function (res) {
-      return setAudioCommentLikes(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch audio comment likes']);
-    }); // Fetch Audio Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
-      return setAudioComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio comments"]);
-    }); // Fetch Audio Likes
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-likes")).then(function (res) {
-      return setAudioLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio likes"]);
-    }); // Fetch Audios
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-      return setAudios(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audios"]);
-    }); // Fetch Audio Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-notifications")).then(function (res) {
-      return setAudioNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio notifications"]);
-    }); // Fetch Audio Payouts
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-payouts")).then(function (res) {
-      return setAudioPayouts(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio payouts"]);
-    }); // Fetch Bought Audios
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
-      return setBoughtAudios(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch bought audios"]);
-    }); // Fetch Bought Videos
+    }); // Fetch for Library
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
-      return setBoughtVideos(res.data);
+      setLibraryBoughtVideos(res.data.boughtVideos);
+      setLibraryBoughtAudios(res.data.boughtAudios);
     })["catch"](function () {
-      return setErrors(['Failed to fetch bought videos']);
-    }); // Fetch Cart Audios
+      return setErrors(['Failed to fetch library']);
+    }); // Fetch for Video Charts
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
-      return setCartAudios(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
+      setChartVideos(res.data.videos);
+      setChartBoughtVideos(res.data.boughtVideos);
+      setChartCartVideos(res.data.cartVideos);
+      setChartVideoLikes(res.data.videoLikes);
+      setVideoChartUsers(res.data.users);
+      setVideoChartFollows(res.data.follows);
     })["catch"](function () {
-      return setErrors(['Failed to fetch cart audios']);
-    }); // Fetch Cart Videos
+      return setErrors(['Failed to fetch videos']);
+    }); // Fetch for Audio Charts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
+      setChartAudios(res.data.audios);
+      setChartBoughtAudios(res.data.boughtAudios);
+      setChartCartAudios(res.data.cartAudios);
+      setChartAudioLikes(res.data.audioLikes);
+      setAudioChartUsers(res.data.users);
+      setAudioChartFollows(res.data.follows);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch audios']);
+    }); // Fetch for Cart
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-      return setCartVideos(res.data);
+      setCartVideos(res.data.cartVideos);
+      setCartAudios(res.data.cartAudios);
     })["catch"](function () {
-      return setErrors(['Failed to fetch cart videos']);
-    }); // Fetch Decos
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/decos")).then(function (res) {
-      return setDecos(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch decos']);
-    }); // Fetch Decos Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/deco-notifications")).then(function (res) {
-      return setDecoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch decos notifications']);
-    }); // Fetch Follows
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
-      return setFollows(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch follows']);
-    }); // Fetch Follows Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follow-notifications")).then(function (res) {
-      return setFollowNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch follow notifications']);
-    }); // Fetch Kopokopo
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-notifications")).then(function (res) {
-      return setKopokopoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch kopokopo notifications']);
-    }); // Fetch Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
-      return setNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch notifications']);
-    }); // Fetch Polls
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/polls")).then(function (res) {
-      return setPolls(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch polls']);
-    }); //Fetch SMS
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/sms")).then(function (res) {
-      return setSMS(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch SMSs']);
-    }); //Fetch Users
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/users")).then(function (res) {
-      return setUsers(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch users']);
-    }); // Fetch Video Albums
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-      return setVideoAlbums(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video albums"]);
-    }); // Fetch Video Comments Likes
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comment-likes")).then(function (res) {
-      return setVideoCommentLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comment likes"]);
-    }); // Fetch Video Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comments")).then(function (res) {
-      return setVideoComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comments"]);
-    }); // Fetch Liked Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-likes")).then(function (res) {
-      return setVideoLikes(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video likes"]);
-    }); //Fetch Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")) // .then((res) => setVideos(res.data))
-    ["catch"](function () {
-      return setErrors(["Failed to fetch videos"]);
-    }); // Fetch Video Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-notifications")).then(function (res) {
-      return setVideoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video notifications"]);
-    }); // Fetch Video Payouts
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
-      return setVideoPayouts(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video payouts"]);
+      return setErrors(['Failed to fetch cart']);
     });
   }, []); //Fetch Auth
 
@@ -93749,50 +93678,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState76 = _slicedToArray(_useState75, 2),
-      show = _useState76[0],
-      setShow = _useState76[1];
+  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState96 = _slicedToArray(_useState95, 2),
+      show = _useState96[0],
+      setShow = _useState96[1];
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState78 = _slicedToArray(_useState77, 2),
-      playBtn = _useState78[0],
-      setPlayBtn = _useState78[1];
+  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState98 = _slicedToArray(_useState97, 2),
+      playBtn = _useState98[0],
+      setPlayBtn = _useState98[1];
 
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState80 = _slicedToArray(_useState79, 2),
-      shuffle = _useState80[0],
-      setShuffle = _useState80[1];
+  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState100 = _slicedToArray(_useState99, 2),
+      shuffle = _useState100[0],
+      setShuffle = _useState100[1];
 
-  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState82 = _slicedToArray(_useState81, 2),
-      loop = _useState82[0],
-      setLoop = _useState82[1];
+  var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState102 = _slicedToArray(_useState101, 2),
+      loop = _useState102[0],
+      setLoop = _useState102[1];
 
-  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState84 = _slicedToArray(_useState83, 2),
-      dur = _useState84[0],
-      setDur = _useState84[1];
+  var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState104 = _slicedToArray(_useState103, 2),
+      dur = _useState104[0],
+      setDur = _useState104[1];
 
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
-      _useState86 = _slicedToArray(_useState85, 2),
-      volume = _useState86[0],
-      setVolume = _useState86[1];
+  var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+      _useState106 = _slicedToArray(_useState105, 2),
+      volume = _useState106[0],
+      setVolume = _useState106[1];
 
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState88 = _slicedToArray(_useState87, 2),
-      currentTime = _useState88[0],
-      setCurrentTime = _useState88[1];
+  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState108 = _slicedToArray(_useState107, 2),
+      currentTime = _useState108[0],
+      setCurrentTime = _useState108[1];
 
-  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState90 = _slicedToArray(_useState89, 2),
-      progressPercent = _useState90[0],
-      setProgressPercent = _useState90[1];
+  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState110 = _slicedToArray(_useState109, 2),
+      progressPercent = _useState110[0],
+      setProgressPercent = _useState110[1];
 
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState92 = _slicedToArray(_useState91, 2),
-      audioLoader = _useState92[0],
-      setAudioLoader = _useState92[1]; // Listen for show change and autoplay song
+  var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState112 = _slicedToArray(_useState111, 2),
+      audioLoader = _useState112[0],
+      setAudioLoader = _useState112[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -93966,8 +93895,12 @@ function App() {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: showAudio.name,
       artist: showArtist.username,
-      album: showAudio.album // artwork: [{ src: showAudio.thumbnail, sizes: '512x512', type: 'image/png' }]
-
+      album: showAudio.album,
+      artwork: [{
+        src: "".concat(url, "/storage/").concat(showAudio.thumbnail),
+        sizes: '512x512',
+        type: 'image/png'
+      }]
     });
     var skipTime = 10; // Time to skip in seconds
 
@@ -93986,10 +93919,10 @@ function App() {
   } // Search State
 
 
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState94 = _slicedToArray(_useState93, 2),
-      search = _useState94[0],
-      setSearch = _useState94[1];
+  var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState114 = _slicedToArray(_useState113, 2),
+      search = _useState114[0],
+      setSearch = _useState114[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94205,10 +94138,8 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_14__["default"], {
         auth: auth,
-        videos: videos,
-        boughtVideos: boughtVideos,
-        audios: audios,
-        boughtAudios: boughtAudios,
+        libraryBoughtVideos: libraryBoughtVideos,
+        libraryBoughtAudios: libraryBoughtAudios,
         setShow: setShow
       }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
@@ -94224,26 +94155,8 @@ function App() {
         auth: auth,
         setAuth: setAuth,
         url: url,
-        users: users,
-        videos: videos,
-        boughtVideos: boughtVideos,
-        cartVideos: cartVideos,
-        setCartVideos: setCartVideos,
-        videoAlbums: videoAlbums,
-        audios: audios,
-        boughtAudios: boughtAudios,
-        cartAudios: cartAudios,
-        setCartAudios: setCartAudios,
-        audioAlbums: audioAlbums,
         posts: posts,
         setPosts: setPosts,
-        postLikes: postLikes,
-        setPostLikes: setPostLikes,
-        polls: polls,
-        setPolls: setPolls,
-        decos: decos,
-        follows: follows,
-        setFollows: setFollows,
         setShow: setShow
       }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
@@ -94301,14 +94214,14 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
-        users: users,
-        videos: videos,
-        boughtVideos: boughtVideos,
-        cartVideos: cartVideos,
-        setCartVideos: setCartVideos,
-        videoLikes: videoLikes,
-        follows: follows,
-        setFollows: setFollows,
+        videoChartUsers: videoChartUsers,
+        chartVideos: chartVideos,
+        chartBoughtVideos: chartBoughtVideos,
+        chartCartVideos: chartCartVideos,
+        setChartCartVideos: setChartCartVideos,
+        chartVideoLikes: chartVideoLikes,
+        videoChartFollows: videoChartFollows,
+        setVideoChartFollows: setVideoChartFollows,
         setShow: setShow
       });
     }
@@ -94430,14 +94343,14 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
-        users: users,
-        audios: audios,
-        boughtAudios: boughtAudios,
-        cartAudios: cartAudios,
-        setCartAudios: setCartAudios,
-        audioLikes: audioLikes,
-        follows: follows,
-        setFollows: setFollows,
+        audioChartUsers: audioChartUsers,
+        chartAudios: chartAudios,
+        chartBoughtAudios: chartBoughtAudios,
+        chartCartAudios: chartCartAudios,
+        setChartCartAudios: setChartCartAudios,
+        chartAudioLikes: chartAudioLikes,
+        audioChartFollows: audioChartFollows,
+        setAudioChartFollows: setAudioChartFollows,
         setShow: setShow
       });
     }
@@ -96586,13 +96499,13 @@ var AudioCharts = function AudioCharts(props) {
 
 
   if (chart == "Newly Released") {
-    var chartList = props.audios;
+    var chartList = props.chartAudios;
   } else if (chart == "Trending") {
-    var chartList = props.boughtAudios;
+    var chartList = props.chartBoughtAudios;
   } else if (chart == "Top Downloaded") {
-    var chartList = props.boughtAudios;
+    var chartList = props.chartBoughtAudios;
   } else {
-    var chartList = props.audioLikes;
+    var chartList = props.chartAudioLikes;
   } // Array for audio id and frequency
 
 
@@ -96610,7 +96523,7 @@ var AudioCharts = function AudioCharts(props) {
         return item.genre == genre;
       }
 
-      return props.audios.find(function (audio) {
+      return props.chartAudios.find(function (audio) {
         return audio.id == item.audio_id;
       }).genre == genre;
     }
@@ -96626,7 +96539,7 @@ var AudioCharts = function AudioCharts(props) {
       var getId = audio.artist;
       var getIdTwo = audio.audio_id;
     } else {
-      var getId = props.audios.find(function (item) {
+      var getId = props.chartAudios.find(function (item) {
         return item.id == audio.audio_id;
       }).username;
       var getIdTwo = audio.audio_id;
@@ -96685,8 +96598,8 @@ var AudioCharts = function AudioCharts(props) {
         audio: audio
       }).then(function (res) {
         props.setMessage(res.data);
-        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
-          return props.setCartAudios(res.data);
+        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setChartCartAudios(res.data.cartAudios);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -96709,8 +96622,8 @@ var AudioCharts = function AudioCharts(props) {
         audio: audio
       }).then(function (res) {
         props.setMessage(res.data);
-        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
-          return props.setCartAudios(res.data);
+        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setChartCartAudios(res.data.cartAudios);
         });
         history.push('/cart');
       })["catch"](function (err) {
@@ -96767,7 +96680,7 @@ var AudioCharts = function AudioCharts(props) {
     "data-slide-to": "2"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
-  }, props.audios.slice(0, 3).map(function (audio, key) {
+  }, props.chartAudios.slice(0, 3).map(function (audio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "carousel-item ".concat(key == 0 && 'active'),
@@ -96919,26 +96832,26 @@ var AudioCharts = function AudioCharts(props) {
       key: key,
       setShow: props.setShow,
       link: "/audio-show/".concat(audioArray.key),
-      thumbnail: props.audios.find(function (audio) {
+      thumbnail: props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
-      }).thumbnail.match(/https/) ? props.audios.find(function (audio) {
+      }).thumbnail.match(/https/) ? props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
-      }).thumbnail : "storage/".concat(props.audios.find(function (audio) {
+      }).thumbnail : "storage/".concat(props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
       }).thumbnail),
-      name: props.audios.find(function (audio) {
+      name: props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
       }).name,
-      username: props.audios.find(function (audio) {
+      username: props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
       }).username,
-      ft: props.audios.find(function (audio) {
+      ft: props.chartAudios.find(function (audio) {
         return audio.id == audioArray.key;
       }).ft,
-      hasBoughtAudio: !props.boughtAudios.some(function (boughtAudio) {
+      hasBoughtAudio: !props.chartBoughtAudios.some(function (boughtAudio) {
         return boughtAudio.audio_id == audioArray.key && boughtAudio.username == props.auth.username;
       }),
-      audioInCart: props.cartAudios.some(function (cartAudio) {
+      audioInCart: props.chartCartAudios.some(function (cartAudio) {
         return cartAudio.audio_id == audioArray.key && cartAudio.username == props.auth.username;
       }),
       audioId: audioArray.key,
@@ -99711,7 +99624,7 @@ var Index = function Index(props) {
         borderRadius: "50%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(post.user_id)
+      to: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: post.pp.match(/http/) ? post.pp : "storage/".concat(post.pp),
       width: "40px",
@@ -100104,12 +100017,8 @@ var Index = function Index(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
-/* harmony import */ var _components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js");
-
-
+/* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
+/* harmony import */ var _components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js");
 
 
 
@@ -100121,67 +100030,31 @@ var Library = function Library(props) {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.username == props.auth.username;
-  }).map(function (boughtVideo, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.libraryBoughtVideos.map(function (boughtVideo, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: key,
       onClick: function onClick() {
         return props.setShow(0);
       },
       setShow: props.setShow,
       link: "/video-show/".concat(boughtVideo.video_id),
-      thumbnail: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }) && props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).thumbnail,
-      name: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }) && props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).name,
-      username: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }) && props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).username,
-      ft: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }) && props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).ft,
+      thumbnail: boughtVideo.thumbnail,
+      name: boughtVideo.name,
+      username: boughtVideo.username,
+      ft: boughtVideo.ft,
       showCartandBuyButton: false
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "mt-5"
-  }, "Audios")), props.boughtAudios.filter(function (boughtAudio) {
-    return boughtAudio.username == props.auth.username;
-  }).map(function (boughtAudio, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Audios")), props.libraryBoughtAudios.map(function (boughtAudio, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: key,
       setShow: props.setShow,
       link: "/audio-show/".concat(boughtAudio.audio_id),
-      thumbnail: "/storage/".concat(props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).thumbnail),
-      name: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).name,
-      username: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).username,
-      ft: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).ft,
+      thumbnail: "/storage/".concat(boughtAudio.thumbnail),
+      name: boughtAudio.name,
+      username: boughtAudio.username,
+      ft: boughtAudio.ft,
       audioId: boughtAudio.audio_id,
       showCartandBuyButton: false
     });
@@ -101311,7 +101184,7 @@ var Profile = function Profile(props) {
     className: tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "hidden"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Posts")), !props.posts.filter(function (post) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Posts")), props.posts.filter(function (post) {
     return post.username == props.auth.username;
   }).length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
@@ -101705,7 +101578,7 @@ var Profile = function Profile(props) {
       alt: "album cover"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), props.videos.filter(function (video) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), videos.filter(function (video) {
       return video.album == videoAlbum.id;
     }).map(function (video, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -102779,13 +102652,13 @@ var VideoCharts = function VideoCharts(props) {
 
 
   if (chart == "Newly Released") {
-    var chartList = props.videos;
+    var chartList = props.chartVideos;
   } else if (chart == "Trending") {
-    var chartList = props.boughtVideos;
+    var chartList = props.chartBoughtVideos;
   } else if (chart == "Top Downloaded") {
-    var chartList = props.boughtVideos;
+    var chartList = props.chartBoughtVideos;
   } else {
-    var chartList = props.videoLikes;
+    var chartList = props.chartVideoLikes;
   } // Array for video id and frequency
 
 
@@ -102803,7 +102676,7 @@ var VideoCharts = function VideoCharts(props) {
         return item.genre == genre;
       }
 
-      return props.videos.find(function (video) {
+      return props.chartVideos.find(function (video) {
         return video.id == item.video_id;
       }).genre == genre;
     }
@@ -102819,7 +102692,7 @@ var VideoCharts = function VideoCharts(props) {
       var getId = video.artist;
       var getIdTwo = video.video_id;
     } else {
-      var getId = props.videos.find(function (item) {
+      var getId = props.chartVideos.find(function (item) {
         return item.id == video.video_id;
       }).username;
       var getIdTwo = video.video_id;
@@ -102878,8 +102751,8 @@ var VideoCharts = function VideoCharts(props) {
         video: video
       }).then(function (res) {
         props.setMessage(res.data);
-        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
+        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setChartCartVideos(res.data.cartVideos);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -102902,8 +102775,8 @@ var VideoCharts = function VideoCharts(props) {
         video: video
       }).then(function (res) {
         props.setMessage(res.data);
-        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
+        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setChartCartVideos(res.data.cartVideos);
         });
         setTimeout(function () {
           return history.push('/cart');
@@ -102962,7 +102835,7 @@ var VideoCharts = function VideoCharts(props) {
     "data-slide-to": "2"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
-  }, props.videos.slice(0, 3).map(function (video, key) {
+  }, props.chartVideos.slice(0, 3).map(function (video, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "carousel-item ".concat(key == 0 && 'active'),
@@ -103072,9 +102945,9 @@ var VideoCharts = function VideoCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/" + artistArray.key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(props.users.find(function (user) {
+      src: "/storage/".concat(props.videoChartUsers.find(function (user) {
         return artistArray.key == user.username;
-      }) && props.users.find(function (user) {
+      }) && props.videoChartUsers.find(function (user) {
         return artistArray.key == user.username;
       }).pp),
       width: "150px",
@@ -103087,9 +102960,9 @@ var VideoCharts = function VideoCharts(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, props.users.find(function (user) {
+    }, props.videoChartUsers.find(function (user) {
       return user.username == artistArray.key;
-    }) && props.users.find(function (user) {
+    }) && props.videoChartUsers.find(function (user) {
       return user.username == artistArray.key;
     }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       style: {
@@ -103120,11 +102993,11 @@ var VideoCharts = function VideoCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/video-show/".concat(videoArray.key)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: props.videos.find(function (video) {
+      src: props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
-      }).thumbnail.match(/https/) ? props.videos.find(function (video) {
+      }).thumbnail.match(/https/) ? props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
-      }).thumbnail : "storage/".concat(props.videos.find(function (video) {
+      }).thumbnail : "storage/".concat(props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
       }).thumbnail),
       width: "160em",
@@ -103137,19 +103010,19 @@ var VideoCharts = function VideoCharts(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, props.videos.find(function (video) {
+    }, props.chartVideos.find(function (video) {
       return video.id == videoArray.key;
     }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.videos.find(function (video) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.chartVideos.find(function (video) {
       return video.id == videoArray.key;
     }).username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "ml-1"
-    }, props.videos.find(function (video) {
+    }, props.chartVideos.find(function (video) {
       return video.id == videoArray.key;
-    }).ft)), !props.boughtVideos.some(function (boughtVideo) {
+    }).ft)), !props.chartBoughtVideos.some(function (boughtVideo) {
       return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
-    }) ? props.cartVideos.find(function (cartVideo) {
+    }) ? props.chartCartVideos.find(function (cartVideo) {
       return cartVideo.video_id == videoArray.key && cartVideo.username == props.auth.username;
     }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn btn-light mb-1 rounded-0",
@@ -103189,7 +103062,7 @@ var VideoCharts = function VideoCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       fillRule: "evenodd",
       d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-    }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !props.boughtVideos.some(function (boughtVideo) {
+    }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !props.chartBoughtVideos.some(function (boughtVideo) {
       return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
     }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       btnClass: 'btn mysonar-btn green-btn',
@@ -103208,26 +103081,26 @@ var VideoCharts = function VideoCharts(props) {
       },
       setShow: props.setShow,
       link: "/video-show/".concat(videoArray.key),
-      thumbnail: props.videos.find(function (video) {
+      thumbnail: props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
-      }).thumbnail.match(/https/) ? props.videos.find(function (video) {
+      }).thumbnail.match(/https/) ? props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
-      }).thumbnail : "storage/".concat(props.videos.find(function (video) {
+      }).thumbnail : "storage/".concat(props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
       }).thumbnail),
-      name: props.videos.find(function (video) {
+      name: props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
       }).name,
-      username: props.videos.find(function (video) {
+      username: props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
       }).username,
-      ft: props.videos.find(function (video) {
+      ft: props.chartVideos.find(function (video) {
         return video.id == videoArray.key;
       }).ft,
-      hasBoughtVideo: !props.boughtVideos.some(function (boughtVideo) {
+      hasBoughtVideo: !props.chartBoughtVideos.some(function (boughtVideo) {
         return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
       }),
-      videoInCart: props.cartVideos.some(function (cartVideo) {
+      videoInCart: props.chartCartVideos.some(function (cartVideo) {
         return cartVideo.video_id == videoArray.key && cartVideo.username == props.auth.username;
       }),
       videoId: videoArray.key,

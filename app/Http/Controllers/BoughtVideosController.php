@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\BoughtAudios;
 use App\BoughtVideos;
 use App\CartVideos;
+use App\DecoNotifications;
 use App\Decos;
 use App\Kopokopo;
 use App\User;
 use App\VideoNotifications;
-use App\DecoNotifications;
 use Illuminate\Http\Request;
 
 class BoughtVideosController extends Controller
@@ -21,7 +21,44 @@ class BoughtVideosController extends Controller
      */
     public function index()
     {
-        return BoughtVideos::all();
+        $getBoughtVideos = BoughtVideos::where('username', auth()->user()->username)->get();
+
+        $boughtVideos = [];
+
+        foreach ($getBoughtVideos as $key => $boughtVideo) {
+            array_push($boughtVideos, [
+                "id" => $boughtVideo->id,
+                "video_id" => $boughtVideo->video_id,
+                "username" => $boughtVideo->username,
+                "ft" => $boughtVideo->videos->ft,
+                "name" => $boughtVideo->videos->name,
+                "artist" => $boughtVideo->artist,
+                "thumbnail" => preg_match("/http/", $boughtVideo->videos->thumbnail) ?
+                $boughtVideo->videos->thumbnail :
+                "/storage/" . $boughtVideo->videos->thumbnail,
+            ]);
+        }
+
+        $getBoughtAudios = BoughtAudios::where('username', auth()->user()->username)->get();
+
+        $boughtAudios = [];
+
+        foreach ($getBoughtAudios as $key => $boughtAudio) {
+            array_push($boughtAudios, [
+                "id" => $boughtAudio->id,
+                "video_id" => $boughtAudio->video_id,
+                "username" => $boughtAudio->username,
+                "ft" => $boughtAudio->audios->ft,
+                "name" => $boughtAudio->name,
+                "artist" => $boughtAudio->artist,
+                "thumbnail" => $boughtAudio->audios->thumbnail,
+            ]);
+        }
+
+        return [
+            "boughtVideos" => $boughtVideos,
+            "boughtAudios" => $boughtAudios,
+        ];
     }
 
     /**
@@ -115,7 +152,7 @@ class BoughtVideosController extends Controller
                     /* Delete from cart */
                     CartVideos::where('video_id', $cartVideoCheck->video_id)
                         ->where('username', auth()->user()->username);
-                        // ->delete();
+                    // ->delete();
 
                     // Update array
                     array_push($approved, $cartVideoCheck->video_id);

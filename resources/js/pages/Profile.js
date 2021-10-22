@@ -353,7 +353,7 @@ const Profile = (props) => {
 				</div>
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
-					{!props.posts.filter((post) => post.username == props.auth.username).length == 0 &&
+					{props.posts.filter((post) => post.username == props.auth.username).length == 0 &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any posts</h6>
 						</center>}
@@ -705,7 +705,7 @@ const Profile = (props) => {
 									<h6>{videoAlbum.created_at}</h6>
 								</div>
 							</div>
-							{props.videos
+							{videos
 								.filter((video) => video.album == videoAlbum.id)
 								.map((video, index) => (
 									<VideoMediaHorizontal

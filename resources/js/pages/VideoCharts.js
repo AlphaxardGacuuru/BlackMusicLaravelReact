@@ -33,13 +33,13 @@ const VideoCharts = (props) => {
 
 	// Set state for chart list
 	if (chart == "Newly Released") {
-		var chartList = props.videos
+		var chartList = props.chartVideos
 	} else if (chart == "Trending") {
-		var chartList = props.boughtVideos
+		var chartList = props.chartBoughtVideos
 	} else if (chart == "Top Downloaded") {
-		var chartList = props.boughtVideos
+		var chartList = props.chartBoughtVideos
 	} else {
-		var chartList = props.videoLikes
+		var chartList = props.chartVideoLikes
 	}
 
 	// Array for video id and frequency
@@ -58,7 +58,7 @@ const VideoCharts = (props) => {
 				return item.genre == genre
 			}
 
-			return props.videos.find((video) => video.id == item.video_id).genre == genre
+			return props.chartVideos.find((video) => video.id == item.video_id).genre == genre
 		}
 	}).forEach((video) => {
 
@@ -73,7 +73,7 @@ const VideoCharts = (props) => {
 			var getId = video.artist
 			var getIdTwo = video.video_id
 		} else {
-			var getId = props.videos.find((item) => item.id == video.video_id).username
+			var getId = props.chartVideos.find((item) => item.id == video.video_id).username
 			var getIdTwo = video.video_id
 		}
 
@@ -114,7 +114,7 @@ const VideoCharts = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				axios.get(`${props.url}/api/videos`).then((res) => props.setChartCartVideos(res.data.cartVideos))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -134,7 +134,7 @@ const VideoCharts = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				axios.get(`${props.url}/api/videos`).then((res) => props.setChartCartVideos(res.data.cartVideos))
 				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -178,7 +178,7 @@ const VideoCharts = (props) => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div className="carousel-inner">
-					{props.videos
+					{props.chartVideos
 						.slice(0, 3)
 						.map((video, key) => (
 							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
@@ -260,8 +260,8 @@ const VideoCharts = (props) => {
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artistArray.key}>
 												<Img src={
-													`/storage/${props.users.find((user) => artistArray.key == user.username) &&
-													props.users.find((user) => artistArray.key == user.username).pp}`
+													`/storage/${props.videoChartUsers.find((user) => artistArray.key == user.username) &&
+													props.videoChartUsers.find((user) => artistArray.key == user.username).pp}`
 												}
 													width='150px'
 													height='150px' />
@@ -274,8 +274,8 @@ const VideoCharts = (props) => {
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											{props.users.find((user) => user.username == artistArray.key) &&
-												props.users.find((user) => user.username == artistArray.key).name}
+											{props.videoChartUsers.find((user) => user.username == artistArray.key) &&
+												props.videoChartUsers.find((user) => user.username == artistArray.key).name}
 										</h6>
 										<h6 style={{
 											width: "100px",
@@ -297,7 +297,8 @@ const VideoCharts = (props) => {
 					<h5>Songs</h5>
 					<div className="hidden" onScroll={handleScroll}>
 						{videosArray.slice(0, videoSlice).map((videoArray, key) => (
-							<span key={key} className="card m-1 pb-2"
+							<span key={key}
+								className="card m-1 pb-2"
 								style={{
 									borderRadius: "10px",
 									display: "inline-block",
@@ -310,10 +311,10 @@ const VideoCharts = (props) => {
 									}}>
 									<Link to={`/video-show/${videoArray.key}`}>
 										<Img
-											src={props.videos
+											src={props.chartVideos
 												.find((video) => video.id == videoArray.key).thumbnail.match(/https/) ?
-												props.videos.find((video) => video.id == videoArray.key).thumbnail :
-												`storage/${props.videos.find((video) => video.id == videoArray.key).thumbnail}`}
+												props.chartVideos.find((video) => video.id == videoArray.key).thumbnail :
+												`storage/${props.chartVideos.find((video) => video.id == videoArray.key).thumbnail}`}
 											width="160em"
 											height="90em" />
 									</Link>
@@ -324,28 +325,28 @@ const VideoCharts = (props) => {
 										whiteSpace: "nowrap",
 										overflow: "hidden",
 										textOverflow: "clip"
-									}}>{props.videos.find((video) => {
+									}}>{props.chartVideos.find((video) => {
 										return video.id == videoArray.key
 									}).name}
 								</h6>
 								<h6 className="mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0">
 									<small>
-										{props.videos.find((video) => {
+										{props.chartVideos.find((video) => {
 											return video.id == videoArray.key
 										}).username}
 									</small>
 									<small className="ml-1">
-										{props.videos.find((video) => {
+										{props.chartVideos.find((video) => {
 											return video.id == videoArray.key
 										}).ft}
 									</small>
 								</h6>
-								{!props.boughtVideos
+								{!props.chartBoughtVideos
 									.some((boughtVideo) => {
 										return boughtVideo.video_id == videoArray.key &&
 											boughtVideo.username == props.auth.username
 									}) ?
-									props.cartVideos
+									props.chartCartVideos
 										.find((cartVideo) => {
 											return cartVideo.video_id == videoArray.key &&
 												cartVideo.username == props.auth.username
@@ -370,7 +371,7 @@ const VideoCharts = (props) => {
 											</svg>
 										</button> : ""}
 								<br />
-								{!props.boughtVideos
+								{!props.chartBoughtVideos
 									.some((boughtVideo) => {
 										return boughtVideo.video_id == videoArray.key &&
 											boughtVideo.username == props.auth.username
@@ -393,22 +394,22 @@ const VideoCharts = (props) => {
 								setShow={props.setShow}
 								link={`/video-show/${videoArray.key}`}
 								thumbnail={
-									props.videos.find((video) => video.id == videoArray.key).thumbnail.match(/https/) ?
-										props.videos.find((video) => video.id == videoArray.key).thumbnail :
-										`storage/${props.videos.find((video) => video.id == videoArray.key).thumbnail}`
+									props.chartVideos.find((video) => video.id == videoArray.key).thumbnail.match(/https/) ?
+										props.chartVideos.find((video) => video.id == videoArray.key).thumbnail :
+										`storage/${props.chartVideos.find((video) => video.id == videoArray.key).thumbnail}`
 								}
-								name={props.videos.find((video) => video.id == videoArray.key).name}
-								username={props.videos.find((video) => video.id == videoArray.key).username}
-								ft={props.videos.find((video) => video.id == videoArray.key).ft}
+								name={props.chartVideos.find((video) => video.id == videoArray.key).name}
+								username={props.chartVideos.find((video) => video.id == videoArray.key).username}
+								ft={props.chartVideos.find((video) => video.id == videoArray.key).ft}
 								hasBoughtVideo={
-									!props.boughtVideos
+									!props.chartBoughtVideos
 										.some((boughtVideo) => {
 											return boughtVideo.video_id == videoArray.key &&
 												boughtVideo.username == props.auth.username
 										})
 								}
 								videoInCart={
-									props.cartVideos
+									props.chartCartVideos
 										.some((cartVideo) => {
 											return cartVideo.video_id == videoArray.key &&
 												cartVideo.username == props.auth.username

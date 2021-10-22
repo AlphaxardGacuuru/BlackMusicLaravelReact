@@ -7,6 +7,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Videos;
+use App\BoughtVideos;
+use App\CartVideos;
+use App\VideoLikes;
+use App\Follows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +28,21 @@ class VideosController extends Controller
      */
     public function index()
     {
-        return Videos::all();
+        $videos = Videos::all();
+        $boughtVideos = BoughtVideos::all();
+		$cartVideos = CartVideos::all();
+        $videoLikes = VideoLikes::all();
+		$users = User::all();
+		$follows = Follows::all();
+
+		return [
+			"videos" => $videos,
+			"boughtVideos" => $boughtVideos,
+			"cartVideos" => $cartVideos,
+			"videoLikes" => $videoLikes,
+			"users" => $users,
+			"follows" => $follows,
+		];
     }
 
     /**

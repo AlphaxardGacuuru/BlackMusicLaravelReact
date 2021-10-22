@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Audios;
+use App\BoughtAudios;
+use App\CartAudios;
+use App\AudioLikes;
+use App\Follows;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +20,21 @@ class AudiosController extends Controller
      */
     public function index()
     {
-        return Audios::all();
+        $audios = Audios::all();
+        $boughtAudios = BoughtAudios::all();
+        $cartAudios = CartAudios::all();
+        $audioLikes = AudioLikes::all();
+		$users = User::all();
+		$follows = Follows::all();
+
+		return [
+			"audios" => $audios,
+			"boughtAudios" => $boughtAudios,
+			"cartAudios" => $cartAudios,
+			"audioLikes" => $audioLikes,
+			"users" => $users,
+			"follows" => $follows,
+		];
     }
 
     /**

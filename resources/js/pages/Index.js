@@ -367,7 +367,7 @@ const Index = (props) => {
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<Link to={`/profile/${post.user_id}`}>
+										<Link to={`/profile/${post.username}`}>
 											<Img src={post.pp.match(/http/) ? post.pp : `storage/${post.pp}`}
 												width="40px"
 												height="40px"

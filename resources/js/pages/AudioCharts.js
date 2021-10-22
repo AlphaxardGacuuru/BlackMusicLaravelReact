@@ -34,13 +34,13 @@ const AudioCharts = (props) => {
 
 	// Set state for chart list
 	if (chart == "Newly Released") {
-		var chartList = props.audios
+		var chartList = props.chartAudios
 	} else if (chart == "Trending") {
-		var chartList = props.boughtAudios
+		var chartList = props.chartBoughtAudios
 	} else if (chart == "Top Downloaded") {
-		var chartList = props.boughtAudios
+		var chartList = props.chartBoughtAudios
 	} else {
-		var chartList = props.audioLikes
+		var chartList = props.chartAudioLikes
 	}
 
 	// Array for audio id and frequency
@@ -60,7 +60,7 @@ const AudioCharts = (props) => {
 				return item.genre == genre
 			}
 
-			return props.audios.find((audio) => audio.id == item.audio_id).genre == genre
+			return props.chartAudios.find((audio) => audio.id == item.audio_id).genre == genre
 		}
 
 	}).forEach((audio) => {
@@ -76,7 +76,7 @@ const AudioCharts = (props) => {
 			var getId = audio.artist
 			var getIdTwo = audio.audio_id
 		} else {
-			var getId = props.audios.find((item) => item.id == audio.audio_id).username
+			var getId = props.chartAudios.find((item) => item.id == audio.audio_id).username
 			var getIdTwo = audio.audio_id
 		}
 
@@ -117,7 +117,7 @@ const AudioCharts = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				axios.get(`${props.url}/api/audios`).then((res) => props.setChartCartAudios(res.data.cartAudios))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -137,7 +137,7 @@ const AudioCharts = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				axios.get(`${props.url}/api/audios`).then((res) => props.setChartCartAudios(res.data.cartAudios))
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -181,7 +181,7 @@ const AudioCharts = (props) => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div className="carousel-inner">
-					{props.audios
+					{props.chartAudios
 						.slice(0, 3)
 						.map((audio, key) => (
 							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
@@ -314,22 +314,22 @@ const AudioCharts = (props) => {
 							setShow={props.setShow}
 							link={`/audio-show/${audioArray.key}`}
 							thumbnail={
-								props.audios.find((audio) => audio.id == audioArray.key).thumbnail.match(/https/) ?
-									props.audios.find((audio) => audio.id == audioArray.key).thumbnail :
-									`storage/${props.audios.find((audio) => audio.id == audioArray.key).thumbnail}`
+								props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail.match(/https/) ?
+									props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail :
+									`storage/${props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail}`
 							}
-							name={props.audios.find((audio) => audio.id == audioArray.key).name}
-							username={props.audios.find((audio) => audio.id == audioArray.key).username}
-							ft={props.audios.find((audio) => audio.id == audioArray.key).ft}
+							name={props.chartAudios.find((audio) => audio.id == audioArray.key).name}
+							username={props.chartAudios.find((audio) => audio.id == audioArray.key).username}
+							ft={props.chartAudios.find((audio) => audio.id == audioArray.key).ft}
 							hasBoughtAudio={
-								!props.boughtAudios
+								!props.chartBoughtAudios
 									.some((boughtAudio) => {
 										return boughtAudio.audio_id == audioArray.key &&
 											boughtAudio.username == props.auth.username
 									})
 							}
 							audioInCart={
-								props.cartAudios
+								props.chartCartAudios
 									.some((cartAudio) => {
 										return cartAudio.audio_id == audioArray.key &&
 											cartAudio.username == props.auth.username
