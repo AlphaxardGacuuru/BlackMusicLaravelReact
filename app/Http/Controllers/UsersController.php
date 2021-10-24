@@ -26,8 +26,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $getUsers = User::where('username', '!=', '@blackmusic')
-            ->get();
+        $getUsers = User::all();
 
         $users = [];
 

@@ -174,7 +174,7 @@ const Search = (props) => {
 									<center>
 										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 											<Link to={"/profile/" + artist.username}>
-												<Img src={`/storage/${artist.pp}`}
+												<Img src={artist.pp}
 													width='150px'
 													height='150px' />
 											</Link>
@@ -227,14 +227,8 @@ const Search = (props) => {
 								name={video.name}
 								username={video.username}
 								ft={video.ft}
-								videoInCart={
-									props.cartVideos
-										.some((cartVideo) => {
-											return cartVideo.video_id == video.id &&
-												cartVideo.username == props.auth.username
-										})
-								}
-								hasBoughtVideo={!hasBought}
+								videoInCart={video.inCart}
+								hasBoughtVideo={!video.hasBoughtVideo}
 								videoId={video.id}
 								onCartVideos={onCartVideos}
 								onBuyVideos={onBuyVideos} />
@@ -259,13 +253,7 @@ const Search = (props) => {
 								username={audio.username}
 								ft={audio.ft}
 								hasBoughtAudio={!props.hasBought}
-								audioInCart={
-									props.cartAudios
-										.some((cartAudio) => {
-											return cartAudio.audio_id == audio.id &&
-												cartAudio.username == props.auth.username
-										})
-								}
+								audioInCart={audio.inCart}
 								audioId={audio.id}
 								onCartAudios={onCartAudios}
 								onBuyAudios={onBuyAudios} />
@@ -300,11 +288,7 @@ const Search = (props) => {
 									<div className="media-body p-2">
 										<small>Video Album</small>
 										<h1>{videoAlbum.name}</h1>
-										<h6>
-											{new Date(videoAlbum.created_at).getDate()}
-											{" " + months[new Date(videoAlbum.created_at).getMonth()]}
-											{" " + new Date(videoAlbum.created_at).getFullYear()}
-										</h6>
+										<h6>{videoAlbum.created_at}</h6>
 									</div>
 								</div>
 							</div>
@@ -336,11 +320,7 @@ const Search = (props) => {
 									<div className="media-body p-2">
 										<small>Audio Album</small>
 										<h1>{audioAlbum.name}</h1>
-										<h6>
-											{new Date(audioAlbum.created_at).getDate()}
-											{" " + months[new Date(audioAlbum.created_at).getMonth()]}
-											{" " + new Date(audioAlbum.created_at).getFullYear()}
-										</h6>
+										<h6>{audioAlbum.create_at}</h6>
 									</div>
 								</div>
 							</div>

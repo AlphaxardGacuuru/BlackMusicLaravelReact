@@ -6,9 +6,6 @@ import Button from '../components/Button'
 
 const Videos = (props) => {
 
-	// Arrays for dates
-	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
 	// Check if user is musician
 	var user = props.users.find((user) => user.username == props.auth.username)
 
@@ -120,9 +117,9 @@ const Videos = (props) => {
 									<h5 style={{ color: "green" }}>
 										KES
 										<span className="ml-1">
-											{props.boughtVideos.filter((boughtVideo) => {
-												return boughtVideo.artist == props.auth.username
-											}).length * 10}
+											{props.boughtVideos
+												.filter((boughtVideo) => boughtVideo.artist == props.auth.username)
+												.length * 10}
 										</span>
 									</h5>
 								</td>
@@ -152,11 +149,7 @@ const Videos = (props) => {
 									<div className="p-2">
 										<small>Video Album</small>
 										<h1>{videoAlbum.name}</h1>
-										<h6>
-											{new Date(videoAlbum.created_at).getDate()}
-											{" " + months[new Date(videoAlbum.created_at).getMonth()]}
-											{" " + new Date(videoAlbum.created_at).getFullYear()}
-										</h6>
+										<h6>{videoAlbum.created_at}</h6>
 									</div>
 									<div className="p-2">
 										<Link to={`/video-album-edit/${videoAlbum.id}`} className="btn mysonar-btn">edit</Link>
@@ -197,31 +190,16 @@ const Videos = (props) => {
 													<td>{albumItem.ft}</td>
 													<td>{albumItem.genre}</td>
 													<td>{albumItem.description}</td>
-													<td>
-														{props.boughtVideos.filter((boughtVideo) => {
-															return boughtVideo.video_id == albumItem.id
-														}).length}
-													</td>
+													<td>{albumItem.downloads}</td>
 													<td style={{ color: "green" }}>
 														KES <span>{props.boughtVideos.filter((boughtVideo) => {
 															return boughtVideo.video_id == albumItem.id
 														}).length * 10}
 														</span>
 													</td>
-													<td>
-														{props.videoLikes.filter((videoLike) => {
-															return videoLike.video_id == albumItem.id
-														}).length
-														}</td>
-													<td>
-														{new Date(videoAlbum.released).getDate()}
-														{" " + months[new Date(videoAlbum.released).getMonth()]}
-														{" " + new Date(videoAlbum.released).getFullYear()}</td>
-													<td>
-														{new Date(albumItem.created_at).getDate()}
-														{" " + months[new Date(albumItem.created_at).getMonth()]}
-														{" " + new Date(albumItem.created_at).getFullYear()}
-													</td>
+													<td>{albumItem.likes}</td>
+													<td>{videoAlbum.released}</td>
+													<td>{albumItem.created_at}</td>
 													<td>
 														<Link to={`/video-edit/${albumItem.id}`}>
 															<button className='mysonar-btn'>edit</button>

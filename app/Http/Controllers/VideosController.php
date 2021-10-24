@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 // FFMpeg
 // namespace ProtoneMedia\LaravelFFMpeg;
 
-use App\User;
-use App\Videos;
 use App\BoughtVideos;
 use App\CartVideos;
-use App\VideoAlbums;
+use App\User;
 use App\VideoLikes;
-use App\Follows;
+use App\Videos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,11 +34,11 @@ class VideosController extends Controller
 
         foreach ($getVideos as $key => $video) {
 
-			// Check if user has liked video
-			$hasLiked = VideoLikes::where('username', auth()->user()->username)
-			->where('video_id', $video->id)
-			->exists();
-			
+            // Check if user has liked video
+            $hasLiked = VideoLikes::where('username', auth()->user()->username)
+                ->where('video_id', $video->id)
+                ->exists();
+
             // Check if video in cart
             $inCart = CartVideos::where('video_id', $video->id)
                 ->where('username', auth()->user()->username)
@@ -50,6 +48,10 @@ class VideosController extends Controller
             $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
                 ->where('video_id', $video->id)
                 ->exists();
+
+            // Get downloads
+            $downloads = BoughtVideos::where('video_id', $video->id)
+                ->count();
 
             array_push($videos, [
                 "id" => $video->id,
@@ -66,11 +68,12 @@ class VideosController extends Controller
                 "likes" => $video->videoLikes->count(),
                 "inCart" => $inCart,
                 "hasBoughtVideo" => $hasBoughtVideo,
+                "downloads" => $downloads,
                 "created_at" => $video->created_at->format('d M Y'),
             ]);
         }
 
-		return $videos;
+        return $videos;
     }
 
     /**

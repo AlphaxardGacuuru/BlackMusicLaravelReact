@@ -9,7 +9,7 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 const Index = (props) => {
 
 	const [videoSlice, setVideoSlice] = useState(10)
-	
+
 	const history = useHistory()
 
 	// Function for following users
@@ -257,7 +257,9 @@ const Index = (props) => {
 						</div>
 						{/* Slice to limit to 10 */}
 						{props.users
-							.filter((user) => user.account_type == "musician" && user.username != props.auth.username)
+							.filter((user) => user.account_type == "musician" &&
+								user.username != props.auth.username &&
+								user.username != "@blackmusic")
 							.slice(0, 10)
 							.map((user, key) => (
 								<div key={key} className='media p-2 border-bottom'>

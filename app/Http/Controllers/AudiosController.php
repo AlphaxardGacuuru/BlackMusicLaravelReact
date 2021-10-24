@@ -41,6 +41,10 @@ class AudiosController extends Controller
                 ->where('audio_id', $audio->id)
                 ->exists();
 
+            // Get downloads
+            $downloads = BoughtAudios::where('audio_id', $audio->id)
+                ->count();
+
             array_push($audios, [
                 "id" => $audio->id,
                 "audio" => $audio->audio,
@@ -56,6 +60,7 @@ class AudiosController extends Controller
                 "likes" => $audio->audioLikes->count(),
                 "inCart" => $inCart,
                 "hasBoughtAudio" => $hasBoughtAudio,
+                "downloads" => $downloads,
                 "created_at" => $audio->created_at->format('d M Y'),
             ]);
         }

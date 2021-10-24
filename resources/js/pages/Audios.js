@@ -98,11 +98,7 @@ const Audios = (props) => {
 									<div className="p-2">
 										<small>Audio Album</small>
 										<h1>{audioAlbum.name}</h1>
-										<h6>
-											{new Date(audioAlbum.created_at).getDate()}
-											{" " + months[new Date(audioAlbum.created_at).getMonth()]}
-											{" " + new Date(audioAlbum.created_at).getFullYear()}
-										</h6>
+										<h6>{audioAlbum.created_at}</h6>
 									</div>
 									<div className="p-2">
 										<Link to={`/audio-album-edit/${audioAlbum.id}`} className="btn mysonar-btn">edit</Link>
@@ -143,32 +139,16 @@ const Audios = (props) => {
 													<td>{albumItem.ft}</td>
 													<td>{albumItem.genre}</td>
 													<td>{albumItem.description}</td>
-													<td>
-														{props.boughtAudios.filter((boughtAudio) => {
-															return boughtAudio.video_id == albumItem.id
-														}).length}
-													</td>
+													<td>{audioAlbum.downloads}</td>
 													<td style={{ color: "green" }}>
 														KES <span>{props.boughtAudios.filter((boughtAudio) => {
 															return boughtAudio.video_id == albumItem.id
 														}).length * 10}
 														</span>
 													</td>
-													<td>
-														{props.audioLikes.filter((audioLike) => {
-															return audioLike.video_id == albumItem.id
-														}).length}
-													</td>
-													<td>
-														{new Date(albumItem.released).getDate()}
-														{" " + months[new Date(albumItem.released).getMonth()]}
-														{" " + new Date(albumItem.released).getFullYear()}
-													</td>
-													<td>
-														{new Date(albumItem.created_at).getDate()}
-														{" " + months[new Date(albumItem.created_at).getMonth()]}
-														{" " + new Date(albumItem.created_at).getFullYear()}
-													</td>
+													<td>{audioAlbum.likes}</td>
+													<td>{audioAlbum.released}</td>
+													<td>{audioAlbum.created_at}</td>
 													<td>
 														<Link to={`/audio-edit/${albumItem.id}`}>
 															<button className='mysonar-btn'>edit</button>
