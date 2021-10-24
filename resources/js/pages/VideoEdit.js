@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
 import axios from 'axios';
+
 import Button from '../components/Button'
 import Img from '../components/Img'
 
@@ -56,14 +56,6 @@ const VideoEdit = (props) => {
 
 	return (
 		<div>
-			{/* <!-- Preloader Start --> */}
-			<div id="preloader">
-				<div className="preload-content">
-					<div id="sonar-load"></div>
-				</div>
-			</div>
-			{/* <!-- Preloader End --> */}
-
 			{/* <!-- Grids --> */}
 			<div className="grids d-flex justify-content-between">
 				<div className="grid1"></div>
