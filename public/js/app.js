@@ -93261,6 +93261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
 /* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -93343,132 +93345,127 @@ function App() {
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
       errors = _useState10[0],
-      setErrors = _useState10[1]; // For Index
-
+      setErrors = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      musicians = _useState12[0],
-      setMusicians = _useState12[1];
+      audioAlbums = _useState12[0],
+      setAudioAlbums = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      videos = _useState14[0],
-      setVideos = _useState14[1];
+      audioCommentLikes = _useState14[0],
+      setAudioCommentLikes = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      posts = _useState16[0],
-      setPosts = _useState16[1]; // For Library
-
+      audioComments = _useState16[0],
+      setAudioComments = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      libraryBoughtVideos = _useState18[0],
-      setLibraryBoughtVideos = _useState18[1];
+      audioLikes = _useState18[0],
+      setAudioLikes = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      libraryBoughtAudios = _useState20[0],
-      setLibraryBoughtAudios = _useState20[1]; // For Video Charts
-
+      audioNotifications = _useState20[0],
+      setAudioNotifications = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState22 = _slicedToArray(_useState21, 2),
-      chartVideos = _useState22[0],
-      setChartVideos = _useState22[1];
+      audioPayouts = _useState22[0],
+      setAudioPayouts = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      chartBoughtVideos = _useState24[0],
-      setChartBoughtVideos = _useState24[1];
+      audios = _useState24[0],
+      setAudios = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState26 = _slicedToArray(_useState25, 2),
-      chartVideoLikes = _useState26[0],
-      setChartVideoLikes = _useState26[1];
+      boughtAudios = _useState26[0],
+      setBoughtAudios = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      chartCartVideos = _useState28[0],
-      setChartCartVideos = _useState28[1];
+      boughtVideos = _useState28[0],
+      setBoughtVideos = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      videoChartUsers = _useState30[0],
-      setVideoChartUsers = _useState30[1];
+      cartAudios = _useState30[0],
+      setCartAudios = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      videoChartFollows = _useState32[0],
-      setVideoChartFollows = _useState32[1]; // For Audio Charts
-
+      cartVideos = _useState32[0],
+      setCartVideos = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      chartAudios = _useState34[0],
-      setChartAudios = _useState34[1];
+      decoNotifications = _useState34[0],
+      setDecoNotifications = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      chartAudioLikes = _useState36[0],
-      setChartAudioLikes = _useState36[1];
+      decos = _useState36[0],
+      setDecos = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      chartBoughtAudios = _useState38[0],
-      setChartBoughtAudios = _useState38[1];
+      followNotifications = _useState38[0],
+      setFollowNotifications = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      chartCartAudios = _useState40[0],
-      setChartCartAudios = _useState40[1];
+      follows = _useState40[0],
+      setFollows = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      audioChartUsers = _useState42[0],
-      setAudioChartUsers = _useState42[1];
+      kopokopo = _useState42[0],
+      setKopokopo = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      audioChartFollows = _useState44[0],
-      setAudioChartFollows = _useState44[1]; // For Cart
-
+      kopokopoNotifications = _useState44[0],
+      setKopokopoNotifications = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      cartVideos = _useState46[0],
-      setCartVideos = _useState46[1];
+      notifications = _useState46[0],
+      setNotifications = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      cartAudios = _useState48[0],
-      setCartAudios = _useState48[1];
+      posts = _useState48[0],
+      setPosts = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      boughtVideos = _useState50[0],
-      setBoughtVideos = _useState50[1];
+      postLikes = _useState50[0],
+      setPostLikes = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      videoLikes = _useState52[0],
-      setVideoLikes = _useState52[1];
+      postComments = _useState52[0],
+      setPostComments = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
-      audios = _useState54[0],
-      setAudios = _useState54[1];
+      postCommentLikes = _useState54[0],
+      setPostCommentLikes = _useState54[1];
 
   var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState56 = _slicedToArray(_useState55, 2),
-      audioLikes = _useState56[0],
-      setAudioLikes = _useState56[1];
+      polls = _useState56[0],
+      setPolls = _useState56[1];
 
   var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState58 = _slicedToArray(_useState57, 2),
-      boughtAudios = _useState58[0],
-      setBoughtAudios = _useState58[1];
+      sms = _useState58[0],
+      setSMS = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState60 = _slicedToArray(_useState59, 2),
@@ -93477,88 +93474,38 @@ function App() {
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState62 = _slicedToArray(_useState61, 2),
-      audioAlbums = _useState62[0],
-      setAudioAlbums = _useState62[1];
+      videoAlbums = _useState62[0],
+      setVideoAlbums = _useState62[1];
 
   var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState64 = _slicedToArray(_useState63, 2),
-      audioComments = _useState64[0],
-      setAudioComments = _useState64[1];
+      videoCommentLikes = _useState64[0],
+      setVideoCommentLikes = _useState64[1];
 
   var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState66 = _slicedToArray(_useState65, 2),
-      audioCommentLikes = _useState66[0],
-      setAudioCommentLikes = _useState66[1];
+      videoComments = _useState66[0],
+      setVideoComments = _useState66[1];
 
   var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState68 = _slicedToArray(_useState67, 2),
-      audioNotifications = _useState68[0],
-      setAudioNotifications = _useState68[1];
+      videoLikes = _useState68[0],
+      setVideoLikes = _useState68[1];
 
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState70 = _slicedToArray(_useState69, 2),
-      audioPayouts = _useState70[0],
-      setAudioPayouts = _useState70[1];
+      videoNotifications = _useState70[0],
+      setVideoNotifications = _useState70[1];
 
   var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState72 = _slicedToArray(_useState71, 2),
-      decos = _useState72[0],
-      setDecos = _useState72[1];
+      videoPayouts = _useState72[0],
+      setVideoPayouts = _useState72[1];
 
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState74 = _slicedToArray(_useState73, 2),
-      decoNotifications = _useState74[0],
-      setDecoNotifications = _useState74[1];
-
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState76 = _slicedToArray(_useState75, 2),
-      follows = _useState76[0],
-      setFollows = _useState76[1];
-
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState78 = _slicedToArray(_useState77, 2),
-      followNotifications = _useState78[0],
-      setFollowNotifications = _useState78[1];
-
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState80 = _slicedToArray(_useState79, 2),
-      sms = _useState80[0],
-      setSMS = _useState80[1];
-
-  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState82 = _slicedToArray(_useState81, 2),
-      kopokopoNotifications = _useState82[0],
-      setKopokopoNotifications = _useState82[1];
-
-  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState84 = _slicedToArray(_useState83, 2),
-      notifications = _useState84[0],
-      setNotifications = _useState84[1];
-
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState86 = _slicedToArray(_useState85, 2),
-      videoComments = _useState86[0],
-      setVideoComments = _useState86[1];
-
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState88 = _slicedToArray(_useState87, 2),
-      videoCommentLikes = _useState88[0],
-      setVideoCommentLikes = _useState88[1];
-
-  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState90 = _slicedToArray(_useState89, 2),
-      videoNotifications = _useState90[0],
-      setVideoNotifications = _useState90[1];
-
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState92 = _slicedToArray(_useState91, 2),
-      videoAlbums = _useState92[0],
-      setVideoAlbums = _useState92[1];
-
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState94 = _slicedToArray(_useState93, 2),
-      videoPayouts = _useState94[0],
-      setVideoPayouts = _useState94[1]; // Reset Messages and Errors to null after 3 seconds
+      videos = _useState74[0],
+      setVideos = _useState74[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93600,50 +93547,196 @@ function App() {
       };
     }();
 
-    getAuth(); // Fetch for Index
+    getAuth(); // Fetch Audio Albums
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
-      setMusicians(res.data.musicians);
-      setVideos(res.data.videos);
-      setPosts(res.data.posts);
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
+      return setAudioAlbums(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch for Index']);
-    }); // Fetch for Library
+      return setErrors(["Failed to fetch audio albums"]);
+    }); // Fetch Audio Comments Likes
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
-      setLibraryBoughtVideos(res.data.boughtVideos);
-      setLibraryBoughtAudios(res.data.boughtAudios);
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comment-likes")).then(function (res) {
+      return setAudioCommentLikes(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch library']);
-    }); // Fetch for Video Charts
+      return setErrors(['Failed to fetch audio comment likes']);
+    }); // Fetch Audio Comments
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
-      setChartVideos(res.data.videos);
-      setChartBoughtVideos(res.data.boughtVideos);
-      setChartCartVideos(res.data.cartVideos);
-      setChartVideoLikes(res.data.videoLikes);
-      setVideoChartUsers(res.data.users);
-      setVideoChartFollows(res.data.follows);
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
+      return setAudioComments(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch videos']);
-    }); // Fetch for Audio Charts
+      return setErrors(["Failed to fetch audio comments"]);
+    }); // Fetch Audio Likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-likes")).then(function (res) {
+      return setAudioLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio likes"]);
+    }); // Fetch Audios
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-      setChartAudios(res.data.audios);
-      setChartBoughtAudios(res.data.boughtAudios);
-      setChartCartAudios(res.data.cartAudios);
-      setChartAudioLikes(res.data.audioLikes);
-      setAudioChartUsers(res.data.users);
-      setAudioChartFollows(res.data.follows);
+      return setAudios(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch audios']);
-    }); // Fetch for Cart
+      return setErrors(["Failed to fetch audios"]);
+    }); // Fetch Audio Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-notifications")).then(function (res) {
+      return setAudioNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio notifications"]);
+    }); // Fetch Audio Payouts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-payouts")).then(function (res) {
+      return setAudioPayouts(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio payouts"]);
+    }); // Fetch Bought Audios
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
+      return setBoughtAudios(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch bought audios"]);
+    }); // Fetch Bought Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
+      return setBoughtVideos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch bought videos']);
+    }); // Fetch Cart Audios
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
+      return setCartAudios(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch cart audios']);
+    }); // Fetch Cart Videos
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-      setCartVideos(res.data.cartVideos);
-      setCartAudios(res.data.cartAudios);
+      return setCartVideos(res.data);
     })["catch"](function () {
-      return setErrors(['Failed to fetch cart']);
+      return setErrors(['Failed to fetch cart videos']);
+    }); // Fetch Decos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/decos")).then(function (res) {
+      return setDecos(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch decos']);
+    }); // Fetch Decos Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/deco-notifications")).then(function (res) {
+      return setDecoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch decos notifications']);
+    }); // Fetch Follows
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
+      return setFollows(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch follows']);
+    }); // Fetch Follows Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follow-notifications")).then(function (res) {
+      return setFollowNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch follow notifications']);
+    }); // Fetch Kopokopo
+    // axios.get(`${url}/api/kopokopo`)
+    // 	.then((res) => setKopokopo(res.data))
+    // 	.catch(() => setErrors(['Failed to fetch kopokopo']))
+    // Fetch Kopokopo
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-notifications")).then(function (res) {
+      return setKopokopoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch kopokopo notifications']);
+    }); // Fetch Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
+      return setNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch notifications']);
+    }); // Fetch Polls
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/polls")).then(function (res) {
+      return setPolls(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch polls']);
+    }); // Fetch Post Comment likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comment-likes")).then(function (res) {
+      return setPostCommentLikes(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post comment likes']);
+    }); // Fetch Post Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comments")).then(function (res) {
+      return setPostComments(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post comments']);
+    }); // Fetch Post Likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-likes")).then(function (res) {
+      return setPostLikes(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post likes']);
+    }); //Fetch Posts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
+      return setPosts(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch posts']);
+    }); //Fetch SMS
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/sms")).then(function (res) {
+      return setSMS(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch SMSs']);
+    }); //Fetch Users
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/users")).then(function (res) {
+      return setUsers(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch users']);
+    }); // Fetch Video Albums
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
+      return setVideoAlbums(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video albums"]);
+    }); // Fetch Video Comments Likes
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comment-likes")).then(function (res) {
+      return setVideoCommentLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video comment likes"]);
+    }); // Fetch Video Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comments")).then(function (res) {
+      return setVideoComments(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video comments"]);
+    }); // Fetch Liked Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-likes")).then(function (res) {
+      return setVideoLikes(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video likes"]);
+    }); //Fetch Videos
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
+      return setVideos(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch videos"]);
+    }); // Fetch Video Notifications
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-notifications")).then(function (res) {
+      return setVideoNotifications(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video notifications"]);
+    }); // Fetch Video Payouts
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
+      return setVideoPayouts(res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video payouts"]);
     });
   }, []); //Fetch Auth
 
@@ -93678,50 +93771,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState96 = _slicedToArray(_useState95, 2),
-      show = _useState96[0],
-      setShow = _useState96[1];
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState76 = _slicedToArray(_useState75, 2),
+      show = _useState76[0],
+      setShow = _useState76[1];
 
-  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState98 = _slicedToArray(_useState97, 2),
-      playBtn = _useState98[0],
-      setPlayBtn = _useState98[1];
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState78 = _slicedToArray(_useState77, 2),
+      playBtn = _useState78[0],
+      setPlayBtn = _useState78[1];
 
-  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState100 = _slicedToArray(_useState99, 2),
-      shuffle = _useState100[0],
-      setShuffle = _useState100[1];
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState80 = _slicedToArray(_useState79, 2),
+      shuffle = _useState80[0],
+      setShuffle = _useState80[1];
 
-  var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState102 = _slicedToArray(_useState101, 2),
-      loop = _useState102[0],
-      setLoop = _useState102[1];
+  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState82 = _slicedToArray(_useState81, 2),
+      loop = _useState82[0],
+      setLoop = _useState82[1];
 
-  var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState104 = _slicedToArray(_useState103, 2),
-      dur = _useState104[0],
-      setDur = _useState104[1];
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState84 = _slicedToArray(_useState83, 2),
+      dur = _useState84[0],
+      setDur = _useState84[1];
 
-  var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
-      _useState106 = _slicedToArray(_useState105, 2),
-      volume = _useState106[0],
-      setVolume = _useState106[1];
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+      _useState86 = _slicedToArray(_useState85, 2),
+      volume = _useState86[0],
+      setVolume = _useState86[1];
 
-  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState108 = _slicedToArray(_useState107, 2),
-      currentTime = _useState108[0],
-      setCurrentTime = _useState108[1];
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState88 = _slicedToArray(_useState87, 2),
+      currentTime = _useState88[0],
+      setCurrentTime = _useState88[1];
 
-  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState110 = _slicedToArray(_useState109, 2),
-      progressPercent = _useState110[0],
-      setProgressPercent = _useState110[1];
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState90 = _slicedToArray(_useState89, 2),
+      progressPercent = _useState90[0],
+      setProgressPercent = _useState90[1];
 
-  var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState112 = _slicedToArray(_useState111, 2),
-      audioLoader = _useState112[0],
-      setAudioLoader = _useState112[1]; // Listen for show change and autoplay song
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState92 = _slicedToArray(_useState91, 2),
+      audioLoader = _useState92[0],
+      setAudioLoader = _useState92[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -93746,27 +93839,24 @@ function App() {
   var audioProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef(null);
   var audioContainer = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
   var volumeProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
-  var volumeContainer = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef(); // Get audio to show
+  var volumeContainer = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
+  var showAudio = [];
+  var showArtist = []; // Get audio to show
 
   if (audios.find(function (audio) {
     return audio.id == show;
   })) {
     var showAudio = audios.find(function (audio) {
       return audio.id == show;
-    });
-  } else {
-    var showAudio = [];
-  } // Get artist of audio to show 
+    }); // Get artist of audio to show 
 
-
-  if (users.find(function (user) {
-    return user.username == showAudio.username;
-  })) {
-    var showArtist = users.find(function (user) {
+    if (users.find(function (user) {
       return user.username == showAudio.username;
-    });
-  } else {
-    var showArtist = [];
+    })) {
+      var showArtist = users.find(function (user) {
+        return user.username == showAudio.username;
+      });
+    }
   } // Song titles
 
 
@@ -93919,10 +94009,10 @@ function App() {
   } // Search State
 
 
-  var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState114 = _slicedToArray(_useState113, 2),
-      search = _useState114[0],
-      setSearch = _useState114[1];
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState94 = _slicedToArray(_useState93, 2),
+      search = _useState94[0],
+      setSearch = _useState94[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94071,8 +94161,8 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
-        musicians: musicians,
-        setMusicians: setMusicians,
+        users: users,
+        setUsers: setUsers,
         videos: videos,
         setVideos: setVideos,
         posts: posts,
@@ -94121,12 +94211,10 @@ function App() {
         setErrors: setErrors,
         cartVideos: cartVideos,
         setCartVideos: setCartVideos,
-        setBoughtVideos: setBoughtVideos,
-        videos: videos,
         cartAudios: cartAudios,
         setCartAudios: setCartAudios,
-        setBoughtAudios: setBoughtAudios,
-        audios: audios,
+        setVideos: setVideos,
+        setAudios: setAudios,
         setShow: setShow
       }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
@@ -94138,8 +94226,8 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_14__["default"], {
         auth: auth,
-        libraryBoughtVideos: libraryBoughtVideos,
-        libraryBoughtAudios: libraryBoughtAudios,
+        boughtVideos: boughtVideos,
+        boughtAudios: boughtAudios,
         setShow: setShow
       }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
@@ -94149,16 +94237,20 @@ function App() {
     path: "/profile/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      var _ref3;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_15__["default"], (_ref3 = {
         setMessage: setMessage,
         setErrors: setErrors,
         auth: auth,
         setAuth: setAuth,
         url: url,
+        users: users,
+        setUsers: setUsers,
+        follows: follows,
         posts: posts,
-        setPosts: setPosts,
-        setShow: setShow
-      }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        setPosts: setPosts
+      }, _defineProperty(_ref3, "posts", posts), _defineProperty(_ref3, "setPosts", setPosts), _defineProperty(_ref3, "videos", videos), _defineProperty(_ref3, "setVideos", setVideos), _defineProperty(_ref3, "videoAlbums", videoAlbums), _defineProperty(_ref3, "setVideoAlbums", setVideoAlbums), _defineProperty(_ref3, "audioAlbums", audioAlbums), _defineProperty(_ref3, "setAudioAlbums", setAudioAlbums), _defineProperty(_ref3, "audios", audios), _defineProperty(_ref3, "setAudios", setAudios), _defineProperty(_ref3, "setCartVideos", setCartVideos), _defineProperty(_ref3, "setCartAudios", setCartAudios), _defineProperty(_ref3, "setShow", setShow), _ref3)), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
       }));
     }
@@ -94214,14 +94306,15 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
-        videoChartUsers: videoChartUsers,
-        chartVideos: chartVideos,
-        chartBoughtVideos: chartBoughtVideos,
-        chartCartVideos: chartCartVideos,
-        setChartCartVideos: setChartCartVideos,
-        chartVideoLikes: chartVideoLikes,
-        videoChartFollows: videoChartFollows,
-        setVideoChartFollows: setVideoChartFollows,
+        users: users,
+        videos: videos,
+        setVideos: setVideos,
+        boughtVideos: boughtVideos,
+        cartVideos: cartVideos,
+        setCartVideos: setCartVideos,
+        videoLikes: videoLikes,
+        follows: follows,
+        setFollows: setFollows,
         setShow: setShow
       });
     }
@@ -94235,8 +94328,10 @@ function App() {
         setMessage: setMessage,
         setErrors: setErrors,
         users: users,
+        setUsers: setUsers,
         decos: decos,
         videos: videos,
+        setVideos: setVideos,
         boughtVideos: boughtVideos,
         cartVideos: cartVideos,
         setCartVideos: setCartVideos,
@@ -94343,14 +94438,15 @@ function App() {
         auth: auth,
         setMessage: setMessage,
         setErrors: setErrors,
-        audioChartUsers: audioChartUsers,
-        chartAudios: chartAudios,
-        chartBoughtAudios: chartBoughtAudios,
-        chartCartAudios: chartCartAudios,
-        setChartCartAudios: setChartCartAudios,
-        chartAudioLikes: chartAudioLikes,
-        audioChartFollows: audioChartFollows,
-        setAudioChartFollows: setAudioChartFollows,
+        users: users,
+        audios: audios,
+        boughtAudios: boughtAudios,
+        cartAudios: cartAudios,
+        setCartAudios: setCartAudios,
+        audioLikes: audioLikes,
+        follows: follows,
+        setFollows: setFollows,
+        setAudioAlbums: setAudioAlbums,
         setShow: setShow
       });
     }
@@ -94364,20 +94460,17 @@ function App() {
         setMessage: setMessage,
         setErrors: setErrors,
         users: users,
+        setUsers: setUsers,
         decos: decos,
         audios: audios,
-        boughtAudios: boughtAudios,
-        cartAudios: cartAudios,
+        setAudios: setAudios,
         setCartAudios: setCartAudios,
-        audioLikes: audioLikes,
-        setAudioLikes: setAudioLikes,
+        boughtAudios: boughtAudios,
         audioComments: audioComments,
         setAudioComments: setAudioComments,
         audioCommentLikes: audioCommentLikes,
         setAudioCommentLikes: setAudioCommentLikes,
         audioAlbums: audioAlbums,
-        follows: follows,
-        setFollows: setFollows,
         show: show,
         setShow: setShow,
         playBtn: playBtn,
@@ -95154,9 +95247,10 @@ var Messages = function Messages(_ref) {
   }, message), errors.map(function (error, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "bg-danger p-2 mt-2",
+      className: "p-2 mt-2",
       style: {
-        borderRadius: "30px"
+        borderRadius: "30px",
+        backgroundColor: "#232323"
       }
     }, error);
   })));
@@ -96499,13 +96593,13 @@ var AudioCharts = function AudioCharts(props) {
 
 
   if (chart == "Newly Released") {
-    var chartList = props.chartAudios;
+    var chartList = props.audios;
   } else if (chart == "Trending") {
-    var chartList = props.chartBoughtAudios;
+    var chartList = props.boughtAudios;
   } else if (chart == "Top Downloaded") {
-    var chartList = props.chartBoughtAudios;
+    var chartList = props.boughtAudios;
   } else {
-    var chartList = props.chartAudioLikes;
+    var chartList = props.audioLikes;
   } // Array for audio id and frequency
 
 
@@ -96523,7 +96617,7 @@ var AudioCharts = function AudioCharts(props) {
         return item.genre == genre;
       }
 
-      return props.chartAudios.find(function (audio) {
+      return props.audios.find(function (audio) {
         return audio.id == item.audio_id;
       }).genre == genre;
     }
@@ -96539,7 +96633,7 @@ var AudioCharts = function AudioCharts(props) {
       var getId = audio.artist;
       var getIdTwo = audio.audio_id;
     } else {
-      var getId = props.chartAudios.find(function (item) {
+      var getId = props.audios.find(function (item) {
         return item.id == audio.audio_id;
       }).username;
       var getIdTwo = audio.audio_id;
@@ -96597,9 +96691,18 @@ var AudioCharts = function AudioCharts(props) {
       axios.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Audios
+
         axios.get("".concat(props.url, "/api/audios")).then(function (res) {
-          return props.setChartCartAudios(res.data.cartAudios);
+          return props.setAudios(res.data);
+        }); // Update Cart Audios
+
+        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
+          return props.setCartAudios(res.data);
+        }); // Update Audio Albums
+
+        axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
+          return props.setAudioAlbums(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -96621,9 +96724,18 @@ var AudioCharts = function AudioCharts(props) {
       axios.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Audios
+
         axios.get("".concat(props.url, "/api/audios")).then(function (res) {
-          return props.setChartCartAudios(res.data.cartAudios);
+          return props.setAudios(res.data);
+        }); // Update Cart Audios
+
+        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
+          return props.setCartAudios(res.data);
+        }); // Update Audio Albums
+
+        axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
+          return props.setAudioAlbums(res.data);
         });
         history.push('/cart');
       })["catch"](function (err) {
@@ -96680,7 +96792,7 @@ var AudioCharts = function AudioCharts(props) {
     "data-slide-to": "2"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
-  }, props.chartAudios.slice(0, 3).map(function (audio, key) {
+  }, props.audios.slice(0, 3).map(function (audio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "carousel-item ".concat(key == 0 && 'active'),
@@ -96772,53 +96884,53 @@ var AudioCharts = function AudioCharts(props) {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "p-2"
+  }, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll",
     onScroll: handleScroll
   }, artistsArray.filter(function (artist) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
   }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: key,
-      className: "pt-0 pl-0 pr-0 pb-2",
-      style: {
-        borderRadius: "10px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "card avatar-thumbnail",
-      style: {
-        borderRadius: "50%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/" + artistArray.key
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(props.users.find(function (user) {
-        return user.username == artistArray.key;
-      }) && props.users.find(function (user) {
-        return user.username == artistArray.key;
-      }).pp),
-      width: "150px",
-      height: "150px"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-2 mb-0",
-      style: {
-        width: "100px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, props.users.find(function (user) {
+      key: key
+    }, props.users.filter(function (user) {
       return user.username == artistArray.key;
-    }) && props.users.find(function (user) {
-      return user.username == artistArray.key;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      style: {
-        width: "100px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, artistArray.key))));
+    }).map(function (user, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: key,
+        className: "pt-0 px-0 pb-2",
+        style: {
+          borderRadius: "10px"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card avatar-thumbnail",
+        style: {
+          borderRadius: "50%"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/profile/" + user.username
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        src: user.pp,
+        width: "150px",
+        height: "150px"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "mt-2 mb-0",
+        style: {
+          width: "100px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "clip"
+        }
+      }, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        style: {
+          width: "100px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "clip"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, user.username))));
+    }));
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96828,36 +96940,26 @@ var AudioCharts = function AudioCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "p-2"
   }, "Songs"), audiosArray.slice(0, audioSlice).map(function (audioArray, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: key,
-      setShow: props.setShow,
-      link: "/audio-show/".concat(audioArray.key),
-      thumbnail: props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).thumbnail.match(/https/) ? props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).thumbnail : "storage/".concat(props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).thumbnail),
-      name: props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).name,
-      username: props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).username,
-      ft: props.chartAudios.find(function (audio) {
-        return audio.id == audioArray.key;
-      }).ft,
-      hasBoughtAudio: !props.chartBoughtAudios.some(function (boughtAudio) {
-        return boughtAudio.audio_id == audioArray.key && boughtAudio.username == props.auth.username;
-      }),
-      audioInCart: props.chartCartAudios.some(function (cartAudio) {
-        return cartAudio.audio_id == audioArray.key && cartAudio.username == props.auth.username;
-      }),
-      audioId: audioArray.key,
-      onCartAudios: onCartAudios,
-      onBuyAudios: onBuyAudios
-    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key
+    }, props.audios.filter(function (audio) {
+      return audio.id == audioArray.key;
+    }).map(function (audio, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        key: key,
+        setShow: props.setShow,
+        link: "/audio-show/".concat(audio.id),
+        thumbnail: "/storage/".concat(audio.thumbnail),
+        name: audio.name,
+        username: audio.username,
+        ft: audio.ft,
+        hasBoughtAudio: !audio.hasBoughtAudio,
+        audioInCart: audio.inCart,
+        audioId: audio.id,
+        onCartAudios: onCartAudios,
+        onBuyAudios: onBuyAudios
+      });
+    }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   })));
@@ -97702,35 +97804,37 @@ var AudioShow = function AudioShow(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
       _useState4 = _slicedToArray(_useState3, 2),
       tabClass = _useState4[0],
-      setTabClass = _useState4[1]; // Get audio to show
+      setTabClass = _useState4[1];
 
+  var showAudio = [];
+  var showArtist = []; // Get Audio to show
 
   if (props.audios.find(function (audio) {
     return audio.id == props.show;
   })) {
     var showAudio = props.audios.find(function (audio) {
       return audio.id == props.show;
-    }); // Get artist of audio to show 
+    }); // Get Artist 
 
-    var showArtist = props.users.find(function (user) {
+    if (props.users.find(function (user) {
       return user.username == showAudio.username;
-    });
-  } else {
-    var showAudio = [];
-    var showArtist = [];
-  } // Arrays for dates
+    })) {
+      var showArtist = props.users.find(function (user) {
+        return user.username == showAudio.username;
+      });
+    }
+  } // Function for liking audio
 
-
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Function for liking audio
 
   var onAudioLike = function onAudioLike() {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audio-likes"), {
         audio: show
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-likes")).then(function (res) {
-          return props.setAudioLikes(res.data);
+        props.setMessage(res.data); // Update audios
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -97752,9 +97856,10 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/follows"), {
         musician: musician
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/follows")).then(function (res) {
-          return props.setFollows(res.data);
+        props.setMessage(res.data); // Update users
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/uses")).then(function (res) {
+          return props.setUsers(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -97778,7 +97883,8 @@ var AudioShow = function AudioShow(props) {
         audio: show,
         text: text
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
           return props.setAudioComments(res.data);
         });
@@ -97803,9 +97909,10 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audio-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comment-likes")).then(function (res) {
-          return props.setAudioCommentLikes(res.data);
+        props.setMessage(res.data); // Update audio comments
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
+          return props.setAudioComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -97825,7 +97932,8 @@ var AudioShow = function AudioShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/audio-comments/").concat(id)).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update audio comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
           return props.setAudioComments(res.data);
         });
@@ -97849,7 +97957,12 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update audios
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
+        }); // Update Cart Audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
           return props.setCartAudios(res.data);
         });
@@ -97873,11 +97986,18 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update audios
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
+        }); // Update Cart Audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
           return props.setCartAudios(res.data);
         });
-        history.push('/cart');
+        setTimeout(function () {
+          return history.push('/cart');
+        }, 1000);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -98091,9 +98211,7 @@ var AudioShow = function AudioShow(props) {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-2"
-  }, props.audioLikes.find(function (audioLike) {
-    return audioLike.audio_id == show && audioLike.username == props.auth.username;
-  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, showAudio.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     style: {
       color: "#cc3300"
@@ -98112,9 +98230,9 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.audioLikes.filter(function (audioLike) {
-    return audioLike.audio_id == show;
-  }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1"
+  }, showAudio.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: function onClick(e) {
       e.preventDefault();
@@ -98129,9 +98247,9 @@ var AudioShow = function AudioShow(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.audioLikes.filter(function (audioLike) {
-    return audioLike.audio_id == show;
-  }).length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1"
+  }, showAudio.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "whatsapp://send?text=https://music.black.co.ke/audio-show/".concat(show)
@@ -98163,9 +98281,15 @@ var AudioShow = function AudioShow(props) {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showAudio.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showAudio.album ? props.audioAlbums.length && props.audioAlbums.find(function (audioAlbum) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showAudio.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1"
+  }, showAudio.album ? props.audioAlbums.length && props.audioAlbums.find(function (audioAlbum) {
     return audioAlbum.id == showAudio.album;
-  }).name : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showAudio.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, new Date(showAudio.created_at).getDay(), " " + months[new Date(showAudio.created_at).getMonth()], " " + new Date(showAudio.created_at).getFullYear()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }).name : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1"
+  }, showAudio.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1"
+  }, showAudio.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     href: "#collapseExample",
@@ -98185,9 +98309,9 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/".concat(showArtist && showArtist.username)
+    to: "/profile/".concat(showArtist.username)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    src: "/storage/".concat(showArtist && showArtist.pp),
+    src: showArtist.pp,
     width: "40px",
     height: "40px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98200,7 +98324,7 @@ var AudioShow = function AudioShow(props) {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist && showArtist.name, " ", showArtist && showArtist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.name, " ", showArtist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       color: "gold",
       paddingTop: "10px"
@@ -98216,19 +98340,11 @@ var AudioShow = function AudioShow(props) {
     d: "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1 mr-1"
-  }, props.decos.filter(function (deco) {
-    return deco.username == showArtist.username;
-  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, showArtist.decos), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "1rem"
     }
-  }, "\u2022"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.follows.filter(function (follow) {
-    return follow.username == showArtist.username;
-  }).length, " fans"), props.boughtAudios.find(function (boughtAudio) {
-    return boughtAudio.username == props.auth.username && boughtAudio.artist == showArtist.username;
-  }) || props.auth.username == "@blackmusic" ? props.follows.find(function (follow) {
-    return follow.followed == showArtist.username && follow.username == props.auth.username;
-  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "\u2022"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.fans, " fans"), showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ? showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: 'btn btn-light float-right rounded-0',
     onClick: function onClick() {
       return onFollow(showArtist.username);
@@ -98273,7 +98389,7 @@ var AudioShow = function AudioShow(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
-  }, props.hasBought && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, showAudio.hasBoughtAudio && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
@@ -98297,7 +98413,7 @@ var AudioShow = function AudioShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))), props.hasBought && props.audioComments.filter(function (comment) {
+  })))), showAudio.hasBoughtAudio && props.audioComments.filter(function (comment) {
     return comment.audio_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98313,9 +98429,7 @@ var AudioShow = function AudioShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(comment.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: "/storage/".concat(props.users.find(function (user) {
-        return user.username == comment.username;
-      }).pp),
+      src: comment.pp,
       width: "40px",
       height: "40px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98328,9 +98442,8 @@ var AudioShow = function AudioShow(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
-      return user.username == comment.username;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "ml-1",
       style: {
         color: "gold"
       }
@@ -98349,15 +98462,11 @@ var AudioShow = function AudioShow(props) {
       style: {
         fontSize: "10px"
       }
-    }, props.decos.filter(function (deco) {
-      return deco.username == comment.username;
-    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }, comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right mr-1"
-    }, new Date(comment.created_at).toDateString()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, comment.text), props.audioCommentLikes.find(function (commentLike) {
-      return commentLike.comment_id == comment.id && commentLike.username == props.auth.username;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, comment.text), comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       style: {
         color: "#cc3300"
@@ -98378,9 +98487,7 @@ var AudioShow = function AudioShow(props) {
       d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "ml-1"
-    }, props.audioCommentLikes.filter(function (commentLike) {
-      return commentLike.comment_id == comment.id;
-    }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       onClick: function onClick(e) {
         e.preventDefault();
@@ -98397,9 +98504,7 @@ var AudioShow = function AudioShow(props) {
       d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "ml-1"
-    }, props.audioCommentLikes.filter(function (commentLike) {
-      return commentLike.comment_id == comment.id;
-    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "dropup float-right"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
@@ -98449,35 +98554,17 @@ var AudioShow = function AudioShow(props) {
       key: key,
       setShow: props.setShow,
       link: "/audio-show/".concat(boughtAudio.audio_id),
-      thumbnail: "/storage/".concat(props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).thumbnail),
-      name: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).name,
-      username: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).username,
-      ft: props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == boughtAudio.audio_id;
-      }).ft,
+      thumbnail: "/storage/".concat(boughtAudio.thumbnail),
+      name: boughtAudio.name,
+      username: boughtAudio.username,
+      ft: boughtAudio.ft,
       audioId: boughtAudio.audio_id,
       showCartandBuyButton: false
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mt-5 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs to watch")), props.audios.filter(function (audio) {
-    return !props.boughtAudios.some(function (boughtAudio) {
-      return boughtAudio.audio_id == audio.id && boughtAudio.username == props.auth.username;
-    }) && audio.username != props.auth.username && audio.id != show;
+    return !audio.hasBoughtAudio && audio.username != props.auth.username && audio.id != show;
   }).slice(0, 10).map(function (audio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: key,
@@ -98487,10 +98574,8 @@ var AudioShow = function AudioShow(props) {
       name: audio.name,
       username: audio.username,
       ft: audio.ft,
-      hasBoughtAudio: !props.hasBought,
-      audioInCart: props.cartAudios.some(function (cartAudio) {
-        return cartAudio.audio_id == audio.id && cartAudio.username == props.auth.username;
-      }),
+      hasBoughtAudio: !audio.hasBoughtAudio,
+      audioInCart: audio.inCart,
       audioId: audio.id,
       onCartAudios: onCartAudios,
       onBuyAudios: onBuyAudios
@@ -98695,18 +98780,10 @@ var Cart = function Cart(props) {
       setReceiptAudios = _useState8[1]; // Calculate totals
 
 
-  var videoTotal = props.cartVideos.filter(function (cartVideo) {
-    return cartVideo.username == props.auth.username;
-  }).length;
-  var videoTotalCash = props.cartVideos.filter(function (cartVideo) {
-    return cartVideo.username == props.auth.username;
-  }).length * 200;
-  var audioTotal = props.cartAudios.filter(function (cartAudio) {
-    return cartAudio.username == props.auth.username;
-  }).length;
-  var audioTotalCash = props.cartAudios.filter(function (cartAudio) {
-    return cartAudio.username == props.auth.username;
-  }).length * 100;
+  var videoTotal = props.cartVideos.length;
+  var videoTotalCash = props.cartVideos.length * 200;
+  var audioTotal = props.cartAudios.length;
+  var audioTotalCash = props.cartAudios.length * 100;
   var total = videoTotalCash + audioTotalCash; // Function for adding video to cart
 
   var onCartVideos = function onCartVideos(video) {
@@ -98714,9 +98791,14 @@ var Cart = function Cart(props) {
       axios.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update cart videos
+
         axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
           return props.setCartVideos(res.data);
+        }); // Update videos
+
+        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -98738,9 +98820,14 @@ var Cart = function Cart(props) {
       axios.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update cart audios
+
         axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
           return props.setCartAudios(res.data);
+        }); // Update audios
+
+        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -98838,9 +98925,7 @@ var Cart = function Cart(props) {
     className: "col-sm-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartVideos.filter(function (cartVideo) {
-    return cartVideo.username == props.auth.username;
-  }).map(function (cartVideo, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartVideos.map(function (cartVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex p-2 border-bottom"
@@ -98849,15 +98934,7 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/video-show/".concat(cartVideo.video_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: props.videos.find(function (video) {
-        return video.id == cartVideo.video_id;
-      }) ? props.videos.find(function (video) {
-        return video.id == cartVideo.video_id;
-      }).thumbnail.match(/http/) ? props.videos.find(function (video) {
-        return video.id == cartVideo.video_id;
-      }).thumbnail : "storage/".concat(props.videos.find(function (video) {
-        return video.id == cartVideo.video_id;
-      }).thumbnail) : "",
+      src: cartVideo.thumbnail,
       width: "160em",
       height: "90em"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98870,22 +98947,12 @@ var Cart = function Cart(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, props.videos.find(function (video) {
-      return video.id == cartVideo.video_id;
-    }) && props.videos.find(function (video) {
-      return video.id == cartVideo.video_id;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.videos.find(function (video) {
-      return video.id == cartVideo.video_id;
-    }) && props.videos.find(function (video) {
-      return video.id == cartVideo.video_id;
-    }).username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    }, cartVideo.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, cartVideo.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "text-success"
     }, "KES 200"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn mb-1 float-right",
       onClick: function onClick() {
-        return onCartVideos(props.videos.find(function (video) {
-          return video.id == cartVideo.video_id;
-        }).id);
+        return onCartVideos(cartVideo.video_id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -98912,9 +98979,7 @@ var Cart = function Cart(props) {
     className: "text-success"
   }, videoTotalCash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartAudios.filter(function (cartAudio) {
-    return cartAudio.username == props.auth.username;
-  }).map(function (cartAudio, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.cartAudios.map(function (cartAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex p-2 border-bottom"
@@ -98927,11 +98992,7 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/audio-show/".concat(cartAudio.audio_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(props.audios.find(function (audio) {
-        return audio.id == cartAudio.audio_id;
-      }) && props.audios.find(function (audio) {
-        return audio.id == cartAudio.audio_id;
-      }).thumbnail),
+      src: cartAudio.thumbnail,
       width: "100%",
       height: "50px"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98943,11 +99004,7 @@ var Cart = function Cart(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, props.audios.find(function (audio) {
-      return audio.id == cartAudio.audio_id;
-    }) && props.audios.find(function (audio) {
-      return audio.id == cartAudio.audio_id;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    }, cartAudio.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "mt-0 pt-0"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, cartAudio.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "text-success"
@@ -98956,9 +99013,7 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn mb-1 float-right",
       onClick: function onClick() {
-        return onCartAudios(props.audios.find(function (audio) {
-          return audio.id == cartAudio.audio_id;
-        }).id);
+        return onCartAudios(cartAudio.audio_id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -99223,17 +99278,21 @@ var Index = function Index(props) {
       videoSlice = _useState2[0],
       setVideoSlice = _useState2[1];
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for following musicians
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for following users
 
   var onFollow = function onFollow(musician) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/follows"), {
         musician: musician
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update users
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/users")).then(function (res) {
+          return props.setUsers(res.data);
+        }); // Update posts
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          props.setMusicians(res.data.musicians);
-          props.setPosts(res.data.posts);
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99257,9 +99316,14 @@ var Index = function Index(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setVideos(res.data.videos);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update cart videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
@@ -99284,9 +99348,14 @@ var Index = function Index(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setVideos(res.data.videos);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update cart videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
         });
         setTimeout(function () {
           return history.push('/cart');
@@ -99313,9 +99382,10 @@ var Index = function Index(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
         post: post
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update posts
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data.posts);
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99337,9 +99407,10 @@ var Index = function Index(props) {
   var onDeletePost = function onDeletePost(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update posts
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data.posts);
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99364,9 +99435,10 @@ var Index = function Index(props) {
         post: post,
         parameter: parameter
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update posts
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data.posts);
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99479,28 +99551,30 @@ var Index = function Index(props) {
     className: "border"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Musicians to follow")), props.musicians.slice(0, 10).map(function (musician, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Musicians to follow")), props.users.filter(function (user) {
+    return user.account_type == "musician" && user.username != props.auth.username;
+  }).slice(0, 10).map(function (user, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "media p-2 border-bottom"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/:".concat(musician.id)
+      to: "/profile/".concat(user.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: musician.pp.match(/http/) ? musician.pp : "storage/".concat(musician.pp),
+      src: user.pp,
       width: "30px",
       height: "30px",
-      alt: "musician"
+      alt: "user"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(musician.id),
+      to: "/profile/".concat(user.username),
       className: "text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, musician.username))), musician.hasBought1 ? musician.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, user.username))), user.hasBought1 ? user.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: 'btn btn-light float-right rounded-0',
       onClick: function onClick() {
-        return onFollow(musician.username);
+        return onFollow(user.username);
       }
     }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-check",
@@ -99515,13 +99589,13 @@ var Index = function Index(props) {
     }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'mysonar-btn float-right',
       onClick: function onClick() {
-        return onFollow(musician.username);
+        return onFollow(user.username);
       },
       btnText: 'follow'
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'mysonar-btn float-right',
       onClick: function onClick() {
-        return props.setErrors(["You must have bought atleast one song by ".concat(musician.username)]);
+        return props.setErrors(["You must have bought atleast one song by ".concat(user.username)]);
       },
       btnText: 'follow'
     })));
@@ -99556,7 +99630,7 @@ var Index = function Index(props) {
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/video-show/".concat(video.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "m-0 pt-2 py-1",
+      className: "m-0 pt-2 px-1",
       style: {
         width: "150px",
         whiteSpace: "nowrap",
@@ -99564,7 +99638,7 @@ var Index = function Index(props) {
         textOverflow: "clip"
       }
     }, video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-0 my-1 mb-2 px-0 py-1"
+      className: "mt-0 mx-1 mb-2 px-1 py-0"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, video.username, " ", video.ft))), video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn btn-light mb-1 rounded-0",
       style: {
@@ -99626,7 +99700,7 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: post.pp.match(/http/) ? post.pp : "storage/".concat(post.pp),
+      src: post.pp,
       width: "40px",
       height: "40px",
       alt: 'avatar'
@@ -100030,7 +100104,7 @@ var Library = function Library(props) {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.libraryBoughtVideos.map(function (boughtVideo, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.boughtVideos.map(function (boughtVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: key,
       onClick: function onClick() {
@@ -100040,20 +100114,20 @@ var Library = function Library(props) {
       link: "/video-show/".concat(boughtVideo.video_id),
       thumbnail: boughtVideo.thumbnail,
       name: boughtVideo.name,
-      username: boughtVideo.username,
+      username: boughtVideo.artist,
       ft: boughtVideo.ft,
       showCartandBuyButton: false
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "mt-5"
-  }, "Audios")), props.libraryBoughtAudios.map(function (boughtAudio, key) {
+  }, "Audios")), props.boughtAudios.map(function (boughtAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: key,
       setShow: props.setShow,
       link: "/audio-show/".concat(boughtAudio.audio_id),
       thumbnail: "/storage/".concat(boughtAudio.thumbnail),
       name: boughtAudio.name,
-      username: boughtAudio.username,
+      username: boughtAudio.artist,
       ft: boughtAudio.ft,
       audioId: boughtAudio.audio_id,
       showCartandBuyButton: false
@@ -100790,62 +100864,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Profile = function Profile(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
-      username = _useParams.username; // For Profile
+      username = _useParams.username;
 
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      profile = _useState2[0],
-      setProfile = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      audioAlbums = _useState4[0],
-      setAudioAlbums = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      audios = _useState6[0],
-      setAudios = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      videoAlbums = _useState8[0],
-      setVideoAlbums = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState10 = _slicedToArray(_useState9, 2),
-      videos = _useState10[0],
-      setVideos = _useState10[1]; // Fetch Profile data
-
-
-  axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/users/").concat(username)).then(function (res) {
-    setProfile(res.data.profile);
-    setAudioAlbums(res.data.audioAlbums);
-    setAudios(res.data.audios);
-    setVideoAlbums(res.data.videoAlbums);
-    setVideos(res.data.videos);
-  })["catch"](function () {
-    return props.setErrors(['Failed to fetch profile']);
-  });
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("audios"),
-      _useState12 = _slicedToArray(_useState11, 2),
-      tabClass = _useState12[0],
-      setTabClass = _useState12[1]; // Arrays for dates
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("audios"),
+      _useState2 = _slicedToArray(_useState, 2),
+      tabClass = _useState2[0],
+      setTabClass = _useState2[1]; // Get profile info
 
 
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Function for following musicians
+  if (props.users.find(function (user) {
+    return user.username == username;
+  })) {
+    var profile = props.users.find(function (user) {
+      return user.username == username;
+    });
+  } else {
+    var profile = [];
+  } // Function for following users
+
 
   var onFollow = function onFollow(musician) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/follows"), {
         musician: musician
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/users/").concat(username)).then(function (res) {
-          return props.setProfile(res.data.profile);
+        props.setMessage(res.data); // Update users
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/users")).then(function (res) {
+          return props.setUsers(res.data);
+        }); // Update posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -100861,65 +100913,58 @@ var Profile = function Profile(props) {
         props.setErrors(newError);
       });
     });
-  }; // Function for liking posts
+  }; // Function for adding video to cart
 
 
-  var onPostLike = function onPostLike(post) {
+  var onCartVideos = function onCartVideos(video) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
-        post: post
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
+        video: video
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-likes")).then(function (res) {
-          return props.setPostLikes(res.data);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update cart videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
         });
       })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
+        var resErrors = err.response.data.errors; // Get validation errors
+
         var resError;
         var newError = [];
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
-  }; // Function for deleting posts
+  }; // Function for buying video to cart
 
 
-  var onDeletePost = function onDeletePost(id) {
+  var onBuyVideos = function onBuyVideos(video) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for voting in poll
-
-
-  var onPoll = function onPoll(post, parameter) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/polls"), {
-        post: post,
-        parameter: parameter
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
+        video: video
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/polls")).then(function (res) {
-          return props.setPolls(res.data);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update cart videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
         });
+        setTimeout(function () {
+          return history.push('/cart');
+        }, 1000);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -100927,21 +100972,27 @@ var Profile = function Profile(props) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
-  };
+  }; // Function for adding audio to cart
 
-  var percentage = 100; // Function for adding audio to cart
 
   var onCartAudios = function onCartAudios(audio) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update audios
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
+        }); // Update cart audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
           return props.setCartAudios(res.data);
         });
@@ -100965,7 +101016,12 @@ var Profile = function Profile(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-audios"), {
         audio: audio
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update audios
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
+          return props.setAudios(res.data);
+        }); // Update cart audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
           return props.setCartAudios(res.data);
         });
@@ -100982,17 +101038,18 @@ var Profile = function Profile(props) {
         props.setErrors(newError);
       });
     });
-  }; // Function for adding video to cart
+  }; // Function for liking posts
 
 
-  var onCartVideos = function onCartVideos(video) {
+  var onPostLike = function onPostLike(post) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
-        video: video
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
+        post: post
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
+        props.setMessage(res.data); // Update posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -101001,24 +101058,24 @@ var Profile = function Profile(props) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
-  }; // Function for buying video to cart
+  }; // Function for deleting posts
 
 
-  var onBuyVideos = function onBuyVideos(video) {
+  var onDeletePost = function onDeletePost(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
-        video: video
-      }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+        props.setMessage(res.data); // Update posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
         });
-        history.push('/cart');
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -101026,8 +101083,38 @@ var Profile = function Profile(props) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for voting in poll
+
+
+  var onPoll = function onPoll(post, parameter) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/polls"), {
+        post: post,
+        parameter: parameter
+      }).then(function (res) {
+        props.setMessage(res.data); // Update posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
@@ -101047,19 +101134,24 @@ var Profile = function Profile(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "hidden"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-container",
     style: {
       marginTop: "100px",
       top: "70px",
       left: "10px"
-    },
-    className: "avatar-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    style: {
-      position: "absolute",
-      zIndex: "99"
-    },
-    imgClass: "avatar hover-img",
-    src: profile.pp
+    }
+  }, props.users.filter(function (user) {
+    return user.username == username;
+  }).map(function (profile, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      style: {
+        position: "absolute",
+        zIndex: "99"
+      },
+      imgClass: "avatar hover-img",
+      src: profile.pp
+    });
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -101068,7 +101160,7 @@ var Profile = function Profile(props) {
     className: "col-sm-10"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "anti-hidden"
-  }), props.auth.username == username ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }), profile.username == props.auth.username ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile-edit"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "float-right mysonar-btn"
@@ -101138,13 +101230,17 @@ var Profile = function Profile(props) {
     className: tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "hidden"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audios")), audios.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audios")), props.audioAlbums.filter(function (audioAlbum) {
+    return audioAlbum.username == username;
+  }).length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "mt-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
       color: "grey"
     }
-  }, username, " does not have any audios")), audioAlbums.map(function (audioAlbum, key) {
+  }, username, " does not have any audios")), props.audioAlbums.filter(function (audioAlbum) {
+    return audioAlbum.username == username;
+  }).map(function (audioAlbum, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "mb-5"
@@ -101159,8 +101255,8 @@ var Profile = function Profile(props) {
       alt: "album cover"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Audio Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, audioAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioAlbum.created_at))), audios.filter(function (audio) {
-      return audio.album == audioAlbum.id;
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Audio Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, audioAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioAlbum.created_at))), props.audios.filter(function (audio) {
+      return audio.album == audioAlbum.id && audio.username == username;
     }).map(function (audio, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__["default"], {
         key: index,
@@ -101185,7 +101281,7 @@ var Profile = function Profile(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Posts")), props.posts.filter(function (post) {
-    return post.username == props.auth.username;
+    return post.username == username;
   }).length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
       color: "grey"
@@ -101206,7 +101302,7 @@ var Profile = function Profile(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(post.user_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: post.pp.match(/http/) ? post.pp : "storage/".concat(post.pp),
+      src: post.pp,
       width: "40px",
       height: "40px",
       alt: 'avatar'
@@ -101557,13 +101653,17 @@ var Profile = function Profile(props) {
     className: tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "hidden"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), videos.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), props.videoAlbums.filter(function (videoAlbum) {
+    return videoAlbum.username == username;
+  }).length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
     className: "mt-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
       color: "grey"
     }
-  }, username, " does not have any videos")), videoAlbums.map(function (videoAlbum, key) {
+  }, username, " does not have any videos")), props.videoAlbums.filter(function (videoAlbum) {
+    return videoAlbum.username == username;
+  }).map(function (videoAlbum, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "mb-5"
@@ -101578,8 +101678,8 @@ var Profile = function Profile(props) {
       alt: "album cover"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), videos.filter(function (video) {
-      return video.album == videoAlbum.id;
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), props.videos.filter(function (video) {
+      return video.album == videoAlbum.id && videoAlbum.username == username;
     }).map(function (video, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
         key: index,
@@ -102652,13 +102752,13 @@ var VideoCharts = function VideoCharts(props) {
 
 
   if (chart == "Newly Released") {
-    var chartList = props.chartVideos;
+    var chartList = props.videos;
   } else if (chart == "Trending") {
-    var chartList = props.chartBoughtVideos;
+    var chartList = props.boughtVideos;
   } else if (chart == "Top Downloaded") {
-    var chartList = props.chartBoughtVideos;
+    var chartList = props.boughtVideos;
   } else {
-    var chartList = props.chartVideoLikes;
+    var chartList = props.videoLikes;
   } // Array for video id and frequency
 
 
@@ -102676,7 +102776,7 @@ var VideoCharts = function VideoCharts(props) {
         return item.genre == genre;
       }
 
-      return props.chartVideos.find(function (video) {
+      return props.videos.find(function (video) {
         return video.id == item.video_id;
       }).genre == genre;
     }
@@ -102692,7 +102792,7 @@ var VideoCharts = function VideoCharts(props) {
       var getId = video.artist;
       var getIdTwo = video.video_id;
     } else {
-      var getId = props.chartVideos.find(function (item) {
+      var getId = props.videos.find(function (item) {
         return item.id == video.video_id;
       }).username;
       var getIdTwo = video.video_id;
@@ -102750,9 +102850,10 @@ var VideoCharts = function VideoCharts(props) {
       axios.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update videos
+
         axios.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setChartCartVideos(res.data.cartVideos);
+          return props.setVideos(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -102774,9 +102875,10 @@ var VideoCharts = function VideoCharts(props) {
       axios.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update videos
+
         axios.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setChartCartVideos(res.data.cartVideos);
+          return props.setVideos(res.data);
         });
         setTimeout(function () {
           return history.push('/cart');
@@ -102835,7 +102937,7 @@ var VideoCharts = function VideoCharts(props) {
     "data-slide-to": "2"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
-  }, props.chartVideos.slice(0, 3).map(function (video, key) {
+  }, props.videos.slice(0, 3).map(function (video, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "carousel-item ".concat(key == 0 && 'active'),
@@ -102932,181 +103034,157 @@ var VideoCharts = function VideoCharts(props) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
   }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: key,
-      className: "pt-0 pl-0 pr-0 pb-2",
-      style: {
-        borderRadius: "10px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "card avatar-thumbnail",
-      style: {
-        borderRadius: "50%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/" + artistArray.key
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "/storage/".concat(props.videoChartUsers.find(function (user) {
-        return artistArray.key == user.username;
-      }) && props.videoChartUsers.find(function (user) {
-        return artistArray.key == user.username;
-      }).pp),
-      width: "150px",
-      height: "150px"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-2 mb-0",
-      style: {
-        width: "100px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, props.videoChartUsers.find(function (user) {
+      key: key
+    }, props.users.filter(function (user) {
       return user.username == artistArray.key;
-    }) && props.videoChartUsers.find(function (user) {
-      return user.username == artistArray.key;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      style: {
-        width: "100px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, artistArray.key)));
+    }).map(function (user, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: key,
+        className: "pt-0 px-0 pb-2",
+        style: {
+          borderRadius: "10px"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card avatar-thumbnail",
+        style: {
+          borderRadius: "50%"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/profile/" + user.username
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        src: user.pp,
+        width: "150px",
+        height: "150px"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "mt-2 mb-0",
+        style: {
+          width: "100px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "clip"
+        }
+      }, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        style: {
+          width: "100px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "clip"
+        }
+      }, user.username)));
+    }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden",
     onScroll: handleScroll
   }, videosArray.slice(0, videoSlice).map(function (videoArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: key,
-      className: "card m-1 pb-2",
-      style: {
-        borderRadius: "10px",
-        display: "inline-block",
-        textAlign: "center"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "thumbnail",
-      style: {
-        borderTopLeftRadius: "10px",
-        borderTopRightRadius: "10px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-show/".concat(videoArray.key)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail.match(/https/) ? props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail : "storage/".concat(props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail),
-      width: "160em",
-      height: "90em"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "m-0 pt-2 pr-1 pl-1",
-      style: {
-        width: "150px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, props.chartVideos.find(function (video) {
+      key: key
+    }, props.videos.filter(function (video) {
       return video.id == videoArray.key;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-0 mr-1 ml-1 mb-2 pt-0 pr-1 pl-1 pb-0"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.chartVideos.find(function (video) {
-      return video.id == videoArray.key;
-    }).username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, props.chartVideos.find(function (video) {
-      return video.id == videoArray.key;
-    }).ft)), !props.chartBoughtVideos.some(function (boughtVideo) {
-      return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
-    }) ? props.chartCartVideos.find(function (cartVideo) {
-      return cartVideo.video_id == videoArray.key && cartVideo.username == props.auth.username;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "btn btn-light mb-1 rounded-0",
-      style: {
-        minWidth: '90px',
-        height: '33px'
-      },
-      onClick: function onClick() {
-        return onCartVideos(videoArray.key);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-      className: "bi bi-cart3",
-      width: "1em",
-      height: "1em",
-      viewBox: "0 0 16 16",
-      fill: "currentColor",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-      fillRule: "evenodd",
-      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "mysonar-btn mb-1",
-      style: {
-        minWidth: '90px',
-        height: '33px'
-      },
-      onClick: function onClick() {
-        return onCartVideos(videoArray.key);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-      className: "bi bi-cart3",
-      width: "1em",
-      height: "1em",
-      viewBox: "0 0 16 16",
-      fill: "currentColor",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-      fillRule: "evenodd",
-      d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-    }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !props.chartBoughtVideos.some(function (boughtVideo) {
-      return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
-    }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      btnClass: 'btn mysonar-btn green-btn',
-      btnText: 'buy',
-      onClick: function onClick() {
-        return onBuyVideos(videoArray.key);
-      }
+    }).map(function (video, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: key,
+        className: "card m-1 pb-2",
+        style: {
+          borderRadius: "10px",
+          display: "inline-block",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "thumbnail",
+        style: {
+          borderTopLeftRadius: "10px",
+          borderTopRightRadius: "10px"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/video-show/".concat(video.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        src: video.thumbnail,
+        width: "160em",
+        height: "90em"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "m-0 pt-2 px-1",
+        style: {
+          width: "150px",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "clip"
+        }
+      }, video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "mt-0 mx-1 mb-2 py-0 px-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, video.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+        className: "ml-1"
+      }, video.ft)), !video.hasBoughtVideo ? video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-light mb-1 rounded-0",
+        style: {
+          minWidth: '90px',
+          height: '33px'
+        },
+        onClick: function onClick() {
+          return onCartVideos(videoArray.key);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        className: "bi bi-cart3",
+        width: "1em",
+        height: "1em",
+        viewBox: "0 0 16 16",
+        fill: "currentColor",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        fillRule: "evenodd",
+        d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+      }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "mysonar-btn mb-1",
+        style: {
+          minWidth: '90px',
+          height: '33px'
+        },
+        onClick: function onClick() {
+          return onCartVideos(videoArray.key);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        className: "bi bi-cart3",
+        width: "1em",
+        height: "1em",
+        viewBox: "0 0 16 16",
+        fill: "currentColor",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        fillRule: "evenodd",
+        d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+      }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !video.hasBoughtVideo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        btnClass: 'btn mysonar-btn green-btn',
+        btnText: 'buy',
+        onClick: function onClick() {
+          return onBuyVideos(videoArray.key);
+        }
+      }));
     }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "anti-hidden"
   }, videosArray.slice(0, videoSlice).map(function (videoArray, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: key,
-      onClick: function onClick() {
-        return props.setShow(0);
-      },
-      setShow: props.setShow,
-      link: "/video-show/".concat(videoArray.key),
-      thumbnail: props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail.match(/https/) ? props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail : "storage/".concat(props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).thumbnail),
-      name: props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).name,
-      username: props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).username,
-      ft: props.chartVideos.find(function (video) {
-        return video.id == videoArray.key;
-      }).ft,
-      hasBoughtVideo: !props.chartBoughtVideos.some(function (boughtVideo) {
-        return boughtVideo.video_id == videoArray.key && boughtVideo.username == props.auth.username;
-      }),
-      videoInCart: props.chartCartVideos.some(function (cartVideo) {
-        return cartVideo.video_id == videoArray.key && cartVideo.username == props.auth.username;
-      }),
-      videoId: videoArray.key,
-      onCartVideos: onCartVideos,
-      onBuyVideos: onBuyVideos
-    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key
+    }, props.videos.filter(function (video) {
+      return video.id == videoArray.key;
+    }).map(function (video, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        key: key,
+        onClick: function onClick() {
+          return props.setShow(0);
+        },
+        setShow: props.setShow,
+        link: "/video-show/".concat(video.id),
+        thumbnail: video.thumbnail,
+        name: video.name,
+        username: video.username,
+        ft: video.ft,
+        hasBoughtVideo: !video.hasBoughtVideo,
+        videoInCart: video.inCart,
+        videoId: videoArray.key,
+        onCartVideos: onCartVideos,
+        onBuyVideos: onBuyVideos
+      });
+    }));
   })))));
 };
 
@@ -103811,35 +103889,24 @@ var VideoShow = function VideoShow(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       show = _useParams.show;
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Get video to show
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var showVideo = [];
+  var showArtist = []; // Get Video to show
 
   if (props.videos.find(function (video) {
     return video.id == show;
   })) {
     var showVideo = props.videos.find(function (video) {
       return video.id == show;
-    });
-  } else {
-    var showVideo = [];
-  } // Get artist of video to show 
+    }); // Get Artist
 
-
-  if (props.users.find(function (user) {
-    return user.username == showVideo.username;
-  })) {
-    var showArtist = props.users.find(function (user) {
+    if (props.users.find(function (user) {
       return user.username == showVideo.username;
-    });
-  } else {
-    var showArtist = [];
-  }
-
-  var hasBought = false;
-
-  if (props.boughtVideos.some(function (boughtVideo) {
-    return boughtVideo.video_id == showVideo.id && boughtVideo.username == props.auth.username || props.auth.username == "@blackmusic" || props.auth.username == showVideo.username;
-  })) {
-    hasBought = true;
+    })) {
+      var showArtist = props.users.find(function (user) {
+        return user.username == showVideo.username;
+      });
+    }
   }
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
@@ -103850,19 +103917,18 @@ var VideoShow = function VideoShow(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
       _useState4 = _slicedToArray(_useState3, 2),
       tabClass = _useState4[0],
-      setTabClass = _useState4[1]; // Arrays for dates
+      setTabClass = _useState4[1]; // Function for liking video
 
-
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // Function for liking video
 
   var onVideoLike = function onVideoLike() {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-likes"), {
         video: show
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-likes")).then(function (res) {
-          return props.setVideoLikes(res.data);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -103884,9 +103950,10 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/follows"), {
         musician: musician
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/follows")).then(function (res) {
-          return props.setFollows(res.data);
+        props.setMessage(res.data); // Update Users
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/users")).then(function (res) {
+          return props.setUsers(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -103910,7 +103977,8 @@ var VideoShow = function VideoShow(props) {
         video: show,
         text: text
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Video Comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
           return props.setVideoComments(res.data);
         });
@@ -103935,9 +104003,10 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comment-likes")).then(function (res) {
-          return props.setVideoCommentLikes(res.data);
+        props.setMessage(res.data); // Update Video Comments
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
+          return props.setVideoComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -103957,7 +104026,8 @@ var VideoShow = function VideoShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/video-comments/").concat(id)).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Video Comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
           return props.setVideoComments(res.data);
         });
@@ -103981,7 +104051,12 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update Cart Videos
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
           return props.setCartVideos(res.data);
         });
@@ -104005,7 +104080,12 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update Cart Videos
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
           return props.setCartVideos(res.data);
         });
@@ -104042,7 +104122,7 @@ var VideoShow = function VideoShow(props) {
     className: "resp-iframe",
     width: "880px",
     height: "495px",
-    src: hasBought ? "".concat(showVideo.video, "/?autoplay=1") : "".concat(showVideo.video, "?autoplay=1&end=10&controls=0"),
+    src: showVideo.hasBoughtVideo ? "".concat(showVideo.video, "/?autoplay=1") : "".concat(showVideo.video, "?autoplay=1&end=10&controls=0"),
     frameBorder: "0",
     allow: "accelerometer",
     "encrypted-media": "true",
@@ -104055,19 +104135,17 @@ var VideoShow = function VideoShow(props) {
     className: "resp-iframe",
     width: "880px",
     height: "495px",
-    controls: hasBought && true,
+    controls: showVideo.hasBoughtVideo && true,
     controlsList: "nodownload",
     autoPlay: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-    src: hasBought ? "storage/".concat(showVideo.video) : "storage/".concat(showVideo.video, "#t=1,10"),
+    src: showVideo.hasBoughtVideo ? "storage/".concat(showVideo.video) : "storage/".concat(showVideo.video, "#t=1,10"),
     type: "video/mp4"
   }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-2"
-  }, props.videoLikes.find(function (videoLike) {
-    return videoLike.video_id == show && videoLike.username == props.auth.username;
-  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, showVideo.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     style: {
       color: "#cc3300"
@@ -104086,9 +104164,9 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.videoLikes.filter(function (videoLike) {
-    return videoLike.video_id == show;
-  }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1"
+  }, showVideo.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: function onClick(e) {
       e.preventDefault();
@@ -104103,9 +104181,9 @@ var VideoShow = function VideoShow(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.videoLikes.filter(function (videoLike) {
-    return videoLike.video_id == show;
-  }).length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1"
+  }, showVideo.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "whatsapp://send?text=https://music.black.co.ke/video-show/".concat(show)
@@ -104119,13 +104197,13 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE"))), hasBought ? showVideo.video.match(/https/) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE"))), showVideo.hasBoughtVideo ? !showVideo.video.match(/https/) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: "mysonar-btn",
     btnText: "download",
     onClick: onDownload
-  })) : "" : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })) : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-auto"
@@ -104137,9 +104215,15 @@ var VideoShow = function VideoShow(props) {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showVideo.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.album ? props.videoAlbums.length && props.videoAlbums.find(function (videoAlbum) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Song name ", showVideo.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "p-1"
+  }, showVideo.album ? props.videoAlbums.length && props.videoAlbums.find(function (videoAlbum) {
     return videoAlbum.id == showVideo.album;
-  }).name : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, showVideo.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, new Date(showVideo.created_at).getDay(), " " + months[new Date(showVideo.created_at).getMonth()], " " + new Date(showVideo.created_at).getFullYear()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }).name : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Genre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "p-1"
+  }, showVideo.genre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Posted"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "p-1"
+  }, showVideo.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     href: "#collapseExample",
@@ -104161,7 +104245,7 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/".concat(showArtist.username)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    src: "/storage/" + showArtist.pp,
+    src: showArtist.pp,
     width: "40px",
     height: "40px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104174,25 +104258,27 @@ var VideoShow = function VideoShow(props) {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.name, " ", showArtist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.name, showArtist.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
     style: {
-      color: "gold",
-      paddingTop: "10px"
-    },
-    className: "fa fa-circle-o"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.decos.filter(function (deco) {
-    return deco.username == showArtist.username;
-  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      color: "gold"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-circle",
+    width: "1em",
+    height: "1em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.decos), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
     style: {
       fontSize: "1rem"
     }
-  }, "\u2022"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", props.follows.filter(function (follow) {
-    return follow.username == showArtist.username;
-  }).length, " fans"), props.boughtVideos.find(function (boughtVideo) {
-    return boughtVideo.username == props.auth.username && boughtVideo.artist == showArtist.username;
-  }) || props.auth.username == "@blackmusic" ? props.follows.find(function (follow) {
-    return follow.followed == showArtist.username && follow.username == props.auth.username || follow.username != "@blackmusic";
-  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "\u2022"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, " ", showArtist.fans, " fans"), showArtist.hasBought1 || props.auth.username == "@blackmusic" ? showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: 'btn btn-light float-right rounded-0',
     onClick: function onClick() {
       return onFollow(showArtist.username);
@@ -104237,7 +104323,7 @@ var VideoShow = function VideoShow(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
-  }, hasBought && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, showVideo.hasBoughtVideo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
@@ -104261,7 +104347,7 @@ var VideoShow = function VideoShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))), hasBought && props.videoComments.filter(function (comment) {
+  })))), showVideo.hasBoughtVideo && props.videoComments.filter(function (comment) {
     return comment.video_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104277,9 +104363,7 @@ var VideoShow = function VideoShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(comment.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: "/storage/".concat(props.users.find(function (user) {
-        return user.username == comment.username;
-      }).pp),
+      src: comment.pp,
       width: "40px",
       height: "40px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104292,9 +104376,7 @@ var VideoShow = function VideoShow(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
-      return user.username == comment.username;
-    }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       style: {
         color: "gold"
       }
@@ -104313,15 +104395,11 @@ var VideoShow = function VideoShow(props) {
       style: {
         fontSize: "10px"
       }
-    }, props.decos.filter(function (deco) {
-      return deco.username == comment.username;
-    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    }, comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right mr-1"
-    }, new Date(comment.created_at).toDateString()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, comment.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, comment.text), props.videoCommentLikes.find(function (commentLike) {
-      return commentLike.comment_id == comment.id && commentLike.username == props.auth.username;
-    }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, comment.text), comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       style: {
         color: "#cc3300"
@@ -104342,9 +104420,7 @@ var VideoShow = function VideoShow(props) {
       d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "ml-1"
-    }, props.videoCommentLikes.filter(function (commentLike) {
-      return commentLike.comment_id == comment.id;
-    }).length)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       onClick: function onClick(e) {
         e.preventDefault();
@@ -104361,9 +104437,7 @@ var VideoShow = function VideoShow(props) {
       d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "ml-1"
-    }, props.videoCommentLikes.filter(function (commentLike) {
-      return commentLike.comment_id == comment.id;
-    }).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "dropup float-right"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
@@ -104421,26 +104495,16 @@ var VideoShow = function VideoShow(props) {
       ,
       setShow: props.setShow,
       link: "/video-show/".concat(boughtVideo.video_id),
-      thumbnail: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).thumbnail,
-      name: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).name,
-      username: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).username,
-      ft: props.videos.find(function (video) {
-        return video.id == boughtVideo.video_id;
-      }).ft,
+      thumbnail: boughtVideo.thumbnail,
+      name: boughtVideo.name,
+      username: boughtVideo.username,
+      ft: boughtVideo.ft,
       showCartandBuyButton: false
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs to watch")), props.videos.filter(function (video) {
-    return !props.boughtVideos.some(function (boughtVideo) {
-      return boughtVideo.video_id == video.id && boughtVideo.username == props.auth.username;
-    }) && video.username != props.auth.username && video.id != show;
+    return !video.hasBoughtVideo && video.username != props.auth.username && video.id != show;
   }).slice(0, 10).map(function (video, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: key,
@@ -104459,10 +104523,8 @@ var VideoShow = function VideoShow(props) {
       name: video.name,
       username: video.username,
       ft: video.ft,
-      videoInCart: props.cartVideos.some(function (cartVideo) {
-        return cartVideo.video_id == video.id && cartVideo.username == props.auth.username;
-      }),
-      hasBoughtVideo: !hasBought,
+      videoInCart: video.inCart,
+      hasBoughtVideo: !video.hasBoughtVideo,
       videoId: video.id,
       onCartVideos: onCartVideos,
       onBuyVideos: onBuyVideos

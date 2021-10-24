@@ -35,9 +35,15 @@ class PostLikesController extends Controller
      */
     public function store(Request $request)
     {
-        $postLikeCount = PostLikes::where('post_id', $request->input('post'))->where('username', auth()->user()->username)->count();
+        $postLikeCount = PostLikes::where('post_id', $request->input('post'))
+            ->where('username', auth()->user()->username)
+            ->count();
+
         if ($postLikeCount > 0) {
-            PostLikes::where('post_id', $request->input('post'))->where('username', auth()->user()->username)->delete();
+            PostLikes::where('post_id', $request->input('post'))
+                ->where('username', auth()->user()->username)
+                ->delete();
+				
             $message = "Like removed";
         } else {
             $postLike = new PostLikes;

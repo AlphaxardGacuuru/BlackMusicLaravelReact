@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\AudioComments;
 use App\AudioCommentLikes;
+use App\AudioComments;
 use Illuminate\Http\Request;
 
 class AudioCommentsController extends Controller
@@ -15,7 +15,32 @@ class AudioCommentsController extends Controller
      */
     public function index()
     {
-        return AudioComments::all();
+        $getAudioComments = AudioComments::all();
+
+        $audioComments = [];
+
+        foreach ($getAudioComments as $key => $audioComment) {
+
+            // Check if user has liked comment
+            $hasLiked = AudioCommentLikes::where('username', auth()->user()->username)
+                ->where('comment_id', $audioComment->id)
+                ->exists();
+
+            array_push($audioComments, [
+                "id" => $audioComment->id,
+                "audio_id" => $audioComment->audio_id,
+                "text" => $audioComment->text,
+                "username" => $audioComment->username,
+                "name" => $audioComment->users->name,
+                "pp" => preg_match("/http/", $audioComment->users->pp) ?
+                $audioComment->users->pp : "/storage/" . $audioComment->users->pp,
+                "hasLiked" => $hasLiked,
+                "likes" => $audioComment->audioCommentLikes->count(),
+                "created_at" => $audioComment->created_at->format("d M Y"),
+            ]);
+        }
+
+        return $audioComments;
     }
 
     /**

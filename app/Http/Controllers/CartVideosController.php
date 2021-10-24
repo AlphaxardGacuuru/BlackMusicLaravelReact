@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\CartVideos;
-use App\CartAudios;
 use Illuminate\Http\Request;
 
 class CartVideosController extends Controller
@@ -15,23 +14,24 @@ class CartVideosController extends Controller
      */
     public function index()
     {
-        $getCartVideos = CartVideos::where('username', auth()->user()->username);
+        $getCartVideos = CartVideos::where('username', auth()->user()->username)
+            ->get();
 
-		$cartVideos = [];
+        $cartVideos = [];
 
-		foreach ($getCartVideos as $key => $cartVideo) {
-			array_push($cartVideos, [
-				"id" => $cartVideo->id,
-				"video_id" => $cartVideo->video_id,
-				"username" => $cartVideo->username,
-			]);
-		}
+        foreach ($getCartVideos as $key => $cartVideo) {
+            array_push($cartVideos, [
+                "id" => $cartVideo->id,
+                "video_id" => $cartVideo->video_id,
+                "name" => $cartVideo->videos->name,
+                "thumbnail" => preg_match("/http/", $cartVideo->videos->thumbnail) ?
+                $cartVideo->videos->thumbnail :
+                "/storage/" . $cartVideo->videos->thumbnail,
+                "username" => $cartVideo->username,
+            ]);
+        }
 
-        $getCartAudios = CartAudios::where('username', auth()->user()->username);
-
-		$cartAudios = [];
-
-		return ['cartVideos' => $cartVideos, 'cartAudios' => $cartAudios];
+        return $cartVideos;
     }
 
     /**

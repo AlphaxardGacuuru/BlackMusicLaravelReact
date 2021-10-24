@@ -54,59 +54,47 @@ function App() {
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
 
-	// For Index
-	const [musicians, setMusicians] = useState([])
-	const [videos, setVideos] = useState([])
-	const [posts, setPosts] = useState([])
-
-	// For Library
-	const [libraryBoughtVideos, setLibraryBoughtVideos] = useState([])
-	const [libraryBoughtAudios, setLibraryBoughtAudios] = useState([])
-
-	// For Video Charts
-	const [chartVideos, setChartVideos] = useState([])
-	const [chartBoughtVideos, setChartBoughtVideos] = useState([])
-	const [chartVideoLikes, setChartVideoLikes] = useState([])
-	const [chartCartVideos, setChartCartVideos] = useState([])
-	const [videoChartUsers, setVideoChartUsers] = useState([])
-	const [videoChartFollows, setVideoChartFollows] = useState([])
-
-	// For Audio Charts
-	const [chartAudios, setChartAudios] = useState([])
-	const [chartAudioLikes, setChartAudioLikes] = useState([])
-	const [chartBoughtAudios, setChartBoughtAudios] = useState([])
-	const [chartCartAudios, setChartCartAudios] = useState([])
-	const [audioChartUsers, setAudioChartUsers] = useState([])
-	const [audioChartFollows, setAudioChartFollows] = useState([])
-
-	// For Cart
-	const [cartVideos, setCartVideos] = useState([])
-	const [cartAudios, setCartAudios] = useState([])
-
-
-	const [boughtVideos, setBoughtVideos] = useState([])
-	const [videoLikes, setVideoLikes] = useState([])
-	const [audios, setAudios] = useState([])
-	const [audioLikes, setAudioLikes] = useState([])
-	const [boughtAudios, setBoughtAudios] = useState([])
-	const [users, setUsers] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
-	const [audioComments, setAudioComments] = useState([])
 	const [audioCommentLikes, setAudioCommentLikes] = useState([])
+	const [audioComments, setAudioComments] = useState([])
+	const [audioLikes, setAudioLikes] = useState([])
 	const [audioNotifications, setAudioNotifications] = useState([])
 	const [audioPayouts, setAudioPayouts] = useState([])
-	const [decos, setDecos] = useState([])
+	const [audios, setAudios] = useState([])
+
+	const [boughtAudios, setBoughtAudios] = useState([])
+	const [boughtVideos, setBoughtVideos] = useState([])
+
+	const [cartAudios, setCartAudios] = useState([])
+	const [cartVideos, setCartVideos] = useState([])
+
 	const [decoNotifications, setDecoNotifications] = useState([])
-	const [follows, setFollows] = useState([])
+	const [decos, setDecos] = useState([])
+
 	const [followNotifications, setFollowNotifications] = useState([])
-	const [sms, setSMS] = useState([])
+	const [follows, setFollows] = useState([])
+
+	const [kopokopo, setKopokopo] = useState([])
 	const [kopokopoNotifications, setKopokopoNotifications] = useState([])
+
 	const [notifications, setNotifications] = useState([])
-	const [videoComments, setVideoComments] = useState([])
-	const [videoCommentLikes, setVideoCommentLikes] = useState([])
-	const [videoNotifications, setVideoNotifications] = useState([])
+
+	const [posts, setPosts] = useState([])
+	const [postLikes, setPostLikes] = useState([])
+	const [postComments, setPostComments] = useState([])
+	const [postCommentLikes, setPostCommentLikes] = useState([])
+	const [polls, setPolls] = useState([])
+
+	const [sms, setSMS] = useState([])
+	const [users, setUsers] = useState([])
+
 	const [videoAlbums, setVideoAlbums] = useState([])
+	const [videoCommentLikes, setVideoCommentLikes] = useState([])
+	const [videoComments, setVideoComments] = useState([])
+	const [videoLikes, setVideoLikes] = useState([])
+	const [videoNotifications, setVideoNotifications] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
+	const [videos, setVideos] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
@@ -123,54 +111,166 @@ function App() {
 		}
 		getAuth()
 
-		// Fetch for Index
-		axios.get(`${url}/api/posts`)
-			.then((res) => {
-				setMusicians(res.data.musicians)
-				setVideos(res.data.videos)
-				setPosts(res.data.posts)
-			})
-			.catch(() => setErrors(['Failed to fetch for Index']))
+		// Fetch Audio Albums
+		axios.get(`${url}/api/audio-albums`)
+			.then((res) => setAudioAlbums(res.data))
+			.catch(() => setErrors(["Failed to fetch audio albums"]))
 
-		// Fetch for Library
-		axios.get(`${url}/api/bought-videos`)
-			.then((res) => {
-				setLibraryBoughtVideos(res.data.boughtVideos)
-				setLibraryBoughtAudios(res.data.boughtAudios)
-			})
-			.catch(() => setErrors(['Failed to fetch library']))
+		// Fetch Audio Comments Likes
+		axios.get(`${url}/api/audio-comment-likes`)
+			.then((res) => setAudioCommentLikes(res.data))
+			.catch(() => setErrors(['Failed to fetch audio comment likes']))
 
-		// Fetch for Video Charts
-		axios.get(`${url}/api/videos`)
-			.then((res) => {
-				setChartVideos(res.data.videos)
-				setChartBoughtVideos(res.data.boughtVideos)
-				setChartCartVideos(res.data.cartVideos)
-				setChartVideoLikes(res.data.videoLikes)
-				setVideoChartUsers(res.data.users)
-				setVideoChartFollows(res.data.follows)
-			})
-			.catch(() => setErrors(['Failed to fetch videos']))
+		// Fetch Audio Comments
+		axios.get(`${url}/api/audio-comments`)
+			.then((res) => setAudioComments(res.data))
+			.catch(() => setErrors(["Failed to fetch audio comments"]))
 
-		// Fetch for Audio Charts
+		// Fetch Audio Likes
+		axios.get(`${url}/api/audio-likes`)
+			.then((res) => setAudioLikes(res.data))
+			.catch(() => setErrors(["Failed to fetch audio likes"]))
+
+		// Fetch Audios
 		axios.get(`${url}/api/audios`)
-			.then((res) => {
-				setChartAudios(res.data.audios)
-				setChartBoughtAudios(res.data.boughtAudios)
-				setChartCartAudios(res.data.cartAudios)
-				setChartAudioLikes(res.data.audioLikes)
-				setAudioChartUsers(res.data.users)
-				setAudioChartFollows(res.data.follows)
-			})
-			.catch(() => setErrors(['Failed to fetch audios']))
+			.then((res) => setAudios(res.data))
+			.catch(() => setErrors(["Failed to fetch audios"]))
 
-		// Fetch for Cart
+		// Fetch Audio Notifications
+		axios.get(`${url}/api/audio-notifications`)
+			.then((res) => setAudioNotifications(res.data))
+			.catch(() => setErrors(["Failed to fetch audio notifications"]))
+
+		// Fetch Audio Payouts
+		axios.get(`${url}/api/audio-payouts`)
+			.then((res) => setAudioPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch audio payouts"]))
+
+		// Fetch Bought Audios
+		axios.get(`${url}/api/bought-audios`)
+			.then((res) => setBoughtAudios(res.data))
+			.catch(() => setErrors(["Failed to fetch bought audios"]))
+
+		// Fetch Bought Videos
+		axios.get(`${url}/api/bought-videos`)
+			.then((res) => setBoughtVideos(res.data))
+			.catch(() => setErrors(['Failed to fetch bought videos']))
+
+		// Fetch Cart Audios
+		axios.get(`${url}/api/cart-audios`)
+			.then((res) => setCartAudios(res.data))
+			.catch(() => setErrors(['Failed to fetch cart audios']))
+
+		// Fetch Cart Videos
 		axios.get(`${url}/api/cart-videos`)
-			.then((res) => {
-				setCartVideos(res.data.cartVideos)
-				setCartAudios(res.data.cartAudios)
-			})
-			.catch(() => setErrors(['Failed to fetch cart']))
+			.then((res) => setCartVideos(res.data))
+			.catch(() => setErrors(['Failed to fetch cart videos']))
+
+		// Fetch Decos
+		axios.get(`${url}/api/decos`)
+			.then((res) => setDecos(res.data))
+			.catch(() => setErrors(['Failed to fetch decos']))
+
+		// Fetch Decos Notifications
+		axios.get(`${url}/api/deco-notifications`)
+			.then((res) => setDecoNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch decos notifications']))
+
+		// Fetch Follows
+		axios.get(`${url}/api/follows`)
+			.then((res) => setFollows(res.data))
+			.catch(() => setErrors(['Failed to fetch follows']))
+
+		// Fetch Follows Notifications
+		axios.get(`${url}/api/follow-notifications`)
+			.then((res) => setFollowNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch follow notifications']))
+
+		// Fetch Kopokopo
+		// axios.get(`${url}/api/kopokopo`)
+		// 	.then((res) => setKopokopo(res.data))
+		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
+
+		// Fetch Kopokopo
+		axios.get(`${url}/api/kopokopo-notifications`)
+			.then((res) => setKopokopoNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch kopokopo notifications']))
+
+		// Fetch Notifications
+		axios.get(`${url}/api/notifications`)
+			.then((res) => setNotifications(res.data))
+			.catch(() => setErrors(['Failed to fetch notifications']))
+
+		// Fetch Polls
+		axios.get(`${url}/api/polls`)
+			.then((res) => setPolls(res.data))
+			.catch(() => setErrors(['Failed to fetch polls']))
+
+		// Fetch Post Comment likes
+		axios.get(`${url}/api/post-comment-likes`)
+			.then((res) => setPostCommentLikes(res.data))
+			.catch(() => setErrors(['Failed to fetch post comment likes']))
+
+		// Fetch Post Comments
+		axios.get(`${url}/api/post-comments`)
+			.then((res) => setPostComments(res.data))
+			.catch(() => setErrors(['Failed to fetch post comments']))
+
+		// Fetch Post Likes
+		axios.get(`${url}/api/post-likes`)
+			.then((res) => setPostLikes(res.data))
+			.catch(() => setErrors(['Failed to fetch post likes']))
+
+		//Fetch Posts
+		axios.get(`${url}/api/posts`)
+			.then((res) => setPosts(res.data))
+			.catch(() => setErrors(['Failed to fetch posts']))
+
+		//Fetch SMS
+		axios.get(`${url}/api/sms`)
+			.then((res) => setSMS(res.data))
+			.catch(() => setErrors(['Failed to fetch SMSs']))
+
+		//Fetch Users
+		axios.get(`${url}/api/users`)
+			.then((res) => setUsers(res.data))
+			.catch(() => setErrors(['Failed to fetch users']))
+
+		// Fetch Video Albums
+		axios.get(`${url}/api/video-albums`)
+			.then((res) => setVideoAlbums(res.data))
+			.catch(() => setErrors(["Failed to fetch video albums"]))
+
+		// Fetch Video Comments Likes
+		axios.get(`${url}/api/video-comment-likes`)
+			.then((res) => setVideoCommentLikes(res.data))
+			.catch(() => setErrors(["Failed to fetch video comment likes"]))
+
+		// Fetch Video Comments
+		axios.get(`${url}/api/video-comments`)
+			.then((res) => setVideoComments(res.data))
+			.catch(() => setErrors(["Failed to fetch video comments"]))
+
+		// Fetch Liked Videos
+		axios.get(`${url}/api/video-likes`)
+			.then((res) => setVideoLikes(res.data))
+			.catch(() => setErrors(["Failed to fetch video likes"]))
+
+		//Fetch Videos
+		axios.get(`${url}/api/videos`)
+			.then((res) => setVideos(res.data))
+			.catch(() => setErrors(["Failed to fetch videos"]))
+
+		// Fetch Video Notifications
+		axios.get(`${url}/api/video-notifications`)
+			.then((res) => setVideoNotifications(res.data))
+			.catch(() => setErrors(["Failed to fetch video notifications"]))
+
+		// Fetch Video Payouts
+		axios.get(`${url}/api/video-payouts`)
+			.then((res) => setVideoPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch video payouts"]))
+
 	}, [])
 
 	//Fetch Auth
@@ -220,18 +320,17 @@ function App() {
 	const volumeProgress = React.useRef()
 	const volumeContainer = React.useRef()
 
+	var showAudio = []
+	var showArtist = []
+
 	// Get audio to show
 	if (audios.find((audio) => audio.id == show)) {
 		var showAudio = audios.find((audio) => audio.id == show)
-	} else {
-		var showAudio = []
-	}
 
-	// Get artist of audio to show 
-	if (users.find((user) => user.username == showAudio.username)) {
-		var showArtist = users.find((user) => user.username == showAudio.username)
-	} else {
-		var showArtist = []
+		// Get artist of audio to show 
+		if (users.find((user) => user.username == showAudio.username)) {
+			var showArtist = users.find((user) => user.username == showAudio.username)
+		}
 	}
 
 	// Song titles
@@ -503,7 +602,7 @@ function App() {
 				)} />
 
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, musicians, setMusicians, videos, setVideos, posts, setPosts, setShow }} />
+					<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, posts, setPosts, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (
@@ -515,14 +614,14 @@ function App() {
 
 				<Route path="/cart" exact render={(props) => (
 					<>
-						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setBoughtVideos, videos, cartAudios, setCartAudios, setBoughtAudios, audios, setShow }} />
+						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, cartAudios, setCartAudios, setVideos, setAudios, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<>
-						<Library {...{ auth, libraryBoughtVideos, libraryBoughtAudios, setShow }} />
+						<Library {...{ auth, boughtVideos, boughtAudios, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
@@ -530,7 +629,7 @@ function App() {
 
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
-						<Profile {...{ setMessage, setErrors, auth, setAuth, url, posts, setPosts, setShow }} />
+						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, setUsers, follows, posts, setPosts, posts, setPosts, videos, setVideos, videoAlbums, setVideoAlbums, audioAlbums, setAudioAlbums, audios, setAudios, setCartVideos, setCartAudios, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />
@@ -558,11 +657,11 @@ function App() {
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (
-					<VideoCharts {...{ url, auth, setMessage, setErrors, videoChartUsers, chartVideos, chartBoughtVideos, chartCartVideos, setChartCartVideos, chartVideoLikes, videoChartFollows, setVideoChartFollows, setShow }} />
+					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, follows, setFollows, setShow }} />
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
@@ -603,11 +702,11 @@ function App() {
 
 				{/* Audio Routes */}
 				<Route path="/audio-charts" exact render={(props) => (
-					<AudioCharts {...{ url, auth, setMessage, setErrors, audioChartUsers, chartAudios, chartBoughtAudios, chartCartAudios, setChartCartAudios, chartAudioLikes, audioChartFollows, setAudioChartFollows, setShow }} />
+					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setAudioAlbums, setShow }} />
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, decos, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, setAudioLikes, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, follows, setFollows, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
 				)} />
 
 				<Route path="/audios" exact render={(props) => (

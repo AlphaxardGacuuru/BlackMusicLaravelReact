@@ -14,7 +14,24 @@ class CartAudiosController extends Controller
      */
     public function index()
     {
-        return CartAudios::all();
+        $getCartAudios = CartAudios::where('username', auth()->user()->username)
+            ->get();
+
+        $cartAudios = [];
+
+        foreach ($getCartAudios as $key => $cartAudio) {
+            array_push($cartAudios, [
+                "id" => $cartAudio->id,
+                "audio_id" => $cartAudio->audio_id,
+                "name" => $cartAudio->audios->name,
+                "thumbnail" => preg_match("/http/", $cartAudio->audios->thumbnail) ?
+                $cartAudio->audios->thumbnail :
+                "/storage/" . $cartAudio->audios->thumbnail,
+                "username" => $cartAudio->username,
+            ]);
+        }
+
+        return $cartAudios;
     }
 
     /**

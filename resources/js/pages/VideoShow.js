@@ -13,36 +13,21 @@ const VideoShow = (props) => {
 
 	let history = useHistory()
 
-	// Get video to show
+	var showVideo = []
+	var showArtist = []
+
+	// Get Video to show
 	if (props.videos.find((video) => video.id == show)) {
 		var showVideo = props.videos.find((video) => video.id == show)
-	} else {
-		var showVideo = []
-	}
 
-	// Get artist of video to show 
-	if (props.users.find((user) => user.username == showVideo.username)) {
-		var showArtist = props.users.find((user) => user.username == showVideo.username)
-	} else {
-		var showArtist = []
-	}
-
-	var hasBought = false
-
-	if (props.boughtVideos.some((boughtVideo) => {
-		return boughtVideo.video_id == showVideo.id &&
-			boughtVideo.username == props.auth.username ||
-			props.auth.username == "@blackmusic" ||
-			props.auth.username == showVideo.username
-	})) {
-		hasBought = true
+		// Get Artist
+		if (props.users.find((user) => user.username == showVideo.username)) {
+			var showArtist = props.users.find((user) => user.username == showVideo.username)
+		}
 	}
 
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
-
-	// Arrays for dates
-	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 	// Function for liking video
 	const onVideoLike = () => {
@@ -51,7 +36,9 @@ const VideoShow = (props) => {
 				video: show
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-likes`).then((res) => props.setVideoLikes(res.data))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -71,7 +58,9 @@ const VideoShow = (props) => {
 				musician: musician
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/follows`).then((res) => props.setFollows(res.data))
+				// Update Users
+				axios.get(`${props.url}/api/users`)
+					.then((res) => props.setUsers(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -94,7 +83,9 @@ const VideoShow = (props) => {
 				text: text
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comments`).then((res) => props.setVideoComments(res.data))
+				// Update Video Comments
+				axios.get(`${props.url}/api/video-comments`)
+					.then((res) => props.setVideoComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -116,7 +107,9 @@ const VideoShow = (props) => {
 				comment: comment
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comment-likes`).then((res) => props.setVideoCommentLikes(res.data))
+				// Update Video Comments
+				axios.get(`${props.url}/api/video-comments`)
+					.then((res) => props.setVideoComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -134,7 +127,9 @@ const VideoShow = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/video-comments/${id}`).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/video-comments`).then((res) => props.setVideoComments(res.data))
+				// Update Video Comments
+				axios.get(`${props.url}/api/video-comments`)
+					.then((res) => props.setVideoComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -154,7 +149,12 @@ const VideoShow = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -174,7 +174,12 @@ const VideoShow = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -204,7 +209,7 @@ const VideoShow = (props) => {
 							<iframe className='resp-iframe'
 								width='880px'
 								height='495px'
-								src={hasBought ?
+								src={showVideo.hasBoughtVideo ?
 									`${showVideo.video}/?autoplay=1` :
 									`${showVideo.video}?autoplay=1&end=10&controls=0`}
 								frameBorder='0'
@@ -220,11 +225,11 @@ const VideoShow = (props) => {
 								className="resp-iframe"
 								width="880px"
 								height="495px"
-								controls={hasBought && true}
+								controls={showVideo.hasBoughtVideo && true}
 								controlsList="nodownload"
 								autoPlay>
 								<source
-									src={hasBought ?
+									src={showVideo.hasBoughtVideo ?
 										`storage/${showVideo.video}` :
 										`storage/${showVideo.video}#t=1,10`}
 									type="video/mp4" />
@@ -234,23 +239,19 @@ const VideoShow = (props) => {
 				<div className="d-flex justify-content-between">
 					{/* Video likes */}
 					<div className="p-2 mr-2">
-						{props.videoLikes.find((videoLike) => {
-							return videoLike.video_id == show &&
-								videoLike.username == props.auth.username
-						}) ? <a href="#" style={{ color: "#cc3300" }}
-							onClick={(e) => {
-								e.preventDefault()
-								onVideoLike()
-							}}>
-							<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-								className='bi bi-heart-fill' viewBox='0 0 16 16'>
-								<path fillRule='evenodd'
-									d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-							</svg>
-
-							<small> {props.videoLikes.filter((videoLike) => videoLike.video_id == show).length}
-							</small>
-						</a>
+						{showVideo.hasLiked ?
+							<a href="#" style={{ color: "#cc3300" }}
+								onClick={(e) => {
+									e.preventDefault()
+									onVideoLike()
+								}}>
+								<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
+									className='bi bi-heart-fill' viewBox='0 0 16 16'>
+									<path fillRule='evenodd'
+										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
+								</svg>
+								<small className="ml-1">{showVideo.likes}</small>
+							</a>
 							: <a href='#' onClick={(e) => {
 								e.preventDefault()
 								onVideoLike()
@@ -260,9 +261,7 @@ const VideoShow = (props) => {
 									<path
 										d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 								</svg>
-
-								<small> {props.videoLikes.filter((videoLike) => videoLike.video_id == show).length}
-								</small>
+								<small className="ml-1">{showVideo.likes}</small>
 							</a>}
 					</div>
 
@@ -279,12 +278,11 @@ const VideoShow = (props) => {
 					</div>
 
 					{/* Download button */}
-					{hasBought ?
-						showVideo.video.match(/https/) ?
-							<div className="p-2">
-								<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
-							</div> : ""
-						: ""}
+					{showVideo.hasBoughtVideo ?
+						!showVideo.video.match(/https/) &&
+						<div className="p-2">
+							<Button btnClass="mysonar-btn" btnText="download" onClick={onDownload} />
+						</div> : ""}
 				</div>
 
 				<div className="d-flex flex-row">
@@ -298,17 +296,13 @@ const VideoShow = (props) => {
 							}}>
 							<small>Song name {showVideo.name}</small>
 						</h6>
-						<small>Album</small> <span>
-							{showVideo.album ?
-								props.videoAlbums.length &&
-								props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
+						<small>Album</small>
+						<span className="p-1">{showVideo.album ?
+							props.videoAlbums.length &&
+							props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
 						</span><br />
-						<small>Genre</small> <span>{showVideo.genre}</span><br />
-						<small>Posted</small> <span>
-							{new Date(showVideo.created_at).getDay()}
-							{" " + months[new Date(showVideo.created_at).getMonth()]}
-							{" " + new Date(showVideo.created_at).getFullYear()}
-						</span>
+						<small>Genre</small><span className="p-1">{showVideo.genre}</span><br />
+						<small>Posted</small><span className="p-1">{showVideo.created_at}</span>
 					</div>
 				</div>
 				{/* Video Area End */}
@@ -335,7 +329,7 @@ const VideoShow = (props) => {
 					<div className='media'>
 						<div className='media-left'>
 							<Link to={`/profile/${showArtist.username}`}>
-								<Img src={"/storage/" + showArtist.pp} width={"40px"} height={"40px"} />
+								<Img src={showArtist.pp} width={"40px"} height={"40px"} />
 							</Link>
 						</div>
 						<div className='media-body'>
@@ -346,29 +340,27 @@ const VideoShow = (props) => {
 									overflow: "hidden",
 									textOverflow: "clip"
 								}}>
-								<small>{showArtist.name} {showArtist.username}</small>
+								<small>{showArtist.name}{showArtist.username}</small>
 							</h6>
-							<span style={{
-								color: "gold",
-								paddingTop: "10px"
-							}}
-								className='fa fa-circle-o'>
+							<span className="ml-1" style={{ color: "gold" }}>
+								<svg className="bi bi-circle"
+									width="1em"
+									height="1em"
+									viewBox="0 0 16 16"
+									fill="currentColor"
+									xmlns="http://www.w3.org/2000/svg">
+									<path fillRule="evenodd"
+										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+								</svg>
 							</span>
-							<small>{props.decos.filter((deco) => deco.username == showArtist.username).length}</small>
-							<span style={{ fontSize: "1rem" }}>&#x2022;</span>
-							<small> {props.follows.filter((follow) => follow.username == showArtist.username).length} fans</small>
+							<small>{showArtist.decos}</small>
+							<span className="ml-1" style={{ fontSize: "1rem" }}>&#x2022;</span>
+							<small> {showArtist.fans} fans</small>
 
 							{/* Check whether user has bought at least one song from musician */}
 							{/* Check whether user has followed musician and display appropriate button */}
-							{props.boughtVideos.find((boughtVideo) => {
-								return boughtVideo.username == props.auth.username &&
-									boughtVideo.artist == showArtist.username
-							}) || props.auth.username == "@blackmusic" ?
-								props.follows.find((follow) => {
-									return follow.followed == showArtist.username &&
-										follow.username == props.auth.username ||
-										follow.username != "@blackmusic"
-								}) ?
+							{showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
+								showArtist.hasFollowed ?
 									<button className={'btn btn-light float-right rounded-0'}
 										onClick={() => onFollow(showArtist.username)}>
 										Followed
@@ -410,7 +402,7 @@ const VideoShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{hasBought &&
+					{showVideo.hasBoughtVideo &&
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
@@ -434,16 +426,17 @@ const VideoShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{hasBought &&
-						props.videoComments.filter((comment) => comment.video_id == show)
+					{showVideo.hasBoughtVideo &&
+						props.videoComments
+							.filter((comment) => comment.video_id == show)
 							.map((comment, index) => (
 								<div key={index} className='media p-2 border-bottom'>
 									<div className='media-left'>
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 											<Link to={`/profile/${comment.username}`}>
-												<Img src={`/storage/${props.users
-													.find((user) => user.username == comment.username).pp}`}
-													width="40px" height="40px" />
+												<Img src={comment.pp}
+													width="40px"
+													height="40px" />
 											</Link>
 										</div>
 									</div>
@@ -455,7 +448,7 @@ const VideoShow = (props) => {
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											<b>{props.users.find((user) => user.username == comment.username).name}</b>
+											<b>{comment.name}</b>
 											<small>{comment.username} </small>
 											<span style={{ color: "gold" }}>
 												<svg className="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16"
@@ -464,20 +457,17 @@ const VideoShow = (props) => {
 														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 												</svg>
 												<span className="ml-1" style={{ fontSize: "10px" }}>
-													{props.decos.filter((deco) => deco.username == comment.username).length}
+													{comment.decos}
 												</span>
 											</span>
 											<small>
-												<i className="float-right mr-1">{new Date(comment.created_at).toDateString()}</i>
+												<i className="float-right mr-1">{comment.created_at}</i>
 											</small>
 										</h6>
 										<p className="mb-0">{comment.text}</p>
 
 										{/* Comment likes */}
-										{props.videoCommentLikes.find((commentLike) => {
-											return commentLike.comment_id == comment.id &&
-												commentLike.username == props.auth.username
-										}) ?
+										{comment.hasLiked ?
 											<a href="#" style={{ color: "#cc3300" }}
 												onClick={(e) => {
 													e.preventDefault()
@@ -488,10 +478,7 @@ const VideoShow = (props) => {
 													<path fillRule='evenodd'
 														d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 												</svg>
-												<small className="ml-1">
-													{props.videoCommentLikes
-														.filter((commentLike) => commentLike.comment_id == comment.id).length}
-												</small>
+												<small className="ml-1">{comment.likes}</small>
 											</a> :
 											<a href='#' onClick={(e) => {
 												e.preventDefault()
@@ -502,10 +489,7 @@ const VideoShow = (props) => {
 													<path
 														d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 												</svg>
-												<small className="ml-1">
-													{props.videoCommentLikes
-														.filter((commentLike) => commentLike.comment_id == comment.id).length}
-												</small>
+												<small className="ml-1">{comment.likes}</small>
 											</a>}
 
 										{/* <!-- Default dropup button --> */}
@@ -541,17 +525,17 @@ const VideoShow = (props) => {
 				<div className="p-2">
 					<h5>Up next</h5>
 				</div>
-				{!props.boughtVideos.some((boughtVideo) => {
-					return boughtVideo.username == props.auth.username
-				}) &&
+				{!props.boughtVideos
+					.some((boughtVideo) => boughtVideo.username == props.auth.username) &&
 					<center>
 						<h6 style={{ color: "grey" }}>You haven't bought any videos</h6>
 					</center>}
 
 				{props.boughtVideos
-					.filter((boughtVideo) => boughtVideo.username == props.auth.username &&
-						boughtVideo.video_id != show)
-					.map((boughtVideo, key) => (
+					.filter((boughtVideo) => {
+						return boughtVideo.username == props.auth.username &&
+							boughtVideo.video_id != show
+					}).map((boughtVideo, key) => (
 						<VideoMediaHorizontal
 							key={key}
 							onClick={() => props.setShow(0)}
@@ -563,10 +547,10 @@ const VideoShow = (props) => {
 							// 	})}
 							setShow={props.setShow}
 							link={`/video-show/${boughtVideo.video_id}`}
-							thumbnail={props.videos.find((video) => video.id == boughtVideo.video_id).thumbnail}
-							name={props.videos.find((video) => video.id == boughtVideo.video_id).name}
-							username={props.videos.find((video) => video.id == boughtVideo.video_id).username}
-							ft={props.videos.find((video) => video.id == boughtVideo.video_id).ft}
+							thumbnail={boughtVideo.thumbnail}
+							name={boughtVideo.name}
+							username={boughtVideo.username}
+							ft={boughtVideo.ft}
 							showCartandBuyButton={false} />
 					))}
 				{/* <!-- End of Up next Area --> */}
@@ -576,12 +560,11 @@ const VideoShow = (props) => {
 					<h5>Songs to watch</h5>
 				</div>
 				{props.videos
-					.filter((video) => !props.boughtVideos
-						.some((boughtVideo) =>
-							boughtVideo.video_id == video.id &&
-							boughtVideo.username == props.auth.username
-						) && video.username != props.auth.username && video.id != show)
-					.slice(0, 10)
+					.filter((video) => {
+						return !video.hasBoughtVideo &&
+							video.username != props.auth.username &&
+							video.id != show
+					}).slice(0, 10)
 					.map((video, key) => (
 						<VideoMediaHorizontal
 							key={key}
@@ -598,14 +581,8 @@ const VideoShow = (props) => {
 							name={video.name}
 							username={video.username}
 							ft={video.ft}
-							videoInCart={
-								props.cartVideos
-									.some((cartVideo) => {
-										return cartVideo.video_id == video.id &&
-											cartVideo.username == props.auth.username
-									})
-							}
-							hasBoughtVideo={!hasBought}
+							videoInCart={video.inCart}
+							hasBoughtVideo={!video.hasBoughtVideo}
 							videoId={video.id}
 							onCartVideos={onCartVideos}
 							onBuyVideos={onBuyVideos} />

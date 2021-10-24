@@ -39,26 +39,7 @@ class BoughtVideosController extends Controller
             ]);
         }
 
-        $getBoughtAudios = BoughtAudios::where('username', auth()->user()->username)->get();
-
-        $boughtAudios = [];
-
-        foreach ($getBoughtAudios as $key => $boughtAudio) {
-            array_push($boughtAudios, [
-                "id" => $boughtAudio->id,
-                "video_id" => $boughtAudio->video_id,
-                "username" => $boughtAudio->username,
-                "ft" => $boughtAudio->audios->ft,
-                "name" => $boughtAudio->name,
-                "artist" => $boughtAudio->artist,
-                "thumbnail" => $boughtAudio->audios->thumbnail,
-            ]);
-        }
-
-        return [
-            "boughtVideos" => $boughtVideos,
-            "boughtAudios" => $boughtAudios,
-        ];
+        return $boughtVideos;
     }
 
     /**

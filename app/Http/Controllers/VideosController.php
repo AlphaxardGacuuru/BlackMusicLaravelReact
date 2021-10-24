@@ -9,6 +9,7 @@ use App\User;
 use App\Videos;
 use App\BoughtVideos;
 use App\CartVideos;
+use App\VideoAlbums;
 use App\VideoLikes;
 use App\Follows;
 use Illuminate\Http\Request;
@@ -28,21 +29,48 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $videos = Videos::all();
-        $boughtVideos = BoughtVideos::all();
-		$cartVideos = CartVideos::all();
-        $videoLikes = VideoLikes::all();
-		$users = User::all();
-		$follows = Follows::all();
+        // Get Videos
+        $getVideos = Videos::orderBy('id', 'ASC')->get();
 
-		return [
-			"videos" => $videos,
-			"boughtVideos" => $boughtVideos,
-			"cartVideos" => $cartVideos,
-			"videoLikes" => $videoLikes,
-			"users" => $users,
-			"follows" => $follows,
-		];
+        $videos = [];
+
+        foreach ($getVideos as $key => $video) {
+
+			// Check if user has liked video
+			$hasLiked = VideoLikes::where('username', auth()->user()->username)
+			->where('video_id', $video->id)
+			->exists();
+			
+            // Check if video in cart
+            $inCart = CartVideos::where('video_id', $video->id)
+                ->where('username', auth()->user()->username)
+                ->exists();
+
+            // Check if user has bought video
+            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
+                ->where('video_id', $video->id)
+                ->exists();
+
+            array_push($videos, [
+                "id" => $video->id,
+                "video" => $video->video,
+                "name" => $video->name,
+                "username" => $video->username,
+                "ft" => $video->ft,
+                "album" => $video->album,
+                "genre" => $video->genre,
+                "thumbnail" => preg_match("/http/", $video->thumbnail) ? $video->thumbnail : "/storage/" . $video->thumbnail,
+                "description" => $video->description,
+                "released" => $video->released,
+                "hasLiked" => $hasLiked,
+                "likes" => $video->videoLikes->count(),
+                "inCart" => $inCart,
+                "hasBoughtVideo" => $hasBoughtVideo,
+                "created_at" => $video->created_at->format('d M Y'),
+            ]);
+        }
+
+		return $videos;
     }
 
     /**

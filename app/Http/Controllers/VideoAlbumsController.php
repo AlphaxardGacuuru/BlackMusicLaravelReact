@@ -15,7 +15,23 @@ class VideoAlbumsController extends Controller
      */
     public function index()
     {
-        return VideoAlbums::all();
+        // Get Video Albums
+        $getVideoAlbums = VideoAlbums::all();
+
+        $videoAlbums = [];
+
+        foreach ($getVideoAlbums as $key => $videoAlbum) {
+            array_push($videoAlbums, [
+                "id" => $videoAlbum->id,
+                "username" => $videoAlbum->username,
+                "name" => $videoAlbum->name,
+                "cover" => $videoAlbum->cover,
+                "released" => $videoAlbum->released,
+                "created_at" => $videoAlbum->created_at->format("d M Y"),
+            ]);
+        }
+
+		return $videoAlbums;
     }
 
     /**

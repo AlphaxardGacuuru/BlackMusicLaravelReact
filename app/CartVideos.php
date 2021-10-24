@@ -8,6 +8,6 @@ class CartVideos extends Model
 {
     public function videos()
     {
-        return $this->belongsTo('App\Videos', 'video_id');
+        return $this->belongsTo('App\Videos', 'video_id', 'id');
     }
 }

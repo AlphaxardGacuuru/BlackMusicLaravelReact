@@ -12,40 +12,30 @@ const Profile = (props) => {
 
 	let { username } = useParams();
 
-	// For Profile
-	const [profile, setProfile] = useState([])
-	const [audioAlbums, setAudioAlbums] = useState([])
-	const [audios, setAudios] = useState([])
-	const [videoAlbums, setVideoAlbums] = useState([])
-	const [videos, setVideos] = useState([])
-
-	// Fetch Profile data
-	axios.get(`${props.url}/api/users/${username}`)
-		.then((res) => {
-			setProfile(res.data.profile)
-			setAudioAlbums(res.data.audioAlbums)
-			setAudios(res.data.audios)
-			setVideoAlbums(res.data.videoAlbums)
-			setVideos(res.data.videos)
-		})
-		.catch(() => props.setErrors(['Failed to fetch profile']))
-
 	let history = useHistory()
 
 	const [tabClass, setTabClass] = useState("audios")
 
-	// Arrays for dates
-	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	// Get profile info
+	if (props.users.find((user) => user.username == username)) {
+		var profile = props.users.find((user) => user.username == username)
+	} else {
+		var profile = []
+	}
 
-	// Function for following musicians
+	// Function for following users
 	const onFollow = (musician) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/follows`, {
 				musician: musician
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/users/${username}`)
-					.then((res) => props.setProfile(res.data.profile))
+				// Update users
+				axios.get(`${props.url}/api/users`)
+					.then((res) => props.setUsers(res.data))
+				// Update posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -60,53 +50,48 @@ const Profile = (props) => {
 		});
 	}
 
-	// Function for liking posts
-	const onPostLike = (post) => {
+	// Function for adding video to cart
+	const onCartVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/post-likes`, {
-				post: post
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/post-likes`).then((res) => props.setPostLikes(res.data))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update cart videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
+				// Get validation errors
 				var resError
 				var newError = []
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
-		})
+		});
 	}
 
-	// Function for deleting posts
-	const onDeletePost = (id) => {
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
-				props.setMessage(res.data)
-				axios.get(`${props.url}/api/posts`).then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		})
-	}
-
-	// Function for voting in poll
-	const onPoll = (post, parameter) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/polls`, {
-				post: post,
-				parameter: parameter
+			axios.post(`${props.url}/api/cart-videos`, {
+				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/polls`).then((res) => props.setPolls(res.data))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update cart videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
+				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -114,12 +99,12 @@ const Profile = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
-		})
+		});
 	}
-
-	var percentage = 100
 
 	// Function for adding audio to cart
 	const onCartAudios = (audio) => {
@@ -128,7 +113,12 @@ const Profile = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				// Update audios
+				axios.get(`${props.url}/api/audios`)
+					.then((res) => props.setAudios(res.data))
+				// Update cart audios
+				axios.get(`${props.url}/api/cart-audios`)
+					.then((res) => props.setCartAudios(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -148,7 +138,12 @@ const Profile = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-audios`).then((res) => props.setCartAudios(res.data))
+				// Update audios
+				axios.get(`${props.url}/api/audios`)
+					.then((res) => props.setAudios(res.data))
+				// Update cart audios
+				axios.get(`${props.url}/api/cart-audios`)
+					.then((res) => props.setCartAudios(res.data))
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -162,14 +157,16 @@ const Profile = (props) => {
 		});
 	}
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
+	// Function for liking posts
+	const onPostLike = (post) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
+			axios.post(`${props.url}/api/post-likes`, {
+				post: post
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
+				// Update posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -177,20 +174,21 @@ const Profile = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
-		});
+		})
 	}
 
-	// Function for buying video to cart
-	const onBuyVideos = (video) => {
+	// Function for deleting posts
+	const onDeletePost = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
+			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/cart-videos`).then((res) => props.setCartVideos(res.data))
-				history.push('/cart')
+				// Update posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -198,9 +196,36 @@ const Profile = (props) => {
 				for (resError in resErrors) {
 					newError.push(resErrors[resError])
 				}
+				// Get other errors
+				newError.push(err.response.data.message)
 				props.setErrors(newError)
 			})
-		});
+		})
+	}
+
+	// Function for voting in poll
+	const onPoll = (post, parameter) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/polls`, {
+				post: post,
+				parameter: parameter
+			}).then((res) => {
+				props.setMessage(res.data)
+				// Update posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				props.setErrors(newError)
+			})
+		})
 	}
 
 	return (
@@ -217,10 +242,18 @@ const Profile = (props) => {
 					<br />
 					<br className="hidden" />
 					<div>
-						<div style={{ marginTop: "100px", top: "70px", left: "10px" }} className="avatar-container">
-							<Img style={{ position: "absolute", zIndex: "99" }}
-								imgClass="avatar hover-img"
-								src={profile.pp} />
+						<div className="avatar-container"
+							style={{
+								marginTop: "100px",
+								top: "70px",
+								left: "10px",
+							}}>
+							{props.users
+								.filter((user) => user.username == username)
+								.map((profile, key) => (
+									<Img key={key} style={{ position: "absolute", zIndex: "99" }}
+										imgClass="avatar hover-img"
+										src={profile.pp} />))}
 						</div>
 					</div>
 				</div>
@@ -236,7 +269,7 @@ const Profile = (props) => {
 					<br className="anti-hidden" />
 					{/* Check whether user has bought at least one song from musician */}
 					{/* Check whether user has followed musician and display appropriate button */}
-					{props.auth.username == username ?
+					{profile.username == props.auth.username ?
 						<Link to="/profile-edit">
 							<button className="float-right mysonar-btn">edit profile</button>
 						</Link>
@@ -309,51 +342,54 @@ const Profile = (props) => {
 				<div className="col-sm-1"></div>
 				<div className={tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Audios</h4></center>
-					{audios.length == 0 &&
+					{props.audioAlbums.filter((audioAlbum) => audioAlbum.username == username).length == 0 &&
 						<center className="mt-3">
 							<h6 style={{ color: "grey" }}>{username} does not have any audios</h6>
 						</center>}
 
 					{/* Audio Albums */}
-					{audioAlbums.map((audioAlbum, key) => (
-						<div key={key} className="mb-5">
-							<div className="media">
-								<div className="media-left">
-									<Img src={`storage/${audioAlbum.cover}`}
-										width="auto"
-										height="100"
-										alt={"album cover"} />
+					{props.audioAlbums
+						.filter((audioAlbum) => audioAlbum.username == username)
+						.map((audioAlbum, key) => (
+							<div key={key} className="mb-5">
+								<div className="media">
+									<div className="media-left">
+										<Img src={`storage/${audioAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
+									</div>
+									<div className="media-body p-2">
+										<small>Audio Album</small>
+										<h1>{audioAlbum.name}</h1>
+										<h6>{audioAlbum.created_at}</h6>
+									</div>
 								</div>
-								<div className="media-body p-2">
-									<small>Audio Album</small>
-									<h1>{audioAlbum.name}</h1>
-									<h6>{audioAlbum.created_at}</h6>
-								</div>
+								{props.audios
+									.filter((audio) => audio.album == audioAlbum.id && audio.username == username)
+									.map((audio, index) => (
+										<AudioMediaHorizontal
+											key={index}
+											onClick={() => props.setShow(0)}
+											setShow={props.setShow}
+											link={`/audio-show/${audio.id}`}
+											thumbnail={`storage/${audio.thumbnail}`}
+											name={audio.name}
+											username={audio.username}
+											ft={audio.ft}
+											hasBoughtAudio={!audio.hasBoughtAudio}
+											audioInCart={audio.inCart}
+											audioId={audio.id}
+											onCartAudios={onCartAudios}
+											onBuyAudios={onBuyAudios} />
+									))}
 							</div>
-							{audios.filter((audio) => audio.album == audioAlbum.id)
-								.map((audio, index) => (
-									<AudioMediaHorizontal
-										key={index}
-										onClick={() => props.setShow(0)}
-										setShow={props.setShow}
-										link={`/audio-show/${audio.id}`}
-										thumbnail={`storage/${audio.thumbnail}`}
-										name={audio.name}
-										username={audio.username}
-										ft={audio.ft}
-										hasBoughtAudio={!audio.hasBoughtAudio}
-										audioInCart={audio.inCart}
-										audioId={audio.id}
-										onCartAudios={onCartAudios}
-										onBuyAudios={onBuyAudios} />
-								))}
-						</div>
-					))}
+						))}
 					{/* Audio Albums End */}
 				</div>
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
-					{props.posts.filter((post) => post.username == props.auth.username).length == 0 &&
+					{props.posts.filter((post) => post.username == username).length == 0 &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any posts</h6>
 						</center>}
@@ -366,7 +402,7 @@ const Profile = (props) => {
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.user_id}`}>
-											<Img src={post.pp.match(/http/) ? post.pp : `storage/${post.pp}`}
+											<Img src={post.pp}
 												width="40px"
 												height="40px"
 												alt={'avatar'} />
@@ -684,47 +720,49 @@ const Profile = (props) => {
 
 				<div className={tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Videos</h4></center>
-					{videos.length == 0 &&
+					{props.videoAlbums.filter((videoAlbum) => videoAlbum.username == username).length == 0 &&
 						<center className="mt-3">
 							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
 						</center>}
 
 					{/* Video Albums */}
-					{videoAlbums.map((videoAlbum, key) => (
-						<div key={key} className="mb-5">
-							<div className="media">
-								<div className="media-left">
-									<Img src={`/storage/${videoAlbum.cover}`}
-										width="auto"
-										height="100"
-										alt={"album cover"} />
+					{props.videoAlbums
+						.filter((videoAlbum) => videoAlbum.username == username)
+						.map((videoAlbum, key) => (
+							<div key={key} className="mb-5">
+								<div className="media">
+									<div className="media-left">
+										<Img src={`/storage/${videoAlbum.cover}`}
+											width="auto"
+											height="100"
+											alt={"album cover"} />
+									</div>
+									<div className="media-body p-2">
+										<small>Video Album</small>
+										<h1>{videoAlbum.name}</h1>
+										<h6>{videoAlbum.created_at}</h6>
+									</div>
 								</div>
-								<div className="media-body p-2">
-									<small>Video Album</small>
-									<h1>{videoAlbum.name}</h1>
-									<h6>{videoAlbum.created_at}</h6>
-								</div>
+								{props.videos
+									.filter((video) => video.album == videoAlbum.id && videoAlbum.username == username)
+									.map((video, index) => (
+										<VideoMediaHorizontal
+											key={index}
+											onClick={() => props.setShow(0)}
+											setShow={props.setShow}
+											link={`/video-show/${video.id}`}
+											thumbnail={video.thumbnail}
+											name={video.name}
+											username={video.username}
+											ft={video.ft}
+											hasBoughtVideo={!video.hasBoughtVideo}
+											videoInCart={video.inCart}
+											videoId={video.id}
+											onCartVideos={onCartVideos}
+											onBuyVideos={onBuyVideos} />
+									))}
 							</div>
-							{videos
-								.filter((video) => video.album == videoAlbum.id)
-								.map((video, index) => (
-									<VideoMediaHorizontal
-										key={index}
-										onClick={() => props.setShow(0)}
-										setShow={props.setShow}
-										link={`/video-show/${video.id}`}
-										thumbnail={video.thumbnail}
-										name={video.name}
-										username={video.username}
-										ft={video.ft}
-										hasBoughtVideo={!video.hasBoughtVideo}
-										videoInCart={video.inCart}
-										videoId={video.id}
-										onCartVideos={onCartVideos}
-										onBuyVideos={onBuyVideos} />
-								))}
-						</div>
-					))}
+						))}
 					{/* Videos Albums End */}
 
 				</div>

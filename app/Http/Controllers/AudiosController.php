@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AudioLikes;
 use App\Audios;
 use App\BoughtAudios;
 use App\CartAudios;
-use App\AudioLikes;
-use App\Follows;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,21 +19,48 @@ class AudiosController extends Controller
      */
     public function index()
     {
-        $audios = Audios::all();
-        $boughtAudios = BoughtAudios::all();
-        $cartAudios = CartAudios::all();
-        $audioLikes = AudioLikes::all();
-		$users = User::all();
-		$follows = Follows::all();
+        // Get Audios
+        $getAudios = Audios::orderBy('id', 'ASC')->get();
 
-		return [
-			"audios" => $audios,
-			"boughtAudios" => $boughtAudios,
-			"cartAudios" => $cartAudios,
-			"audioLikes" => $audioLikes,
-			"users" => $users,
-			"follows" => $follows,
-		];
+        $audios = [];
+
+        foreach ($getAudios as $key => $audio) {
+
+            // Check if user has liked
+            $hasLiked = AudioLikes::where('username', auth()->user()->username)
+                ->where('audio_id', $audio->id)
+                ->exists();
+
+            // Check if audio in cart
+            $inCart = CartAudios::where('audio_id', $audio->id)
+                ->where('username', auth()->user()->username)
+                ->exists();
+
+            // Check if user has bought audio
+            $hasBoughtAudio = BoughtAudios::where('username', auth()->user()->username)
+                ->where('audio_id', $audio->id)
+                ->exists();
+
+            array_push($audios, [
+                "id" => $audio->id,
+                "audio" => $audio->audio,
+                "name" => $audio->name,
+                "username" => $audio->username,
+                "ft" => $audio->ft,
+                "album" => $audio->album,
+                "genre" => $audio->genre,
+                "thumbnail" => $audio->thumbnail,
+                "description" => $audio->description,
+                "released" => $audio->released,
+                "hasLiked" => $hasLiked,
+                "likes" => $audio->audioLikes->count(),
+                "inCart" => $inCart,
+                "hasBoughtAudio" => $hasBoughtAudio,
+                "created_at" => $audio->created_at->format('d M Y'),
+            ]);
+        }
+
+        return $audios;
     }
 
     /**

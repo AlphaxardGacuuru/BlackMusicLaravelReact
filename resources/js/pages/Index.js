@@ -9,21 +9,22 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 const Index = (props) => {
 
 	const [videoSlice, setVideoSlice] = useState(10)
-
+	
 	const history = useHistory()
 
-	// Function for following musicians
+	// Function for following users
 	const onFollow = (musician) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/follows`, {
 				musician: musician
 			}).then((res) => {
 				props.setMessage(res.data)
+				// Update users
+				axios.get(`${props.url}/api/users`)
+					.then((res) => props.setUsers(res.data))
+				// Update posts
 				axios.get(`${props.url}/api/posts`)
-					.then((res) => {
-						props.setMusicians(res.data.musicians)
-						props.setPosts(res.data.posts)
-					})
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -45,8 +46,12 @@ const Index = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setVideos(res.data.videos))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update cart videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				// Get validation errors
@@ -69,8 +74,12 @@ const Index = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setVideos(res.data.videos))
+				// Update videos
+				axios.get(`${props.url}/api/videos`)
+					.then((res) => props.setVideos(res.data))
+				// Update cart videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
 				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -93,8 +102,9 @@ const Index = (props) => {
 				post: post
 			}).then((res) => {
 				props.setMessage(res.data)
+				// Update posts
 				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setPosts(res.data.posts))
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -114,8 +124,9 @@ const Index = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
 				props.setMessage(res.data)
+				// Update posts
 				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setPosts(res.data.posts))
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -138,8 +149,9 @@ const Index = (props) => {
 				parameter: parameter
 			}).then((res) => {
 				props.setMessage(res.data)
+				// Update posts
 				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setPosts(res.data.posts))
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -238,36 +250,37 @@ const Index = (props) => {
 
 					<br />
 
-					{/* <!-- Musician suggestions area --> */}
+					{/* <!-- Musicians suggestions area --> */}
 					<div className="border">
 						<div className="p-2 border-bottom">
 							<h2>Musicians to follow</h2>
 						</div>
 						{/* Slice to limit to 10 */}
-						{props.musicians
+						{props.users
+							.filter((user) => user.account_type == "musician" && user.username != props.auth.username)
 							.slice(0, 10)
-							.map((musician, key) => (
+							.map((user, key) => (
 								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>
-										<Link to={`/profile/:${musician.id}`}>
-											<Img src={musician.pp.match(/http/) ? musician.pp : `storage/${musician.pp}`}
+										<Link to={`/profile/${user.username}`}>
+											<Img src={user.pp}
 												width="30px"
 												height="30px"
-												alt="musician" />
+												alt="user" />
 										</Link>
 									</div>
 									<div className='media-body'>
-										<Link to={`/profile/${musician.id}`} className="text-dark">
-											<b>{musician.name}</b>
-											<small><i>{musician.username}</i></small>
+										<Link to={`/profile/${user.username}`} className="text-dark">
+											<b>{user.name}</b>
+											<small><i>{user.username}</i></small>
 										</Link>
 
-										{/* Check whether user has bought at least one song from musician */}
-										{/* Check whether user has followed musician and display appropriate button */}
-										{musician.hasBought1 ?
-											musician.hasFollowed ?
+										{/* Check whether user has bought at least one song from user */}
+										{/* Check whether user has followed user and display appropriate button */}
+										{user.hasBought1 ?
+											user.hasFollowed ?
 												<button className={'btn btn-light float-right rounded-0'}
-													onClick={() => onFollow(musician.username)}>
+													onClick={() => onFollow(user.username)}>
 													Followed
 													<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 														<path fillRule='evenodd'
@@ -275,11 +288,11 @@ const Index = (props) => {
 													</svg>
 												</button>
 												: <Button btnClass={'mysonar-btn float-right'}
-													onClick={() => onFollow(musician.username)}
+													onClick={() => onFollow(user.username)}
 													btnText={'follow'} />
 											: <Button btnClass={'mysonar-btn float-right'}
 												onClick={() =>
-													props.setErrors([`You must have bought atleast one song by ${musician.username}`])}
+													props.setErrors([`You must have bought atleast one song by ${user.username}`])}
 												btnText={'follow'} />}
 									</div>
 								</div>
@@ -314,7 +327,7 @@ const Index = (props) => {
 											</Link>
 										</div>
 										<Link to={`/video-show/${video.id}`}>
-											<h6 className="m-0 pt-2 py-1"
+											<h6 className="m-0 pt-2 px-1"
 												style={{
 													width: "150px",
 													whiteSpace: "nowrap",
@@ -323,7 +336,7 @@ const Index = (props) => {
 												}}>
 												{video.name}
 											</h6>
-											<h6 className="mt-0 my-1 mb-2 px-0 py-1">
+											<h6 className="mt-0 mx-1 mb-2 px-1 py-0">
 												<small>{video.username} {video.ft}</small>
 											</h6>
 										</Link>
@@ -368,7 +381,7 @@ const Index = (props) => {
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
-											<Img src={post.pp.match(/http/) ? post.pp : `storage/${post.pp}`}
+											<Img src={post.pp}
 												width="40px"
 												height="40px"
 												alt={'avatar'} />

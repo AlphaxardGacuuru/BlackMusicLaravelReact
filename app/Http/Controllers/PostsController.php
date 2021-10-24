@@ -26,81 +26,6 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $getMusicians = User::where('username', '!=', auth()->user()->username)
-            ->where('username', '!=', '@blackmusic')
-            ->where('account_type', 'musician')
-            ->get();
-
-        $musicians = [];
-
-        // Get Musicians
-        foreach ($getMusicians as $key => $musician) {
-            // Check if user has followed Musician
-            $hasFollowed = Follows::where('followed', $musician->username)
-                ->where('username', auth()->user()->username)
-                ->exists();
-
-            // Check if user has bought atleast 1 song
-            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
-                ->where('artist', $musician->username)
-                ->count();
-
-            // Check if user has bought atleast 1 song
-            $hasBoughtAudio = BoughtAudios::where('username', auth()->user()->username)
-                ->where('artist', $musician->username)
-                ->count();
-
-            $hasBought1 = ($hasBoughtVideo + $hasBoughtAudio) > 1 ? true : false;
-
-            array_push($musicians, [
-                "name" => $musician->name,
-                "username" => $musician->username,
-                "account_type" => $musician->account_type,
-                "pp" => $musician->pp,
-                "bio" => $musician->bio,
-                "posts" => $musician->posts->count(),
-                "following" => $musician->posts->Where('username', auth()->user()->username)->count(),
-                "followers" => $musician->posts->Where('following', auth()->user()->username)->count(),
-                "hasFollowed" => $hasFollowed,
-                "hasBought1" => $hasBought1,
-            ]);
-        }
-
-        // Get Videos
-        $getVideos = Videos::where('username', '!=', auth()->user()->username)
-            ->orderBy('id', 'ASC')
-            ->get();
-
-        $videos = [];
-
-        foreach ($getVideos as $key => $video) {
-            // Check if video in cart
-            $inCart = CartVideos::where('video_id', $video->id)
-                ->where('username', auth()->user()->username)
-                ->exists();
-
-            // Check if user has bought video
-            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
-                ->where('video_id', $video->id)
-                ->exists();
-
-            array_push($videos, [
-                "id" => $video->id,
-                "video" => $video->video,
-                "name" => $video->name,
-                "username" => $video->username,
-                "ft" => $video->ft,
-                "album" => $video->album,
-                "genre" => $video->genre,
-                "thumbnail" => $video->thumbnail,
-                "description" => $video->description,
-                "released" => $video->released,
-                "inCart" => $inCart,
-                "hasBoughtVideo" => $hasBoughtVideo,
-                "created_at" => $video->created_at,
-            ]);
-        }
-
         // Get Posts
         $getPosts = Posts::orderBy('id', 'DESC')->get();
 
@@ -226,7 +151,7 @@ class PostsController extends Controller
                 "id" => $post->id,
                 "name" => $post->users->name,
                 "username" => $post->users->username,
-                "pp" => $post->users->pp,
+                "pp" => preg_match("/http/", $post->users->pp) ? $post->users->pp : "/storage/" . $post->users->pp,
                 "decos" => $post->users->decos->count(),
                 "text" => $post->text,
                 "media" => $post->media,
@@ -255,11 +180,7 @@ class PostsController extends Controller
             ]);
         }
 
-        return [
-            "musicians" => $musicians,
-            "videos" => $videos,
-            "posts" => $posts,
-        ];
+        return $posts;
     }
 
     /**

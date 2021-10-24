@@ -12,7 +12,7 @@ const Library = (props) => {
 				<hr />
 				<center><h3>Videos</h3></center>
 
-				{props.libraryBoughtVideos
+				{props.boughtVideos
 					.map((boughtVideo, key) => (
 						<VideoMediaHorizontal
 							key={key}
@@ -21,14 +21,14 @@ const Library = (props) => {
 							link={`/video-show/${boughtVideo.video_id}`}
 							thumbnail={boughtVideo.thumbnail}
 							name={boughtVideo.name}
-							username={boughtVideo.username}
+							username={boughtVideo.artist}
 							ft={boughtVideo.ft}
 							showCartandBuyButton={false} />
 					))}
 
 				<center><h3 className="mt-5">Audios</h3></center>
 
-				{props.libraryBoughtAudios
+				{props.boughtAudios
 					.map((boughtAudio, key) => (
 						<AudioMediaHorizontal
 							key={key}
@@ -36,7 +36,7 @@ const Library = (props) => {
 							link={`/audio-show/${boughtAudio.audio_id}`}
 							thumbnail={`/storage/${boughtAudio.thumbnail}`}
 							name={boughtAudio.name}
-							username={boughtAudio.username}
+							username={boughtAudio.artist}
 							ft={boughtAudio.ft}
 							audioId={boughtAudio.audio_id}
 							showCartandBuyButton={false} />

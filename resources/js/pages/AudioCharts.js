@@ -34,13 +34,13 @@ const AudioCharts = (props) => {
 
 	// Set state for chart list
 	if (chart == "Newly Released") {
-		var chartList = props.chartAudios
+		var chartList = props.audios
 	} else if (chart == "Trending") {
-		var chartList = props.chartBoughtAudios
+		var chartList = props.boughtAudios
 	} else if (chart == "Top Downloaded") {
-		var chartList = props.chartBoughtAudios
+		var chartList = props.boughtAudios
 	} else {
-		var chartList = props.chartAudioLikes
+		var chartList = props.audioLikes
 	}
 
 	// Array for audio id and frequency
@@ -60,7 +60,7 @@ const AudioCharts = (props) => {
 				return item.genre == genre
 			}
 
-			return props.chartAudios.find((audio) => audio.id == item.audio_id).genre == genre
+			return props.audios.find((audio) => audio.id == item.audio_id).genre == genre
 		}
 
 	}).forEach((audio) => {
@@ -76,7 +76,7 @@ const AudioCharts = (props) => {
 			var getId = audio.artist
 			var getIdTwo = audio.audio_id
 		} else {
-			var getId = props.chartAudios.find((item) => item.id == audio.audio_id).username
+			var getId = props.audios.find((item) => item.id == audio.audio_id).username
 			var getIdTwo = audio.audio_id
 		}
 
@@ -117,7 +117,15 @@ const AudioCharts = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/audios`).then((res) => props.setChartCartAudios(res.data.cartAudios))
+				// Update Audios
+				axios.get(`${props.url}/api/audios`)
+					.then((res) => props.setAudios(res.data))
+				// Update Cart Audios
+				axios.get(`${props.url}/api/cart-audios`)
+					.then((res) => props.setCartAudios(res.data))
+				// Update Audio Albums
+				axios.get(`${props.url}/api/audio-albums`)
+					.then((res) => props.setAudioAlbums(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -137,7 +145,15 @@ const AudioCharts = (props) => {
 				audio: audio
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/audios`).then((res) => props.setChartCartAudios(res.data.cartAudios))
+				// Update Audios
+				axios.get(`${props.url}/api/audios`)
+					.then((res) => props.setAudios(res.data))
+				// Update Cart Audios
+				axios.get(`${props.url}/api/cart-audios`)
+					.then((res) => props.setCartAudios(res.data))
+				// Update Audio Albums
+				axios.get(`${props.url}/api/audio-albums`)
+					.then((res) => props.setAudioAlbums(res.data))
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -181,7 +197,7 @@ const AudioCharts = (props) => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div className="carousel-inner">
-					{props.chartAudios
+					{props.audios
 						.slice(0, 3)
 						.map((audio, key) => (
 							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
@@ -256,43 +272,46 @@ const AudioCharts = (props) => {
 				<div className="col-sm-12">
 
 					{/* <!-- ****** Artists Area Start ****** - */}
-					<h5>Artists</h5>
+					<h5 className="p-2">Artists</h5>
 					<div className="hidden-scroll" onScroll={handleScroll}>
 						{/*  Echo Artists  */}
-						{artistsArray.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
+						{artistsArray
+							.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
 							.slice(0, artistSlice)
 							.map((artistArray, key) => (
-								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-									<center>
-										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-											<Link to={"/profile/" + artistArray.key}>
-												<Img src={
-													`/storage/${props.users.find((user) => user.username == artistArray.key) &&
-													props.users.find((user) => user.username == artistArray.key).pp}`
-												}
-													width='150px'
-													height='150px' />
-											</Link>
-										</div>
-										<h6 className="mt-2 mb-0"
-											style={{
-												width: "100px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{props.users.find((user) => user.username == artistArray.key) &&
-												props.users.find((user) => user.username == artistArray.key).name}
-										</h6>
-										<h6 style={{
-											width: "100px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-											<small>{artistArray.key}</small>
-										</h6>
-									</center>
+								<span key={key}>
+									{props.users
+										.filter((user) => user.username == artistArray.key)
+										.map((user, key) => (
+											<span key={key} className="pt-0 px-0 pb-2" style={{ borderRadius: "10px" }}>
+												<center>
+													<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+														<Link to={"/profile/" + user.username}>
+															<Img src={user.pp}
+																width='150px'
+																height='150px' />
+														</Link>
+													</div>
+													<h6 className="mt-2 mb-0"
+														style={{
+															width: "100px",
+															whiteSpace: "nowrap",
+															overflow: "hidden",
+															textOverflow: "clip"
+														}}>
+														{user.name}
+													</h6>
+													<h6 style={{
+														width: "100px",
+														whiteSpace: "nowrap",
+														overflow: "hidden",
+														textOverflow: "clip"
+													}}>
+														<small>{user.username}</small>
+													</h6>
+												</center>
+											</span>
+										))}
 								</span>
 							))}
 						{/* Echo Artists End */}
@@ -308,37 +327,29 @@ const AudioCharts = (props) => {
 				<div className="col-sm-1"></div>
 				<div className="col-sm-10">
 					<h5 className="p-2">Songs</h5>
-					{audiosArray.slice(0, audioSlice).map((audioArray, key) => (
-						<AudioMediaHorizontal
-							key={key}
-							setShow={props.setShow}
-							link={`/audio-show/${audioArray.key}`}
-							thumbnail={
-								props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail.match(/https/) ?
-									props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail :
-									`storage/${props.chartAudios.find((audio) => audio.id == audioArray.key).thumbnail}`
-							}
-							name={props.chartAudios.find((audio) => audio.id == audioArray.key).name}
-							username={props.chartAudios.find((audio) => audio.id == audioArray.key).username}
-							ft={props.chartAudios.find((audio) => audio.id == audioArray.key).ft}
-							hasBoughtAudio={
-								!props.chartBoughtAudios
-									.some((boughtAudio) => {
-										return boughtAudio.audio_id == audioArray.key &&
-											boughtAudio.username == props.auth.username
-									})
-							}
-							audioInCart={
-								props.chartCartAudios
-									.some((cartAudio) => {
-										return cartAudio.audio_id == audioArray.key &&
-											cartAudio.username == props.auth.username
-									})
-							}
-							audioId={audioArray.key}
-							onCartAudios={onCartAudios}
-							onBuyAudios={onBuyAudios} />
-					))}
+					{audiosArray
+						.slice(0, audioSlice)
+						.map((audioArray, key) => (
+							<div key={key}>
+								{props.audios
+									.filter((audio) => audio.id == audioArray.key)
+									.map((audio, key) => (
+										<AudioMediaHorizontal
+											key={key}
+											setShow={props.setShow}
+											link={`/audio-show/${audio.id}`}
+											thumbnail={`/storage/${audio.thumbnail}`}
+											name={audio.name}
+											username={audio.username}
+											ft={audio.ft}
+											hasBoughtAudio={!audio.hasBoughtAudio}
+											audioInCart={audio.inCart}
+											audioId={audio.id}
+											onCartAudios={onCartAudios}
+											onBuyAudios={onBuyAudios} />
+									))}
+							</div>
+						))}
 					{/* <!-- ****** Songs Area End ****** - */}
 				</div>
 				<div className="col-sm-1"></div>

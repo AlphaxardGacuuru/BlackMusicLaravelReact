@@ -15,7 +15,31 @@ class VideoCommentsController extends Controller
      */
     public function index()
     {
-        return VideoComments::all();
+        $getVideoComments = VideoComments::all();
+
+		$videoComments = [];
+
+		foreach ($getVideoComments as $key => $videoComment) {
+
+            // Check if user has liked comment
+            $hasLiked = VideoCommentLikes::where('username', auth()->user()->username)
+                ->where('comment_id', $videoComment->id)
+                ->exists();
+
+			array_push($videoComments, [
+				"id" => $videoComment->id,
+				"video_id" => $videoComment->video_id,
+				"text" => $videoComment->text,
+				"username" => $videoComment->username,
+				"name" => $videoComment->users->name,
+                "pp" => preg_match("/http/", $videoComment->users->pp) ? $videoComment->users->pp : "/storage/" . $videoComment->users->pp,
+                "hasLiked" => $hasLiked,
+                "likes" => $videoComment->videoCommentLikes->count(),
+				"created_at" => $videoComment->created_at->format("d M Y"),
+			]);
+		}
+
+		return $videoComments;
     }
 
     /**

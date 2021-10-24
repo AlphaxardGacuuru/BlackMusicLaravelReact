@@ -8,6 +8,6 @@ class CartAudios extends Model
 {
     public function audios()
     {
-        return $this->belongsTo('App\Audios', 'audio_id');
+        return $this->belongsTo('App\Audios', 'audio_id', 'id');
     }
 }

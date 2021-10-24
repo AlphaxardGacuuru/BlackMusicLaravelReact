@@ -15,7 +15,23 @@ class AudioAlbumsController extends Controller
      */
     public function index()
     {
-        return AudioAlbums::all();
+        // Get Audio Albums
+        $getAudioAlbums = AudioAlbums::all();
+
+        $audioAlbums = [];
+
+        foreach ($getAudioAlbums as $key => $audioAlbum) {
+            array_push($audioAlbums, [
+                "id" => $audioAlbum->id,
+                "username" => $audioAlbum->username,
+                "name" => $audioAlbum->name,
+                "cover" => $audioAlbum->cover,
+                "released" => $audioAlbum->released,
+                "created_at" => $audioAlbum->created_at->format("d M Y"),
+            ]);
+        }
+
+        return $audioAlbums;
     }
 
     /**
