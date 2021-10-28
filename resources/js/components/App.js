@@ -136,11 +136,6 @@ function App() {
 			.then((res) => setAudios(res.data))
 			.catch(() => setErrors(["Failed to fetch audios"]))
 
-		// Fetch Audio Notifications
-		axios.get(`${url}/api/audio-notifications`)
-			.then((res) => setAudioNotifications(res.data))
-			.catch(() => setErrors(["Failed to fetch audio notifications"]))
-
 		// Fetch Audio Payouts
 		axios.get(`${url}/api/audio-payouts`)
 			.then((res) => setAudioPayouts(res.data))
@@ -171,30 +166,15 @@ function App() {
 			.then((res) => setDecos(res.data))
 			.catch(() => setErrors(['Failed to fetch decos']))
 
-		// Fetch Decos Notifications
-		axios.get(`${url}/api/deco-notifications`)
-			.then((res) => setDecoNotifications(res.data))
-			.catch(() => setErrors(['Failed to fetch decos notifications']))
-
 		// Fetch Follows
 		axios.get(`${url}/api/follows`)
 			.then((res) => setFollows(res.data))
 			.catch(() => setErrors(['Failed to fetch follows']))
 
-		// Fetch Follows Notifications
-		axios.get(`${url}/api/follow-notifications`)
-			.then((res) => setFollowNotifications(res.data))
-			.catch(() => setErrors(['Failed to fetch follow notifications']))
-
 		// Fetch Kopokopo
 		// axios.get(`${url}/api/kopokopo`)
 		// 	.then((res) => setKopokopo(res.data))
 		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
-
-		// Fetch Kopokopo
-		axios.get(`${url}/api/kopokopo-notifications`)
-			.then((res) => setKopokopoNotifications(res.data))
-			.catch(() => setErrors(['Failed to fetch kopokopo notifications']))
 
 		// Fetch Notifications
 		axios.get(`${url}/api/notifications`)
@@ -260,11 +240,6 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-
-		// Fetch Video Notifications
-		axios.get(`${url}/api/video-notifications`)
-			.then((res) => setVideoNotifications(res.data))
-			.catch(() => setErrors(["Failed to fetch video notifications"]))
 
 		// Fetch Video Payouts
 		axios.get(`${url}/api/video-payouts`)
@@ -592,7 +567,7 @@ function App() {
 			<Router>
 				{login && <LoginPopUp {...{ url }} />}
 
-				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, followNotifications, decoNotifications, videoNotifications, audioNotifications, kopokopoNotifications }} />
+				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications }} />
 
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />

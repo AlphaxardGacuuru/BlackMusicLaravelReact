@@ -279,7 +279,7 @@ const Index = (props) => {
 
 										{/* Check whether user has bought at least one song from user */}
 										{/* Check whether user has followed user and display appropriate button */}
-										{user.hasBought1 ?
+										{user.hasBought1 || props.auth.username == "@blackmusic" ?
 											user.hasFollowed ?
 												<button className={'btn btn-light float-right rounded-0'}
 													onClick={() => onFollow(user.username)}>
@@ -346,8 +346,12 @@ const Index = (props) => {
 											<button className="btn btn-light mb-1 rounded-0"
 												style={{ minWidth: '90px', height: '33px' }}
 												onClick={() => onCartVideos(video.id)}>
-												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+												<svg className='bi bi-cart3'
+													width='1em'
+													height='1em'
+													viewBox='0 0 16 16'
+													fill='currentColor'
+													xmlns='http://www.w3.org/2000/svg'>
 													<path fillRule='evenodd'
 														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
 												</svg>
@@ -438,12 +442,12 @@ const Index = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted1 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn btn-2 mb-1"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn mb-1"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
@@ -452,7 +456,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage1}%`,
-															backgroundColor: "#232323"
+															backgroundColor: "gold"
 														}}>
 														{post.parameter_1}
 													</div>
@@ -472,12 +476,12 @@ const Index = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted2 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn mb-1"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
@@ -486,7 +490,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage2}%`,
-															backgroundColor: "#232323"
+															backgroundColor: "gold"
 														}}>
 														{post.parameter_2}
 													</div>
@@ -506,12 +510,12 @@ const Index = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted3 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn mb-1"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
@@ -520,7 +524,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage3}%`,
-															backgroundColor: "#232323"
+															backgroundColor: "gold"
 														}}>
 														{post.parameter_3}
 													</div>
@@ -540,19 +544,22 @@ const Index = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted4 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn mb-1"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
 											: post.hasVoted4 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ width: `${post.percentage4}%`, backgroundColor: "#232323" }}>
+														style={{ 
+															width: `${post.percentage4}%`, 
+															backgroundColor: "gold" 
+															}}>
 														{post.parameter_4}
 													</div>
 												</div>
@@ -571,12 +578,12 @@ const Index = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted5 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn mb-1"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
@@ -585,7 +592,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage5}%`,
-															backgroundColor: "#232323"
+															backgroundColor: "gold"
 														}}>
 														{post.parameter_5}
 													</div>
@@ -602,11 +609,13 @@ const Index = (props) => {
 										: ""}
 
 									{/* Total votes */}
-									{post.parameter_1 &&
-										<small style={{ color: "grey" }}>
-											<i>Total votes: {post.totalVotes}</i>
-											<br />
-										</small>}
+									{post.parameter_1 ?
+										post.username == props.auth.username || !post.isWithin24Hrs ?
+											<small style={{ color: "grey" }}>
+												<i>Total votes: {post.totalVotes}</i>
+												<br />
+											</small> : ""
+										: ""}
 
 									{/* Post likes */}
 									{post.hasLiked ?
@@ -676,11 +685,11 @@ const Index = (props) => {
 											</svg>
 										</a>
 										<div className="dropdown-menu dropdown-menu-right" style={{ borderRadius: "0" }}>
-											{post.user_id != props.auth.id ?
-												post.user_id != 29 &&
+											{post.username != props.auth.username ?
+												post.username != "@blackmusic" &&
 												<a href="#" className="dropdown-item" onClick={(e) => {
 													e.preventDefault()
-													onFollow(post.user_id)
+													onFollow(post.username)
 												}}>
 													<h6>Unfollow</h6>
 												</a>

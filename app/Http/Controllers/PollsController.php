@@ -36,7 +36,9 @@ class PollsController extends Controller
     public function store(Request $request)
     {
         // Check if user has voted
-        $checkPoll = Polls::where('username', auth()->user()->username)->where('post_id', $request->input('post'))->first();
+        $checkPoll = Polls::where('username', auth()->user()->username)
+            ->where('post_id', $request->input('post'))
+            ->first();
 
         if (!$checkPoll) {
             $poll = new Polls;
@@ -49,6 +51,7 @@ class PollsController extends Controller
             Polls::where('username', auth()->user()->username)
                 ->where('post_id', $request->input('post'))
                 ->delete();
+				
             $message = "Vote removed";
         }
 

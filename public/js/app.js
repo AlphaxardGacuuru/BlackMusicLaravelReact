@@ -93577,12 +93577,6 @@ function App() {
       return setAudios(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audios"]);
-    }); // Fetch Audio Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-notifications")).then(function (res) {
-      return setAudioNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio notifications"]);
     }); // Fetch Audio Payouts
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-payouts")).then(function (res) {
@@ -93619,35 +93613,17 @@ function App() {
       return setDecos(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch decos']);
-    }); // Fetch Decos Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/deco-notifications")).then(function (res) {
-      return setDecoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch decos notifications']);
     }); // Fetch Follows
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follows")).then(function (res) {
       return setFollows(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch follows']);
-    }); // Fetch Follows Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/follow-notifications")).then(function (res) {
-      return setFollowNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch follow notifications']);
     }); // Fetch Kopokopo
     // axios.get(`${url}/api/kopokopo`)
     // 	.then((res) => setKopokopo(res.data))
     // 	.catch(() => setErrors(['Failed to fetch kopokopo']))
-    // Fetch Kopokopo
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-notifications")).then(function (res) {
-      return setKopokopoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch kopokopo notifications']);
-    }); // Fetch Notifications
+    // Fetch Notifications
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
       return setNotifications(res.data);
@@ -93725,12 +93701,6 @@ function App() {
       return setVideos(res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
-    }); // Fetch Video Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-notifications")).then(function (res) {
-      return setVideoNotifications(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video notifications"]);
     }); // Fetch Video Payouts
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
@@ -94121,12 +94091,7 @@ function App() {
     cartAudios: cartAudios,
     search: search,
     setSearch: setSearch,
-    notifications: notifications,
-    followNotifications: followNotifications,
-    decoNotifications: decoNotifications,
-    videoNotifications: videoNotifications,
-    audioNotifications: audioNotifications,
-    kopokopoNotifications: kopokopoNotifications
+    notifications: notifications
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login",
     exact: true,
@@ -95117,7 +95082,7 @@ var Bottomnav = function Bottomnav(props) {
       fontSize: "12px",
       fontWeight: "100",
       position: "absolute",
-      right: "0.5rem",
+      right: "-0.3rem",
       bottom: "1rem",
       border: "solid #232323"
     }
@@ -95504,37 +95469,39 @@ __webpack_require__.r(__webpack_exports__);
 
 var TopNavLinks = function TopNavLinks(props) {
   // Get number of items in video cart
-  var vidCartItems = props.cartVideos.filter(function (cartVideo) {
-    return cartVideo.username == props.auth.username;
-  }).length;
-  var audCartItems = props.cartAudios.filter(function (cartAudio) {
-    return cartAudio.username == props.auth.username;
-  }).length;
-  var cartItems = vidCartItems + audCartItems;
+  var vidCartItems = props.cartVideos.length;
+  var audCartItems = props.cartAudios.length;
+  var cartItems = vidCartItems + audCartItems; // Message notifications
+
+  var messageNotifications = props.notifications.filter(function (followNotification) {
+    return followNotification.type == "MessagesNotifications";
+  });
+  var decoNotifications = props.notifications.filter(function (decoNotification) {
+    return decoNotification.type == "DecoNotifications";
+  });
+  var followNotifications = props.notifications.filter(function (followNotification) {
+    return followNotification.type == "FollowNotifications";
+  });
+  var boughtVideoNotifications = props.notifications.filter(function (boughtVideoNotification) {
+    return boughtVideoNotification.type == "BoughtVideoNotifications";
+  });
+  var boughtAudioNotifications = props.notifications.filter(function (boughtAudioNotification) {
+    return boughtAudioNotification.type == "BoughtAudioNotifications";
+  });
+  var boughtNotifications = boughtVideoNotifications + boughtAudioNotifications;
 
   var logout = function logout(e) {
     e.preventDefault();
     axios.get('/sanctum/csrf-cookie').then(function () {
       axios.post("".concat(props.url, "/api/logout")).then(function (res) {
-        props.setMessage("Logged out");
-        axios.get("".concat(props.url, "/api/home")).then(function (res) {
-          return props.setAuth({
-            "name": "Guest",
-            "username": "@guest",
-            "pp": "profile-pics/male_avatar.png",
-            "account_type": "normal"
-          });
+        props.setMessage("Logged out"); // Update Auth
+
+        props.setAuth({
+          "name": "Guest",
+          "username": "@guest",
+          "pp": "profile-pics/male_avatar.png",
+          "account_type": "normal"
         });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
       });
     });
   }; // Install button
@@ -95581,8 +95548,8 @@ var TopNavLinks = function TopNavLinks(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/cart",
     role: "button",
-    id: "dropdownMenuLink",
-    "data-toggle": "dropdown",
+    id: "dropdownMenuLink" // data-toggle="dropdown"
+    ,
     "aria-haspopup": "true",
     "aria-expanded": "false",
     style: {
@@ -95605,7 +95572,7 @@ var TopNavLinks = function TopNavLinks(props) {
     style: {
       fontWeight: "100",
       position: "absolute",
-      right: "0rem",
+      right: "-0.5rem",
       bottom: "0.5rem",
       border: "solid #232323"
     }
@@ -95635,16 +95602,16 @@ var TopNavLinks = function TopNavLinks(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-danger rounded-circle",
     style: {
       fontWeight: "100",
       position: "absolute",
-      right: "0rem",
+      right: "-0.5rem",
       bottom: "0.5rem",
       border: "solid #232323"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.notifications.length > 0 && props.notifications.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       borderRadius: "0"
     },
@@ -95657,47 +95624,39 @@ var TopNavLinks = function TopNavLinks(props) {
       maxHeight: "500px",
       overflowY: "scroll"
     }
-  }, props.notifications.filter(function (notification) {
-    return notification.username == props.auth.username;
-  }).map(function (notification, key) {
+  }, messageNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "Messages"), messageNotifications.map(function (messageNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: "/profile/",
       className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, notification.message));
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, messageNotification.message));
+  }), decoNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header"
-  }, "Decos"), props.decoNotifications.filter(function (decoNotification) {
-    return decoNotification.username == props.auth.username;
-  }).map(function (decoNotification, key) {
+  }, "Decos"), decoNotifications.map(function (decoNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: "/profile/",
       className: "p-3 dropdown-item border-bottom text-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, decoNotification.artist, " just Decorated you."));
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), followNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header"
-  }, "New Fans"), props.followNotifications.filter(function (followNotification) {
-    return followNotification.username == props.auth.username;
-  }).map(function (followNotification, key) {
+  }, "New Fans"), followNotifications.map(function (followNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
-      to: "/profile/",
+      to: "/profile/".concat(followNotification.from),
       className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, followNotification.follower, " became a fan."));
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, followNotification.message));
+  }), boughtNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header"
-  }, "Songs Bought"), props.videoNotifications.filter(function (videoNotification) {
-    return videoNotification.artist == props.auth.username;
-  }).map(function (videoNotification, key) {
+  }, "Songs Bought"), boughtVideoNotifications.map(function (videoNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: "/profile/",
       className: "p-3 dropdown-item border-bottom text-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoNotification.username, " just bought ", videoNotification.video_id));
-  }), props.audioNotifications.filter(function (audioNotification) {
-    return audioNotification.artist == props.auth.username;
-  }).map(function (audioNotification, key) {
+  }), boughtAudioNotifications.map(function (audioNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: "/profile/",
@@ -99559,7 +99518,7 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(user.username),
       className: "text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, user.username))), user.hasBought1 ? user.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, user.username))), user.hasBought1 || props.auth.username == "@blackmusic" ? user.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: 'btn btn-light float-right rounded-0',
       onClick: function onClick() {
         return onFollow(user.username);
@@ -99741,7 +99700,7 @@ var Index = function Index(props) {
       width: "100%",
       height: "auto"
     })), post.parameter_1 ? post.isWithin24Hrs ? post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn btn-2 mb-1",
       btnText: post.parameter_1,
       btnStyle: {
         width: "100%"
@@ -99750,7 +99709,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_1);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1",
+      btnClass: "mysonar-btn poll-btn mb-1",
       btnText: post.parameter_1,
       btnStyle: {
         width: "100%"
@@ -99767,7 +99726,7 @@ var Index = function Index(props) {
       className: "progress-bar",
       style: {
         width: "".concat(post.percentage1, "%"),
-        backgroundColor: "#232323"
+        backgroundColor: "gold"
       }
     }, post.parameter_1)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "progress rounded-0 mb-1",
@@ -99781,7 +99740,7 @@ var Index = function Index(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_1)) : "", post.parameter_2 ? post.isWithin24Hrs ? post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_2,
       btnStyle: {
         width: "100%"
@@ -99790,7 +99749,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_2);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1",
+      btnClass: "mysonar-btn poll-btn mb-1",
       btnText: post.parameter_2,
       btnStyle: {
         width: "100%"
@@ -99807,7 +99766,7 @@ var Index = function Index(props) {
       className: "progress-bar",
       style: {
         width: "".concat(post.percentage2, "%"),
-        backgroundColor: "#232323"
+        backgroundColor: "gold"
       }
     }, post.parameter_2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "progress rounded-0 mb-1",
@@ -99821,7 +99780,7 @@ var Index = function Index(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_2)) : "", post.parameter_3 ? post.isWithin24Hrs ? post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_3,
       btnStyle: {
         width: "100%"
@@ -99830,7 +99789,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_3);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1",
+      btnClass: "mysonar-btn poll-btn mb-1",
       btnText: post.parameter_3,
       btnStyle: {
         width: "100%"
@@ -99847,7 +99806,7 @@ var Index = function Index(props) {
       className: "progress-bar",
       style: {
         width: "".concat(post.percentage3, "%"),
-        backgroundColor: "#232323"
+        backgroundColor: "gold"
       }
     }, post.parameter_3)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "progress rounded-0 mb-1",
@@ -99861,7 +99820,7 @@ var Index = function Index(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_3)) : "", post.parameter_4 ? post.isWithin24Hrs ? post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_4,
       btnStyle: {
         width: "100%"
@@ -99870,7 +99829,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_4);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1",
+      btnClass: "mysonar-btn poll-btn mb-1",
       btnText: post.parameter_4,
       btnStyle: {
         width: "100%"
@@ -99887,7 +99846,7 @@ var Index = function Index(props) {
       className: "progress-bar",
       style: {
         width: "".concat(post.percentage4, "%"),
-        backgroundColor: "#232323"
+        backgroundColor: "gold"
       }
     }, post.parameter_4)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "progress rounded-0 mb-1",
@@ -99901,7 +99860,7 @@ var Index = function Index(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_4)) : "", post.parameter_5 ? post.isWithin24Hrs ? post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_5,
       btnStyle: {
         width: "100%"
@@ -99910,7 +99869,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_5);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn mb-1",
+      btnClass: "mysonar-btn poll-btn mb-1",
       btnText: post.parameter_5,
       btnStyle: {
         width: "100%"
@@ -99927,7 +99886,7 @@ var Index = function Index(props) {
       className: "progress-bar",
       style: {
         width: "".concat(post.percentage5, "%"),
-        backgroundColor: "#232323"
+        backgroundColor: "gold"
       }
     }, post.parameter_5)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "progress rounded-0 mb-1",
@@ -99940,11 +99899,11 @@ var Index = function Index(props) {
         width: "".concat(post.percentage5, "%"),
         backgroundColor: "grey"
       }
-    }, post.parameter_5)) : "", post.parameter_1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    }, post.parameter_5)) : "", post.parameter_1 ? post.username == props.auth.username || !post.isWithin24Hrs ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       style: {
         color: "grey"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes: ", post.totalVotes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), post.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes: ", post.totalVotes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "" : "", post.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       style: {
         color: "#cc3300"
@@ -100020,12 +99979,12 @@ var Index = function Index(props) {
       style: {
         borderRadius: "0"
       }
-    }, post.user_id != props.auth.id ? post.user_id != 29 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, post.username != props.auth.username ? post.username != "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       className: "dropdown-item",
       onClick: function onClick(e) {
         e.preventDefault();
-        onFollow(post.user_id);
+        onFollow(post.username);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Unfollow")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
@@ -101288,7 +101247,7 @@ var Profile = function Profile(props) {
         borderRadius: "50%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(post.user_id)
+      to: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: post.pp,
       width: "40px",
@@ -101622,12 +101581,12 @@ var Profile = function Profile(props) {
       style: {
         borderRadius: "0"
       }
-    }, post.user_id != props.auth.id ? post.user_id != 29 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, post.username != props.auth.id ? post.username != 29 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       className: "dropdown-item",
       onClick: function onClick(e) {
         e.preventDefault();
-        onFollow(post.user_id);
+        onFollow(post.username);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Unfollow")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",

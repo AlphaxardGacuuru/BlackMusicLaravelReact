@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDecoNotificationsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateDecoNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deco_notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->nullable();
-            $table->string('artist')->nullable();
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateDecoNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deco_notifications');
+        Schema::dropIfExists('notifications');
     }
 }

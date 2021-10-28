@@ -401,7 +401,7 @@ const Profile = (props) => {
 							<div key={index} className='media p-2 border-bottom'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<Link to={`/profile/${post.user_id}`}>
+										<Link to={`/profile/${post.username}`}>
 											<Img src={post.pp}
 												width="40px"
 												height="40px"
@@ -695,11 +695,11 @@ const Profile = (props) => {
 											</svg>
 										</a>
 										<div className="dropdown-menu dropdown-menu-right" style={{ borderRadius: "0" }}>
-											{post.user_id != props.auth.id ?
-												post.user_id != 29 &&
+											{post.username != props.auth.id ?
+												post.username != 29 &&
 												<a href="#" className="dropdown-item" onClick={(e) => {
 													e.preventDefault()
-													onFollow(post.user_id)
+													onFollow(post.username)
 												}}>
 													<h6>Unfollow</h6>
 												</a>

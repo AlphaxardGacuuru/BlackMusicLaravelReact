@@ -5,9 +5,27 @@ import Img from "./Img"
 const TopNavLinks = (props) => {
 
 	// Get number of items in video cart
-	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
-	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length
+	const vidCartItems = props.cartVideos.length
+	const audCartItems = props.cartAudios.length
 	const cartItems = vidCartItems + audCartItems
+
+	// Message notifications
+	const messageNotifications = props.notifications
+		.filter((followNotification) => followNotification.type == "MessagesNotifications")
+
+	const decoNotifications = props.notifications
+		.filter((decoNotification) => decoNotification.type == "DecoNotifications")
+
+	const followNotifications = props.notifications
+		.filter((followNotification) => followNotification.type == "FollowNotifications")
+
+	const boughtVideoNotifications = props.notifications
+		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideoNotifications")
+
+	const boughtAudioNotifications = props.notifications
+		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudioNotifications")
+
+	const boughtNotifications = boughtVideoNotifications + boughtAudioNotifications
 
 	const logout = (e) => {
 		e.preventDefault()
@@ -16,23 +34,15 @@ const TopNavLinks = (props) => {
 			axios.post(`${props.url}/api/logout`)
 				.then(res => {
 					props.setMessage("Logged out")
-					axios.get(`${props.url}/api/home`).then((res) => props.setAuth({
+					// Update Auth
+					props.setAuth({
 						"name": "Guest",
 						"username": "@guest",
 						"pp": "profile-pics/male_avatar.png",
 						"account_type": "normal"
-					}))
-				})
-				.catch(err => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					props.setErrors(newError)
+					})
 				});
-		});
+		})
 	}
 
 	// Install button
@@ -82,7 +92,7 @@ const TopNavLinks = (props) => {
 				<Link to="/cart"
 					role="button"
 					id="dropdownMenuLink"
-					data-toggle="dropdown"
+					// data-toggle="dropdown"
 					aria-haspopup="true"
 					aria-expanded="false"
 					style={{
@@ -104,7 +114,7 @@ const TopNavLinks = (props) => {
 					style={{
 						fontWeight: "100",
 						position: "absolute",
-						right: "0rem",
+						right: "-0.5rem",
 						bottom: "0.5rem",
 						border: "solid #232323"
 					}}>
@@ -136,16 +146,17 @@ const TopNavLinks = (props) => {
 						<path fillRule="evenodd"
 							d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
 					</svg>
-				</Link>
 				<span className="badge badge-danger rounded-circle"
 					style={{
 						fontWeight: "100",
 						position: "absolute",
-						right: "0rem",
+						right: "-0.5rem",
 						bottom: "0.5rem",
 						border: "solid #232323"
 					}}>
-				</span>
+					{props.notifications.length > 0 && props.notifications.length}
+					</span>
+				</Link>
 				<div style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
@@ -153,38 +164,41 @@ const TopNavLinks = (props) => {
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 
 						{/* Get Notifications */}
-						{props.notifications
-							.filter((notification) => notification.username == props.auth.username)
-							.map((notification, key) => (
+						{messageNotifications.length > 0 &&
+							<div className="dropdown-header">Messages</div>}
+						{messageNotifications
+							.map((messageNotification, key) => (
 								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{notification.message}</h6>
+									<h6>{messageNotification.message}</h6>
 								</Link>
 							))}
 
 						{/* Get Decos */}
-						<div className="dropdown-header">Decos</div>
-						{props.decoNotifications
-							.filter((decoNotification) => decoNotification.username == props.auth.username)
-							.map((decoNotification, key) => (
+						{decoNotifications.length > 0 &&
+							<div className="dropdown-header">Decos</div>}
+						{decoNotifications.
+							map((decoNotification, key) => (
 								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
 									<h6>{decoNotification.artist} just Decorated you.</h6>
 								</Link>
 							))}
 
 						{/* Get Follow Notifications */}
-						<div className="dropdown-header">New Fans</div>
-						{props.followNotifications
-							.filter((followNotification) => followNotification.username == props.auth.username)
+						{followNotifications.length > 0 &&
+							<div className="dropdown-header">New Fans</div>}
+						{followNotifications
 							.map((followNotification, key) => (
-								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{followNotification.follower} became a fan.</h6>
+								<Link key={key}
+									to={`/profile/${followNotification.from}`}
+									className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{followNotification.message}</h6>
 								</Link>
 							))}
 
-						<div className="dropdown-header">Songs Bought</div>
+						{boughtNotifications.length > 0 &&
+							<div className="dropdown-header">Songs Bought</div>}
 						{/* Get Video Notifications */}
-						{props.videoNotifications
-							.filter((videoNotification) => videoNotification.artist == props.auth.username)
+						{boughtVideoNotifications
 							.map((videoNotification, key) => (
 								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
 									<h6>{videoNotification.username} just bought {videoNotification.video_id}</h6>
@@ -192,8 +206,7 @@ const TopNavLinks = (props) => {
 							))}
 
 						{/* Get Audio Notifications */}
-						{props.audioNotifications
-							.filter((audioNotification) => audioNotification.artist == props.auth.username)
+						{boughtAudioNotifications
 							.map((audioNotification, key) => (
 								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
 									<h6>{audioNotification.username} just bought {audioNotification.audio_id}</h6>

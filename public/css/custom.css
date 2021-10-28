@@ -157,8 +157,33 @@ a:focus {
     color: #ffffff;
 }
 
+.mysonar-btn.gold-btn {
+    border-color: gold;
+    color: gold;
+    background-color: transparent;
+}
+
+.mysonar-btn.gold-btn:focus,
+.mysonar-btn.gold-btn:hover {
+    background-color: gold;
+    color: #ffffff;
+}
+
+.poll-btn:focus,
+.poll-btn:hover {
+    background-color: transparent;
+    color: #232323;
+}
+
 .mysonar-btn.btn-2 {
     background-color: #2f2f2f;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.poll-btn.btn-2 {
+    background-color: gold;
+	border-color: gold;
     font-size: 12px;
     color: #ffffff;
 }

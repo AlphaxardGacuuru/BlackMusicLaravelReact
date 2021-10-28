@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Notifications;
+use App\User;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -14,7 +15,22 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        return Notifications::all();
+        $user = User::where('username', auth()->user()->username)
+            ->first();
+
+        $notifications = [];
+
+        foreach ($user->unreadNotifications as $notification) {
+            array_push($notifications, [
+                "id" => $notification->id,
+                "type" => explode('\\', $notification->type)[2],
+				"from" => $notification->data['from'],
+                "message" => $notification->data['message'],
+                "created_at" => $notification->created_at->format('d M Y'),
+            ]);
+        }
+
+        return $notifications;
     }
 
     /**

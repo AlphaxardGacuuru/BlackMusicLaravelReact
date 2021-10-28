@@ -30,6 +30,7 @@ class HomeController extends Controller
             "name" => Auth::user()->name,
             "username" => Auth::user()->username,
             "email" => Auth::user()->email,
+			"phone" => Auth::user()->phone,
             "account_type" => Auth::user()->account_type,
             "pp" => Auth::user()->pp,
             "pb" => Auth::user()->pb,
