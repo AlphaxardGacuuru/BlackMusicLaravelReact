@@ -94131,6 +94131,8 @@ function App() {
         setUsers: setUsers,
         videos: videos,
         setVideos: setVideos,
+        setCartVideos: setCartVideos,
+        setCartAudios: setCartAudios,
         posts: posts,
         setPosts: setPosts,
         setShow: setShow
@@ -94408,6 +94410,7 @@ function App() {
         setErrors: setErrors,
         users: users,
         audios: audios,
+        setAudios: setAudios,
         boughtAudios: boughtAudios,
         cartAudios: cartAudios,
         setCartAudios: setCartAudios,
@@ -95489,10 +95492,10 @@ var TopNavLinks = function TopNavLinks(props) {
     return followNotification.type == "FollowNotifications";
   });
   var boughtVideoNotifications = props.notifications.filter(function (boughtVideoNotification) {
-    return boughtVideoNotification.type == "BoughtVideosNotifications";
+    return boughtVideoNotification.type == "BoughtVideoNotifications";
   });
   var boughtAudioNotifications = props.notifications.filter(function (boughtAudioNotification) {
-    return boughtAudioNotification.type == "BoughtAudiosNotifications";
+    return boughtAudioNotification.type == "BoughtAudioNotifications";
   });
   var boughtNotifications = boughtVideoNotifications + boughtAudioNotifications;
 
@@ -95640,8 +95643,6 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "dropdown-menu dropdown-menu-right m-0 p-0",
     "aria-labelledby": "dropdownMenuButton"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "dropdown-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, "Notifications")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       maxHeight: "500px",
       overflowY: "scroll"
@@ -95675,15 +95676,15 @@ var TopNavLinks = function TopNavLinks(props) {
   }, "Songs Bought"), boughtVideoNotifications.map(function (videoNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       key: key,
-      to: "/profile/",
+      to: "/profile/".concat(videoNotification.from),
       className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, videoNotification.username, " just bought ", videoNotification.video_id));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, videoNotification.message));
   }), boughtAudioNotifications.map(function (audioNotification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       key: key,
-      to: "/profile/",
+      to: "/profile/".concat(audioNotification.from),
       className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, audioNotification.username, " just bought ", audioNotification.audio_id));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, audioNotification.message));
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "dropdown"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
@@ -98839,7 +98840,6 @@ var Cart = function Cart(props) {
             setBottomMenu();
           }, 60000);
         })["catch"](function (err) {
-          console.log(err.response.data.message);
           var resErrors = err.response.data.errors;
           var resError;
           var newError = [];
@@ -98873,6 +98873,7 @@ var Cart = function Cart(props) {
             setBottomMenu();
           }, 60000);
         })["catch"](function (err) {
+          console.log(err.response.data.message);
           var resErrors = err.response.data.errors;
           var resError;
           var newError = [];

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\AudioNotifications;
 use App\BoughtAudios;
+use App\Audios;
 use App\BoughtVideos;
 use App\CartAudios;
 use App\DecoNotifications;
 use App\Decos;
 use App\Kopokopo;
 use App\User;
+use App\Notifications\BoughtAudioNotifications;
 use Illuminate\Http\Request;
 
 class BoughtAudiosController extends Controller
@@ -60,10 +61,10 @@ class BoughtAudiosController extends Controller
     {
         $permission = "";
         $approved = [];
-        /* Fetch songs from Cart Videos */
+        /* Fetch songs from Cart Audios */
         $cartAudiosCheck = CartAudios::where('username', auth()->user()->username)->get();
 
-        foreach ($cartAudiosCheck as $cartAudioCheck) {
+        foreach ($cartAudiosCheck as $cartAudio) {
             // Get Cost of Bought Videos at each price
             $totalVideos20 = BoughtVideos::where('username', auth()->user()->username)
                 ->where('price', 20)
@@ -83,66 +84,79 @@ class BoughtAudiosController extends Controller
 
             if ($permission >= 1) {
                 $baQuery = BoughtAudios::where('username', auth()->user()->username)
-                    ->where('audio_id', $cartAudioCheck->audio_id)
+                    ->where('audio_id', $cartAudio->audio_id)
                     ->count();
                 if ($baQuery == 0) {
-                    /* Add song to videos_bought */
+                    /* Add song to audios_bought */
                     $boughtAudios = new BoughtAudios;
-                    $boughtAudios->audio_id = $cartAudioCheck->audio_id;
+                    $boughtAudios->audio_id = $cartAudio->audio_id;
                     $boughtAudios->reference = "ODT2TA2060";
                     $boughtAudios->price = 200;
                     $boughtAudios->username = auth()->user()->username;
-                    $boughtAudios->name = $cartAudioCheck->audios->audio_name;
-                    $boughtAudios->artist = $cartAudioCheck->audios->username;
+                    $boughtAudios->name = $cartAudio->audios->audio_name;
+                    $boughtAudios->artist = $cartAudio->audios->username;
                     // $boughtAudios->save();
 
-                    /* Showing video song bought notification */
-                    $audioNotifications = new AudioNotifications;
-                    $audioNotifications->audio_id = $cartAudioCheck->audio_id;
-                    $audioNotifications->username = auth()->user()->username;
-                    $audioNotifications->artist = $cartAudioCheck->audios->username;
-                    // $audioNotifications->save();
+                    /* Showing audio song bought notification */
+                    $user = User::where('username', $cartAudio->audios->username)
+                        ->first();
+
+                    $user->notify(new BoughtAudioNotifications($cartAudio));
 
                     /* Add deco if necessary */
                     /* Check if songs are 10 */
                     $userDecos = Decos::where('username', auth()->user()->username)
-                        ->where('artist', $cartAudioCheck->audios->username)
+                        ->where('artist', $cartAudio->audios->username)
                         ->count();
-                    $uservideos = BoughtAudios::where('username', auth()->user()->username)
-                        ->where('username', $cartAudioCheck->audios->username)
+                    $useraudios = BoughtAudios::where('username', auth()->user()->username)
+                        ->where('username', $cartAudio->audios->username)
                         ->count();
-                    $uservideos = $uservideos / 10;
-                    $decoBalance = $uservideos - $userDecos;
+                    $useraudios = $useraudios / 10;
+                    $decoBalance = $useraudios - $userDecos;
                     $decoPermission = intval($decoBalance);
 
                     /* If deco balance >= 1 then add deco */
                     if ($decoPermission >= 1) {
                         $deco = new Decos;
                         $deco->username = auth()->user()->username;
-                        $deco->artist = $cartAudioCheck->video->username;
+                        $deco->artist = $cartAudio->audios->username;
                         // $deco->save();
 
                         /* Add deco notification */
                         $decoNotification = new DecoNotifications;
                         $decoNotification->username = auth()->user()->username;
-                        $decoNotification->artist = $cartAudioCheck->video->username;
+                        $decoNotification->artist = $cartAudio->audios->username;
                         // $decoNotification->save();
                     }
                     /* Delete from cart */
-                    CartAudios::where('audio_id', $cartAudioCheck->audio_id)
+                    CartAudios::where('audio_id', $cartAudio->audio_id)
                         ->where('username', auth()->user()->username);
                     // ->delete();
 
                     // Update array
-                    array_push($approved, $cartAudioCheck->audio_id);
+                    array_push($approved, $cartAudio->audio_id);
                 }
             }
         }
 
-        $totalVideos = BoughtAudios::where('username', auth()->user()->username)->count() * 20;
-        $phone = substr_replace(auth()->user()->phone, "+254", 0, -9);
-        $kopokopo = Kopokopo::where('sender_phone', $phone)->sum('amount');
-        $balance = $kopokopo - $totalVideos;
+        $receiptAudios = [];
+
+        foreach ($approved as $key => $id) {
+            $audio = Audios::find($id);
+
+            array_push($receiptAudios, [
+                "id" => $audio->id,
+                "audio" => $audio->audio,
+                "name" => $audio->name,
+                "username" => $audio->username,
+                "ft" => $audio->ft,
+                "album" => $audio->album,
+                "genre" => $audio->genre,
+                "thumbnail" => $audio->thumbnail,
+            ]);
+        }
+
+        return response($receiptAudios, 200);
 
         return response($approved, 200);
     }

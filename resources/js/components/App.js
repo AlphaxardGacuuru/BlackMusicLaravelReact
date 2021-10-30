@@ -577,7 +577,7 @@ function App() {
 				)} />
 
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, posts, setPosts, setShow }} />
+					<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, setCartVideos, setCartAudios, posts, setPosts, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (
@@ -677,7 +677,7 @@ function App() {
 
 				{/* Audio Routes */}
 				<Route path="/audio-charts" exact render={(props) => (
-					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setAudioAlbums, setShow }} />
+					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, setAudios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setAudioAlbums, setShow }} />
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (

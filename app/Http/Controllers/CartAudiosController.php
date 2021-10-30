@@ -20,12 +20,13 @@ class CartAudiosController extends Controller
         $cartAudios = [];
 
         foreach ($getCartAudios as $key => $cartAudio) {
+
             array_push($cartAudios, [
                 "id" => $cartAudio->id,
                 "audio_id" => $cartAudio->audio_id,
                 "name" => $cartAudio->audios->name,
-                "artist" => $cartAudio->videos->username,
-                "ft" => $cartAudio->videos->ft,
+                "artist" => $cartAudio->audios->username,
+                "ft" => $cartAudio->audios->ft,
                 "thumbnail" => preg_match("/http/", $cartAudio->audios->thumbnail) ?
                 $cartAudio->audios->thumbnail :
                 "/storage/" . $cartAudio->audios->thumbnail,
@@ -55,16 +56,23 @@ class CartAudiosController extends Controller
     public function store(Request $request)
     {
         /* Check if item is already in cart */
-        $acartCheck = CartAudios::where('audio_id', $request->input('audio'))->where('username', auth()->user()->username)->count();
+        $acartCheck = CartAudios::where('audio_id', $request->input('audio'))
+            ->where('username', auth()->user()->username)
+            ->count();
+
         /* Insert or Remove from cart */
         if ($acartCheck == 0) {
             $cartAudios = new CartAudios;
             $cartAudios->audio_id = $request->input('audio');
             $cartAudios->username = auth()->user()->username;
             $cartAudios->save();
+
             $message = 'Audio added to Cart';
         } else {
-            CartAudios::where('audio_id', $request->input('audio'))->where('username', auth()->user()->username)->delete();
+            CartAudios::where('audio_id', $request->input('audio'))
+                ->where('username', auth()->user()->username)
+                ->delete();
+
             $message = 'Audio removed from Cart';
         }
 

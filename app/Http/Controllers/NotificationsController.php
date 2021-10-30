@@ -20,7 +20,7 @@ class NotificationsController extends Controller
 		$notifications = [];
 
         foreach ($getNotifications as $notification) {
-			
+
             // Check if notification is read
             $isRead = $notification->read_at ? true : false;
 

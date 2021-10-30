@@ -21,10 +21,10 @@ const TopNavLinks = (props) => {
 		.filter((followNotification) => followNotification.type == "FollowNotifications")
 
 	const boughtVideoNotifications = props.notifications
-		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideosNotifications")
+		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideoNotifications")
 
 	const boughtAudioNotifications = props.notifications
-		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudiosNotifications")
+		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudioNotifications")
 
 	const boughtNotifications = boughtVideoNotifications + boughtAudioNotifications
 
@@ -174,7 +174,6 @@ const TopNavLinks = (props) => {
 				<div style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<div className="dropdown-header"><h5>Notifications</h5></div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 
 						{/* Get Notifications */}
@@ -214,16 +213,20 @@ const TopNavLinks = (props) => {
 						{/* Get Video Notifications */}
 						{boughtVideoNotifications
 							.map((videoNotification, key) => (
-								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{videoNotification.username} just bought {videoNotification.video_id}</h6>
+								<Link key={key}
+									to={`/profile/${videoNotification.from}`}
+									className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{videoNotification.message}</h6>
 								</Link>
 							))}
 
 						{/* Get Audio Notifications */}
 						{boughtAudioNotifications
 							.map((audioNotification, key) => (
-								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{audioNotification.username} just bought {audioNotification.audio_id}</h6>
+								<Link key={key}
+									to={`/profile/${audioNotification.from}`}
+									className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{audioNotification.message}</h6>
 								</Link>
 							))}
 					</div>
