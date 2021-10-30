@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Img from "./Img"
@@ -20,10 +21,10 @@ const TopNavLinks = (props) => {
 		.filter((followNotification) => followNotification.type == "FollowNotifications")
 
 	const boughtVideoNotifications = props.notifications
-		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideoNotifications")
+		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideosNotifications")
 
 	const boughtAudioNotifications = props.notifications
-		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudioNotifications")
+		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudiosNotifications")
 
 	const boughtNotifications = boughtVideoNotifications + boughtAudioNotifications
 
@@ -42,6 +43,17 @@ const TopNavLinks = (props) => {
 						"account_type": "normal"
 					})
 				});
+		})
+	}
+
+	const onNotification = () => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.put(`${props.url}/api/notifications/update`)
+				.then((res) => {
+					// Update notifications
+					axios.get(`${props.url}/api/notifications`)
+						.then((res) => props.setNotifications(res.data))
+				})
 		})
 	}
 
@@ -135,7 +147,8 @@ const TopNavLinks = (props) => {
 						textAlign: "center",
 						fontWeight: "100",
 						position: "relative",
-					}}>
+					}}
+					onClick={onNotification}>
 					<svg className="bi bi-bell"
 						width="1em"
 						height="1em"
@@ -146,21 +159,22 @@ const TopNavLinks = (props) => {
 						<path fillRule="evenodd"
 							d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
 					</svg>
-				<span className="badge badge-danger rounded-circle"
-					style={{
-						fontWeight: "100",
-						position: "absolute",
-						right: "-0.5rem",
-						bottom: "0.5rem",
-						border: "solid #232323"
-					}}>
-					{props.notifications.length > 0 && props.notifications.length}
+					<span className="badge badge-danger rounded-circle"
+						style={{
+							fontWeight: "100",
+							position: "absolute",
+							right: "-0.5rem",
+							bottom: "0.5rem",
+							border: "solid #232323"
+						}}>
+						{props.notifications.filter((notification) => !notification.isRead).length > 0 &&
+							props.notifications.filter((notification) => !notification.isRead).length}
 					</span>
 				</Link>
 				<div style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<div className="dropdown-header">Notifications</div>
+					<div className="dropdown-header"><h5>Notifications</h5></div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 
 						{/* Get Notifications */}

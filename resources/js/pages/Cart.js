@@ -88,7 +88,9 @@ const Cart = (props) => {
 							setReceipt("menu-open")
 							clearInterval(intervalId)
 							props.setMessage(res.data.length + " Videos bought")
-							axios.get(`${props.url}/api/bought-videos`).then((res) => props.setBoughtVideos(res.data))
+							// Update Bought Videos
+							axios.get(`${props.url}/api/bought-videos`)
+								.then((res) => props.setBoughtVideos(res.data))
 						}
 						// Stop loop after 60s
 						setTimeout(() => {
@@ -97,6 +99,7 @@ const Cart = (props) => {
 						}, 60000)
 
 					}).catch((err) => {
+						console.log(err.response.data.message)
 						const resErrors = err.response.data.errors
 						var resError
 						var newError = []
@@ -116,7 +119,9 @@ const Cart = (props) => {
 							setReceipt("menu-open")
 							clearInterval(intervalId)
 							setTimeout(() => props.setMessage(res.data.length + " Audios bought"), 5000)
-							axios.get(`${props.url}/api/bought-audios`).then((res) => props.setBoughtAudios(res.data))
+							// Update Bought Audio
+							axios.get(`${props.url}/api/bought-audios`)
+								.then((res) => props.setBoughtAudios(res.data))
 						}
 						// Stop loop after 60s
 						setTimeout(() => {
@@ -148,8 +153,11 @@ const Cart = (props) => {
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3">
 					{/* Cart Videos */}
-					<center><h3>Videos</h3></center>
-					<hr />
+					{props.cartVideos.length > 0 &&
+						<>
+							<center><h3>Videos</h3></center>
+							<hr />
+						</>}
 					{props.cartVideos.map((cartVideo, key) => (
 						<div key={key} className="d-flex p-2 border-bottom">
 							<div className="thumbnail">
@@ -170,7 +178,7 @@ const Cart = (props) => {
 									{cartVideo.name}
 								</h6>
 								<h6>
-									<small>{cartVideo.username}</small>
+									<small>{cartVideo.artist} {cartVideo.ft}</small>
 								</h6>
 								<h6 className="text-success">KES 200</h6>
 								<button
@@ -184,20 +192,24 @@ const Cart = (props) => {
 							</div>
 						</div>
 					))}
-					<div className="d-flex justify-content-between">
-						<div className="p-2">
-							<h4 className="text-success">Sub Total</h4>
-						</div>
-						<div className="p-2">
-							<h4 className="text-success">{videoTotalCash}</h4>
-						</div>
-					</div>
+					{props.cartVideos.length > 0 &&
+						<div className="d-flex justify-content-between">
+							<div className="p-2">
+								<h4 className="text-success">Sub Total</h4>
+							</div>
+							<div className="p-2">
+								<h4 className="text-success">{videoTotalCash}</h4>
+							</div>
+						</div>}
 					{/* Cart Videos End */}
 				</div>
 				<div className="col-sm-4">
 					{/* Cart Audios */}
-					<center><h3>Audios</h3></center>
-					<hr />
+					{props.cartAudios.length > 0 &&
+						<>
+							<center><h3>Audios</h3></center>
+							<hr />
+						</>}
 					{props.cartAudios.map((cartAudio, key) => (
 						<div key={key} className="d-flex p-2 border-bottom">
 							<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
@@ -240,14 +252,15 @@ const Cart = (props) => {
 							</div>
 						</div>
 					))}
-					<div className="d-flex justify-content-between">
-						<div className="p-2">
-							<h4 className="text-success">Sub Total</h4>
-						</div>
-						<div className="p-2">
-							<h4 className="text-success">{audioTotalCash}</h4>
-						</div>
-					</div>
+					{props.cartAudios.length > 0 &&
+						<div className="d-flex justify-content-between">
+							<div className="p-2">
+								<h4 className="text-success">Sub Total</h4>
+							</div>
+							<div className="p-2">
+								<h4 className="text-success">{audioTotalCash}</h4>
+							</div>
+						</div>}
 					{/* Cart Audios End */}
 				</div>
 				<div className="col-sm-3">
@@ -369,78 +382,39 @@ const Cart = (props) => {
 					</div>
 
 					<div className="px-2 pb-4" style={{ height: "100%", overflowY: "scroll", textAlign: "left" }}>
-						<center><h3 className="text-success">Congratulations!</h3></center>
+						<center><h4 className="text-success">Congratulations. Purchase successful!</h4></center>
 						{/* Cart Videos */}
-						<center><h4>Videos</h4></center>
+						{receiptVideos.length > 0 && <center><h4>Videos</h4></center>}
 						{receiptVideos.map((receiptVideo, key) => (
 							<VideoMediaHorizontal
 								key={key}
 								onClick={() => props.setShow(0)}
 								setShow={props.setShow}
-								link={
-									`/video-show/${props.videos.find((video) => video.id == receiptVideo) &&
-									props.videos.find((video) => video.id == receiptVideo).id}`
-								}
-								thumbnail={
-									props.videos.find((video) => video.id == receiptVideo) ?
-										props.videos.find((video) => video.id == receiptVideo).thumbnail.match(/http/) ?
-											props.videos.find((video) => video.id == receiptVideo).thumbnail :
-											`storage/${props.videos.find((video) => video.id == receiptVideo).thumbnail}` :
-										""
-								}
-								name={
-									props.videos.find((video) => video.id == receiptVideo) &&
-									props.videos.find((video) => video.id == receiptVideo).name
-								}
-								username={
-									props.videos.find((video) => video.id == receiptVideo) &&
-									props.videos.find((video) => video.id == receiptVideo).username
-								}
-								ft={
-									props.videos.find((video) => video.id == receiptVideo) &&
-									props.videos.find((video) => video.id == receiptVideo).ft
-								}
+								link={`/video-show/${receiptVideo.id}`}
+								thumbnail={receiptVideo.thumbnail}
+								name={receiptVideo.name}
+								username={receiptVideo.username}
+								ft={receiptVideo.ft}
 								videoInCart={false}
 								hasBoughtVideo={false}
-								videoId={
-									props.videos.find((video) => video.id == receiptVideo) &&
-									props.videos.find((video) => video.id == receiptVideo).id
-								} />
+								videoId={receiptVideo.id} />
 						))}
 						{/* Cart Videos End */}
 
 						{/* Cart Audios */}
-						<center><h4 className="mt-4">Audios</h4></center>
+						{receiptAudios.length > 0 && <center><h4 className="mt-4">Audios</h4></center>}
 						{receiptAudios.map((receiptAudio, key) => (
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}
-								link={
-									`/audio-show/${props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).id}`
-								}
-								thumbnail={
-									`/storage/${props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).thumbnail}`
-								}
-								name={
-									props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).name
-								}
-								username={
-									props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).username
-								}
-								ft={
-									props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).ft
-								}
+								link={`/audio-show/${receiptAudio.id}`}
+								thumbnail={`/storage/${receiptAudio.thumbnail}`}
+								name={receiptAudio.name}
+								username={receiptAudio.username}
+								ft={receiptAudio.ft}
 								hasBoughtAudio={false}
 								audioInCart={false}
-								audioId={
-									props.audios.find((audio) => audio.id == receiptAudio) &&
-									props.audios.find((audio) => audio.id == receiptAudio).id
-								} />
+								audioId={receiptAudio.id} />
 						))}
 						<br />
 						<br />

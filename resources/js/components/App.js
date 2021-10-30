@@ -567,7 +567,7 @@ function App() {
 			<Router>
 				{login && <LoginPopUp {...{ url }} />}
 
-				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications }} />
+				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, setNotifications }} />
 
 				<Route path="/login" exact render={(props) => (
 					<Login {...{ setMessage, setErrors, setAuth, url }} />
@@ -589,7 +589,7 @@ function App() {
 
 				<Route path="/cart" exact render={(props) => (
 					<>
-						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, cartAudios, setCartAudios, setVideos, setAudios, setShow }} />
+						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, cartAudios, setCartAudios, setVideos, setAudios, setBoughtVideos, setBoughtAudios, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />

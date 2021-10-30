@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\BoughtAudios;
 use App\BoughtVideos;
 use App\CartVideos;
-use App\DecoNotifications;
 use App\Decos;
 use App\Kopokopo;
+use App\Notifications\BoughtVideoNotifications;
 use App\User;
-use App\VideoNotifications;
+use App\Videos;
 use Illuminate\Http\Request;
 
 class BoughtVideosController extends Controller
@@ -63,9 +63,10 @@ class BoughtVideosController extends Controller
         $permission = "";
         $approved = [];
         /* Fetch songs from Cart Videos */
-        $cartVideosCheck = CartVideos::where('username', auth()->user()->username)->get();
+        $cartVideos = CartVideos::where('username', auth()->user()->username)
+            ->get();
 
-        foreach ($cartVideosCheck as $cartVideoCheck) {
+        foreach ($cartVideos as $cartVideo) {
             // Get Cost of Bought Videos at each price
             $totalVideos20 = BoughtVideos::where('username', auth()->user()->username)
                 ->where('price', 20)
@@ -85,33 +86,32 @@ class BoughtVideosController extends Controller
 
             if ($permission >= 1) {
                 $bvQuery = BoughtVideos::where('username', auth()->user()->username)
-                    ->where('video_id', $cartVideoCheck->video_id)
+                    ->where('video_id', $cartVideo->video_id)
                     ->count();
                 if ($bvQuery == 0) {
                     /* Add song to videos_bought */
                     $boughtVideos = new BoughtVideos;
-                    $boughtVideos->video_id = $cartVideoCheck->video_id;
+                    $boughtVideos->video_id = $cartVideo->video_id;
                     $boughtVideos->reference = "ODT2TA2060";
                     $boughtVideos->price = 200;
                     $boughtVideos->username = auth()->user()->username;
-                    $boughtVideos->name = $cartVideoCheck->videos->video_name;
-                    $boughtVideos->artist = $cartVideoCheck->videos->username;
+                    $boughtVideos->name = $cartVideo->videos->name;
+                    $boughtVideos->artist = $cartVideo->videos->username;
                     // $boughtVideos->save();
 
                     /* Showing video song bought notification */
-                    $videoNotifications = new VideoNotifications;
-                    $videoNotifications->video_id = $cartVideoCheck->video_id;
-                    $videoNotifications->username = auth()->user()->username;
-                    $videoNotifications->artist = $cartVideoCheck->videos->username;
-                    // $videoNotifications->save();
+                    $user = User::where('username', $cartVideo->videos->username)
+                        ->first();
+
+                    $user->notify(new BoughtVideoNotifications($cartVideo));
 
                     /* Add deco if necessary */
                     /* Check if songs are 10 */
                     $userDecos = Decos::where('username', auth()->user()->username)
-                        ->where('artist', $cartVideoCheck->videos->username)
+                        ->where('artist', $cartVideo->videos->username)
                         ->count();
                     $uservideos = BoughtVideos::where('username', auth()->user()->username)
-                        ->where('username', $cartVideoCheck->videos->username)
+                        ->where('username', $cartVideo->videos->username)
                         ->count();
                     $uservideos = $uservideos / 10;
                     $decoBalance = $uservideos - $userDecos;
@@ -121,32 +121,40 @@ class BoughtVideosController extends Controller
                     if ($decoPermission >= 1) {
                         $deco = new Decos;
                         $deco->username = auth()->user()->username;
-                        $deco->artist = $cartVideoCheck->video->username;
-                        // $deco->save();
+                        $deco->artist = $cartVideo->video->username;
+                        $deco->save();
 
                         /* Add deco notification */
-                        $decoNotification = new DecoNotifications;
-                        $decoNotification->username = auth()->user()->username;
-                        $decoNotification->artist = $cartVideoCheck->video->username;
-                        // $decoNotification->save();
                     }
                     /* Delete from cart */
-                    CartVideos::where('video_id', $cartVideoCheck->video_id)
+                    CartVideos::where('video_id', $cartVideo->video_id)
                         ->where('username', auth()->user()->username);
                     // ->delete();
 
                     // Update array
-                    array_push($approved, $cartVideoCheck->video_id);
+                    array_push($approved, $cartVideo->videos->id);
                 }
             }
         }
 
-        $totalVideos = BoughtVideos::where('username', auth()->user()->username)->count() * 20;
-        $phone = substr_replace(auth()->user()->phone, "+254", 0, -9);
-        $kopokopo = Kopokopo::where('sender_phone', $phone)->sum('amount');
-        $balance = $kopokopo - $totalVideos;
+        $receiptVideos = [];
 
-        return response($approved, 200);
+        foreach ($approved as $key => $id) {
+            $video = Videos::find($id);
+
+            array_push($receiptVideos, [
+                "id" => $video->id,
+                "video" => $video->video,
+                "name" => $video->name,
+                "username" => $video->username,
+                "ft" => $video->ft,
+                "album" => $video->album,
+                "genre" => $video->genre,
+                "thumbnail" => preg_match("/http/", $video->thumbnail) ? $video->thumbnail : "/storage/" . $video->thumbnail,
+            ]);
+        }
+
+        return response($receiptVideos, 200);
     }
 
     /**

@@ -15,17 +15,21 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        $user = User::where('username', auth()->user()->username)
-            ->first();
+		$getNotifications = auth()->user()->notifications;
 
-        $notifications = [];
+		$notifications = [];
 
-        foreach ($user->unreadNotifications as $notification) {
+        foreach ($getNotifications as $notification) {
+			
+            // Check if notification is read
+            $isRead = $notification->read_at ? true : false;
+
             array_push($notifications, [
                 "id" => $notification->id,
                 "type" => explode('\\', $notification->type)[2],
-				"from" => $notification->data['from'],
+                "from" => $notification->data['from'],
                 "message" => $notification->data['message'],
+                "isRead" => $isRead,
                 "created_at" => $notification->created_at->format('d M Y'),
             ]);
         }
@@ -85,7 +89,7 @@ class NotificationsController extends Controller
      */
     public function update(Request $request, Notifications $notifications)
     {
-        //
+        return auth()->user()->notifications->markAsRead();
     }
 
     /**

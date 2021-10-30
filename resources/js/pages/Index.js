@@ -456,7 +456,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage1}%`,
-															backgroundColor: "gold"
+															backgroundColor: "#232323"
 														}}>
 														{post.parameter_1}
 													</div>
@@ -490,7 +490,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage2}%`,
-															backgroundColor: "gold"
+															backgroundColor: "#232323"
 														}}>
 														{post.parameter_2}
 													</div>
@@ -524,7 +524,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage3}%`,
-															backgroundColor: "gold"
+															backgroundColor: "#232323"
 														}}>
 														{post.parameter_3}
 													</div>
@@ -558,7 +558,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{ 
 															width: `${post.percentage4}%`, 
-															backgroundColor: "gold" 
+															backgroundColor: "#232323" 
 															}}>
 														{post.parameter_4}
 													</div>
@@ -592,7 +592,7 @@ const Index = (props) => {
 													<div className='progress-bar'
 														style={{
 															width: `${post.percentage5}%`,
-															backgroundColor: "gold"
+															backgroundColor: "#232323"
 														}}>
 														{post.parameter_5}
 													</div>

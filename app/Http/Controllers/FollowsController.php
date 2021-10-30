@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Follows;
+use App\Notifications;
+use App\Notifications\FollowNotifications;
 use App\User;
 use Illuminate\Http\Request;
-use App\Notifications\FollowNotifications;
 
 class FollowsController extends Controller
 {
@@ -61,7 +62,12 @@ class FollowsController extends Controller
             $user = User::where('username', $request->input('musician'))
                 ->first();
 
-            $user->notify(new FollowNotifications());
+            // Check if notification exists
+            $notificationDoesNotExist = Notifications::where('data->from', auth()->user()->username)
+                ->where('notifiable_id', $user->id)
+                ->doesntExist();
+
+            $notificationDoesNotExist && $user->notify(new FollowNotifications());
         }
 
         return response('You ' . $message . ' ' . $request->musician, 200);

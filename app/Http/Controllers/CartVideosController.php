@@ -24,6 +24,8 @@ class CartVideosController extends Controller
                 "id" => $cartVideo->id,
                 "video_id" => $cartVideo->video_id,
                 "name" => $cartVideo->videos->name,
+                "artist" => $cartVideo->videos->username,
+                "ft" => $cartVideo->videos->ft,
                 "thumbnail" => preg_match("/http/", $cartVideo->videos->thumbnail) ?
                 $cartVideo->videos->thumbnail :
                 "/storage/" . $cartVideo->videos->thumbnail,

@@ -24,6 +24,8 @@ class CartAudiosController extends Controller
                 "id" => $cartAudio->id,
                 "audio_id" => $cartAudio->audio_id,
                 "name" => $cartAudio->audios->name,
+                "artist" => $cartAudio->videos->username,
+                "ft" => $cartAudio->videos->ft,
                 "thumbnail" => preg_match("/http/", $cartAudio->audios->thumbnail) ?
                 $cartAudio->audios->thumbnail :
                 "/storage/" . $cartAudio->audios->thumbnail,

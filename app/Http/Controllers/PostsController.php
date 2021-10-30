@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtAudios;
-use App\BoughtVideos;
-use App\CartVideos;
 use App\Follows;
 use App\Polls;
 use App\PostCommentLikes;
@@ -12,7 +9,6 @@ use App\PostComments;
 use App\PostLikes;
 use App\Posts;
 use App\User;
-use App\Videos;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -74,66 +70,55 @@ class PostsController extends Controller
 
             // Get percentage for parameter 1
             // Get total polls for parameter 1
-            $totalParameter1 = Polls::where('post_id', $post->id)
-                ->where('parameter', $post->parameter_1)
+            $totalParameter = Polls::where('post_id', $post->id)
                 ->count();
 
             // Check if total polls for parameter 1 is not 0
-            if ($totalParameter1 > 0) {
-                $percentage1 = Polls::where('post_id', $post->id)->count() /
-                    $totalParameter1 * 100;
+            if ($totalParameter > 0) {
+                $countParameter1 = Polls::where('post_id', $post->id)
+                    ->where('parameter', $post->parameter_1)
+                    ->count();
+                $percentage1 = $countParameter1 / $totalParameter * 100;
             } else {
                 $percentage1 = 0;
             }
 
-            // Get total polls for parameter 2
-            $totalParameter2 = Polls::where('post_id', $post->id)
-                ->where('parameter', $post->parameter_2)
-                ->count();
-
             // Check if total polls for parameter 2 is not 0
-            if ($totalParameter2 > 0) {
-                $percentage2 = Polls::where('post_id', $post->id)->count() /
-                    $totalParameter2 * 100;
+            if ($totalParameter > 0) {
+                $countParameter2 = Polls::where('post_id', $post->id)
+                    ->where('parameter', $post->parameter_2)
+                    ->count();
+                $percentage2 = $countParameter2 / $totalParameter * 100;
             } else {
                 $percentage2 = 0;
             }
 
-            // Get total polls for parameter 3
-            $totalParameter3 = Polls::where('post_id', $post->id)
-                ->where('parameter', $post->parameter_3)
-                ->count();
-
             // Check if total polls for parameter 1 is not 0
-            if ($totalParameter3 > 0) {
-                $percentage3 = Polls::where('post_id', $post->id)->count() /
-                    $totalParameter3 * 100;
+            if ($totalParameter > 0) {
+                $countParameter3 = Polls::where('post_id', $post->id)
+                    ->where('parameter', $post->parameter_3)
+                    ->count();
+                $percentage3 = $countParameter3 / $totalParameter * 100;
             } else {
                 $percentage3 = 0;
             }
 
-            // Get total polls for parameter 4
-            $totalParameter4 = Polls::where('post_id', $post->id)
-                ->where('parameter', $post->parameter_4)
-                ->count();
-
             // Check if total polls for parameter 1 is not 0
-            if ($totalParameter4 > 0) {
-                $percentage4 = Polls::where('post_id', $post->id)->count() /
-                    $totalParameter4 * 100;
+            if ($totalParameter > 0) {
+                $countParameter4 = Polls::where('post_id', $post->id)
+                    ->where('parameter', $post->parameter_4)
+                    ->count();
+                $percentage4 = $countParameter4 / $totalParameter * 100;
             } else {
                 $percentage4 = 0;
             }
 
-            // Get total polls for parameter 5
-            $totalParameter5 = Polls::where('post_id', $post->id)
-                ->where('parameter', $post->parameter_5)
-                ->count();
-
             // Check if total polls for parameter 5 is not 0
-            if ($totalParameter5 > 0) {
-                $percentage5 = Polls::where('post_id', $post->id)->count() /
-                    $totalParameter5 * 100;
+            if ($totalParameter > 0) {
+                $countParameter5 = Polls::where('post_id', $post->id)
+                    ->where('parameter', $post->parameter_5)
+                    ->count();
+                $percentage5 = $countParameter5 / $totalParameter * 100;
             } else {
                 $percentage5 = 0;
             }
