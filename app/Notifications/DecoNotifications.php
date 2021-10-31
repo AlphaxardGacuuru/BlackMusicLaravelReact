@@ -52,7 +52,7 @@ class DecoNotifications extends Notification
 	{
 		return [
 			'from' => $this->artist,
-			'message' => $this->artist . ' just decorated you',
+			'message' => $this->artist . ' decorated you.',
 		];
 	}
 

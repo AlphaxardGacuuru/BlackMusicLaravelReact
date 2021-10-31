@@ -39,16 +39,16 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany('App\Posts', 'id', 'username');
+        return $this->hasMany('App\Posts', 'username', 'username');
     }
 
     public function decos()
     {
-        return $this->hasMany('App\Decos', 'id', 'username');
+        return $this->hasMany('App\Decos', 'username', 'username');
     }
 
     public function follows()
     {
-        return $this->hasMany('App\Follows', 'id', 'username');
+        return $this->hasMany('App\Follows', 'username', 'username');
     }
 }

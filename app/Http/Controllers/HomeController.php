@@ -36,7 +36,7 @@ class HomeController extends Controller
             "pb" => Auth::user()->pb,
             "bio" => Auth::user()->bio,
             "dob" => Auth::user()->dob,
-            "decos" => Decos::where('username', Auth::user()->dob)->count(),
+            "decos" => Decos::where('username', Auth::user()->username)->count(),
             "fans" => Follows::where('followed', Auth::user()->username)->count() - 1,
             "following" => Follows::where('followed', Auth::user()->username)->count(),
             "posts" => Posts::where('username', Auth::user()->username)->count(),

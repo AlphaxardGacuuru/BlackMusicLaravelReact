@@ -15,9 +15,9 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-		$getNotifications = auth()->user()->notifications;
+        $getNotifications = auth()->user()->notifications;
 
-		$notifications = [];
+        $notifications = [];
 
         foreach ($getNotifications as $notification) {
 
@@ -98,8 +98,12 @@ class NotificationsController extends Controller
      * @param  \App\Notifications  $notifications
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notifications $notifications)
+    public function destroy($id)
     {
-        //
+        if ($id == 0) {
+            auth()->user()->notifications()->delete();
+        } else {
+            Notifications::find($id)->delete();
+        }
     }
 }

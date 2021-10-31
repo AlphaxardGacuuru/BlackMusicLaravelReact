@@ -10,24 +10,6 @@ const TopNavLinks = (props) => {
 	const audCartItems = props.cartAudios.length
 	const cartItems = vidCartItems + audCartItems
 
-	// Message notifications
-	const messageNotifications = props.notifications
-		.filter((followNotification) => followNotification.type == "MessagesNotifications")
-
-	const decoNotifications = props.notifications
-		.filter((decoNotification) => decoNotification.type == "DecoNotifications")
-
-	const followNotifications = props.notifications
-		.filter((followNotification) => followNotification.type == "FollowNotifications")
-
-	const boughtVideoNotifications = props.notifications
-		.filter((boughtVideoNotification) => boughtVideoNotification.type == "BoughtVideoNotifications")
-
-	const boughtAudioNotifications = props.notifications
-		.filter((boughtAudioNotification) => boughtAudioNotification.type == "BoughtAudioNotifications")
-
-	const boughtNotifications = boughtVideoNotifications + boughtAudioNotifications
-
 	const logout = (e) => {
 		e.preventDefault()
 
@@ -55,6 +37,15 @@ const TopNavLinks = (props) => {
 						.then((res) => props.setNotifications(res.data))
 				})
 		})
+	}
+
+	const onDeleteComment = (id) => {
+		axios.delete(`${props.url}/api/notifications/${id}`)
+			.then((res) => {
+				// Update Notifications
+				axios.get(`${props.url}/api/notifications`)
+					.then((res) => props.setNotifications(res.data))
+			})
 	}
 
 	// Install button
@@ -174,62 +165,22 @@ const TopNavLinks = (props) => {
 				<div style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
+					<div className="dropdown-header">Notifications</div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 
 						{/* Get Notifications */}
-						{messageNotifications.length > 0 &&
-							<div className="dropdown-header">Messages</div>}
-						{messageNotifications
-							.map((messageNotification, key) => (
-								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{messageNotification.message}</h6>
-								</Link>
-							))}
-
-						{/* Get Decos */}
-						{decoNotifications.length > 0 &&
-							<div className="dropdown-header">Decos</div>}
-						{decoNotifications.
-							map((decoNotification, key) => (
-								<Link key={key} to={`/profile/${decoNotification.from}`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{decoNotification.message}</h6>
-								</Link>
-							))}
-
-						{/* Get Follow Notifications */}
-						{followNotifications.length > 0 &&
-							<div className="dropdown-header">New Fans</div>}
-						{followNotifications
-							.map((followNotification, key) => (
+						{props.notifications
+							.map((notification, key) => (
 								<Link key={key}
-									to={`/profile/${followNotification.from}`}
-									className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{followNotification.message}</h6>
-								</Link>
-							))}
-
-						{boughtNotifications.length > 0 &&
-							<div className="dropdown-header">Songs Bought</div>}
-						{/* Get Video Notifications */}
-						{boughtVideoNotifications
-							.map((videoNotification, key) => (
-								<Link key={key}
-									to={`/profile/${videoNotification.from}`}
-									className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{videoNotification.message}</h6>
-								</Link>
-							))}
-
-						{/* Get Audio Notifications */}
-						{boughtAudioNotifications
-							.map((audioNotification, key) => (
-								<Link key={key}
-									to={`/profile/${audioNotification.from}`}
-									className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{audioNotification.message}</h6>
+									to={`/profile/${notification.from}`}
+									className="p-3 dropdown-item border-bottom text-dark"
+									onClick={() => onDeleteComment(notification.id)}>
+									<h6>{notification.message}</h6>
 								</Link>
 							))}
 					</div>
+					{props.notifications.length > 0 &&
+						<div className="dropdown-header" onClick={() => onDeleteComment(0)}>Clear notifications</div>}
 				</div>
 			</div>
 			{/* Notification Dropdown End */}

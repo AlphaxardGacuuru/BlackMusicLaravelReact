@@ -95483,24 +95483,7 @@ var TopNavLinks = function TopNavLinks(props) {
   // Get number of items in video cart
   var vidCartItems = props.cartVideos.length;
   var audCartItems = props.cartAudios.length;
-  var cartItems = vidCartItems + audCartItems; // Message notifications
-
-  var messageNotifications = props.notifications.filter(function (followNotification) {
-    return followNotification.type == "MessagesNotifications";
-  });
-  var decoNotifications = props.notifications.filter(function (decoNotification) {
-    return decoNotification.type == "DecoNotifications";
-  });
-  var followNotifications = props.notifications.filter(function (followNotification) {
-    return followNotification.type == "FollowNotifications";
-  });
-  var boughtVideoNotifications = props.notifications.filter(function (boughtVideoNotification) {
-    return boughtVideoNotification.type == "BoughtVideoNotifications";
-  });
-  var boughtAudioNotifications = props.notifications.filter(function (boughtAudioNotification) {
-    return boughtAudioNotification.type == "BoughtAudioNotifications";
-  });
-  var boughtNotifications = boughtVideoNotifications + boughtAudioNotifications;
+  var cartItems = vidCartItems + audCartItems;
 
   var logout = function logout(e) {
     e.preventDefault();
@@ -95525,6 +95508,15 @@ var TopNavLinks = function TopNavLinks(props) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/notifications")).then(function (res) {
           return props.setNotifications(res.data);
         });
+      });
+    });
+  };
+
+  var onDeleteComment = function onDeleteComment(id) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("".concat(props.url, "/api/notifications/").concat(id)).then(function (res) {
+      // Update Notifications
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/notifications")).then(function (res) {
+        return props.setNotifications(res.data);
       });
     });
   }; // Install button
@@ -95646,49 +95638,27 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "dropdown-menu dropdown-menu-right m-0 p-0",
     "aria-labelledby": "dropdownMenuButton"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "dropdown-header"
+  }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       maxHeight: "500px",
       overflowY: "scroll"
     }
-  }, messageNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "dropdown-header"
-  }, "Messages"), messageNotifications.map(function (messageNotification, key) {
+  }, props.notifications.map(function (notification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       key: key,
-      to: "/profile/",
-      className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, messageNotification.message));
-  }), decoNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "dropdown-header"
-  }, "Decos"), decoNotifications.map(function (decoNotification, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      key: key,
-      to: "/profile/".concat(decoNotification.from),
-      className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, decoNotification.message));
-  }), followNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "dropdown-header"
-  }, "New Fans"), followNotifications.map(function (followNotification, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      key: key,
-      to: "/profile/".concat(followNotification.from),
-      className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, followNotification.message));
-  }), boughtNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "dropdown-header"
-  }, "Songs Bought"), boughtVideoNotifications.map(function (videoNotification, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      key: key,
-      to: "/profile/".concat(videoNotification.from),
-      className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, videoNotification.message));
-  }), boughtAudioNotifications.map(function (audioNotification, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      key: key,
-      to: "/profile/".concat(audioNotification.from),
-      className: "p-3 dropdown-item border-bottom text-dark"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, audioNotification.message));
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      to: "/profile/".concat(notification.from),
+      className: "p-3 dropdown-item border-bottom text-dark",
+      onClick: function onClick() {
+        return onDeleteComment(notification.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, notification.message));
+  })), props.notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "dropdown-header",
+    onClick: function onClick() {
+      return onDeleteComment(0);
+    }
+  }, "Clear notifications"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "dropdown"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     href: "#",
@@ -98869,8 +98839,8 @@ var Cart = function Cart(props) {
             setReceipt("menu-open");
             clearInterval(intervalId);
             setTimeout(function () {
-              return props.setMessage(res.data.length + " Audios bought");
-            }, 5000); // Update Bought Audio
+              props.setMessage(res.data.length + " Audios bought");
+            }, 10000); // Update Bought Audio
 
             axios.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
               return props.setBoughtAudios(res.data);

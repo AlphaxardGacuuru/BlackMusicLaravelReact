@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PostLikeNotifications;
 use App\PostLikes;
+use App\Posts;
 use Illuminate\Http\Request;
 
 class PostLikesController extends Controller
@@ -43,7 +45,7 @@ class PostLikesController extends Controller
             PostLikes::where('post_id', $request->input('post'))
                 ->where('username', auth()->user()->username)
                 ->delete();
-				
+
             $message = "Like removed";
         } else {
             $postLike = new PostLikes;
@@ -51,6 +53,11 @@ class PostLikesController extends Controller
             $postLike->username = auth()->user()->username;
             $postLike->save();
             $message = "Post liked";
+
+            $musician = Posts::find($request->input('post'))->users;
+
+            $musician->username != auth()->user()->username &&
+            $musician->notify(new PostLikeNotifications);
         }
 
         return response($message, 200);

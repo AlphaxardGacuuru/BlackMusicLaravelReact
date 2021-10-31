@@ -53,7 +53,7 @@ class BoughtVideoNotifications extends Notification
 		return [
 			'from' => auth()->user()->username,
 			'id' => $this->cartVideo->videos->username,
-			'message' => auth()->user()->username . ' just bought ' . $this->cartVideo->videos->name,
+			'message' => auth()->user()->username . ' bought ' . $this->cartVideo->videos->name,
 		];
     }
 

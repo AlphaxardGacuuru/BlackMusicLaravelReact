@@ -6,11 +6,11 @@ use App\BoughtAudios;
 use App\Audios;
 use App\BoughtVideos;
 use App\CartAudios;
-use App\DecoNotifications;
 use App\Decos;
 use App\Kopokopo;
 use App\User;
 use App\Notifications\BoughtAudioNotifications;
+use App\Notifications\DecoNotifications;
 use Illuminate\Http\Request;
 
 class BoughtAudiosController extends Controller
@@ -95,7 +95,7 @@ class BoughtAudiosController extends Controller
                     $boughtAudios->username = auth()->user()->username;
                     $boughtAudios->name = $cartAudio->audios->audio_name;
                     $boughtAudios->artist = $cartAudio->audios->username;
-                    // $boughtAudios->save();
+                    $boughtAudios->save();
 
                     /* Showing audio song bought notification */
                     $user = User::where('username', $cartAudio->audios->username)
@@ -109,7 +109,7 @@ class BoughtAudiosController extends Controller
                         ->where('artist', $cartAudio->audios->username)
                         ->count();
                     $useraudios = BoughtAudios::where('username', auth()->user()->username)
-                        ->where('username', $cartAudio->audios->username)
+                        ->where('artist', $cartAudio->audios->username)
                         ->count();
                     $useraudios = $useraudios / 10;
                     $decoBalance = $useraudios - $userDecos;
@@ -120,13 +120,10 @@ class BoughtAudiosController extends Controller
                         $deco = new Decos;
                         $deco->username = auth()->user()->username;
                         $deco->artist = $cartAudio->audios->username;
-                        // $deco->save();
+                        $deco->save();
 
                         /* Add deco notification */
-                        $decoNotification = new DecoNotifications;
-                        $decoNotification->username = auth()->user()->username;
-                        $decoNotification->artist = $cartAudio->audios->username;
-                        // $decoNotification->save();
+                        auth()->user()->notify(new DecoNotifications($cartAudio->audios->username));
                     }
                     /* Delete from cart */
                     CartAudios::where('audio_id', $cartAudio->audio_id)

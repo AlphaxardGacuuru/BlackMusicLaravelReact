@@ -50,14 +50,15 @@ class UsersController extends Controller
             $hasBought1 = ($hasBoughtVideo + $hasBoughtAudio) > 1 ? true : false;
 
             array_push($users, [
+				"id" => $user->id,
                 "name" => $user->name,
                 "username" => $user->username,
                 "account_type" => $user->account_type,
                 "pp" => preg_match("/http/", $user->pp) ? $user->pp : "/storage/" . $user->pp,
                 "bio" => $user->bio,
                 "posts" => $user->posts->count(),
-                "following" => $user->posts->Where('username', auth()->user()->username)->count(),
-                "fans" => $user->posts->Where('following', auth()->user()->username)->count(),
+                "following" => $user->follows->count() - 1,
+                "fans" => Follows::where('followed', $user->username)->count() - 1,
                 "hasFollowed" => $hasFollowed,
                 "hasBought1" => $hasBought1,
                 "decos" => $user->decos->count(),
@@ -193,6 +194,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
     }
 }

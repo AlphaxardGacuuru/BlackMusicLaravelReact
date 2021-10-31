@@ -59,15 +59,10 @@ class FollowsController extends Controller
             $message = "Followed";
 
             // Notify Musician
-            $user = User::where('username', $request->input('musician'))
+            $musician = User::where('username', $request->input('musician'))
                 ->first();
 
-            // Check if notification exists
-            $notificationDoesNotExist = Notifications::where('data->from', auth()->user()->username)
-                ->where('notifiable_id', $user->id)
-                ->doesntExist();
-
-            $notificationDoesNotExist && $user->notify(new FollowNotifications());
+            $musician->notify(new FollowNotifications);
         }
 
         return response('You ' . $message . ' ' . $request->musician, 200);

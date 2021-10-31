@@ -195,8 +195,7 @@ const Index = (props) => {
 						<div className="p-2">
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
 								<Link to={"/profile/" + props.auth.username}>
-									<Img
-										src={props.auth.pp.match(/http/) ? props.auth.pp : '/storage/' + props.auth.pp}
+									<Img src={props.auth.pp.match(/http/) ? props.auth.pp : '/storage/' + props.auth.pp}
 										width="100px"
 										height="100px"
 										alt="avatar" />

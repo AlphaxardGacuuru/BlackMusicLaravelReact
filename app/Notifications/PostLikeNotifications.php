@@ -7,20 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class BoughtAudioNotifications extends Notification
+class PostLikeNotifications extends Notification
 {
     use Queueable;
-
-	protected $cartAudio;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($cartAudio)
+    public function __construct()
     {
-        $this->cartAudio = $cartAudio;
+        //
     }
 
     /**
@@ -48,12 +46,11 @@ class BoughtAudioNotifications extends Notification
                     ->line('Thank you for using our application!');
     }
 
-	public function toDatabase($notifiable)
+	public function toDatabase()
 	{
 		return [
 			'from' => auth()->user()->username,
-			'id' => $this->cartAudio->audios->username,
-			'message' => auth()->user()->username . ' bought ' . $this->cartAudio->audios->name,
+			'message' => auth()->user()->username . ' liked your post.',
 		];
 	}
 

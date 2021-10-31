@@ -127,7 +127,9 @@ const Cart = (props) => {
 							setBottomMenu()
 							setReceipt("menu-open")
 							clearInterval(intervalId)
-							setTimeout(() => props.setMessage(res.data.length + " Audios bought"), 5000)
+							setTimeout(() => {
+								props.setMessage(res.data.length + " Audios bought")
+							}, 10000)
 							// Update Bought Audio
 							axios.get(`${props.url}/api/bought-audios`)
 								.then((res) => props.setBoughtAudios(res.data))
@@ -229,48 +231,48 @@ const Cart = (props) => {
 							<center><h3>Audios</h3></center>
 							<hr />
 						</>}
-					{props.cartAudios.map((cartAudio, key) => (
-						<div key={key} className="d-flex p-2 border-bottom">
-							<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
-								<Link to={`/audio-show/${cartAudio.audio_id}`}>
-									<Img src={cartAudio.thumbnail}
-										width="100%"
-										height="50px" />
-								</Link>
+					{props.cartAudios
+						.map((cartAudio, key) => (
+							<div key={key} className="d-flex p-2 border-bottom">
+								<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
+									<Link to={`/audio-show/${cartAudio.audio_id}`}>
+										<Img src={cartAudio.thumbnail}
+											width="100%"
+											height="50px" />
+									</Link>
+								</div>
+								<div className="ml-2 mr-auto">
+									<h6 className="mb-0 pb-0"
+										style={{
+											whiteSpace: "nowrap",
+											overflow: "hidden",
+											textOverflow: "clip"
+										}}>
+										{cartAudio.name}
+									</h6>
+									<h6 className="mt-0 pt-0">
+										<small>{cartAudio.username}</small>
+									</h6>
+									<h6 className="text-success">KES 100</h6>
+								</div>
+								<div className="ml-2">
+									<button
+										className="mysonar-btn mb-1 float-right"
+										onClick={() => onCartAudios(cartAudio.audio_id)}>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											fill="currentColor"
+											className="bi bi-trash"
+											viewBox="0 0 16 16">
+											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+											<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+										</svg>
+									</button>
+								</div>
 							</div>
-							<div className="ml-2 mr-auto">
-								<h6
-									className="mb-0 pb-0"
-									style={{
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{cartAudio.name}
-								</h6>
-								<h6 className="mt-0 pt-0">
-									<small>{cartAudio.username}</small>
-								</h6>
-								<h6 className="text-success">KES 100</h6>
-							</div>
-							<div className="ml-2">
-								<button
-									className="mysonar-btn mb-1 float-right"
-									onClick={() => onCartAudios(cartAudio.audio_id)}>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="16"
-										height="16"
-										fill="currentColor"
-										className="bi bi-trash"
-										viewBox="0 0 16 16">
-										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-										<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-									</svg>
-								</button>
-							</div>
-						</div>
-					))}
+						))}
 					{props.cartAudios.length > 0 &&
 						<div className="d-flex justify-content-between">
 							<div className="p-2">

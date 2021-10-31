@@ -98,7 +98,7 @@ class BoughtVideosController extends Controller
                     $boughtVideos->username = auth()->user()->username;
                     $boughtVideos->name = $cartVideo->videos->name;
                     $boughtVideos->artist = $cartVideo->videos->username;
-                    $boughtVideos->save();
+                    // $boughtVideos->save();
 
                     /* Showing video song bought notification */
                     $user = User::where('username', $cartVideo->videos->username)
