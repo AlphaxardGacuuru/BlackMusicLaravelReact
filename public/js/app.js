@@ -94282,6 +94282,7 @@ function App() {
         boughtVideos: boughtVideos,
         cartVideos: cartVideos,
         setCartVideos: setCartVideos,
+        setVideoAlbums: setVideoAlbums,
         videoLikes: videoLikes,
         follows: follows,
         setFollows: setFollows,
@@ -97133,12 +97134,6 @@ var AudioCreate = function AudioCreate(props) {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "preloader"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "preload-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "sonar-load"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "grids d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "grid1"
@@ -102767,10 +102762,18 @@ var VideoCharts = function VideoCharts(props) {
       axios.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data); // Update videos
+        props.setMessage(res.data); // Update Videos
 
         axios.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
+        }); // Update Cart Videos
+
+        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
+        }); // Update Videos Albums
+
+        axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
+          return props.setVideoAlbums(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -102792,10 +102795,18 @@ var VideoCharts = function VideoCharts(props) {
       axios.post("".concat(props.url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data); // Update videos
+        props.setMessage(res.data); // Update Videos
 
         axios.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
+        }); // Update Cart Videos
+
+        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
+        }); // Update Videos Albums
+
+        axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
+          return props.setVideoAlbums(res.data);
         });
         setTimeout(function () {
           return history.push('/cart');
@@ -103264,12 +103275,6 @@ var VideoCreate = function VideoCreate(props) {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "preloader"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "preload-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "sonar-load"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "grids d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "grid1"
@@ -103415,7 +103420,6 @@ var VideoCreate = function VideoCreate(props) {
     acceptedFileTypes: ['video/*'],
     stylePanelAspectRatio: "16:9",
     maxFileSize: "100000000",
-    minFileSize: "10000000",
     allowRevert: true,
     server: {
       url: "".concat(props.url, "/api"),
@@ -104613,7 +104617,7 @@ var Videos = function Videos(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         key: key
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        src: albumItem.thumbnail.match(/https/) ? albumItem.thumbnail : "storage/".concat(albumItem.thumbnail),
+        src: albumItem.thumbnail,
         width: "160em",
         height: "90em",
         alt: "thumbnail"

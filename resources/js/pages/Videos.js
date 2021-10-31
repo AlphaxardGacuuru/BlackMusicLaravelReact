@@ -178,10 +178,7 @@ const Videos = (props) => {
 											<tbody key={key}>
 												<tr>
 													<td>
-														<Img
-															src={albumItem.thumbnail.match(/https/) ?
-																albumItem.thumbnail :
-																`storage/${albumItem.thumbnail}`}
+														<Img src={albumItem.thumbnail}
 															width="160em"
 															height="90em"
 															alt={"thumbnail"} />
@@ -192,9 +189,9 @@ const Videos = (props) => {
 													<td>{albumItem.description}</td>
 													<td>{albumItem.downloads}</td>
 													<td style={{ color: "green" }}>
-														KES <span>{props.boughtVideos.filter((boughtVideo) => {
-															return boughtVideo.video_id == albumItem.id
-														}).length * 10}
+														KES <span>{props.boughtVideos
+															.filter((boughtVideo) => boughtVideo.video_id == albumItem.id)
+															.length * 10}
 														</span>
 													</td>
 													<td>{albumItem.likes}</td>

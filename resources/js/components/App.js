@@ -632,7 +632,7 @@ function App() {
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (
-					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, follows, setFollows, setShow }} />
+					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, setVideoAlbums, videoLikes, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (

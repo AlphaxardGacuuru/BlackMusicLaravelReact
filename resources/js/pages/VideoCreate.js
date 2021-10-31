@@ -89,14 +89,6 @@ const VideoCreate = (props) => {
 
 	return (
 		<div>
-			{/* <!-- Preloader Start --> */}
-			<div id="preloader">
-				<div className="preload-content">
-					<div id="sonar-load"></div>
-				</div>
-			</div>
-			{/* <!-- Preloader End --> */}
-
 			{/* <!-- Grids --> */}
 			<div className="grids d-flex justify-content-between">
 				<div className="grid1"></div>
@@ -221,7 +213,6 @@ const VideoCreate = (props) => {
 											acceptedFileTypes={['video/*']}
 											stylePanelAspectRatio="16:9"
 											maxFileSize="100000000"
-											minFileSize="10000000"
 											allowRevert={true}
 											server={{
 												url: `${props.url}/api`,

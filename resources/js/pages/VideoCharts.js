@@ -114,9 +114,15 @@ const VideoCharts = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				// Update videos
+				// Update Videos
 				axios.get(`${props.url}/api/videos`)
 					.then((res) => props.setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
+				// Update Videos Albums
+				axios.get(`${props.url}/api/video-albums`)
+					.then((res) => props.setVideoAlbums(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -136,9 +142,15 @@ const VideoCharts = (props) => {
 				video: video
 			}).then((res) => {
 				props.setMessage(res.data)
-				// Update videos
+				// Update Videos
 				axios.get(`${props.url}/api/videos`)
 					.then((res) => props.setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${props.url}/api/cart-videos`)
+					.then((res) => props.setCartVideos(res.data))
+				// Update Videos Albums
+				axios.get(`${props.url}/api/video-albums`)
+					.then((res) => props.setVideoAlbums(res.data))
 				setTimeout(() => history.push('/cart'), 1000)
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
