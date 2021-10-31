@@ -191,8 +191,8 @@ const TopNavLinks = (props) => {
 							<div className="dropdown-header">Decos</div>}
 						{decoNotifications.
 							map((decoNotification, key) => (
-								<Link key={key} to={`/profile/`} className="p-3 dropdown-item border-bottom text-dark">
-									<h6>{decoNotification.artist} just Decorated you.</h6>
+								<Link key={key} to={`/profile/${decoNotification.from}`} className="p-3 dropdown-item border-bottom text-dark">
+									<h6>{decoNotification.message}</h6>
 								</Link>
 							))}
 

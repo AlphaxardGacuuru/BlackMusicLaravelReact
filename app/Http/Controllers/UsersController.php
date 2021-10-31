@@ -60,6 +60,7 @@ class UsersController extends Controller
                 "fans" => $user->posts->Where('following', auth()->user()->username)->count(),
                 "hasFollowed" => $hasFollowed,
                 "hasBought1" => $hasBought1,
+                "decos" => $user->decos->count(),
             ]);
         }
 

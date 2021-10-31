@@ -91,6 +91,15 @@ const Cart = (props) => {
 							// Update Bought Videos
 							axios.get(`${props.url}/api/bought-videos`)
 								.then((res) => props.setBoughtVideos(res.data))
+							// Update Videos
+							axios.get(`${props.url}/api/videos`)
+								.then((res) => props.setVideos(res.data))
+							// Update Cart Videos
+							axios.get(`${props.url}/api/cart-videos`)
+								.then((res) => props.setCartVideos(res.data))
+							// Update Videos Albums
+							axios.get(`${props.url}/api/video-albums`)
+								.then((res) => props.setVideoAlbums(res.data))
 						}
 						// Stop loop after 60s
 						setTimeout(() => {
@@ -99,6 +108,7 @@ const Cart = (props) => {
 						}, 60000)
 
 					}).catch((err) => {
+						console.log(err.response.data.message)
 						const resErrors = err.response.data.errors
 						var resError
 						var newError = []
@@ -121,6 +131,15 @@ const Cart = (props) => {
 							// Update Bought Audio
 							axios.get(`${props.url}/api/bought-audios`)
 								.then((res) => props.setBoughtAudios(res.data))
+							// Update Audios
+							axios.get(`${props.url}/api/audios`)
+								.then((res) => props.setAudios(res.data))
+							// Update Cart Audios
+							axios.get(`${props.url}/api/cart-audios`)
+								.then((res) => props.setCartAudios(res.data))
+							// Update Audio Albums
+							axios.get(`${props.url}/api/audio-albums`)
+								.then((res) => props.setAudioAlbums(res.data))
 						}
 						// Stop loop after 60s
 						setTimeout(() => {
@@ -279,6 +298,16 @@ const Cart = (props) => {
 									e.preventDefault()
 									setBottomMenu("menu-open")
 									onPay()
+								}} />}
+						<br />
+						{/* Receipt button */}
+						{(receiptVideos.length + receiptAudios.length) > 0 &&
+							<Button btnClass="mysonar-btn mb-4"
+								btnText="receipt"
+								btnStyle={{ width: "80%" }}
+								onClick={(e) => {
+									e.preventDefault()
+									setReceipt("menu-open")
 								}} />}
 					</center>
 				</div>

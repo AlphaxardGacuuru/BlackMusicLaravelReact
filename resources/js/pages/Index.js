@@ -228,8 +228,8 @@ const Index = (props) => {
 									<path fillRule="evenodd"
 										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 								</svg>
+								<small className="ml-1">{props.auth.decos}</small>
 							</span>
-							<span style={{ fontSize: "10px" }}>{props.auth.decos}</span>
 						</div>
 					</div>
 					<div className="d-flex border-bottom border-left border-right">
@@ -414,8 +414,8 @@ const Index = (props) => {
 												<path fillRule="evenodd"
 													d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											</svg>
+											<small className="ml-1">{post.decos}</small>
 										</span>
-										<span className="ml-1" style={{ fontSize: "10px" }}>{post.decos}</span>
 										<small>
 											<i className="float-right mr-1">{post.created_at}</i>
 										</small>

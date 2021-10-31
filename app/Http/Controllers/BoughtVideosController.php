@@ -8,6 +8,7 @@ use App\CartVideos;
 use App\Decos;
 use App\Kopokopo;
 use App\Notifications\BoughtVideoNotifications;
+use App\Notifications\DecoNotifications;
 use App\User;
 use App\Videos;
 use Illuminate\Http\Request;
@@ -97,7 +98,7 @@ class BoughtVideosController extends Controller
                     $boughtVideos->username = auth()->user()->username;
                     $boughtVideos->name = $cartVideo->videos->name;
                     $boughtVideos->artist = $cartVideo->videos->username;
-                    // $boughtVideos->save();
+                    $boughtVideos->save();
 
                     /* Showing video song bought notification */
                     $user = User::where('username', $cartVideo->videos->username)
@@ -111,7 +112,7 @@ class BoughtVideosController extends Controller
                         ->where('artist', $cartVideo->videos->username)
                         ->count();
                     $uservideos = BoughtVideos::where('username', auth()->user()->username)
-                        ->where('username', $cartVideo->videos->username)
+                        ->where('artist', $cartVideo->videos->username)
                         ->count();
                     $uservideos = $uservideos / 10;
                     $decoBalance = $uservideos - $userDecos;
@@ -121,15 +122,16 @@ class BoughtVideosController extends Controller
                     if ($decoPermission >= 1) {
                         $deco = new Decos;
                         $deco->username = auth()->user()->username;
-                        $deco->artist = $cartVideo->video->username;
+                        $deco->artist = $cartVideo->videos->username;
                         $deco->save();
 
                         /* Add deco notification */
+                        auth()->user()->notify(new DecoNotifications($cartVideo->videos->username));
                     }
                     /* Delete from cart */
-                    CartVideos::where('video_id', $cartVideo->video_id)
-                        ->where('username', auth()->user()->username);
-                    // ->delete();
+                    // CartVideos::where('video_id', $cartVideo->video_id)
+                    //     ->where('username', auth()->user()->username)
+                    //     ->delete();
 
                     // Update array
                     array_push($approved, $cartVideo->videos->id);

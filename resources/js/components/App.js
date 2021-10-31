@@ -589,7 +589,7 @@ function App() {
 
 				<Route path="/cart" exact render={(props) => (
 					<>
-						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, cartAudios, setCartAudios, setVideos, setAudios, setBoughtVideos, setBoughtAudios, setShow }} />
+						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setVideos, setBoughtVideos, setVideoAlbums, cartAudios, setCartAudios, setAudios, setBoughtAudios, setAudioAlbums, setShow }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />

@@ -299,6 +299,18 @@ const Profile = (props) => {
 					<div>
 						<h3>{profile.name}</h3>
 						<h5>{profile.username}</h5>
+						<span style={{ color: "gold" }} className="pr-1">
+							<svg className="bi bi-circle"
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fillRule="evenodd"
+									d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+							</svg>
+							<small className="ml-1">{profile.decos}</small>
+						</span>
 						<h6>{profile.bio}</h6>
 					</div>
 					<div className="d-flex flex-row">
@@ -429,8 +441,8 @@ const Profile = (props) => {
 												<path fillRule="evenodd"
 													d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 											</svg>
+											<small className="ml-1">{post.decos}</small>
 										</span>
-										<span className="ml-1" style={{ fontSize: "10px" }}>{post.decos}</span>
 										<small>
 											<i className="float-right mr-1">{post.created_at}</i>
 										</small>
