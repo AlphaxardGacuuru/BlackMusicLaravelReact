@@ -10,7 +10,8 @@ const Library = (props) => {
 			<div className="col-sm-4">
 				<center><h1>Library</h1></center>
 				<hr />
-				<center><h3>Videos</h3></center>
+				{props.boughtVideos.length > 0 &&
+					<center><h3>Videos</h3></center>}
 
 				{props.boughtVideos
 					.map((boughtVideo, key) => (
@@ -26,7 +27,8 @@ const Library = (props) => {
 							showCartandBuyButton={false} />
 					))}
 
-				<center><h3 className="mt-5">Audios</h3></center>
+				{props.boughtAudios.length > 0 &&
+					<center><h3 className="mt-5">Audios</h3></center>}
 
 				{props.boughtAudios
 					.map((boughtAudio, key) => (
