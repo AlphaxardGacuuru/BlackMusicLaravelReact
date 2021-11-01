@@ -625,7 +625,7 @@ function App() {
 
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
-						<PostShow {...{ url, auth, setMessage, setErrors }} />
+						<PostShow {...{ url, auth, setMessage, setErrors, setPostComments, setPosts }} />
 						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
 					</>
 				)} />

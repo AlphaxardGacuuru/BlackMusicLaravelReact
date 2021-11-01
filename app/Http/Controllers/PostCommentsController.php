@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PostCommentNotifications;
 use App\PostCommentLikes;
 use App\PostComments;
+use App\Posts;
 use Illuminate\Http\Request;
 
 class PostCommentsController extends Controller
@@ -47,6 +49,11 @@ class PostCommentsController extends Controller
         $postComment->text = $request->input('text');
         $postComment->media = "";
         $postComment->save();
+
+        $musician = Posts::find($request->input('post'))->users;
+
+        $musician->username != auth()->user()->username &&
+        $musician->notify(new PostCommentNotifications);
 
         return response("Comment sent", 200);
     }

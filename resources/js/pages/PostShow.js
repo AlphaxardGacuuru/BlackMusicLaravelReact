@@ -30,7 +30,12 @@ const PostShow = (props) => {
 				text: text
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/post-comments`).then((res) => props.setPostComments(res.data))
+				// Update Post Comments
+				axios.get(`${props.url}/api/posts/${id}`)
+					.then((res) => props.setPostComments(res.data))
+				// Update Posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -52,6 +57,7 @@ const PostShow = (props) => {
 				comment: comment
 			}).then((res) => {
 				props.setMessage(res.data)
+				// Update Post Comments
 				axios.get(`${props.url}/api/posts/${id}`)
 					.then((res) => props.setPostComments(res.data))
 			}).catch((err) => {
@@ -71,8 +77,12 @@ const PostShow = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/post-comments/${id}`).then((res) => {
 				props.setMessage(res.data)
+				// Update Post Comments
 				axios.get(`${props.url}/api/posts/${id}`)
 					.then((res) => props.setPostComments(res.data))
+				// Update Posts
+				axios.get(`${props.url}/api/posts`)
+					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError

@@ -94264,7 +94264,9 @@ function App() {
         url: url,
         auth: auth,
         setMessage: setMessage,
-        setErrors: setErrors
+        setErrors: setErrors,
+        setPostComments: setPostComments,
+        setPosts: setPosts
       }), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], {
         url: url
       }));
@@ -100497,9 +100499,14 @@ var PostShow = function PostShow(props) {
         post: id,
         text: text
       }).then(function (res) {
-        props.setMessage(res.data);
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
+        props.setMessage(res.data); // Update Post Comments
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
           return props.setPostComments(res.data);
+        }); // Update Posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -100522,7 +100529,8 @@ var PostShow = function PostShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Post Comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
           return props.setPostComments(res.data);
         });
@@ -100544,9 +100552,14 @@ var PostShow = function PostShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/post-comments/").concat(id)).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Post Comments
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
           return props.setPostComments(res.data);
+        }); // Update Posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
