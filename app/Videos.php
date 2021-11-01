@@ -10,4 +10,14 @@ class Videos extends Model
 	{
 		return $this->hasMany("App\VideoLikes", "video_id", "id");
 	}
+
+	public function albums()
+	{
+		return $this->belongsTo('App\VideoAlbums', 'album', 'id');
+	}
+
+	public function users()
+	{
+		return $this->belongsTo('App\User', 'username', 'username');
+	}
 }

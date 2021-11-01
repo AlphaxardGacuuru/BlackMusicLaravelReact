@@ -10,4 +10,14 @@ class Audios extends Model
 	{
 		return $this->hasMany('App\AudioLikes', 'audio_id');
 	}
+
+	public function albums()
+	{
+		return $this->belongsTo('App\AudioAlbums', 'album', 'id');
+	}
+
+	public function users()
+	{
+		return $this->belongsTo('App\User', 'username', 'username');
+	}
 }

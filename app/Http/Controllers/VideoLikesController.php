@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\VideoLikeNotifications;
 use App\VideoLikes;
+use App\Videos;
 use Illuminate\Http\Request;
 
 class VideoLikesController extends Controller
@@ -36,10 +38,13 @@ class VideoLikesController extends Controller
     public function store(Request $request)
     {
         $videoLikeCount = VideoLikes::where('video_id', $request->input('video'))
-            ->where('username', auth()->user()->username)->count();
+            ->where('username', auth()->user()->username)
+            ->count();
 
         if ($videoLikeCount > 0) {
-            VideoLikes::where('video_id', $request->input('video'))->where('username', auth()->user()->username)->delete();
+            VideoLikes::where('video_id', $request->input('video'))
+                ->where('username', auth()->user()->username)
+                ->delete();
 
             $message = "Like removed";
         } else {
@@ -49,6 +54,11 @@ class VideoLikesController extends Controller
             $videoLike->save();
 
             $message = "Video liked";
+
+            // Show notification
+            $video = Videos::where('id', $request->input('video'))->first();
+            $video->users->username != auth()->user()->username &&
+            $video->users->notify(new VideoLikeNotifications($video->name));
         }
 
         return response($message, 200);

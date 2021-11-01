@@ -40,6 +40,7 @@ const VideoShow = (props) => {
 				axios.get(`${props.url}/api/videos`)
 					.then((res) => props.setVideos(res.data))
 			}).catch((err) => {
+				console.log(err.response.data.message)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []
@@ -111,6 +112,7 @@ const VideoShow = (props) => {
 				axios.get(`${props.url}/api/video-comments`)
 					.then((res) => props.setVideoComments(res.data))
 			}).catch((err) => {
+				console.log(err.response.data.message)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []
@@ -155,6 +157,9 @@ const VideoShow = (props) => {
 				// Update Cart Videos
 				axios.get(`${props.url}/api/cart-videos`)
 					.then((res) => props.setCartVideos(res.data))
+				// Update Video Albums
+				axios.get(`${props.url}/api/video-albums`)
+					.then((res) => props.setVideoAlbums(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -180,6 +185,9 @@ const VideoShow = (props) => {
 				// Update Cart Videos
 				axios.get(`${props.url}/api/cart-videos`)
 					.then((res) => props.setCartVideos(res.data))
+				// Update Video Albums
+				axios.get(`${props.url}/api/video-albums`)
+					.then((res) => props.setVideoAlbums(res.data))
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -297,9 +305,7 @@ const VideoShow = (props) => {
 							<small>Song name {showVideo.name}</small>
 						</h6>
 						<small>Album</small>
-						<span className="p-1">{showVideo.album ?
-							props.videoAlbums.length &&
-							props.videoAlbums.find((videoAlbum) => videoAlbum.id == showVideo.album).name : ""}
+						<span className="p-1">{showVideo.album}
 						</span><br />
 						<small>Genre</small><span className="p-1">{showVideo.genre}</span><br />
 						<small>Posted</small><span className="p-1">{showVideo.created_at}</span>
@@ -333,7 +339,7 @@ const VideoShow = (props) => {
 							</Link>
 						</div>
 						<div className='media-body'>
-							<h6 className="m-0 p-0"
+							<h6 className="ml-1 mb-0 p-0"
 								style={{
 									width: "140px",
 									whiteSpace: "nowrap",
@@ -341,42 +347,43 @@ const VideoShow = (props) => {
 									textOverflow: "clip"
 								}}>
 								<small>{showArtist.name}{showArtist.username}</small>
+								<span className="ml-1" style={{ color: "gold" }}>
+									<svg className="bi bi-circle"
+										width="1em"
+										height="1em"
+										viewBox="0 0 16 16"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg">
+										<path fillRule="evenodd"
+											d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+									</svg>
+									<small className="ml-1">{showArtist.decos}</small>
+								</span>
 							</h6>
-							<span className="ml-1" style={{ color: "gold" }}>
-								<svg className="bi bi-circle"
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-								</svg>
-							</span>
-							<small>{showArtist.decos}</small>
-							<span className="ml-1" style={{ fontSize: "1rem" }}>&#x2022;</span>
-							<small> {showArtist.fans} fans</small>
+							{/* <span className="ml-1" style={{ fontSize: "1rem" }}>&#x2022;</span> */}
+							<small className="ml-1"> {showArtist.fans} fans</small>
 
 							{/* Check whether user has bought at least one song from musician */}
 							{/* Check whether user has followed musician and display appropriate button */}
-							{showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
-								showArtist.hasFollowed ?
-									<button className={'btn btn-light float-right rounded-0'}
-										onClick={() => onFollow(showArtist.username)}>
-										Followed
-										<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-										</svg>
-									</button> :
+							{showArtist.username != props.auth.username ?
+								showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
+									showArtist.hasFollowed ?
+										<button className={'btn btn-light float-right rounded-0'}
+											onClick={() => onFollow(showArtist.username)}>
+											Followed
+											<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+												<path fillRule='evenodd'
+													d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
+											</svg>
+										</button> :
+										<Button
+											btnClass={'mysonar-btn float-right'}
+											onClick={() => onFollow(showArtist.username)}
+											btnText={'follow'} /> :
 									<Button
 										btnClass={'mysonar-btn float-right'}
-										onClick={() => onFollow(showArtist.username)}
-										btnText={'follow'} /> :
-								<Button
-									btnClass={'mysonar-btn float-right'}
-									onClick={() => props.setErrors([`You must have bought atleast one song by ${showArtist.username}`])}
-									btnText={'follow'} />}
+										onClick={() => props.setErrors([`You must have bought atleast one song by ${showArtist.username}`])}
+										btnText={'follow'} /> : ""}
 						</div>
 					</div>
 				</div>
@@ -402,7 +409,9 @@ const VideoShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{showVideo.hasBoughtVideo &&
+					{showVideo.hasBoughtVideo ||
+						showVideo.username == props.auth.username ||
+						showVideo.username == "@blackmusic" ?
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
@@ -422,7 +431,7 @@ const VideoShow = (props) => {
 										btnText={"Comment"} />
 								</form>
 							</div>
-						</div>}
+						</div> : ""}
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}

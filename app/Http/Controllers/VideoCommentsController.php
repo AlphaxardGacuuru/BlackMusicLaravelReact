@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\VideoComments;
+use App\Notifications\VideoCommentNotifications;
 use App\VideoCommentLikes;
+use App\Videos;
+use App\VideoComments;
 use Illuminate\Http\Request;
 
 class VideoCommentsController extends Controller
@@ -17,29 +19,29 @@ class VideoCommentsController extends Controller
     {
         $getVideoComments = VideoComments::all();
 
-		$videoComments = [];
+        $videoComments = [];
 
-		foreach ($getVideoComments as $key => $videoComment) {
+        foreach ($getVideoComments as $key => $videoComment) {
 
             // Check if user has liked comment
             $hasLiked = VideoCommentLikes::where('username', auth()->user()->username)
                 ->where('comment_id', $videoComment->id)
                 ->exists();
 
-			array_push($videoComments, [
-				"id" => $videoComment->id,
-				"video_id" => $videoComment->video_id,
-				"text" => $videoComment->text,
-				"username" => $videoComment->username,
-				"name" => $videoComment->users->name,
+            array_push($videoComments, [
+                "id" => $videoComment->id,
+                "video_id" => $videoComment->video_id,
+                "text" => $videoComment->text,
+                "username" => $videoComment->username,
+                "name" => $videoComment->users->name,
                 "pp" => preg_match("/http/", $videoComment->users->pp) ? $videoComment->users->pp : "/storage/" . $videoComment->users->pp,
                 "hasLiked" => $hasLiked,
                 "likes" => $videoComment->videoCommentLikes->count(),
-				"created_at" => $videoComment->created_at->format("d M Y"),
-			]);
-		}
+                "created_at" => $videoComment->created_at->format("d M Y"),
+            ]);
+        }
 
-		return $videoComments;
+        return $videoComments;
     }
 
     /**
@@ -61,7 +63,7 @@ class VideoCommentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'text' => 'required'
+            'text' => 'required',
         ]);
 
         /* Create new post */
@@ -70,6 +72,11 @@ class VideoCommentsController extends Controller
         $videoComment->username = auth()->user()->username;
         $videoComment->text = $request->input('text');
         $videoComment->save();
+
+        // Show notification
+        $video = Videos::where('id', $request->input('video'))->first();
+        $video->users->username != auth()->user()->username &&
+        $video->users->notify(new VideoCommentNotifications($video->name));
 
         return response('Comment Posted', 200);
     }

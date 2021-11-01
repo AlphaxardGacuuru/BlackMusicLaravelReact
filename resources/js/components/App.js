@@ -636,7 +636,7 @@ function App() {
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, follows, setFollows, setShow }} />
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, setVideoAlbums, follows, setFollows, setShow }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
@@ -681,7 +681,7 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, setAudioAlbums, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
 				)} />
 
 				<Route path="/audios" exact render={(props) => (

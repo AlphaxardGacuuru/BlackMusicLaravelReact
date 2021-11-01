@@ -59,7 +59,7 @@ class VideosController extends Controller
                 "name" => $video->name,
                 "username" => $video->username,
                 "ft" => $video->ft,
-                "album" => $video->album,
+                "album" => $video->album ? $video->albums->name : "",
                 "genre" => $video->genre,
                 "thumbnail" => preg_match("/http/", $video->thumbnail) ? $video->thumbnail : "/storage/" . $video->thumbnail,
                 "description" => $video->description,

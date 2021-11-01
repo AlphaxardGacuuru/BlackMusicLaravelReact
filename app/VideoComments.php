@@ -15,4 +15,9 @@ class VideoComments extends Model
     {
         return $this->hasMany('App\VideoCommentLikes', 'comment_id');
     }
+
+	public function videos()
+	{
+		return $this->belongsTo('App\Videos', 'video_id', 'id');
+	}
 }

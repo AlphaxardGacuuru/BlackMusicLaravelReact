@@ -54,8 +54,8 @@ class PostLikesController extends Controller
             $postLike->save();
             $message = "Post liked";
 
+			// Show notification
             $musician = Posts::find($request->input('post'))->users;
-
             $musician->username != auth()->user()->username &&
             $musician->notify(new PostLikeNotifications);
         }
