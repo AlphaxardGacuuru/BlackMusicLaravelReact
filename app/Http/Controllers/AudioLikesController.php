@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AudioLikes;
+use App\Audios;
+use App\Notifications\AudioLikeNotifications;
 use Illuminate\Http\Request;
 
 class AudioLikesController extends Controller
@@ -49,6 +51,11 @@ class AudioLikesController extends Controller
             $audioLike->save();
 
             $message = "Audio liked";
+
+            // Show notification
+            $audio = Audios::where('id', $request->input('audio'))->first();
+            $audio->users->username != auth()->user()->username &&
+            $audio->users->notify(new AudioLikeNotifications($audio->name));
         }
 
         return response($message, 200);

@@ -435,7 +435,9 @@ const VideoShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{showVideo.hasBoughtVideo &&
+					{showVideo.username == props.auth.username ||
+						showVideo.username == "@blackmusic" ||
+						showVideo.hasBoughtVideo ?
 						props.videoComments
 							.filter((comment) => comment.video_id == show)
 							.map((comment, index) => (
@@ -523,8 +525,7 @@ const VideoShow = (props) => {
 										</div>
 									</div>
 								</div>
-							))
-					}
+							)) : ""}
 				</div>
 			</div>
 			{/* <!-- End of Comment Section --> */}

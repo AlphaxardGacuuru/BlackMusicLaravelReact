@@ -39,12 +39,12 @@ class VideoCommentLikesController extends Controller
     {
         $videoCommentLikeCount = VideoCommentLikes::where('comment_id', $request->input('comment'))
             ->where('username', auth()->user()->username)
-			->count();
+            ->count();
 
         if ($videoCommentLikeCount > 0) {
             VideoCommentLikes::where('comment_id', $request->input('comment'))
                 ->where('username', auth()->user()->username)
-				->delete();
+                ->delete();
 
             $message = "Like removed";
         } else {
@@ -55,11 +55,11 @@ class VideoCommentLikesController extends Controller
 
             $message = "Comment liked";
 
-        // Show notification
-        $videoComment = VideoComments::where('id', $request->input('comment'))->first();
-		$video = $videoComment->videos;
-        $video->users->username != auth()->user()->username &&
-        $video->users->notify(new VideoCommentLikeNotifications($video->name));
+            // Show notification
+            $videoComment = VideoComments::where('id', $request->input('comment'))->first();
+            $video = $videoComment->videos;
+            $video->users->username != auth()->user()->username &&
+            $video->users->notify(new VideoCommentLikeNotifications($video->name));
         }
 
         return response($message, 200);

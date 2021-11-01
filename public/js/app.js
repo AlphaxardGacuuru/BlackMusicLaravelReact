@@ -95652,11 +95652,11 @@ var TopNavLinks = function TopNavLinks(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       key: key,
       to: "/profile/".concat(notification.from),
-      className: "p-3 dropdown-item border-bottom text-dark",
+      className: "p-2 dropdown-item border-bottom text-dark",
       onClick: function onClick() {
         return onDeleteComment(notification.id);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null, notification.message));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, notification.message));
   })), props.notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "dropdown-header",
     onClick: function onClick() {
@@ -98364,7 +98364,7 @@ var AudioShow = function AudioShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))) : "", showAudio.hasBoughtAudio && props.audioComments.filter(function (comment) {
+  })))) : "", showAudio.username == props.auth.username || showAudio.hasBoughtAudio ? props.audioComments.filter(function (comment) {
     return comment.audio_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98487,7 +98487,7 @@ var AudioShow = function AudioShow(props) {
         onDeleteComment(comment.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment"))))));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "recommended" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border-bottom"
@@ -104303,7 +104303,7 @@ var VideoShow = function VideoShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))) : "", showVideo.hasBoughtVideo && props.videoComments.filter(function (comment) {
+  })))) : "", showVideo.username == props.auth.username || showVideo.username == "@blackmusic" || showVideo.hasBoughtVideo ? props.videoComments.filter(function (comment) {
     return comment.video_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104425,7 +104425,7 @@ var VideoShow = function VideoShow(props) {
         onDeleteComment(comment.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment"))))));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "recommended" ? "" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"

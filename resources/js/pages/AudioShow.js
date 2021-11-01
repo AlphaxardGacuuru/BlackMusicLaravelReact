@@ -587,7 +587,8 @@ const AudioShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{showAudio.hasBoughtAudio &&
+					{showAudio.username == props.auth.username ||
+					showAudio.hasBoughtAudio ?
 						props.audioComments
 							.filter((comment) => comment.audio_id == show)
 							.map((comment, index) => (
@@ -680,7 +681,7 @@ const AudioShow = (props) => {
 										</div>
 									</div>
 								</div>
-							))}
+							)) : ""}
 				</div>
 				{/* End of Comment Section */}
 			</div>

@@ -15,4 +15,9 @@ class AudioComments extends Model
     {
         return $this->hasMany('App\AudioCommentLikes', 'comment_id');
     }
+
+	public function audios()
+	{
+		return $this->belongsTo('App\Audios', 'audio_id', 'id');
+	}
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AudioCommentLikes;
+use App\AudioComments;
+use App\Notifications\AudioCommentLikeNotifications;
 use Illuminate\Http\Request;
 
 class AudioCommentLikesController extends Controller
@@ -49,6 +51,12 @@ class AudioCommentLikesController extends Controller
             $audioCommentLike->username = auth()->user()->username;
             $audioCommentLike->save();
             $message = "Comment liked";
+
+            // Show notification
+            $audioComment = AudioComments::where('id', $request->input('comment'))->first();
+            $audio = $audioComment->audios;
+            $audio->users->username != auth()->user()->username &&
+            $audio->users->notify(new AudioCommentLikeNotifications($audio->name));
         }
 
         return response($message, 200);

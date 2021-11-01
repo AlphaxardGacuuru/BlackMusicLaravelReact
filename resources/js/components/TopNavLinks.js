@@ -167,15 +167,14 @@ const TopNavLinks = (props) => {
 					aria-labelledby="dropdownMenuButton">
 					<div className="dropdown-header">Notifications</div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
-
 						{/* Get Notifications */}
 						{props.notifications
 							.map((notification, key) => (
 								<Link key={key}
 									to={`/profile/${notification.from}`}
-									className="p-3 dropdown-item border-bottom text-dark"
+									className="p-2 dropdown-item border-bottom text-dark"
 									onClick={() => onDeleteComment(notification.id)}>
-									<h6>{notification.message}</h6>
+									<small>{notification.message}</small>
 								</Link>
 							))}
 					</div>
