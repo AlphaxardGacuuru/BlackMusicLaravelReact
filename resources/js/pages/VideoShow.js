@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useState } from 'react'
 import axios from 'axios'
 
 import Img from '../components/Img'
@@ -14,6 +13,7 @@ const VideoShow = (props) => {
 	let history = useHistory()
 
 	var showVideo = []
+	
 	var showArtist = []
 
 	// Get Video to show

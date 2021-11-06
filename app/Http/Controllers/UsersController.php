@@ -9,6 +9,7 @@ use App\BoughtVideos;
 use App\CartAudios;
 use App\CartVideos;
 use App\Follows;
+use App\Mail\VideoReceipt;
 use App\Mail\WelcomeMail;
 use App\User;
 use App\VideoAlbums;
@@ -79,6 +80,28 @@ class UsersController extends Controller
             // ->send(new WelcomeMail(auth()->user()->username));
 
 			// return new WelcomeMail(auth()->user()->username);
+			$receiptVideos = [
+				1 => [
+                "id" => '1',
+                "video" => 'video 1',
+                "name" => 'name 1',
+                "username" => 'username1',
+                "ft" => 'ft 1',
+                "album" => 'album 1',
+                "genre" => 'genre 1',
+				],
+				2 => [
+                "id" => '2',
+                "video" => 'video 2',
+                "name" => 'name 2',
+                "username" => 'username 2',
+                "ft" => 'ft 2',
+                "album" => 'album 2',
+                "genre" => 'genre 2',
+				],
+			];
+
+			return new VideoReceipt($receiptVideos);
     }
 
     /**

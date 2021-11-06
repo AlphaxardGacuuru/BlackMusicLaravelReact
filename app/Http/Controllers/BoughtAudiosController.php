@@ -95,7 +95,7 @@ class BoughtAudiosController extends Controller
                     $boughtAudios->username = auth()->user()->username;
                     $boughtAudios->name = $cartAudio->audios->audio_name;
                     $boughtAudios->artist = $cartAudio->audios->username;
-                    $boughtAudios->save();
+                    // $boughtAudios->save();
 
                     /* Showing audio song bought notification */
                     $user = User::where('username', $cartAudio->audios->username)

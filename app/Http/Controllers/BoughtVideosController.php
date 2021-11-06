@@ -9,6 +9,7 @@ use App\Decos;
 use App\Kopokopo;
 use App\Notifications\BoughtVideoNotifications;
 use App\Notifications\DecoNotifications;
+use App\Notifications\VideoReceiptNotifications;
 use App\User;
 use App\Videos;
 use Illuminate\Http\Request;
@@ -142,6 +143,7 @@ class BoughtVideosController extends Controller
         $receiptVideos = [];
 
         foreach ($approved as $key => $id) {
+			
             $video = Videos::find($id);
 
             array_push($receiptVideos, [
@@ -155,6 +157,9 @@ class BoughtVideosController extends Controller
                 "thumbnail" => preg_match("/http/", $video->thumbnail) ? $video->thumbnail : "/storage/" . $video->thumbnail,
             ]);
         }
+
+		// Notify User
+		auth()->user()->notify(new VideoReceiptNotifications($receiptVideos));
 
         return response($receiptVideos, 200);
     }
