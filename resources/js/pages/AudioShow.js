@@ -56,28 +56,6 @@ const AudioShow = (props) => {
 		})
 	}
 
-	// Function for following musicians
-	const onFollow = (musician) => {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/follows`, {
-				musician: musician
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update users
-				axios.get(`${props.url}/api/uses`)
-					.then((res) => props.setUsers(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for posting comment
 	const onComment = (e) => {
 		e.preventDefault()
@@ -147,61 +125,10 @@ const AudioShow = (props) => {
 		})
 	}
 
-	// Function for adding audio to cart
-	const onCartAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update audios
-				axios.get(`${props.url}/api/audios`)
-					.then((res) => props.setAudios(res.data))
-				// Update Cart Audios
-				axios.get(`${props.url}/api/cart-audios`)
-					.then((res) => props.setCartAudios(res.data))
-				// Update Audio Albums
-				axios.get(`${props.url}/api/audio-albums`)
-					.then((res) => props.setAudioAlbums(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for buying audio to cart
 	const onBuyAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update audios
-				axios.get(`${props.url}/api/audios`)
-					.then((res) => props.setAudios(res.data))
-				// Update Cart Audios
-				axios.get(`${props.url}/api/cart-audios`)
-					.then((res) => props.setCartAudios(res.data))
-				// Update Audio Albums
-				axios.get(`${props.url}/api/audio-albums`)
-					.then((res) => props.setAudioAlbums(res.data))
-				setTimeout(() => history.push('/cart'), 1000)
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
+		props.onBuyAudios(audio)
+		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for downloading audio
@@ -517,7 +444,7 @@ const AudioShow = (props) => {
 								showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ?
 									showArtist.hasFollowed ?
 										<button className={'btn btn-light float-right rounded-0'}
-											onClick={() => onFollow(showArtist.username)}>
+											onClick={() => props.onFollow(showArtist.username)}>
 											Followed
 											<svg className='bi bi-check'
 												width='1.5em'
@@ -530,7 +457,7 @@ const AudioShow = (props) => {
 											</svg>
 										</button>
 										: <Button btnClass={'mysonar-btn float-right'}
-											onClick={() => onFollow(showArtist.username)}
+											onClick={() => props.onFollow(showArtist.username)}
 											btnText={'follow'} />
 									: <Button btnClass={'mysonar-btn float-right'}
 										onClick={() =>

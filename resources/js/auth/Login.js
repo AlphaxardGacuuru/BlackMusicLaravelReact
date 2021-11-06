@@ -22,7 +22,9 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 			}).then(res => {
 				// const resStatus = res.statusText
 				setMessage("Logged in")
-				axios.get(`${url}/api/home`).then((res) => setAuth(res.data))
+				// Update Logged in user
+				axios.get(`${url}/api/home`)
+					.then((res) => setAuth(res.data))
 				setTimeout(() => history.push('/'), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors

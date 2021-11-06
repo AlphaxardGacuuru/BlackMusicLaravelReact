@@ -12,87 +12,10 @@ const Index = (props) => {
 
 	const history = useHistory()
 
-	// Function for following users
-	const onFollow = (musician) => {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/follows`, {
-				musician: musician
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update users
-				axios.get(`${props.url}/api/users`)
-					.then((res) => props.setUsers(res.data))
-				// Update posts
-				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		});
-	}
-
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update cart videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				// Get validation errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		});
-	}
-
-	// Function for buying video to cart
+	// Buy function
 	const onBuyVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update cart videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				setTimeout(() => history.push('/cart'), 1000)
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		});
+		props.onBuyVideos(video)
+		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for liking posts
@@ -281,7 +204,7 @@ const Index = (props) => {
 										{user.hasBought1 || props.auth.username == "@blackmusic" ?
 											user.hasFollowed ?
 												<button className={'btn btn-light float-right rounded-0'}
-													onClick={() => onFollow(user.username)}>
+													onClick={() => props.onFollow(user.username)}>
 													Followed
 													<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 														<path fillRule='evenodd'
@@ -289,7 +212,7 @@ const Index = (props) => {
 													</svg>
 												</button>
 												: <Button btnClass={'mysonar-btn float-right'}
-													onClick={() => onFollow(user.username)}
+													onClick={() => props.onFollow(user.username)}
 													btnText={'follow'} />
 											: <Button btnClass={'mysonar-btn float-right'}
 												onClick={() =>
@@ -344,7 +267,7 @@ const Index = (props) => {
 										{video.inCart ?
 											<button className="btn btn-light mb-1 rounded-0"
 												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
+												onClick={() => props.onCartVideos(video.id)}>
 												<svg className='bi bi-cart3'
 													width='1em'
 													height='1em'
@@ -358,7 +281,7 @@ const Index = (props) => {
 											: <button
 												className="mysonar-btn mb-1"
 												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
+												onClick={() => props.onCartVideos(video.id)}>
 												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 													<path fillRule='evenodd'
@@ -555,10 +478,10 @@ const Index = (props) => {
 											: post.hasVoted4 ?
 												<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
 													<div className='progress-bar'
-														style={{ 
-															width: `${post.percentage4}%`, 
-															backgroundColor: "#232323" 
-															}}>
+														style={{
+															width: `${post.percentage4}%`,
+															backgroundColor: "#232323"
+														}}>
 														{post.parameter_4}
 													</div>
 												</div>
@@ -688,7 +611,7 @@ const Index = (props) => {
 												post.username != "@blackmusic" &&
 												<a href="#" className="dropdown-item" onClick={(e) => {
 													e.preventDefault()
-													onFollow(post.username)
+													props.onFollow(post.username)
 												}}>
 													<h6>Unfollow</h6>
 												</a>
@@ -721,14 +644,14 @@ const Index = (props) => {
 								onClick={() => props.setShow(0)}
 								setShow={props.setShow}
 								link={`/video-show/${video.id}`}
-								thumbnail={video.thumbnail.match(/http/) ? video.thumbnail : `storage/${video.thumbnail}`}
+								thumbnail={video.thumbnail}
 								name={video.name}
 								username={video.username}
 								ft={video.ft}
 								hasBoughtVideo={!video.hasBoughtVideo}
 								videoInCart={video.inCart}
 								videoId={video.id}
-								onCartVideos={onCartVideos}
+								onCartVideos={props.onCartVideos}
 								onBuyVideos={onBuyVideos} />
 						))}
 				</div>

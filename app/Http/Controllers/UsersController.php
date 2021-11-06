@@ -75,8 +75,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        Mail::to(auth()->user())
-            ->send(new WelcomeMail);
+        // return Mail::to(auth()->user())
+            // ->send(new WelcomeMail(auth()->user()->username));
+
+			// return new WelcomeMail(auth()->user()->username);
     }
 
     /**

@@ -1,12 +1,24 @@
 @component('mail::message')
-# Welcome to Black Music
+# Welcome {{$username}} to Black Music
 
-The body of your message.
+Thanks for singing up! You've just joined the best online music store in Kenya. As a user you'll be able to;
+<ul>
+	<li>Follow your favourite musicians.</li>
+	<li>Buy their videos and audios.</li>
+	<li>Sell your own videos and audios.</li>
+</ul>
 
-@component('mail::button', ['url' => ''], ['style' => 'border-radius: 0px'])
-Button Text
+and much more! To get you started we picked an awesome song for you.
+
+@component('mail::button', ['url' => 'https://music.black.co.ke', 'color' => 'primary'])
+CHECK OUT THIS SONG
 @endcomponent
 
-Thanks,<br>
+Thank you and we're excited to have you!<br>
 {{ config('app.name') }}
+
+{{-- @component('mail::panel')
+Alphaxard Gacuuru,<br>
+Founder.	
+@endcomponent --}}
 @endcomponent

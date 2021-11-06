@@ -55,16 +55,23 @@ class CartVideosController extends Controller
     public function store(Request $request)
     {
         /* Check if item is already in cart */
-        $vcartCheck = CartVideos::where('video_id', $request->input('video'))->where('username', auth()->user()->username)->count();
+        $vcartCheck = CartVideos::where('video_id', $request->input('video'))
+            ->where('username', auth()->user()->username)
+            ->count();
+
         /* Insert or Remove from cart */
         if ($vcartCheck == 0) {
             $cartVideos = new CartVideos;
             $cartVideos->video_id = $request->input('video');
             $cartVideos->username = auth()->user()->username;
             $cartVideos->save();
+
             $message = 'Video added to Cart';
         } else {
-            CartVideos::where('video_id', $request->input('video'))->where('username', auth()->user()->username)->delete();
+            CartVideos::where('video_id', $request->input('video'))
+                ->where('username', auth()->user()->username)
+                ->delete();
+
             $message = 'Video removed from Cart';
         }
 

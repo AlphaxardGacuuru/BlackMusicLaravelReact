@@ -7,7 +7,7 @@ import Messages from './Messages'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
 
-import LoginPopUp from '../auth/LoginPopUp';
+import LoginPopUp from '../auth/LoginPopUp'
 import Login from '../auth/Login'
 import Register from '../auth/Register'
 
@@ -55,10 +55,7 @@ function App() {
 	const [errors, setErrors] = useState([])
 
 	const [audioAlbums, setAudioAlbums] = useState([])
-	const [audioCommentLikes, setAudioCommentLikes] = useState([])
 	const [audioComments, setAudioComments] = useState([])
-	const [audioLikes, setAudioLikes] = useState([])
-	const [audioNotifications, setAudioNotifications] = useState([])
 	const [audioPayouts, setAudioPayouts] = useState([])
 	const [audios, setAudios] = useState([])
 
@@ -68,31 +65,14 @@ function App() {
 	const [cartAudios, setCartAudios] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
 
-	const [decoNotifications, setDecoNotifications] = useState([])
-	const [decos, setDecos] = useState([])
-
-	const [followNotifications, setFollowNotifications] = useState([])
-	const [follows, setFollows] = useState([])
-
-	const [kopokopo, setKopokopo] = useState([])
-	const [kopokopoNotifications, setKopokopoNotifications] = useState([])
-
 	const [notifications, setNotifications] = useState([])
-
 	const [posts, setPosts] = useState([])
-	const [postLikes, setPostLikes] = useState([])
 	const [postComments, setPostComments] = useState([])
-	const [postCommentLikes, setPostCommentLikes] = useState([])
-	const [polls, setPolls] = useState([])
-
 	const [sms, setSMS] = useState([])
 	const [users, setUsers] = useState([])
 
 	const [videoAlbums, setVideoAlbums] = useState([])
-	const [videoCommentLikes, setVideoCommentLikes] = useState([])
 	const [videoComments, setVideoComments] = useState([])
-	const [videoLikes, setVideoLikes] = useState([])
-	const [videoNotifications, setVideoNotifications] = useState([])
 	const [videoPayouts, setVideoPayouts] = useState([])
 	const [videos, setVideos] = useState([])
 
@@ -116,20 +96,10 @@ function App() {
 			.then((res) => setAudioAlbums(res.data))
 			.catch(() => setErrors(["Failed to fetch audio albums"]))
 
-		// Fetch Audio Comments Likes
-		axios.get(`${url}/api/audio-comment-likes`)
-			.then((res) => setAudioCommentLikes(res.data))
-			.catch(() => setErrors(['Failed to fetch audio comment likes']))
-
 		// Fetch Audio Comments
 		axios.get(`${url}/api/audio-comments`)
 			.then((res) => setAudioComments(res.data))
 			.catch(() => setErrors(["Failed to fetch audio comments"]))
-
-		// Fetch Audio Likes
-		axios.get(`${url}/api/audio-likes`)
-			.then((res) => setAudioLikes(res.data))
-			.catch(() => setErrors(["Failed to fetch audio likes"]))
 
 		// Fetch Audios
 		axios.get(`${url}/api/audios`)
@@ -161,45 +131,15 @@ function App() {
 			.then((res) => setCartVideos(res.data))
 			.catch(() => setErrors(['Failed to fetch cart videos']))
 
-		// Fetch Decos
-		axios.get(`${url}/api/decos`)
-			.then((res) => setDecos(res.data))
-			.catch(() => setErrors(['Failed to fetch decos']))
-
-		// Fetch Follows
-		axios.get(`${url}/api/follows`)
-			.then((res) => setFollows(res.data))
-			.catch(() => setErrors(['Failed to fetch follows']))
-
-		// Fetch Kopokopo
-		// axios.get(`${url}/api/kopokopo`)
-		// 	.then((res) => setKopokopo(res.data))
-		// 	.catch(() => setErrors(['Failed to fetch kopokopo']))
-
 		// Fetch Notifications
 		axios.get(`${url}/api/notifications`)
 			.then((res) => setNotifications(res.data))
 			.catch(() => setErrors(['Failed to fetch notifications']))
 
-		// Fetch Polls
-		axios.get(`${url}/api/polls`)
-			.then((res) => setPolls(res.data))
-			.catch(() => setErrors(['Failed to fetch polls']))
-
-		// Fetch Post Comment likes
-		axios.get(`${url}/api/post-comment-likes`)
-			.then((res) => setPostCommentLikes(res.data))
-			.catch(() => setErrors(['Failed to fetch post comment likes']))
-
 		// Fetch Post Comments
 		axios.get(`${url}/api/post-comments`)
 			.then((res) => setPostComments(res.data))
 			.catch(() => setErrors(['Failed to fetch post comments']))
-
-		// Fetch Post Likes
-		axios.get(`${url}/api/post-likes`)
-			.then((res) => setPostLikes(res.data))
-			.catch(() => setErrors(['Failed to fetch post likes']))
 
 		//Fetch Posts
 		axios.get(`${url}/api/posts`)
@@ -221,20 +161,10 @@ function App() {
 			.then((res) => setVideoAlbums(res.data))
 			.catch(() => setErrors(["Failed to fetch video albums"]))
 
-		// Fetch Video Comments Likes
-		axios.get(`${url}/api/video-comment-likes`)
-			.then((res) => setVideoCommentLikes(res.data))
-			.catch(() => setErrors(["Failed to fetch video comment likes"]))
-
 		// Fetch Video Comments
 		axios.get(`${url}/api/video-comments`)
 			.then((res) => setVideoComments(res.data))
 			.catch(() => setErrors(["Failed to fetch video comments"]))
-
-		// Fetch Liked Videos
-		axios.get(`${url}/api/video-likes`)
-			.then((res) => setVideoLikes(res.data))
-			.catch(() => setErrors(["Failed to fetch video likes"]))
 
 		//Fetch Videos
 		axios.get(`${url}/api/videos`)
@@ -254,6 +184,151 @@ function App() {
 		const data = res.json()
 
 		return data
+	}
+
+	// Function for following users
+	const onFollow = (musician) => {
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api/follows`, {
+				musician: musician
+			}).then((res) => {
+				setMessage(res.data)
+				// Update users
+				axios.get(`${url}/api/users`)
+					.then((res) => setUsers(res.data))
+				// Update posts
+				axios.get(`${url}/api/posts`)
+					.then((res) => setPosts(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				setErrors(newError)
+			})
+		});
+	}
+
+	// Function for adding video to cart
+	const onCartVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				setMessage(res.data)
+				// Update Videos
+				axios.get(`${url}/api/videos`)
+					.then((res) => setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${url}/api/cart-videos`)
+					.then((res) => setCartVideos(res.data))
+				// Update Video Albums
+				axios.get(`${url}/api/video-albums`)
+					.then((res) => setVideoAlbums(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				// Get validation errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api/cart-videos`, {
+				video: video
+			}).then((res) => {
+				setMessage(res.data)
+				// Update Videos
+				axios.get(`${url}/api/videos`)
+					.then((res) => setVideos(res.data))
+				// Update Cart Videos
+				axios.get(`${url}/api/cart-videos`)
+					.then((res) => setCartVideos(res.data))
+				// Update Video Albums
+				axios.get(`${url}/api/video-albums`)
+					.then((res) => setVideoAlbums(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				setErrors(newError)
+			})
+		});
+	}
+
+	// Function for adding audio to cart
+	const onCartAudios = (audio) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api/cart-audios`, {
+				audio: audio
+			}).then((res) => {
+				setMessage(res.data)
+				// Update Audios
+				axios.get(`${url}/api/audios`)
+					.then((res) => setAudios(res.data))
+				// Update Cart Audios
+				axios.get(`${url}/api/cart-audios`)
+					.then((res) => setCartAudios(res.data))
+				// Update Audio Albums
+				axios.get(`${url}/api/audio-albums`)
+					.then((res) => setAudioAlbums(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				setErrors(newError)
+			})
+		});
+	}
+
+	// Function for buying audio to cart
+	const onBuyAudios = (audio) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api/cart-audios`, {
+				audio: audio
+			}).then((res) => {
+				setMessage(res.data)
+				// Update audios
+				axios.get(`${url}/api/audios`)
+					.then((res) => setAudios(res.data))
+				// Update Cart Audios
+				axios.get(`${url}/api/cart-audios`)
+					.then((res) => setCartAudios(res.data))
+				// Update Audio Albums
+				axios.get(`${url}/api/audio-albums`)
+					.then((res) => setAudioAlbums(res.data))
+				history.push('/cart')
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				setErrors(newError)
+			})
+		});
 	}
 
 	/*
@@ -562,10 +637,12 @@ function App() {
 	// 		})
 	// 	})
 
+	const LoginComponent = <LoginPopUp {...{ setMessage, setErrors, setAuth, url, setLogin }} />
+
 	return (
 		<>
 			<Router>
-				{login && <LoginPopUp {...{ url }} />}
+				{login && LoginComponent}
 
 				<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, setNotifications }} />
 
@@ -577,153 +654,153 @@ function App() {
 				)} />
 
 				<Route path="/" exact render={(props) => (
-					<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, setCartVideos, setCartAudios, posts, setPosts, setShow }} />
+					<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, setCartVideos, setCartAudios, posts, setPosts, postComments, onFollow, onCartVideos, onBuyVideos, setShow }} />
 				)} />
 
 				<Route path="/search" exact render={(props) => (
 					<>
-						<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
 					<>
-						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setVideos, setBoughtVideos, setVideoAlbums, cartAudios, setCartAudios, setAudios, setBoughtAudios, setAudioAlbums, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setVideos, setBoughtVideos, setVideoAlbums, cartAudios, setCartAudios, setAudios, setBoughtAudios, setAudioAlbums, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<>
 						<Library {...{ auth, boughtVideos, boughtAudios, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
-						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, setUsers, follows, posts, setPosts, posts, setPosts, videos, setVideos, videoAlbums, setVideoAlbums, audioAlbums, setAudioAlbums, audios, setAudios, setCartVideos, setCartAudios, setShow }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, setUsers, posts, setPosts, posts, setPosts, videos, setVideos, videoAlbums, setVideoAlbums, audioAlbums, setAudioAlbums, audios, setAudios, setCartVideos, setCartAudios, onFollow, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/profile-edit" exact render={(props) => (
 					<>
 						<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/post-create" exact render={(props) => (
 					<>
 						<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
 						<PostShow {...{ url, auth, setMessage, setErrors, setPostComments, setPosts }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (
-					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, setVideoAlbums, videoLikes, follows, setFollows, setShow }} />
+					<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, setVideoAlbums, onCartVideos, onBuyVideos, setShow }} />
 				)} />
 
 				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoLikes, setVideoLikes, videoComments, setVideoComments, videoCommentLikes, setVideoCommentLikes, videoAlbums, setVideoAlbums, follows, setFollows, setShow }} />
+					<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoComments, setVideoComments, videoAlbums, setVideoAlbums, onFollow, onCartVideos, onBuyVideos, setShow }} />
 				)} />
 
 				<Route path="/videos" exact render={(props) => (
 					<>
-						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoLikes, videoAlbums, setVideoAlbums, videoPayouts, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoAlbums, videoPayouts,setVideoAlbums, setAudioAlbums }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (
 					<>
 						<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/video-edit/:id" exact render={(props) => (
 					<>
 						<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/video-album-create" exact render={(props) => (
 					<>
 						<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/video-album-edit/:id" exact render={(props) => (
 					<>
 						<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 
 				{/* Audio Routes */}
 				<Route path="/audio-charts" exact render={(props) => (
-					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, setAudios, boughtAudios, cartAudios, setCartAudios, audioLikes, follows, setFollows, setAudioAlbums, setShow }} />
+					<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, setAudios, boughtAudios, cartAudios, setCartAudios, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, setShow }} />
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, decos, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioCommentLikes, setAudioCommentLikes, audioAlbums, setAudioAlbums, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
 				)} />
 
 				<Route path="/audios" exact render={(props) => (
 					<>
-						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioLikes, audioAlbums, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioAlbums, setAudioAlbums, audioPayouts }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/audio-create" exact render={(props) => (
 					<>
 						<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/audio-edit/:id" exact render={(props) => (
 					<>
 						<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
 					<>
 						<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
 					<>
 						<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 
 
 				<Route path="/admin" exact render={(props) => (
 					<>
-						<Admin {...{ url, auth, setMessage, setErrors, users, decos, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
-						{auth.username == "@guest" && <LoginPopUp {...{ url }} />}
+						<Admin {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
+						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
 

@@ -52,28 +52,6 @@ const VideoShow = (props) => {
 		})
 	}
 
-	// Function for following musicians
-	const onFollow = (musician) => {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/follows`, {
-				musician: musician
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update Users
-				axios.get(`${props.url}/api/users`)
-					.then((res) => props.setUsers(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for posting comment
 	const onComment = (e) => {
 		e.preventDefault()
@@ -144,61 +122,10 @@ const VideoShow = (props) => {
 		})
 	}
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update Cart Videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				// Update Video Albums
-				axios.get(`${props.url}/api/video-albums`)
-					.then((res) => props.setVideoAlbums(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update Cart Videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				// Update Video Albums
-				axios.get(`${props.url}/api/video-albums`)
-					.then((res) => props.setVideoAlbums(res.data))
-				history.push('/cart')
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
+		props.onBuyVideos(video)
+		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for downloading audio
@@ -259,13 +186,17 @@ const VideoShow = (props) => {
 										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 								</svg>
 								<small className="ml-1">{showVideo.likes}</small>
-							</a>
-							: <a href='#' onClick={(e) => {
+							</a> :
+							<a href='#' onClick={(e) => {
 								e.preventDefault()
 								onVideoLike()
 							}}>
-								<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-									className='bi bi-heart' viewBox='0 0 16 16'>
+								<svg xmlns='http://www.w3.org/2000/svg'
+									width='1.2em'
+									height='1.2em'
+									fill='currentColor'
+									className='bi bi-heart'
+									viewBox='0 0 16 16'>
 									<path
 										d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 								</svg>
@@ -369,7 +300,7 @@ const VideoShow = (props) => {
 								showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
 									showArtist.hasFollowed ?
 										<button className={'btn btn-light float-right rounded-0'}
-											onClick={() => onFollow(showArtist.username)}>
+											onClick={() => props.onFollow(showArtist.username)}>
 											Followed
 											<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 												<path fillRule='evenodd'
@@ -378,7 +309,7 @@ const VideoShow = (props) => {
 										</button> :
 										<Button
 											btnClass={'mysonar-btn float-right'}
-											onClick={() => onFollow(showArtist.username)}
+											onClick={() => props.onFollow(showArtist.username)}
 											btnText={'follow'} /> :
 									<Button
 										btnClass={'mysonar-btn float-right'}
@@ -594,7 +525,7 @@ const VideoShow = (props) => {
 							videoInCart={video.inCart}
 							hasBoughtVideo={!video.hasBoughtVideo}
 							videoId={video.id}
-							onCartVideos={onCartVideos}
+							onCartVideos={props.onCartVideos}
 							onBuyVideos={onBuyVideos} />
 					))}
 			</div>
