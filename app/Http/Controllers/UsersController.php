@@ -3,20 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\AudioAlbums;
-use App\Audios;
 use App\BoughtAudios;
 use App\BoughtVideos;
-use App\CartAudios;
-use App\CartVideos;
 use App\Follows;
 use App\Mail\AudioReceipt;
-use App\Mail\VideoReceipt;
-use App\Mail\WelcomeMail;
 use App\User;
 use App\VideoAlbums;
-use App\Videos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
@@ -52,7 +45,7 @@ class UsersController extends Controller
             $hasBought1 = ($hasBoughtVideo + $hasBoughtAudio) > 1 ? true : false;
 
             array_push($users, [
-				"id" => $user->id,
+                "id" => $user->id,
                 "name" => $user->name,
                 "username" => $user->username,
                 "account_type" => $user->account_type,
@@ -67,7 +60,7 @@ class UsersController extends Controller
             ]);
         }
 
-		return $users;
+        return $users;
     }
 
     /**
@@ -77,12 +70,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // return Mail::to(auth()->user())
-            // ->send(new WelcomeMail(auth()->user()->username));
-
-			// return new WelcomeMail(auth()->user()->username);
-			$receiptAudios = [
-				1 => [
+        // return new WelcomeMail(auth()->user()->username);
+        $receiptAudios = [
+            1 => [
                 "id" => '1',
                 "audio" => 'audio 1',
                 "name" => 'name 1',
@@ -90,8 +80,8 @@ class UsersController extends Controller
                 "ft" => 'ft 1',
                 "album" => 'album 1',
                 "genre" => 'genre 1',
-				],
-				2 => [
+            ],
+            2 => [
                 "id" => '2',
                 "audio" => 'audio 2',
                 "name" => 'name 2',
@@ -99,10 +89,10 @@ class UsersController extends Controller
                 "ft" => 'ft 2',
                 "album" => 'album 2',
                 "genre" => 'genre 2',
-				],
-			];
+            ],
+        ];
 
-			return new AudioReceipt($receiptAudios);
+        return new AudioReceipt($receiptAudios);
     }
 
     /**
@@ -139,7 +129,7 @@ class UsersController extends Controller
      */
     public function show($username)
     {
-		// 
+        //
     }
 
     /**
@@ -220,6 +210,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        //
     }
 }

@@ -41,7 +41,9 @@ const Register = (props) => {
 				phone: phone,
 			}).then(res => {
 				props.setMessage("Account Updated")
-				axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
+				// Update Auth
+				axios.get(`${props.url}/api/home`)
+					.then((res) => props.setAuth(res.data))
 				setTimeout(() => history.push('/'), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors

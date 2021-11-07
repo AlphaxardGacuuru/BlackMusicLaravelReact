@@ -93038,7 +93038,8 @@ var Register = function Register(props) {
         username: username,
         phone: phone
       }).then(function (res) {
-        props.setMessage("Account Updated");
+        props.setMessage("Account Updated"); // Update Auth
+
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
         });

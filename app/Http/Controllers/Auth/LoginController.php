@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -112,7 +114,7 @@ class LoginController extends Controller
         }
     }
 
-    // Update Use on Login
+    // Update User on Login
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -127,6 +129,10 @@ class LoginController extends Controller
         $user->username = $request->input('username');
         $user->phone = $request->input('phone');
         $user->save();
+
+		// Notify User
+        Mail::to($request->input('email'))
+            ->send(new WelcomeMail($request->input('username')));
 
         Auth::login($user, true);
 
