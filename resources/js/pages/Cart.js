@@ -74,7 +74,6 @@ const Cart = (props) => {
 	// Function for buying videos
 	const onPay = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			// axios.post(`${props.url}/api/kopokopo`)
 
 			// Check payment after every 2s
 			var intervalId = window.setInterval(() => {
@@ -159,7 +158,7 @@ const Cart = (props) => {
 						}
 						props.setErrors(newError)
 					})
-			}, 2000);
+			}, 3000);
 		});
 	}
 

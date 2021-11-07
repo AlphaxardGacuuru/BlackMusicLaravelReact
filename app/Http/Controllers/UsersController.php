@@ -9,6 +9,7 @@ use App\BoughtVideos;
 use App\CartAudios;
 use App\CartVideos;
 use App\Follows;
+use App\Mail\AudioReceipt;
 use App\Mail\VideoReceipt;
 use App\Mail\WelcomeMail;
 use App\User;
@@ -80,10 +81,10 @@ class UsersController extends Controller
             // ->send(new WelcomeMail(auth()->user()->username));
 
 			// return new WelcomeMail(auth()->user()->username);
-			$receiptVideos = [
+			$receiptAudios = [
 				1 => [
                 "id" => '1',
-                "video" => 'video 1',
+                "audio" => 'audio 1',
                 "name" => 'name 1',
                 "username" => 'username1',
                 "ft" => 'ft 1',
@@ -92,7 +93,7 @@ class UsersController extends Controller
 				],
 				2 => [
                 "id" => '2',
-                "video" => 'video 2',
+                "audio" => 'audio 2',
                 "name" => 'name 2',
                 "username" => 'username 2',
                 "ft" => 'ft 2',
@@ -101,7 +102,7 @@ class UsersController extends Controller
 				],
 			];
 
-			return new VideoReceipt($receiptVideos);
+			return new AudioReceipt($receiptAudios);
     }
 
     /**
@@ -183,7 +184,7 @@ class UsersController extends Controller
         if ($request->filled('account_type')) {
             $user->account_type = $request->input('account_type');
 
-            /* Create new video album */
+            /* Create new audio album */
             $aAlbum = new AudioAlbums;
             $aAlbum->name = "Singles";
             $aAlbum->username = auth()->user()->username;

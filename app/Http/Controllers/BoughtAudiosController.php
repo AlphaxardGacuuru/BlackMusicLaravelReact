@@ -8,6 +8,7 @@ use App\BoughtVideos;
 use App\CartAudios;
 use App\Decos;
 use App\Kopokopo;
+use App\Notifications\AudioReceiptNotifications;
 use App\User;
 use App\Notifications\BoughtAudioNotifications;
 use App\Notifications\DecoNotifications;
@@ -153,9 +154,10 @@ class BoughtAudiosController extends Controller
             ]);
         }
 
-        return response($receiptAudios, 200);
+		// Notify User
+		auth()->user()->notify(new AudioReceiptNotifications($receiptAudios));
 
-        return response($approved, 200);
+        return response($receiptAudios, 200);
     }
 
     /**

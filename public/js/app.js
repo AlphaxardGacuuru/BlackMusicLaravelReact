@@ -98814,7 +98814,6 @@ var Cart = function Cart(props) {
 
   var onPay = function onPay() {
     axios.get('sanctum/csrf-cookie').then(function () {
-      // axios.post(`${props.url}/api/kopokopo`)
       // Check payment after every 2s
       var intervalId = window.setInterval(function () {
         // Try and buy videos
@@ -98907,7 +98906,7 @@ var Cart = function Cart(props) {
 
           props.setErrors(newError);
         });
-      }, 2000);
+      }, 3000);
     });
   };
 
