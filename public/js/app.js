@@ -93657,8 +93657,9 @@ function App() {
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
       return setVideos(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch videos"]);
+    }) // .catch(() => setErrors(["Failed to fetch videos"]))
+    ["catch"](function (err) {
+      return console.log(err);
     }); // Fetch Video Payouts
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
