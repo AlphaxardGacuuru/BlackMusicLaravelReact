@@ -93659,7 +93659,7 @@ function App() {
       return setVideos(res.data);
     }) // .catch(() => setErrors(["Failed to fetch videos"]))
     ["catch"](function (err) {
-      return console.log(err);
+      return console.log(err.response.data.message);
     }); // Fetch Video Payouts
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-payouts")).then(function (res) {
