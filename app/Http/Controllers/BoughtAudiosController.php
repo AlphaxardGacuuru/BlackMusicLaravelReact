@@ -13,6 +13,7 @@ use App\User;
 use App\Notifications\BoughtAudioNotifications;
 use App\Notifications\DecoNotifications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoughtAudiosController extends Controller
 {
@@ -23,7 +24,15 @@ class BoughtAudiosController extends Controller
      */
     public function index()
     {
-        $getBoughtAudios = BoughtAudios::where('username', auth()->user()->username)->get();
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
+        $getBoughtAudios = BoughtAudios::where('username', $authUsername)
+		->get();
 
         $boughtAudios = [];
 
@@ -61,7 +70,9 @@ class BoughtAudiosController extends Controller
     public function store(Request $request)
     {
         $permission = "";
+
         $approved = [];
+
         /* Fetch songs from Cart Audios */
         $cartAudiosCheck = CartAudios::where('username', auth()->user()->username)->get();
 

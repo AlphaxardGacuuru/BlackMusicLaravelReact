@@ -13,6 +13,7 @@ use App\Notifications\VideoReceiptNotifications;
 use App\User;
 use App\Videos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoughtVideosController extends Controller
 {
@@ -23,7 +24,15 @@ class BoughtVideosController extends Controller
      */
     public function index()
     {
-        $getBoughtVideos = BoughtVideos::where('username', auth()->user()->username)->get();
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+
+        $getBoughtVideos = BoughtVideos::where('username', $authUsername)
+            ->get();
 
         $boughtVideos = [];
 
@@ -143,7 +152,7 @@ class BoughtVideosController extends Controller
         $receiptVideos = [];
 
         foreach ($approved as $key => $id) {
-			
+
             $video = Videos::find($id);
 
             array_push($receiptVideos, [
@@ -158,8 +167,8 @@ class BoughtVideosController extends Controller
             ]);
         }
 
-		// Notify User
-		auth()->user()->notify(new VideoReceiptNotifications($receiptVideos));
+        // Notify User
+        auth()->user()->notify(new VideoReceiptNotifications($receiptVideos));
 
         return response($receiptVideos, 200);
     }

@@ -12,6 +12,7 @@ use App\VideoLikes;
 use App\Videos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 // FFMpeg
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
@@ -27,6 +28,13 @@ class VideosController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         // Get Videos
         $getVideos = Videos::orderBy('id', 'ASC')->get();
 
@@ -35,17 +43,17 @@ class VideosController extends Controller
         foreach ($getVideos as $key => $video) {
 
             // Check if user has liked video
-            $hasLiked = VideoLikes::where('username', auth()->user()->username)
+            $hasLiked = VideoLikes::where('username', $authUsername)
                 ->where('video_id', $video->id)
                 ->exists();
 
             // Check if video in cart
             $inCart = CartVideos::where('video_id', $video->id)
-                ->where('username', auth()->user()->username)
+                ->where('username', $authUsername)
                 ->exists();
 
             // Check if user has bought video
-            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
+            $hasBoughtVideo = BoughtVideos::where('username', $authUsername)
                 ->where('video_id', $video->id)
                 ->exists();
 

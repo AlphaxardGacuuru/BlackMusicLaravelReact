@@ -7,6 +7,7 @@ use App\AudioComments;
 use App\Audios;
 use App\Notifications\AudioCommentNotifications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AudioCommentsController extends Controller
 {
@@ -17,6 +18,13 @@ class AudioCommentsController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         $getAudioComments = AudioComments::all();
 
         $audioComments = [];
@@ -24,7 +32,7 @@ class AudioCommentsController extends Controller
         foreach ($getAudioComments as $key => $audioComment) {
 
             // Check if user has liked comment
-            $hasLiked = AudioCommentLikes::where('username', auth()->user()->username)
+            $hasLiked = AudioCommentLikes::where('username', $authUsername)
                 ->where('comment_id', $audioComment->id)
                 ->exists();
 

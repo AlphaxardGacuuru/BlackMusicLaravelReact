@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CartVideos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartVideosController extends Controller
 {
@@ -14,7 +15,14 @@ class CartVideosController extends Controller
      */
     public function index()
     {
-        $getCartVideos = CartVideos::where('username', auth()->user()->username)
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
+        $getCartVideos = CartVideos::where('username', $authUsername)
             ->get();
 
         $cartVideos = [];

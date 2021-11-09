@@ -169,8 +169,7 @@ function App() {
 		//Fetch Videos
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
-			// .catch(() => setErrors(["Failed to fetch videos"]))
-			.catch((err) => console.log(err.response.data.message))
+			.catch(() => setErrors(["Failed to fetch videos"]))
 
 		// Fetch Video Payouts
 		axios.get(`${url}/api/video-payouts`)

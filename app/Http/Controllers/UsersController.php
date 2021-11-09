@@ -6,11 +6,11 @@ use App\AudioAlbums;
 use App\BoughtAudios;
 use App\BoughtVideos;
 use App\Follows;
-use App\Mail\AudioReceipt;
 use App\User;
 use App\VideoAlbums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -25,20 +25,27 @@ class UsersController extends Controller
 
         $users = [];
 
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         // Get Users
         foreach ($getUsers as $key => $user) {
             // Check if user has followed User
             $hasFollowed = Follows::where('followed', $user->username)
-                ->where('username', auth()->user()->username)
+                ->where('username', $authUsername)
                 ->exists();
 
             // Check if user has bought atleast 1 song
-            $hasBoughtVideo = BoughtVideos::where('username', auth()->user()->username)
+            $hasBoughtVideo = BoughtVideos::where('username', $authUsername)
                 ->where('artist', $user->username)
                 ->count();
 
             // Check if user has bought atleast 1 song
-            $hasBoughtAudio = BoughtAudios::where('username', auth()->user()->username)
+            $hasBoughtAudio = BoughtAudios::where('username', $authUsername)
                 ->where('artist', $user->username)
                 ->count();
 
@@ -71,28 +78,8 @@ class UsersController extends Controller
     public function create()
     {
         // return new WelcomeMail(auth()->user()->username);
-        $receiptAudios = [
-            1 => [
-                "id" => '1',
-                "audio" => 'audio 1',
-                "name" => 'name 1',
-                "username" => 'username1',
-                "ft" => 'ft 1',
-                "album" => 'album 1',
-                "genre" => 'genre 1',
-            ],
-            2 => [
-                "id" => '2',
-                "audio" => 'audio 2',
-                "name" => 'name 2',
-                "username" => 'username 2',
-                "ft" => 'ft 2',
-                "album" => 'album 2',
-                "genre" => 'genre 2',
-            ],
-        ];
 
-        return new AudioReceipt($receiptAudios);
+		return auth()->user();
     }
 
     /**

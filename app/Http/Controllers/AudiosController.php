@@ -9,6 +9,7 @@ use App\CartAudios;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AudiosController extends Controller
 {
@@ -19,6 +20,13 @@ class AudiosController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         // Get Audios
         $getAudios = Audios::orderBy('id', 'ASC')->get();
 
@@ -27,17 +35,17 @@ class AudiosController extends Controller
         foreach ($getAudios as $key => $audio) {
 
             // Check if user has liked
-            $hasLiked = AudioLikes::where('username', auth()->user()->username)
+            $hasLiked = AudioLikes::where('username', $authUsername)
                 ->where('audio_id', $audio->id)
                 ->exists();
 
             // Check if audio in cart
             $inCart = CartAudios::where('audio_id', $audio->id)
-                ->where('username', auth()->user()->username)
+                ->where('username', $authUsername)
                 ->exists();
 
             // Check if user has bought audio
-            $hasBoughtAudio = BoughtAudios::where('username', auth()->user()->username)
+            $hasBoughtAudio = BoughtAudios::where('username', $authUsername)
                 ->where('audio_id', $audio->id)
                 ->exists();
 

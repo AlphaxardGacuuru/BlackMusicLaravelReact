@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CartAudios;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartAudiosController extends Controller
 {
@@ -14,7 +15,14 @@ class CartAudiosController extends Controller
      */
     public function index()
     {
-        $getCartAudios = CartAudios::where('username', auth()->user()->username)
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
+        $getCartAudios = CartAudios::where('username', $authUsername)
             ->get();
 
         $cartAudios = [];

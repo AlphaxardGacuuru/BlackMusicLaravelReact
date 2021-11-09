@@ -12,6 +12,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -22,6 +23,13 @@ class PostsController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         // Get Posts
         $getPosts = Posts::orderBy('id', 'DESC')->get();
 
@@ -31,39 +39,39 @@ class PostsController extends Controller
 
             // Check if user has followed Musician
             $hasFollowed = Follows::where('followed', $post->username)
-                ->where('username', auth()->user()->username)
+                ->where('username', $authUsername)
                 ->exists();
 
             // Check if user has liked post
             $hasLiked = PostLikes::where('post_id', $post->id)
-                ->where('username', auth()->user()->username)
+                ->where('username', $authUsername)
                 ->exists();
 
             // Check if user has voted for parameter 1
-            $hasVoted1 = Polls::where('username', auth()->user()->username)
+            $hasVoted1 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_1)
                 ->exists();
             // Check if user has voted for parameter 2
-            $hasVoted2 = Polls::where('username', auth()->user()->username)
+            $hasVoted2 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_2)
                 ->exists();
 
             // Check if user has voted for parameter 3
-            $hasVoted3 = Polls::where('username', auth()->user()->username)
+            $hasVoted3 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_3)
                 ->exists();
 
             // Check if user has voted for parameter 4
-            $hasVoted4 = Polls::where('username', auth()->user()->username)
+            $hasVoted4 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_4)
                 ->exists();
 
             // Check if user has voted for parameter 5
-            $hasVoted5 = Polls::where('username', auth()->user()->username)
+            $hasVoted5 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_5)
                 ->exists();

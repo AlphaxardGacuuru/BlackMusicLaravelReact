@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Follows', 'username', 'username');
     }
+
+	public function videos()
+	{
+		return $this->hasMany('App\Videos', 'username', 'username');
+	}
+
+	public function videoAlbums()
+	{
+		return $this->hasMany('App\VideoAlbums', 'username', 'username');
+	}
 }

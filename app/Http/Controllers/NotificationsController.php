@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Notifications;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
@@ -15,7 +16,12 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        $getNotifications = auth()->user()->notifications;
+        // Check if user is logged in
+        if (Auth::check()) {
+            $getNotifications = auth()->user()->notifications;
+        } else {
+            $getNotifications = [];
+        }
 
         $notifications = [];
 

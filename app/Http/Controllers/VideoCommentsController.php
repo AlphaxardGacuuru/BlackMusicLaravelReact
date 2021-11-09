@@ -7,6 +7,7 @@ use App\VideoCommentLikes;
 use App\Videos;
 use App\VideoComments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideoCommentsController extends Controller
 {
@@ -17,6 +18,13 @@ class VideoCommentsController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
+
         $getVideoComments = VideoComments::all();
 
         $videoComments = [];
@@ -24,7 +32,7 @@ class VideoCommentsController extends Controller
         foreach ($getVideoComments as $key => $videoComment) {
 
             // Check if user has liked comment
-            $hasLiked = VideoCommentLikes::where('username', auth()->user()->username)
+            $hasLiked = VideoCommentLikes::where('username', $authUsername)
                 ->where('comment_id', $videoComment->id)
                 ->exists();
 
