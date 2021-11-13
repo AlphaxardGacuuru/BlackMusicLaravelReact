@@ -98004,7 +98004,7 @@ var AudioShow = function AudioShow(props) {
     var shareData = {
       title: showAudio.name,
       text: "Check out ".concat(showAudio.name),
-      url: "https://music.black.co.ke/".concat(show)
+      url: "https://test.black.co.ke/#/audio-show/".concat(show)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);

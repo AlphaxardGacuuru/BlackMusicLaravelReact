@@ -144,7 +144,7 @@ const AudioShow = (props) => {
 		const shareData = {
 			title: showAudio.name,
 			text: `Check out ${showAudio.name}`,
-			url: `https://music.black.co.ke/${show}`
+			url: `https://test.black.co.ke/#/audio-show/${show}`
 		}
 		// Check if data is shareble
 		navigator.canShare(shareData) &&
