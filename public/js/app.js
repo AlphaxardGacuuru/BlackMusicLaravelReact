@@ -98003,8 +98003,8 @@ var AudioShow = function AudioShow(props) {
     // Define share data
     var shareData = {
       title: showAudio.name,
-      text: "Check out ".concat(showAudio.name),
-      url: "https://test.black.co.ke/#/audio-show/".concat(show)
+      text: "Check out ".concat(showAudio.name, " on Black Music"),
+      url: "https://music.black.co.ke/#/audio-show/".concat(show)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
@@ -98242,8 +98242,14 @@ var AudioShow = function AudioShow(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, showAudio.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 mr-2",
-    onClick: onShare
+    className: "p-2 mr-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#" // href={`whatsapp://send?text=https://music.black.co.ke/audio-show/${show}`}
+    ,
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onShare();
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "bi bi-reply",
     width: "1.5em",
@@ -98254,7 +98260,7 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE")), props.hasBought && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " SHARE"))), props.hasBought && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: "mysonar-btn",
@@ -103669,6 +103675,19 @@ var VideoShow = function VideoShow(props) {
   var onDownload = function onDownload() {
     window.open("".concat(props.url, "/api/videos/").concat(showVideo.id));
     props.setMessage("Downloading ".concat(showVideo.name));
+  }; // Web Share API for share button
+  // Share must be triggered by "user activation"
+
+
+  var onShare = function onShare() {
+    // Define share data
+    var shareData = {
+      title: showVideo.name,
+      text: "Check out ".concat(showVideo.name, " on Black Music"),
+      url: "https://music.black.co.ke/#/video-show/".concat(show)
+    }; // Check if data is shareble
+
+    navigator.canShare(shareData) && navigator.share(shareData);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103747,7 +103766,12 @@ var VideoShow = function VideoShow(props) {
   }, showVideo.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "whatsapp://send?text=https://music.black.co.ke/video-show/".concat(show)
+    href: "#" // href={`whatsapp://send?text=https://music.black.co.ke/video-show/${show}`}
+    ,
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onShare();
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "bi bi-reply",
     width: "1.5em",
