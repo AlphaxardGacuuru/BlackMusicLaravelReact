@@ -182,7 +182,11 @@ const TopNavas = (props) => {
 							))}
 					</div>
 					{props.notifications.length > 0 &&
-						<div className="dropdown-header" onClick={() => onDeleteComment(0)}>Clear notifications</div>}
+						<div
+							className="dropdown-header"
+							onClick={() => onDeleteComment(0)}>
+							Clear notifications
+						</div>}
 				</div>
 			</div>
 			{/* Notification Dropdown End */}

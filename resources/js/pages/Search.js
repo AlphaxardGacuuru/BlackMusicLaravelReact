@@ -58,6 +58,7 @@ const Search = (props) => {
 							.filter((user) => {
 								return user.username != props.auth.username &&
 									user.username != "@blackmusic" &&
+									user.account_type == "musician" &&
 									user.username.match(props.search)
 							}).map((artist, key) => (
 								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>

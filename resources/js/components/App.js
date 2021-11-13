@@ -40,6 +40,7 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 import Admin from '../pages/Admin'
 
 function App() {
+
 	// Declare states
 	const [login, setLogin] = useState()
 	const [url, setUrl] = useState(window.location.href.match(/https/) ?
@@ -718,7 +719,7 @@ function App() {
 
 				<Route path="/videos" exact render={(props) => (
 					<>
-						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoAlbums, videoPayouts,setVideoAlbums, setAudioAlbums }} />
+						<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoAlbums, videoPayouts, setVideoAlbums, setAudioAlbums }} />
 						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
