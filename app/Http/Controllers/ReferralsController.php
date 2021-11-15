@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BoughtVideos;
 use App\Referrals;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,127 @@ class ReferralsController extends Controller
      */
     public function index()
     {
-        //
+        $referral = new Referrals;
+        $referral->username = '@foxtrot';
+        $referral->referee = '@golf';
+        // return $referral->save();
+
+		$referrals = [];
+
+        $level1Revenue = $level2Revenue = $level3Revenue = $level4Revenue = 0;
+
+        // Fetch for level 1
+        $level1Referrals = Referrals::where('username', auth()->user()->username)
+            ->get();
+
+        foreach ($level1Referrals as $key => $referral) {
+
+            // Total Bought Videos
+            $boughtVideos = $referral->boughtVideos->count();
+
+            // Total Bought Audios
+            $boughtAudios = $referral->boughtAudios->count();
+
+            // Total Revenue Generated
+            $revenue = $boughtVideos + $boughtAudios * 10;
+
+            $level1Revenue += $revenue;
+
+            array_push($referrals, [
+                'level' => 'Level 1',
+                'referee' => $referral->referee,
+                'boughtVideos' => $boughtVideos,
+                'boughtAudios' => $boughtAudios,
+                'revenue' => $revenue
+            ]);
+
+            // Fetch for level 2
+            $level2Referrals = Referrals::where('username', $referral->referee)
+                ->get();
+
+            foreach ($level2Referrals as $key => $referral) {
+
+                // Total Bought Videos
+                $boughtVideos = $referral->boughtVideos->count();
+
+                // Total Bought Audios
+                $boughtAudios = $referral->boughtAudios->count();
+
+                // Total Revenue Generated
+                $revenue = $boughtVideos + $boughtAudios * 5;
+
+                $level2Revenue += $revenue;
+
+                array_push($referrals, [
+                    'level' => 'Level 2',
+                    'referee' => $referral->referee,
+                    'boughtVideos' => $boughtVideos,
+                    'boughtAudios' => $boughtAudios,
+                    'revenue' => $revenue
+                ]);
+
+                // Fetch for level 3
+                $level3Referrals = Referrals::where('username', $referral->referee)
+                    ->get();
+
+                foreach ($level3Referrals as $key => $referral) {
+
+                    // Total Bought Videos
+                    $boughtVideos = $referral->boughtVideos->count();
+
+                    // Total Bought Audios
+                    $boughtAudios = $referral->boughtAudios->count();
+
+                    // Total Revenue Generated
+                    $revenue = $boughtVideos + $boughtAudios * 2.5;
+
+                    $level3Revenue += $revenue;
+
+                    array_push($referrals, [
+                        'level' => 'Level 3',
+                        'referee' => $referral->referee,
+                        'boughtVideos' => $boughtVideos,
+                        'boughtAudios' => $boughtAudios,
+                        'revenue' => $revenue
+                    ]);
+
+                    // Fetch for level 4
+                    $level4Referrals = Referrals::where('username', $referral->referee)
+                        ->get();
+
+                    foreach ($level4Referrals as $key => $referral) {
+
+                        // Total Bought Videos
+                        $boughtVideos = $referral->boughtVideos->count();
+
+                        // Total Bought Audios
+                        $boughtAudios = $referral->boughtAudios->count();
+
+                        // Total Revenue Generated
+                        $revenue = $boughtVideos + $boughtAudios * 1.25;
+
+                        $level4Revenue += $revenue;
+
+                        array_push($referrals, [
+                            'level' => 'Level 4',
+                            'referee' => $referral->referee,
+                            'boughtVideos' => $boughtVideos,
+                            'boughtAudios' => $boughtAudios,
+                            'revenue' => $revenue
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return response([
+			'referrals' => $referrals,
+			'level1Revenue' => $level1Revenue,
+			'level2Revenue' => $level2Revenue,
+			'level3Revenue' => $level3Revenue,
+			'level4Revenue' => $level4Revenue,
+			'totalRevenue' => $level1Revenue + $level2Revenue + $level3Revenue + $level4Revenue,
+		], 200);
     }
 
     /**

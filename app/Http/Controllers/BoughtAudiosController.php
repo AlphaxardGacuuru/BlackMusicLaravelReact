@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtAudios;
 use App\Audios;
+use App\BoughtAudios;
 use App\BoughtVideos;
 use App\CartAudios;
 use App\Decos;
 use App\Kopokopo;
 use App\Notifications\AudioReceiptNotifications;
-use App\User;
 use App\Notifications\BoughtAudioNotifications;
 use App\Notifications\DecoNotifications;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,15 +24,15 @@ class BoughtAudiosController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
         $getBoughtAudios = BoughtAudios::where('username', $authUsername)
-		->get();
+            ->get();
 
         $boughtAudios = [];
 
@@ -48,7 +48,7 @@ class BoughtAudiosController extends Controller
             ]);
         }
 
-		return $boughtAudios;
+        return $boughtAudios;
     }
 
     /**
@@ -58,7 +58,17 @@ class BoughtAudiosController extends Controller
      */
     public function create()
     {
-        //
+		for ($i=0; $i < 5; $i++) { 
+        /* Add song to audios_bought */
+        $boughtAudios = new BoughtAudios;
+        // $boughtAudios->audio_id = $cartAudio->audio_id;
+        $boughtAudios->reference = "ODT2TA2060";
+        $boughtAudios->price = 100;
+        $boughtAudios->username = '@golf';
+        // $boughtAudios->name = $cartAudio->audios->audio_name;
+        // $boughtAudios->artist = $cartAudio->audios->username;
+        // $boughtAudios->save();
+		}
     }
 
     /**
@@ -92,7 +102,7 @@ class BoughtAudiosController extends Controller
             $kopokopo = Kopokopo::where('sender_phone', $betterPhone)->sum('amount');
             $balance = $kopokopo - ($totalVideos20 + $totalVideos200 + $totalAudios100);
             // Check if user can buy songs in cart
-            $permission = intval($balance / 200);
+            $permission = intval($balance / 100);
 
             if ($permission >= 1) {
                 $baQuery = BoughtAudios::where('username', auth()->user()->username)
@@ -103,11 +113,11 @@ class BoughtAudiosController extends Controller
                     $boughtAudios = new BoughtAudios;
                     $boughtAudios->audio_id = $cartAudio->audio_id;
                     $boughtAudios->reference = "ODT2TA2060";
-                    $boughtAudios->price = 200;
+                    $boughtAudios->price = 100;
                     $boughtAudios->username = auth()->user()->username;
                     $boughtAudios->name = $cartAudio->audios->audio_name;
                     $boughtAudios->artist = $cartAudio->audios->username;
-                    // $boughtAudios->save();
+                    $boughtAudios->save();
 
                     /* Showing audio song bought notification */
                     $user = User::where('username', $cartAudio->audios->username)
@@ -165,8 +175,8 @@ class BoughtAudiosController extends Controller
             ]);
         }
 
-		// Notify User
-		auth()->user()->notify(new AudioReceiptNotifications($receiptAudios));
+        // Notify User
+        auth()->user()->notify(new AudioReceiptNotifications($receiptAudios));
 
         return response($receiptAudios, 200);
     }

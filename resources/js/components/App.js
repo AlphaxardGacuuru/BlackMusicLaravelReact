@@ -38,6 +38,7 @@ import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
+import Settings from '../pages/Settings';
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
 	const [notifications, setNotifications] = useState([])
 	const [posts, setPosts] = useState([])
 	const [postComments, setPostComments] = useState([])
+	const [referrals, setReferrals] = useState([])
 	const [sms, setSMS] = useState([])
 	const [users, setUsers] = useState([])
 
@@ -146,6 +148,11 @@ function App() {
 		axios.get(`${url}/api/posts`)
 			.then((res) => setPosts(res.data))
 			.catch(() => setErrors(['Failed to fetch posts']))
+
+		//Fetch Referrals
+		axios.get(`${url}/api/referrals`)
+			.then((res) => setReferrals(res.data))
+			.catch(() => setErrors(['Failed to fetch referrals']))
 
 		//Fetch SMS
 		axios.get(`${url}/api/sms`)
@@ -801,6 +808,14 @@ function App() {
 				<Route path="/admin" exact render={(props) => (
 					<>
 						<Admin {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
+
+
+				<Route path="/settings" exact render={(props) => (
+					<>
+						<Settings {...{ url, auth, setMessage, setErrors, referrals }} />
 						{auth.username == "@guest" && LoginComponent}
 					</>
 				)} />
