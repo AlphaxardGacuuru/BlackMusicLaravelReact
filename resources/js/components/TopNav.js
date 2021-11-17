@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { useState } from 'react'
 
-import Img from "./Img"
 import AuthLinks from "./AuthLinks"
 import TopnavLinks from "./TopNavLinks"
 
@@ -15,7 +14,13 @@ const TopNav = (props) => {
 	const history = useHistory()
 
 	var display
-	location.pathname == "/post-create" || location.pathname.match(/post-show/) ? display = "none" : display = ""
+
+	location.pathname.match("/post-create") ||
+		location.pathname.match("/post-show/") ||
+		location.pathname.match("/referral") ||
+		location.pathname.match("/login") ||
+		location.pathname.match("/register") ?
+		display = "none" : display = ""
 
 	return (
 		<div id="MyElement" style={{ display: display }} className={menu}>
@@ -159,7 +164,9 @@ const TopNav = (props) => {
 			<br />
 			<br />
 			{/* Remove for profile page for better background image */}
-			{location.pathname.match(/profile/) || location.pathname.match(/video-charts/) || location.pathname.match(/audio-charts/) ?
+			{location.pathname.match(/profile/) ||
+				location.pathname.match(/video-charts/) ||
+				location.pathname.match(/audio-charts/) ?
 				<br className="hidden" /> :
 				<span>
 					<br />

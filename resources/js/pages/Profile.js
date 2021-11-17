@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useState } from 'react'
 import axios from 'axios'
 
 import Img from '../components/Img'
