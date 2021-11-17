@@ -12,6 +12,9 @@ const LoginPopUp = (props) => {
 
 	const onSocial = (website) => {
 		window.location.href = `${props.url}/api/login/${website}`
+
+		// axios.get(`${props.url}/api/login/${website}`)
+		// .then((res) => console.log(res.data))
 	}
 
 	const [phone, setPhone] = useState('07')

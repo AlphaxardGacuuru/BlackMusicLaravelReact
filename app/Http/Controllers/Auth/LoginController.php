@@ -52,6 +52,8 @@ class LoginController extends Controller
     public function redirectToProvider($website)
     {
         return Socialite::driver($website)->redirect();
+
+		// return Socialite::driver($website)->stateless()->redirect()->getTargetUrl();
     }
 
     /**
@@ -87,8 +89,6 @@ class LoginController extends Controller
         // Check if user exists
         if ($dbUser->exists()) {
             if ($dbUser->first()->username && $dbUser->first()->phone) {
-
-                // $currentUser = User::find($dbUser->id);
 
                 Auth::login($dbUser->first(), true);
 
@@ -138,31 +138,6 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-
-    /*
-     *
-     * Login User
-     */
-    // public function login(Request $request)
-    // {
-    //     $fields = $request->validate([
-    //         'phone' => 'required|exists:users',
-    //     ]);
-
-    //     // Fetch User
-    //     $user = User::where('phone', $fields['phone'])->first();
-
-    //     $token = $user->createToken('normal')->plainTextToken;
-
-    //     // Auth::login($user);
-
-    //     $response = [
-    //         'user' => auth()->user(),
-    //         'token' => $token,
-    //     ];
-
-    //     return response($response, 201);
-    // }
 
     public function logout(Request $request)
     {

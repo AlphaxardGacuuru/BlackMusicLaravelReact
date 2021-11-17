@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtVideos;
 use App\Referrals;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReferralsController extends Controller
 {
@@ -15,17 +15,19 @@ class ReferralsController extends Controller
      */
     public function index()
     {
-        $referral = new Referrals;
-        $referral->username = '@foxtrot';
-        $referral->referee = '@golf';
-        // return $referral->save();
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
 
 		$referrals = [];
 
         $level1Revenue = $level2Revenue = $level3Revenue = $level4Revenue = 0;
 
         // Fetch for level 1
-        $level1Referrals = Referrals::where('username', auth()->user()->username)
+        $level1Referrals = Referrals::where('username', $authUsername)
             ->get();
 
         foreach ($level1Referrals as $key => $referral) {

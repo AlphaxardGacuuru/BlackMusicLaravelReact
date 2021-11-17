@@ -20,14 +20,14 @@ class KopokopoController extends Controller
 		
         // Do not hard code these values
         $options = [
-            // 'clientId' => '1hEtWa9CzOo7ge7R0MoxOYd9LtW5IkzcbFwIpz385Ms',
-            'clientId' => 'o7wE4rdF-bXJV8JbPknbribTxjTxiEVD-Qn44KGjo_E',
-            // 'clientSecret' => 'AWmptk5WjDpTau9PIELbVBqiw3pDiM5dlILssKX9N3E',
-            'clientSecret' => 'nkOf5bqUP_5wSMquZIhUa_GvRAkNIkBOCMqGwGuMc3w',
-            // 'apiKey' => '6rgIMwloH24KVndBVEMVpdFpoSG4L0tQd3YpcADyIpA',
-            'apiKey' => '1aa7d918b8a4cd2472d74dc90e429edd4cd6d999',
-            // 'baseUrl' => 'https://sandbox.kopokopo.com',
-            'baseUrl' => 'https://app.kopokopo.com/applications',
+            // 'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
+            'clientId' => env('KOPOKOPO_CLIENT_ID'),
+            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
+            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
+            // 'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
+            'apiKey' => env('KOPOKOPO_API_KEY'),
+            // 'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
+            'baseUrl' => env('KOPOKOPO_BASE_URL'),
         ];
 
         $K2 = new K2($options);

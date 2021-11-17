@@ -92831,7 +92831,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginPopUp = function LoginPopUp(props) {
   var onSocial = function onSocial(website) {
-    window.location.href = "".concat(props.url, "/api/login/").concat(website);
+    window.location.href = "".concat(props.url, "/api/login/").concat(website); // axios.get(`${props.url}/api/login/${website}`)
+    // .then((res) => console.log(res.data))
   };
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('07'),
