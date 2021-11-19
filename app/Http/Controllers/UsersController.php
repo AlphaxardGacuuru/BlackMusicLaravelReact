@@ -21,10 +21,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-		$user = User::where('username', '@golf')->first();
-		$user->phone = '07000000007';
-		// return $user->save();
-
         $getUsers = User::all();
 
         $users = [];
