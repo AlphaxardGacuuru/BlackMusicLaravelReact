@@ -158,7 +158,10 @@ class ReferralsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $referral = new Referrals;
+		$referral->username = $request->input('referer');
+		$referral->referee = $request->input('username');
+		return $referral->save();
     }
 
     /**

@@ -648,193 +648,224 @@ function App() {
 	// 		})
 	// 	})
 
-	const LoginComponent = <LoginPopUp {...{ setMessage, setErrors, setAuth, url, setLogin }} />
+	const LoginComponent = <LoginPopUp {...GLOBAL_STATE} />
+
+	// All states
+	const GLOBAL_STATE = {
+		login, setLogin,
+		url, setUrl,
+		auth, setAuth,
+		message, setMessage,
+		errors, setErrors,
+		audioAlbums, setAudioAlbums,
+		audioComments, setAudioComments,
+		audioPayouts, setAudioPayouts,
+		audios, setAudios,
+		boughtAudios, setBoughtAudios,
+		boughtVideos, setBoughtVideos,
+		cartAudios, setCartAudios,
+		cartVideos, setCartVideos,
+		notifications, setNotifications,
+		posts, setPosts,
+		postComments, setPostComments,
+		referrals, setReferrals,
+		search, setSearch,
+		sms, setSMS,
+		users, setUsers,
+		videoAlbums, setVideoAlbums,
+		videoComments, setVideoComments,
+		videoPayouts, setVideoPayouts,
+		videos, setVideos,
+		onFollow,
+		onCartVideos,
+		onBuyVideos,
+		onCartAudios,
+		onBuyAudios,
+	}
 
 	return (
 		<>
 			<Router>
-					{login && LoginComponent}
+				{login && LoginComponent}
 
-					<TopNav {...{ url, auth, setLogin, setMessage, setErrors, setAuth, cartVideos, cartAudios, search, setSearch, notifications, setNotifications }} />
+				<TopNav {...GLOBAL_STATE} />
 
-					<Route path="/login" exact render={(props) => (
-						<Login {...{ setMessage, setErrors, setAuth, url }} />
-					)} />
+				<Route path="/login" exact render={(props) => (
+					<Login {...GLOBAL_STATE} />
+				)} />
 
-					<Route path="/register/:name/:email/:avatar" exact render={(props) => (
-						<Register {...{ setMessage, setErrors, setAuth, url, users, sms, setSMS }} />
-					)} />
+				<Route path="/register/:name/:email/:avatar" exact render={(props) => (
+					<Register {...GLOBAL_STATE} />
+				)} />
 
-					<Route path="/referral/:referer" exact render={(props) => (
-						<>
-							<Referral />
-						</>
-					)} />
+				<Route path="/referral/:referer" exact render={(props) => (
+					<Referral />
+				)} />
 
-					<Route path="/" exact render={(props) => (
-						<Index {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, setCartVideos, setCartAudios, posts, setPosts, postComments, onFollow, onCartVideos, onBuyVideos, setShow }} />
-					)} />
+				<Route path="/" exact render={(props) => (
+					<Index {...GLOBAL_STATE} />
+				)} />
 
-					<Route path="/search" exact render={(props) => (
-						<>
-							<Search {...{ url, auth, setLogin, setMessage, setErrors, search, setSearch, searchInput, users, videos, videoAlbums, audios, audioAlbums, cartVideos, setCartVideos, boughtVideos, cartAudios, setCartAudios, boughtAudios, hasBought, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/search" exact render={(props) => (
+					<>
+						<Search {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/cart" exact render={(props) => (
-						<>
-							<Cart {...{ url, auth, setMessage, setErrors, cartVideos, setCartVideos, setVideos, setBoughtVideos, setVideoAlbums, cartAudios, setCartAudios, setAudios, setBoughtAudios, setAudioAlbums, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/cart" exact render={(props) => (
+					<>
+						<Cart {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/library" exact render={(props) => (
-						<>
-							<Library {...{ auth, boughtVideos, boughtAudios, setShow }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/library" exact render={(props) => (
+					<>
+						<Library {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
 
-					<Route path="/profile/:username" exact render={(props) => (
-						<>
-							<Profile {...{ setMessage, setErrors, auth, setAuth, url, users, setUsers, posts, setPosts, posts, setPosts, videos, setVideos, videoAlbums, setVideoAlbums, audioAlbums, setAudioAlbums, audios, setAudios, setCartVideos, setCartAudios, onFollow, onCartVideos, onBuyVideos, onCartAudios, onBuyAudios, setShow }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/profile/:username" exact render={(props) => (
+					<>
+						<Profile {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/profile-edit" exact render={(props) => (
-						<>
-							<ProfileEdit {...{ setMessage, setErrors, auth, setAuth, url, users, decos }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/profile-edit" exact render={(props) => (
+					<>
+						<ProfileEdit {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/post-create" exact render={(props) => (
-						<>
-							<PostCreate {...{ url, auth, setMessage, setErrors, setPosts }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/post-create" exact render={(props) => (
+					<>
+						<PostCreate {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/post-show/:id" exact render={(props) => (
-						<>
-							<PostShow {...{ url, auth, setMessage, setErrors, setPostComments, setPosts }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/post-show/:id" exact render={(props) => (
+					<>
+						<PostShow {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					{/* Video Routes */}
-					<Route path="/video-charts" exact render={(props) => (
-						<VideoCharts {...{ url, auth, setMessage, setErrors, users, videos, setVideos, boughtVideos, cartVideos, setCartVideos, setVideoAlbums, onCartVideos, onBuyVideos, setShow }} />
-					)} />
+				{/* Video Routes */}
+				<Route path="/video-charts" exact render={(props) => (
+					<VideoCharts {...GLOBAL_STATE} />
+				)} />
 
-					<Route path="/video-show/:show" exact render={(props) => (
-						<VideoShow {...{ url, auth, setMessage, setErrors, users, setUsers, videos, setVideos, boughtVideos, cartVideos, setCartVideos, videoComments, setVideoComments, videoAlbums, setVideoAlbums, onFollow, onCartVideos, onBuyVideos, setShow }} />
-					)} />
+				<Route path="/video-show/:show" exact render={(props) => (
+					<VideoShow {...GLOBAL_STATE} />
+				)} />
 
-					<Route path="/videos" exact render={(props) => (
-						<>
-							<Videos {...{ url, auth, setMessage, setErrors, users, setUsers, videos, boughtVideos, videoAlbums, videoPayouts, setVideoAlbums, setAudioAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/videos" exact render={(props) => (
+					<>
+						<Videos {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/video-create" exact render={(props) => (
-						<>
-							<VideoCreate {...{ url, auth, setMessage, setErrors, setVideos, videoAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/video-create" exact render={(props) => (
+					<>
+						<VideoCreate {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/video-edit/:id" exact render={(props) => (
-						<>
-							<VideoEdit {...{ url, auth, setMessage, setErrors, videos, setVideos, videoAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/video-edit/:id" exact render={(props) => (
+					<>
+						<VideoEdit {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/video-album-create" exact render={(props) => (
-						<>
-							<VideoAlbumCreate {...{ url, auth, setMessage, setErrors, setVideoAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/video-album-create" exact render={(props) => (
+					<>
+						<VideoAlbumCreate {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Route path="/video-album-edit/:id" exact render={(props) => (
-						<>
-							<VideoAlbumEdit {...{ url, auth, setMessage, setErrors, videoAlbums, setVideoAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
-
-
-					{/* Audio Routes */}
-					<Route path="/audio-charts" exact render={(props) => (
-						<AudioCharts {...{ url, auth, setMessage, setErrors, users, audios, setAudios, boughtAudios, cartAudios, setCartAudios, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, setShow }} />
-					)} />
-
-					<Route path="/audio-show/:show" exact render={(props) => (
-						<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
-					)} />
-
-					<Route path="/audios" exact render={(props) => (
-						<>
-							<Audios {...{ url, auth, setMessage, setErrors, audios, setAudios, boughtAudios, audioAlbums, setAudioAlbums, audioPayouts }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
-
-					<Route path="/audio-create" exact render={(props) => (
-						<>
-							<AudioCreate {...{ url, auth, setMessage, setErrors, setAudios, audioAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
-
-					<Route path="/audio-edit/:id" exact render={(props) => (
-						<>
-							<AudioEdit {...{ url, auth, setMessage, setErrors, audios, setAudios, audioAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
-
-					<Route path="/audio-album-create" exact render={(props) => (
-						<>
-							<AudioAlbumCreate {...{ url, auth, setMessage, setErrors, setAudioAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
-
-					<Route path="/audio-album-edit/:id" exact render={(props) => (
-						<>
-							<AudioAlbumEdit {...{ url, auth, setMessage, setErrors, audioAlbums, setAudioAlbums }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/video-album-edit/:id" exact render={(props) => (
+					<>
+						<VideoAlbumEdit {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
 
-					<Route path="/admin" exact render={(props) => (
-						<>
-							<Admin {...{ url, auth, setMessage, setErrors, users, videos, boughtVideos, videoPayouts, audios, boughtAudios, audioPayouts }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				{/* Audio Routes */}
+				<Route path="/audio-charts" exact render={(props) => (
+					<AudioCharts {...GLOBAL_STATE} />
+				)} />
+
+				<Route path="/audio-show/:show" exact render={(props) => (
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+				)} />
+
+				<Route path="/audios" exact render={(props) => (
+					<>
+						<Audios {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
+
+				<Route path="/audio-create" exact render={(props) => (
+					<>
+						<AudioCreate {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
+
+				<Route path="/audio-edit/:id" exact render={(props) => (
+					<>
+						<AudioEdit {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
+
+				<Route path="/audio-album-create" exact render={(props) => (
+					<>
+						<AudioAlbumCreate {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
+
+				<Route path="/audio-album-edit/:id" exact render={(props) => (
+					<>
+						<AudioAlbumEdit {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
 
-					<Route path="/settings" exact render={(props) => (
-						<>
-							<Settings {...{ url, auth, setMessage, setErrors, referrals }} />
-							{auth.username == "@guest" && LoginComponent}
-						</>
-					)} />
+				<Route path="/admin" exact render={(props) => (
+					<>
+						<Admin {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					<Messages {...{ message, errors }} />
 
-					<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, audioLoader, onSearchIconClick }} />
+				<Route path="/settings" exact render={(props) => (
+					<>
+						<Settings {...GLOBAL_STATE} />
+						{auth.username == "@guest" && LoginComponent}
+					</>
+				)} />
 
-					{/* <center>
+				<Messages {...{ message, errors }} />
+
+				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, audioLoader, onSearchIconClick }} />
+
+				{/* <center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
 				</center>
 				<br />

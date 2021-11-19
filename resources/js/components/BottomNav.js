@@ -5,6 +5,15 @@ const Bottomnav = (props) => {
 
 	const location = useLocation()
 
+	var display
+
+	location.pathname.match("/post-create") ||
+		location.pathname.match("/post-show/") ||
+		location.pathname.match("/referral") ||
+		location.pathname.match("/login") ||
+		location.pathname.match("/register") ?
+		display = "none" : display = ""
+
 	var checkLocation = true
 
 	if (props.show != 0) {
@@ -146,7 +155,7 @@ const Bottomnav = (props) => {
 				{/* Audio Player End */}
 
 				{/* Bottom Nav */}
-				<div className="anti-hidden">
+				<div className="anti-hidden" style={{ display: display }}>
 					<div className="container-fluid menu-area d-flex justify-content-between">
 						{/* Home */}
 						<Link

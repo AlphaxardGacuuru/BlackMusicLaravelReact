@@ -90,7 +90,9 @@ class LoginController extends Controller
         if ($dbUser->exists()) {
             if ($dbUser->first()->username && $dbUser->first()->phone) {
 
-                Auth::login($dbUser->first(), true);
+                // Auth::login($dbUser->first(), true);
+
+				Auth::attempt($dbUser->first());
 
                 return redirect()->intended();
 

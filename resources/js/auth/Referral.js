@@ -13,7 +13,6 @@ const Referral = () => {
 	let { referer } = useParams()
 
 	sessionStorage.setItem("referer", referer)
-	console.log(sessionStorage.getItem("referer"))
 
 	const onSocial = (website) => {
 		window.location.href = `${props.url}/api/login/${website}`
