@@ -648,8 +648,6 @@ function App() {
 	// 		})
 	// 	})
 
-	const LoginComponent = <LoginPopUp {...GLOBAL_STATE} />
-
 	// All states
 	const GLOBAL_STATE = {
 		login, setLogin,
@@ -682,6 +680,8 @@ function App() {
 		onCartAudios,
 		onBuyAudios,
 	}
+
+	const LoginComponent = <LoginPopUp {...GLOBAL_STATE} />
 
 	return (
 		<>

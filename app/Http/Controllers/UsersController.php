@@ -9,8 +9,8 @@ use App\Follows;
 use App\User;
 use App\VideoAlbums;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -21,16 +21,22 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if (Auth::viaRemember()) {
+            return "true";
+        } else {
+            return "false";
+        }
+
         $getUsers = User::all();
 
         $users = [];
 
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
         // Get Users
         foreach ($getUsers as $key => $user) {
@@ -79,7 +85,7 @@ class UsersController extends Controller
     {
         // return new WelcomeMail(auth()->user()->username);
 
-		return auth()->user();
+        return auth()->user();
     }
 
     /**
