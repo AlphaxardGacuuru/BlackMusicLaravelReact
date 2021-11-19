@@ -92,7 +92,7 @@ class LoginController extends Controller
 
                 // Auth::login($dbUser->first(), true);
 
-				Auth::attempt(['username' => $dbUser->first()->username], 'on');
+				Auth::attempt(['username' => $dbUser->first()->username, 'password' => $dbUser->first()->phone], 'on');
 
                 return redirect()->intended();
 
