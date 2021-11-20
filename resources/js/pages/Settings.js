@@ -10,7 +10,7 @@ const Settings = (props) => {
 		// Define share data
 		const shareData = {
 			title: "Refer",
-			text: `Check out Black Music`,
+			text: `Check out Black Music\n\n\n`,
 			url: `https://test.black.co.ke/#/referral/${props.auth.username}`
 		}
 		// Check if data is shareble

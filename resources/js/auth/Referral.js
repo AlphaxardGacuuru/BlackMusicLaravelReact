@@ -8,7 +8,7 @@ import {
 } from "react-social-login-buttons";
 import Img from '../components/Img'
 
-const Referral = () => {
+const Referral = (props) => {
 
 	let { referer } = useParams()
 
@@ -33,8 +33,8 @@ const Referral = () => {
 					<div className="row">
 						<div className="col-12">
 							<div className="call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
-								<h2 className="mt-2" style={{ color: "#fff" }}>Welcome to Black Music</h2>
-								<h2 style={{ color: "white" }}>Kenya's best online music store.</h2>
+								<h2 className="mt-2">Welcome to Black Music</h2>
+								<h2>Kenya's best online music store.</h2>
 								<center>
 									<Img
 										src="storage/img/musical-note.png"

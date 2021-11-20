@@ -92968,7 +92968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Referral = function Referral() {
+var Referral = function Referral(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       referer = _useParams.referer;
 
@@ -92996,15 +92996,8 @@ var Referral = function Referral() {
     className: "call-to-action-content wow fadeInUp",
     "data-wow-delay": "0.5s"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "mt-2",
-    style: {
-      color: "#fff"
-    }
-  }, "Welcome to Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    style: {
-      color: "white"
-    }
-  }, "Kenya's best online music store."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: "mt-2"
+  }, "Welcome to Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Kenya's best online music store."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: "storage/img/musical-note.png",
     width: "20%",
     height: "auto",
@@ -101902,7 +101895,7 @@ var Settings = function Settings(props) {
     // Define share data
     var shareData = {
       title: "Refer",
-      text: "Check out Black Music",
+      text: "Check out Black Music\n\n\n",
       url: "https://test.black.co.ke/#/referral/".concat(props.auth.username)
     }; // Check if data is shareble
 
