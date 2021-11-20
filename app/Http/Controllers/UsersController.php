@@ -21,12 +21,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (Auth::viaRemember()) {
-            return "true";
-        } else {
-            return "false";
-        }
-
         $getUsers = User::all();
 
         $users = [];
@@ -83,9 +77,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // return new WelcomeMail(auth()->user()->username);
-
-        return auth()->user();
+        if (Auth::viaRemember()) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
 
     /**
