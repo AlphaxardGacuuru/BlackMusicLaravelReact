@@ -101903,7 +101903,7 @@ var Settings = function Settings(props) {
     var shareData = {
       title: "Refer",
       text: "Check out Black Music",
-      url: "https://music.black.co.ke/#/".concat(props.auth.username)
+      url: "https://test.black.co.ke/#/referral/".concat(props.auth.username)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
