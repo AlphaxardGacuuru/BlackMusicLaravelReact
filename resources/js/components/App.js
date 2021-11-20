@@ -668,6 +668,7 @@ function App() {
 		postComments, setPostComments,
 		referrals, setReferrals,
 		search, setSearch,
+		show, setShow,
 		sms, setSMS,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
@@ -807,7 +808,7 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader }} />
+					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader, setLogin }} />
 				)} />
 
 				<Route path="/audios" exact render={(props) => (
