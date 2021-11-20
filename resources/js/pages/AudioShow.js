@@ -479,10 +479,7 @@ const AudioShow = (props) => {
 									textOverflow: "clip"
 								}}>
 								<small>{showArtist.name}{showArtist.username}</small>
-								<span style={{
-									color: "gold",
-									paddingTop: "10px"
-								}}>
+								<span className="ml-1" style={{ color: "gold" }}>
 									<svg xmlns="http://www.w3.org/2000/svg"
 										width="16"
 										height="16"

@@ -94401,10 +94401,38 @@ function App() {
     onCartVideos: onCartVideos,
     onBuyVideos: onBuyVideos,
     onCartAudios: onCartAudios,
-    onBuyAudios: onBuyAudios
+    onBuyAudios: onBuyAudios,
+    // Audio Player state
+    playBtn: playBtn,
+    setPlayBtn: setPlayBtn,
+    shuffle: shuffle,
+    setShuffle: setShuffle,
+    loop: loop,
+    setLoop: setLoop,
+    dur: dur,
+    setDur: setDur,
+    volume: volume,
+    setVolume: setVolume,
+    currentTime: currentTime,
+    setCurrentTime: setCurrentTime,
+    audio: audio,
+    audioProgress: audioProgress,
+    audioContainer: audioContainer,
+    volumeProgress: volumeProgress,
+    volumeContainer: volumeContainer,
+    songs: songs,
+    hasBought: hasBought,
+    playSong: playSong,
+    pauseSong: pauseSong,
+    prevSong: prevSong,
+    nextSong: nextSong,
+    setProgress: setProgress,
+    progressPercent: progressPercent,
+    onSetVolume: onSetVolume,
+    fmtMSS: fmtMSS,
+    audioLoader: audioLoader
   };
-  var LoginComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && LoginComponent, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login",
     exact: true,
     render: function render(props) {
@@ -94432,43 +94460,43 @@ function App() {
     path: "/search",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Search__WEBPACK_IMPORTED_MODULE_13__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Search__WEBPACK_IMPORTED_MODULE_13__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/cart",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_14__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_14__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/library",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_15__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_15__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/profile/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_16__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_16__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/profile-edit",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_17__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_17__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/post-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_18__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_18__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/post-show/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_19__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_19__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-charts",
@@ -94486,31 +94514,31 @@ function App() {
     path: "/videos",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_22__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_22__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-album-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_25__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_25__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/video-album-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_26__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_26__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-charts",
@@ -94522,98 +94550,49 @@ function App() {
     path: "/audio-show/:show",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_28__["default"], {
-        url: url,
-        auth: auth,
-        setMessage: setMessage,
-        setErrors: setErrors,
-        users: users,
-        setUsers: setUsers,
-        audios: audios,
-        setAudios: setAudios,
-        setCartAudios: setCartAudios,
-        boughtAudios: boughtAudios,
-        audioComments: audioComments,
-        setAudioComments: setAudioComments,
-        audioAlbums: audioAlbums,
-        setAudioAlbums: setAudioAlbums,
-        onFollow: onFollow,
-        onCartAudios: onCartAudios,
-        onBuyAudios: onBuyAudios,
-        show: show,
-        setShow: setShow,
-        playBtn: playBtn,
-        setPlayBtn: setPlayBtn,
-        shuffle: shuffle,
-        setShuffle: setShuffle,
-        loop: loop,
-        setLoop: setLoop,
-        dur: dur,
-        setDur: setDur,
-        volume: volume,
-        setVolume: setVolume,
-        currentTime: currentTime,
-        setCurrentTime: setCurrentTime,
-        audio: audio,
-        audioProgress: audioProgress,
-        audioContainer: audioContainer,
-        volumeProgress: volumeProgress,
-        volumeContainer: volumeContainer,
-        songs: songs,
-        hasBought: hasBought,
-        playSong: playSong,
-        pauseSong: pauseSong,
-        prevSong: prevSong,
-        nextSong: nextSong,
-        setProgress: setProgress,
-        progressPercent: progressPercent,
-        onSetVolume: onSetVolume,
-        fmtMSS: fmtMSS,
-        audioLoader: audioLoader,
-        setLogin: setLogin
-      });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_28__["default"], GLOBAL_STATE);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audios",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_29__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_29__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_30__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_30__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_31__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_31__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-album-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_32__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_32__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/audio-album-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/admin",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_34__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_34__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/settings",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && LoginComponent);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
     message: message,
@@ -96788,19 +96767,7 @@ var AudioCharts = function AudioCharts(props) {
     id: "carouselExampleIndicators",
     className: "carousel slide",
     "data-ride": "carousel"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-    className: "carousel-indicators"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "0",
-    className: "active"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
   }, props.audios.slice(0, 3).map(function (audio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96825,27 +96792,7 @@ var AudioCharts = function AudioCharts(props) {
         color: "white"
       }
     }, audio.username)));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "carousel-control-prev",
-    href: "#carouselExampleIndicators",
-    role: "button",
-    "data-slide": "prev"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "carousel-control-prev-icon",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Previous")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "carousel-control-next",
-    href: "#carouselExampleIndicators",
-    role: "button",
-    "data-slide": "next"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "carousel-control-next-icon",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Next"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
     className: "hidden-scroll",
     style: {
@@ -98293,9 +98240,9 @@ var AudioShow = function AudioShow(props) {
       textOverflow: "clip"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, showArtist.name, showArtist.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
     style: {
-      color: "gold",
-      paddingTop: "10px"
+      color: "gold"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -102698,19 +102645,7 @@ var VideoCharts = function VideoCharts(props) {
     id: "carouselExampleIndicators",
     className: "carousel slide",
     "data-ride": "carousel"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-    className: "carousel-indicators"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "0",
-    className: "active"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    "data-target": "#carouselExampleIndicators",
-    "data-slide-to": "2"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "carousel-inner"
   }, props.videos.slice(0, 3).map(function (video, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102733,27 +102668,7 @@ var VideoCharts = function VideoCharts(props) {
         color: "white"
       }
     }, video.username)));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "carousel-control-prev",
-    href: "#carouselExampleIndicators",
-    role: "button",
-    "data-slide": "prev"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "carousel-control-prev-icon",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Previous")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "carousel-control-next",
-    href: "#carouselExampleIndicators",
-    role: "button",
-    "data-slide": "next"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "carousel-control-next-icon",
-    "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Next"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
     className: "hidden-scroll",
     style: {

@@ -108,7 +108,7 @@ class BoughtVideosController extends Controller
                     $boughtVideos->username = auth()->user()->username;
                     $boughtVideos->name = $cartVideo->videos->name;
                     $boughtVideos->artist = $cartVideo->videos->username;
-                    // $boughtVideos->save();
+                    $boughtVideos->save();
 
                     /* Showing video song bought notification */
                     $user = User::where('username', $cartVideo->videos->username)
@@ -139,9 +139,9 @@ class BoughtVideosController extends Controller
                         auth()->user()->notify(new DecoNotifications($cartVideo->videos->username));
                     }
                     /* Delete from cart */
-                    // CartVideos::where('video_id', $cartVideo->video_id)
-                    //     ->where('username', auth()->user()->username)
-                    //     ->delete();
+                    CartVideos::where('video_id', $cartVideo->video_id)
+                        ->where('username', auth()->user()->username)
+                        ->delete();
 
                     // Update array
                     array_push($approved, $cartVideo->videos->id);

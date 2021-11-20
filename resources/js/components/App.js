@@ -680,14 +680,35 @@ function App() {
 		onBuyVideos,
 		onCartAudios,
 		onBuyAudios,
+		// Audio Player state
+		playBtn, setPlayBtn, 
+		shuffle, setShuffle, 
+		loop, setLoop, 
+		dur, setDur, 
+		volume, setVolume, 
+		currentTime, setCurrentTime, 
+		audio, 
+		audioProgress, 
+		audioContainer, 
+		volumeProgress, 
+		volumeContainer, 
+		songs, 
+		hasBought, 
+		playSong, 
+		pauseSong, 
+		prevSong, 
+		nextSong, 
+		setProgress, 
+		progressPercent, 
+		onSetVolume, 
+		fmtMSS, 
+		audioLoader,
 	}
-
-	const LoginComponent = <LoginPopUp {...GLOBAL_STATE} />
 
 	return (
 		<>
 			<Router>
-				{login && LoginComponent}
+				{login && <LoginPopUp {...GLOBAL_STATE} />}
 
 				<TopNav {...GLOBAL_STATE} />
 
@@ -710,21 +731,21 @@ function App() {
 				<Route path="/search" exact render={(props) => (
 					<>
 						<Search {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/cart" exact render={(props) => (
 					<>
 						<Cart {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/library" exact render={(props) => (
 					<>
 						<Library {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
@@ -732,28 +753,28 @@ function App() {
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
 						<Profile {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/profile-edit" exact render={(props) => (
 					<>
 						<ProfileEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/post-create" exact render={(props) => (
 					<>
 						<PostCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
 						<PostShow {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
@@ -769,35 +790,35 @@ function App() {
 				<Route path="/videos" exact render={(props) => (
 					<>
 						<Videos {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/video-create" exact render={(props) => (
 					<>
 						<VideoCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/video-edit/:id" exact render={(props) => (
 					<>
 						<VideoEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/video-album-create" exact render={(props) => (
 					<>
 						<VideoAlbumCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/video-album-edit/:id" exact render={(props) => (
 					<>
 						<VideoAlbumEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
@@ -808,41 +829,41 @@ function App() {
 				)} />
 
 				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...{ url, auth, setMessage, setErrors, users, setUsers, audios, setAudios, setCartAudios, boughtAudios, audioComments, setAudioComments, audioAlbums, setAudioAlbums, onFollow, onCartAudios, onBuyAudios, show, setShow, playBtn, setPlayBtn, shuffle, setShuffle, loop, setLoop, dur, setDur, volume, setVolume, currentTime, setCurrentTime, audio, audioProgress, audioContainer, volumeProgress, volumeContainer, songs, hasBought, playSong, pauseSong, prevSong, nextSong, setProgress, progressPercent, onSetVolume, fmtMSS, audioLoader, setLogin }} />
+					<AudioShow {...GLOBAL_STATE} />
 				)} />
 
 				<Route path="/audios" exact render={(props) => (
 					<>
 						<Audios {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/audio-create" exact render={(props) => (
 					<>
 						<AudioCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/audio-edit/:id" exact render={(props) => (
 					<>
 						<AudioEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/audio-album-create" exact render={(props) => (
 					<>
 						<AudioAlbumCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
 					<>
 						<AudioAlbumEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
@@ -850,7 +871,7 @@ function App() {
 				<Route path="/admin" exact render={(props) => (
 					<>
 						<Admin {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
@@ -858,7 +879,7 @@ function App() {
 				<Route path="/settings" exact render={(props) => (
 					<>
 						<Settings {...GLOBAL_STATE} />
-						{auth.username == "@guest" && LoginComponent}
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 

@@ -8,8 +8,8 @@ use App\BoughtAudios;
 use App\CartAudios;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AudiosController extends Controller
 {
@@ -20,12 +20,12 @@ class AudiosController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
         // Get Audios
         $getAudios = Audios::orderBy('id', 'ASC')->get();
@@ -147,9 +147,15 @@ class AudiosController extends Controller
      */
     public function show($id)
     {
-        $audioItem = Audios::where('id', $id)->first();
+        $audio = Audios::find($id);
+        // Get file extesion
+        $ext = substr($audio->audio, -3);
 
-        return response()->download('storage/' . $audioItem->audio, $audioItem->name);
+		$src = 'storage/' . $audio->audio;
+
+		$name = $audio->name . '.' . $ext;
+
+        return response()->download($src, $name);
     }
 
     /**

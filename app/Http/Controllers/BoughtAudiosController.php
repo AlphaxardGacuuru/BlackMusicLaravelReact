@@ -58,17 +58,17 @@ class BoughtAudiosController extends Controller
      */
     public function create()
     {
-		for ($i=0; $i < 5; $i++) { 
-        /* Add song to audios_bought */
-        $boughtAudios = new BoughtAudios;
-        // $boughtAudios->audio_id = $cartAudio->audio_id;
-        $boughtAudios->reference = "ODT2TA2060";
-        $boughtAudios->price = 100;
-        $boughtAudios->username = '@golf';
-        // $boughtAudios->name = $cartAudio->audios->audio_name;
-        // $boughtAudios->artist = $cartAudio->audios->username;
-        // $boughtAudios->save();
-		}
+        for ($i = 0; $i < 5; $i++) {
+            /* Add song to audios_bought */
+            $boughtAudios = new BoughtAudios;
+            // $boughtAudios->audio_id = $cartAudio->audio_id;
+            $boughtAudios->reference = "ODT2TA2060";
+            $boughtAudios->price = 100;
+            $boughtAudios->username = '@golf';
+            // $boughtAudios->name = $cartAudio->audios->audio_name;
+            // $boughtAudios->artist = $cartAudio->audios->username;
+            // $boughtAudios->save();
+        }
     }
 
     /**
@@ -115,7 +115,7 @@ class BoughtAudiosController extends Controller
                     $boughtAudios->reference = "ODT2TA2060";
                     $boughtAudios->price = 100;
                     $boughtAudios->username = auth()->user()->username;
-                    $boughtAudios->name = $cartAudio->audios->audio_name;
+                    $boughtAudios->name = $cartAudio->audios->name;
                     $boughtAudios->artist = $cartAudio->audios->username;
                     $boughtAudios->save();
 
@@ -149,8 +149,8 @@ class BoughtAudiosController extends Controller
                     }
                     /* Delete from cart */
                     CartAudios::where('audio_id', $cartAudio->audio_id)
-                        ->where('username', auth()->user()->username);
-                    // ->delete();
+                        ->where('username', auth()->user()->username)
+                        ->delete();
 
                     // Update array
                     array_push($approved, $cartAudio->audio_id);

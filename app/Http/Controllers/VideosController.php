@@ -166,9 +166,15 @@ class VideosController extends Controller
      */
     public function show($id)
     {
-        $videoItem = Videos::where('id', $id)->first();
+        $video = Videos::find($id);
+        // Get file extesion
+        $ext = substr($video->video, -3);
 
-        return response()->download('storage/' . $videoItem->video, $videoItem->name);
+		$src = 'storage/' . $video->video;
+
+		$name = $video->name . '.' . $ext;
+
+        return response()->download($src, $name);
     }
 
     /**
