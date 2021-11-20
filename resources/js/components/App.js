@@ -721,7 +721,7 @@ function App() {
 				)} />
 
 				<Route path="/referral/:referer" exact render={(props) => (
-					<Referral />
+					<Referral {...GLOBAL_STATE} />
 				)} />
 
 				<Route path="/" exact render={(props) => (
