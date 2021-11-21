@@ -33,19 +33,18 @@ const Referral = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div className="call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
-								<h2 className="mt-2">Welcome to Black Music</h2>
-								<h2>Kenya's best online music store.</h2>
 								<center>
 									<Img
-										src="storage/img/musical-note.png"
+										src="storage/img/musical-note-black-gold-512.png"
 										width="20%"
 										height="auto"
-										imgClass="card"
 										style={{
 											background: "rgba(255, 215, 0, 1)",
 											borderRadius: "50%"
 										}} />
 								</center>
+								<h2 className="mt-2">Welcome to Black Music</h2>
+								<h2>Kenya's best online music store.</h2>
 							</div>
 						</div>
 					</div>
