@@ -18,6 +18,7 @@ const Register = (props) => {
 
 	// Get referer
 	const referer = sessionStorage.getItem("referer")
+	const page = sessionStorage.getItem("page")
 
 	const history = useHistory()
 
@@ -80,14 +81,15 @@ const Register = (props) => {
 				username: username,
 				phone: phone,
 				remember: 'on'
-			}).then(res => {
+			}).then((res) => {
 				props.setMessage("Account created")
 				// Update auth data
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
 				// Clear sessionStorage
 				sessionStorage.clear("referer")
-				setTimeout(() => history.push('/'), 1000)
+				// Redirect user
+				setTimeout(() => history.push(page ? page : '/'), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors
 				var resError

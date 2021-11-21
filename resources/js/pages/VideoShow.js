@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useParams, useHistory, useLocation } from "react-router-dom";
 import axios from 'axios'
 
 import Img from '../components/Img'
@@ -8,9 +8,13 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
 
 const VideoShow = (props) => {
 
-	let { show } = useParams();
+	let { show } = useParams()
+
+	let { referer } = useParams()
 
 	let history = useHistory()
+
+	const location = useLocation()
 
 	var showVideo = []
 
@@ -141,11 +145,16 @@ const VideoShow = (props) => {
 		const shareData = {
 			title: showVideo.name,
 			text: `Check out ${showVideo.name} on Black Music`,
-			url: `https://music.black.co.ke/#/video-show/${show}`
+			url: `https://music.black.co.ke/#/video-show/${show}/${props.auth.username}`
 		}
 		// Check if data is shareble
 		navigator.canShare(shareData) &&
 			navigator.share(shareData)
+	}
+
+	const onGuestBuy = () => {
+		props.setLogin(true)
+		sessionStorage.setItem("page", location.pathname)
 	}
 
 	return (
@@ -220,9 +229,7 @@ const VideoShow = (props) => {
 
 					{/* Share button */}
 					<div className="p-2">
-						<a
-							href="#"
-							// href={`whatsapp://send?text=https://music.black.co.ke/video-show/${show}`}
+						<a href="#"
 							onClick={(e) => {
 								e.preventDefault()
 								onShare()
@@ -274,11 +281,10 @@ const VideoShow = (props) => {
 									onClick={() => {
 										// If user is guest then redirect to Login
 										props.auth.username == "@guest" ?
-											props.setLogin(true) :
+											onGuestBuy() :
 											onBuyVideos(show)
 									}} />
 							</div>}
-
 				</div>
 
 				<div className="d-flex flex-row">

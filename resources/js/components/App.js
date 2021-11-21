@@ -712,21 +712,13 @@ function App() {
 
 				<TopNav {...GLOBAL_STATE} />
 
-				<Route path="/login" exact render={(props) => (
-					<Login {...GLOBAL_STATE} />
-				)} />
+				<Route path="/login" exact render={(props) => (<Login {...GLOBAL_STATE} />)} />
 
-				<Route path="/register/:name/:email/:avatar" exact render={(props) => (
-					<Register {...GLOBAL_STATE} />
-				)} />
+				<Route path="/register/:name/:email/:avatar" exact render={(props) => (<Register {...GLOBAL_STATE} />)} />
 
-				<Route path="/referral/:referer" exact render={(props) => (
-					<Referral {...GLOBAL_STATE} />
-				)} />
+				<Route path="/referral/:referer" exact render={(props) => (<Referral {...GLOBAL_STATE} />)} />
 
-				<Route path="/" exact render={(props) => (
-					<Index {...GLOBAL_STATE} />
-				)} />
+				<Route path="/" exact render={(props) => (<Index {...GLOBAL_STATE} />)} />
 
 				<Route path="/search" exact render={(props) => (
 					<>
@@ -779,13 +771,9 @@ function App() {
 				)} />
 
 				{/* Video Routes */}
-				<Route path="/video-charts" exact render={(props) => (
-					<VideoCharts {...GLOBAL_STATE} />
-				)} />
+				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />
 
-				<Route path="/video-show/:show" exact render={(props) => (
-					<VideoShow {...GLOBAL_STATE} />
-				)} />
+				<Route path="/video-show/:show/:referer?" exact render={(props) => (<VideoShow {...GLOBAL_STATE} />)} />
 
 				<Route path="/videos" exact render={(props) => (
 					<>
@@ -824,13 +812,9 @@ function App() {
 
 
 				{/* Audio Routes */}
-				<Route path="/audio-charts" exact render={(props) => (
-					<AudioCharts {...GLOBAL_STATE} />
-				)} />
+				<Route path="/audio-charts" exact render={(props) => (<AudioCharts {...GLOBAL_STATE} />)} />
 
-				<Route path="/audio-show/:show" exact render={(props) => (
-					<AudioShow {...GLOBAL_STATE} />
-				)} />
+				<Route path="/audio-show/:show" exact render={(props) => (<AudioShow {...GLOBAL_STATE} />)} />
 
 				<Route path="/audios" exact render={(props) => (
 					<>
@@ -883,9 +867,9 @@ function App() {
 					</>
 				)} />
 
-				<Messages {...{ message, errors }} />
+				<Messages {...GLOBAL_STATE} />
 
-				<BottomNav {...{ url, auth, setMessage, setErrors, setAuth, cartVideos, cartAudios, audios, audioProgress, audioContainer, progressPercent, show, setShow, playBtn, audio, songs, playSong, pauseSong, prevSong, nextSong, audioLoader, onSearchIconClick }} />
+				<BottomNav {...GLOBAL_STATE} />
 
 				{/* <center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>

@@ -93098,6 +93098,7 @@ var Register = function Register(props) {
 
 
   var referer = sessionStorage.getItem("referer");
+  var page = sessionStorage.getItem("page");
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])(); // Remove all spaces from avatar
 
   avatar = avatar.replace(/\s/g, "/"); // Show error on space in username
@@ -93166,9 +93167,10 @@ var Register = function Register(props) {
           return props.setAuth(res.data);
         }); // Clear sessionStorage
 
-        sessionStorage.clear("referer");
+        sessionStorage.clear("referer"); // Redirect user
+
         setTimeout(function () {
-          return history.push('/');
+          return history.push(page ? page : '/');
         }, 1000);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -94489,7 +94491,7 @@ function App() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCharts__WEBPACK_IMPORTED_MODULE_20__["default"], GLOBAL_STATE);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/video-show/:show",
+    path: "/video-show/:show/:referer?",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoShow__WEBPACK_IMPORTED_MODULE_21__["default"], GLOBAL_STATE);
@@ -94578,33 +94580,7 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    message: message,
-    errors: errors
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    url: url,
-    auth: auth,
-    setMessage: setMessage,
-    setErrors: setErrors,
-    setAuth: setAuth,
-    cartVideos: cartVideos,
-    cartAudios: cartAudios,
-    audios: audios,
-    audioProgress: audioProgress,
-    audioContainer: audioContainer,
-    progressPercent: progressPercent,
-    show: show,
-    setShow: setShow,
-    playBtn: playBtn,
-    audio: audio,
-    songs: songs,
-    playSong: playSong,
-    pauseSong: pauseSong,
-    prevSong: prevSong,
-    nextSong: nextSong,
-    audioLoader: audioLoader,
-    onSearchIconClick: onSearchIconClick
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
@@ -103548,7 +103524,11 @@ var VideoShow = function VideoShow(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       show = _useParams.show;
 
+  var _useParams2 = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      referer = _useParams2.referer;
+
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
   var showVideo = [];
   var showArtist = []; // Get Video to show
 
@@ -103702,10 +103682,15 @@ var VideoShow = function VideoShow(props) {
     var shareData = {
       title: showVideo.name,
       text: "Check out ".concat(showVideo.name, " on Black Music"),
-      url: "https://music.black.co.ke/#/video-show/".concat(show)
+      url: "https://music.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
+  };
+
+  var onGuestBuy = function onGuestBuy() {
+    props.setLogin(true);
+    sessionStorage.setItem("page", location.pathname);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103784,8 +103769,7 @@ var VideoShow = function VideoShow(props) {
   }, showVideo.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#" // href={`whatsapp://send?text=https://music.black.co.ke/video-show/${show}`}
-    ,
+    href: "#",
     onClick: function onClick(e) {
       e.preventDefault();
       onShare();
@@ -103836,7 +103820,7 @@ var VideoShow = function VideoShow(props) {
     btnText: 'buy',
     onClick: function onClick() {
       // If user is guest then redirect to Login
-      props.auth.username == "@guest" ? props.setLogin(true) : onBuyVideos(show);
+      props.auth.username == "@guest" ? onGuestBuy() : onBuyVideos(show);
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
