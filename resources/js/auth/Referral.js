@@ -39,30 +39,33 @@ const Referral = (props) => {
 										width="20%"
 										height="auto"
 										style={{
-											background: "rgba(255, 215, 0, 1)",
+											// background: "rgba(255, 215, 0, 1)",
 											borderRadius: "50%"
 										}} />
+									<h2 className="mt-2">Welcome to Black Music</h2>
+									<h2>Kenya's best online music store.</h2>
+									<br />
+									<br />
+									<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />
+									<FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} />
+									<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
 								</center>
-								<h2 className="mt-2">Welcome to Black Music</h2>
-								<h2>Kenya's best online music store.</h2>
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
+								<br />
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className="row">
-				<div className="col-sm-2"></div>
-				<div className="col-sm-8 call-to-action-content">
-					<center>
-						<h2>Login</h2>
-						<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />
-						<FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} />
-						<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
-						<br />
-						<br />
-					</center>
-				</div>
-				<div className="col-sm-2"></div>
 			</div>
 		</>
 	)
