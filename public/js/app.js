@@ -93099,6 +93099,7 @@ var Register = function Register(props) {
 
   var referer = sessionStorage.getItem("referer");
   var page = sessionStorage.getItem("page");
+  console.log(referer, page);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])(); // Remove all spaces from avatar
 
   avatar = avatar.replace(/\s/g, "/"); // Show error on space in username

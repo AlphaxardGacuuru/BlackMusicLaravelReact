@@ -20,6 +20,8 @@ const Register = (props) => {
 	const referer = sessionStorage.getItem("referer")
 	const page = sessionStorage.getItem("page")
 
+	console.log(referer, page)
+
 	const history = useHistory()
 
 	// Remove all spaces from avatar
