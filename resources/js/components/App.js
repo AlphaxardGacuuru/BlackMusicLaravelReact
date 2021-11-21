@@ -814,7 +814,7 @@ function App() {
 				{/* Audio Routes */}
 				<Route path="/audio-charts" exact render={(props) => (<AudioCharts {...GLOBAL_STATE} />)} />
 
-				<Route path="/audio-show/:show" exact render={(props) => (<AudioShow {...GLOBAL_STATE} />)} />
+				<Route path="/audio-show/:show/:referer?" exact render={(props) => (<AudioShow {...GLOBAL_STATE} />)} />
 
 				<Route path="/audios" exact render={(props) => (
 					<>
