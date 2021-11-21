@@ -145,7 +145,7 @@ const VideoShow = (props) => {
 		const shareData = {
 			title: showVideo.name,
 			text: `Check out ${showVideo.name} on Black Music`,
-			url: `https://music.black.co.ke/#/video-show/${show}/${props.auth.username}`
+			url: `https://test.black.co.ke/#/video-show/${show}/${props.auth.username}`
 		}
 		// Check if data is shareble
 		navigator.canShare(shareData) &&

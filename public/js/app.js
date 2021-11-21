@@ -103682,7 +103682,7 @@ var VideoShow = function VideoShow(props) {
     var shareData = {
       title: showVideo.name,
       text: "Check out ".concat(showVideo.name, " on Black Music"),
-      url: "https://music.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
+      url: "https://test.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
