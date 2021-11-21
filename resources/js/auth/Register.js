@@ -20,8 +20,6 @@ const Register = (props) => {
 	const referer = sessionStorage.getItem("referer")
 	const page = sessionStorage.getItem("page")
 
-	console.log(referer, page)
-
 	const history = useHistory()
 
 	// Remove all spaces from avatar
@@ -45,7 +43,7 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
-			}).then(res => {
+			}).then((res) => {
 				props.setMessage("Account Updated")
 				// Update Auth
 				axios.get(`${props.url}/api/home`)
