@@ -88,10 +88,11 @@ const Register = (props) => {
 				// Update auth data
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
-				// Clear sessionStorage
-				sessionStorage.clear("referer")
 				// Redirect user
 				setTimeout(() => history.push(page ? page : '/'), 1000)
+				// Clear sessionStorage
+				sessionStorage.clear("referer")
+				sessionStorage.clear("page")
 			}).catch(err => {
 				const resErrors = err.response.data.errors
 				var resError

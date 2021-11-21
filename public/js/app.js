@@ -93166,13 +93166,14 @@ var Register = function Register(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
-        }); // Clear sessionStorage
-
-        sessionStorage.clear("referer"); // Redirect user
+        }); // Redirect user
 
         setTimeout(function () {
           return history.push(page ? page : '/');
-        }, 1000);
+        }, 1000); // Clear sessionStorage
+
+        sessionStorage.clear("referer");
+        sessionStorage.clear("page");
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
