@@ -158,6 +158,8 @@ const VideoShow = (props) => {
 		sessionStorage.setItem("page", location.pathname)
 	}
 
+	console.log(sessionStorage)
+
 	return (
 		<div className="row">
 			<div className="col-sm-1"></div>

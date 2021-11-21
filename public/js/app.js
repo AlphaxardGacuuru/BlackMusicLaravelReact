@@ -103696,6 +103696,7 @@ var VideoShow = function VideoShow(props) {
     sessionStorage.setItem("page", location.pathname);
   };
 
+  console.log(sessionStorage);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
