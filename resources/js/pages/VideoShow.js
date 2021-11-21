@@ -144,7 +144,7 @@ const VideoShow = (props) => {
 		// Define share data
 		const shareData = {
 			title: showVideo.name,
-			text: `Check out ${showVideo.name} on Black Music`,
+			text: `Check out ${showVideo.name} on Black Music\n`,
 			url: `https://test.black.co.ke/#/video-show/${show}/${props.auth.username}`
 		}
 		// Check if data is shareble
@@ -154,6 +154,7 @@ const VideoShow = (props) => {
 
 	const onGuestBuy = () => {
 		props.setLogin(true)
+		sessionStorage.setItem("referer", referer)
 		sessionStorage.setItem("page", location.pathname)
 	}
 

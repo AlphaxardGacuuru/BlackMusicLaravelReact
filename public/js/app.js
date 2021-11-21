@@ -101862,7 +101862,7 @@ var Settings = function Settings(props) {
     // Define share data
     var shareData = {
       title: "Refer",
-      text: "Check out Black Music\n\n\n",
+      text: "Check out Black Music\n",
       url: "https://test.black.co.ke/#/referral/".concat(props.auth.username)
     }; // Check if data is shareble
 
@@ -103681,7 +103681,7 @@ var VideoShow = function VideoShow(props) {
     // Define share data
     var shareData = {
       title: showVideo.name,
-      text: "Check out ".concat(showVideo.name, " on Black Music"),
+      text: "Check out ".concat(showVideo.name, " on Black Music\n"),
       url: "https://test.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
     }; // Check if data is shareble
 
@@ -103690,6 +103690,7 @@ var VideoShow = function VideoShow(props) {
 
   var onGuestBuy = function onGuestBuy() {
     props.setLogin(true);
+    sessionStorage.setItem("referer", referer);
     sessionStorage.setItem("page", location.pathname);
   };
 
