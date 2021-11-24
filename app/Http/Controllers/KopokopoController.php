@@ -101,7 +101,7 @@ class KopokopoController extends Controller
         // $kopokopo->eventType = $request->data['eventType'];
         // $kopokopo->resourceId = $request->data['resourceId'];
         // $kopokopo->reference = $request->data['reference'];
-        $kopokopo->originationTime = $request->data['originationTime'];
+        // $kopokopo->originationTime = $request->data['originationTime'];
         // $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
         // $kopokopo->amount = $request->data['amount'];
         // $kopokopo->currency = $request->data['currency'];
