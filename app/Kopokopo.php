@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kopokopo extends Model
 {
-    public $table = 'kopokopo';
+    protected $table = 'kopokopo';
 }

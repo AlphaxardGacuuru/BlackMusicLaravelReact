@@ -16,14 +16,14 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-		// Get phone in better format
+        // Get phone in better format
         $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
-		// Get first and last name
+        // Get first and last name
         $parts = explode(" ", auth()->user()->name);
 
         $lastname = array_pop($parts);
 
-		$firstname = implode(" ", $parts);
+        $firstname = implode(" ", $parts);
 
         // Do not hard code these values
         $options = [
@@ -93,65 +93,25 @@ class KopokopoController extends Controller
      */
     public function store(Request $request)
     {
-        // $kopokopo = new Kopokopo;
-        // $kopokopo->sender_phone = $request->input('sender_phone');
-        // $kopokopo->first_name = $request->input('first_name');
-        // $kopokopo->last_name = $request->input('last_name');
-        // $kopokopo->amount = $request->input('amount');
-        // $kopokopo->reference = $request->input('transaction_reference');
-        // $kopokopo->middle_name = $request->input('middle_name');
-        // $kopokopo->service_name = $request->input('service_name');
-        // $kopokopo->business_number = $request->input('business_number');
-        // $kopokopo->internal_transaction_id = $request->input('internal_transaction_id');
-        // $kopokopo->transaction_timestamp = $request->input('transaction_timestamp');
-        // $kopokopo->transaction_type = $request->input('transaction_type');
-        // $kopokopo->account_number = $request->input('account_number');
-        // $kopokopo->currency = $request->input('currency');
-        // $kopokopo->signature = $request->input('signature');
-        // $kopokopo->save();
-
-        // // Create notification
-
-        // return response()->json([
-        //     'status' => '01',
-        //     'description' => 'Accepted',
-        //     'subscriber_message' => 'Thank you John Doe for your payment of Ksh 4000. We value your business',
-        // ]);
-
         $kopokopo = new Kopokopo;
-        $kopokopo->sender_phone = $request->data['id'];
-        // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
-        // $kopokopo->first_name = $request->input('senderPhoneNumber');
-        $kopokopo->first_name = 'name';
-        return $kopokopo->save();
-
-        // foreach ($request as $key => $value) {
-        //     foreach ($value as $key1 => $value1) {
-        //         return $key1;
-        //     }
-        // }
-
-        // $kopokopo->id = $request->id;
-        // $kopokopo->type = $request->type;
-        // $kopokopo->initiationTime = $request->initiationTime;
-        // $kopokopo->status = $request->status;
-        // $kopokopo->eventType = $request->eventType;
-        // $kopokopo->resourceId = $request->resourceId;
-        // $kopokopo->reference = $request->reference;
-        // $kopokopo->originationTime = $request->originationTime;
-        // $kopokopo->senderPhoneNumber = $request->senderPhoneNumber;
-        // $kopokopo->amount = $request->amount;
-        // $kopokopo->currency = $request->currency;
-        // $kopokopo->tillNumber = $request->tillNumber;
-        // $kopokopo->system = $request->system;
-        // $kopokopo->senderFirstName = $request->senderFirstName;
-        // $kopokopo->senderMiddleName = $request->senderMiddleName;
-        // $kopokopo->senderLastName = $request->senderLastName;
-        // $kopokopo->resourceStatus = $request->resourceStatus;
-        // $kopokopo->errors = $request->errors;
-        // $kopokopo->metadata = $request->metadata;
-        // $kopokopo->linkSelf = $request->linkSelf;
-        // $kopokopo->callbackUrl = $request->callbackUrl;
+        $kopokopo->kopokopo_id = $request->data['kopokopo_id'];
+        $kopokopo->type = $request->data['type'];
+        $kopokopo->initiationTime = $request->data['initiationTime'];
+        $kopokopo->status = $request->data['status'];
+        $kopokopo->eventType = $request->data['eventType'];
+        $kopokopo->resourceId = $request->data['resourceId'];
+        $kopokopo->reference = $request->data['reference'];
+        $kopokopo->originationTime = $request->data['originationTime'];
+        $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
+        $kopokopo->amount = $request->data['amount'];
+        $kopokopo->currency = $request->data['currency'];
+        $kopokopo->tillNumber = $request->data['tillNumber'];
+        $kopokopo->system = $request->data['system'];
+        $kopokopo->resourceStatus = $request->data['resourceStatus'];
+        $kopokopo->senderFirstName = $request->data['senderFirstName'];
+        $kopokopo->senderMiddleName = $request->data['senderMiddleName'];
+        $kopokopo->senderLastName = $request->data['senderLastName'];
+        $kopokopo->save();
     }
 
     /**
