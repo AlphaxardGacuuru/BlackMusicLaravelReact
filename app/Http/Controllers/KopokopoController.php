@@ -97,8 +97,8 @@ class KopokopoController extends Controller
         $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
         // $kopokopo->initiationTime = $request->data['initiationTime'];
-        $kopokopo->status = $request->data['status'];
-        // $kopokopo->eventType = $request->data['eventType'];
+        // $kopokopo->status = $request->data['status'];
+        $kopokopo->eventType = $request->data['eventType'];
         // $kopokopo->resourceId = $request->data['resourceId'];
         // $kopokopo->reference = $request->data['reference'];
         // $kopokopo->originationTime = $request->data['originationTime'];
