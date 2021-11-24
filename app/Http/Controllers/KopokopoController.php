@@ -103,8 +103,8 @@ class KopokopoController extends Controller
         // $kopokopo->reference = $request->data['reference'];
         // $kopokopo->originationTime = $request->data['originationTime'];
         // $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
-        $kopokopo->amount = $request->data['amount'];
-        // $kopokopo->currency = $request->data['currency'];
+        // $kopokopo->amount = $request->data['amount'];
+        $kopokopo->currency = $request->data['currency'];
         // $kopokopo->tillNumber = $request->data['tillNumber'];
         // $kopokopo->system = $request->data['system'];
         // $kopokopo->resourceStatus = $request->data['resourceStatus'];
