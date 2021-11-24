@@ -97,7 +97,8 @@ class KopokopoController extends Controller
         $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
         // $kopokopo->initiationTime = $request->data['initiationTime'];
-        // $kopokopo->status = $request->data['status'];
+        $kopokopo->initiationTime = 'initiationTime';
+        $kopokopo->status = $request->data['status'];
         // $kopokopo->eventType = $request->data['eventType'];
         // $kopokopo->resourceId = $request->data['resourceId'];
         // $kopokopo->reference = $request->data['reference'];
@@ -105,7 +106,7 @@ class KopokopoController extends Controller
         // $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
         // $kopokopo->amount = $request->data['amount'];
         // $kopokopo->currency = $request->data['currency'];
-        $kopokopo->tillNumber = $request->data['tillNumber'];
+        // $kopokopo->tillNumber = $request->data['tillNumber'];
         // $kopokopo->system = $request->data['system'];
         // $kopokopo->resourceStatus = $request->data['resourceStatus'];
         // $kopokopo->senderFirstName = $request->data['senderFirstName'];
