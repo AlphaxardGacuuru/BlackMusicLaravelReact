@@ -20,14 +20,14 @@ class KopokopoController extends Controller
 		
         // Do not hard code these values
         $options = [
-            'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
-            // 'clientId' => env('KOPOKOPO_CLIENT_ID'),
-            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
-            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
-            'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
-            // 'apiKey' => env('KOPOKOPO_API_KEY'),
-            'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
-            // 'baseUrl' => env('KOPOKOPO_BASE_URL'),
+            // 'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
+            'clientId' => env('KOPOKOPO_CLIENT_ID'),
+            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
+            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
+            // 'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
+            'apiKey' => env('KOPOKOPO_API_KEY'),
+            // 'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
+            'baseUrl' => env('KOPOKOPO_BASE_URL'),
         ];
 
         $K2 = new K2($options);
@@ -51,7 +51,7 @@ class KopokopoController extends Controller
             'firstName' => auth()->user()->name,
             'lastName' => 'Doe',
             'phoneNumber' => substr_replace(auth()->user()->phone, '+254', 0, -9),
-            'amount' => 200,
+            'amount' => 10,
             'currency' => 'KES',
             'email' => auth()->user()->email,
             'callbackUrl' => 'https://test.black.co.ke/api/kopokopo',
