@@ -115,7 +115,7 @@ class KopokopoController extends Controller
 		$kopokopo->sender_phone = $request->data;
         // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
         // $kopokopo->first_name = $request->input('senderPhoneNumber');
-        // $kopokopo->first_name = 'name';
+        $kopokopo->first_name = 'name';
         return $kopokopo->save();
 
         // foreach ($request as $key => $value) {
