@@ -16,8 +16,15 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-		// return Kopokopo::all();
-		
+		// Get phone in better format
+        $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
+		// Get first and last name
+        $parts = explode(" ", auth()->user()->name);
+
+        $lastname = array_pop($parts);
+
+		$firstname = implode(" ", $parts);
+
         // Do not hard code these values
         $options = [
             // 'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
@@ -42,15 +49,15 @@ class KopokopoController extends Controller
             $data = $result['data'];
             echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
-		
+
         // STKPush
         $stk = $K2->StkService();
         $response = $stk->initiateIncomingPayment([
             'paymentChannel' => 'M-PESA STK Push',
             'tillNumber' => 'K433842',
-            'firstName' => auth()->user()->name,
-            'lastName' => 'Doe',
-            'phoneNumber' => substr_replace(auth()->user()->phone, '+254', 0, -9),
+            'firstName' => $firstname,
+            'lastName' => $lastname,
+            'phoneNumber' => $betterPhone,
             'amount' => 10,
             'currency' => 'KES',
             'email' => auth()->user()->email,
@@ -103,7 +110,7 @@ class KopokopoController extends Controller
         // $kopokopo->signature = $request->input('signature');
         // $kopokopo->save();
 
-		// // Create notification
+        // // Create notification
 
         // return response()->json([
         //     'status' => '01',
@@ -112,7 +119,7 @@ class KopokopoController extends Controller
         // ]);
 
         $kopokopo = new Kopokopo;
-		$kopokopo->sender_phone = $request->data;
+        // $kopokopo->sender_phone = $request->data;
         // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
         // $kopokopo->first_name = $request->input('senderPhoneNumber');
         $kopokopo->first_name = 'name';
