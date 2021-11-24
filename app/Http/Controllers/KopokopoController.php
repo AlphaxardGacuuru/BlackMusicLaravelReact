@@ -94,7 +94,7 @@ class KopokopoController extends Controller
     public function store(Request $request)
     {
         $kopokopo = new Kopokopo;
-        $kopokopo->kopokopo_id = $request->data['kopokopo_id'];
+        $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
         $kopokopo->initiationTime = $request->data['initiationTime'];
         $kopokopo->status = $request->data['status'];
