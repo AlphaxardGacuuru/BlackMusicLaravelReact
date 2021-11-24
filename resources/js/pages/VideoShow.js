@@ -330,7 +330,11 @@ const VideoShow = (props) => {
 					<div className='media'>
 						<div className='media-left'>
 							<Link to={`/profile/${showArtist.username}`}>
-								<Img src={showArtist.pp} width={"40px"} height={"40px"} />
+								<Img
+									src={showArtist.pp}
+									imgClass="rounded-circle"
+									width={"40px"}
+									height={"40px"} />
 							</Link>
 						</div>
 						<div className='media-body'>

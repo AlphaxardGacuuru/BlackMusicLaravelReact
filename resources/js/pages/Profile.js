@@ -232,7 +232,7 @@ const Profile = (props) => {
 				<div className={tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Audios</h4></center>
 					{props.audioAlbums
-					.filter((audioAlbum) => audioAlbum.username == username).length == 0 &&
+						.filter((audioAlbum) => audioAlbum.username == username).length == 0 &&
 						<center className="mt-3">
 							<h6 style={{ color: "grey" }}>{username} does not have any audios</h6>
 						</center>}
@@ -336,10 +336,12 @@ const Profile = (props) => {
 										overflow: "hidden"
 									}}>
 										{post.media &&
-											<Img src={`storage/${post.media}`}
-												alt={'post-media'}
+											<Img
+												src={`storage/${post.media}`}
+												imgClass="rounded-circle"
 												width="100%"
-												height="auto" />}
+												height="auto"
+												alt={'post-media'} />}
 									</div>
 
 									{/* Show poll */}
@@ -610,7 +612,7 @@ const Profile = (props) => {
 				<div className={tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"}>
 					<center className="hidden"><h4>Videos</h4></center>
 					{props.videoAlbums
-					.filter((videoAlbum) => videoAlbum.username == username).length == 0 &&
+						.filter((videoAlbum) => videoAlbum.username == username).length == 0 &&
 						<center className="mt-3">
 							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
 						</center>}

@@ -98124,6 +98124,7 @@ var AudioShow = function AudioShow(props) {
     to: "/profile/".concat(props.showArtist.username)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: props.showArtist.pp,
+    imgClass: "rounded-circle",
     width: "40px",
     height: "40px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100983,9 +100984,10 @@ var Profile = function Profile(props) {
       }
     }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "storage/".concat(post.media),
-      alt: 'post-media',
+      imgClass: "rounded-circle",
       width: "100%",
-      height: "auto"
+      height: "auto",
+      alt: 'post-media'
     })), post.parameter_1 ? post.isWithin24Hrs ? post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: "mysonar-btn mb-1 btn-2",
       btnText: post.parameter_1,
@@ -101430,7 +101432,8 @@ var ProfileEdit = function ProfileEdit(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/users/").concat(props.auth.id), formData).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update auth details
+
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
         });
@@ -101484,7 +101487,7 @@ var ProfileEdit = function ProfileEdit(props) {
           });
         },
         onerror: function onerror(err) {
-          return console.log();
+          return console.log(err.response.data.message);
         }
       }
     }
@@ -103805,6 +103808,7 @@ var VideoShow = function VideoShow(props) {
     to: "/profile/".concat(showArtist.username)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: showArtist.pp,
+    imgClass: "rounded-circle",
     width: "40px",
     height: "40px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

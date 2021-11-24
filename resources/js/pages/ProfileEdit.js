@@ -51,9 +51,12 @@ const ProfileEdit = (props) => {
 		// Send data to UsersController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/users/${props.auth.id}`, formData).then((res) => {
+			axios.post(`${props.url}/api/users/${props.auth.id}`, formData)
+			.then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
+				// Update auth details
+				axios.get(`${props.url}/api/home`)
+				.then((res) => props.setAuth(res.data))
 				setName("")
 				setBio("")
 			}).catch(err => {
@@ -97,7 +100,7 @@ const ProfileEdit = (props) => {
 											props.setMessage("Account updated")
 											axios.get(`${props.url}/api/home`).then((res) => props.setAuth(res.data))
 										},
-										onerror: (err) => console.log()
+										onerror: (err) => console.log(err.response.data.message)
 									}
 								}} />
 						</div>
