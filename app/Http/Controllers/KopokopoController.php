@@ -47,7 +47,6 @@ class KopokopoController extends Controller
         $stk = $K2->StkService();
         $response = $stk->initiateIncomingPayment([
             'paymentChannel' => 'M-PESA STK Push',
-            // 'tillNumber' => 'K000000',
             'tillNumber' => 'K433842',
             'firstName' => auth()->user()->name,
             'lastName' => 'Doe',
@@ -113,10 +112,11 @@ class KopokopoController extends Controller
         ]);
 
         // $kopokopo = new Kopokopo;
+		// $kopokopo->sender_phone = $request->data;
         // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
         // $kopokopo->first_name = $request->input('senderPhoneNumber');
-        // // $kopokopo->first_name = 'name';
-        // $kopokopo->save();
+        // $kopokopo->first_name = 'name';
+        // return $kopokopo->save();
 
         // foreach ($request as $key => $value) {
         //     foreach ($value as $key1 => $value1) {
@@ -124,27 +124,27 @@ class KopokopoController extends Controller
         //     }
         // }
 
-        // $kopokopo->data = $request->id;
-        // $kopokopo->data = $request->type;
-        // $kopokopo->data = $request->initiationTime;
-        // $kopokopo->data = $request->status;
-        // $kopokopo->data = $request->eventType;
-        // $kopokopo->data = $request->resourceId;
-        // $kopokopo->data = $request->reference;
-        // $kopokopo->data = $request->originationTime;
-        // $kopokopo->data = $request->senderPhoneNumber;
-        // $kopokopo->data = $request->amount;
-        // $kopokopo->data = $request->currency;
-        // $kopokopo->data = $request->tillNumber;
-        // $kopokopo->data = $request->system;
-        // $kopokopo->data = $request->senderFirstName;
-        // $kopokopo->data = $request->senderMiddleName;
-        // $kopokopo->data = $request->senderLastName;
-        // $kopokopo->data = $request->resourceStatus;
-        // $kopokopo->data = $request->errors;
-        // $kopokopo->data = $request->metadata;
-        // $kopokopo->data = $request->linkSelf;
-        // $kopokopo->data = $request->callbackUrl;
+        // $kopokopo->id = $request->id;
+        // $kopokopo->type = $request->type;
+        // $kopokopo->initiationTime = $request->initiationTime;
+        // $kopokopo->status = $request->status;
+        // $kopokopo->eventType = $request->eventType;
+        // $kopokopo->resourceId = $request->resourceId;
+        // $kopokopo->reference = $request->reference;
+        // $kopokopo->originationTime = $request->originationTime;
+        // $kopokopo->senderPhoneNumber = $request->senderPhoneNumber;
+        // $kopokopo->amount = $request->amount;
+        // $kopokopo->currency = $request->currency;
+        // $kopokopo->tillNumber = $request->tillNumber;
+        // $kopokopo->system = $request->system;
+        // $kopokopo->senderFirstName = $request->senderFirstName;
+        // $kopokopo->senderMiddleName = $request->senderMiddleName;
+        // $kopokopo->senderLastName = $request->senderLastName;
+        // $kopokopo->resourceStatus = $request->resourceStatus;
+        // $kopokopo->errors = $request->errors;
+        // $kopokopo->metadata = $request->metadata;
+        // $kopokopo->linkSelf = $request->linkSelf;
+        // $kopokopo->callbackUrl = $request->callbackUrl;
     }
 
     /**

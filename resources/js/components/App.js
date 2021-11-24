@@ -399,24 +399,12 @@ function App() {
 
 	// Add bought song ids to songs array
 	boughtAudios
-		.filter((boughtAudio) => boughtAudio.username == auth.username)
 		.map((boughtAudio) => (songs.push(boughtAudio.audio_id)))
 
 	// Keep track of song
 	let songIndex = songs.indexOf(show.toString())
 
 	const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (10 < s ? ':' : ':0') + ~~(s) }
-
-	var hasBought = false
-
-	if (boughtAudios.some((boughtAudio) => {
-		return boughtAudio.audio_id == showAudio.id &&
-			boughtAudio.username == auth.username ||
-			auth.username == "@blackmusic" ||
-			auth.username == showAudio.username
-	})) {
-		hasBought = true
-	}
 
 	// Play song
 	const playSong = () => {
@@ -478,7 +466,7 @@ function App() {
 
 		setShow(songs[songIndex])
 	}
-
+	
 	// Update audio progress bar
 	function updateProgress() {
 		const progress = (audio.current.currentTime / audio.current.duration) * 100;
@@ -486,7 +474,7 @@ function App() {
 		// audioProgress.current.style.width = `${progressPercent}%`;
 
 		{/* Pause at 10s if user has not bought the audio */ }
-		if (!hasBought) {
+		if (!showAudio.hasBoughtAudio) {
 			if (audio.current.currentTime >= 10) {
 				pauseSong()
 				setErrors([`Buy song to continue!`])
@@ -668,7 +656,6 @@ function App() {
 		postComments, setPostComments,
 		referrals, setReferrals,
 		search, setSearch,
-		show, setShow,
 		sms, setSMS,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
@@ -680,7 +667,13 @@ function App() {
 		onBuyVideos,
 		onCartAudios,
 		onBuyAudios,
+		// Search 
+		onSearchIconClick,
+		searchInput,
 		// Audio Player state
+		showAudio,
+		showArtist,
+		show, setShow,
 		playBtn, setPlayBtn, 
 		shuffle, setShuffle, 
 		loop, setLoop, 
@@ -693,7 +686,6 @@ function App() {
 		volumeProgress, 
 		volumeContainer, 
 		songs, 
-		hasBought, 
 		playSong, 
 		pauseSong, 
 		prevSong, 

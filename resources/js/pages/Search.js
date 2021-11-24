@@ -161,7 +161,6 @@ const Search = (props) => {
 					<div className="p-2 mt-5 mb-3 border-bottom">
 						<h4>Video Albums</h4>
 					</div>
-
 					{/* Video Albums */}
 					{props.videoAlbums
 						.filter((videoAlbum) => {
@@ -185,14 +184,12 @@ const Search = (props) => {
 								</div>
 							</div>
 						))}
-				</div>
-
-				<div className="col-sm-3">
 					{/* Videos Albums End */}
+				</div>
+				<div className="col-sm-3">
 					<div className="p-2 mt-5 mb-3 border-bottom">
 						<h4>Audio Albums</h4>
 					</div>
-
 					{/* Audio Albums */}
 					{props.audioAlbums
 						.filter((audioAlbum) => {

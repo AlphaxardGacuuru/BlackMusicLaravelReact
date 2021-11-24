@@ -118,7 +118,7 @@ const Index = (props) => {
 						<div className="p-2">
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
 								<Link to={"/profile/" + props.auth.username}>
-									<Img src={props.auth.pp.match(/http/) ? props.auth.pp : '/storage/' + props.auth.pp}
+									<Img src={props.auth.pp}
 										width="100px"
 										height="100px"
 										alt="avatar" />
@@ -188,6 +188,7 @@ const Index = (props) => {
 									<div className='media-left'>
 										<Link to={`/profile/${user.username}`}>
 											<Img src={user.pp}
+												imgClass="rounded-circle"
 												width="30px"
 												height="30px"
 												alt="user" />
@@ -353,10 +354,12 @@ const Index = (props) => {
 										overflow: "hidden"
 									}}>
 										{post.media &&
-											<Img src={`storage/${post.media}`}
-												alt={'post-media'}
+											<Img
+												src={`storage/${post.media}`}
+												imgClass="rounded-circle"
 												width="100%"
-												height="auto" />}
+												height="auto"
+												alt={'post-media'} />}
 									</div>
 
 									{/* Show poll */}

@@ -21,19 +21,6 @@ const AudioShow = (props) => {
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
 
-	var showAudio = []
-	var showArtist = []
-
-	// Get Audio to show
-	if (props.audios.find((audio) => audio.id == props.show)) {
-		var showAudio = props.audios.find((audio) => audio.id == props.show)
-
-		// Get Artist 
-		if (props.users.find((user) => user.username == showAudio.username)) {
-			var showArtist = props.users.find((user) => user.username == showAudio.username)
-		}
-	}
-
 	// Function for liking audio
 	const onAudioLike = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -133,8 +120,8 @@ const AudioShow = (props) => {
 
 	// Function for downloading audio
 	const onDownload = () => {
-		window.open(`${props.url}/api/audios/${showAudio.id}`)
-		props.setMessage(`Downloading ${showAudio.name}`)
+		window.open(`${props.url}/api/audios/${props.showAudio.id}`)
+		props.setMessage(`Downloading ${props.showAudio.name}`)
 	}
 
 	// Web Share API for share button
@@ -142,8 +129,8 @@ const AudioShow = (props) => {
 	const onShare = () => {
 		// Define share data
 		const shareData = {
-			title: showAudio.name,
-			text: `Check out ${showAudio.name} on Black Music`,
+			title: props.showAudio.name,
+			text: `Check out ${props.showAudio.name} on Black Music`,
 			url: `https://music.black.co.ke/#/audio-show/${show}`
 		}
 		// Check if data is shareble
@@ -177,7 +164,7 @@ const AudioShow = (props) => {
 						{props.audioLoader ?
 							<div id="sonar-load" className="mt-5 mb-5"></div> :
 							<Img
-								src={`/storage/${showAudio.thumbnail}`}
+								src={`/storage/${props.showAudio.thumbnail}`}
 								width="100%"
 								height="auto"
 								alt="music-cover" />}
@@ -340,7 +327,7 @@ const AudioShow = (props) => {
 				<div className="d-flex justify-content-between">
 					{/* Audio likes */}
 					<div className="p-2 mr-2">
-						{showAudio.hasLiked ?
+						{props.showAudio.hasLiked ?
 							<a href="#" style={{ color: "#cc3300" }}
 								onClick={(e) => {
 									e.preventDefault()
@@ -351,7 +338,7 @@ const AudioShow = (props) => {
 									<path fillRule='evenodd'
 										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 								</svg>
-								<small className="ml-1">{showAudio.likes}</small>
+								<small className="ml-1">{props.showAudio.likes}</small>
 							</a> :
 							<a href='#' onClick={(e) => {
 								e.preventDefault()
@@ -366,14 +353,14 @@ const AudioShow = (props) => {
 									<path
 										d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 								</svg>
-								<small className="ml-1">{showAudio.likes}</small>
+								<small className="ml-1">{props.showAudio.likes}</small>
 							</a>}
 					</div>
 
 					{/* Download/Buy button */}
-					{showAudio.hasBoughtAudio ?
+					{props.showAudio.hasBoughtAudio ?
 						// Ensure audio is downloadable
-						!showAudio.audio.match(/https/) &&
+						!props.showAudio.audio.match(/https/) &&
 						<div className="p-2">
 							<Button
 								btnClass="mysonar-btn"
@@ -381,7 +368,7 @@ const AudioShow = (props) => {
 								onClick={onDownload} />
 						</div> :
 						// Cart Button
-						showAudio.inCart ?
+						props.showAudio.inCart ?
 							<div className="p-2">
 								<button className="btn btn-light mb-1 rounded-0"
 									style={{ minWidth: '90px', height: '33px' }}
@@ -437,14 +424,14 @@ const AudioShow = (props) => {
 								overflow: "hidden",
 								textOverflow: "clip"
 							}}>
-							<small>Song name {showAudio.name}</small>
+							<small>Song name {props.showAudio.name}</small>
 						</h6>
 						<small>Album</small>
 						<span className="ml-1">
-							{showAudio.album}
+							{props.showAudio.album}
 						</span><br />
-						<small>Genre</small><span className="ml-1">{showAudio.genre}</span><br />
-						<small>Posted</small><span className="ml-1">{showAudio.created_at}</span>
+						<small>Genre</small><span className="ml-1">{props.showAudio.genre}</span><br />
+						<small>Posted</small><span className="ml-1">{props.showAudio.created_at}</span>
 					</div>
 				</div>
 
@@ -460,7 +447,7 @@ const AudioShow = (props) => {
 					</button>
 					<div className="collapse" id="collapseExample">
 						<div className="card card-body">
-							{showAudio.description}
+							{props.showAudio.description}
 						</div>
 					</div>
 				</div>
@@ -470,8 +457,8 @@ const AudioShow = (props) => {
 				<div className="p-2 border-bottom">
 					<div className='media'>
 						<div className='media-left'>
-							<Link to={`/profile/${showArtist.username}`}>
-								<Img src={showArtist.pp} width={"40px"} height={"40px"} />
+							<Link to={`/profile/${props.showArtist.username}`}>
+								<Img src={props.showArtist.pp} width={"40px"} height={"40px"} />
 							</Link>
 						</div>
 						<div className='media-body'>
@@ -482,7 +469,7 @@ const AudioShow = (props) => {
 									overflow: "hidden",
 									textOverflow: "clip"
 								}}>
-								<small>{showArtist.name}{showArtist.username}</small>
+								<small>{props.showArtist.name}{props.showArtist.username}</small>
 								<span className="ml-1" style={{ color: "gold" }}>
 									<svg xmlns="http://www.w3.org/2000/svg"
 										width="16"
@@ -492,18 +479,18 @@ const AudioShow = (props) => {
 										viewBox="0 0 16 16">
 										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 									</svg>
-									<small className="ml-1">{showArtist.decos}</small>
+									<small className="ml-1">{props.showArtist.decos}</small>
 								</span>
 							</h6>
-							<small className="ml-1">{showArtist.fans} fans</small>
+							<small className="ml-1">{props.showArtist.fans} fans</small>
 
 							{/* Check whether user has bought at least one song from musician */}
 							{/* Check whether user has followed musician and display appropriate button */}
-							{showArtist.username != props.auth.username ?
-								showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ?
-									showArtist.hasFollowed ?
+							{props.showArtist.username != props.auth.username ?
+								props.showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ?
+									props.showArtist.hasFollowed ?
 										<button className={'btn btn-light float-right rounded-0'}
-											onClick={() => props.onFollow(showArtist.username)}>
+											onClick={() => props.onFollow(props.showArtist.username)}>
 											Followed
 											<svg className='bi bi-check'
 												width='1.5em'
@@ -516,11 +503,11 @@ const AudioShow = (props) => {
 											</svg>
 										</button>
 										: <Button btnClass={'mysonar-btn float-right'}
-											onClick={() => props.onFollow(showArtist.username)}
+											onClick={() => props.onFollow(props.showArtist.username)}
 											btnText={'follow'} />
 									: <Button btnClass={'mysonar-btn float-right'}
 										onClick={() =>
-											props.setErrors([`You must have bought atleast one song by ${showArtist.username}`])}
+											props.setErrors([`You must have bought atleast one song by ${props.showArtist.username}`])}
 										btnText={'follow'} /> : ""}
 						</div>
 					</div>
@@ -547,9 +534,9 @@ const AudioShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{showAudio.username == props.auth.username ||
-						showAudio.username == "@blackmusic" ||
-						showAudio.hasBoughtAudio ?
+					{props.showAudio.username == props.auth.username ||
+						props.showAudio.username == "@blackmusic" ||
+						props.showAudio.hasBoughtAudio ?
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
@@ -573,8 +560,8 @@ const AudioShow = (props) => {
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
-					{showAudio.username == props.auth.username ||
-						showAudio.hasBoughtAudio ?
+					{props.showAudio.username == props.auth.username ||
+						props.showAudio.hasBoughtAudio ?
 						props.audioComments
 							.filter((comment) => comment.audio_id == show)
 							.map((comment, index) => (

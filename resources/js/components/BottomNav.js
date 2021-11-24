@@ -56,7 +56,11 @@ const Bottomnav = (props) => {
 					<div style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
 						<span onClick={() => props.setShow(0)}>
-							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-x"
+							<svg xmlns="http://www.w3.org/2000/svg"
+								width="40"
+								height="40"
+								fill="currentColor"
+								className="bi bi-x"
 								viewBox="0 0 16 16">
 								<path
 									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -73,18 +77,11 @@ const Bottomnav = (props) => {
 									textOverflow: "clip",
 									color: "white"
 								}}>
-								{props.audios.find((audio) => audio.id == props.show) &&
-									props.audios.find((audio) => audio.id == props.show).name}
+								{props.showAudio.name}
 							</h6>
 							<h6 className="mt-0 pt-0" style={{ color: "white" }}>
-								<small>
-									{props.audios.find((audio) => audio.id == props.show) &&
-										props.audios.find((audio) => audio.id == props.show).username}
-								</small>
-								<small className="ml-1">
-									{props.audios.find((audio) => audio.id == props.show) &&
-										props.audios.find((audio) => audio.id == props.show).ft}
-								</small>
+								<small>{props.showAudio.username}</small>
+								<small className="ml-1">{props.showAudio.ft}</small>
 							</h6>
 						</Link>
 					</div>
@@ -100,7 +97,12 @@ const Bottomnav = (props) => {
 								}}>
 							</div>}
 					</div>
-					<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
+					<div
+						style={{
+							cursor: "pointer",
+							display: checkLocation && "none"
+						}}
+						className="p-2">
 						<span onClick={props.prevSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +115,13 @@ const Bottomnav = (props) => {
 							</svg>
 						</span>
 					</div>
-					<div style={{ cursor: "pointer", display: checkLocation && "none", color: "#FFD700" }} className="p-2">
+					<div
+						style={{
+							cursor: "pointer",
+							display: checkLocation && "none",
+							color: "#FFD700"
+						}}
+						className="p-2">
 						<span
 							onClick={props.playBtn ? props.pauseSong : props.playSong}>
 							{props.playBtn ?
@@ -138,7 +146,12 @@ const Bottomnav = (props) => {
 							}
 						</span>
 					</div>
-					<div style={{ cursor: "pointer", display: checkLocation && "none" }} className="p-2">
+					<div
+						style={{
+							cursor: "pointer",
+							display: checkLocation && "none"
+						}}
+						className="p-2">
 						<span onClick={props.nextSong}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

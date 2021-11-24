@@ -34,7 +34,7 @@ class HomeController extends Controller
                 "email" => Auth::user()->email,
                 "phone" => Auth::user()->phone,
                 "account_type" => Auth::user()->account_type,
-                "pp" => Auth::user()->pp,
+                "pp" => preg_match("/http/", Auth::user()->pp) ? Auth::user()->pp : "/storage/" . Auth::user()->pp,
                 "pb" => Auth::user()->pb,
                 "bio" => Auth::user()->bio,
                 "dob" => Auth::user()->dob,

@@ -115,8 +115,7 @@ const TopNav = (props) => {
 								<div className="logo-area">
 									<Link to="/">Black Music</Link>
 								</div>
-
-								{/* <-- Contact form --> */}
+								{/* <-- Search Form --> */}
 								<div className="contact-form hidden">
 									<input
 										name="search"
@@ -133,7 +132,7 @@ const TopNav = (props) => {
 											history.push("/search")
 										}} />
 								</div>
-
+								{/* Search Form End */}
 								<div className="menu-content-area d-flex align-items-center">
 									{/* <!-- Header Social Area --> */}
 									<div className="header-social-area d-flex align-items-center">
