@@ -119,7 +119,7 @@ class KopokopoController extends Controller
         // ]);
 
         $kopokopo = new Kopokopo;
-        $kopokopo->sender_phone = $request['status'];
+        $kopokopo->sender_phone = $request->status;
         // $kopokopo->sender_phone = $request->input('senderPhoneNumber');
         // $kopokopo->first_name = $request->input('senderPhoneNumber');
         $kopokopo->first_name = 'name';
