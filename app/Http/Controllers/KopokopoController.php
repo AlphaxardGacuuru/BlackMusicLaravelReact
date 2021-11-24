@@ -95,22 +95,22 @@ class KopokopoController extends Controller
     {
         $kopokopo = new Kopokopo;
         $kopokopo->kopokopo_id = $request->data['id'];
-        $kopokopo->type = $request->data['type'];
-        $kopokopo->initiationTime = $request->data['initiationTime'];
-        $kopokopo->status = $request->data['status'];
-        $kopokopo->eventType = $request->data['eventType'];
-        $kopokopo->resourceId = $request->data['resourceId'];
-        $kopokopo->reference = $request->data['reference'];
-        $kopokopo->originationTime = $request->data['originationTime'];
-        $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
-        $kopokopo->amount = $request->data['amount'];
-        $kopokopo->currency = $request->data['currency'];
-        $kopokopo->tillNumber = $request->data['tillNumber'];
-        $kopokopo->system = $request->data['system'];
-        $kopokopo->resourceStatus = $request->data['resourceStatus'];
-        $kopokopo->senderFirstName = $request->data['senderFirstName'];
-        $kopokopo->senderMiddleName = $request->data['senderMiddleName'];
-        $kopokopo->senderLastName = $request->data['senderLastName'];
+        // $kopokopo->type = $request->data['type'];
+        // $kopokopo->initiationTime = $request->data['initiationTime'];
+        // $kopokopo->status = $request->data['status'];
+        // $kopokopo->eventType = $request->data['eventType'];
+        // $kopokopo->resourceId = $request->data['resourceId'];
+        // $kopokopo->reference = $request->data['reference'];
+        // $kopokopo->originationTime = $request->data['originationTime'];
+        // $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
+        // $kopokopo->amount = $request->data['amount'];
+        // $kopokopo->currency = $request->data['currency'];
+        // $kopokopo->tillNumber = $request->data['tillNumber'];
+        // $kopokopo->system = $request->data['system'];
+        // $kopokopo->resourceStatus = $request->data['resourceStatus'];
+        // $kopokopo->senderFirstName = $request->data['senderFirstName'];
+        // $kopokopo->senderMiddleName = $request->data['senderMiddleName'];
+        // $kopokopo->senderLastName = $request->data['senderLastName'];
         $kopokopo->save();
     }
 
