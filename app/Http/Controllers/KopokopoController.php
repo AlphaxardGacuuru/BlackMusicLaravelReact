@@ -27,14 +27,14 @@ class KopokopoController extends Controller
 
         // Do not hard code these values
         $options = [
-            // 'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
-            'clientId' => env('KOPOKOPO_CLIENT_ID'),
-            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
-            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
-            // 'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
-            'apiKey' => env('KOPOKOPO_API_KEY'),
-            // 'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
-            'baseUrl' => env('KOPOKOPO_BASE_URL'),
+            'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
+            // 'clientId' => env('KOPOKOPO_CLIENT_ID'),
+            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
+            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
+            'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
+            // 'apiKey' => env('KOPOKOPO_API_KEY'),
+            'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
+            // 'baseUrl' => env('KOPOKOPO_BASE_URL'),
         ];
 
         $K2 = new K2($options);
@@ -96,6 +96,7 @@ class KopokopoController extends Controller
         $kopokopo = new Kopokopo;
         $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
+        $kopokopo->initiationTime = $request->data;
         // $kopokopo->initiationTime = $request->data['initiationTime'];
         // $kopokopo->status = $request->data['status'];
         // $kopokopo->eventType = $request->data['eventType'];
