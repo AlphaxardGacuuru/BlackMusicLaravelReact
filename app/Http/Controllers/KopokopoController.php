@@ -105,7 +105,7 @@ class KopokopoController extends Controller
         $kopokopo->senderPhoneNumber = $request->data['attributes']['event']['resource']['sender_phone_number'];
         $kopokopo->amount = $request->data['attributes']['event']['resource']['amount'];
         $kopokopo->currency = $request->data['attributes']['event']['resource']['currency'];
-        $kopokopo->tillNumber = $request->data['attributes']['event']['resource']['tillNumber'];
+        $kopokopo->tillNumber = $request->data['attributes']['event']['resource']['till_number'];
         $kopokopo->system = $request->data['attributes']['event']['resource']['system'];
         $kopokopo->resourceStatus = $request->data['attributes']['event']['resource']['status'];
         $kopokopo->senderFirstName = $request->data['attributes']['event']['resource']['sender_first_name'];
