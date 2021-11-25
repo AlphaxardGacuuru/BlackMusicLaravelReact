@@ -102,15 +102,15 @@ class KopokopoController extends Controller
         $kopokopo->resourceId = $request->data['attributes']['event']['resource']['id'];
         $kopokopo->reference = $request->data['attributes']['event']['resource']['reference'];
         $kopokopo->originationTime = $request->data['attributes']['event']['resource']['origination_time'];
-        // $kopokopo->senderPhoneNumber = $request->data['senderPhoneNumber'];
-        // $kopokopo->amount = $request->data['amount'];
-        // $kopokopo->currency = $request->data['currency'];
-        // $kopokopo->tillNumber = $request->data['tillNumber'];
-        // $kopokopo->system = $request->data['system'];
-        // $kopokopo->resourceStatus = $request->data['resourceStatus'];
-        // $kopokopo->senderFirstName = $request->data['senderFirstName'];
-        // $kopokopo->senderMiddleName = $request->data['senderMiddleName'];
-        // $kopokopo->senderLastName = $request->data['senderLastName'];
+        $kopokopo->senderPhoneNumber = $request->data['attributes']['event']['resource']['sender_phone_number'];
+        $kopokopo->amount = $request->data['attributes']['event']['resource']['amount'];
+        $kopokopo->currency = $request->data['attributes']['event']['resource']['currency'];
+        $kopokopo->tillNumber = $request->data['attributes']['event']['resource']['tillNumber'];
+        $kopokopo->system = $request->data['attributes']['event']['resource']['system'];
+        $kopokopo->resourceStatus = $request->data['attributes']['event']['resource']['status'];
+        $kopokopo->senderFirstName = $request->data['attributes']['event']['resource']['sender_first_name'];
+        $kopokopo->senderMiddleName = $request->data['attributes']['event']['resource']['sender_middle_name'];
+        $kopokopo->senderLastName = $request->data['attributes']['event']['resource']['sender_last_name'];
         $kopokopo->save();
     }
 
