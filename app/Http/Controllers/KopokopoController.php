@@ -27,14 +27,14 @@ class KopokopoController extends Controller
 
         // Do not hard code these values
         $options = [
-            'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
-            // 'clientId' => env('KOPOKOPO_CLIENT_ID'),
-            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
-            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
-            'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
-            // 'apiKey' => env('KOPOKOPO_API_KEY'),
-            'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
-            // 'baseUrl' => env('KOPOKOPO_BASE_URL'),
+            // 'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
+            'clientId' => env('KOPOKOPO_CLIENT_ID'),
+            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
+            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
+            // 'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
+            'apiKey' => env('KOPOKOPO_API_KEY'),
+            // 'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
+            'baseUrl' => env('KOPOKOPO_BASE_URL'),
         ];
 
         $K2 = new K2($options);
@@ -96,21 +96,21 @@ class KopokopoController extends Controller
         $kopokopo = new Kopokopo;
         $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
-        $kopokopo->initiationTime = $request->data['attributes']['initiation_time'];
+        $kopokopo->initiation_time = $request->data['attributes']['initiation_time'];
         $kopokopo->status = $request->data['attributes']['status'];
-        $kopokopo->eventType = $request->data['attributes']['event']['type'];
-        $kopokopo->resourceId = $request->data['attributes']['event']['resource']['id'];
+        $kopokopo->event_type = $request->data['attributes']['event']['type'];
+        $kopokopo->resource_id = $request->data['attributes']['event']['resource']['id'];
         $kopokopo->reference = $request->data['attributes']['event']['resource']['reference'];
-        $kopokopo->originationTime = $request->data['attributes']['event']['resource']['origination_time'];
-        $kopokopo->senderPhoneNumber = $request->data['attributes']['event']['resource']['sender_phone_number'];
+        $kopokopo->origination_time = $request->data['attributes']['event']['resource']['origination_time'];
+        $kopokopo->sender_phone_number = $request->data['attributes']['event']['resource']['sender_phone_number'];
         $kopokopo->amount = $request->data['attributes']['event']['resource']['amount'];
         $kopokopo->currency = $request->data['attributes']['event']['resource']['currency'];
-        $kopokopo->tillNumber = $request->data['attributes']['event']['resource']['till_number'];
+        $kopokopo->till_number = $request->data['attributes']['event']['resource']['till_number'];
         $kopokopo->system = $request->data['attributes']['event']['resource']['system'];
-        $kopokopo->resourceStatus = $request->data['attributes']['event']['resource']['status'];
-        $kopokopo->senderFirstName = $request->data['attributes']['event']['resource']['sender_first_name'];
-        $kopokopo->senderMiddleName = $request->data['attributes']['event']['resource']['sender_middle_name'];
-        $kopokopo->senderLastName = $request->data['attributes']['event']['resource']['sender_last_name'];
+        $kopokopo->resource_status = $request->data['attributes']['event']['resource']['status'];
+        $kopokopo->sender_first_name = $request->data['attributes']['event']['resource']['sender_first_name'];
+        $kopokopo->sender_middle_name = $request->data['attributes']['event']['resource']['sender_middle_name'];
+        $kopokopo->sender_last_name = $request->data['attributes']['event']['resource']['sender_last_name'];
         $kopokopo->save();
     }
 

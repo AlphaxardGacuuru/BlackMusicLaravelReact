@@ -52,7 +52,7 @@ class VideoPayoutsController extends Controller
             echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
 
-		// Add receipient
+        // Add receipient
         // $pay = $K2->PayService();
 
         // $response = $pay->addPayRecipient([
@@ -68,31 +68,30 @@ class VideoPayoutsController extends Controller
         // if ($response['status'] == 'success') {
         //     echo "The resource location is:" . json_encode($response['location']);
         // }
-		
-		// Pay
-		$pay = $K2->PayService();
+
+        // Pay
+        $pay = $K2->PayService();
 
         $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
-            'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
-            'amount' => '10',
+            'destinationReference' => 'c7f300c0-f1ef-4151-9bbe-005005aa3747',
+            'amount' => '20000',
             'currency' => 'KES',
+            'callbackUrl' => 'https://test.black.co.ke/api/video-payouts',
             'description' => 'Salary payment for May 2018',
             'category' => 'salaries',
             'tags' => ["tag 1", "tag 2"],
-            'callbackUrl' => 'https://test.black.co.ke/api/video-payouts',
             'metadata' => [
                 'customerId' => '8675309',
                 'notes' => 'Salary payment for May 2018',
             ],
-            'accessToken' => $data['accessToken'],
+            'accessToken' => 'myRand0mAcc3ssT0k3n',
         ]);
 
         if ($response['status'] == 'success') {
             echo "The resource location is:" . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
         }
-
     }
 
     /**
