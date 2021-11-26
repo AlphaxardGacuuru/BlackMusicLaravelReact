@@ -74,8 +74,8 @@ class VideoPayoutsController extends Controller
 
         $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
-            'destinationReference' => 'c7f300c0-f1ef-4151-9bbe-005005aa3747',
-            'amount' => '20000',
+            'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
+            'amount' => '100',
             'currency' => 'KES',
             'callbackUrl' => 'https://test.black.co.ke/api/video-payouts',
             'description' => 'Salary payment for May 2018',
@@ -85,13 +85,37 @@ class VideoPayoutsController extends Controller
                 'customerId' => '8675309',
                 'notes' => 'Salary payment for May 2018',
             ],
-            'accessToken' => 'myRand0mAcc3ssT0k3n',
+            'accessToken' => $data['accessToken'],
         ]);
 
         if ($response['status'] == 'success') {
             echo "The resource location is:" . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
         }
+
+        $pay = $K2->PayService();
+
+        $response = $pay->sendPay([
+            'destinationType' => 'mobile_wallet',
+            'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
+            'amount' => '20000',
+            'currency' => 'KES',
+            'description' => 'Salary payment for May 2018',
+            'category' => 'salaries',
+            'tags' => ["tag 1", "tag 2"],
+            'callbackUrl' => 'https://your-call-bak.yourapplication.com/payment_result',
+            'metadata' => [
+                'customerId' => '8675309',
+                'notes' => 'Salary payment for May 2018',
+            ],
+            'accessToken' => $data['accessToken'],
+        ]);
+
+        if ($response['status'] == 'success') {
+            echo "The resource location is:" . json_encode($response['location']);
+            // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
+        }
+
     }
 
     /**

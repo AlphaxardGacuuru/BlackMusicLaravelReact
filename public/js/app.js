@@ -98543,6 +98543,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
 /* harmony import */ var _components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js");
 /* harmony import */ var _components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -98554,6 +98556,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -98589,22 +98592,12 @@ var Cart = function Cart(props) {
   var videoTotalCash = props.cartVideos.length * 200;
   var audioTotal = props.cartAudios.length;
   var audioTotalCash = props.cartAudios.length * 100;
-  var total = videoTotalCash + audioTotalCash; // Function for adding video to cart
+  var total = videoTotalCash + audioTotalCash; // Send STKPush
 
-  var onCartVideos = function onCartVideos(video) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-videos"), {
-        video: video
-      }).then(function (res) {
-        props.setMessage(res.data); // Update cart videos
-
-        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
-        }); // Update videos
-
-        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setVideos(res.data);
-        });
+  var STKPush = function STKPush(amount) {
+    axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.put("".concat(props.url, "/api/kopokopo/").concat(amount)).then(function (res) {
+        return props.setMessage(res.data);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -98614,35 +98607,7 @@ var Cart = function Cart(props) {
           newError.push(resErrors[resError]);
         }
 
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for adding audio to cart
-
-
-  var onCartAudios = function onCartAudios(audio) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-audios"), {
-        audio: audio
-      }).then(function (res) {
-        props.setMessage(res.data); // Update cart audios
-
-        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
-          return props.setCartAudios(res.data);
-        }); // Update audios
-
-        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
-          return props.setAudios(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
@@ -98650,11 +98615,11 @@ var Cart = function Cart(props) {
 
 
   var onPay = function onPay() {
-    axios.get('sanctum/csrf-cookie').then(function () {
+    axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('sanctum/csrf-cookie').then(function () {
       // Check payment after every 2s
       var intervalId = window.setInterval(function () {
         // Try and buy videos
-        axios.post("".concat(props.url, "/api/bought-videos")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("".concat(props.url, "/api/bought-videos")).then(function (res) {
           // If videos are bought stop checking
           if (res.data.length > 0) {
             setReceiptVideos(res.data);
@@ -98663,19 +98628,19 @@ var Cart = function Cart(props) {
             clearInterval(intervalId);
             props.setMessage(res.data.length + " Videos bought"); // Update Bought Videos
 
-            axios.get("".concat(props.url, "/api/bought-videos")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/bought-videos")).then(function (res) {
               return props.setBoughtVideos(res.data);
             }); // Update Videos
 
-            axios.get("".concat(props.url, "/api/videos")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
               return props.setVideos(res.data);
             }); // Update Cart Videos
 
-            axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
               return props.setCartVideos(res.data);
             }); // Update Videos Albums
 
-            axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
               return props.setVideoAlbums(res.data);
             });
           } // Stop loop after 60s
@@ -98684,7 +98649,7 @@ var Cart = function Cart(props) {
           setTimeout(function () {
             clearInterval(intervalId);
             setBottomMenu();
-          }, 60000);
+          }, 30000);
         })["catch"](function (err) {
           console.log(err.response.data.message);
           var resErrors = err.response.data.errors;
@@ -98698,7 +98663,7 @@ var Cart = function Cart(props) {
           props.setErrors(newError);
         }); // Try and buy audios
 
-        axios.post("".concat(props.url, "/api/bought-audios")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("".concat(props.url, "/api/bought-audios")).then(function (res) {
           // If videos are bought stop checking
           if (res.data.length > 0) {
             setReceiptAudios(res.data);
@@ -98709,19 +98674,19 @@ var Cart = function Cart(props) {
               props.setMessage(res.data.length + " Audios bought");
             }, 10000); // Update Bought Audio
 
-            axios.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
               return props.setBoughtAudios(res.data);
             }); // Update Audios
 
-            axios.get("".concat(props.url, "/api/audios")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
               return props.setAudios(res.data);
             }); // Update Cart Audios
 
-            axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
               return props.setCartAudios(res.data);
             }); // Update Audio Albums
 
-            axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
+            axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
               return props.setAudioAlbums(res.data);
             });
           } // Stop loop after 60s
@@ -98730,7 +98695,7 @@ var Cart = function Cart(props) {
           setTimeout(function () {
             clearInterval(intervalId);
             setBottomMenu();
-          }, 60000);
+          }, 30000);
         })["catch"](function (err) {
           console.log(err.response.data.message);
           var resErrors = err.response.data.errors;
@@ -98743,7 +98708,7 @@ var Cart = function Cart(props) {
 
           props.setErrors(newError);
         });
-      }, 3000);
+      }, 2000);
     });
   };
 
@@ -98757,7 +98722,11 @@ var Cart = function Cart(props) {
     className: "col-sm-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, props.cartVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartVideos.map(function (cartVideo, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "border mb-4"
+  }, props.cartVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "pt-4"
+  }, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartVideos.map(function (cartVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex p-2 border-bottom"
@@ -98784,7 +98753,7 @@ var Cart = function Cart(props) {
     }, "KES 200"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn mb-1 float-right",
       onClick: function onClick() {
-        return onCartVideos(cartVideo.video_id);
+        return props.onCartVideos(cartVideo.video_id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -98809,9 +98778,13 @@ var Cart = function Cart(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, videoTotalCash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, videoTotalCash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, props.cartAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartAudios.map(function (cartAudio, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "border mb-4"
+  }, props.cartAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "pt-4"
+  }, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartAudios.map(function (cartAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex p-2 border-bottom"
@@ -98845,7 +98818,7 @@ var Cart = function Cart(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn mb-1 float-right",
       onClick: function onClick() {
-        return onCartAudios(cartAudio.audio_id);
+        return props.onCartAudios(cartAudio.audio_id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -98870,20 +98843,25 @@ var Cart = function Cart(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, audioTotalCash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, audioTotalCash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "border mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "pt-4"
+  }, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "text-success"
   }, " KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), videoTotal + audioTotal > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: "mysonar-btn mb-4",
-    btnText: "checkout",
+    btnClass: "mysonar-btn green-btn mb-4",
+    btnText: "pay with mpesa",
     btnStyle: {
       width: "80%"
     },
     onClick: function onClick(e) {
       e.preventDefault();
-      setBottomMenu("menu-open");
-      onPay();
+      setBottomMenu("menu-open"); // onPay()
+
+      STKPush(total);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), receiptVideos.length + receiptAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     btnClass: "mysonar-btn mb-4",
@@ -98895,7 +98873,7 @@ var Cart = function Cart(props) {
       e.preventDefault();
       setReceipt("menu-open");
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: bottomMenu
@@ -98911,7 +98889,6 @@ var Cart = function Cart(props) {
     className: "closeIcon p-2 float-right text-dark",
     onClick: function onClick() {
       setBottomMenu("");
-      onPay();
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -99311,16 +99288,9 @@ var Index = function Index(props) {
   }).slice(0, videoSlice).map(function (video, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: index,
-      className: "card pt-0 pl-0 pr-0 pb-2",
-      style: {
-        borderRadius: "10px"
-      }
+      className: "card pt-0 px-0 pb-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "thumbnail",
-      style: {
-        borderTopLeftRadius: "10px",
-        borderTopRightRadius: "10px"
-      }
+      className: "thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/video-show/".concat(video.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -102677,16 +102647,12 @@ var VideoCharts = function VideoCharts(props) {
         key: key,
         className: "card m-1 pb-2",
         style: {
-          borderRadius: "10px",
+          borderRadius: "0px",
           display: "inline-block",
           textAlign: "center"
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "thumbnail",
-        style: {
-          borderTopLeftRadius: "10px",
-          borderTopRightRadius: "10px"
-        }
+        className: "thumbnail"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/video-show/".concat(video.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {

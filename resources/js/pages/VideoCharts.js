@@ -325,15 +325,11 @@ const VideoCharts = (props) => {
 											<span key={key}
 												className="card m-1 pb-2"
 												style={{
-													borderRadius: "10px",
+													borderRadius: "0px",
 													display: "inline-block",
 													textAlign: "center"
 												}}>
-												<div className="thumbnail"
-													style={{
-														borderTopLeftRadius: "10px",
-														borderTopRightRadius: "10px"
-													}}>
+												<div className="thumbnail">
 													<Link to={`/video-show/${video.id}`}>
 														<Img src={video.thumbnail}
 															width="160em"

@@ -181,6 +181,13 @@ a:focus {
     color: #ffffff;
 }
 
+.green-btn.btn-2 {
+    background-color: green;
+	border-color: green;
+    font-size: 12px;
+    color: #ffffff;
+}
+
 .poll-btn.btn-2 {
     background-color: #232323;
 	border-color: #232323;

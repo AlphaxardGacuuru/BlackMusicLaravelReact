@@ -6,6 +6,7 @@ import Img from '../components/Img'
 import Button from '../components/Button'
 import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
+import axios from 'axios'
 
 const Cart = (props) => {
 
@@ -21,54 +22,22 @@ const Cart = (props) => {
 	const audioTotalCash = props.cartAudios.length * 100
 	const total = videoTotalCash + audioTotalCash
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
+	// Send STKPush
+	const STKPush = (amount) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update cart videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				// Update videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
-	// Function for adding audio to cart
-	const onCartAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update cart audios
-				axios.get(`${props.url}/api/cart-audios`)
-					.then((res) => props.setCartAudios(res.data))
-				// Update audios
-				axios.get(`${props.url}/api/audios`)
-					.then((res) => props.setAudios(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
+			axios.put(`${props.url}/api/kopokopo/${amount}`)
+				.then((res) => props.setMessage(res.data))
+				.catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					newError.push(err.response.data.message)
+					props.setErrors(newError)
+				})
+		})
 	}
 
 	// Function for buying videos
@@ -104,7 +73,7 @@ const Cart = (props) => {
 						setTimeout(() => {
 							clearInterval(intervalId)
 							setBottomMenu()
-						}, 60000)
+						}, 30000)
 
 					}).catch((err) => {
 						console.log(err.response.data.message)
@@ -146,7 +115,7 @@ const Cart = (props) => {
 						setTimeout(() => {
 							clearInterval(intervalId)
 							setBottomMenu()
-						}, 60000)
+						}, 30000)
 
 					}).catch((err) => {
 						console.log(err.response.data.message)
@@ -158,7 +127,7 @@ const Cart = (props) => {
 						}
 						props.setErrors(newError)
 					})
-			}, 3000);
+			}, 2000);
 		});
 	}
 
@@ -172,92 +141,39 @@ const Cart = (props) => {
 			<div className="row">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3">
-					{/* Cart Videos */}
-					{props.cartVideos.length > 0 &&
-						<>
-							<center><h3>Videos</h3></center>
-							<hr />
-						</>}
-					{props.cartVideos.map((cartVideo, key) => (
-						<div key={key} className="d-flex p-2 border-bottom">
-							<div className="thumbnail">
-								<Link to={`/video-show/${cartVideo.video_id}`}>
-									<Img src={cartVideo.thumbnail}
-										width="160em"
-										height="90em" />
-								</Link>
-							</div>
-							<div className="ml-2 mr-auto flex-grow-1">
-								<h6 className="mb-0"
-									style={{
-										width: "150px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-									{cartVideo.name}
-								</h6>
-								<h6>
-									<small>{cartVideo.artist} {cartVideo.ft}</small>
-								</h6>
-								<h6 className="text-success">KES 200</h6>
-								<button
-									className="mysonar-btn mb-1 float-right"
-									onClick={() => onCartVideos(cartVideo.video_id)}>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-										<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-									</svg>
-								</button>
-							</div>
-						</div>
-					))}
-					{props.cartVideos.length > 0 &&
-						<div className="d-flex justify-content-between">
-							<div className="p-2">
-								<h4 className="text-success">Sub Total</h4>
-							</div>
-							<div className="p-2">
-								<h4 className="text-success">{videoTotalCash}</h4>
-							</div>
-						</div>}
-					{/* Cart Videos End */}
-				</div>
-				<div className="col-sm-4">
-					{/* Cart Audios */}
-					{props.cartAudios.length > 0 &&
-						<>
-							<center><h3>Audios</h3></center>
-							<hr />
-						</>}
-					{props.cartAudios
-						.map((cartAudio, key) => (
+					<div className="border mb-4">
+						{/* Cart Videos */}
+						{props.cartVideos.length > 0 &&
+							<>
+								<center><h3 className="pt-4">Videos</h3></center>
+								<hr />
+							</>}
+						{props.cartVideos.map((cartVideo, key) => (
 							<div key={key} className="d-flex p-2 border-bottom">
-								<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
-									<Link to={`/audio-show/${cartAudio.audio_id}`}>
-										<Img src={cartAudio.thumbnail}
-											width="100%"
-											height="50px" />
+								<div className="thumbnail">
+									<Link to={`/video-show/${cartVideo.video_id}`}>
+										<Img src={cartVideo.thumbnail}
+											width="160em"
+											height="90em" />
 									</Link>
 								</div>
-								<div className="ml-2 mr-auto">
-									<h6 className="mb-0 pb-0"
+								<div className="ml-2 mr-auto flex-grow-1">
+									<h6 className="mb-0"
 										style={{
+											width: "150px",
 											whiteSpace: "nowrap",
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-										{cartAudio.name}
+										{cartVideo.name}
 									</h6>
-									<h6 className="mt-0 pt-0">
-										<small>{cartAudio.username}</small>
+									<h6>
+										<small>{cartVideo.artist} {cartVideo.ft}</small>
 									</h6>
-									<h6 className="text-success">KES 100</h6>
-								</div>
-								<div className="ml-2">
+									<h6 className="text-success">KES 200</h6>
 									<button
 										className="mysonar-btn mb-1 float-right"
-										onClick={() => onCartAudios(cartAudio.audio_id)}>
+										onClick={() => props.onCartVideos(cartVideo.video_id)}>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											width="16"
@@ -272,45 +188,113 @@ const Cart = (props) => {
 								</div>
 							</div>
 						))}
-					{props.cartAudios.length > 0 &&
-						<div className="d-flex justify-content-between">
-							<div className="p-2">
-								<h4 className="text-success">Sub Total</h4>
-							</div>
-							<div className="p-2">
-								<h4 className="text-success">{audioTotalCash}</h4>
-							</div>
-						</div>}
-					{/* Cart Audios End */}
+						{props.cartVideos.length > 0 &&
+							<div className="d-flex justify-content-between">
+								<div className="p-2">
+									<h4 className="text-success">Sub Total</h4>
+								</div>
+								<div className="p-2">
+									<h4 className="text-success">{videoTotalCash}</h4>
+								</div>
+							</div>}
+						{/* Cart Videos End */}
+					</div>
+				</div>
+				<div className="col-sm-4">
+					<div className="border mb-4">
+						{/* Cart Audios */}
+						{props.cartAudios.length > 0 &&
+							<>
+								<center><h3 className="pt-4">Audios</h3></center>
+								<hr />
+							</>}
+						{props.cartAudios
+							.map((cartAudio, key) => (
+								<div key={key} className="d-flex p-2 border-bottom">
+									<div
+										className="thumbnail"
+										style={{ width: "50px", height: "50px" }}>
+										<Link to={`/audio-show/${cartAudio.audio_id}`}>
+											<Img src={cartAudio.thumbnail}
+												width="100%"
+												height="50px" />
+										</Link>
+									</div>
+									<div className="ml-2 mr-auto">
+										<h6 className="mb-0 pb-0"
+											style={{
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											{cartAudio.name}
+										</h6>
+										<h6 className="mt-0 pt-0">
+											<small>{cartAudio.username}</small>
+										</h6>
+										<h6 className="text-success">KES 100</h6>
+									</div>
+									<div className="ml-2">
+										<button
+											className="mysonar-btn mb-1 float-right"
+											onClick={() => props.onCartAudios(cartAudio.audio_id)}>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												fill="currentColor"
+												className="bi bi-trash"
+												viewBox="0 0 16 16">
+												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+												<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+											</svg>
+										</button>
+									</div>
+								</div>
+							))}
+						{props.cartAudios.length > 0 &&
+							<div className="d-flex justify-content-between">
+								<div className="p-2">
+									<h4 className="text-success">Sub Total</h4>
+								</div>
+								<div className="p-2">
+									<h4 className="text-success">{audioTotalCash}</h4>
+								</div>
+							</div>}
+						{/* Cart Audios End */}
+					</div>
 				</div>
 				<div className="col-sm-3">
-					<center>
-						<h3>Total</h3>
-						<hr />
-						<h3 className="text-success"> KES {total}</h3>
-						<br />
-						{/* Checkout button*/}
-						{(videoTotal + audioTotal) > 0 &&
-							<Button
-								btnClass="mysonar-btn mb-4"
-								btnText="checkout"
-								btnStyle={{ width: "80%" }}
-								onClick={(e) => {
-									e.preventDefault()
-									setBottomMenu("menu-open")
-									onPay()
-								}} />}
-						<br />
-						{/* Receipt button */}
-						{(receiptVideos.length + receiptAudios.length) > 0 &&
-							<Button btnClass="mysonar-btn mb-4"
-								btnText="receipt"
-								btnStyle={{ width: "80%" }}
-								onClick={(e) => {
-									e.preventDefault()
-									setReceipt("menu-open")
-								}} />}
-					</center>
+					<div className="border mb-4">
+						<center>
+							<h3 className="pt-4">Total</h3>
+							<hr />
+							<h3 className="text-success"> KES {total}</h3>
+							<br />
+							{/* Checkout button*/}
+							{(videoTotal + audioTotal) > 0 &&
+								<Button
+									btnClass="mysonar-btn green-btn mb-4"
+									btnText="pay with mpesa"
+									btnStyle={{ width: "80%" }}
+									onClick={(e) => {
+										e.preventDefault()
+										setBottomMenu("menu-open")
+										// onPay()
+										STKPush(total)
+									}} />}
+							<br />
+							{/* Receipt button */}
+							{(receiptVideos.length + receiptAudios.length) > 0 &&
+								<Button btnClass="mysonar-btn mb-4"
+									btnText="receipt"
+									btnStyle={{ width: "80%" }}
+									onClick={(e) => {
+										e.preventDefault()
+										setReceipt("menu-open")
+									}} />}
+						</center>
+					</div>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>
@@ -328,7 +312,6 @@ const Cart = (props) => {
 						<div className="closeIcon p-2 float-right text-dark"
 							onClick={() => {
 								setBottomMenu("")
-								onPay()
 							}}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

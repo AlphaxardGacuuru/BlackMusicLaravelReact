@@ -235,14 +235,8 @@ const Index = (props) => {
 								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)
 								.map((video, index) => (
-									<span key={index}
-										className="card pt-0 pl-0 pr-0 pb-2"
-										style={{ borderRadius: "10px" }}>
-										<div className="thumbnail"
-											style={{
-												borderTopLeftRadius: "10px",
-												borderTopRightRadius: "10px"
-											}}>
+									<span key={index} className="card pt-0 px-0 pb-2">
+										<div className="thumbnail">
 											<Link to={`/video-show/${video.id}`}>
 												<Img src={video.thumbnail.match(/http/) ?
 													video.thumbnail :
