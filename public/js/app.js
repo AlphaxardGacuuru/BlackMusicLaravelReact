@@ -93530,7 +93530,7 @@ function App() {
       login = _useState2[0],
       setLogin = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("http://localhost:3000"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000'),
       _useState4 = _slicedToArray(_useState3, 2),
       url = _useState4[0],
       setUrl = _useState4[1];
