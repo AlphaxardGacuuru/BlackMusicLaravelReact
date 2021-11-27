@@ -99409,7 +99409,6 @@ var Index = function Index(props) {
       }
     }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "storage/".concat(post.media),
-      imgClass: "rounded-circle",
       width: "100%",
       height: "auto",
       alt: 'post-media'

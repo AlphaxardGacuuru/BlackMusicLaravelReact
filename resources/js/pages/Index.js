@@ -350,7 +350,6 @@ const Index = (props) => {
 										{post.media &&
 											<Img
 												src={`storage/${post.media}`}
-												imgClass="rounded-circle"
 												width="100%"
 												height="auto"
 												alt={'post-media'} />}
