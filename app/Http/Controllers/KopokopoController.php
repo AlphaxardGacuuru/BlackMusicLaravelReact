@@ -134,7 +134,7 @@ class KopokopoController extends Controller
             'amount' => $amount,
             'currency' => 'KES',
             'email' => auth()->user()->email,
-            'callbackUrl' => 'https://test.black.co.ke/api/kopokopo',
+            'callbackUrl' => 'https://music.black.co.ke/api/kopokopo',
             'accessToken' => $data['accessToken'],
         ]);
 

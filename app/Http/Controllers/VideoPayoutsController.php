@@ -77,7 +77,7 @@ class VideoPayoutsController extends Controller
             'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
             'amount' => '100',
             'currency' => 'KES',
-            'callbackUrl' => 'https://test.black.co.ke/api/video-payouts',
+            'callbackUrl' => 'https://music.black.co.ke/api/video-payouts',
             'description' => 'Salary payment for May 2018',
             'category' => 'salaries',
             'tags' => ["tag 1", "tag 2"],

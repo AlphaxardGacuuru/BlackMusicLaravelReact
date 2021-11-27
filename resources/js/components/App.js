@@ -47,9 +47,7 @@ function App() {
 
 	// Declare states
 	const [login, setLogin] = useState()
-	const [url, setUrl] = useState(window.location.href.match(/https/) ?
-		'https://test.black.co.ke' :
-		'http://localhost:3000')
+	const [url, setUrl] = useState(process.env.MIX_APP_URL)
 	const [auth, setAuth] = useState({
 		"name": "Guest",
 		"username": "@guest",

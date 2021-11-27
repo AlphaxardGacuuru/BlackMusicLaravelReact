@@ -11,7 +11,7 @@ const Settings = (props) => {
 		const shareData = {
 			title: "Refer",
 			text: `Check out Black Music\n`,
-			url: `https://test.black.co.ke/#/referral/${props.auth.username}`
+			url: `https://music.black.co.ke/#/referral/${props.auth.username}`
 		}
 		// Check if data is shareble
 		navigator.canShare(shareData) &&

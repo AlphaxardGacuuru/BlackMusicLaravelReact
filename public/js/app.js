@@ -93529,7 +93529,7 @@ function App() {
       login = _useState2[0],
       setLogin = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(window.location.href.match(/https/) ? 'https://test.black.co.ke' : 'http://localhost:3000'),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("http://localhost:3000"),
       _useState4 = _slicedToArray(_useState3, 2),
       url = _useState4[0],
       setUrl = _useState4[1];
@@ -101767,7 +101767,7 @@ var Settings = function Settings(props) {
     var shareData = {
       title: "Refer",
       text: "Check out Black Music\n",
-      url: "https://test.black.co.ke/#/referral/".concat(props.auth.username)
+      url: "https://music.black.co.ke/#/referral/".concat(props.auth.username)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
@@ -103576,7 +103576,7 @@ var VideoShow = function VideoShow(props) {
     var shareData = {
       title: showVideo.name,
       text: "Check out ".concat(showVideo.name, " on Black Music\n"),
-      url: "https://test.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
+      url: "https://music.black.co.ke/#/video-show/".concat(show, "/").concat(props.auth.username)
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
