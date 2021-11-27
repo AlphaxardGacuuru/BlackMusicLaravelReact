@@ -197,7 +197,10 @@ const VideoCharts = (props) => {
 					{props.videos
 						.slice(0, 3)
 						.map((video, key) => (
-							<div key={key} className={`carousel-item ${key == 0 && 'active'}`} style={{ overflow: "hidden" }}>
+							<div
+								key={key}
+								className={`carousel-item ${key == 0 && 'active'}`}
+								style={{ overflow: "hidden" }}>
 								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
 								<div className="carousel-caption d-none d-md-block">
 									<h5 style={{ color: "white" }}>{video.name}</h5>
@@ -218,7 +221,7 @@ const VideoCharts = (props) => {
 			{/*  Carousel End  */}
 
 			{/* <!-- Scroll menu - */}
-			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
+			<div id="chartsMenu" className="hidden-scroll mt-2">
 				<span>
 					<Link to="#">
 						<h3 className="active-scrollmenu">Videos</h3>
@@ -232,14 +235,14 @@ const VideoCharts = (props) => {
 			</div>
 
 			{/* List of Charts */}
-			<div id="chartsMenu" className="hidden-scroll" style={{ margin: "10px 0 0 0" }}>
+			<div id="chartsMenu" className="hidden-scroll m-0">
 				{charts.map((chartItem, key) => (
 					<span key={key}>
 						<a href="#" onClick={(e) => {
 							e.preventDefault()
 							onChart(chartItem)
 						}}>
-							<h5 className={chart == chartItem ? "active-scrollmenu" : ""}>{chartItem}</h5>
+							<h5 className={chart == chartItem ? "active-scrollmenu m-0" : "m-0"}>{chartItem}</h5>
 						</a>
 					</span>
 				))}
@@ -253,7 +256,7 @@ const VideoCharts = (props) => {
 							e.preventDefault()
 							onGenre(genreItem)
 						}}>
-							<h6 className={genre == genreItem ? "active-scrollmenu" : ""}>{genreItem}</h6>
+							<h6 className={genre == genreItem ? "active-scrollmenu m-0" : "m-0"}>{genreItem}</h6>
 						</a>
 					</span>
 				))}
@@ -263,20 +266,21 @@ const VideoCharts = (props) => {
 			{/* <!-- Chart Area - */}
 			<div className="row">
 				<div className="col-sm-12">
-
 					{/* <!-- ****** Artists Area Start ****** - */}
 					<h5>Artists</h5>
 					<div className="hidden-scroll" onScroll={handleScroll}>
 						{/*  Echo Artists  */}
 						{artistsArray
-							.filter((artist) => artist.key != props.auth.username && artist.key != "@blackmusic")
+							.filter((artist) => artist.key !=
+								props.auth.username &&
+								artist.key != "@blackmusic")
 							.slice(0, artistSlice)
 							.map((artistArray, key) => (
-								<span key={key}>
+								<span key={key} style={{ padding: "5px" }}>
 									{props.users
 										.filter((user) => user.username == artistArray.key)
 										.map((user, key) => (
-											<span key={key} className="pt-0 px-0 pb-2" style={{ borderRadius: "10px" }}>
+											<span key={key} className="m-0 p-0">
 												<center>
 													<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
 														<Link to={"/profile/" + user.username}>
@@ -310,7 +314,6 @@ const VideoCharts = (props) => {
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
-					<br />
 
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>

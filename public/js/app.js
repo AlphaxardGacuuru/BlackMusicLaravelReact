@@ -96703,10 +96703,7 @@ var AudioCharts = function AudioCharts(props) {
     }, audio.username)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
-    className: "hidden-scroll",
-    style: {
-      margin: "10px 0 0 0"
-    }
+    className: "hidden-scroll mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/video-charts"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -96715,10 +96712,7 @@ var AudioCharts = function AudioCharts(props) {
     className: "active-scrollmenu"
   }, "Audios")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
-    className: "hidden-scroll",
-    style: {
-      margin: "10px 0 0 0"
-    }
+    className: "hidden-scroll m-0"
   }, charts.map(function (chartItem, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key
@@ -96729,7 +96723,7 @@ var AudioCharts = function AudioCharts(props) {
         onChart(chartItem);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-      className: chart == chartItem ? "active-scrollmenu" : ""
+      className: chart == chartItem ? "active-scrollmenu m-0" : "m-0"
     }, chartItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "audio-chartsMenu",
@@ -96744,31 +96738,29 @@ var AudioCharts = function AudioCharts(props) {
         onGenre(genreItem);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: genre == genreItem ? "active-scrollmenu" : ""
+      className: genre == genreItem ? "active-scrollmenu m-0" : "m-0"
     }, genreItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "p-2"
-  }, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll",
     onScroll: handleScroll
   }, artistsArray.filter(function (artist) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
   }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: key
+      key: key,
+      style: {
+        padding: "5px"
+      }
     }, props.users.filter(function (user) {
       return user.username == artistArray.key;
     }).map(function (user, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: key,
-        className: "pt-0 px-0 pb-2",
-        style: {
-          borderRadius: "10px"
-        }
+        className: "m-0 p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card avatar-thumbnail",
         style: {
@@ -102542,10 +102534,7 @@ var VideoCharts = function VideoCharts(props) {
     }, video.username)));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
-    className: "hidden-scroll",
-    style: {
-      margin: "10px 0 0 0"
-    }
+    className: "hidden-scroll mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -102554,10 +102543,7 @@ var VideoCharts = function VideoCharts(props) {
     to: "/audio-charts"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
-    className: "hidden-scroll",
-    style: {
-      margin: "10px 0 0 0"
-    }
+    className: "hidden-scroll m-0"
   }, charts.map(function (chartItem, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key
@@ -102568,7 +102554,7 @@ var VideoCharts = function VideoCharts(props) {
         onChart(chartItem);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-      className: chart == chartItem ? "active-scrollmenu" : ""
+      className: chart == chartItem ? "active-scrollmenu m-0" : "m-0"
     }, chartItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "video-chartsMenu",
@@ -102583,7 +102569,7 @@ var VideoCharts = function VideoCharts(props) {
         onGenre(genreItem);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: genre == genreItem ? "active-scrollmenu" : ""
+      className: genre == genreItem ? "active-scrollmenu m-0" : "m-0"
     }, genreItem)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -102596,16 +102582,16 @@ var VideoCharts = function VideoCharts(props) {
     return artist.key != props.auth.username && artist.key != "@blackmusic";
   }).slice(0, artistSlice).map(function (artistArray, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      key: key
+      key: key,
+      style: {
+        padding: "5px"
+      }
     }, props.users.filter(function (user) {
       return user.username == artistArray.key;
     }).map(function (user, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: key,
-        className: "pt-0 px-0 pb-2",
-        style: {
-          borderRadius: "10px"
-        }
+        className: "m-0 p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card avatar-thumbnail",
         style: {
@@ -102634,7 +102620,7 @@ var VideoCharts = function VideoCharts(props) {
         }
       }, user.username)));
     }));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden",
     onScroll: handleScroll
   }, videosArray.slice(0, videoSlice).map(function (videoArray, key) {
