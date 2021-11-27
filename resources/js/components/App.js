@@ -45,6 +45,8 @@ import NotFound from '../pages/NotFound'
 
 function App() {
 
+	console.log(process.env.MIX_APP_URL)
+
 	// Declare states
 	const [login, setLogin] = useState()
 	const [url, setUrl] = useState(process.env.MIX_APP_URL)

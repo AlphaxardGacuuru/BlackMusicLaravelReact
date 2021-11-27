@@ -93523,7 +93523,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App() {
-  // Declare states
+  console.log("http://localhost:3000"); // Declare states
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       login = _useState2[0],
