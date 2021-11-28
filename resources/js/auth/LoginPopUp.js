@@ -97,7 +97,7 @@ const LoginPopUp = (props) => {
 							</center> :
 							<>
 								<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />
-								<FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} />
+								{/* <FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} /> */}
 								<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
 								<br />
 

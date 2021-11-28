@@ -130,7 +130,7 @@ const AudioShow = (props) => {
 		// Define share data
 		const shareData = {
 			title: props.showAudio.name,
-			text: `Check out ${props.showAudio.name} on Black Music`,
+			text: `Check out ${props.showAudio.name} on Black Music\n`,
 			url: `https://music.black.co.ke/#/audio-show/${show}`
 		}
 		// Check if data is shareble
