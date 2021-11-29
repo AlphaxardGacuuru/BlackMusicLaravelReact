@@ -92930,13 +92930,7 @@ var LoginPopUp = function LoginPopUp(props) {
     onClick: function onClick() {
       return onSocial("twitter");
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    btnClass: "mysonar-btn",
-    btnText: "login with number",
-    onClick: function onClick() {
-      return setPhoneLogin(true);
-    }
-  }))))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LoginPopUp);
@@ -101429,13 +101423,14 @@ var ProfileEdit = function ProfileEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessage("Account updated");
+          props.setMessage("Account updated"); // Update auth
+
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
             return props.setAuth(res.data);
           });
         },
         onerror: function onerror(err) {
-          return console.log(err.response.data.message);
+          return console.log(err.response);
         }
       }
     }
