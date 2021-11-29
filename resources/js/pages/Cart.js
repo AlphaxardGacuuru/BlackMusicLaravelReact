@@ -69,7 +69,7 @@ const Cart = (props) => {
 							axios.get(`${props.url}/api/video-albums`)
 								.then((res) => props.setVideoAlbums(res.data))
 						}
-						// Stop loop after 60s
+						// Stop loop after 30s
 						setTimeout(() => {
 							clearInterval(intervalId)
 							setBottomMenu()
@@ -111,7 +111,7 @@ const Cart = (props) => {
 							axios.get(`${props.url}/api/audio-albums`)
 								.then((res) => props.setAudioAlbums(res.data))
 						}
-						// Stop loop after 60s
+						// Stop loop after 30s
 						setTimeout(() => {
 							clearInterval(intervalId)
 							setBottomMenu()
@@ -280,7 +280,7 @@ const Cart = (props) => {
 									onClick={(e) => {
 										e.preventDefault()
 										setBottomMenu("menu-open")
-										// onPay()
+										onPay()
 										STKPush(total)
 									}} />}
 							<br />

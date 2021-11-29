@@ -98629,7 +98629,7 @@ var Cart = function Cart(props) {
             axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
               return props.setVideoAlbums(res.data);
             });
-          } // Stop loop after 60s
+          } // Stop loop after 30s
 
 
           setTimeout(function () {
@@ -98675,7 +98675,7 @@ var Cart = function Cart(props) {
             axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
               return props.setAudioAlbums(res.data);
             });
-          } // Stop loop after 60s
+          } // Stop loop after 30s
 
 
           setTimeout(function () {
