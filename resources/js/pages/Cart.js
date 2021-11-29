@@ -309,7 +309,8 @@ const Cart = (props) => {
 						</div>
 
 						{/* <!-- Close Icon --> */}
-						<div className="closeIcon p-2 float-right text-dark"
+						<div
+							className="closeIcon p-2 float-right text-dark"
 							onClick={() => {
 								setBottomMenu("")
 							}}>
@@ -327,27 +328,16 @@ const Cart = (props) => {
 					</div>
 
 					<center>
-						<h5>Lipa na Mpesa</h5>
-						<h5>Buy Goods and Services</h5>
-						<h5>Mpesa Till No:</h5>
-						<h3 id='myInput' style={{ color: "green" }}>613289</h3>
-						<h5 style={{ color: "green" }}>HAVI Lab Equipment</h5>
-						<h5>Amount: KES <span style={{ color: "green" }}>{total}</span></h5>
-						<h5>Ensure you pay with <b style={{ color: "dodgerblue" }}>{props.auth.phone}</b></h5>
-						<br />
-
-						<Button
-							btnClass="mysonar-btn"
-							btnStyle={{ width: "40%" }}
-							btnText="copy till number"
-							onClick={() => {
-								navigator.clipboard.writeText(613289)
-								props.setMessage("Till number copied")
-							}} />
+						<h5>A pop up will appear on your phone asking you to pay</h5>
+						<h5 style={{ color: "green" }}>KES {total}</h5>
+						<h5>to</h5>
+						<h5 style={{ color: "dodgerblue" }}>Kopokopo</h5>
 						<br />
 						<br />
 
-						<div id="sonar-load" className="mt-3 mb-3"></div>
+						<h6>Checking payment</h6>
+						<div id="sonar-load" className="mt-4 mb-4"></div>
+						<h6>Request was sent to <span style={{ color: "dodgerblue" }}>{props.auth.phone}</span></h6>
 					</center>
 
 					{/* {videoTotal > 0 && <h5 className="">Videos {videoTotal}</h5>}
