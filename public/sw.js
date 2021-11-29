@@ -7,13 +7,13 @@ const cacheAssets = [
 
 // Install event
 self.addEventListener('install', e => {
-	console.log('Service Worker installed');
+	// console.log('Service Worker installed');
 	// Function to prevent the install event from stopping the async methods from finishing 
 	e.waitUntil(
 		// 	Cache assets for faster page loading and offline mode
 		caches.open(cacheName)
-			.then(cache => {
-				console.log('Caching files');
+			.then((cache) => {
+				// console.log('Caching files');
 				cache.addAll(cacheAssets);
 			})
 			.then(() => self.skipWaiting())
@@ -22,7 +22,7 @@ self.addEventListener('install', e => {
 
 // Activate event
 self.addEventListener('activate', e => {
-	console.log('Service Worker Activated');
+	// console.log('Service Worker Activated');
 	// Function to prevent the install event from stopping the async methods from finishing 
 	e.waitUntil(
 		// Get cached assests based on keys
@@ -43,7 +43,7 @@ self.addEventListener('activate', e => {
 
 // Fetch event
 self.addEventListener('fetch', e => {
-	console.log('Fetching')
+	// console.log('Fetching')
 	e.respondWith(
 		fetch(e.request)
 			.then((res) => {
