@@ -1,5 +1,5 @@
 @component('mail::message')
-# Congratulations! You just purchased {{ count($audios) }} audios.
+# Congratulations! You just purchased {{ count($audios) }} audio{{ count($audios) > 1 ? "s" : ""}}.
 
 Thank you for supporting Kenyan artists, here's your receipt.
 

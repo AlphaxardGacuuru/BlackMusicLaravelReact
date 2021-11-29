@@ -77,11 +77,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (Auth::viaRemember()) {
-            return "true";
-        } else {
-            return "false";
-        }
+		// 
     }
 
     /**

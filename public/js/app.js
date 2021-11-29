@@ -98611,8 +98611,17 @@ var Cart = function Cart(props) {
             setReceiptVideos(res.data);
             setBottomMenu();
             setReceipt("menu-open");
-            clearInterval(intervalId);
-            props.setMessage(res.data.length + " Videos bought"); // Update Bought Videos
+            clearInterval(intervalId); // Show message
+
+            var message; // Proper grammar for message
+
+            if (res.data.length > 1) {
+              message = res.data.length + " Videos bought.";
+            } else {
+              message = res.data.length + " Video bought.";
+            }
+
+            props.setMessage(message); // Update Bought Videos
 
             axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/bought-videos")).then(function (res) {
               return props.setBoughtVideos(res.data);
@@ -98655,9 +98664,18 @@ var Cart = function Cart(props) {
             setReceiptAudios(res.data);
             setBottomMenu();
             setReceipt("menu-open");
-            clearInterval(intervalId);
+            clearInterval(intervalId); // Show message after 10 seconds
+
             setTimeout(function () {
-              props.setMessage(res.data.length + " Audios bought");
+              var message; // Proper grammar for message
+
+              if (res.data.length > 1) {
+                message = res.data.length + " Audios bought.";
+              } else {
+                message = res.data.length + " Audio bought.";
+              }
+
+              props.setMessage(message);
             }, 10000); // Update Bought Audio
 
             axios__WEBPACK_IMPORTED_MODULE_6___default.a.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
@@ -98845,8 +98863,8 @@ var Cart = function Cart(props) {
     },
     onClick: function onClick(e) {
       e.preventDefault();
-      setBottomMenu("menu-open"); // onPay()
-
+      setBottomMenu("menu-open");
+      onPay();
       STKPush(total);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), receiptVideos.length + receiptAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {

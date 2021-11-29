@@ -54,9 +54,16 @@ class AudioReceiptNotifications extends Notification
 			array_push($list, $audio['name']);
 		}
 
+        // Check proper grammar
+        if (count($this->audios) > 1) {
+            $numberOfAudios = count($this->audios) . ' audios: ';
+        } else {
+            $numberOfAudios = count($this->audios) . ' audio: ';
+        }
+
         return [
             'from' => '@blackmusic',
-            'message' => 'You bought ' . count($this->audios) . ' audios: ' . implode(", ", $list),
+            'message' => 'You bought ' . $numberOfAudios . implode(", ", $list),
         ];
     }
 

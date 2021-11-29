@@ -48,15 +48,22 @@ class VideoReceiptNotifications extends Notification
 
     public function toDatabase()
     {
-		$list = [];
+        $list = [];
 
-		foreach ($this->videos as $video) {
-			array_push($list, $video['name']);
-		}
+        foreach ($this->videos as $video) {
+            array_push($list, $video['name']);
+        }
+
+        // Check proper grammar
+        if (count($this->videos) > 1) {
+            $numberOfVideos = count($this->videos) . ' videos: ';
+        } else {
+            $numberOfVideos = count($this->videos) . ' video: ';
+        }
 
         return [
             'from' => '@blackmusic',
-            'message' => 'You bought ' . count($this->videos) . ' videos: ' . implode(", ", $list),
+            'message' => 'You bought ' . $numberOfVideos . implode(", ", $list),
         ];
     }
 

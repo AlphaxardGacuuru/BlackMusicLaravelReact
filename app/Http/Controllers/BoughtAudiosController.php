@@ -99,7 +99,7 @@ class BoughtAudiosController extends Controller
                 ->count() * 100;
             $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
             // Get Total Cash paid
-            $kopokopo = Kopokopo::where('sender_phone', $betterPhone)->sum('amount');
+            $kopokopo = Kopokopo::where('sender_phone_number', $betterPhone)->sum('amount');
             $balance = $kopokopo - ($totalVideos20 + $totalVideos200 + $totalAudios100);
             // Check if user can buy songs in cart
             $permission = intval($balance / 100);
@@ -176,7 +176,9 @@ class BoughtAudiosController extends Controller
         }
 
         // Notify User
-        auth()->user()->notify(new AudioReceiptNotifications($receiptAudios));
+        if (count($receiptAudios) > 0) {
+            auth()->user()->notify(new AudioReceiptNotifications($receiptAudios));
+        }
 
         return response($receiptAudios, 200);
     }

@@ -43,7 +43,6 @@ const Cart = (props) => {
 	// Function for buying videos
 	const onPay = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-
 			// Check payment after every 2s
 			var intervalId = window.setInterval(() => {
 				// Try and buy videos
@@ -55,7 +54,15 @@ const Cart = (props) => {
 							setBottomMenu()
 							setReceipt("menu-open")
 							clearInterval(intervalId)
-							props.setMessage(res.data.length + " Videos bought")
+							// Show message
+							var message
+							// Proper grammar for message
+							if (res.data.length > 1) {
+								message = res.data.length + " Videos bought."
+							} else {
+								message = res.data.length + " Video bought."
+							}
+							props.setMessage(message)
 							// Update Bought Videos
 							axios.get(`${props.url}/api/bought-videos`)
 								.then((res) => props.setBoughtVideos(res.data))
@@ -95,8 +102,16 @@ const Cart = (props) => {
 							setBottomMenu()
 							setReceipt("menu-open")
 							clearInterval(intervalId)
+							// Show message after 10 seconds
 							setTimeout(() => {
-								props.setMessage(res.data.length + " Audios bought")
+								var message
+								// Proper grammar for message
+								if (res.data.length > 1) {
+									message = res.data.length + " Audios bought."
+								} else {
+									message = res.data.length + " Audio bought."
+								}
+								props.setMessage(message)
 							}, 10000)
 							// Update Bought Audio
 							axios.get(`${props.url}/api/bought-audios`)
