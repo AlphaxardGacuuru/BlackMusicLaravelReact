@@ -7,23 +7,42 @@ import Button from '../components/Button'
 const AudioMediaHorizontal = (props) => {
 	return (
 		<div className="d-flex p-2 border-bottom">
-			<div className="thumbnail" style={{ width: "50px", height: "50px" }}>
-				<Link to={props.link} onClick={() => props.setShow(props.audioId)}>
-					<Img src={props.thumbnail} width="100%" height="50px" />
+			<div
+				className="thumbnail"
+				style={{
+					width: "50px",
+					height: "50px"
+				}}>
+				<Link
+					to={props.link}
+					onClick={() => props.setShow(props.audioId)}>
+					<Img
+						src={props.thumbnail}
+						width="100%"
+						height="50px" />
 				</Link>
 			</div>
-			<div className="ml-2 mr-auto">
-				<span style={{ cursor: "pointer" }} onClick={() => props.setShow(props.audioId)}>
+			<div className="p-2 mr-auto">
+				<span
+					style={{ cursor: "pointer" }}
+					onClick={() => props.setShow(props.audioId)}>
 					<h6
 						className="mb-0 pb-0"
 						style={{
+							maxWidth: "6em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"
 						}}>
 						{props.name}
 					</h6>
-					<h6 className="mt-0 pt-0">
+					<h6 className="mt-0 pt-0"
+						style={{
+							maxWidth: "6em",
+							whiteSpace: "nowrap",
+							overflow: "hidden",
+							textOverflow: "clip"
+						}}>
 						<small>{props.username}</small>
 						<small className="ml-1">{props.ft}</small>
 					</h6>

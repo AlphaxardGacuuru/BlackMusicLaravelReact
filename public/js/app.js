@@ -94631,7 +94631,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     width: "100%",
     height: "50px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-2 mr-auto"
+    className: "p-2 mr-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       cursor: "pointer"
@@ -94642,12 +94642,19 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
     style: {
+      maxWidth: "6em",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip"
     }
   }, props.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "mt-0 pt-0"
+    className: "mt-0 pt-0",
+    style: {
+      maxWidth: "6em",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.ft)))), props.showCartandBuyButton ? props.hasBoughtAudio ? props.audioInCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -95710,13 +95717,19 @@ var VideoMediaHorizontal = function VideoMediaHorizontal(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0",
     style: {
-      width: "150px",
+      width: "8em",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip"
     }
   }, props.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "mb-3"
+    className: "mb-3",
+    style: {
+      width: "8em",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.ft))), props.showCartandBuyButton ? props.hasBoughtVideo ? props.videoInCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
