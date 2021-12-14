@@ -40,13 +40,12 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
-import DownloadApp from '../pages/DownloadApp'
 
 import NotFound from '../pages/NotFound'
 
 function App() {
 
-	console.log(process.env.MIX_APP_URL)
+	// console.log(process.env.MIX_APP_URL)
 
 	// Declare states
 	const [login, setLogin] = useState()
@@ -859,10 +858,6 @@ function App() {
 						<Settings {...GLOBAL_STATE} />
 						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
-				)} />
-
-				<Route path="/download" exact render={(props) => (
-					<DownloadApp {...GLOBAL_STATE} />
 				)} />
 
 

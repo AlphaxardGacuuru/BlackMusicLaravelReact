@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BoughtVideos;
+use App\BoughtAudios;
 use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class VideoPayoutsController extends Controller
             ->where('price', 100)
             ->count() * 100;
 
-        $videoPayouts = VideoPayouts::where('username', auth()->user()->username)->sum();
+        $videoPayouts = VideoPayouts::where('username', auth()->user()->username)->sum('amount');
 
         // Check if there's any outstanding cash
         $balance = ($totalVideos20 + $totalVideos200 + $totalAudios100) - $videoPayouts;

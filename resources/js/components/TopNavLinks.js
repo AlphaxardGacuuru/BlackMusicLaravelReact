@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -49,28 +49,33 @@ const TopNavLinks = (props) => {
 			})
 	}
 
-	// Install button
+	/*
+	*
+	* PWA Install button */
 	let deferredPrompt;
+	var btnAdd = React.useRef(null)
+	
 	// Listen to the install prompt
 	window.addEventListener('beforeinstallprompt', (e) => {
 		deferredPrompt = e;
+
 		// Show the button
-		btnAdd.style.display = 'block';
+		btnAdd.current.style.display = 'block';
 
 		// Action when button is clicked
-		btnAdd.addEventListener('click', (e) => {
+		btnAdd.current.addEventListener('click', (e) => {
 			// Show install banner
 			deferredPrompt.prompt();
 			// Check if the user accepted
 			deferredPrompt.userChoice.then((choiceResult) => {
 				if (choiceResult.outcome === 'accepted') {
-					btnAdd.innerHTML = 'User accepted';
+					btnAdd.current.innerHTML = '<h6>User accepted</h6>';
 				}
 				deferredPrompt = null;
 			});
 
 			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.innerHTML = 'Installed';
+				btnAdd.current.innerHTML = '<h6>Installed</h6>';
 			});
 		});
 	});
@@ -218,7 +223,9 @@ const TopNavLinks = (props) => {
 						<h6>{props.auth.username}</h6>
 					</Link>
 					<Link
-						to="/download"
+						to="#"
+						ref={btnAdd}
+						style={{ display: "none" }}
 						className="p-3 dropdown-item border-bottom">
 						<h6>Get App</h6>
 					</Link>

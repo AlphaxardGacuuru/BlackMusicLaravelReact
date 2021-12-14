@@ -93455,8 +93455,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
 /* harmony import */ var _pages_Settings__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Settings */ "./resources/js/pages/Settings.js");
-/* harmony import */ var _pages_DownloadApp__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/DownloadApp */ "./resources/js/pages/DownloadApp.js");
-/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
+/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -93512,10 +93511,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function App() {
-  console.log("http://localhost:3000"); // Declare states
-
+  // console.log(process.env.MIX_APP_URL)
+  // Declare states
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       login = _useState2[0],
@@ -94567,12 +94565,6 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/download",
-    exact: true,
-    render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_DownloadApp__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE);
-    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
@@ -95483,29 +95475,33 @@ var TopNavLinks = function TopNavLinks(props) {
         return props.setNotifications(res.data);
       });
     });
-  }; // Install button
+  };
+  /*
+  *
+  * PWA Install button */
 
 
-  var deferredPrompt; // Listen to the install prompt
+  var deferredPrompt;
+  var btnAdd = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Listen to the install prompt
 
   window.addEventListener('beforeinstallprompt', function (e) {
     deferredPrompt = e; // Show the button
 
-    btnAdd.style.display = 'block'; // Action when button is clicked
+    btnAdd.current.style.display = 'block'; // Action when button is clicked
 
-    btnAdd.addEventListener('click', function (e) {
+    btnAdd.current.addEventListener('click', function (e) {
       // Show install banner
       deferredPrompt.prompt(); // Check if the user accepted
 
       deferredPrompt.userChoice.then(function (choiceResult) {
         if (choiceResult.outcome === 'accepted') {
-          btnAdd.innerHTML = 'User accepted';
+          btnAdd.current.innerHTML = '<h6>User accepted</h6>';
         }
 
         deferredPrompt = null;
       });
       window.addEventListener('appinstalled', function (evt) {
-        btnAdd.innerHTML = 'Installed';
+        btnAdd.current.innerHTML = '<h6>Installed</h6>';
       });
     });
   }); // Function to get to Privacy Policy
@@ -95655,7 +95651,11 @@ var TopNavLinks = function TopNavLinks(props) {
     to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/download",
+    to: "#",
+    ref: btnAdd,
+    style: {
+      display: "none"
+    },
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
@@ -98995,37 +98995,6 @@ var Cart = function Cart(props) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/DownloadApp.js":
-/*!*******************************************!*\
-  !*** ./resources/js/pages/DownloadApp.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var DownloadApp = function DownloadApp() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
-    style: {
-      background: "gold"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Download the App"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "It's light"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "btnAdd",
-    className: "sonar-btn btn-2",
-    style: {
-      display: "none"
-    }
-  }, "Install App"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (DownloadApp);
-
-/***/ }),
-
 /***/ "./resources/js/pages/Index.js":
 /*!*************************************!*\
   !*** ./resources/js/pages/Index.js ***!
@@ -101823,7 +101792,9 @@ var Settings = function Settings(props) {
     className: "col-sm-2"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Outstanding cash ", props.videoPayouts), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "text-success"
+  }, "KES ", props.videoPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     btnClass: "sonar-btn",
     onClick: onShare,
     btnText: "transfer funds"

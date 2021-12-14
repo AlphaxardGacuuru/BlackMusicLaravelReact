@@ -146,9 +146,8 @@ const Admin = (props) => {
 						</tr>
 					</tbody>
 					{props.users
-						.filter((user) => {
-							return user.username.match(search)
-						}).reverse((a, b) => (a - b))
+						.filter((user) => user.username.match(search))
+						.reverse((a, b) => (a - b))
 						.slice(0, 10)
 						.map((musician, key) => (
 							<tbody key={key}>

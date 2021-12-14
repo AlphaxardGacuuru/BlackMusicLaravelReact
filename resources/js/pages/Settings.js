@@ -24,7 +24,8 @@ const Settings = (props) => {
 			<div className="col-sm-8">
 				<center>
 					<h1>Video Payouts</h1>
-					<h6>Outstanding cash {props.videoPayouts}</h6>
+					<h4>Outstanding cash</h4>
+					<h5 className='text-success'>KES {props.videoPayouts.balance}</h5>
 					<br />
 
 					<Button
@@ -121,7 +122,7 @@ const Settings = (props) => {
 						</tr>
 					</tbody>
 				</table>
-			</div >
+			</div>
 			<div className="col-sm-2"></div>
 		</div>
 	)
