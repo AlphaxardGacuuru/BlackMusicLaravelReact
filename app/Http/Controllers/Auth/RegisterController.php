@@ -50,8 +50,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'startsWith:@', 'min:2', 'max:15', 'unique:users', 'regex:/^\S+$/'],
-            'phone' => ['required', 'string', 'startsWith:07', 'min:10', 'max:10', 'unique:users'],
+            'username' => [
+                'required',
+                'string',
+                'startsWith:@',
+                'min:2',
+                'max:15',
+                'unique:users',
+                'regex:/^\S+$/',
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'startsWith:07',
+                'min:10',
+                'max:10',
+                'unique:users',
+            ],
         ]);
     }
 
@@ -63,7 +78,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-		// Notify User
+        // Notify User
         Mail::to($data['email'])
             ->send(new WelcomeMail($data['username']));
 

@@ -128,7 +128,9 @@ const Profile = (props) => {
 							{props.users
 								.filter((user) => user.username == username)
 								.map((profile, key) => (
-									<Img key={key} style={{ position: "absolute", zIndex: "99" }}
+									<Img
+										key={key}
+										style={{ position: "absolute", zIndex: "99" }}
 										imgClass="avatar hover-img"
 										src={profile.pp} />))}
 						</div>
@@ -256,7 +258,7 @@ const Profile = (props) => {
 									</div>
 								</div>
 								{props.audios
-									.filter((audio) => audio.album_id == audioAlbum.id && audio.username == username)
+									.filter((audio) => audio.album_id == audioAlbum.id)
 									.map((audio, index) => (
 										<AudioMediaHorizontal
 											key={index}
@@ -279,7 +281,8 @@ const Profile = (props) => {
 				</div>
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
-					{props.posts.filter((post) => post.username == username).length == 0 &&
+					{props.posts
+						.filter((post) => post.username == username).length == 0 &&
 						<center>
 							<h6 style={{ color: "grey" }}>{username} does not have any posts</h6>
 						</center>}
@@ -636,7 +639,7 @@ const Profile = (props) => {
 									</div>
 								</div>
 								{props.videos
-									.filter((video) => video.album_id == videoAlbum.id && videoAlbum.username == username)
+									.filter((video) => video.album_id == videoAlbum.id)
 									.map((video, index) => (
 										<VideoMediaHorizontal
 											key={index}

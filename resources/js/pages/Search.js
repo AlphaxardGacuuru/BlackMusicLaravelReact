@@ -9,6 +9,36 @@ const Search = (props) => {
 
 	const history = useHistory()
 
+	var userResults = props.users
+		.filter((user) => {
+			return user.username != props.auth.username &&
+				user.username != "@blackmusic" &&
+				user.account_type == "musician" &&
+				user.username.match(props.search)
+		})
+
+	var videoResults = props.videos
+		.filter((video) => video.name.match(props.search) &&
+			video.username != props.auth.username)
+
+	var audioResults = props.audios
+		.filter((audio) => audio.name.match(props.search) &&
+			audio.username != props.auth.username)
+
+	var audioAlbumResults = props.audioAlbums
+		.filter((audioAlbum) => {
+			return audioAlbum.name != "Singles" &&
+				audioAlbum.name.match(props.search) &&
+				audioAlbum.username != props.auth.username
+		})
+
+	var videoAlbumResults = props.videoAlbums
+		.filter((videoAlbum) => {
+			return videoAlbum.name != "Singles" &&
+				videoAlbum.name.match(props.search) &&
+				videoAlbum.username != props.auth.username
+		})
+
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
 		props.onBuyVideos(video)
@@ -51,45 +81,42 @@ const Search = (props) => {
 					<br className="anti-hidden" />
 
 					{/* <!-- ****** Artists Area Start ****** --> */}
-					<h4>Artists</h4>
+					{userResults.length > 0 && <h4>Artists</h4>}
 					<div className="hidden-scroll">
 						{/*  Echo Artists  */}
-						{props.users
-							.filter((user) => {
-								return user.username != props.auth.username &&
-									user.username != "@blackmusic" &&
-									user.account_type == "musician" &&
-									user.username.match(props.search)
-							}).map((artist, key) => (
-								<span key={key} className="pt-0 pl-0 pr-0 pb-2" style={{ borderRadius: "10px" }}>
-									<center>
-										<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-											<Link to={"/profile/" + artist.username}>
-												<Img src={artist.pp}
-													width='150px'
-													height='150px' />
-											</Link>
-										</div>
-										<h6 className="mt-2"
-											style={{
-												width: "100px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{artist.name}
-										</h6>
-										<h6 style={{
+						{userResults.map((artist, key) => (
+							<span
+								key={key}
+								className="pt-0 px-0 pb-2"
+								style={{ borderRadius: "10px" }}>
+								<center>
+									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+										<Link to={"/profile/" + artist.username}>
+											<Img src={artist.pp}
+												width='150px'
+												height='150px' />
+										</Link>
+									</div>
+									<h6 className="mt-2"
+										style={{
 											width: "100px",
 											whiteSpace: "nowrap",
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-											<small>{artist.username}</small>
-										</h6>
-									</center>
-								</span>
-							))}
+										{artist.name}
+									</h6>
+									<h6 style={{
+										width: "100px",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip"
+									}}>
+										<small>{artist.username}</small>
+									</h6>
+								</center>
+							</span>
+						))}
 						{/* Echo Artists End */}
 					</div>
 					{/* <!-- ****** Artists Area End ****** - */}
@@ -100,14 +127,12 @@ const Search = (props) => {
 			<div className="row">
 				<div className="col-sm-3"></div>
 				<div className="col-sm-3">
-
-					{/* Songs to watch Area */}
-					<div className="p-2 mt-2">
-						<h4>Videos</h4>
-					</div>
-					{props.videos
-						.filter((video) => video.name.match(props.search) &&
-							video.username != props.auth.username)
+					{/* Videos */}
+					{videoResults.length > 0 &&
+						<div className="p-2 border-bottom">
+							<h4>Videos</h4>
+						</div>}
+					{videoResults
 						.slice(0, 5)
 						.map((video, key) => (
 							<VideoMediaHorizontal
@@ -125,16 +150,16 @@ const Search = (props) => {
 								onCartVideos={props.onCartVideos}
 								onBuyVideos={onBuyVideos} />
 						))}
+					{/* Videos End */}
 				</div>
 
 				<div className="col-sm-3">
-					{/* Song Suggestion Area */}
-					<div className="p-2 mt-2 border-bottom">
-						<h4>Audios</h4>
-					</div>
-					{props.audios
-						.filter((audio) => audio.name.match(props.search) &&
-							audio.username != props.auth.username)
+					{/* Audios */}
+					{audioResults.length > 0 &&
+						<div className="p-2 mt-2 border-bottom">
+							<h4>Audios</h4>
+						</div>}
+					{audioResults
 						.slice(0, 5)
 						.map((audio, key) => (
 							<AudioMediaHorizontal
@@ -151,6 +176,7 @@ const Search = (props) => {
 								onCartAudios={props.onCartAudios}
 								onBuyAudios={onBuyAudios} />
 						))}
+					{/* Audios End */}
 				</div>
 				<div className="col-sm-3"></div>
 			</div>
@@ -158,61 +184,53 @@ const Search = (props) => {
 			<div className="row">
 				<div className="col-sm-3"></div>
 				<div className="col-sm-3">
-					<div className="p-2 mt-5 mb-3 border-bottom">
-						<h4>Video Albums</h4>
-					</div>
+					{videoAlbumResults.lenth > 0 &&
+						<div className="p-2 mt-5 mb-3 border-bottom">
+							<h4>Video Albums</h4>
+						</div>}
 					{/* Video Albums */}
-					{props.videoAlbums
-						.filter((videoAlbum) => {
-							return videoAlbum.name != "Singles" &&
-								videoAlbum.name.match(props.search) &&
-								videoAlbum.username != props.auth.username
-						}).map((videoAlbum, key) => (
-							<div key={key} className="mb-3">
-								<div className="media">
-									<div className="media-left">
-										<Img src={`/storage/${videoAlbum.cover}`}
-											width="auto"
-											height="100"
-											alt={"album cover"} />
-									</div>
-									<div className="media-body p-2">
-										<small>Video Album</small>
-										<h1>{videoAlbum.name}</h1>
-										<h6>{videoAlbum.created_at}</h6>
-									</div>
+					{videoAlbumResults.map((videoAlbum, key) => (
+						<div key={key} className="mb-3">
+							<div className="media">
+								<div className="media-left">
+									<Img src={`/storage/${videoAlbum.cover}`}
+										width="auto"
+										height="100"
+										alt={"album cover"} />
+								</div>
+								<div className="media-body p-2">
+									<small>Video Album</small>
+									<h1>{videoAlbum.name}</h1>
+									<h6>{videoAlbum.created_at}</h6>
 								</div>
 							</div>
-						))}
+						</div>
+					))}
 					{/* Videos Albums End */}
 				</div>
 				<div className="col-sm-3">
-					<div className="p-2 mt-5 mb-3 border-bottom">
-						<h4>Audio Albums</h4>
-					</div>
+					{audioAlbumResults.length > 0 &&
+						<div className="p-2 mt-5 mb-3 border-bottom">
+							<h4>Audio Albums</h4>
+						</div>}
 					{/* Audio Albums */}
-					{props.audioAlbums
-						.filter((audioAlbum) => {
-							return audioAlbum.name != "Singles" &&
-								audioAlbum.name.match(props.search) &&
-								audioAlbum.username != props.auth.username
-						}).map((audioAlbum, key) => (
-							<div key={key} className="mb-3">
-								<div className="media">
-									<div className="media-left">
-										<Img src={`/storage/${audioAlbum.cover}`}
-											width="auto"
-											height="100"
-											alt={"album cover"} />
-									</div>
-									<div className="media-body p-2">
-										<small>Audio Album</small>
-										<h1>{audioAlbum.name}</h1>
-										<h6>{audioAlbum.create_at}</h6>
-									</div>
+					{audioAlbumResults.map((audioAlbum, key) => (
+						<div key={key} className="mb-3">
+							<div className="media">
+								<div className="media-left">
+									<Img src={`/storage/${audioAlbum.cover}`}
+										width="auto"
+										height="100"
+										alt={"album cover"} />
+								</div>
+								<div className="media-body p-2">
+									<small>Audio Album</small>
+									<h1>{audioAlbum.name}</h1>
+									<h6>{audioAlbum.create_at}</h6>
 								</div>
 							</div>
-						))}
+						</div>
+					))}
 					{/* Audio Albums End */}
 				</div>
 				<div className="col-sm-3"></div>

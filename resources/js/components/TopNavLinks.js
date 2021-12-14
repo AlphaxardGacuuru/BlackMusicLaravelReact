@@ -64,13 +64,13 @@ const TopNavLinks = (props) => {
 			// Check if the user accepted
 			deferredPrompt.userChoice.then((choiceResult) => {
 				if (choiceResult.outcome === 'accepted') {
-					btnAdd.innerHTML = '<h6>User accepted</h6>';
+					btnAdd.innerHTML = 'User accepted';
 				}
 				deferredPrompt = null;
 			});
 
 			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.innerHTML = '<h6>Installed</h6>';
+				btnAdd.innerHTML = 'Installed';
 			});
 		});
 	});
@@ -186,6 +186,7 @@ const TopNavLinks = (props) => {
 					{props.notifications.length > 0 &&
 						<div
 							className="dropdown-header"
+							style={{ cursor: "pointer" }}
 							onClick={() => onDeleteComment(0)}>
 							Clear notifications
 						</div>}
@@ -216,20 +217,10 @@ const TopNavLinks = (props) => {
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>
 					</Link>
-					<Link to="#"
-						id="btnAdd"
-						className="p-3 dropdown-item border-bottom"
-						style={{ display: "none" }}>
-						<h6>Get App
-							{/* <svg xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-plus"
-								viewBox="0 0 16 16">
-								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-							</svg> */}
-						</h6>
+					<Link
+						to="/download"
+						className="p-3 dropdown-item border-bottom">
+						<h6>Get App</h6>
 					</Link>
 					<Link to='/videos' className="p-3 dropdown-item border-bottom">
 						<h6>Studio</h6>

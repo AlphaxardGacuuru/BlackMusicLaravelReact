@@ -23,6 +23,22 @@ const Settings = (props) => {
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
 				<center>
+					<h1>Video Payouts</h1>
+					<h6>Outstanding cash {props.videoPayouts}</h6>
+					<br />
+
+					<Button
+						btnClass="sonar-btn"
+						onClick={onShare}
+						btnText="transfer funds" />
+					<br />
+					<br />
+					<br />
+					<hr />
+					<br />
+					<br />
+					<br />
+
 					<h1>INVITES</h1>
 					<h5>Invite your friends to Black Music and <span style={{ color: "green" }}>earn!</span></h5>
 					<br />

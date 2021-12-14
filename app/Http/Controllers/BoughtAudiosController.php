@@ -24,15 +24,7 @@ class BoughtAudiosController extends Controller
      */
     public function index()
     {
-        // Check if user is logged in
-        if (Auth::check()) {
-            $authUsername = auth()->user()->username;
-        } else {
-            $authUsername = '@guest';
-        }
-
-        $getBoughtAudios = BoughtAudios::where('username', $authUsername)
-            ->get();
+        $getBoughtAudios = BoughtAudios::all();
 
         $boughtAudios = [];
 

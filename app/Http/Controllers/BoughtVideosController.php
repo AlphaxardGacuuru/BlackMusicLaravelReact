@@ -24,15 +24,7 @@ class BoughtVideosController extends Controller
      */
     public function index()
     {
-        // Check if user is logged in
-        if (Auth::check()) {
-            $authUsername = auth()->user()->username;
-        } else {
-            $authUsername = '@guest';
-        }
-
-        $getBoughtVideos = BoughtVideos::where('username', $authUsername)
-            ->get();
+        $getBoughtVideos = BoughtVideos::all();
 
         $boughtVideos = [];
 

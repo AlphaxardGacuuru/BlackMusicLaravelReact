@@ -187,7 +187,8 @@ const Index = (props) => {
 								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>
 										<Link to={`/profile/${user.username}`}>
-											<Img src={user.pp}
+											<Img
+												src={user.pp}
 												imgClass="rounded-circle"
 												width="30px"
 												height="30px"

@@ -1035,16 +1035,16 @@
         },
         {
             "name": "kopokopo/k2-connect-php",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kopokopo/k2-connect-php.git",
-                "reference": "004f89da08c9ba0db74900af4518089f2fa7f1f7"
+                "reference": "e0307697076699592028590f120aeb385d35f9f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kopokopo/k2-connect-php/zipball/004f89da08c9ba0db74900af4518089f2fa7f1f7",
-                "reference": "004f89da08c9ba0db74900af4518089f2fa7f1f7",
+                "url": "https://api.github.com/repos/kopokopo/k2-connect-php/zipball/e0307697076699592028590f120aeb385d35f9f9",
+                "reference": "e0307697076699592028590f120aeb385d35f9f9",
                 "shasum": ""
             },
             "require": {
@@ -1077,9 +1077,9 @@
             "homepage": "https://github.com/kopokopo/k2-connect-php",
             "support": {
                 "issues": "https://github.com/kopokopo/k2-connect-php/issues",
-                "source": "https://github.com/kopokopo/k2-connect-php/tree/v1.1.0"
+                "source": "https://github.com/kopokopo/k2-connect-php/tree/v1.2.0"
             },
-            "time": "2021-06-14T14:08:19+00:00"
+            "time": "2021-11-03T07:45:08+00:00"
         },
         {
             "name": "laravel/framework",

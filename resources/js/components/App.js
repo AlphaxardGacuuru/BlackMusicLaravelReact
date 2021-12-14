@@ -40,6 +40,7 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
+import DownloadApp from '../pages/DownloadApp'
 
 import NotFound from '../pages/NotFound'
 
@@ -360,19 +361,18 @@ function App() {
 	useEffect(() => {
 		var playPromise = audio.current.play();
 
-		if (playPromise !== undefined) {
-			playPromise.then(_ => {
+		if (playPromise != undefined) {
+			playPromise.then(() => {
 				// Automatic playback started!
 				// Show playing UI.
 				setPlayBtn(true)
 				setAudioLoader(false)
-			})
-				.catch(error => {
-					// Auto-play was prevented
-					// Show paused UI.
-					setPlayBtn(false)
-					setAudioLoader(true)
-				});
+			}).catch((error) => {
+				// Auto-play was prevented
+				// Show paused UI.
+				setPlayBtn(false)
+				setAudioLoader(true)
+			});
 		}
 	}, [show])
 
@@ -468,7 +468,7 @@ function App() {
 
 		setShow(songs[songIndex])
 	}
-	
+
 	// Update audio progress bar
 	function updateProgress() {
 		const progress = (audio.current.currentTime / audio.current.duration) * 100;
@@ -676,26 +676,26 @@ function App() {
 		showAudio,
 		showArtist,
 		show, setShow,
-		playBtn, setPlayBtn, 
-		shuffle, setShuffle, 
-		loop, setLoop, 
-		dur, setDur, 
-		volume, setVolume, 
-		currentTime, setCurrentTime, 
-		audio, 
-		audioProgress, 
-		audioContainer, 
-		volumeProgress, 
-		volumeContainer, 
-		songs, 
-		playSong, 
-		pauseSong, 
-		prevSong, 
-		nextSong, 
-		setProgress, 
-		progressPercent, 
-		onSetVolume, 
-		fmtMSS, 
+		playBtn, setPlayBtn,
+		shuffle, setShuffle,
+		loop, setLoop,
+		dur, setDur,
+		volume, setVolume,
+		currentTime, setCurrentTime,
+		audio,
+		audioProgress,
+		audioContainer,
+		volumeProgress,
+		volumeContainer,
+		songs,
+		playSong,
+		pauseSong,
+		prevSong,
+		nextSong,
+		setProgress,
+		progressPercent,
+		onSetVolume,
+		fmtMSS,
 		audioLoader,
 	}
 
@@ -861,6 +861,11 @@ function App() {
 					</>
 				)} />
 
+				<Route path="/download" exact render={(props) => (
+					<DownloadApp {...GLOBAL_STATE} />
+				)} />
+
+
 				<Messages {...GLOBAL_STATE} />
 
 				<BottomNav {...GLOBAL_STATE} />
@@ -885,8 +890,7 @@ function App() {
 				type="audio/*"
 				preload='true'
 				// autoPlay={true}
-				src={`/storage/${audios.find((audio) => audio.id == show) &&
-					audios.find((audio) => audio.id == show).audio}`} />
+				src={`/storage/${showAudio.audio}`} />
 		</>
 	);
 }

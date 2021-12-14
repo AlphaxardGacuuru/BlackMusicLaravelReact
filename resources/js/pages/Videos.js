@@ -31,9 +31,15 @@ const Videos = (props) => {
 				_method: "put"
 			}).then((res) => {
 				props.setMessage(res.data)
-				axios.get(`${props.url}/api/users`).then((res) => props.setUsers(res.data))
-				axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
-				axios.get(`${props.url}/api/audio-albums`).then((res) => props.setAudioAlbums(res.data))
+				// Update Users
+				axios.get(`${props.url}/api/users`)
+					.then((res) => props.setUsers(res.data))
+					// Update Video Albums
+				axios.get(`${props.url}/api/video-albums`)
+					.then((res) => props.setVideoAlbums(res.data))
+					// Update Audio Albums
+				axios.get(`${props.url}/api/audio-albums`)
+					.then((res) => props.setAudioAlbums(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -80,7 +86,9 @@ const Videos = (props) => {
 							<tr>
 								<th className="border-top-0"><h5>Videos</h5></th>
 								<th className="border-top-0">
-									<h5>{props.videos.filter((video) => video.username == props.auth.username).length}</h5>
+									<h5>{props.videos
+										.filter((video) => video.username == props.auth.username)
+										.length}</h5>
 								</th>
 							</tr>
 						</tbody>
@@ -89,7 +97,9 @@ const Videos = (props) => {
 								<th><h5>Video Albums</h5></th>
 								<th>
 									<h5>
-										{props.videoAlbums.filter((videoAlbum) => videoAlbum.username == props.auth.username).length}
+										{props.videoAlbums
+											.filter((videoAlbum) => videoAlbum.username == props.auth.username)
+											.length}
 									</h5>
 								</th>
 							</tr>
@@ -99,7 +109,9 @@ const Videos = (props) => {
 								<td className="border-right-0"><h5>Downloads</h5></td>
 								<td>
 									<h5>
-										{props.boughtVideos.filter((boughtVideo) => boughtVideo.artist == props.auth.username).length}
+										{props.boughtVideos
+											.filter((boughtVideo) => boughtVideo.artist == props.auth.username)
+											.length}
 									</h5>
 								</td>
 							</tr>
@@ -141,7 +153,8 @@ const Videos = (props) => {
 							<div key={key}>
 								<div className="d-flex">
 									<div className="p-2">
-										<Img src={`/storage/${videoAlbum.cover}`}
+										<Img
+											src={`/storage/${videoAlbum.cover}`}
 											width="auto"
 											height="100"
 											alt={"album cover"} />
@@ -152,7 +165,9 @@ const Videos = (props) => {
 										<h6>{videoAlbum.created_at}</h6>
 									</div>
 									<div className="p-2">
-										<Link to={`/video-album-edit/${videoAlbum.id}`} className="btn mysonar-btn">edit</Link>
+										<Link
+											to={`/video-album-edit/${videoAlbum.id}`}
+											className="btn mysonar-btn">edit</Link>
 									</div>
 								</div>
 								<br />
@@ -173,12 +188,13 @@ const Videos = (props) => {
 										</tr>
 									</tbody>
 									{props.videos
-										.filter((video) => video.album == videoAlbum.id)
+										.filter((video) => video.album_id == videoAlbum.id)
 										.map((albumItem, key) => (
 											<tbody key={key}>
 												<tr>
 													<td>
-														<Img src={albumItem.thumbnail}
+														<Img
+															src={albumItem.thumbnail}
 															width="160em"
 															height="90em"
 															alt={"thumbnail"} />

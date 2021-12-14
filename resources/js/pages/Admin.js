@@ -166,11 +166,15 @@ const Admin = (props) => {
 									<td>{musician.location}</td>
 									<td>
 										{props.boughtAudios
-											.filter((boughtAudio) => boughtAudio.username == musician.username).length}
+											.filter((boughtAudio) => {
+												boughtAudio.username == musician.username
+											}).length}
 									</td>
 									<td>
 										{props.boughtVideos
-											.filter((boughtVideo) => boughtVideo.username == musician.username).length}
+											.filter((boughtVideo) => {
+												boughtVideo.username == musician.username
+											}).length}
 									</td>
 									<td>{musician.created_at}
 									</td>

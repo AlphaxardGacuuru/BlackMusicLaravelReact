@@ -10,10 +10,13 @@ const Library = (props) => {
 			<div className="col-sm-4">
 				<center><h1>Library</h1></center>
 				<hr />
-				{props.boughtVideos.length > 0 &&
+				{props.boughtVideos
+					.filter((boughtVideo) => boughtVideo.username == props.auth.username)
+					.length > 0 &&
 					<center><h3>Videos</h3></center>}
 
 				{props.boughtVideos
+					.filter((boughtVideo) => boughtVideo.username == props.auth.username)
 					.map((boughtVideo, key) => (
 						<VideoMediaHorizontal
 							key={key}
@@ -27,10 +30,13 @@ const Library = (props) => {
 							showCartandBuyButton={false} />
 					))}
 
-				{props.boughtAudios.length > 0 &&
+				{props.boughtAudios
+					.filter((boughtAudio) => boughtAudio.username == props.auth.username)
+					.length > 0 &&
 					<center><h3 className="mt-5">Audios</h3></center>}
 
 				{props.boughtAudios
+					.filter((boughtAudio) => boughtAudio.username == props.auth.username)
 					.map((boughtAudio, key) => (
 						<AudioMediaHorizontal
 							key={key}

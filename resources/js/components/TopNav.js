@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import { useState } from 'react'
 
 import AuthLinks from "./AuthLinks"
 import TopnavLinks from "./TopNavLinks"
@@ -16,6 +15,7 @@ const TopNav = (props) => {
 	var display
 
 	location.pathname.match("/post-create") ||
+		location.pathname.match("/download") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||
 		location.pathname.match("/login") ||

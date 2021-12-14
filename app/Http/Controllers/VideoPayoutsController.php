@@ -6,6 +6,7 @@ use App\BoughtVideos;
 use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Kopokopo\SDK\K2;
 
 class VideoPayoutsController extends Controller
@@ -17,7 +18,25 @@ class VideoPayoutsController extends Controller
      */
     public function index()
     {
-        return VideoPayouts::all();
+        // Get Cost of Bought Videos at each price
+        $totalVideos20 = BoughtVideos::where('artist', auth()->user()->username)
+            ->where('price', 20)
+            ->count() * 20;
+        $totalVideos200 = BoughtVideos::where('artist', auth()->user()->username)
+            ->where('price', 200)
+            ->count() * 200;
+        $totalAudios100 = BoughtAudios::where('artist', auth()->user()->username)
+            ->where('price', 100)
+            ->count() * 100;
+
+        $videoPayouts = VideoPayouts::where('username', auth()->user()->username)->sum();
+
+        // Check if there's any outstanding cash
+        $balance = ($totalVideos20 + $totalVideos200 + $totalAudios100) - $videoPayouts;
+
+        return [
+            'balance' => $balance,
+        ];
     }
 
     /**
@@ -53,7 +72,7 @@ class VideoPayoutsController extends Controller
         }
 
         // Add receipient
-        // $pay = $K2->PayService();
+        $pay = $K2->PayService();
 
         // $response = $pay->addPayRecipient([
         //     'type' => 'mobile_wallet',
@@ -70,9 +89,7 @@ class VideoPayoutsController extends Controller
         // }
 
         // Pay
-        $pay = $K2->PayService();
-
-        $response = $pay->sendPay([
+        return $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
             'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
             'amount' => '100',
@@ -93,29 +110,42 @@ class VideoPayoutsController extends Controller
             // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
         }
 
-        $pay = $K2->PayService();
+        // $string = 'https:\/\/sandbox.kopokopo.com\/api\/v1\/pay_recipients\/9891b66e-827e-4798-81ac-9a1d05c7067d';
+        // $array = explode('/', $string);
 
-        $response = $pay->sendPay([
-            'destinationType' => 'mobile_wallet',
-            'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
-            'amount' => '20000',
-            'currency' => 'KES',
-            'description' => 'Salary payment for May 2018',
-            'category' => 'salaries',
-            'tags' => ["tag 1", "tag 2"],
-            'callbackUrl' => 'https://your-call-bak.yourapplication.com/payment_result',
-            'metadata' => [
-                'customerId' => '8675309',
-                'notes' => 'Salary payment for May 2018',
-            ],
-            'accessToken' => $data['accessToken'],
-        ]);
+        // $destinationReferrence = end($array);
 
-        if ($response['status'] == 'success') {
-            echo "The resource location is:" . json_encode($response['location']);
-            // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
-        }
+        // $response = Http::withHeaders([
+        //     "Accept" => "application/json",
+        //     "Content-Type" => "application/json",
+        //     "Authorization" => "Bearer " . $data['accessToken'],
+        // ])->post('https://sandbox.kopokopo.com/api/v1/payments', [
+        //     "destination_reference" => "f40e98ad-ed6a-4659-8129-f6b0c74efd06",
+        //     "destination_type" => "mobile_wallet",
+        //     "amount" => [
+        //         "currency" => "KES",
+        //         "value" => "20000",
+        //     ],
+        //     "description" => "Salary payment for May 2018",
+        //     "category" => "salaries",
+        //     "tags" => ["tag 1", "tag 2"],
+        //     "metadata" => [
+        //         "customerId" => "8675309",
+        //         "notes" => "Salary payment for May 2018",
+        //     ],
+        //     "_links" => [
+        //         "callback_url" => "https://your-call-bak.yourapplication.com/payment_result",
+        //     ],
+        // ]);
 
+        // return [
+        //     $response->status(), 'status',
+        //     $response->successful(), 'successful',
+        //     $response->failed(), 'failed',
+        //     $response->headers()['Status'],
+        //     $response->headers()['location'],
+        //     $response->headers()['Date'],
+        // ];
     }
 
     /**

@@ -93455,7 +93455,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
 /* harmony import */ var _pages_Settings__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Settings */ "./resources/js/pages/Settings.js");
-/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
+/* harmony import */ var _pages_DownloadApp__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/DownloadApp */ "./resources/js/pages/DownloadApp.js");
+/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -93473,6 +93474,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -94034,8 +94036,8 @@ function App() {
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var playPromise = audio.current.play();
 
-    if (playPromise !== undefined) {
-      playPromise.then(function (_) {
+    if (playPromise != undefined) {
+      playPromise.then(function () {
         // Automatic playback started!
         // Show playing UI.
         setPlayBtn(true);
@@ -94565,6 +94567,12 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
     }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/download",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_DownloadApp__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE);
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
@@ -94577,11 +94585,7 @@ function App() {
     type: "audio/*",
     preload: "true" // autoPlay={true}
     ,
-    src: "/storage/".concat(audios.find(function (audio) {
-      return audio.id == show;
-    }) && audios.find(function (audio) {
-      return audio.id == show;
-    }).audio)
+    src: "/storage/".concat(showAudio.audio)
   }));
 }
 
@@ -95228,7 +95232,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var TopNav = function TopNav(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -95238,7 +95241,7 @@ var TopNav = function TopNav(props) {
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var display;
-  location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = "";
+  location.pathname.match("/post-create") || location.pathname.match("/download") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = "";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "MyElement",
     style: {
@@ -95496,13 +95499,13 @@ var TopNavLinks = function TopNavLinks(props) {
 
       deferredPrompt.userChoice.then(function (choiceResult) {
         if (choiceResult.outcome === 'accepted') {
-          btnAdd.innerHTML = '<h6>User accepted</h6>';
+          btnAdd.innerHTML = 'User accepted';
         }
 
         deferredPrompt = null;
       });
       window.addEventListener('appinstalled', function (evt) {
-        btnAdd.innerHTML = '<h6>Installed</h6>';
+        btnAdd.innerHTML = 'Installed';
       });
     });
   }); // Function to get to Privacy Policy
@@ -95621,6 +95624,9 @@ var TopNavLinks = function TopNavLinks(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
   })), props.notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header",
+    style: {
+      cursor: "pointer"
+    },
     onClick: function onClick() {
       return onDeleteComment(0);
     }
@@ -95649,12 +95655,8 @@ var TopNavLinks = function TopNavLinks(props) {
     to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "#",
-    id: "btnAdd",
-    className: "p-3 dropdown-item border-bottom",
-    style: {
-      display: "none"
-    }
+    to: "/download",
+    className: "p-3 dropdown-item border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "p-3 dropdown-item border-bottom"
@@ -95967,9 +95969,9 @@ var Admin = function Admin(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.gender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.account_type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.dob), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.boughtAudios.filter(function (boughtAudio) {
-      return boughtAudio.username == musician.username;
+      boughtAudio.username == musician.username;
     }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.boughtVideos.filter(function (boughtVideo) {
-      return boughtVideo.username == musician.username;
+      boughtVideo.username == musician.username;
     }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.created_at)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive thead-light"
@@ -98011,7 +98013,27 @@ var AudioShow = function AudioShow(props) {
     d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
-  }, props.showAudio.likes))), props.showAudio.hasBoughtAudio ? // Ensure audio is downloadable
+  }, props.showAudio.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 mr-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      props.auth.username != "@guest" && onShare();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-reply",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1"
+  }, "SHARE"))), props.showAudio.hasBoughtAudio ? // Ensure audio is downloadable
   !props.showAudio.audio.match(/https/) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -98049,27 +98071,7 @@ var AudioShow = function AudioShow(props) {
       // If user is guest then redirect to Login
       props.auth.username == "@guest" ? onGuestBuy() : onBuyAudios(show);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 mr-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      props.auth.username != "@guest" && onShare();
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "bi bi-reply",
-    width: "1.5em",
-    height: "1.5em",
-    viewBox: "0 0 16 16",
-    fill: "currentColor",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ml-1"
-  }, "SHARE")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-auto"
@@ -98191,7 +98193,8 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    src: "/storage/" + props.auth.pp,
+    src: props.auth.pp,
+    imgClass: "rounded-circle",
     width: "40px",
     height: "40px"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98992,6 +98995,37 @@ var Cart = function Cart(props) {
 
 /***/ }),
 
+/***/ "./resources/js/pages/DownloadApp.js":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/DownloadApp.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var DownloadApp = function DownloadApp() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+    style: {
+      background: "gold"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Download the App"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "It's light"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "btnAdd",
+    className: "sonar-btn btn-2",
+    style: {
+      display: "none"
+    }
+  }, "Install App"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DownloadApp);
+
+/***/ }),
+
 /***/ "./resources/js/pages/Index.js":
 /*!*************************************!*\
   !*** ./resources/js/pages/Index.js ***!
@@ -99760,7 +99794,11 @@ var Library = function Library(props) {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.boughtVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.boughtVideos.map(function (boughtVideo, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.boughtVideos.filter(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username;
+  }).length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos")), props.boughtVideos.filter(function (boughtVideo) {
+    return boughtVideo.username == props.auth.username;
+  }).map(function (boughtVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: key,
       onClick: function onClick() {
@@ -99774,9 +99812,13 @@ var Library = function Library(props) {
       ft: boughtVideo.ft,
       showCartandBuyButton: false
     });
-  }), props.boughtAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+  }), props.boughtAudios.filter(function (boughtAudio) {
+    return boughtAudio.username == props.auth.username;
+  }).length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "mt-5"
-  }, "Audios")), props.boughtAudios.map(function (boughtAudio, key) {
+  }, "Audios")), props.boughtAudios.filter(function (boughtAudio) {
+    return boughtAudio.username == props.auth.username;
+  }).map(function (boughtAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: key,
       setShow: props.setShow,
@@ -100850,7 +100892,7 @@ var Profile = function Profile(props) {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Audio Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, audioAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioAlbum.created_at))), props.audios.filter(function (audio) {
-      return audio.album_id == audioAlbum.id && audio.username == username;
+      return audio.album_id == audioAlbum.id;
     }).map(function (audio, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__["default"], {
         key: index,
@@ -101271,7 +101313,7 @@ var Profile = function Profile(props) {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), props.videos.filter(function (video) {
-      return video.album_id == videoAlbum.id && videoAlbum.username == username;
+      return video.album_id == videoAlbum.id;
     }).map(function (video, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], {
         key: index,
@@ -101543,7 +101585,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Search = function Search(props) {
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for buying video to cart
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  var userResults = props.users.filter(function (user) {
+    return user.username != props.auth.username && user.username != "@blackmusic" && user.account_type == "musician" && user.username.match(props.search);
+  });
+  var videoResults = props.videos.filter(function (video) {
+    return video.name.match(props.search) && video.username != props.auth.username;
+  });
+  var audioResults = props.audios.filter(function (audio) {
+    return audio.name.match(props.search) && audio.username != props.auth.username;
+  });
+  var audioAlbumResults = props.audioAlbums.filter(function (audioAlbum) {
+    return audioAlbum.name != "Singles" && audioAlbum.name.match(props.search) && audioAlbum.username != props.auth.username;
+  });
+  var videoAlbumResults = props.videoAlbums.filter(function (videoAlbum) {
+    return videoAlbum.name != "Singles" && videoAlbum.name.match(props.search) && videoAlbum.username != props.auth.username;
+  }); // Function for buying video to cart
 
   var onBuyVideos = function onBuyVideos(video) {
     props.onBuyVideos(video);
@@ -101593,14 +101650,12 @@ var Search = function Search(props) {
     }
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "anti-hidden"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), userResults.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Artists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll"
-  }, props.users.filter(function (user) {
-    return user.username != props.auth.username && user.username != "@blackmusic" && user.account_type == "musician" && user.username.match(props.search);
-  }).map(function (artist, key) {
+  }, userResults.map(function (artist, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
-      className: "pt-0 pl-0 pr-0 pb-2",
+      className: "pt-0 px-0 pb-2",
       style: {
         borderRadius: "10px"
       }
@@ -101639,11 +101694,9 @@ var Search = function Search(props) {
     className: "col-sm-3"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 mt-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), props.videos.filter(function (video) {
-    return video.name.match(props.search) && video.username != props.auth.username;
-  }).slice(0, 5).map(function (video, key) {
+  }, videoResults.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 border-bottom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), videoResults.slice(0, 5).map(function (video, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_3__["default"], {
       key: key,
       onClick: function onClick() {
@@ -101663,11 +101716,9 @@ var Search = function Search(props) {
     });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, audioResults.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mt-2 border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audios")), props.audios.filter(function (audio) {
-    return audio.name.match(props.search) && audio.username != props.auth.username;
-  }).slice(0, 5).map(function (audio, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audios")), audioResults.slice(0, 5).map(function (audio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: key,
       setShow: props.setShow,
@@ -101690,11 +101741,9 @@ var Search = function Search(props) {
     className: "col-sm-3"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, videoAlbumResults.lenth > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mt-5 mb-3 border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Video Albums")), props.videoAlbums.filter(function (videoAlbum) {
-    return videoAlbum.name != "Singles" && videoAlbum.name.match(props.search) && videoAlbum.username != props.auth.username;
-  }).map(function (videoAlbum, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Video Albums")), videoAlbumResults.map(function (videoAlbum, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "mb-3"
@@ -101712,11 +101761,9 @@ var Search = function Search(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, audioAlbumResults.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mt-5 mb-3 border-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audio Albums")), props.audioAlbums.filter(function (audioAlbum) {
-    return audioAlbum.name != "Singles" && audioAlbum.name.match(props.search) && audioAlbum.username != props.auth.username;
-  }).map(function (audioAlbum, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Audio Albums")), audioAlbumResults.map(function (audioAlbum, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "mb-3"
@@ -101776,7 +101823,11 @@ var Settings = function Settings(props) {
     className: "col-sm-2"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "INVITES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Invite your friends to Black Music and ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Outstanding cash ", props.videoPayouts), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "sonar-btn",
+    onClick: onShare,
+    btnText: "transfer funds"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "INVITES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Invite your friends to Black Music and ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       color: "green"
     }
@@ -103658,7 +103709,27 @@ var VideoShow = function VideoShow(props) {
     d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
-  }, showVideo.likes))), showVideo.hasBoughtVideo ? // Ensure video is downloadable
+  }, showVideo.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      props.auth.username != "@guest" && onShare();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "bi bi-reply",
+    width: "1.5em",
+    height: "1.5em",
+    viewBox: "0 0 16 16",
+    fill: "currentColor",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1"
+  }, "SHARE"))), showVideo.hasBoughtVideo ? // Ensure video is downloadable
   !showVideo.video.match(/https/) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -103696,27 +103767,7 @@ var VideoShow = function VideoShow(props) {
       // If user is guest then redirect to Login
       props.auth.username == "@guest" ? onGuestBuy() : onBuyVideos(show);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      props.auth.username != "@guest" && onShare();
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "bi bi-reply",
-    width: "1.5em",
-    height: "1.5em",
-    viewBox: "0 0 16 16",
-    fill: "currentColor",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ml-1"
-  }, "SHARE")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-auto"
@@ -103839,7 +103890,8 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    src: "/storage/" + props.auth.pp,
+    src: props.auth.pp,
+    imgClass: "rounded-circle",
     width: "40px",
     height: "40px"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104094,13 +104146,16 @@ var Videos = function Videos(props) {
         account_type: "musician",
         _method: "put"
       }).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Users
+
         axios.get("".concat(props.url, "/api/users")).then(function (res) {
           return props.setUsers(res.data);
-        });
+        }); // Update Video Albums
+
         axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
           return props.setVideoAlbums(res.data);
-        });
+        }); // Update Audio Albums
+
         axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
           return props.setAudioAlbums(res.data);
         });
@@ -104209,7 +104264,7 @@ var Videos = function Videos(props) {
         color: "green"
       }
     }, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Likes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Released")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Uploaded")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null)))), props.videos.filter(function (video) {
-      return video.album == videoAlbum.id;
+      return video.album_id == videoAlbum.id;
     }).map(function (albumItem, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         key: key
