@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtVideos;
 use App\BoughtAudios;
+use App\BoughtVideos;
 use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
@@ -19,25 +19,39 @@ class VideoPayoutsController extends Controller
      */
     public function index()
     {
-        // Get Cost of Bought Videos at each price
+        // Get cost of bought videos at each price and multiply by profit
         $totalVideos20 = BoughtVideos::where('artist', auth()->user()->username)
             ->where('price', 20)
-            ->count() * 20;
+            ->count() * 10;
         $totalVideos200 = BoughtVideos::where('artist', auth()->user()->username)
             ->where('price', 200)
-            ->count() * 200;
+            ->count() * 100;
         $totalAudios100 = BoughtAudios::where('artist', auth()->user()->username)
             ->where('price', 100)
-            ->count() * 100;
+            ->count() * 50;
 
-        $videoPayouts = VideoPayouts::where('username', auth()->user()->username)->sum('amount');
+        // Get video payouts
+        $getVideoPayouts = VideoPayouts::where('username', auth()->user()->username)
+            ->get();
+
+        $videoPayouts = [];
+        // Populate video payouts array
+        foreach ($getVideoPayouts as $key => $videoPayout) {
+            array_push($videoPayouts, [
+                'amount' => $videoPayout->amount,
+				'created_at' => $videoPayout->created_at->format('d F Y')
+            ]);
+        }
 
         // Check if there's any outstanding cash
-        $balance = ($totalVideos20 + $totalVideos200 + $totalAudios100) - $videoPayouts;
+        $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
+        $balance = $totalEarnings - $getVideoPayouts->sum('amount');
 
-        return [
+        return response([
+            'videoPayouts' => $videoPayouts,
+            'totalEarnings' => $totalEarnings,
             'balance' => $balance,
-        ];
+        ], 200);
     }
 
     /**

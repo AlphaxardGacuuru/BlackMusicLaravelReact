@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useContext, createContext } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Route, Redirect, useHistory, useLocation, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 import axios from 'axios';
 
 import Messages from './Messages'

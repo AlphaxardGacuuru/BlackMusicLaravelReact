@@ -33,6 +33,7 @@ class BoughtVideosController extends Controller
                 "id" => $boughtVideo->id,
                 "video_id" => $boughtVideo->video_id,
                 "username" => $boughtVideo->username,
+				"price" => $boughtVideo->price,
                 "ft" => $boughtVideo->videos->ft,
                 "name" => $boughtVideo->videos->name,
                 "artist" => $boughtVideo->artist,

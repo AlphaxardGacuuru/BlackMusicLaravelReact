@@ -197,23 +197,24 @@ const Admin = (props) => {
 							<th>Send</th>
 						</tr>
 					</tbody>
-					{props.videoPayouts.map((videoPayout, key) => (
-						<tbody key={key}>
-							<tr>
-								<td>{videoPayout.name}</td>
-								<td>{videoPayout.username}</td>
-								<td>{videoPayout.email}</td>
-								<td>{videoPayout.phone}</td>
-								<td>{videoPayout.amount}</td>
-								<td>
-									<Button
-										btnClass="mysonar-btn"
-										btnText="send"
-										onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
-								</td>
-							</tr>
-						</tbody>
-					))}
+					{props.videoPayouts
+						.map((videoPayout, key) => (
+							<tbody key={key}>
+								<tr>
+									<td>{videoPayout.name}</td>
+									<td>{videoPayout.username}</td>
+									<td>{videoPayout.email}</td>
+									<td>{videoPayout.phone}</td>
+									<td>{videoPayout.amount}</td>
+									<td>
+										<Button
+											btnClass="mysonar-btn"
+											btnText="send"
+											onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
+									</td>
+								</tr>
+							</tbody>
+						))}
 				</table>
 				{/* Video Payouts End */}
 

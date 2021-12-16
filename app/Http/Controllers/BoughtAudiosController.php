@@ -33,6 +33,7 @@ class BoughtAudiosController extends Controller
                 "id" => $boughtAudio->id,
                 "audio_id" => $boughtAudio->audio_id,
                 "username" => $boughtAudio->username,
+				"price" => $boughtAudio->price,
                 "ft" => $boughtAudio->audios->ft,
                 "name" => $boughtAudio->name,
                 "artist" => $boughtAudio->artist,

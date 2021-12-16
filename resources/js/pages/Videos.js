@@ -34,10 +34,10 @@ const Videos = (props) => {
 				// Update Users
 				axios.get(`${props.url}/api/users`)
 					.then((res) => props.setUsers(res.data))
-					// Update Video Albums
+				// Update Video Albums
 				axios.get(`${props.url}/api/video-albums`)
 					.then((res) => props.setVideoAlbums(res.data))
-					// Update Audio Albums
+				// Update Audio Albums
 				axios.get(`${props.url}/api/audio-albums`)
 					.then((res) => props.setAudioAlbums(res.data))
 			}).catch((err) => {
@@ -99,7 +99,7 @@ const Videos = (props) => {
 									<h5>
 										{props.videoAlbums
 											.filter((videoAlbum) => videoAlbum.username == props.auth.username)
-											.length}
+											.length - 1}
 									</h5>
 								</th>
 							</tr>
@@ -114,12 +114,6 @@ const Videos = (props) => {
 											.length}
 									</h5>
 								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td><h6>Unpaid</h6></td>
-								<td><h6></h6></td>
 							</tr>
 						</tbody>
 						<tbody>
@@ -140,7 +134,10 @@ const Videos = (props) => {
 						<tbody>
 							<tr>
 								<td><h6>Unpaid</h6></td>
-								<td><h6 style={{ color: "green" }}>KES</h6></td>
+								<td><h6 style={{ color: "green" }}>
+									KES <span className="ml-1">{props.videoPayouts.balance}</span>
+								</h6>
+								</td>
 							</tr>
 						</tbody>
 					</table>

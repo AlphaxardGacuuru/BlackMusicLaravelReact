@@ -24,6 +24,26 @@ const Settings = (props) => {
 			<div className="col-sm-8">
 				<center>
 					<h1>Video Payouts</h1>
+					<table className="table table-responsive table-hover">
+						<thead>
+							<tr>
+								<th>Amount</th>
+								<th>Date Sent</th>
+							</tr>
+						</thead>
+						<tbody>
+							{/* Show Video Payouts */}
+							{/* Level 1 */}
+							{props.videoPayouts.videoPayouts &&
+								props.videoPayouts.videoPayouts
+									.map((videoPayout, key) => (
+										<tr key={key}>
+											<td className="text-success">KES {videoPayout.amount}</td>
+											<td>{videoPayout.created_at}</td>
+										</tr>))}
+							{/* Show Referrals End */}
+						</tbody>
+					</table>
 					<h4>Outstanding cash</h4>
 					<h5 className='text-success'>KES {props.videoPayouts.balance}</h5>
 					<br />
