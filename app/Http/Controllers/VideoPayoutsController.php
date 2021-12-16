@@ -8,6 +8,7 @@ use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use Kopokopo\SDK\K2;
 
 class VideoPayoutsController extends Controller
@@ -19,19 +20,26 @@ class VideoPayoutsController extends Controller
      */
     public function index()
     {
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+		
         // Get cost of bought videos at each price and multiply by profit
-        $totalVideos20 = BoughtVideos::where('artist', auth()->user()->username)
+        $totalVideos20 = BoughtVideos::where('artist', $authUsername)
             ->where('price', 20)
             ->count() * 10;
-        $totalVideos200 = BoughtVideos::where('artist', auth()->user()->username)
+        $totalVideos200 = BoughtVideos::where('artist', $authUsername)
             ->where('price', 200)
             ->count() * 100;
-        $totalAudios100 = BoughtAudios::where('artist', auth()->user()->username)
+        $totalAudios100 = BoughtAudios::where('artist', $authUsername)
             ->where('price', 100)
             ->count() * 50;
 
         // Get video payouts
-        $getVideoPayouts = VideoPayouts::where('username', auth()->user()->username)
+        $getVideoPayouts = VideoPayouts::where('username', $authUsername)
             ->get();
 
         $videoPayouts = [];

@@ -93527,7 +93527,7 @@ function App() {
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     "name": "Guest",
     "username": "@guest",
-    "pp": "profile-pics/male_avatar.png",
+    "pp": "/storage/profile-pics/male_avatar.png",
     "account_type": "normal"
   }),
       _useState6 = _slicedToArray(_useState5, 2),

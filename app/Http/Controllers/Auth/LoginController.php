@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         return Socialite::driver($website)->redirect();
 
-		// return Socialite::driver($website)->stateless()->redirect()->getTargetUrl();
+        // return Socialite::driver($website)->stateless()->redirect()->getTargetUrl();
     }
 
     /**
@@ -92,10 +92,10 @@ class LoginController extends Controller
 
                 // Auth::login($dbUser->first(), true);
 
-				Auth::attempt([
-					'phone' => $dbUser->first()->phone, 
-					'password' => $dbUser->first()->phone
-				], 'on');
+                Auth::attempt([
+                    'phone' => $dbUser->first()->phone,
+                    'password' => $dbUser->first()->phone
+                ], 'on');
 
                 return redirect()->intended();
 
@@ -135,7 +135,7 @@ class LoginController extends Controller
         $user->phone = $request->input('phone');
         $user->save();
 
-		// Notify User
+        // Notify User
         Mail::to($request->input('email'))
             ->send(new WelcomeMail($request->input('username')));
 

@@ -11,9 +11,6 @@ use App\VideoAlbums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMail;
-
 
 class UsersController extends Controller
 {
@@ -80,7 +77,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-		// return Mail::to('alphaxardgacuuru47@gmail.com')->send(new WelcomeMail('@alphaxardG'));
+        // return Mail::to('alphaxardgacuuru47@gmail.com')->send(new WelcomeMail('@alphaxardG'));
     }
 
     /**

@@ -55,7 +55,7 @@ function App() {
 	const [auth, setAuth] = useState({
 		"name": "Guest",
 		"username": "@guest",
-		"pp": "profile-pics/male_avatar.png",
+		"pp": "/storage/profile-pics/male_avatar.png",
 		"account_type": "normal"
 	})
 	const [message, setMessage] = useState('')
