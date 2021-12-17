@@ -101457,7 +101457,7 @@ var ProfileEdit = function ProfileEdit(props) {
           });
         },
         onerror: function onerror(err) {
-          return console.log(err.response);
+          return console.log(err.response.data);
         }
       }
     }

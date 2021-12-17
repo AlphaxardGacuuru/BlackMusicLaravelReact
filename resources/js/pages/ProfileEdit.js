@@ -52,22 +52,22 @@ const ProfileEdit = (props) => {
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/users/${props.auth.id}`, formData)
-			.then((res) => {
-				props.setMessage(res.data)
-				// Update auth details
-				axios.get(`${props.url}/api/home`)
-				.then((res) => props.setAuth(res.data))
-				setName("")
-				setBio("")
-			}).catch(err => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
+				.then((res) => {
+					props.setMessage(res.data)
+					// Update auth details
+					axios.get(`${props.url}/api/home`)
+						.then((res) => props.setAuth(res.data))
+					setName("")
+					setBio("")
+				}).catch(err => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
 		})
 	}
 
@@ -96,13 +96,13 @@ const ProfileEdit = (props) => {
 									process: {
 										url: `/users`,
 										headers: { 'X-CSRF-TOKEN': token.content },
-										onload: res => {
+										onload: (res) => {
 											props.setMessage("Account updated")
 											// Update auth
 											axios.get(`${props.url}/api/home`)
-											.then((res) => props.setAuth(res.data))
+												.then((res) => props.setAuth(res.data))
 										},
-										onerror: (err) => console.log(err.response)
+										onerror: (err) => console.log(err.response.data)
 									}
 								}} />
 						</div>
