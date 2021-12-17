@@ -102,7 +102,7 @@ const ProfileEdit = (props) => {
 											axios.get(`${props.url}/api/home`)
 												.then((res) => props.setAuth(res.data))
 										},
-										onerror: (err) => console.log(err.response.data)
+										onerror: (err) => console.log(err.response)
 									}
 								}} />
 						</div>

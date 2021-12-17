@@ -219,10 +219,8 @@ const VideoCreate = (props) => {
 												process: {
 													url: "/videos",
 													headers: { 'X-CSRF-TOKEN': token.content },
-													onload: res => {
-														setVideo(res)
-													},
-													onerror: (err) => console.log(err)
+													onload: res => setVideo(res),
+													onerror: (err) => console.log(err.response.data)
 												},
 												revert: {
 													url: `/${video}`,

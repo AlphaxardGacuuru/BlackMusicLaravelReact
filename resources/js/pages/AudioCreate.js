@@ -276,16 +276,13 @@ const AudioCreate = (props) => {
 												process: {
 													url: "/audios",
 													headers: { 'X-CSRF-TOKEN': token.content },
-													onload: res => {
-														setThumbnail(res)
-													},
+													onload: res => setThumbnail(res),
+													onerror: (err) => console.log(err.response.data)
 												},
 												revert: {
 													url: `/audios/${thumbnail.substr(17)}`,
 													headers: { 'X-CSRF-TOKEN': token.content },
-													onload: res => {
-														props.setMessage(res)
-													},
+													onload: res => props.setMessage(res),
 												},
 											}} />
 										<br />

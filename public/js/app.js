@@ -97159,7 +97159,10 @@ var AudioCreate = function AudioCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          setThumbnail(res);
+          return setThumbnail(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
         }
       },
       revert: {
@@ -97168,7 +97171,7 @@ var AudioCreate = function AudioCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessage(res);
+          return props.setMessage(res);
         }
       }
     }
@@ -101457,7 +101460,7 @@ var ProfileEdit = function ProfileEdit(props) {
           });
         },
         onerror: function onerror(err) {
-          return console.log(err.response.data);
+          return console.log(err.response);
         }
       }
     }
@@ -103072,10 +103075,10 @@ var VideoCreate = function VideoCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          setVideo(res);
+          return setVideo(res);
         },
         onerror: function onerror(err) {
-          return console.log(err);
+          return console.log(err.response.data);
         }
       },
       revert: {
