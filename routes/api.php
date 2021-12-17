@@ -45,6 +45,7 @@ Route::resources([
     'decos' => 'DecosController',
     'follows' => 'FollowsController',
     'kopokopo' => 'KopokopoController',
+    'kopokopo-recipients' => 'KopokopoRecipientsController',
     'notifications' => 'NotificationsController',
     'posts' => 'PostsController',
     'post-likes' => 'PostLikesController',

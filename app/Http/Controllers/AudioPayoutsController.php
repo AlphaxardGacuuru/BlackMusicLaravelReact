@@ -6,6 +6,7 @@ use App\User;
 use App\BoughtAudios;
 use App\AudioPayouts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AudioPayoutsController extends Controller
 {
@@ -16,7 +17,40 @@ class AudioPayoutsController extends Controller
      */
     public function index()
     {
-        return AudioPayouts::all();
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+		
+        // Get cost of bought audios at each price and multiply by profit
+        $totalAudios100 = BoughtAudios::where('artist', $authUsername)
+            ->where('price', 100)
+            ->count() * 50;
+
+        // Get audio payouts
+        $getAudioPayouts = AudioPayouts::where('username', $authUsername)
+            ->get();
+
+        $audioPayouts = [];
+		
+        // Populate audio payouts array
+        foreach ($getAudioPayouts as $key => $audioPayout) {
+            array_push($audioPayouts, [
+                'amount' => $audioPayout->amount,
+				'created_at' => $audioPayout->created_at->format('d F Y')
+            ]);
+        }
+
+        // Check if there's any outstanding cash
+        $balance = $totalAudios100 - $getAudioPayouts->sum('amount');
+
+        return response([
+            'audioPayouts' => $audioPayouts,
+            'totalAudioEarnings' => $totalAudios100,
+            'balance' => $balance,
+        ], 200);
     }
 
     /**

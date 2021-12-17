@@ -197,24 +197,25 @@ const Admin = (props) => {
 							<th>Send</th>
 						</tr>
 					</tbody>
-					{props.videoPayouts
-						.map((videoPayout, key) => (
-							<tbody key={key}>
-								<tr>
-									<td>{videoPayout.name}</td>
-									<td>{videoPayout.username}</td>
-									<td>{videoPayout.email}</td>
-									<td>{videoPayout.phone}</td>
-									<td>{videoPayout.amount}</td>
-									<td>
-										<Button
-											btnClass="mysonar-btn"
-											btnText="send"
-											onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
-									</td>
-								</tr>
-							</tbody>
-						))}
+					{props.videoPayouts.videoPayouts &&
+						props.videoPayouts.videoPayouts
+							.map((videoPayout, key) => (
+								<tbody key={key}>
+									<tr>
+										<td>{videoPayout.name}</td>
+										<td>{videoPayout.username}</td>
+										<td>{videoPayout.email}</td>
+										<td>{videoPayout.phone}</td>
+										<td>{videoPayout.amount}</td>
+										<td>
+											<Button
+												btnClass="mysonar-btn"
+												btnText="send"
+												onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
+										</td>
+									</tr>
+								</tbody>
+							))}
 				</table>
 				{/* Video Payouts End */}
 
@@ -234,23 +235,25 @@ const Admin = (props) => {
 							<th>Send</th>
 						</tr>
 					</tbody>
-					{props.audioPayouts.map((audioPayout, key) => (
-						<tbody key={key}>
-							<tr>
-								<td>{audioPayout.name}</td>
-								<td>{audioPayout.username}</td>
-								<td>{audioPayout.email}</td>
-								<td>{audioPayout.phone}</td>
-								<td>{audioPayout.amount}</td>
-								<td>
-									<Button
-										btnClass="mysonar-btn"
-										btnText="send"
-										onClick={() => onAudioPayout(audioPayout.username, audioPayout.amount)} />
-								</td>
-							</tr>
-						</tbody>
-					))}
+					{props.audioPayouts.audioPayouts &&
+						props.audioPayouts.audioPayouts
+							.map((audioPayout, key) => (
+								<tbody key={key}>
+									<tr>
+										<td>{audioPayout.name}</td>
+										<td>{audioPayout.username}</td>
+										<td>{audioPayout.email}</td>
+										<td>{audioPayout.phone}</td>
+										<td>{audioPayout.amount}</td>
+										<td>
+											<Button
+												btnClass="mysonar-btn"
+												btnText="send"
+												onClick={() => onAudioPayout(audioPayout.username, audioPayout.amount)} />
+										</td>
+									</tr>
+								</tbody>
+							))}
 				</table>
 				{/* Audio Payouts End */}
 			</div>

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtAudios;
 use App\BoughtVideos;
 use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Kopokopo\SDK\K2;
 
@@ -26,7 +24,7 @@ class VideoPayoutsController extends Controller
         } else {
             $authUsername = '@guest';
         }
-		
+
         // Get cost of bought videos at each price and multiply by profit
         $totalVideos20 = BoughtVideos::where('artist', $authUsername)
             ->where('price', 20)
@@ -34,30 +32,28 @@ class VideoPayoutsController extends Controller
         $totalVideos200 = BoughtVideos::where('artist', $authUsername)
             ->where('price', 200)
             ->count() * 100;
-        $totalAudios100 = BoughtAudios::where('artist', $authUsername)
-            ->where('price', 100)
-            ->count() * 50;
 
         // Get video payouts
         $getVideoPayouts = VideoPayouts::where('username', $authUsername)
             ->get();
 
         $videoPayouts = [];
+
         // Populate video payouts array
         foreach ($getVideoPayouts as $key => $videoPayout) {
             array_push($videoPayouts, [
                 'amount' => $videoPayout->amount,
-				'created_at' => $videoPayout->created_at->format('d F Y')
+                'created_at' => $videoPayout->created_at->format('d F Y'),
             ]);
         }
 
         // Check if there's any outstanding cash
-        $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
-        $balance = $totalEarnings - $getVideoPayouts->sum('amount');
+        $totalVideoEarnings = $totalVideos20 + $totalVideos200;
+        $balance = $totalVideoEarnings - $getVideoPayouts->sum('amount');
 
         return response([
             'videoPayouts' => $videoPayouts,
-            'totalEarnings' => $totalEarnings,
+            'totalVideoEarnings' => $totalVideoEarnings,
             'balance' => $balance,
         ], 200);
     }
@@ -68,6 +64,17 @@ class VideoPayoutsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+    {
+		// 
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         // Do not hard code these values
         $options = [
@@ -91,100 +98,40 @@ class VideoPayoutsController extends Controller
 
         if ($result['status'] == 'success') {
             $data = $result['data'];
-            echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
+            // echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
         }
 
-        // Add receipient
         $pay = $K2->PayService();
 
-        // $response = $pay->addPayRecipient([
-        //     'type' => 'mobile_wallet',
-        //     'firstName' => 'Alphaxard',
-        //     'lastName' => 'Gacuuru',
-        //     'email' => 'alphaxardgacuuru47@gmail.com',
-        //     'phoneNumber' => '+254700364446',
-        //     'network' => 'Safaricom',
-        //     'accessToken' => $data['accessToken'],
-        // ]);
-
-        // if ($response['status'] == 'success') {
-        //     echo "The resource location is:" . json_encode($response['location']);
-        // }
-
         // Pay
-        return $response = $pay->sendPay([
+        $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
-            'destinationReference' => 'f40e98ad-ed6a-4659-8129-f6b0c74efd06',
-            'amount' => '100',
+            'destinationReference' => $request->input('destination_reference'),
+            'amount' => $request->input('amount'),
             'currency' => 'KES',
             'callbackUrl' => 'https://music.black.co.ke/api/video-payouts',
-            'description' => 'Salary payment for May 2018',
+            'description' => 'Video Payout',
             'category' => 'salaries',
             'tags' => ["tag 1", "tag 2"],
             'metadata' => [
-                'customerId' => '8675309',
-                'notes' => 'Salary payment for May 2018',
+                // 'customerId' => '8675309',
+                'notes' => 'Video payment for May 2018',
             ],
             'accessToken' => $data['accessToken'],
         ]);
 
         if ($response['status'] == 'success') {
-            echo "The resource location is:" . json_encode($response['location']);
+            // echo "The resource location is:" . json_encode($response['location']);
             // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
+
+            $videoPayout = new VideoPayouts;
+            $videoPayout->username = auth()->user()->username;
+            $videoPayout->amount = $request->input('amount');
+            $videoPayout->save();
+
+            return response("Video Payout Added", 200);
         }
-
-        // $string = 'https:\/\/sandbox.kopokopo.com\/api\/v1\/pay_recipients\/9891b66e-827e-4798-81ac-9a1d05c7067d';
-        // $array = explode('/', $string);
-
-        // $destinationReferrence = end($array);
-
-        // $response = Http::withHeaders([
-        //     "Accept" => "application/json",
-        //     "Content-Type" => "application/json",
-        //     "Authorization" => "Bearer " . $data['accessToken'],
-        // ])->post('https://sandbox.kopokopo.com/api/v1/payments', [
-        //     "destination_reference" => "f40e98ad-ed6a-4659-8129-f6b0c74efd06",
-        //     "destination_type" => "mobile_wallet",
-        //     "amount" => [
-        //         "currency" => "KES",
-        //         "value" => "20000",
-        //     ],
-        //     "description" => "Salary payment for May 2018",
-        //     "category" => "salaries",
-        //     "tags" => ["tag 1", "tag 2"],
-        //     "metadata" => [
-        //         "customerId" => "8675309",
-        //         "notes" => "Salary payment for May 2018",
-        //     ],
-        //     "_links" => [
-        //         "callback_url" => "https://your-call-bak.yourapplication.com/payment_result",
-        //     ],
-        // ]);
-
-        // return [
-        //     $response->status(), 'status',
-        //     $response->successful(), 'successful',
-        //     $response->failed(), 'failed',
-        //     $response->headers()['Status'],
-        //     $response->headers()['location'],
-        //     $response->headers()['Date'],
-        // ];
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $videoPayout = new VideoPayouts;
-        $videoPayout->username = $request->input('username');
-        $videoPayout->amount = $request->input('amount');
-        $videoPayout->save();
-
-        return response("Video Payout Added", 200);
+		return response($request->input('destination_reference'), 200);
     }
 
     /**

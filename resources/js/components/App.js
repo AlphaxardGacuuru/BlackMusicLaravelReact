@@ -72,6 +72,7 @@ function App() {
 	const [cartAudios, setCartAudios] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
 
+	const [kopokopoRecipients, setKopokopoRecipients] = useState([])
 	const [notifications, setNotifications] = useState([])
 	const [posts, setPosts] = useState([])
 	const [postComments, setPostComments] = useState([])
@@ -138,6 +139,11 @@ function App() {
 		axios.get(`${url}/api/cart-videos`)
 			.then((res) => setCartVideos(res.data))
 			.catch(() => setErrors(['Failed to fetch cart videos']))
+
+		// Fetch Kopokopo Recipients
+		axios.get(`${url}/api/kopokopo-recipients`)
+			.then((res) => setKopokopoRecipients(res.data))
+			.catch(() => setErrors(['Failed to fetch kopokopo recipients']))
 
 		// Fetch Notifications
 		axios.get(`${url}/api/notifications`)
@@ -652,6 +658,7 @@ function App() {
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
+		kopokopoRecipients, setKopokopoRecipients,
 		notifications, setNotifications,
 		posts, setPosts,
 		postComments, setPostComments,

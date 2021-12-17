@@ -93586,53 +93586,58 @@ function App() {
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      notifications = _useState28[0],
-      setNotifications = _useState28[1];
+      kopokopoRecipients = _useState28[0],
+      setKopokopoRecipients = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      posts = _useState30[0],
-      setPosts = _useState30[1];
+      notifications = _useState30[0],
+      setNotifications = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      postComments = _useState32[0],
-      setPostComments = _useState32[1];
+      posts = _useState32[0],
+      setPosts = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      referrals = _useState34[0],
-      setReferrals = _useState34[1];
+      postComments = _useState34[0],
+      setPostComments = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      sms = _useState36[0],
-      setSMS = _useState36[1];
+      referrals = _useState36[0],
+      setReferrals = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      users = _useState38[0],
-      setUsers = _useState38[1];
+      sms = _useState38[0],
+      setSMS = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      videoAlbums = _useState40[0],
-      setVideoAlbums = _useState40[1];
+      users = _useState40[0],
+      setUsers = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      videoComments = _useState42[0],
-      setVideoComments = _useState42[1];
+      videoAlbums = _useState42[0],
+      setVideoAlbums = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      videoPayouts = _useState44[0],
-      setVideoPayouts = _useState44[1];
+      videoComments = _useState44[0],
+      setVideoComments = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      videos = _useState46[0],
-      setVideos = _useState46[1]; // Reset Messages and Errors to null after 3 seconds
+      videoPayouts = _useState46[0],
+      setVideoPayouts = _useState46[1];
+
+  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState48 = _slicedToArray(_useState47, 2),
+      videos = _useState48[0],
+      setVideos = _useState48[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93722,6 +93727,12 @@ function App() {
       return setCartVideos(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch cart videos']);
+    }); // Fetch Kopokopo Recipients
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-recipients")).then(function (res) {
+      return setKopokopoRecipients(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch kopokopo recipients']);
     }); // Fetch Notifications
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
@@ -93985,50 +93996,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState48 = _slicedToArray(_useState47, 2),
-      show = _useState48[0],
-      setShow = _useState48[1];
-
-  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState50 = _slicedToArray(_useState49, 2),
-      playBtn = _useState50[0],
-      setPlayBtn = _useState50[1];
+      show = _useState50[0],
+      setShow = _useState50[1];
 
-  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState52 = _slicedToArray(_useState51, 2),
-      shuffle = _useState52[0],
-      setShuffle = _useState52[1];
+      playBtn = _useState52[0],
+      setPlayBtn = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState54 = _slicedToArray(_useState53, 2),
-      loop = _useState54[0],
-      setLoop = _useState54[1];
+      shuffle = _useState54[0],
+      setShuffle = _useState54[1];
 
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState56 = _slicedToArray(_useState55, 2),
-      dur = _useState56[0],
-      setDur = _useState56[1];
+      loop = _useState56[0],
+      setLoop = _useState56[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState58 = _slicedToArray(_useState57, 2),
-      volume = _useState58[0],
-      setVolume = _useState58[1];
+      dur = _useState58[0],
+      setDur = _useState58[1];
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
       _useState60 = _slicedToArray(_useState59, 2),
-      currentTime = _useState60[0],
-      setCurrentTime = _useState60[1];
+      volume = _useState60[0],
+      setVolume = _useState60[1];
 
-  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState62 = _slicedToArray(_useState61, 2),
-      progressPercent = _useState62[0],
-      setProgressPercent = _useState62[1];
+      currentTime = _useState62[0],
+      setCurrentTime = _useState62[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState64 = _slicedToArray(_useState63, 2),
-      audioLoader = _useState64[0],
-      setAudioLoader = _useState64[1]; // Listen for show change and autoplay song
+      progressPercent = _useState64[0],
+      setProgressPercent = _useState64[1];
+
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState66 = _slicedToArray(_useState65, 2),
+      audioLoader = _useState66[0],
+      setAudioLoader = _useState66[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -94213,10 +94224,10 @@ function App() {
   } // Search State
 
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState66 = _slicedToArray(_useState65, 2),
-      search = _useState66[0],
-      setSearch = _useState66[1];
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState68 = _slicedToArray(_useState67, 2),
+      search = _useState68[0],
+      setSearch = _useState68[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94340,6 +94351,8 @@ function App() {
     setCartAudios: setCartAudios,
     cartVideos: cartVideos,
     setCartVideos: setCartVideos,
+    kopokopoRecipients: kopokopoRecipients,
+    setKopokopoRecipients: setKopokopoRecipients,
     notifications: notifications,
     setNotifications: setNotifications,
     posts: posts,
@@ -95975,7 +95988,7 @@ var Admin = function Admin(props) {
     }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.created_at)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Video Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive thead-light"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), props.videoPayouts.map(function (videoPayout, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), props.videoPayouts.videoPayouts && props.videoPayouts.videoPayouts.map(function (videoPayout, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -95987,7 +96000,7 @@ var Admin = function Admin(props) {
     }))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Audio Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive thead-light"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), props.audioPayouts.map(function (audioPayout, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), props.audioPayouts.audioPayouts && props.audioPayouts.audioPayouts.map(function (audioPayout, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -101776,8 +101789,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Settings = function Settings(props) {
-  // Web Share API for share button
+  var amount = props.videoPayouts.balance;
+  var reference = props.kopokopoRecipients.find(function (reference) {
+    return reference.username == props.auth.username;
+  }); // Web Share API for share button
   // Share must be triggered by "user activation"
+
   var onShare = function onShare() {
     // Define share data
     var shareData = {
@@ -101787,6 +101804,54 @@ var Settings = function Settings(props) {
     }; // Check if data is shareble
 
     navigator.canShare(shareData) && navigator.share(shareData);
+  }; // Function to create recipient
+
+
+  var onCreateRecipient = function onCreateRecipient() {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/kopokopo-recipients")).then(function (res) {
+        props.setMessage(res.data); // Update Kopokopo recipients
+
+        axios.get("".concat(props.url, "/api/kopokopo-recipients")).then(function (res) {
+          return props.setKopokopoRecipients(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  var onTransferFunds = function onTransferFunds() {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/video-payouts"), {
+        amount: amount,
+        destination_reference: reference.destination_reference
+      }).then(function (res) {
+        return props.setMessage(res.data);
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -101803,12 +101868,18 @@ var Settings = function Settings(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-success"
     }, "KES ", videoPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.created_at));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "text-success"
-  }, "KES ", props.videoPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "KES ", props.videoPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
+    return recipient.username == props.auth.username;
+  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     btnClass: "sonar-btn",
-    onClick: onShare,
+    onClick: onTransferFunds,
     btnText: "transfer funds"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "sonar-btn",
+    onClick: onCreateRecipient,
+    btnText: "create wallet"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "INVITES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Invite your friends to Black Music and ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       color: "green"
