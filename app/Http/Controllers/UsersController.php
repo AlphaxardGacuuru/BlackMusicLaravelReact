@@ -77,7 +77,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // return Mail::to('alphaxardgacuuru47@gmail.com')->send(new WelcomeMail('@alphaxardG'));
+		// 
     }
 
     /**

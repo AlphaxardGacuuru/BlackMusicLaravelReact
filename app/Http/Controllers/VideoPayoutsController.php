@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BoughtVideos;
+use App\Notifications\VideoPayoutNotifications;
 use App\User;
 use App\VideoPayouts;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class VideoPayoutsController extends Controller
      */
     public function create()
     {
-		// 
+        //
     }
 
     /**
@@ -129,9 +130,11 @@ class VideoPayoutsController extends Controller
             $videoPayout->amount = $request->input('amount');
             $videoPayout->save();
 
+			// Get send video payout notification
+            auth()->user()->notify(new VideoPayoutNotifications($request->input('amount')));
+
             return response("Video Payout Added", 200);
         }
-		return response($request->input('destination_reference'), 200);
     }
 
     /**

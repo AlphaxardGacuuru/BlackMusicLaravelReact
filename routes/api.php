@@ -23,7 +23,7 @@ Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallback');
 
 // Update on Login Route
-Route::post('login/update', 'Auth\LoginController@update'); 
+Route::post('login/update', 'Auth\LoginController@update');
 
 // Register page
 // Route::get('register', 'Auth\LoginController@index');
@@ -54,7 +54,7 @@ Route::resources([
     'polls' => 'PollsController',
     'referrals' => 'ReferralsController',
     'search' => 'SearchController',
-	'sms' => 'SMSController',
+    'sms' => 'SMSController',
     'users' => 'UsersController',
     'videos' => 'VideosController',
     'video-likes' => 'VideoLikesController',
@@ -63,3 +63,11 @@ Route::resources([
     'video-albums' => 'VideoAlbumsController',
     'video-payouts' => 'VideoPayoutsController',
 ]);
+
+Route::get('mailable', function () {
+
+    $amount = 100;
+    $phone = '0700364446';
+
+    return new App\Mail\VideoPayout($amount, $phone);
+});

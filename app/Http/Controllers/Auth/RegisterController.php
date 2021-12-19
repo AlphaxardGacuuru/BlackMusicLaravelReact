@@ -82,6 +82,20 @@ class RegisterController extends Controller
         Mail::to($data['email'])
             ->send(new WelcomeMail($data['username']));
 
+        /* User should follow themselves */
+        $follow = new Follow;
+        $follow->followed = $data['username'];
+        $follow->username = $data['username'];
+        $follow->muted = "show";
+        $follow->save();
+
+        /* User should follow @blackmusic */
+        $follow = new Follow;
+        $follow->followed = '@blackmusic';
+        $follow->username = $data['username'];
+        $follow->muted = "show";
+        $follow->save();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
