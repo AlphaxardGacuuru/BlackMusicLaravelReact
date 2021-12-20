@@ -43,6 +43,7 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
+				remember: true
 			}).then((res) => {
 				props.setMessage("Account Updated")
 				// Update Auth

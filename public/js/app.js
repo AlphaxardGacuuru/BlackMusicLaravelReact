@@ -93108,7 +93108,8 @@ var Register = function Register(props) {
         email: email,
         avatar: avatar,
         username: username,
-        phone: phone
+        phone: phone,
+        remember: true
       }).then(function (res) {
         props.setMessage("Account Updated"); // Update Auth
 

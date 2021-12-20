@@ -100,6 +100,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'username' => $data['username'],
+            'remember_token' => $data['remember_token'],
             'phone' => $data['phone'],
             'pp' => $data['avatar'],
         ]);
