@@ -43,7 +43,6 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
-				remember_token: true
 			}).then((res) => {
 				props.setMessage("Account Updated")
 				// Update Auth
@@ -81,7 +80,7 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
-				remember: 'on'
+				remember_token: true
 			}).then((res) => {
 				props.setMessage("Account created")
 				// Update auth data

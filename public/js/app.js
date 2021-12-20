@@ -93108,8 +93108,7 @@ var Register = function Register(props) {
         email: email,
         avatar: avatar,
         username: username,
-        phone: phone,
-        remember_token: true
+        phone: phone
       }).then(function (res) {
         props.setMessage("Account Updated"); // Update Auth
 
@@ -93149,7 +93148,7 @@ var Register = function Register(props) {
         avatar: avatar,
         username: username,
         phone: phone,
-        remember: 'on'
+        remember_token: true
       }).then(function (res) {
         props.setMessage("Account created"); // Update auth data
 
