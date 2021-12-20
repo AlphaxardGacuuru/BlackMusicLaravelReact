@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\BoughtAudios;
+use App\Notifications\AudioPayoutNotifications;
 use App\AudioPayouts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,12 +72,7 @@ class AudioPayoutsController extends Controller
      */
     public function store(Request $request)
     {
-        $audioPayout = new AudioPayouts;
-        $audioPayout->username = $request->input('username');
-        $audioPayout->amount = $request->input('amount');
-        $audioPayout->save();
-
-		return response("Audio Payout Added", 200);
+		// 
     }
 
     /**
@@ -129,9 +125,66 @@ class AudioPayoutsController extends Controller
      * @param  \App\AudioPayouts  $audioPayouts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AudioPayouts $audioPayouts)
+    public function update(Request $request, $id)
     {
-        //
+        // Do not hard code these values
+        $options = [
+            'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
+            // 'clientId' => env('KOPOKOPO_CLIENT_ID'),
+            'clientSecret' => env('KOPOKOPO_CLIENT_SECRET_SANDBOX'),
+            // 'clientSecret' => env('KOPOKOPO_CLIENT_SECRET'),
+            'apiKey' => env('KOPOKOPO_API_KEY_SANDBOX'),
+            // 'apiKey' => env('KOPOKOPO_API_KEY'),
+            'baseUrl' => env('KOPOKOPO_BASE_URL_SANDBOX'),
+            // 'baseUrl' => env('KOPOKOPO_BASE_URL'),
+        ];
+
+        $K2 = new K2($options);
+
+        // Get one of the services
+        $tokens = $K2->TokenService();
+
+        // Use the service
+        $result = $tokens->getToken();
+
+        if ($result['status'] == 'success') {
+            $data = $result['data'];
+            // echo "My access token is: " . $data['accessToken'] . " It expires in: " . $data['expiresIn'] . "<br>";
+        }
+
+        $pay = $K2->PayService();
+
+        // Pay
+        $response = $pay->sendPay([
+            'destinationType' => 'mobile_wallet',
+            'destinationReference' => $request->input('destination_reference'),
+            'amount' => $request->input('amount'),
+            'currency' => 'KES',
+            'callbackUrl' => 'https://music.black.co.ke/api/audio-payouts',
+            'description' => 'Audio Payout',
+            'category' => 'salaries',
+            'tags' => ["tag 1", "tag 2"],
+            'metadata' => [
+                // 'customerId' => '8675309',
+                'notes' => 'Audio payment for May 2018',
+            ],
+            'accessToken' => $data['accessToken'],
+        ]);
+
+        if ($response['status'] == 'success') {
+            // echo "The resource location is:" . json_encode($response['location']);
+            // => 'https://sandbox.kopokopo.com/api/v1/payments/d76265cd-0951-e511-80da-0aa34a9b2388'
+
+            $audioPayout = new AudioPayouts;
+            $audioPayout->username = auth()->user()->username;
+            $audioPayout->amount = $request->input('amount');
+            $audioPayout->save();
+
+			// Get send audio payout notification
+            auth()->user()->notify(new AudioPayoutNotifications($request->input('amount')));
+
+            return response("Audio Payout Added", 200);
+        }
     }
 
     /**

@@ -101827,7 +101827,7 @@ var Settings = function Settings(props) {
 
   var onTransferFunds = function onTransferFunds() {
     axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/video-payouts"), {
+      axios.post("".concat(props.url, "/api/video-payouts/1"), {
         amount: amount,
         destination_reference: reference.destination_reference
       }).then(function (res) {
@@ -101862,9 +101862,17 @@ var Settings = function Settings(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-success"
     }, "KES ", videoPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, videoPayout.created_at));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Audio Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-responsive table-hover"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Date Sent"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.audioPayouts.audioPayouts && props.audioPayouts.audioPayouts.map(function (audioPayout, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      key: key
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-success"
+    }, "KES ", audioPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, audioPayout.created_at));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "text-success"
-  }, "KES ", props.videoPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
+  }, "KES ", props.videoPayouts.balance + props.audioPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
   }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     btnClass: "sonar-btn",

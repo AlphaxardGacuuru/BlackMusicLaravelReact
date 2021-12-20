@@ -47,7 +47,7 @@ const Settings = (props) => {
 
 	const onTransferFunds = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-payouts`, {
+			axios.post(`${props.url}/api/video-payouts/1`, {
 				amount: amount,
 				destination_reference: reference.destination_reference,
 			}).then((res) => props.setMessage(res.data))
@@ -93,8 +93,31 @@ const Settings = (props) => {
 					</table>
 					<br />
 
+					<h1>Audio Payouts</h1>
+					<table className="table table-responsive table-hover">
+						<thead>
+							<tr>
+								<th>Amount</th>
+								<th>Date Sent</th>
+							</tr>
+						</thead>
+						<tbody>
+							{/* Show Audio Payouts */}
+							{/* Level 1 */}
+							{props.audioPayouts.audioPayouts &&
+								props.audioPayouts.audioPayouts
+									.map((audioPayout, key) => (
+										<tr key={key}>
+											<td className="text-success">KES {audioPayout.amount}</td>
+											<td>{audioPayout.created_at}</td>
+										</tr>))}
+							{/* Show Referrals End */}
+						</tbody>
+					</table>
+					<br />
+
 					<h4>Outstanding cash</h4>
-					<h5 className='text-success'>KES {props.videoPayouts.balance}</h5>
+					<h5 className='text-success'>KES {props.videoPayouts.balance + props.audioPayouts.balance}</h5>
 					<br />
 
 					{props.kopokopoRecipients
