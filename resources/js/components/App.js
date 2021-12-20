@@ -82,7 +82,7 @@ function App() {
 
 	const [videoAlbums, setVideoAlbums] = useState([])
 	const [videoComments, setVideoComments] = useState([])
-	const [videoPayouts, setVideoPayouts] = useState([])
+	const [songPayouts, setSongPayouts] = useState([])
 	const [videos, setVideos] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
@@ -114,11 +114,6 @@ function App() {
 		axios.get(`${url}/api/audios`)
 			.then((res) => setAudios(res.data))
 			.catch(() => setErrors(["Failed to fetch audios"]))
-
-		// Fetch Audio Payouts
-		axios.get(`${url}/api/audio-payouts`)
-			.then((res) => setAudioPayouts(res.data))
-			.catch(() => setErrors(["Failed to fetch audio payouts"]))
 
 		// Fetch Bought Audios
 		axios.get(`${url}/api/bought-audios`)
@@ -165,6 +160,11 @@ function App() {
 			.then((res) => setReferrals(res.data))
 			.catch(() => setErrors(['Failed to fetch referrals']))
 
+		// Fetch Song Payouts
+		axios.get(`${url}/api/song-payouts`)
+			.then((res) => setSongPayouts(res.data))
+			.catch(() => setErrors(["Failed to fetch song payouts"]))
+
 		//Fetch SMS
 		axios.get(`${url}/api/sms`)
 			.then((res) => setSMS(res.data))
@@ -189,12 +189,6 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-
-		// Fetch Video Payouts
-		axios.get(`${url}/api/video-payouts`)
-			.then((res) => setVideoPayouts(res.data))
-			.catch(() => setErrors(["Failed to fetch video payouts"]))
-
 	}, [])
 
 	//Fetch Auth
@@ -668,7 +662,7 @@ function App() {
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
 		videoComments, setVideoComments,
-		videoPayouts, setVideoPayouts,
+		songPayouts, setSongPayouts,
 		videos, setVideos,
 		onFollow,
 		onCartVideos,

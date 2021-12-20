@@ -1,10 +1,11 @@
+import axios from 'axios'
 import React from 'react'
 
 import Button from '../components/Button'
 
 const Settings = (props) => {
 
-	const amount = props.videoPayouts.balance
+	const amount = props.songPayouts.balance
 	const reference = props.kopokopoRecipients
 		.find((reference) => reference.username == props.auth.username)
 
@@ -47,21 +48,26 @@ const Settings = (props) => {
 
 	const onTransferFunds = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-payouts/1`, {
+			axios.post(`${props.url}/api/song-payouts`, {
 				amount: amount,
 				destination_reference: reference.destination_reference,
-			}).then((res) => props.setMessage(res.data))
-				.catch((err) => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					// Get other errors
-					newError.push(err.response.data.message)
-					props.setErrors(newError)
-				})
+			}).then((res) => {
+				props.setMessage(res.data)
+				// Update song payouts
+				axios.get(`${props.url}/api/song-payouts`)
+					.then((res) => props.setSongsPayouts(res.data))
+					.catch((err) => console.log(err.response.data.message))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				props.setErrors(newError)
+			})
 		})
 	}
 
@@ -70,7 +76,7 @@ const Settings = (props) => {
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
 				<center>
-					<h1>Video Payouts</h1>
+					<h1>Song Payouts</h1>
 					<table className="table table-responsive table-hover">
 						<thead>
 							<tr>
@@ -81,8 +87,8 @@ const Settings = (props) => {
 						<tbody>
 							{/* Show Video Payouts */}
 							{/* Level 1 */}
-							{props.videoPayouts.videoPayouts &&
-								props.videoPayouts.videoPayouts
+							{props.songPayouts.songPayouts &&
+								props.songPayouts.songPayouts
 									.map((videoPayout, key) => (
 										<tr key={key}>
 											<td className="text-success">KES {videoPayout.amount}</td>
@@ -91,33 +97,9 @@ const Settings = (props) => {
 							{/* Show Referrals End */}
 						</tbody>
 					</table>
-					<br />
-
-					<h1>Audio Payouts</h1>
-					<table className="table table-responsive table-hover">
-						<thead>
-							<tr>
-								<th>Amount</th>
-								<th>Date Sent</th>
-							</tr>
-						</thead>
-						<tbody>
-							{/* Show Audio Payouts */}
-							{/* Level 1 */}
-							{props.audioPayouts.audioPayouts &&
-								props.audioPayouts.audioPayouts
-									.map((audioPayout, key) => (
-										<tr key={key}>
-											<td className="text-success">KES {audioPayout.amount}</td>
-											<td>{audioPayout.created_at}</td>
-										</tr>))}
-							{/* Show Referrals End */}
-						</tbody>
-					</table>
-					<br />
 
 					<h4>Outstanding cash</h4>
-					<h5 className='text-success'>KES {props.videoPayouts.balance + props.audioPayouts.balance}</h5>
+					<h5 className='text-success'>KES {props.songPayouts.balance}</h5>
 					<br />
 
 					{props.kopokopoRecipients

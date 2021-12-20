@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AudioPayouts extends Model
+class SongPayouts extends Model
 {
     //
 }

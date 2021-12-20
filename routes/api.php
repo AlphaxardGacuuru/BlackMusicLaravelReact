@@ -37,7 +37,6 @@ Route::resources([
     'audio-comments' => 'AudioCommentsController',
     'audio-comment-likes' => 'AudioCommentLikesController',
     'audio-albums' => 'AudioAlbumsController',
-    'audio-payouts' => 'AudioPayoutsController',
     'bought-audios' => 'BoughtAudiosController',
     'bought-videos' => 'BoughtVideosController',
     'cart-audios' => 'CartAudiosController',
@@ -54,6 +53,7 @@ Route::resources([
     'polls' => 'PollsController',
     'referrals' => 'ReferralsController',
     'search' => 'SearchController',
+    'song-payouts' => 'SongPayoutsController',
     'sms' => 'SMSController',
     'users' => 'UsersController',
     'videos' => 'VideosController',
@@ -61,7 +61,6 @@ Route::resources([
     'video-comments' => 'VideoCommentsController',
     'video-comment-likes' => 'VideoCommentLikesController',
     'video-albums' => 'VideoAlbumsController',
-    'video-payouts' => 'VideoPayoutsController',
 ]);
 
 Route::get('mailable', function () {
@@ -69,5 +68,5 @@ Route::get('mailable', function () {
     $amount = 100;
     $phone = '0700364446';
 
-    return new App\Mail\VideoPayout($amount, $phone);
+    return new App\Mail\SongPayout($amount, $phone);
 });

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class VideoPayout extends Mailable
+class SongPayout extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,6 +31,6 @@ class VideoPayout extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.video-payout');
+        return $this->markdown('mails.song-payout');
     }
 }

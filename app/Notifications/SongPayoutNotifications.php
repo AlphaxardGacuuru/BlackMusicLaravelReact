@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Mail\SongPayout;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AudioPayoutNotifications extends Notification
+class SongPayoutNotifications extends Notification
 {
     use Queueable;
 
@@ -31,7 +32,7 @@ class AudioPayoutNotifications extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail'];
     }
 
     /**
@@ -42,7 +43,7 @@ class AudioPayoutNotifications extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new AudioPayout($this->amount, $notifiable->phone))
+        return (new SongPayout($this->amount, $notifiable->phone))
             ->to($notifiable->email);
     }
 
