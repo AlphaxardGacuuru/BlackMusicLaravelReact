@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Follows;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\User;
@@ -83,14 +84,14 @@ class RegisterController extends Controller
             ->send(new WelcomeMail($data['username']));
 
         /* User should follow themselves */
-        $follow = new Follow;
+        $follow = new Follows;
         $follow->followed = $data['username'];
         $follow->username = $data['username'];
         $follow->muted = "show";
         $follow->save();
 
         /* User should follow @blackmusic */
-        $follow = new Follow;
+        $follow = new Follows;
         $follow->followed = '@blackmusic';
         $follow->username = $data['username'];
         $follow->muted = "show";
