@@ -93148,7 +93148,7 @@ var Register = function Register(props) {
         avatar: avatar,
         username: username,
         phone: phone,
-        remember_token: true
+        remember_token: 'true'
       }).then(function (res) {
         props.setMessage("Account created"); // Update auth data
 
