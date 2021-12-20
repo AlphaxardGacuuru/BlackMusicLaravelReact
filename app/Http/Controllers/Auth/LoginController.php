@@ -100,7 +100,6 @@ class LoginController extends Controller
                 // ], true);
 
                 return redirect()->intended();
-
             } else {
                 $name = $user->getName();
                 $email = $user->getEmail();

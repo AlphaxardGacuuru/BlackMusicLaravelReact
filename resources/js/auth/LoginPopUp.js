@@ -18,7 +18,7 @@ const LoginPopUp = (props) => {
 	}
 
 	const [phone, setPhone] = useState('07')
-	const [phoneLogin, setPhoneLogin] = useState(false)
+	const [phoneLogin, setPhoneLogin] = useState(true)
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -89,10 +89,10 @@ const LoginPopUp = (props) => {
 									<br />
 									<br />
 
-									<Button
+									{/* <Button
 										btnClass="mysonar-btn"
 										btnText="back"
-										onClick={() => setPhoneLogin(false)} />
+										onClick={() => setPhoneLogin(false)} /> */}
 								</div>
 							</center> :
 							<>
