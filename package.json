@@ -28,6 +28,7 @@
         "webpack-dev-server": "^4.0.0"
     },
     "dependencies": {
+        "emoji-picker-react": "^3.4.12",
         "filepond": "^4.29.0",
         "filepond-plugin-file-validate-size": "^2.2.4",
         "filepond-plugin-file-validate-type": "^1.2.6",

@@ -1,8 +1,9 @@
-import React from 'react'
-import Button from '../components/Button'
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import axios from 'axios';
+
+import Button from '../components/Button'
+import Img from '../components/Img'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -30,6 +31,8 @@ registerPlugin(
 	FilePondPluginFileValidateSize
 );
 
+import Picker from 'emoji-picker-react';
+
 const PostCreate = (props) => {
 
 	// Get csrf token
@@ -51,6 +54,7 @@ const PostCreate = (props) => {
 	const [display3, setDisplay3] = useState("none")
 	const [display4, setDisplay4] = useState("none")
 	const [display5, setDisplay5] = useState("none")
+	const [showEmojiPicker, setShowEmojiPicker] = useState()
 
 	// Get history for page location
 	const history = useHistory()
@@ -68,6 +72,13 @@ const PostCreate = (props) => {
 			setMedia(img)
 			setPreview(URL.createObjectURL(img))
 		}
+	};
+
+	const [chosenEmoji, setChosenEmoji] = useState(null);
+
+	const onEmojiClick = (event, emojiObject) => {
+		setChosenEmoji(emojiObject);
+		setText(text + emojiObject.emoji)
 	};
 
 	const onSubmit = (e) => {
@@ -108,34 +119,126 @@ const PostCreate = (props) => {
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				<div className="contact-form">
-					<form action="POST" onSubmit={onSubmit}>
-						<div className="float-left">
+					<form action="POST" onSubmit={onSubmit} className='contact-form'>
+						<div className="d-flex justify-content-between">
 							{/* <!-- Close Icon --> */}
-							<Link to="/">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="40"
-									height="40"
-									fill="currentColor"
-									className="bi bi-x"
-									viewBox="0 0 16 16">
-									<path
-										d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-								</svg>
-							</Link>
+							<div className="">
+								<Link to="/">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="40"
+										height="40"
+										fill="currentColor"
+										className="bi bi-x"
+										viewBox="0 0 16 16">
+										<path
+											d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+									</svg>
+								</Link>
+							</div>
+							{/* Post button */}
+							<div className="">
+								<Button
+									type="submit"
+									btnClass={'mysonar-btn'}
+									btnText={'post'} />
+							</div>
 						</div>
-						<div className="form group float-right">
-							<Button
-								type="submit"
-								btnClass={'mysonar-btn'}
-								btnText={'post'} />
+						<br />
+
+						<div
+							className="d-flex"
+							style={{ borderBottom: "1px solid #c0c0c0" }}>
+							{/* Profile pic */}
+							<div className='p-2'>
+								<Img
+									src={props.auth.pp}
+									imgClass={"rounded-circle"}
+									width="25px"
+									height="25px"
+									alt="Avatar" />
+							</div>
+							{/* Input */}
+							<div className="flex-grow-1">
+								<textarea
+									name='post-text'
+									className='form-control'
+									style={{ border: "none", outline: "none" }}
+									placeholder="What's on your mind"
+									row="10"
+									value={text}
+									onChange={(e) => setText(e.target.value)}>
+								</textarea>
+							</div>
+							{/* Emoji icon */}
+							<div className='p-2'>
+								<span
+									style={{ cursor: "pointer" }}
+									onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										fill="currentColor"
+										className="bi bi-emoji-smile"
+										viewBox="0 0 16 16">
+										<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+										<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+									</svg>
+								</span>
+							</div>
+							{/* Image icon */}
+							<div
+								className="p-2"
+								style={{
+									cursor: "pointer",
+									display: mediaStyle
+								}}>
+								<span
+									onClick={() => setPollStyle("none")}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										fill="currentColor"
+										className="bi bi-image"
+										viewBox="0 0 16 16">
+										<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+										<path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+									</svg>
+								</span>
+							</div>
+							{/* Poll icon */}
+							<div
+								className="p-2"
+								style={{
+									cursor: "pointer",
+									display: pollStyle
+								}}>
+								<span
+									onClick={() => {
+										setDisplay1("inline")
+										setMediaStyle("none")
+									}}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										fill="currentColor"
+										className="bi bi-bar-chart"
+										viewBox="0 0 16 16">
+										<path
+											d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+									</svg>
+								</span>
+							</div>
 						</div>
-						<textarea
-							name='post-text'
-							className='form-control'
-							placeholder="What's on your mind"
-							onChange={(e) => { setText(e.target.value) }}>
-						</textarea>
+						<br />
+						{showEmojiPicker &&
+							<Picker
+								onEmojiClick={onEmojiClick}
+								preload="true"
+								pickerStyle={{ float: "right", width: "100%" }} />}
 						{/* <div
 							className="mb-2"
 							style={{
@@ -159,7 +262,7 @@ const PostCreate = (props) => {
 							ref={mediaInput}
 							onChange={onImageChange} /> */}
 
-						<div className="d-flex text-center">
+						{/* <div className="d-flex text-center">
 							<div className="p-2 flex-fill"
 								style={{
 									backgroundColor: "#232323",
@@ -203,11 +306,12 @@ const PostCreate = (props) => {
 									</svg>
 								</span>
 							</div>
-						</div>
+						</div> */}
 
 						{/* Upload Image */}
 						{pollStyle == "none" &&
-							<div className="mt-2">
+							<center className="mt-2">
+								<h5>Add Image</h5>
 								<FilePond
 									name="filepond-media"
 									labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
@@ -232,9 +336,10 @@ const PostCreate = (props) => {
 											},
 										},
 									}} />
-							</div>}
+							</center>}
 
-						<div>
+						<center>
+							<h5 style={{ display: display1 }}>Add Poll</h5>
 							{/* Poll inputs */}
 							<input
 								type='text'
@@ -278,7 +383,7 @@ const PostCreate = (props) => {
 								className='form-control'
 								placeholder='Parameter 5'
 								onChange={(e) => setPara5(e.target.value)} />
-						</div>
+						</center>
 					</form>
 				</div>
 			</div>
