@@ -100549,22 +100549,10 @@ var PostShow = function PostShow(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       id = _useParams.id;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
-      postComments = _useState2[0],
-      setPostComments = _useState2[1]; // Fetch for Post Comments
-
-
-  axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
-    return setPostComments(res.data);
-  })["catch"](function () {
-    return props.setErrors(['Failed to fetch post comments']);
-  });
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      text = _useState4[0],
-      setText = _useState4[1]; // Function for posting comment
+      text = _useState2[0],
+      setText = _useState2[1]; // Function for posting comment
 
 
   var onComment = function onComment(e) {
@@ -100576,7 +100564,7 @@ var PostShow = function PostShow(props) {
       }).then(function (res) {
         props.setMessage(res.data); // Update Post Comments
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
           return props.setPostComments(res.data);
         }); // Update Posts
 
@@ -100596,7 +100584,7 @@ var PostShow = function PostShow(props) {
       });
     });
     setText("");
-  }; // Function for liking posts
+  }; // Function for liking comments
 
 
   var onCommentLike = function onCommentLike(comment) {
@@ -100606,7 +100594,7 @@ var PostShow = function PostShow(props) {
       }).then(function (res) {
         props.setMessage(res.data); // Update Post Comments
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
           return props.setPostComments(res.data);
         });
       })["catch"](function (err) {
@@ -100629,7 +100617,7 @@ var PostShow = function PostShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/post-comments/").concat(id)).then(function (res) {
         props.setMessage(res.data); // Update Post Comments
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
           return props.setPostComments(res.data);
         }); // Update Posts
 
@@ -100684,7 +100672,9 @@ var PostShow = function PostShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), postComments.map(function (comment, index) {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), props.postComments.filter(function (comment) {
+    return comment.post_id == id;
+  }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
       className: "media p-2 border-bottom"
@@ -100698,7 +100688,7 @@ var PostShow = function PostShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/home/".concat(comment.user_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: "storage/".concat(comment.pp),
+      src: comment.pp,
       width: "40px",
       height: "40px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

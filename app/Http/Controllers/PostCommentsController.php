@@ -17,7 +17,31 @@ class PostCommentsController extends Controller
      */
     public function index()
     {
-        return PostComments::all();
+        $getComments = PostComments::orderby('id', 'DESC')->get();
+
+        $comments = [];
+
+        foreach ($getComments as $key => $comment) {
+            // Check if user has liked
+            $hasLiked = PostCommentLikes::where('username', auth()->user()->username)
+                ->where('comment_id', $comment->id)
+                ->exists();
+
+            array_push($comments, [
+                "id" => $comment->id,
+				"post_id" => $comment->post_id,
+                "name" => $comment->users->name,
+                "username" => $comment->users->username,
+                "decos" => $comment->users->decos->count(),
+                "pp" => preg_match("/http/", $comment->users->pp) ? $comment->users->pp : "/storage/" . $comment->users->pp,
+                "text" => $comment->text,
+                "hasLiked" => $hasLiked,
+                "likes" => $comment->postCommentLikes->count(),
+                "created_at" => $comment->created_at->format("d M Y"),
+            ]);
+        }
+
+        return $comments;
     }
 
     /**
@@ -42,7 +66,7 @@ class PostCommentsController extends Controller
             'text' => 'required',
         ]);
 
-        /* Create new post */
+        /* Create new comment */
         $postComment = new PostComments;
         $postComment->post_id = $request->input('post');
         $postComment->username = auth()->user()->username;

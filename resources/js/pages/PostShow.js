@@ -11,13 +11,6 @@ const PostShow = (props) => {
 	// Get id from URL
 	const { id } = useParams();
 
-	const [postComments, setPostComments] = useState([])
-
-	// Fetch for Post Comments
-	axios.get(`${props.url}/api/posts/${id}`)
-		.then((res) => setPostComments(res.data))
-		.catch(() => props.setErrors(['Failed to fetch post comments']))
-
 	const [text, setText] = useState("")
 
 	// Function for posting comment
@@ -31,7 +24,7 @@ const PostShow = (props) => {
 			}).then((res) => {
 				props.setMessage(res.data)
 				// Update Post Comments
-				axios.get(`${props.url}/api/posts/${id}`)
+				axios.get(`${props.url}/api/post-comments`)
 					.then((res) => props.setPostComments(res.data))
 				// Update Posts
 				axios.get(`${props.url}/api/posts`)
@@ -50,7 +43,7 @@ const PostShow = (props) => {
 		setText("")
 	}
 
-	// Function for liking posts
+	// Function for liking comments
 	const onCommentLike = (comment) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/post-comment-likes`, {
@@ -58,7 +51,7 @@ const PostShow = (props) => {
 			}).then((res) => {
 				props.setMessage(res.data)
 				// Update Post Comments
-				axios.get(`${props.url}/api/posts/${id}`)
+				axios.get(`${props.url}/api/post-comments`)
 					.then((res) => props.setPostComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -75,23 +68,24 @@ const PostShow = (props) => {
 	// Function for deleting comments
 	const onDeleteComment = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/post-comments/${id}`).then((res) => {
-				props.setMessage(res.data)
-				// Update Post Comments
-				axios.get(`${props.url}/api/posts/${id}`)
-					.then((res) => props.setPostComments(res.data))
-				// Update Posts
-				axios.get(`${props.url}/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
+			axios.delete(`${props.url}/api/post-comments/${id}`)
+				.then((res) => {
+					props.setMessage(res.data)
+					// Update Post Comments
+					axios.get(`${props.url}/api/post-comments`)
+						.then((res) => props.setPostComments(res.data))
+					// Update Posts
+					axios.get(`${props.url}/api/posts`)
+						.then((res) => props.setPosts(res.data))
+				}).catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
 		})
 	}
 
@@ -119,11 +113,6 @@ const PostShow = (props) => {
 
 				<div>
 					<form onSubmit={onComment} className="contact-form">
-						{/* <input type="text"
-								className="form-control"
-								placeholder="Add a comment"
-								value={text}
-								onChange={(e) => setText(e.target.value)} /> */}
 						<SocialMediaInput {...props}
 							text={text}
 							setText={setText}
@@ -138,13 +127,14 @@ const PostShow = (props) => {
 				<br />
 				<hr />
 
-				{postComments
+				{props.postComments
+					.filter((comment) => comment.post_id == id)
 					.map((comment, index) => (
 						<div key={index} className='media p-2 border-bottom'>
 							<div className='media-left'>
 								<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 									<Link to={`/home/${comment.user_id}`}>
-										<Img src={`storage/${comment.pp}`} width="40px" height="40px" />
+										<Img src={comment.pp} width="40px" height="40px" />
 									</Link>
 								</div>
 							</div>

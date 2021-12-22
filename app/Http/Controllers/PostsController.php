@@ -238,30 +238,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $getComments = PostComments::where('post_id', $id)->orderby('id', 'DESC')->get();
-
-        $comments = [];
-
-        foreach ($getComments as $key => $comment) {
-            // Check if user has liked
-            $hasLiked = PostCommentLikes::where('username', auth()->user()->username)
-                ->where('comment_id', $comment->id)
-                ->exists();
-
-            array_push($comments, [
-                "id" => $comment->id,
-                "name" => $comment->users->name,
-                "username" => $comment->users->username,
-                "decos" => $comment->users->decos->count(),
-                "pp" => $comment->users->pp,
-                "text" => $comment->text,
-                "hasLiked" => $hasLiked,
-                "likes" => $comment->postCommentLikes->count(),
-                "created_at" => $comment->created_at->format("d M Y"),
-            ]);
-        }
-
-        return $comments;
+		// 
     }
 
     /**
