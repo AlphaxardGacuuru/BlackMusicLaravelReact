@@ -163,7 +163,7 @@ const PostCreate = (props) => {
 								<textarea
 									name='post-text'
 									className='form-control'
-									style={{ border: "none", outline: "none" }}
+									style={{ border: "none", outline: "none", resize: "none" }}
 									placeholder="What's on your mind"
 									row="10"
 									value={text}

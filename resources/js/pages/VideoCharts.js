@@ -187,27 +187,59 @@ const VideoCharts = (props) => {
 	return (
 		<>
 			{/* Carousel */}
-			<div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-				{/* <ol className="carousel-indicators">
+			<div id="carouselExampleIndicators" className="carousel slide hidden" data-ride="carousel">
+				<ol className="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
 					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-				</ol> */}
+				</ol>
 				<div className="carousel-inner">
-					{props.videos
-						.slice(0, 3)
-						.map((video, key) => (
-							<div
-								key={key}
-								className={`carousel-item ${key == 0 && 'active'}`}
-								style={{ overflow: "hidden" }}>
-								<Img imgClass={"d-block w-100"} src={video.thumbnail} />
-								<div className="carousel-caption d-none d-md-block">
-									<h5 style={{ color: "white" }}>{video.name}</h5>
-									<p style={{ color: "white" }} >{video.username}</p>
+					{/* {props.videos
+							.slice(0, 3)
+							.map((video, key) => (
+								<div
+									key={key}
+									className={`carousel-item ${key == 0 && 'active'}`}
+									style={{ overflow: "hidden" }}>
+									<Img imgClass={"d-block w-100"} src={video.thumbnail} />
+									<div className="carousel-caption d-none d-md-block">
+										<h5 style={{ color: "white" }}>{video.name}</h5>
+										<p style={{ color: "white" }} >{video.username}</p>
+									</div>
 								</div>
-							</div>
-						))}
+							))} */}
+					<div className="carousel-item active">
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/slide1.jpg"
+							width="25%" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/slide2.jpg"
+							width="25%" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/slide3.jpg"
+							width="25%" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/slide4.jpg"
+							width="25%" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/1.jpg" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/2.jpg" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/3.jpg" />
+						<Img
+							imgClass={"d-inline w-25"}
+							src="/storage/img/4.jpg" />
+					</div>
 				</div>
 				{/* <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -219,6 +251,80 @@ const VideoCharts = (props) => {
 				</a> */}
 			</div>
 			{/*  Carousel End  */}
+
+			{/* Carousel Mobile */}
+			<div id="carouselExampleIndicators" className="carousel slide anti-hidden" data-ride="carousel">
+				<ol className="carousel-indicators">
+					<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				</ol>
+				<div className="carousel-inner">
+					{/* {props.videos
+							.slice(0, 3)
+							.map((video, key) => (
+								<div
+									key={key}
+									className={`carousel-item ${key == 0 && 'active'}`}
+									style={{ overflow: "hidden" }}>
+									<Img imgClass={"d-block w-100"} src={video.thumbnail} />
+									<div className="carousel-caption d-none d-md-block">
+										<h5 style={{ color: "white" }}>{video.name}</h5>
+										<p style={{ color: "white" }} >{video.username}</p>
+									</div>
+								</div>
+							))} */}
+					<div className="carousel-item active">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/slide1.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/slide2.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/slide3.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/slide4.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/1.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/2.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/3.jpg" />
+					</div>
+					<div className="carousel-item">
+						<Img
+							imgClass="d-inline w-100"
+							src="/storage/img/4.jpg" />
+					</div>
+				</div>
+				{/* <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span className="sr-only">Previous</span>
+				</a>
+				<a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					<span className="carousel-control-next-icon" aria-hidden="true"></span>
+					<span className="sr-only">Next</span>
+				</a> */}
+			</div>
+			{/*  Carousel Mobile End  */}
 
 			{/* <!-- Scroll menu - */}
 			<div id="chartsMenu" className="hidden-scroll mt-2">

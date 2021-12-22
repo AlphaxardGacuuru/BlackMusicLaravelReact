@@ -101,7 +101,8 @@ const PostShow = (props) => {
 			<div className="col-sm-4">
 				<div className="float-left">
 					<Link to="/">
-						<svg width="2em"
+						<svg
+							width="2em"
 							height="2em"
 							viewBox="0 0 16 16"
 							className="bi bi-arrow-left-short"
@@ -117,7 +118,10 @@ const PostShow = (props) => {
 				<br />
 				<div className='media p-2 border-bottom'>
 					<div className="media-left">
-						<Img src={"/storage/" + props.auth.pp} width={"40px"} height={"40px"} />
+						<Img
+							src={props.auth.pp}
+							width={"40px"}
+							height={"40px"} />
 					</div>
 					<div className="media-body contact-form">
 						<form onSubmit={onComment}>
