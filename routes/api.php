@@ -43,6 +43,7 @@ Route::resources([
     'cart-videos' => 'CartVideosController',
     'decos' => 'DecosController',
     'follows' => 'FollowsController',
+	'help-posts' => 'HelpPostsController',
     'kopokopo' => 'KopokopoController',
     'kopokopo-recipients' => 'KopokopoRecipientsController',
     'notifications' => 'NotificationsController',

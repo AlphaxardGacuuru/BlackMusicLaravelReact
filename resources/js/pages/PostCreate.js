@@ -97,20 +97,21 @@ const PostCreate = (props) => {
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/posts`, formData).then((res) => {
-				props.setMessage("Posted")
-				axios.get(`${props.url}/api/posts`).then((res) => props.setPosts(res.data))
-				setTimeout(() => history.push('/'), 1000)
-			}).catch(err => {
-				const resErrors = err.response.data.errors
+			axios.post(`${props.url}/api/posts`, formData)
+				.then((res) => {
+					props.setMessage("Posted")
+					axios.get(`${props.url}/api/posts`).then((res) => props.setPosts(res.data))
+					setTimeout(() => history.push('/'), 1000)
+				}).catch(err => {
+					const resErrors = err.response.data.errors
 
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
 		})
 	}
 
@@ -188,12 +189,7 @@ const PostCreate = (props) => {
 								</span>
 							</div>
 							{/* Image icon */}
-							<div
-								className="p-2"
-								style={{
-									cursor: "pointer",
-									display: mediaStyle
-								}}>
+							<div className="p-2" style={{ cursor: "pointer", display: mediaStyle }}>
 								<span
 									onClick={() => setPollStyle("none")}>
 									<svg

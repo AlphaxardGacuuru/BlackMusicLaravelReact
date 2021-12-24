@@ -12,6 +12,7 @@ const PostShow = (props) => {
 	const { id } = useParams();
 
 	const [text, setText] = useState("")
+	const [media, setMedia] = useState("")
 
 	// Function for posting comment
 	const onComment = (e) => {
@@ -111,21 +112,16 @@ const PostShow = (props) => {
 				<br />
 				<br />
 
-				<div>
-					<form onSubmit={onComment} className="contact-form">
-						<SocialMediaInput {...props}
-							text={text}
-							setText={setText}
-							placeholder="Add a comment" />
-						<Button
-							type="submit"
-							btnClass={"mysonar-btn float-right"}
-							btnText={"Comment"} />
-					</form>
-				</div>
-				<br />
-				<br />
-				<hr />
+				<form onSubmit={onComment} className="contact-form">
+					<SocialMediaInput
+						pp={props.auth.pp}
+						text={text}
+						setText={setText}
+						media={media}
+						setMedia={setMedia}
+						placeholder="Add a comment"
+						showImage={false} />
+				</form>
 
 				{props.postComments
 					.filter((comment) => comment.post_id == id)
@@ -138,7 +134,7 @@ const PostShow = (props) => {
 									</Link>
 								</div>
 							</div>
-							<div className='media-body'>
+							<div className='media-body p-2'>
 								<h6 className="media-heading m-0"
 									style={{
 										width: "100%",

@@ -14,8 +14,9 @@ const TopNav = (props) => {
 
 	var display
 
-	location.pathname.match("/video-charts") ||
-	location.pathname.match("/audio-charts") ||
+	location.pathname.match("/help") ||
+		location.pathname.match("/video-charts") ||
+		location.pathname.match("/audio-charts") ||
 		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||

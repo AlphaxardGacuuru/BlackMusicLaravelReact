@@ -235,6 +235,9 @@ const TopNavLinks = (props) => {
 					<Link to='/settings' className="p-3 dropdown-item border-bottom">
 						<h6>Settings</h6>
 					</Link>
+					<Link to='/help' className="p-3 dropdown-item border-bottom">
+						<h6>Help Center</h6>
+					</Link>
 					<Link
 						to="#"
 						className="p-3 dropdown-item border-bottom"

@@ -40,6 +40,7 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
+import Help from '../pages/Help';
 
 import NotFound from '../pages/NotFound'
 
@@ -72,6 +73,7 @@ function App() {
 	const [cartAudios, setCartAudios] = useState([])
 	const [cartVideos, setCartVideos] = useState([])
 
+	const [helpPosts, setHelpPosts] = useState([])
 	const [kopokopoRecipients, setKopokopoRecipients] = useState([])
 	const [notifications, setNotifications] = useState([])
 	const [posts, setPosts] = useState([])
@@ -134,6 +136,11 @@ function App() {
 		axios.get(`${url}/api/cart-videos`)
 			.then((res) => setCartVideos(res.data))
 			.catch(() => setErrors(['Failed to fetch cart videos']))
+
+		// Fetch Help Posts
+		axios.get(`${url}/api/help-posts`)
+			.then((res) => setHelpPosts(res.data))
+			.catch(() => setErrors(['Failed to fetch help posts']))
 
 		// Fetch Kopokopo Recipients
 		axios.get(`${url}/api/kopokopo-recipients`)
@@ -652,6 +659,7 @@ function App() {
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
+		helpPosts, setHelpPosts,
 		kopokopoRecipients, setKopokopoRecipients,
 		notifications, setNotifications,
 		posts, setPosts,
@@ -857,6 +865,14 @@ function App() {
 				<Route path="/settings" exact render={(props) => (
 					<>
 						<Settings {...GLOBAL_STATE} />
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+					</>
+				)} />
+
+
+				<Route path="/help" exact render={(props) => (
+					<>
+						<Help {...GLOBAL_STATE} />
 						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
