@@ -8,7 +8,6 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 const VideoCharts = (props) => {
 
 	const history = useHistory()
-
 	const location = useLocation()
 
 	//Declare States 

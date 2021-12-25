@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\HelpPosts;
+use App\HelpPostLikes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,7 @@ class HelpPostsController extends Controller
                 "id" => $helpPost->id,
                 "name" => $helpPost->users->name,
                 "username" => $helpPost->users->username,
+				"to" => $helpPost->to,
                 "pp" => preg_match("/http/", $helpPost->users->pp) ? $helpPost->users->pp : "/storage/" . $helpPost->users->pp,
                 "decos" => $helpPost->users->decos->count(),
                 "text" => $helpPost->text,
@@ -134,8 +136,21 @@ class HelpPostsController extends Controller
      * @param  \App\HelpPosts  $helpPosts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HelpPosts $helpPosts)
+    public function destroy($id)
     {
-        //
+        // Check file extension and handle filepond delete accordingly
+        $ext = substr($id, -3);
+
+        if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
+            Storage::delete('public/help-post-media/' . $id);
+            return response("Help Post media deleted", 200);
+        } else {
+            $helpPost = HelpPosts::where('id', $id)->first();
+            Storage::delete('public/' . $helpPost->media);
+            HelpPostLikes::where('help_post_id', $id)->delete();
+            HelpPosts::find($id)->delete();
+
+            return response("Help Post deleted", 200);
+        }
     }
 }

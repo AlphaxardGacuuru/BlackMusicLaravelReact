@@ -108,32 +108,36 @@ const SocialMediaInput = (props) => {
 					</div>}
 				<div className="p-2">
 					<Button
+						type="submit"
 						btnClass="mysonar-btn-round"
 						btnStyle={{ borderRadius: "50%", minWidth: "33px", paddingRight: "2px" }}
-						btnText={<span className="p-2">
-							<svg style={{ transform: "rotate(45deg)" }}
-								xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-send-fill"
-								viewBox="0 0 16 16">
-								<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
-							</svg>
-						</span>} />
+						btnText={
+							<span className="p-2">
+								<svg style={{ transform: "rotate(45deg)" }}
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									className="bi bi-send-fill"
+									viewBox="0 0 16 16">
+									<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+								</svg>
+							</span>} />
 				</div>
 			</div>
-			<br />
 
+			{/* Show Emoji Picker */}
 			{showEmojiPicker &&
-				<Picker
-					onEmojiClick={onEmojiClick}
-					preload="true"
-					pickerStyle={{ float: "right", width: "100%" }} />}
+				<div className="my-2 bg-white">
+					<Picker
+						onEmojiClick={onEmojiClick}
+						preload="true"
+						pickerStyle={{ width: "100%", borderRadius: "0px" }} />
+				</div>}
 
+			{/* Show Filepond */}
 			{showFilepond &&
-				<center className="mt-2">
-					<h5>Add Image</h5>
+				<center className="my-2">
 					<FilePond
 						name="filepond-media"
 						labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
@@ -148,7 +152,7 @@ const SocialMediaInput = (props) => {
 								onload: res => props.setMedia(res),
 							},
 							revert: {
-								url: `${props.urlTo}/${props.media.substr(11)}`,
+								url: props.urlToDelete,
 								headers: { 'X-CSRF-TOKEN': token.content },
 								onload: res => props.setMessage(res),
 							},

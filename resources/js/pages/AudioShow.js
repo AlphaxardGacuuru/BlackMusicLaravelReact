@@ -10,8 +10,7 @@ import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
 
 const AudioShow = (props) => {
 
-	let { show } = useParams();
-
+	let { show } = useParams()
 	let history = useHistory()
 
 	// Set Show if it's equal to 0

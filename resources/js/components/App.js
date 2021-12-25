@@ -40,7 +40,8 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
-import Help from '../pages/Help';
+import Help from '../pages/Help'
+import HelpThread from '../pages/HelpThread'
 
 import NotFound from '../pages/NotFound'
 
@@ -539,12 +540,57 @@ function App() {
 
 	// Search State
 	const [search, setSearch] = useState("!@#$%^&")
-
 	const searchInput = useRef(null)
 
 	// Function to focus on search input
 	const onSearchIconClick = () => {
 		window.location.href.match("/search") && searchInput.current.focus()
+	}
+
+	// Social Input states
+	const [text, setText] = useState("")
+	const [media, setMedia] = useState("")
+	const [placeholder, setPlaceholder] = useState()
+	const [showImage, setShowImage] = useState()
+	const [urlTo, setUrlTo] = useState()
+	const [urlToDelete, setUrlToDelete] = useState()
+	const [stateToUpdate, setStateToUpdate] = useState()
+
+	// Declare new FormData object for form data
+	const formData = new FormData();
+
+	// Handle form submit for Social Input
+	const onSubmit = (e) => {
+		e.preventDefault()
+
+		// Add form data to FormData object
+		formData.append("text", text);
+		// If media has been selected then append the file to FormData object
+		media && formData.append("media", media);
+
+		// Send data to HelpPostsController
+		// Get csrf cookie from Laravel inorder to send a POST request
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${url}/api${urlTo}`, formData)
+				.then((res) => {
+					setMessage(res.data)
+					// Updated Help Posts
+					axios.get(`${url}/api${urlTo}`)
+						.then((res) => stateToUpdate(res.data))
+					// Clear text
+					setText("")
+				}).catch(err => {
+					const resErrors = err.response.data.errors
+
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					newError.push(err.response.data.message)
+					setErrors(newError)
+				})
+		})
 	}
 
 	/*
@@ -680,7 +726,7 @@ function App() {
 		// Search 
 		onSearchIconClick,
 		searchInput,
-		// Audio Player state
+		// Audio Player
 		showAudio,
 		showArtist,
 		show, setShow,
@@ -705,6 +751,14 @@ function App() {
 		onSetVolume,
 		fmtMSS,
 		audioLoader,
+		// Social Input
+		text, setText,
+		media, setMedia,
+		placeholder, setPlaceholder,
+		showImage, setShowImage,
+		urlTo, setUrlTo,
+		stateToUpdate, setStateToUpdate,
+		onSubmit
 	}
 
 	return (
@@ -861,7 +915,6 @@ function App() {
 					</>
 				)} />
 
-
 				<Route path="/settings" exact render={(props) => (
 					<>
 						<Settings {...GLOBAL_STATE} />
@@ -869,10 +922,16 @@ function App() {
 					</>
 				)} />
 
-
 				<Route path="/help" exact render={(props) => (
 					<>
 						<Help {...GLOBAL_STATE} />
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+					</>
+				)} />
+
+				<Route path="/help/:username" exact render={(props) => (
+					<>
+						<HelpThread {...GLOBAL_STATE} />
 						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />

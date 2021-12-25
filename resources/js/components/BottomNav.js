@@ -1,20 +1,28 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import SocialMediaInput from './SocialMediaInput'
+
 const Bottomnav = (props) => {
 
 	const location = useLocation()
 
 	var display
+	var inputDisplay
+	var checkLocation = true
 
-	location.pathname.match("/post-create") ||
+	// Hide BottomNav from various pages
+	location.pathname.match("/help/") ||
+		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||
 		location.pathname.match("/login") ||
 		location.pathname.match("/register") ?
 		display = "none" : display = ""
 
-	var checkLocation = true
+	// Show Social Input in various pages
+	location.pathname.match("/help/") ?
+		inputDisplay = "" : inputDisplay = "none"
 
 	if (props.show != 0) {
 		checkLocation = location.pathname.match(/audio-show/)
@@ -27,6 +35,10 @@ const Bottomnav = (props) => {
 
 	return (
 		<>
+			{/* Add breaks if social input is visible */}
+			<br style={{ display: !props.showSocialInput && "none" }} />
+			<br style={{ display: !props.showSocialInput && "none" }} />
+			{/* Add breaks if audio player is visible */}
 			<br style={{ display: checkLocation && "none" }} />
 			<br style={{ display: checkLocation && "none" }} />
 			<br style={{ display: checkLocation && "none" }} />
@@ -38,7 +50,12 @@ const Bottomnav = (props) => {
 				<div
 					ref={props.audioContainer}
 					className="progress"
-					style={{ height: "3px", background: "#232323", borderRadius: "0px", display: checkLocation && "none" }}>
+					style={{
+						height: "3px",
+						background: "#232323",
+						borderRadius: "0px",
+						display: checkLocation && "none"
+					}}>
 					<div
 						ref={props.audioProgress}
 						className="progress-bar rounded-0"
@@ -50,9 +67,16 @@ const Bottomnav = (props) => {
 					</div>
 				</div>
 
+				{/* Social Input */}
+				<form
+					onSubmit={props.onSubmit}
+					className="contact-form bg-white"
+					style={{ display: inputDisplay }}>
+					<SocialMediaInput {...props} />
+				</form>
+
 				{/* Audio Player */}
 				<div className="container-fluid menu-area d-flex text-white hidden">
-
 					<div style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
 						<span onClick={() => props.setShow(0)}>

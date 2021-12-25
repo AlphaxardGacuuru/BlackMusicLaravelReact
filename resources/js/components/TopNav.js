@@ -14,9 +14,8 @@ const TopNav = (props) => {
 
 	var display
 
-	location.pathname.match("/help") ||
-		location.pathname.match("/video-charts") ||
-		location.pathname.match("/audio-charts") ||
+	// Hide TopNav from various pages
+	location.pathname.match("/help/") ||
 		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||
