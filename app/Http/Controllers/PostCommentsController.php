@@ -74,8 +74,8 @@ class PostCommentsController extends Controller
         $postComment->media = "";
         $postComment->save();
 
+		// Get user details
         $musician = Posts::find($request->input('post'))->users;
-
         $musician->username != auth()->user()->username &&
         $musician->notify(new PostCommentNotifications);
 

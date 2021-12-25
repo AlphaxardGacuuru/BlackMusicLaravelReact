@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Img from '../components/Img'
 
@@ -8,11 +8,12 @@ const Help = (props) => {
 	var threadsArray = []
 
 	props.helpPosts
+		.filter((helpPost) => helpPost.username == props.auth.username)
 		.forEach((helpPost) => {
 			// Populate threads array
-			if (!threadsArray.some((username) => username == helpPost.username) && helpPost.username != "@blackmusic") {
+			if (!threadsArray.some((username) => username == helpPost.to)) {
 				// Add item if it doesn't exist
-				threadsArray.push(helpPost.username)
+				threadsArray.push(helpPost.to)
 			}
 		})
 
@@ -24,21 +25,27 @@ const Help = (props) => {
 					.map((thread, key) => (
 						<div key={key}>
 							{props.helpPosts
-								.filter((helpPost) => helpPost.username == thread)
+								.filter((helpPost) => {
+									return helpPost.username == thread &&
+										helpPost.to == props.auth.username ||
+										helpPost.username == props.auth.username &&
+										helpPost.to == thread
+								}).reverse()
 								.slice(0, 1)
 								.map((helpPost, key) => (
 									<div key={key} className={`d-flex border-bottom ${key == 0 && "border-top"}`}>
 										<div className="p-2">
-											<Link to={`/profile/${helpPost.username}`}>
+											<Link to={thread != "@blackmusic" ? `/profile/${thread}` : "/help"}>
 												<Img
-													src={helpPost.pp}
+													src={props.users.find((user) => user.username == thread) &&
+														props.users.find((user) => user.username == thread).pp}
 													imgClass="rounded-circle"
 													width="50px"
 													height="50px" />
 											</Link>
 										</div>
 										<div className="p-2 flex-grow-1">
-											<Link to={`/help/${helpPost.username}`}>
+											<Link to={`/help/${thread}`}>
 												<h6
 													className="m-0"
 													style={{
@@ -47,8 +54,9 @@ const Help = (props) => {
 														overflow: "hidden",
 														textOverflow: "clip"
 													}}>
-													<b>{helpPost.name}</b>
-													<small>{helpPost.username}</small>
+													<b>{props.users.find((user) => user.username == thread) &&
+														props.users.find((user) => user.username == thread).name}</b>
+													<small>{thread}</small>
 												</h6>
 												<p className="mb-0">{helpPost.text}</p>
 											</Link>

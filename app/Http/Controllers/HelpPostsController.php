@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\HelpPosts;
-use App\HelpPostLikes;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
+use App\Notifications\HelpPostNotifications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HelpPostsController extends Controller
 {
@@ -18,41 +17,34 @@ class HelpPostsController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
-		$getHelpPosts = HelpPosts::orderBy('id', 'ASC')->get();
+        $getHelpPosts = HelpPosts::orderBy('id', 'ASC')->get();
 
-		$helpPosts = [];
+        $helpPosts = [];
 
-		// Populate array
+        // Populate array
         foreach ($getHelpPosts as $key => $helpPost) {
-
-            // Check if user has liked post
-            // $hasLiked = HelpPostLikes::where('help_post_id', $helpPost->id)
-            //     ->where('username', $authUsername)
-            //     ->exists();
 
             array_push($helpPosts, [
                 "id" => $helpPost->id,
                 "name" => $helpPost->users->name,
                 "username" => $helpPost->users->username,
-				"to" => $helpPost->to,
+                "to" => $helpPost->to,
                 "pp" => preg_match("/http/", $helpPost->users->pp) ? $helpPost->users->pp : "/storage/" . $helpPost->users->pp,
                 "decos" => $helpPost->users->decos->count(),
                 "text" => $helpPost->text,
                 "media" => $helpPost->media,
-                // "hasLiked" => $hasLiked,
-                // "likes" => $helpPost->helpPostLikes->count(),
                 "created_at" => $helpPost->created_at->format("d/m/Y h:ia"),
             ]);
         }
 
-		return $helpPosts;
+        return $helpPosts;
     }
 
     /**
@@ -79,7 +71,6 @@ class HelpPostsController extends Controller
             $media = substr($media, 7);
             return $media;
         } else {
-
             $this->validate($request, [
                 'text' => 'required',
             ]);
@@ -87,10 +78,15 @@ class HelpPostsController extends Controller
             /* Create new post */
             $helpPost = new HelpPosts;
             $helpPost->username = auth()->user()->username;
-            $helpPost->to = '@blackmusic';
+            $helpPost->to = $request->input('to');
             $helpPost->text = $request->input('text');
             $helpPost->media = $request->input('media');
             $helpPost->save();
+
+            // Get user
+            $user = HelpPosts::where('username', $request->input('to'))->first()->users;
+            $request->input('to') != "@blackmusic" &&
+            $user->notify(new HelpPostNotifications);
 
             return response('Sent', 200);
         }
@@ -147,7 +143,6 @@ class HelpPostsController extends Controller
         } else {
             $helpPost = HelpPosts::where('id', $id)->first();
             Storage::delete('public/' . $helpPost->media);
-            HelpPostLikes::where('help_post_id', $id)->delete();
             HelpPosts::find($id)->delete();
 
             return response("Help Post deleted", 200);

@@ -549,6 +549,7 @@ function App() {
 
 	// Social Input states
 	const [text, setText] = useState("")
+	const [to, setTo] = useState()
 	const [media, setMedia] = useState("")
 	const [placeholder, setPlaceholder] = useState()
 	const [showImage, setShowImage] = useState()
@@ -565,6 +566,7 @@ function App() {
 
 		// Add form data to FormData object
 		formData.append("text", text);
+		to && formData.append("to", to);
 		// If media has been selected then append the file to FormData object
 		media && formData.append("media", media);
 
@@ -753,10 +755,12 @@ function App() {
 		audioLoader,
 		// Social Input
 		text, setText,
+		to, setTo,
 		media, setMedia,
 		placeholder, setPlaceholder,
 		showImage, setShowImage,
 		urlTo, setUrlTo,
+		urlToDelete, setUrlToDelete,
 		stateToUpdate, setStateToUpdate,
 		onSubmit
 	}

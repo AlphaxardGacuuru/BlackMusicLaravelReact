@@ -94258,35 +94258,40 @@ function App() {
       text = _useState72[0],
       setText = _useState72[1];
 
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState74 = _slicedToArray(_useState73, 2),
-      media = _useState74[0],
-      setMedia = _useState74[1];
+      to = _useState74[0],
+      setTo = _useState74[1];
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState76 = _slicedToArray(_useState75, 2),
-      placeholder = _useState76[0],
-      setPlaceholder = _useState76[1];
+      media = _useState76[0],
+      setMedia = _useState76[1];
 
   var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      showImage = _useState78[0],
-      setShowImage = _useState78[1];
+      placeholder = _useState78[0],
+      setPlaceholder = _useState78[1];
 
   var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      urlTo = _useState80[0],
-      setUrlTo = _useState80[1];
+      showImage = _useState80[0],
+      setShowImage = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState82 = _slicedToArray(_useState81, 2),
-      urlToDelete = _useState82[0],
-      setUrlToDelete = _useState82[1];
+      urlTo = _useState82[0],
+      setUrlTo = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState84 = _slicedToArray(_useState83, 2),
-      stateToUpdate = _useState84[0],
-      setStateToUpdate = _useState84[1]; // Declare new FormData object for form data
+      urlToDelete = _useState84[0],
+      setUrlToDelete = _useState84[1];
+
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState86 = _slicedToArray(_useState85, 2),
+      stateToUpdate = _useState86[0],
+      setStateToUpdate = _useState86[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -94294,7 +94299,8 @@ function App() {
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Add form data to FormData object
 
-    formData.append("text", text); // If media has been selected then append the file to FormData object
+    formData.append("text", text);
+    to && formData.append("to", to); // If media has been selected then append the file to FormData object
 
     media && formData.append("media", media); // Send data to HelpPostsController
     // Get csrf cookie from Laravel inorder to send a POST request
@@ -94508,6 +94514,8 @@ function App() {
     // Social Input
     text: text,
     setText: setText,
+    to: to,
+    setTo: setTo,
     media: media,
     setMedia: setMedia,
     placeholder: placeholder,
@@ -94516,6 +94524,8 @@ function App() {
     setShowImage: setShowImage,
     urlTo: urlTo,
     setUrlTo: setUrlTo,
+    urlToDelete: urlToDelete,
+    setUrlToDelete: setUrlToDelete,
     stateToUpdate: stateToUpdate,
     setStateToUpdate: setStateToUpdate,
     onSubmit: onSubmit
@@ -95465,6 +95475,17 @@ var SocialMediaInput = function SocialMediaInput(props) {
       return props.setText(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    fill: "currentColor",
+    className: "bi bi-at",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -99481,13 +99502,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var Help = function Help(props) {
   var threadsArray = [];
-  props.helpPosts.forEach(function (helpPost) {
+  props.helpPosts.filter(function (helpPost) {
+    return helpPost.username == props.auth.username;
+  }).forEach(function (helpPost) {
     // Populate threads array
     if (!threadsArray.some(function (username) {
-      return username == helpPost.username;
-    }) && helpPost.username != "@blackmusic") {
+      return username == helpPost.to;
+    })) {
       // Add item if it doesn't exist
-      threadsArray.push(helpPost.username);
+      threadsArray.push(helpPost.to);
     }
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99500,24 +99523,28 @@ var Help = function Help(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key
     }, props.helpPosts.filter(function (helpPost) {
-      return helpPost.username == thread;
-    }).slice(0, 1).map(function (helpPost, key) {
+      return helpPost.username == thread && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == thread;
+    }).reverse().slice(0, 1).map(function (helpPost, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: key,
         className: "d-flex border-bottom ".concat(key == 0 && "border-top")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/profile/".concat(helpPost.username)
+        to: thread != "@blackmusic" ? "/profile/".concat(thread) : "/help"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        src: helpPost.pp,
+        src: props.users.find(function (user) {
+          return user.username == thread;
+        }) && props.users.find(function (user) {
+          return user.username == thread;
+        }).pp,
         imgClass: "rounded-circle",
         width: "50px",
         height: "50px"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-2 flex-grow-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/help/".concat(helpPost.username)
+        to: "/help/".concat(thread)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "m-0",
         style: {
@@ -99526,7 +99553,11 @@ var Help = function Help(props) {
           overflow: "hidden",
           textOverflow: "clip"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, helpPost.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, helpPost.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
+        return user.username == thread;
+      }) && props.users.find(function (user) {
+        return user.username == thread;
+      }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, thread)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "mb-0"
       }, helpPost.text))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-2"
@@ -99581,43 +99612,17 @@ var HelpThread = function HelpThread(props) {
 
 
   setTimeout(function () {
+    props.setTo(username);
     props.setPlaceholder("Talk to us");
     props.setShowImage(true);
     props.setUrlTo("/help-posts");
-    props.setUrlTo(props.media.substr(16));
+    props.setUrlToDelete(props.media.substr(16));
     props.setStateToUpdate(function () {
       return props.setHelpPosts;
     });
   }, 1000); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
-  // Function for liking posts
-
-  var onPostLike = function onPostLike(id) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/help-post-likes"), {
-        helpPost: id
-      }).then(function (res) {
-        props.setMessage(res.data); // Update posts
-
-        axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
-          return props.setHelpPosts(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        } // Get other errors
-
-
-        newError.push(err.response.data.message);
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for deleting posts
-
+  // Function for deleting posts
 
   var onDeletePost = function onDeletePost(id) {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -99686,7 +99691,7 @@ var HelpThread = function HelpThread(props) {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-white"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, props.auth.username == "@blackmusic" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "m-0",
     style: {
       width: "100%",
@@ -99702,7 +99707,19 @@ var HelpThread = function HelpThread(props) {
     return user.username == username;
   }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "text-white"
-  }, username))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, username)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "m-0",
+    style: {
+      width: "100%",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+    className: "text-white"
+  }, "Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "text-white"
+  }, "@blackmusic"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "hidden"
@@ -99711,7 +99728,7 @@ var HelpThread = function HelpThread(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   })), props.helpPosts.filter(function (helpPost) {
-    return helpPost.username == username && helpPost.to == "@blackmusic" || helpPost.username == "@blackmusic" && helpPost.to == username;
+    return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
   }).map(function (helpPost, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
@@ -99742,7 +99759,7 @@ var HelpThread = function HelpThread(props) {
         backgroundColor: helpPost.username == props.auth.username && "#232323"
       },
       onClick: function onClick() {
-        return setShowDelete(!showDelete);
+        return helpPost.username == props.auth.username && setShowDelete(!showDelete);
       }
     }, helpPost.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "text-muted"

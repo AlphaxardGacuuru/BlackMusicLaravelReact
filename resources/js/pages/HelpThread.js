@@ -9,39 +9,16 @@ const HelpThread = (props) => {
 
 	// Set states
 	setTimeout(() => {
+		props.setTo(username)
 		props.setPlaceholder("Talk to us")
 		props.setShowImage(true)
 		props.setUrlTo("/help-posts")
-		props.setUrlTo(props.media.substr(16))
+		props.setUrlToDelete(props.media.substr(16))
 		props.setStateToUpdate(() => props.setHelpPosts)
 	}, 1000)
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
-
-	// Function for liking posts
-	const onPostLike = (id) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/help-post-likes`, {
-				helpPost: id
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update posts
-				axios.get(`${props.url}/api/help-posts`)
-					.then((res) => props.setHelpPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		})
-	}
 
 	// Function for deleting posts
 	const onDeletePost = (id) => {
@@ -97,20 +74,31 @@ const HelpThread = (props) => {
 									<div className="menu-content-area d-flex align-items-center">
 										<div className="text-white">
 											<center>
-												<h6 className="m-0"
-													style={{
-														width: "100%",
-														whiteSpace: "nowrap",
-														overflow: "hidden",
-														textOverflow: "clip"
-													}}>
-													<b className="text-white">
-														{props.users.find((user) => user.username == username) &&
-															props.users.find((user) => user.username == username).name}
-													</b>
-													<br />
-													<small className="text-white">{username}</small>
-												</h6>
+												{props.auth.username == "@blackmusic" ?
+													<h6 className="m-0"
+														style={{
+															width: "100%",
+															whiteSpace: "nowrap",
+															overflow: "hidden",
+															textOverflow: "clip"
+														}}><b className="text-white">
+															{props.users.find((user) => user.username == username) &&
+																props.users.find((user) => user.username == username).name}
+														</b>
+														<br />
+														<small className="text-white">{username}</small>
+													</h6> :
+													<h6 className="m-0"
+														style={{
+															width: "100%",
+															whiteSpace: "nowrap",
+															overflow: "hidden",
+															textOverflow: "clip"
+														}}>
+														<b className="text-white">Black Music</b>
+														<br />
+														<small className="text-white">@blackmusic</small>
+													</h6>}
 											</center>
 										</div>
 									</div>
@@ -139,8 +127,8 @@ const HelpThread = (props) => {
 					.helpPosts
 					.filter((helpPost) => {
 						return helpPost.username == username &&
-							helpPost.to == "@blackmusic" ||
-							helpPost.username == "@blackmusic" &&
+							helpPost.to == props.auth.username ||
+							helpPost.username == props.auth.username &&
 							helpPost.to == username
 					}).map((helpPost, key) => (
 						<div
@@ -168,7 +156,7 @@ const HelpThread = (props) => {
 							<div
 								className="card rounded-0 border border-0 p-2 my-1 mx-0"
 								style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
-								onClick={() => setShowDelete(!showDelete)}>
+								onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
 								{helpPost.text}
 								<small className="text-muted">
 									<i className="float-right">

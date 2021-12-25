@@ -54,7 +54,7 @@ const TopNavLinks = (props) => {
 	* PWA Install button */
 	let deferredPrompt;
 	var btnAdd = React.useRef(null)
-	
+
 	// Listen to the install prompt
 	window.addEventListener('beforeinstallprompt', (e) => {
 		deferredPrompt = e;
@@ -235,7 +235,9 @@ const TopNavLinks = (props) => {
 					<Link to='/settings' className="p-3 dropdown-item border-bottom">
 						<h6>Settings</h6>
 					</Link>
-					<Link to='/help' className="p-3 dropdown-item border-bottom">
+					<Link
+						to="/help"
+						className="p-3 dropdown-item border-bottom">
 						<h6>Help Center</h6>
 					</Link>
 					<Link
