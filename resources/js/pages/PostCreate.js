@@ -100,7 +100,8 @@ const PostCreate = (props) => {
 			axios.post(`${props.url}/api/posts`, formData)
 				.then((res) => {
 					props.setMessage("Posted")
-					axios.get(`${props.url}/api/posts`).then((res) => props.setPosts(res.data))
+					axios.get(`${props.url}/api/posts`)
+						.then((res) => props.setPosts(res.data))
 					setTimeout(() => history.push('/'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors

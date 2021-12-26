@@ -68,14 +68,14 @@ class PostCommentsController extends Controller
 
         /* Create new comment */
         $postComment = new PostComments;
-        $postComment->post_id = $request->input('post');
+        $postComment->post_id = $request->input('id');
         $postComment->username = auth()->user()->username;
         $postComment->text = $request->input('text');
         $postComment->media = "";
         $postComment->save();
 
 		// Get user details
-        $musician = Posts::find($request->input('post'))->users;
+        $musician = Posts::find($request->input('id'))->users;
         $musician->username != auth()->user()->username &&
         $musician->notify(new PostCommentNotifications);
 

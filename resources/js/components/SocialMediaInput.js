@@ -226,6 +226,7 @@ const SocialMediaInput = (props) => {
 
 SocialMediaInput.defaultProps = {
 	urlTo: '/',
+	urlToDelete: '/',
 }
 
 export default SocialMediaInput

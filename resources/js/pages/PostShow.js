@@ -12,7 +12,16 @@ const PostShow = (props) => {
 	const { id } = useParams();
 
 	const [text, setText] = useState("")
-	const [media, setMedia] = useState("")
+
+	// Set states
+	setTimeout(() => {
+		props.setId(id)
+		props.setPlaceholder("Add comment")
+		props.setUrlTo("/post-comments")
+		props.setUrlToTwo("/posts")
+		props.setStateToUpdate(() => props.setPostComments)
+		props.setStateToUpdateTwo(() => props.setPosts)
+	}, 1000)
 
 	// Function for posting comment
 	const onComment = (e) => {
@@ -112,25 +121,17 @@ const PostShow = (props) => {
 				<br />
 				<br />
 
-				<form onSubmit={onComment} className="contact-form">
-					<SocialMediaInput
-						pp={props.auth.pp}
-						text={text}
-						setText={setText}
-						media={media}
-						setMedia={setMedia}
-						placeholder="Add a comment"
-						showImage={false} />
-				</form>
-
 				{props.postComments
 					.filter((comment) => comment.post_id == id)
 					.map((comment, index) => (
-						<div key={index} className='media p-2 border-bottom'>
+						<div key={index} className={`media p-2 border-bottom ${index == 0 && "border-top"}`}>
 							<div className='media-left'>
 								<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 									<Link to={`/home/${comment.user_id}`}>
-										<Img src={comment.pp} width="40px" height="40px" />
+										<Img
+											src={comment.pp}
+											width="40px"
+											height="40px" />
 									</Link>
 								</div>
 							</div>

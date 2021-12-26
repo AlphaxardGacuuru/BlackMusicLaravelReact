@@ -21,7 +21,8 @@ const Bottomnav = (props) => {
 		display = "none" : display = ""
 
 	// Show Social Input in various pages
-	location.pathname.match("/help/") ?
+	location.pathname.match("/post-show/") ||
+		location.pathname.match("/help/") ?
 		inputDisplay = "" : inputDisplay = "none"
 
 	if (props.show != 0) {

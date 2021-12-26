@@ -548,14 +548,17 @@ function App() {
 	}
 
 	// Social Input states
+	const [id, setId] = useState()
 	const [text, setText] = useState("")
 	const [to, setTo] = useState()
 	const [media, setMedia] = useState("")
 	const [placeholder, setPlaceholder] = useState()
 	const [showImage, setShowImage] = useState()
 	const [urlTo, setUrlTo] = useState()
+	const [urlToTwo, setUrlToTwo] = useState()
 	const [urlToDelete, setUrlToDelete] = useState()
 	const [stateToUpdate, setStateToUpdate] = useState()
+	const [stateToUpdateTwo, setStateToUpdateTwo] = useState()
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -566,6 +569,7 @@ function App() {
 
 		// Add form data to FormData object
 		formData.append("text", text);
+		id && formData.append("id", id);
 		to && formData.append("to", to);
 		// If media has been selected then append the file to FormData object
 		media && formData.append("media", media);
@@ -576,9 +580,12 @@ function App() {
 			axios.post(`${url}/api${urlTo}`, formData)
 				.then((res) => {
 					setMessage(res.data)
-					// Updated Help Posts
+					// Updated State One
 					axios.get(`${url}/api${urlTo}`)
 						.then((res) => stateToUpdate(res.data))
+					// Updated State Two
+					axios.get(`${url}/api${urlToTwo}`)
+						.then((res) => stateToUpdateTwo(res.data))
 					// Clear text
 					setText("")
 				}).catch(err => {
@@ -754,14 +761,17 @@ function App() {
 		fmtMSS,
 		audioLoader,
 		// Social Input
+		id, setId,
 		text, setText,
 		to, setTo,
 		media, setMedia,
 		placeholder, setPlaceholder,
 		showImage, setShowImage,
 		urlTo, setUrlTo,
+		urlToTwo, setUrlToTwo,
 		urlToDelete, setUrlToDelete,
 		stateToUpdate, setStateToUpdate,
+		stateToUpdateTwo, setStateToUpdateTwo,
 		onSubmit
 	}
 

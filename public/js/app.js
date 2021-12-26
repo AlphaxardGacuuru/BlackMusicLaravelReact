@@ -94253,45 +94253,60 @@ function App() {
   }; // Social Input states
 
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState72 = _slicedToArray(_useState71, 2),
-      text = _useState72[0],
-      setText = _useState72[1];
+      id = _useState72[0],
+      setId = _useState72[1];
 
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState74 = _slicedToArray(_useState73, 2),
-      to = _useState74[0],
-      setTo = _useState74[1];
+      text = _useState74[0],
+      setText = _useState74[1];
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState76 = _slicedToArray(_useState75, 2),
-      media = _useState76[0],
-      setMedia = _useState76[1];
+      to = _useState76[0],
+      setTo = _useState76[1];
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState78 = _slicedToArray(_useState77, 2),
-      placeholder = _useState78[0],
-      setPlaceholder = _useState78[1];
+      media = _useState78[0],
+      setMedia = _useState78[1];
 
   var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      showImage = _useState80[0],
-      setShowImage = _useState80[1];
+      placeholder = _useState80[0],
+      setPlaceholder = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState82 = _slicedToArray(_useState81, 2),
-      urlTo = _useState82[0],
-      setUrlTo = _useState82[1];
+      showImage = _useState82[0],
+      setShowImage = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState84 = _slicedToArray(_useState83, 2),
-      urlToDelete = _useState84[0],
-      setUrlToDelete = _useState84[1];
+      urlTo = _useState84[0],
+      setUrlTo = _useState84[1];
 
   var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState86 = _slicedToArray(_useState85, 2),
-      stateToUpdate = _useState86[0],
-      setStateToUpdate = _useState86[1]; // Declare new FormData object for form data
+      urlToTwo = _useState86[0],
+      setUrlToTwo = _useState86[1];
+
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState88 = _slicedToArray(_useState87, 2),
+      urlToDelete = _useState88[0],
+      setUrlToDelete = _useState88[1];
+
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState90 = _slicedToArray(_useState89, 2),
+      stateToUpdate = _useState90[0],
+      setStateToUpdate = _useState90[1];
+
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState92 = _slicedToArray(_useState91, 2),
+      stateToUpdateTwo = _useState92[0],
+      setStateToUpdateTwo = _useState92[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -94300,6 +94315,7 @@ function App() {
     e.preventDefault(); // Add form data to FormData object
 
     formData.append("text", text);
+    id && formData.append("id", id);
     to && formData.append("to", to); // If media has been selected then append the file to FormData object
 
     media && formData.append("media", media); // Send data to HelpPostsController
@@ -94307,10 +94323,14 @@ function App() {
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api").concat(urlTo), formData).then(function (res) {
-        setMessage(res.data); // Updated Help Posts
+        setMessage(res.data); // Updated State One
 
         axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api").concat(urlTo)).then(function (res) {
           return stateToUpdate(res.data);
+        }); // Updated State Two
+
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api").concat(urlToTwo)).then(function (res) {
+          return stateToUpdateTwo(res.data);
         }); // Clear text
 
         setText("");
@@ -94512,6 +94532,8 @@ function App() {
     fmtMSS: fmtMSS,
     audioLoader: audioLoader,
     // Social Input
+    id: id,
+    setId: setId,
     text: text,
     setText: setText,
     to: to,
@@ -94524,10 +94546,14 @@ function App() {
     setShowImage: setShowImage,
     urlTo: urlTo,
     setUrlTo: setUrlTo,
+    urlToTwo: urlToTwo,
+    setUrlToTwo: setUrlToTwo,
     urlToDelete: urlToDelete,
     setUrlToDelete: setUrlToDelete,
     stateToUpdate: stateToUpdate,
     setStateToUpdate: setStateToUpdate,
+    stateToUpdateTwo: stateToUpdateTwo,
+    setStateToUpdateTwo: setStateToUpdateTwo,
     onSubmit: onSubmit
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -94912,7 +94938,7 @@ var Bottomnav = function Bottomnav(props) {
 
   location.pathname.match("/help/") || location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = ""; // Show Social Input in various pages
 
-  location.pathname.match("/help/") ? inputDisplay = "" : inputDisplay = "none";
+  location.pathname.match("/post-show/") || location.pathname.match("/help/") ? inputDisplay = "" : inputDisplay = "none";
 
   if (props.show != 0) {
     checkLocation = location.pathname.match(/audio-show/);
@@ -95631,7 +95657,8 @@ var SocialMediaInput = function SocialMediaInput(props) {
 };
 
 SocialMediaInput.defaultProps = {
-  urlTo: '/'
+  urlTo: '/',
+  urlToDelete: '/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (SocialMediaInput);
 
@@ -101160,13 +101187,21 @@ var PostShow = function PostShow(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
       text = _useState2[0],
-      setText = _useState2[1];
+      setText = _useState2[1]; // Set states
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      media = _useState4[0],
-      setMedia = _useState4[1]; // Function for posting comment
 
+  setTimeout(function () {
+    props.setId(id);
+    props.setPlaceholder("Add comment");
+    props.setUrlTo("/post-comments");
+    props.setUrlToTwo("/posts");
+    props.setStateToUpdate(function () {
+      return props.setPostComments;
+    });
+    props.setStateToUpdateTwo(function () {
+      return props.setPosts;
+    });
+  }, 1000); // Function for posting comment
 
   var onComment = function onComment(e) {
     e.preventDefault();
@@ -101274,23 +101309,12 @@ var PostShow = function PostShow(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
     d: "M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: onComment,
-    className: "contact-form"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SocialMediaInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    pp: props.auth.pp,
-    text: text,
-    setText: setText,
-    media: media,
-    setMedia: setMedia,
-    placeholder: "Add a comment",
-    showImage: false
-  })), props.postComments.filter(function (comment) {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.postComments.filter(function (comment) {
     return comment.post_id == id;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "media p-2 border-bottom"
+      className: "media p-2 border-bottom ".concat(index == 0 && "border-top")
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
