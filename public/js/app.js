@@ -94306,7 +94306,22 @@ function App() {
   var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState92 = _slicedToArray(_useState91, 2),
       stateToUpdateTwo = _useState92[0],
-      setStateToUpdateTwo = _useState92[1]; // Declare new FormData object for form data
+      setStateToUpdateTwo = _useState92[1];
+
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState94 = _slicedToArray(_useState93, 2),
+      showMentionPicker = _useState94[0],
+      setShowMentionPicker = _useState94[1];
+
+  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState96 = _slicedToArray(_useState95, 2),
+      showEmojiPicker = _useState96[0],
+      setShowEmojiPicker = _useState96[1];
+
+  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState98 = _slicedToArray(_useState97, 2),
+      showImagePicker = _useState98[0],
+      setShowImagePicker = _useState98[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -94330,10 +94345,13 @@ function App() {
         }); // Updated State Two
 
         axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api").concat(urlToTwo)).then(function (res) {
-          return stateToUpdateTwo(res.data);
+          return stateToUpdateTwo && stateToUpdateTwo(res.data);
         }); // Clear text
 
         setText("");
+        setShowMentionPicker(false);
+        setShowEmojiPicker(false);
+        setShowImagePicker(false);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -94554,6 +94572,12 @@ function App() {
     setStateToUpdate: setStateToUpdate,
     stateToUpdateTwo: stateToUpdateTwo,
     setStateToUpdateTwo: setStateToUpdateTwo,
+    showMentionPicker: showMentionPicker,
+    setShowMentionPicker: setShowMentionPicker,
+    showEmojiPicker: showEmojiPicker,
+    setShowEmojiPicker: setShowEmojiPicker,
+    showImagePicker: showImagePicker,
+    setShowImagePicker: setShowImagePicker,
     onSubmit: onSubmit
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -95453,25 +95477,10 @@ var SocialMediaInput = function SocialMediaInput(props) {
   // Get csrf token
   var token = document.head.querySelector('meta[name="csrf-token"]'); // const [chosenEmoji, setChosenEmoji] = useState(null);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
-      showEmojiPicker = _useState2[0],
-      setShowEmojiPicker = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showMentionPicker = _useState4[0],
-      setShowMentionPicker = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      doNotShowMentionPicker = _useState6[0],
-      setDoNotShowMentionPicker = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      showImagePicker = _useState8[0],
-      setShowImagePicker = _useState8[1];
+      doNotShowMentionPicker = _useState2[0],
+      setDoNotShowMentionPicker = _useState2[1];
 
   var onEmojiClick = function onEmojiClick(event, emojiObject) {
     // setChosenEmoji(emojiObject);
@@ -95480,14 +95489,14 @@ var SocialMediaInput = function SocialMediaInput(props) {
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    props.text.indexOf("@") > -1 && setShowMentionPicker(true);
+    props.text.indexOf("@") > -1 && props.setShowMentionPicker(true);
   }, [props.text]); // Add username to text
 
   var addMention = function addMention(mention) {
     var textUsername = "@" + props.text.split("@")[1];
     var mentionToAdd = props.text.replace(textUsername, mention);
     props.setText(mentionToAdd);
-    setShowMentionPicker(false);
+    props.setShowMentionPicker(false);
     setDoNotShowMentionPicker(false);
   };
 
@@ -95526,7 +95535,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return setShowEmojiPicker(!showEmojiPicker);
+      return props.setShowEmojiPicker(!props.showEmojiPicker);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -95542,7 +95551,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
   })))), props.showImage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "pt-2 px-1",
     onClick: function onClick() {
-      return setShowImagePicker(!showImagePicker);
+      return props.setShowImagePicker(!props.showImagePicker);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -95584,7 +95593,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       d: "M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
     })))
-  }))), showEmojiPicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_14___default.a, {
+  }))), props.showEmojiPicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_14___default.a, {
     onEmojiClick: onEmojiClick,
     preload: "true",
     pickerStyle: {
@@ -95592,7 +95601,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
       borderRadius: "0px",
       margin: "10px"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), showImagePicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), props.showImagePicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
     name: "filepond-media",
     className: "m-2",
     labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
@@ -95619,7 +95628,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
         }
       }
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), showMentionPicker && doNotShowMentionPicker ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), props.showMentionPicker && doNotShowMentionPicker ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card rounded-0",
     style: {
       maxHeight: "200px",
@@ -99652,6 +99661,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99663,6 +99673,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -99827,7 +99838,17 @@ var HelpThread = function HelpThread(props) {
       onClick: function onClick() {
         return helpPost.username == props.auth.username && setShowDelete(!showDelete);
       }
-    }, helpPost.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    }, helpPost.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "mb-1",
+      style: {
+        overflow: "hidden"
+      }
+    }, helpPost.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: "storage/".concat(helpPost.media),
+      width: "100%",
+      height: "auto",
+      alt: 'help-post-media'
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "text-muted"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right"
@@ -100246,10 +100267,6 @@ var Index = function Index(props) {
     }, post.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-1",
       style: {
-        borderTopLeftRadius: "10px",
-        borderTopRightRadius: "10px",
-        borderBottomRightRadius: "10px",
-        borderBottomLeftRadius: "10px",
         overflow: "hidden"
       }
     }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {

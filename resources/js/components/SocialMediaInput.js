@@ -39,10 +39,7 @@ const SocialMediaInput = (props) => {
 	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// const [chosenEmoji, setChosenEmoji] = useState(null);
-	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-	const [showMentionPicker, setShowMentionPicker] = useState(false)
 	const [doNotShowMentionPicker, setDoNotShowMentionPicker] = useState(true)
-	const [showImagePicker, setShowImagePicker] = useState(false)
 
 	const onEmojiClick = (event, emojiObject) => {
 		// setChosenEmoji(emojiObject);
@@ -52,7 +49,7 @@ const SocialMediaInput = (props) => {
 	// Show error on space in username
 	useEffect(() => {
 		props.text.indexOf("@") > -1 &&
-			setShowMentionPicker(true)
+			props.setShowMentionPicker(true)
 	}, [props.text])
 
 	// Add username to text
@@ -60,7 +57,7 @@ const SocialMediaInput = (props) => {
 		var textUsername = "@" + props.text.split("@")[1]
 		var mentionToAdd = props.text.replace(textUsername, mention)
 		props.setText(mentionToAdd)
-		setShowMentionPicker(false)
+		props.setShowMentionPicker(false)
 		setDoNotShowMentionPicker(false)
 	}
 
@@ -92,7 +89,7 @@ const SocialMediaInput = (props) => {
 				<div className="pt-2 px-1">
 					<span
 						style={{ cursor: "pointer" }}
-						onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+						onClick={() => props.setShowEmojiPicker(!props.showEmojiPicker)}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"
@@ -109,7 +106,7 @@ const SocialMediaInput = (props) => {
 				{props.showImage &&
 					<div
 						className="pt-2 px-1"
-						onClick={() => setShowImagePicker(!showImagePicker)}>
+						onClick={() => props.setShowImagePicker(!props.showImagePicker)}>
 						<span style={{ cursor: "pointer" }}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +141,7 @@ const SocialMediaInput = (props) => {
 			</div>
 
 			{/* Show Emoji Picker */}
-			{showEmojiPicker &&
+			{props.showEmojiPicker &&
 				<div>
 					<Picker
 						onEmojiClick={onEmojiClick}
@@ -154,7 +151,7 @@ const SocialMediaInput = (props) => {
 				</div>}
 
 			{/* Show Filepond */}
-			{showImagePicker &&
+			{props.showImagePicker &&
 				<div>
 					<FilePond
 						name="filepond-media"
@@ -179,7 +176,7 @@ const SocialMediaInput = (props) => {
 				</div>}
 
 			{/* Show Mention Picker */}
-			{showMentionPicker && doNotShowMentionPicker ?
+			{props.showMentionPicker && doNotShowMentionPicker ?
 				<div>
 					<div className="card rounded-0" style={{ maxHeight: "200px", overflowY: "scroll" }}>
 						{props.users

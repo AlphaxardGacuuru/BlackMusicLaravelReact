@@ -341,13 +341,7 @@ const Index = (props) => {
 									<p className="mb-0">{post.text}</p>
 
 									{/* Show media */}
-									<div className="mb-1" style={{
-										borderTopLeftRadius: "10px",
-										borderTopRightRadius: "10px",
-										borderBottomRightRadius: "10px",
-										borderBottomLeftRadius: "10px",
-										overflow: "hidden"
-									}}>
+									<div className="mb-1" style={{ overflow: "hidden" }}>
 										{post.media &&
 											<Img
 												src={`storage/${post.media}`}

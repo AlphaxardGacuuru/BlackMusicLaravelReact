@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import Img from '../components/Img'
+
 const HelpThread = (props) => {
 
 	let { username } = useParams()
@@ -158,6 +160,16 @@ const HelpThread = (props) => {
 								style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
 								onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
 								{helpPost.text}
+
+								{/* Show media */}
+								<div className="mb-1" style={{ overflow: "hidden" }}>
+									{helpPost.media &&
+										<Img
+											src={`storage/${helpPost.media}`}
+											width="100%"
+											height="auto"
+											alt={'help-post-media'} />}
+								</div>
 								<small className="text-muted">
 									<i className="float-right">
 										{helpPost.created_at}

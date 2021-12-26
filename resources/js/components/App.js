@@ -559,6 +559,9 @@ function App() {
 	const [urlToDelete, setUrlToDelete] = useState()
 	const [stateToUpdate, setStateToUpdate] = useState()
 	const [stateToUpdateTwo, setStateToUpdateTwo] = useState()
+	const [showMentionPicker, setShowMentionPicker] = useState(false)
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+	const [showImagePicker, setShowImagePicker] = useState(false)
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -585,9 +588,12 @@ function App() {
 						.then((res) => stateToUpdate(res.data))
 					// Updated State Two
 					axios.get(`${url}/api${urlToTwo}`)
-						.then((res) => stateToUpdateTwo(res.data))
+						.then((res) => stateToUpdateTwo && stateToUpdateTwo(res.data))
 					// Clear text
 					setText("")
+					setShowMentionPicker(false)
+					setShowEmojiPicker(false)
+					setShowImagePicker(false)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 
@@ -772,6 +778,9 @@ function App() {
 		urlToDelete, setUrlToDelete,
 		stateToUpdate, setStateToUpdate,
 		stateToUpdateTwo, setStateToUpdateTwo,
+		showMentionPicker, setShowMentionPicker,
+		showEmojiPicker, setShowEmojiPicker,
+		showImagePicker, setShowImagePicker,
 		onSubmit
 	}
 
