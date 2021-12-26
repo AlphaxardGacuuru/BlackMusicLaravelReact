@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import axios from 'axios';
 
 import Button from '../components/Button'
 import Img from '../components/Img'
@@ -40,6 +38,11 @@ const SocialMediaInput = (props) => {
 
 	// const [chosenEmoji, setChosenEmoji] = useState(null);
 	const [doNotShowMentionPicker, setDoNotShowMentionPicker] = useState(true)
+	const [display1, setDisplay1] = useState("none")
+	const [display2, setDisplay2] = useState("none")
+	const [display3, setDisplay3] = useState("none")
+	const [display4, setDisplay4] = useState("none")
+	const [display5, setDisplay5] = useState("none")
 
 	const onEmojiClick = (event, emojiObject) => {
 		// setChosenEmoji(emojiObject);
@@ -77,19 +80,30 @@ const SocialMediaInput = (props) => {
 				</div>
 				{/* Input */}
 				<div className="flex-grow-1">
-					<input
+					<textarea
 						name='post-text'
-						className='form-control'
-						style={{ border: "none", outline: "none", height: "50px" }}
+						className='form-control m-0 p-2'
+						style={{
+							border: "none",
+							outline: "none",
+							height: "50px",
+							resize: "none"
+						}}
 						placeholder={props.placeholder}
 						value={props.text}
-						onChange={(e) => props.setText(e.target.value)} />
+						row="1"
+						onChange={(e) => props.setText(e.target.value)}>
+					</textarea>
 				</div>
 				{/* Emoji icon */}
 				<div className="pt-2 px-1">
 					<span
 						style={{ cursor: "pointer" }}
-						onClick={() => props.setShowEmojiPicker(!props.showEmojiPicker)}>
+						onClick={() => {
+							props.setShowEmojiPicker(!props.showEmojiPicker)
+							props.setShowImagePicker(true && false)
+							props.setShowPollPicker(true && false)
+						}}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"
@@ -106,7 +120,19 @@ const SocialMediaInput = (props) => {
 				{props.showImage &&
 					<div
 						className="pt-2 px-1"
-						onClick={() => props.setShowImagePicker(!props.showImagePicker)}>
+						onClick={() => {
+							props.setShowImagePicker(!props.showImagePicker)
+							props.setShowEmojiPicker(true && false)
+							props.setShowPollPicker(true && false)
+							if (props.showImage || props.showPollPicker) {
+								props.setMedia("")
+								props.setPara1()
+								props.setPara2()
+								props.setPara3()
+								props.setPara4()
+								props.setPara5()
+							}
+						}}>
 						<span style={{ cursor: "pointer" }}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -120,6 +146,37 @@ const SocialMediaInput = (props) => {
 							</svg>
 						</span>
 					</div>}
+				{/* Poll icon */}
+				{props.showPoll &&
+					<div
+						className="pt-2 px-1"
+						onClick={() => {
+							props.setShowPollPicker(!props.showPollPicker)
+							props.setShowEmojiPicker(true && false)
+							props.setShowImagePicker(true && false)
+							if (props.showImage || props.showPollPicker) {
+								props.setMedia("")
+								props.setPara1()
+								props.setPara2()
+								props.setPara3()
+								props.setPara4()
+								props.setPara5()
+							}
+						}}>
+						<span style={{ cursor: "pointer" }}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								fill="currentColor"
+								className="bi bi-bar-chart"
+								viewBox="0 0 16 16">
+								<path
+									d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+							</svg>
+						</span>
+					</div>}
+				{/* Button */}
 				<div className="p-1">
 					<Button
 						type="submit"
@@ -217,6 +274,54 @@ const SocialMediaInput = (props) => {
 					</div>
 					<br />
 				</div> : ""}
+
+			{/* Show Polls */}
+			{props.showPollPicker &&
+				<center>
+					<h5 className="mt-2">Add Poll</h5>
+					{/* Poll inputs */}
+					<input
+						type='text'
+						className='form-control'
+						placeholder="Parameter 1"
+						onChange={(e) => {
+							setDisplay2("inline")
+							props.setPara1(e.target.value)
+						}} />
+					<input
+						type='text'
+						style={{ display: display2 }}
+						className='form-control'
+						placeholder='Parameter 2'
+						onChange={(e) => {
+							setDisplay3("inline")
+							props.setPara2(e.target.value)
+						}} />
+					<input
+						type='text'
+						style={{ display: display3 }}
+						className='form-control'
+						placeholder='Parameter 3'
+						onChange={(e) => {
+							setDisplay4("inline")
+							props.setPara3(e.target.value)
+						}} />
+					<input
+						type='text'
+						style={{ display: display4 }}
+						className='form-control'
+						placeholder='Parameter 4'
+						onChange={(e) => {
+							setDisplay5("inline")
+							props.setPara4(e.target.value)
+						}} />
+					<input
+						type='text'
+						style={{ display: display5 }}
+						className='form-control'
+						placeholder='Parameter 5'
+						onChange={(e) => props.setPara5(e.target.value)} />
+				</center>}
 		</center>
 	)
 }

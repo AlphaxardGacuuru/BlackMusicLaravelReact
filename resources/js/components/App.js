@@ -549,19 +549,26 @@ function App() {
 
 	// Social Input states
 	const [id, setId] = useState()
-	const [text, setText] = useState("")
 	const [to, setTo] = useState()
+	const [text, setText] = useState("")
 	const [media, setMedia] = useState("")
+	const [para1, setPara1] = useState("")
+	const [para2, setPara2] = useState("")
+	const [para3, setPara3] = useState("")
+	const [para4, setPara4] = useState("")
+	const [para5, setPara5] = useState("")
 	const [placeholder, setPlaceholder] = useState()
-	const [showImage, setShowImage] = useState()
 	const [urlTo, setUrlTo] = useState()
 	const [urlToTwo, setUrlToTwo] = useState()
 	const [urlToDelete, setUrlToDelete] = useState()
 	const [stateToUpdate, setStateToUpdate] = useState()
 	const [stateToUpdateTwo, setStateToUpdateTwo] = useState()
+	const [showImage, setShowImage] = useState()
+	const [showPoll, setShowPoll] = useState()
 	const [showMentionPicker, setShowMentionPicker] = useState(false)
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 	const [showImagePicker, setShowImagePicker] = useState(false)
+	const [showPollPicker, setShowPollPicker] = useState(false)
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -574,8 +581,12 @@ function App() {
 		formData.append("text", text);
 		id && formData.append("id", id);
 		to && formData.append("to", to);
-		// If media has been selected then append the file to FormData object
 		media && formData.append("media", media);
+		para1 && formData.append("para1", para1);
+		para2 && formData.append("para2", para2);
+		para3 && formData.append("para3", para3);
+		para4 && formData.append("para4", para4);
+		para5 && formData.append("para5", para5);
 
 		// Send data to HelpPostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
@@ -594,6 +605,7 @@ function App() {
 					setShowMentionPicker(false)
 					setShowEmojiPicker(false)
 					setShowImagePicker(false)
+					setShowPollPicker(false)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 
@@ -768,19 +780,26 @@ function App() {
 		audioLoader,
 		// Social Input
 		id, setId,
-		text, setText,
 		to, setTo,
+		text, setText,
 		media, setMedia,
+		para1, setPara1,
+		para2, setPara2,
+		para3, setPara3,
+		para4, setPara4,
+		para5, setPara5,
 		placeholder, setPlaceholder,
-		showImage, setShowImage,
 		urlTo, setUrlTo,
 		urlToTwo, setUrlToTwo,
 		urlToDelete, setUrlToDelete,
 		stateToUpdate, setStateToUpdate,
 		stateToUpdateTwo, setStateToUpdateTwo,
+		showImage, setShowImage,
+		showPoll, setShowPoll,
 		showMentionPicker, setShowMentionPicker,
 		showEmojiPicker, setShowEmojiPicker,
 		showImagePicker, setShowImagePicker,
+		showPollPicker, setShowPollPicker,
 		onSubmit
 	}
 

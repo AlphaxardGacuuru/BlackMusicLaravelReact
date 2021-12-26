@@ -226,7 +226,7 @@ class PostsController extends Controller
             $post->parameter_5 = $request->input('para5') ? $request->input('para5') : "";
             $post->save();
 
-            return redirect('posts')->with('success', 'Post Sent');
+            return response('Post Sent', 200);
         }
     }
 

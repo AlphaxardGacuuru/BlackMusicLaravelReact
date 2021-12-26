@@ -14,6 +14,7 @@ const HelpThread = (props) => {
 		props.setTo(username)
 		props.setPlaceholder("Talk to us")
 		props.setShowImage(true)
+		props.setShowPoll(false)
 		props.setUrlTo("/help-posts")
 		props.setUrlToDelete(`/help-posts/${props.media.substr(16)}`)
 		props.setStateToUpdate(() => props.setHelpPosts)
