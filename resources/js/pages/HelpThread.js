@@ -13,7 +13,7 @@ const HelpThread = (props) => {
 		props.setPlaceholder("Talk to us")
 		props.setShowImage(true)
 		props.setUrlTo("/help-posts")
-		props.setUrlToDelete(props.media.substr(16))
+		props.setUrlToDelete(`/help-posts/${props.media.substr(16)}`)
 		props.setStateToUpdate(() => props.setHelpPosts)
 	}, 1000)
 

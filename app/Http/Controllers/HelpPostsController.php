@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\HelpPosts;
+use App\User;
 use App\Notifications\HelpPostNotifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,7 +85,7 @@ class HelpPostsController extends Controller
             $helpPost->save();
 
             // Get user
-            $user = HelpPosts::where('username', $request->input('to'))->first()->users;
+            $user = User::where('username', $request->input('to'))->first();
             $request->input('to') != "@blackmusic" &&
             $user->notify(new HelpPostNotifications);
 

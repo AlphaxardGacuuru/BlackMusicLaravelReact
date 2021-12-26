@@ -71,7 +71,8 @@ const Bottomnav = (props) => {
 				<form
 					onSubmit={props.onSubmit}
 					className="contact-form bg-white"
-					style={{ display: inputDisplay }}>
+					style={{ display: inputDisplay }}
+					autoComplete="off">
 					<SocialMediaInput {...props} />
 				</form>
 

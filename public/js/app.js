@@ -94974,7 +94974,8 @@ var Bottomnav = function Bottomnav(props) {
     className: "contact-form bg-white",
     style: {
       display: inputDisplay
-    }
+    },
+    autoComplete: "off"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__["default"], props)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid menu-area d-flex text-white hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -95424,26 +95425,44 @@ Object(react_filepond__WEBPACK_IMPORTED_MODULE_5__["registerPlugin"])(filepond_p
 
 var SocialMediaInput = function SocialMediaInput(props) {
   // Get csrf token
-  var token = document.head.querySelector('meta[name="csrf-token"]');
+  var token = document.head.querySelector('meta[name="csrf-token"]'); // const [chosenEmoji, setChosenEmoji] = useState(null);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      chosenEmoji = _useState2[0],
-      setChosenEmoji = _useState2[1];
+      showEmojiPicker = _useState2[0],
+      setShowEmojiPicker = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      showEmojiPicker = _useState4[0],
-      setShowEmojiPicker = _useState4[1];
+      showMentionPicker = _useState4[0],
+      setShowMentionPicker = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState6 = _slicedToArray(_useState5, 2),
-      showFilepond = _useState6[0],
-      setShowFilepond = _useState6[1];
+      doNotShowMentionPicker = _useState6[0],
+      setDoNotShowMentionPicker = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      showImagePicker = _useState8[0],
+      setShowImagePicker = _useState8[1];
 
   var onEmojiClick = function onEmojiClick(event, emojiObject) {
-    setChosenEmoji(emojiObject);
+    // setChosenEmoji(emojiObject);
     props.setText(props.text + emojiObject.emoji);
+  }; // Show error on space in username
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    props.text.indexOf("@") > -1 && setShowMentionPicker(true);
+  }, [props.text]); // Add username to text
+
+  var addMention = function addMention(mention) {
+    var textUsername = "@" + props.text.split("@")[1];
+    var mentionToAdd = props.text.replace(textUsername, mention);
+    props.setText(mentionToAdd);
+    setShowMentionPicker(false);
+    setDoNotShowMentionPicker(false);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -95475,18 +95494,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
       return props.setText(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    fill: "currentColor",
-    className: "bi bi-at",
-    viewBox: "0 0 16 16"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
+    className: "pt-2 px-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       cursor: "pointer"
@@ -95506,9 +95514,9 @@ var SocialMediaInput = function SocialMediaInput(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"
   })))), props.showImage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2",
+    className: "pt-2 px-1",
     onClick: function onClick() {
-      return setShowFilepond(!showFilepond);
+      return setShowImagePicker(!showImagePicker);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -95526,7 +95534,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
+    className: "p-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     btnClass: "mysonar-btn-round",
@@ -95550,22 +95558,19 @@ var SocialMediaInput = function SocialMediaInput(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       d: "M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
     })))
-  }))), showEmojiPicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "my-2 bg-white"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_14___default.a, {
+  }))), showEmojiPicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_14___default.a, {
     onEmojiClick: onEmojiClick,
     preload: "true",
     pickerStyle: {
-      width: "100%",
-      borderRadius: "0px"
+      width: "95%",
+      borderRadius: "0px",
+      margin: "10px"
     }
-  })), showFilepond && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
-    className: "my-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), showImagePicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
     name: "filepond-media",
+    className: "m-2",
     labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
     acceptedFileTypes: ['image/*'],
-    stylePanelAspectRatio: "16:9",
     allowRevert: true,
     server: {
       url: "".concat(props.url, "/api"),
@@ -95588,7 +95593,41 @@ var SocialMediaInput = function SocialMediaInput(props) {
         }
       }
     }
-  })));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), showMentionPicker && doNotShowMentionPicker ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card rounded-0",
+    style: {
+      maxHeight: "200px",
+      overflowY: "scroll"
+    }
+  }, props.users.filter(function (user) {
+    var regex = new RegExp(props.text.split("@")[1], 'gi');
+    return user.username != props.auth.username && user.username != "@blackmusic" && user.account_type == "musician" && user.username.match(regex);
+  }).map(function (user, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key,
+      className: "d-flex",
+      onClick: function onClick() {
+        return addMention(user.username);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      src: user.pp,
+      imgClass: "rounded-circle",
+      width: "30px",
+      height: "30px"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "py-2 px-0"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, user.username))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "");
 };
 
 SocialMediaInput.defaultProps = {
@@ -99616,7 +99655,7 @@ var HelpThread = function HelpThread(props) {
     props.setPlaceholder("Talk to us");
     props.setShowImage(true);
     props.setUrlTo("/help-posts");
-    props.setUrlToDelete(props.media.substr(16));
+    props.setUrlToDelete("/help-posts/".concat(props.media.substr(16)));
     props.setStateToUpdate(function () {
       return props.setHelpPosts;
     });

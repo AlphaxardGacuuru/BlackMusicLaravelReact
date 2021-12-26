@@ -171,7 +171,8 @@ const TopNavLinks = (props) => {
 					{props.notifications.filter((notification) => !notification.isRead).length > 0 &&
 						props.notifications.filter((notification) => !notification.isRead).length}
 				</span>
-				<div style={{ borderRadius: "0" }}
+				<div
+					style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
 					<div className="dropdown-header">Notifications</div>
@@ -215,7 +216,8 @@ const TopNavLinks = (props) => {
 						height="25px"
 						alt="Avatar" />
 				</Link>
-				<div style={{ borderRadius: "0" }}
+				<div
+					style={{ borderRadius: "0" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
 					<Link to={`/profile/${props.auth.username}`} className="p-3 dropdown-item border-bottom">
