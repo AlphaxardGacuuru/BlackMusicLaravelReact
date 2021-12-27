@@ -167,15 +167,19 @@ const ProfileEdit = (props) => {
 							<button
 								type="reset"
 								className="sonar-btn">reset</button>
-
 							<br />
 							<br />
 
 							<Button
 								type="submit"
 								btnText={"save changes"} />
-
 						</form>
+						<br />
+						<br />
+
+						<Button
+							btnText="back to profile" />
+
 						<br />
 					</center>
 				</div>
