@@ -104,6 +104,7 @@ const Settings = (props) => {
 
 					{props.kopokopoRecipients
 						.some((recipient) => recipient.username == props.auth.username) ?
+						props.songPayouts.balance > 0 &&
 						<Button
 							btnClass="sonar-btn"
 							onClick={onTransferFunds}

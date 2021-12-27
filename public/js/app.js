@@ -102515,7 +102515,7 @@ var Settings = function Settings(props) {
     className: "text-success"
   }, "KES ", props.songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
-  }) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }) ? props.songPayouts.balance > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnClass: "sonar-btn",
     onClick: onTransferFunds,
     btnText: "transfer funds"
