@@ -63,6 +63,7 @@ function App() {
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
 
+	const [admin, setAdmin] = useState([])
 	const [audioAlbums, setAudioAlbums] = useState([])
 	const [audioComments, setAudioComments] = useState([])
 	const [audioPayouts, setAudioPayouts] = useState([])
@@ -102,6 +103,11 @@ function App() {
 			setAuth(authFromServer)
 		}
 		getAuth()
+
+		// Fetch Admin
+		axios.get(`${url}/api/admin`)
+			.then((res) => setAdmin(res.data))
+			.catch(() => setErrors(["Failed to fetch admin"]))
 
 		// Fetch Audio Albums
 		axios.get(`${url}/api/audio-albums`)
@@ -724,6 +730,7 @@ function App() {
 		auth, setAuth,
 		message, setMessage,
 		errors, setErrors,
+		admin, setAdmin,
 		audioAlbums, setAudioAlbums,
 		audioComments, setAudioComments,
 		audioPayouts, setAudioPayouts,

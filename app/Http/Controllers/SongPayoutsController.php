@@ -44,7 +44,7 @@ class SongPayoutsController extends Controller
 
         $songPayouts = [];
 
-        // Populate video payouts array
+        // Populate song payouts array
         foreach ($getSongPayouts as $key => $songPayout) {
             array_push($songPayouts, [
                 'amount' => $songPayout->amount,
@@ -53,12 +53,12 @@ class SongPayoutsController extends Controller
         }
 
         // Check if there's any outstanding cash
-        $totalVideoEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
-        $balance = $totalVideoEarnings - $getSongPayouts->sum('amount');
+        $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
+        $balance = $totalEarnings - $getSongPayouts->sum('amount');
 
         return response([
             'songPayouts' => $songPayouts,
-            'totalVideoEarnings' => $totalVideoEarnings,
+            'totalEarnings' => $totalEarnings,
             'balance' => $balance,
         ], 200);
     }

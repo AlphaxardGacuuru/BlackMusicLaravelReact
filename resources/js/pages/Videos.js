@@ -124,19 +124,17 @@ const Videos = (props) => {
 										KES
 										<span className="ml-1">
 											{props.boughtVideos
-												.filter((boughtVideo) => boughtVideo.artist == props.auth.username)
-												.length * 10}
+												.filter((boughtVideo) => {
+													return boughtVideo.artist == props.auth.username && boughtVideo.price == 20
+												})
+												.length * 10 +
+												props.boughtVideos
+													.filter((boughtVideo) => {
+														return boughtVideo.artist == props.auth.username && boughtVideo.price == 200
+													})
+													.length * 100}
 										</span>
 									</h5>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td><h6>Unpaid</h6></td>
-								<td><h6 style={{ color: "green" }}>
-									KES <span className="ml-1">{props.videoPayouts.balance}</span>
-								</h6>
 								</td>
 							</tr>
 						</tbody>
@@ -203,8 +201,13 @@ const Videos = (props) => {
 													<td>{albumItem.downloads}</td>
 													<td style={{ color: "green" }}>
 														KES <span>{props.boughtVideos
-															.filter((boughtVideo) => boughtVideo.video_id == albumItem.id)
-															.length * 10}
+															.filter((boughtVideo) => boughtVideo.video_id == albumItem.id &&
+																boughtVideo.price == 20)
+															.length * 10 +
+															props.boughtVideos
+																.filter((boughtVideo) => boughtVideo.video_id == albumItem.id &&
+																	boughtVideo.price == 200)
+																.length * 100}
 														</span>
 													</td>
 													<td>{albumItem.likes}</td>

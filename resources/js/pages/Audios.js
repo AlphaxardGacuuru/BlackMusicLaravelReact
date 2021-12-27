@@ -41,7 +41,7 @@ const Audios = (props) => {
 							<tr>
 								<th><h5>Audio Albums</h5></th>
 								<th><h5>{props.audioAlbums
-									.filter((audioAlbum) => audioAlbum.username == props.auth.username).length}</h5>
+									.filter((audioAlbum) => audioAlbum.username == props.auth.username).length - 1}</h5>
 								</th>
 							</tr>
 						</tbody>
@@ -55,26 +55,14 @@ const Audios = (props) => {
 						</tbody>
 						<tbody>
 							<tr>
-								<td><h6>Unpaid</h6></td>
-								<td><h6></h6></td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
 								<td><h5>Revenue</h5></td>
 								<td><h5 style={{ color: "green" }}>
 									KES
-									<span> {props.boughtAudios.filter((boughtAudio) => {
-										return boughtAudio.artist == props.auth.username
-									}).length * 10}</span>
+									<span> {props.boughtAudios
+										.filter((boughtAudio) => boughtAudio.artist == props.auth.username)
+										.length * 10}</span>
 								</h5>
 								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td><h6>Unpaid</h6></td>
-								<td><h6 style={{ color: "green" }}>KES</h6></td>
 							</tr>
 						</tbody>
 					</table>

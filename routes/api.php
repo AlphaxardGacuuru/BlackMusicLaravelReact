@@ -32,6 +32,7 @@ Route::post('login/update', 'Auth\LoginController@update');
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::resources([
+	'admin' => 'AdminController',
     'audios' => 'AudiosController',
     'audio-likes' => 'AudioLikesController',
     'audio-comments' => 'AudioCommentsController',

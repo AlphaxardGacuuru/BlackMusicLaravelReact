@@ -665,7 +665,7 @@ const AudioShow = (props) => {
 										</div>
 									</div>
 								)) :
-							<center className="mt-3">
+							<center className="my-5">
 								<h6 style={{ color: "grey" }}>No comments to show</h6>
 							</center> : ""}
 				</div>

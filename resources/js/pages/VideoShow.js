@@ -9,15 +9,11 @@ import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
 const VideoShow = (props) => {
 
 	let { show } = useParams()
-
 	let { referer } = useParams()
-
 	let history = useHistory()
-
 	const location = useLocation()
 
 	var showVideo = []
-
 	var showArtist = []
 
 	// Get Video to show
@@ -408,7 +404,7 @@ const VideoShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{/* {showVideo.hasBoughtVideo ||
+					{showVideo.hasBoughtVideo ||
 						showVideo.username == props.auth.username ||
 						showVideo.username == "@blackmusic" ?
 						<div className='media p-2 border-bottom'>
@@ -434,7 +430,7 @@ const VideoShow = (props) => {
 										btnText={"Comment"} />
 								</form>
 							</div>
-						</div> : ""} */}
+						</div> : ""}
 					{/* <!-- End of Comment Form --> */}
 
 					{/* <!-- Comment Section --> */}
@@ -533,7 +529,7 @@ const VideoShow = (props) => {
 										</div>
 									</div>
 								)) :
-							<center className="mt-3">
+							<center className="my-5">
 								<h6 style={{ color: "grey" }}>No comments to show</h6>
 							</center> : ""}
 				</div>

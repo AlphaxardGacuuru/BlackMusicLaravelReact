@@ -6,30 +6,10 @@ const Admin = (props) => {
 
 	const [search, setSearch] = useState()
 
-	// Post video payout
+	// Post song payout
 	const onVideoPayout = (username, amount) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/video-payouts`, {
-				username: username,
-				amount: amount,
-			}).then((res) => props.setMessage(res.data))
-				.catch((err) => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					newError.push(err.response.data.message)
-					props.setErrors(newError)
-				})
-		})
-	}
-
-	// Post audio payout
-	const onAudioPayout = (username, amount) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/audio-payouts`, {
+			axios.post(`${props.url}/api/song-payouts`, {
 				username: username,
 				amount: amount,
 			}).then((res) => props.setMessage(res.data))
@@ -76,50 +56,48 @@ const Admin = (props) => {
 							<th>Audios Bought</th>
 							<th>Video Revenue</th>
 							<th>Audio Revenue</th>
-							<th>This week</th>
-							<th>Profit</th>
-							<th>This week</th>
+							<th>Video Profit</th>
+							<th>Audio Profit</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
+							{/* Users */}
 							<td>{props.users.length}</td>
+							{/* Musicians */}
 							<td>{props.users.filter((user) => user.account_type == "musician").length}</td>
+							{/* Videos */}
 							<td>{props.videos.length}</td>
+							{/* Audios */}
 							<td>{props.audios.length}</td>
-							<td style={{ color: "green" }}>KES {props.boughtVideos.length * 10}</td>
-							<td style={{ color: "green" }}>KES {props.boughtAudios.length * 10}</td>
+							{/* Videos Bought */}
+							<td>KES {props.boughtVideos.length}</td>
+							{/* Audios Bought */}
+							<td>KES {props.boughtAudios.length}</td>
+							{/* Video Revenue */}
 							<td style={{ color: "green" }}>
 								KES {props.boughtVideos
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() -
-											new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 20}
+									.filter((boughtVideo) => boughtVideo.price == 20).length * 20 +
+									props.boughtVideos
+										.filter((boughtVideo) => boughtVideo.price == 200).length * 200}
 							</td>
+							{/* Audio Revenue */}
 							<td style={{ color: "green" }}>
 								KES {props.boughtAudios
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() -
-											new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 20}
+									.filter((boughtAudio) => boughtAudio.price == 100).length * 100}
 							</td>
+							{/* Video Profit */}
 							<td style={{ color: "green" }}>
 								KES {props.boughtVideos
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() - new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 10}
+									.filter((boughtVideo) => boughtVideo.price == 20).length * 10 +
+									props.boughtVideos
+										.filter((boughtVideo) => boughtVideo.price == 200).length * 100}
 							</td>
+							{/* Audio Profit */}
 							<td style={{ color: "green" }}>
 								KES {props.boughtAudios
-									.filter((boughtVideo) => {
-										return ((new Date().getTime() - new Date(boughtVideo.created_at).getTime()) /
-											(1000 * 3600 * 24) < 7)
-									}).length * 10}
+									.filter((boughtAudio) => boughtAudio.price == 100).length * 50}
 							</td>
-							<td>{props.boughtVideos.length}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -184,8 +162,8 @@ const Admin = (props) => {
 				<br />
 				<br />
 
-				{/* Video Payouts */}
-				<h1>Video Payouts</h1>
+				{/* Song Payouts */}
+				<h1>Song Payouts</h1>
 				<table className="table table-responsive thead-light">
 					<tbody>
 						<tr>
@@ -197,65 +175,29 @@ const Admin = (props) => {
 							<th>Send</th>
 						</tr>
 					</tbody>
-					{props.videoPayouts.videoPayouts &&
-						props.videoPayouts.videoPayouts
-							.map((videoPayout, key) => (
+					{props.admin.songPayouts &&
+						props.admin.songPayouts
+							.map((songPayout, key) => (
 								<tbody key={key}>
 									<tr>
-										<td>{videoPayout.name}</td>
-										<td>{videoPayout.username}</td>
-										<td>{videoPayout.email}</td>
-										<td>{videoPayout.phone}</td>
-										<td>{videoPayout.amount}</td>
+										<td>{songPayout.name}</td>
+										<td>{songPayout.username}</td>
+										<td>{songPayout.email}</td>
+										<td>{songPayout.phone}</td>
+										<td>{songPayout.amount}</td>
 										<td>
 											<Button
 												btnClass="mysonar-btn"
 												btnText="send"
-												onClick={() => onVideoPayout(videoPayout.username, videoPayout.amount)} />
+												onClick={() => onVideoPayout(songPayout.username, songPayout.amount)} />
 										</td>
 									</tr>
 								</tbody>
 							))}
 				</table>
-				{/* Video Payouts End */}
-
+				{/* Song Payouts End */}
 				<br />
 				<br />
-
-				{/* Audio Payouts */}
-				<h1>Audio Payouts</h1>
-				<table className="table table-responsive thead-light">
-					<tbody>
-						<tr>
-							<th>Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Amount</th>
-							<th>Send</th>
-						</tr>
-					</tbody>
-					{props.audioPayouts.audioPayouts &&
-						props.audioPayouts.audioPayouts
-							.map((audioPayout, key) => (
-								<tbody key={key}>
-									<tr>
-										<td>{audioPayout.name}</td>
-										<td>{audioPayout.username}</td>
-										<td>{audioPayout.email}</td>
-										<td>{audioPayout.phone}</td>
-										<td>{audioPayout.amount}</td>
-										<td>
-											<Button
-												btnClass="mysonar-btn"
-												btnText="send"
-												onClick={() => onAudioPayout(audioPayout.username, audioPayout.amount)} />
-										</td>
-									</tr>
-								</tbody>
-							))}
-				</table>
-				{/* Audio Payouts End */}
 			</div>
 			<div className="col-sm-2"></div>
 		</div >
