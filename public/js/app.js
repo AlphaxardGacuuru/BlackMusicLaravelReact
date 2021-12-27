@@ -102100,6 +102100,10 @@ var ProfileEdit = function ProfileEdit(props) {
 
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
             return props.setAuth(res.data);
+          }); // Update Users
+
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/users")).then(function (res) {
+            return props.setUsers(res.data);
           });
         },
         onerror: function onerror(err) {

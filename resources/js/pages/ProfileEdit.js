@@ -101,6 +101,9 @@ const ProfileEdit = (props) => {
 											// Update auth
 											axios.get(`${props.url}/api/home`)
 												.then((res) => props.setAuth(res.data))
+											// Update Users
+											axios.get(`${props.url}/api/users`)
+												.then((res) => props.setUsers(res.data))
 										},
 										onerror: (err) => console.log(err.response)
 									}
