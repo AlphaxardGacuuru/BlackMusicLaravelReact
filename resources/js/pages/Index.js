@@ -111,7 +111,7 @@ const Index = (props) => {
 				</Link>}
 
 			{/* <!-- Profile info area --> */}
-			<div className="row">
+			<div className="row p-0">
 				<div className="col-sm-1 hidden"></div>
 				<div className="col-sm-3 hidden">
 					<div className="d-flex border">
@@ -298,7 +298,7 @@ const Index = (props) => {
 					{/* <!-- ****** Songs Area End ****** --> */}
 
 					{/* <!-- Posts area --> */}
-					<div className="border m-0 p-0">
+					<div className="border border-top-0 m-0 p-0">
 						{props.posts
 							.filter((post) => post.hasFollowed)
 							.map((post, index) => (

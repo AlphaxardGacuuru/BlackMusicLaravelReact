@@ -21,6 +21,37 @@ const Help = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
+				{/* Start Thread */}
+				{threadsArray.length == 0 &&
+					<div className="d-flex border-bottom">
+						<div className="p-2">
+							<Link to="/profile/@blackmusic">
+								<Img
+									imgClass="rounded-circle"
+									width="50px"
+									height="50px" />
+							</Link>
+						</div>
+						<div className="p-2 flex-grow-1">
+							<Link to="/help/@blackmusic">
+								<h6
+									className="m-0"
+									style={{
+										width: "100%",
+										whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip"
+									}}>
+									<b>Black Music</b>
+									<small>@blackmusic</small>
+								</h6>
+								<p className="mb-0">Start a conversation</p>
+							</Link>
+						</div>
+					</div>}
+					{/* Start Thread End */}
+
+				{/* Threads Start */}
 				{threadsArray
 					.map((thread, key) => (
 						<div key={key}>
@@ -70,6 +101,7 @@ const Help = (props) => {
 								))}
 						</div>
 					))}
+				{/* Threads End */}
 			</div>
 			<div className="col-sm-4"></div>
 		</div>

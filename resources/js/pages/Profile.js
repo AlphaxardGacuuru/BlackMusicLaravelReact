@@ -152,29 +152,30 @@ const Profile = (props) => {
 						<Link to="/profile-edit">
 							<button className="float-right mysonar-btn">edit profile</button>
 						</Link>
-						: profile.hasFollowed ?
-							<button className={'btn btn-light float-right rounded-0'}
-								onClick={() => props.onFollow(username)}>
-								Followed
-								<svg className='bi bi-check'
-									width='1.5em'
-									height='1.5em'
-									viewBox='0 0 16 16'
-									fill='currentColor'
-									xmlns='http://www.w3.org/2000/svg'>
-									<path fillRule='evenodd'
-										d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-								</svg>
-							</button> :
-							profile.hasBought1 ?
-								<Button
-									btnClass={'mysonar-btn float-right'}
-									onClick={() => props.onFollow(username)}
-									btnText={'follow'} />
-								: <Button
-									btnClass={'mysonar-btn float-right'}
-									onClick={() => props.setErrors([`You must have bought atleast one song by ${username}`])}
-									btnText={'follow'} />}
+						: profile.username != "@blackmusic" ?
+							profile.hasFollowed ?
+								<button className={'btn btn-light float-right rounded-0'}
+									onClick={() => props.onFollow(username)}>
+									Followed
+									<svg className='bi bi-check'
+										width='1.5em'
+										height='1.5em'
+										viewBox='0 0 16 16'
+										fill='currentColor'
+										xmlns='http://www.w3.org/2000/svg'>
+										<path fillRule='evenodd'
+											d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
+									</svg>
+								</button> :
+								profile.hasBought1 ?
+									<Button
+										btnClass={'mysonar-btn float-right'}
+										onClick={() => props.onFollow(username)}
+										btnText={'follow'} />
+									: <Button
+										btnClass={'mysonar-btn float-right'}
+										onClick={() => props.setErrors([`You must have bought atleast one song by ${username}`])}
+										btnText={'follow'} /> : ""}
 					<div>
 						<h3>{profile.name}</h3>
 						<h5>{profile.username}</h5>

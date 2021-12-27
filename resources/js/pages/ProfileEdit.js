@@ -18,6 +18,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import { Link } from 'react-router-dom';
 
 // Register the plugins
 registerPlugin(
@@ -176,9 +177,9 @@ const ProfileEdit = (props) => {
 						</form>
 						<br />
 
-						<Button
-							btnClass="sonar-btn btn-2"
-							btnText="back to profile" />
+						<Link to={`/profile/${props.auth.username}`} className="btn sonar-btn btn-2">
+							back to profile
+						</Link>
 
 						<br />
 					</center>
