@@ -49,8 +49,9 @@ class HelpPostNotifications extends Notification
 	public function toDatabase()
 	{
 		return [
-			'from' => '@blackmusic',
-			'message' => 'Black Music sent you a message.',
+			'url' => '/help',
+			'from' => auth()->user()->username,
+			'message' => auth()->user()->username . ' sent you a message.',
 		];
 	}
 

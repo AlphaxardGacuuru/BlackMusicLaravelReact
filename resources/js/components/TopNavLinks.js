@@ -182,7 +182,7 @@ const TopNavLinks = (props) => {
 							.map((notification, key) => (
 								<Link
 									key={key}
-									to={`/profile/${notification.from}`}
+									to={notification.url}
 									className="p-2 dropdown-item border-bottom text-dark"
 									onClick={() => onDeleteComment(notification.id)}>
 									<small>{notification.message}</small>

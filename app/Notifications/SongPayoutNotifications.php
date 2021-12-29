@@ -50,6 +50,7 @@ class SongPayoutNotifications extends Notification
     public function toDatabase()
     {
         return [
+			'url' => '/settings',
             'from' => '@blackmusic',
             'message' => 'You withdrew KES ' . $this->amount,
         ];

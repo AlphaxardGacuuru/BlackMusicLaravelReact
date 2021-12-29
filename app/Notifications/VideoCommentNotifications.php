@@ -51,6 +51,7 @@ class VideoCommentNotifications extends Notification
 	public function toDatabase()
 	{
 		return [
+			'url' => '/profile/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'message' => auth()->user()->username . ' commented on ' . $this->video,
 		];

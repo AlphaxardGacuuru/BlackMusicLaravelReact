@@ -62,6 +62,7 @@ class VideoReceiptNotifications extends Notification
         }
 
         return [
+			'url' => '/library',
             'from' => '@blackmusic',
             'message' => 'You bought ' . $numberOfVideos . implode(", ", $list),
         ];

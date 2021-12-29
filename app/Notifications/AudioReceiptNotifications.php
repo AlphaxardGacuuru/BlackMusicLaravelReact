@@ -62,6 +62,7 @@ class AudioReceiptNotifications extends Notification
         }
 
         return [
+			'url' => '/library',
             'from' => '@blackmusic',
             'message' => 'You bought ' . $numberOfAudios . implode(", ", $list),
         ];

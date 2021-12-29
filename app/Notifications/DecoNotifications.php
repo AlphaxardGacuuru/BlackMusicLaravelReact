@@ -51,6 +51,7 @@ class DecoNotifications extends Notification
 	public function toDatabase($notifiable)
 	{
 		return [
+			'url' => '/profile/' . $this->artist,
 			'from' => $this->artist,
 			'message' => $this->artist . ' decorated you.',
 		];

@@ -96277,7 +96277,7 @@ var TopNavLinks = function TopNavLinks(props) {
   }, props.notifications.map(function (notification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
-      to: "/profile/".concat(notification.from),
+      to: notification.url,
       className: "p-2 dropdown-item border-bottom text-dark",
       onClick: function onClick() {
         return onDeleteComment(notification.id);

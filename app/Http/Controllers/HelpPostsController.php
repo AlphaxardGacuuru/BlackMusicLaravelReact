@@ -86,7 +86,6 @@ class HelpPostsController extends Controller
 
             // Get user
             $user = User::where('username', $request->input('to'))->first();
-            $request->input('to') != "@blackmusic" &&
             $user->notify(new HelpPostNotifications);
 
             return response('Sent', 200);

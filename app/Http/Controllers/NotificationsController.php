@@ -33,6 +33,7 @@ class NotificationsController extends Controller
             array_push($notifications, [
                 "id" => $notification->id,
                 "type" => explode('\\', $notification->type)[2],
+                "url" => $notification->data['url'],
                 "from" => $notification->data['from'],
                 "message" => $notification->data['message'],
                 "isRead" => $isRead,

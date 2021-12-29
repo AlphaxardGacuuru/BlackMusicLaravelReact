@@ -49,6 +49,7 @@ class FollowNotifications extends Notification
 	public function toDatabase($notifiable)
 	{
 		return [
+			'url' => '/profile/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'message' => auth()->user()->username . ' followed you.',
 		];

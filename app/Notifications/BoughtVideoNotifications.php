@@ -51,6 +51,7 @@ class BoughtVideoNotifications extends Notification
     public function toDatabase($notifiable)
     {
 		return [
+			'url' => '/profile/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'id' => $this->cartVideo->videos->username,
 			'message' => auth()->user()->username . ' bought ' . $this->cartVideo->videos->name,

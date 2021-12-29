@@ -51,6 +51,7 @@ class AudioCommentLikeNotifications extends Notification
 	public function toDatabase()
 	{
 		return [
+			'url' => '/profile/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'message' => auth()->user()->username . ' liked your comment on ' . $this->audio,
 		];

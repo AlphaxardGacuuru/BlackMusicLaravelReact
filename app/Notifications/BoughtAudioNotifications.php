@@ -51,6 +51,7 @@ class BoughtAudioNotifications extends Notification
 	public function toDatabase($notifiable)
 	{
 		return [
+			'url' => '/profile/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'id' => $this->cartAudio->audios->username,
 			'message' => auth()->user()->username . ' bought ' . $this->cartAudio->audios->name,
