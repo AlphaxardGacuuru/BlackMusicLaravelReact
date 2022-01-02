@@ -89,13 +89,15 @@ const AudioCreate = (props) => {
 		formData.append("description", description);
 		formData.append("files", files);
 
-		// Send data to PostsController
+		// Send data to AudiossController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/audios`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
-					axios.get(`${props.url}/api/audios`).then((res) => props.setAudios(res.data))
+					// Update Audios
+					axios.get(`${props.url}/api/audios`)
+						.then((res) => props.setAudios(res.data))
 					setTimeout(() => history.push('/audios'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
@@ -104,6 +106,8 @@ const AudioCreate = (props) => {
 					for (resError in resErrors) {
 						newError.push(resErrors[resError])
 					}
+					// Get other errors
+					newError.push(err.response.data.message)
 					props.setErrors(newError)
 				})
 		})

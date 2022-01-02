@@ -97683,12 +97683,13 @@ var AudioCreate = function AudioCreate(props) {
     formData.append("genre", genre);
     formData.append("released", released);
     formData.append("description", description);
-    formData.append("files", files); // Send data to PostsController
+    formData.append("files", files); // Send data to AudiossController
     // Get csrf cookie from Laravel inorder to send a POST request
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audios"), formData).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
         });
@@ -97702,8 +97703,10 @@ var AudioCreate = function AudioCreate(props) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });
