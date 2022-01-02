@@ -127,13 +127,13 @@ class AudiosController extends Controller
             $audio->save();
 
             // Check if user is musician
-            $accountCheck = User::where('username', auth()->user()->username)->first();
+            // $accountCheck = User::where('username', auth()->user()->username)->first();
 
-            if ($accountCheck->account_type == "normal") {
-                $user = User::find($accountCheck->id);
-                $user->account_type = "musician";
-                $user->save();
-            }
+            // if ($accountCheck->account_type == "normal") {
+            //     $user = User::find($accountCheck->id);
+            //     $user->account_type = "musician";
+            //     $user->save();
+            // }
 
             return response('Audio Uploaded', 200);
         }
