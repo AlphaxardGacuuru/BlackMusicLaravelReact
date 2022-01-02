@@ -107,14 +107,14 @@ class VideosController extends Controller
             /* Handle video upload */
             $video = $request->file('filepond-video')->store('public/videos');
             $videoShort = substr($video, 7);
-            $videoName = substr($video, 14);
-            $videoName = substr($videoName, 0, strpos($videoName, "."));
+            // $videoName = substr($video, 14);
+            // $videoName = substr($videoName, 0, strpos($videoName, "."));
 
             // Create frame from Video
-            FFMpeg::open($video)
-                ->getFrameFromSeconds(5)
-                ->export()
-                ->save('public/video-thumbnails/' . $videoName . '.png');
+            // FFMpeg::open($video)
+            //     ->getFrameFromSeconds(5)
+            //     ->export()
+            //     ->save('public/video-thumbnails/' . $videoName . '.png');
 
             return $videoShort;
         } else {
