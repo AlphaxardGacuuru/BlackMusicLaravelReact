@@ -103696,7 +103696,17 @@ var VideoCreate = function VideoCreate(props) {
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState14 = _slicedToArray(_useState13, 2),
       description = _useState14[0],
-      setDescription = _useState14[1]; // Get csrf token
+      setDescription = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState16 = _slicedToArray(_useState15, 2),
+      thumbnail = _useState16[0],
+      setThumbnail = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState18 = _slicedToArray(_useState17, 2),
+      files = _useState18[0],
+      setFiles = _useState18[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
@@ -103709,17 +103719,20 @@ var VideoCreate = function VideoCreate(props) {
     e.preventDefault(); // Add form data to FormData object
 
     formData.append("video", video);
+    formData.append("thumbnail", thumbnail);
     formData.append("name", name);
     formData.append("ft", ft);
     formData.append("album", album);
     formData.append("genre", genre);
     formData.append("released", released);
-    formData.append("description", description); // Send data to PostsController
+    formData.append("description", description);
+    formData.append("files", files); // Send data to PostsController
     // Get csrf cookie from Laravel inorder to send a POST request
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/videos"), formData).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Videos
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
         });
@@ -103733,8 +103746,11 @@ var VideoCreate = function VideoCreate(props) {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Get other errors
 
+
+        newError.push(err.response.data.message);
+        console.log(err.response.data);
         props.setErrors(newError);
       });
     });
@@ -103888,12 +103904,43 @@ var VideoCreate = function VideoCreate(props) {
     onChange: function onChange(e) {
       setDescription(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Video"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Video Thumbnail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
+    name: "filepond-thumbnail",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
+    imageCropAspectRatio: "16:9",
+    acceptedFileTypes: ['image/*'],
+    stylePanelAspectRatio: "16:9",
+    allowRevert: true,
+    server: {
+      url: "".concat(props.url, "/api"),
+      process: {
+        url: "/videos",
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          return setThumbnail(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/videos/".concat(thumbnail.substr(17)),
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          return props.setMessage(res);
+        }
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Video"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-video",
     labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action\"> Browse </span>",
     acceptedFileTypes: ['video/*'],
     stylePanelAspectRatio: "16:9",
-    maxFileSize: "100000000",
+    maxFileSize: "200000000",
     allowRevert: true,
     server: {
       url: "".concat(props.url, "/api"),

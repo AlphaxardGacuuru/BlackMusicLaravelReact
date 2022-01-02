@@ -41,6 +41,8 @@ const VideoCreate = (props) => {
 	const [genre, setGenre] = useState()
 	const [released, setReleased] = useState()
 	const [description, setDescription] = useState()
+	const [thumbnail, setThumbnail] = useState("")
+	const [files, setFiles] = useState([]);
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -56,12 +58,14 @@ const VideoCreate = (props) => {
 
 		// Add form data to FormData object
 		formData.append("video", video);
+		formData.append("thumbnail", thumbnail);
 		formData.append("name", name);
 		formData.append("ft", ft);
 		formData.append("album", album);
 		formData.append("genre", genre);
 		formData.append("released", released);
 		formData.append("description", description);
+		formData.append("files", files);
 
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
@@ -69,7 +73,9 @@ const VideoCreate = (props) => {
 			axios.post(`${props.url}/api/videos`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
-					axios.get(`${props.url}/api/videos`).then((res) => props.setVideos(res.data))
+					// Update Videos
+					axios.get(`${props.url}/api/videos`)
+						.then((res) => props.setVideos(res.data))
 					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
 					const resErrors = err.response.data.errors
@@ -78,6 +84,9 @@ const VideoCreate = (props) => {
 					for (resError in resErrors) {
 						newError.push(resErrors[resError])
 					}
+					// Get other errors
+					newError.push(err.response.data.message)
+					console.log(err.response.data)
 					props.setErrors(newError)
 				})
 		})
@@ -206,13 +215,40 @@ const VideoCreate = (props) => {
 											onChange={(e) => { setDescription(e.target.value) }}>
 										</textarea>
 
+										<label>Upload Video Thumbnail</label>
+
+										<FilePond
+											name="filepond-thumbnail"
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
+											imageCropAspectRatio="16:9"
+											acceptedFileTypes={['image/*']}
+											stylePanelAspectRatio="16:9"
+											allowRevert={true}
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/videos",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => setThumbnail(res),
+													onerror: (err) => console.log(err.response.data)
+												},
+												revert: {
+													url: `/videos/${thumbnail.substr(17)}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => props.setMessage(res),
+												},
+											}} />
+										<br />
+										<br />
+
 										<label>Upload Video</label>
+
 										<FilePond
 											name="filepond-video"
 											labelIdle='Drag & Drop your Video or <span class="filepond--label-action"> Browse </span>'
 											acceptedFileTypes={['video/*']}
 											stylePanelAspectRatio="16:9"
-											maxFileSize="100000000"
+											maxFileSize="200000000"
 											allowRevert={true}
 											server={{
 												url: `${props.url}/api`,

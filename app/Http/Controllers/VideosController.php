@@ -11,11 +11,10 @@ use App\User;
 use App\VideoLikes;
 use App\Videos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 // FFMpeg
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 // use ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider;
 
@@ -28,12 +27,12 @@ class VideosController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
         // Get Videos
         $getVideos = Videos::orderBy('id', 'ASC')->get();
@@ -103,7 +102,12 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('filepond-video')) {
+        if ($request->hasFile('filepond-thumbnail')) {
+            /* Handle thumbnail upload */
+            $thumbnail = $request->file('filepond-thumbnail')->store('public/video-thumbnails');
+            $thumbnail = substr($thumbnail, 7);
+            return $thumbnail;
+        } elseif ($request->hasFile('filepond-video')) {
             /* Handle video upload */
             $video = $request->file('filepond-video')->store('public/videos');
             $videoShort = substr($video, 7);
@@ -122,6 +126,7 @@ class VideosController extends Controller
             $this->validate($request, [
                 'video' => 'required|string',
                 'name' => 'required|string',
+                'thumbnail' => 'required',
                 'ft' => 'nullable|exists:users,username',
             ]);
 
@@ -133,14 +138,11 @@ class VideosController extends Controller
             $video->ft = $request->input('ft') ? $request->input('ft') : null;
             $video->album = $request->input('album');
             $video->genre = $request->input('genre');
-            /* Generate thumbnail */
-            // $thumbnail = substr($video->video, 30);
-            // $thumbnail = "https://img.youtube.com/vi/" . $thumbnail . "/hqdefault.jpg";
+            // $thumbnail = substr($request->input('video'), 7);
+            // $thumbnail = substr($thumbnail, 0, strpos($thumbnail, "."));
+            // $thumbnail = 'video-thumbnails/' . $thumbnail . '.png';
             // $video->thumbnail = $thumbnail;
-            $thumbnail = substr($request->input('video'), 7);
-            $thumbnail = substr($thumbnail, 0, strpos($thumbnail, "."));
-            $thumbnail = 'video-thumbnails/' . $thumbnail . '.png';
-            $video->thumbnail = $thumbnail;
+            $video->thumbnail = $request->input('thumbnail');
             $video->description = $request->input('description');
             $video->released = $request->input('released');
             $video->save();
@@ -170,9 +172,9 @@ class VideosController extends Controller
         // Get file extesion
         $ext = substr($video->video, -3);
 
-		$src = 'storage/' . $video->video;
+        $src = 'storage/' . $video->video;
 
-		$name = $video->name . '.' . $ext;
+        $name = $video->name . '.' . $ext;
 
         return response()->download($src, $name);
     }
@@ -237,7 +239,17 @@ class VideosController extends Controller
      */
     public function destroy($id)
     {
-        Storage::delete('public/videos/' . $id);
-        return response("Video deleted", 200);
+        // Check file extension and handle filepond delete accordingly
+        $ext = substr($id, -3);
+
+        // If image
+        if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
+            Storage::delete('public/video-thumbnails/' . $id);
+            return response("Video thumbnail deleted", 200);
+            // If video
+        } else {
+            Storage::delete('public/videos/' . $id);
+            return response("Video deleted", 200);
+        }
     }
 }

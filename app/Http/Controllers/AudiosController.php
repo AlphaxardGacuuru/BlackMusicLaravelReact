@@ -108,8 +108,8 @@ class AudiosController extends Controller
         } else {
             $this->validate($request, [
                 'audio' => 'required',
-                'thumbnail' => 'required',
                 'name' => 'required|string',
+                'thumbnail' => 'required',
                 'ft' => 'nullable|exists:users,username',
             ]);
 
