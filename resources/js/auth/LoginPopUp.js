@@ -18,7 +18,7 @@ const LoginPopUp = (props) => {
 	}
 
 	const [phone, setPhone] = useState('07')
-	const [phoneLogin, setPhoneLogin] = useState(true)
+	const [phoneLogin, setPhoneLogin] = useState(false)
 
 	const onSubmit = (e) => {
 		e.preventDefault()
