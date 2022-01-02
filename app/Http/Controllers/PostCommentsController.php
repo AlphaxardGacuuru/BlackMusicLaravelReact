@@ -30,7 +30,7 @@ class PostCommentsController extends Controller
 
         foreach ($getComments as $key => $comment) {
             // Check if user has liked
-            $hasLiked = PostCommentLikes::where('username', authUsername)
+            $hasLiked = PostCommentLikes::where('username', $authUsername)
                 ->where('comment_id', $comment->id)
                 ->exists();
 
