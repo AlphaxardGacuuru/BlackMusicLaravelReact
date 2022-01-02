@@ -7,6 +7,7 @@ use App\PostCommentLikes;
 use App\PostComments;
 use App\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostCommentsController extends Controller
 {
@@ -17,13 +18,19 @@ class PostCommentsController extends Controller
      */
     public function index()
     {
+		// Check if user is logged in
+        if (Auth::check()) {
+			$authUsername = auth()->user()->username;
+        } else {
+			$authUsername = '@guest';
+		}
         $getComments = PostComments::orderby('id', 'DESC')->get();
 
         $comments = [];
 
         foreach ($getComments as $key => $comment) {
             // Check if user has liked
-            $hasLiked = PostCommentLikes::where('username', auth()->user()->username)
+            $hasLiked = PostCommentLikes::where('username', authUsername)
                 ->where('comment_id', $comment->id)
                 ->exists();
 
