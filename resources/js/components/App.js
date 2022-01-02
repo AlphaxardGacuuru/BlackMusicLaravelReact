@@ -52,7 +52,7 @@ function App() {
 	// Declare states
 	const [login, setLogin] = useState()
 	const [url, setUrl] = useState(window.location.href.match(/https/) ?
-		'http://music.black.co.ke' :
+		'https://music.black.co.ke' :
 		'http://localhost:3000')
 	const [auth, setAuth] = useState({
 		"name": "Guest",
