@@ -108,6 +108,7 @@ const AudioCreate = (props) => {
 					}
 					// Get other errors
 					newError.push(err.response.data.message)
+					console.log(err.response.data)
 					props.setErrors(newError)
 				})
 		})
