@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Auth::routes();
+// Auth::routes();
 
 // Social logins
 Route::get('login/{website}', 'Auth\LoginController@redirectToProvider');

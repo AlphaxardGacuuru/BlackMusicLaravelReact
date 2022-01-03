@@ -50,6 +50,7 @@ const HelpThread = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
+
 				{/* <!-- ***** Header Area Start ***** --> */}
 				<header style={{ backgroundColor: "#232323" }} className="header-area">
 					<div className="container-fluid p-0">
@@ -120,65 +121,66 @@ const HelpThread = (props) => {
 				<br />
 				<br className="hidden" />
 
-				<div className="d-flex justify-content-between">
-					{/* <!-- Back Icon --> */}
-					<div className="">
+				{/* <!-- ***** Call to Action Area Start ***** --> */}
+				<div className="sonar-call-to-action-area section-padding-0-100">
+					<div className="backEnd-content">
+						<h2 className="p-2">Help Center</h2>
 					</div>
-				</div>
 
-				{props
-					.helpPosts
-					.filter((helpPost) => {
-						return helpPost.username == username &&
-							helpPost.to == props.auth.username ||
-							helpPost.username == props.auth.username &&
-							helpPost.to == username
-					}).map((helpPost, key) => (
-						<div
-							key={key}
-							className={`d-flex ${helpPost.username == props.auth.username && "flex-row-reverse text-white"}`}>
-							{helpPost.username == props.auth.username &&
-								showDelete &&
-								<div
-									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
-									className="card rounded-0 my-1 mx-0 p-2"
-									onClick={() => onDeletePost(helpPost.id)}>
-									<span>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											fill="currentColor"
-											className="bi bi-trash"
-											viewBox="0 0 16 16">
-											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-											<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-										</svg>
-									</span>
-								</div>}
+					{props
+						.helpPosts
+						.filter((helpPost) => {
+							return helpPost.username == username &&
+								helpPost.to == props.auth.username ||
+								helpPost.username == props.auth.username &&
+								helpPost.to == username
+						}).map((helpPost, key) => (
 							<div
-								className="card rounded-0 border border-0 p-2 my-1 mx-0"
-								style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
-								onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
-								{helpPost.text}
+								key={key}
+								className={`d-flex ${helpPost.username == props.auth.username && "flex-row-reverse text-white"}`}>
+								{helpPost.username == props.auth.username &&
+									showDelete &&
+									<div
+										style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
+										className="card rounded-0 my-1 mx-0 p-2"
+										onClick={() => onDeletePost(helpPost.id)}>
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												fill="currentColor"
+												className="bi bi-trash"
+												viewBox="0 0 16 16">
+												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+												<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+											</svg>
+										</span>
+									</div>}
+								<div
+									className="card rounded-0 border border-0 p-2 my-1 mx-0"
+									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
+									onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
+									{helpPost.text}
 
-								{/* Show media */}
-								<div className="mb-1" style={{ overflow: "hidden" }}>
-									{helpPost.media &&
-										<Img
-											src={`storage/${helpPost.media}`}
-											width="100%"
-											height="auto"
-											alt={'help-post-media'} />}
+									{/* Show media */}
+									<div className="mb-1" style={{ overflow: "hidden" }}>
+										{helpPost.media &&
+											<Img
+												src={`storage/${helpPost.media}`}
+												width="100%"
+												height="auto"
+												alt={'help-post-media'} />}
+									</div>
+									<small className="text-muted">
+										<i className="float-right">
+											{helpPost.created_at}
+										</i>
+									</small>
 								</div>
-								<small className="text-muted">
-									<i className="float-right">
-										{helpPost.created_at}
-									</i>
-								</small>
 							</div>
-						</div>
-					))}
+						))}
+				</div>
 			</div>
 			<div className="col-sm-4"></div>
 		</div>

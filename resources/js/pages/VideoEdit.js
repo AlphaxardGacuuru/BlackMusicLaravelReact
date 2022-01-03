@@ -205,7 +205,7 @@ const VideoEdit = (props) => {
 					</div>
 				</div>
 			</div>
-		</div >
+		</div>
 	)
 }
 

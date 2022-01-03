@@ -151,10 +151,6 @@ const AudioShow = (props) => {
 				<div
 					className="ml-2 mr-2"
 					style={{
-						borderTopLeftRadius: "10px",
-						borderTopRightRadius: "10px",
-						borderBottomRightRadius: "10px",
-						borderBottomLeftRadius: "10px",
 						overflow: "hidden",
 						width: "auto",
 						maxHeight: "495px",

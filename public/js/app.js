@@ -92727,7 +92727,7 @@ var Login = function Login(_ref) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/api/login"), {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/login"), {
         phone: phone,
         password: phone,
         remember: 'checked'
@@ -92854,7 +92854,7 @@ var LoginPopUp = function LoginPopUp(props) {
       phone = _useState2[0],
       setPhone = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
       phoneLogin = _useState4[0],
       setPhoneLogin = _useState4[1];
@@ -92862,7 +92862,7 @@ var LoginPopUp = function LoginPopUp(props) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(props.url, "/api/login"), {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(props.url, "/login"), {
         phone: phone,
         password: phone,
         remember: 'checked'
@@ -94647,7 +94647,7 @@ function App() {
     setShowPollPicker: setShowPollPicker,
     onSubmit: onSubmit
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login",
     exact: true,
     render: function render(props) {
@@ -96109,7 +96109,7 @@ var TopNavLinks = function TopNavLinks(props) {
   var logout = function logout(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/logout")).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/logout")).then(function (res) {
         props.setMessage("Logged out"); // Update Auth
 
         props.setAuth({
@@ -98503,10 +98503,6 @@ var AudioShow = function AudioShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-2 mr-2",
     style: {
-      borderTopLeftRadius: "10px",
-      borderTopRightRadius: "10px",
-      borderBottomRightRadius: "10px",
-      borderBottomLeftRadius: "10px",
       overflow: "hidden",
       width: "auto",
       maxHeight: "495px"
@@ -99979,10 +99975,12 @@ var HelpThread = function HelpThread(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "hidden"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between"
+    className: "sonar-call-to-action-area section-padding-0-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  })), props.helpPosts.filter(function (helpPost) {
+    className: "backEnd-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "p-2"
+  }, "Help Center")), props.helpPosts.filter(function (helpPost) {
     return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
   }).map(function (helpPost, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100031,7 +100029,7 @@ var HelpThread = function HelpThread(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right"
     }, helpPost.created_at))));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
 };
