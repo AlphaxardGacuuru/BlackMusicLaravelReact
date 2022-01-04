@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtVideos;
 use App\BoughtAudios;
+use App\BoughtVideos;
 use App\Notifications\SongPayoutNotifications;
-use App\User;
 use App\SongPayouts;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kopokopo\SDK\K2;
-use Illuminate\Http\Request;
 
 class SongPayoutsController extends Controller
 {
@@ -71,6 +71,8 @@ class SongPayoutsController extends Controller
      */
     public function store(Request $request)
     {
+        $amount = $request->input('amount');
+
         // Do not hard code these values
         $options = [
             'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
@@ -102,7 +104,7 @@ class SongPayoutsController extends Controller
         $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
             'destinationReference' => $request->input('destination_reference'),
-            'amount' => $request->input('amount'),
+            'amount' => $amount > 400 ? $amount : $amount - 50,
             'currency' => 'KES',
             'callbackUrl' => 'https://music.black.co.ke/api/song-payouts',
             'description' => 'Song Payout',

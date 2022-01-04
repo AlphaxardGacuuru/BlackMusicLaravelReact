@@ -25,7 +25,11 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				// Update Logged in user
 				axios.get(`${url}/api/home`)
 					.then((res) => setAuth(res.data))
-				setTimeout(() => history.push('/'), 1000)
+				// Redirect and reload page
+				setTimeout(() => {
+					history.push('/')
+					location.reload()
+				}, 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors
 				// Get validation errors

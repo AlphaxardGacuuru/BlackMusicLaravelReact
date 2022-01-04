@@ -34,6 +34,7 @@ const ProfileEdit = (props) => {
 	// Declare states
 	const [name, setName] = useState("")
 	const [bio, setBio] = useState("")
+	const [withdrawal, setWithdrawal] = useState("")
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -47,6 +48,7 @@ const ProfileEdit = (props) => {
 		// Add form data to FormData object
 		name && formData.append("name", name);
 		bio && formData.append("bio", bio);
+		withdrawal && formData.append("withdrawal", withdrawal);
 		formData.append("_method", 'put');
 
 		// Send data to UsersController
@@ -59,7 +61,9 @@ const ProfileEdit = (props) => {
 					axios.get(`${props.url}/api/home`)
 						.then((res) => props.setAuth(res.data))
 					setName("")
+					setPhone("")
 					setBio("")
+					setWithdrawal("")
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -143,26 +147,33 @@ const ProfileEdit = (props) => {
 								onChange={(e) => { setBio(e.target.value) }} />
 							<br />
 
-							<label htmlFor="" className="float-left">Account</label>
-							<input
-								type="text"
-								name="account"
-								className="form-control"
-								placeholder={props.auth.account_type}
-							// value={bio}
-							// onChange={(e) => { setBio(e.target.value) }}
-							/>
-							<br />
-
 							<label htmlFor="" className="float-left">Withdrawal</label>
-							<input
-								type="number"
-								name="withdrawal"
-								className="form-control"
-								placeholder={props.auth.withdrawal}
-							// value={withdrawal}
-							// onChange={(e) => { setBio(e.target.value) }}
-							/>
+							<br />
+							<br />
+							{/* {{-- Collapse --}} */}
+							<button className="sonar-btn" type="button" data-toggle="collapse" data-target="#collapseExample"
+								aria-expanded="false" aria-controls="collapseExample">
+								minimum withdrawal
+							</button>
+							<div className="collapse" id="collapseExample">
+								<div className="">
+									<br />
+									<h6>By setting your minimum withdrawal to less than <b className="mx-1 text-success"> KES 1000</b>
+										you will incur additional withdrawal charges of <b className="mx-1 text-success"> KES 50</b>
+										from our provider.
+									</h6>
+									<input
+										type="number"
+										name="withdrawal"
+										className="form-control"
+										placeholder={props.auth.withdrawal}
+										value={withdrawal}
+										onChange={(e) => { setWithdrawal(e.target.value) }}
+									/>
+								</div>
+							</div>
+							{/* {{-- Collapse End --}} */}
+							<br />
 							<br />
 
 							<button

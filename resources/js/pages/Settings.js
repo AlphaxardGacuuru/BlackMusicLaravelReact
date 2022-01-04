@@ -55,8 +55,7 @@ const Settings = (props) => {
 				props.setMessage(res.data)
 				// Update song payouts
 				axios.get(`${props.url}/api/song-payouts`)
-					.then((res) => props.setSongsPayouts(res.data))
-					.catch((err) => console.log(err.response.data.message))
+					.then((res) => props.setSongPayouts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -104,7 +103,7 @@ const Settings = (props) => {
 
 					{props.kopokopoRecipients
 						.some((recipient) => recipient.username == props.auth.username) ?
-						props.songPayouts.balance > 0 &&
+						// props.songPayouts.balance > props.auth.withdrawal &&
 						<Button
 							btnClass="sonar-btn"
 							onClick={onTransferFunds}

@@ -34,6 +34,8 @@ const LoginPopUp = (props) => {
 				// Update Logged in user
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
+				// Reload page
+				setTimeout(() => location.reload(), 1000)
 			}).catch(err => {
 				const resErrors = err.response.data.errors
 				// Get validation errors

@@ -92737,9 +92737,11 @@ var Login = function Login(_ref) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
-        });
+        }); // Redirect and reload page
+
         setTimeout(function () {
-          return history.push('/');
+          history.push('/');
+          location.reload();
         }, 1000);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
@@ -92872,7 +92874,11 @@ var LoginPopUp = function LoginPopUp(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
-        });
+        }); // Reload page
+
+        setTimeout(function () {
+          return location.reload();
+        }, 1000);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
 
@@ -94647,7 +94653,7 @@ function App() {
     setShowPollPicker: setShowPollPicker,
     onSubmit: onSubmit
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login",
     exact: true,
     render: function render(props) {
@@ -102058,7 +102064,12 @@ var ProfileEdit = function ProfileEdit(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
       bio = _useState4[0],
-      setBio = _useState4[1]; // Get csrf token
+      setBio = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      withdrawal = _useState6[0],
+      setWithdrawal = _useState6[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
@@ -102070,6 +102081,7 @@ var ProfileEdit = function ProfileEdit(props) {
 
     name && formData.append("name", name);
     bio && formData.append("bio", bio);
+    withdrawal && formData.append("withdrawal", withdrawal);
     formData.append("_method", 'put'); // Send data to UsersController
     // Get csrf cookie from Laravel inorder to send a POST request
 
@@ -102081,7 +102093,9 @@ var ProfileEdit = function ProfileEdit(props) {
           return props.setAuth(res.data);
         });
         setName("");
+        setPhone("");
         setBio("");
+        setWithdrawal("");
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -102178,24 +102192,32 @@ var ProfileEdit = function ProfileEdit(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "",
     className: "float-left"
-  }, "Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "account",
-    className: "form-control",
-    placeholder: props.auth.account_type // value={bio}
-    // onChange={(e) => { setBio(e.target.value) }}
-
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "",
-    className: "float-left"
-  }, "Withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, "Withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "sonar-btn",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#collapseExample",
+    "aria-expanded": "false",
+    "aria-controls": "collapseExample"
+  }, "minimum withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "collapse",
+    id: "collapseExample"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "By setting your minimum withdrawal to less than ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+    className: "mx-1 text-success"
+  }, " KES 1000"), "you will incur additional withdrawal charges of ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+    className: "mx-1 text-success"
+  }, " KES 50"), "from our provider."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "number",
     name: "withdrawal",
     className: "form-control",
-    placeholder: props.auth.withdrawal // value={withdrawal}
-    // onChange={(e) => { setBio(e.target.value) }}
-
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    placeholder: props.auth.withdrawal,
+    value: withdrawal,
+    onChange: function onChange(e) {
+      setWithdrawal(e.target.value);
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "reset",
     className: "sonar-btn"
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -102508,9 +102530,7 @@ var Settings = function Settings(props) {
         props.setMessage(res.data); // Update song payouts
 
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/song-payouts")).then(function (res) {
-          return props.setSongsPayouts(res.data);
-        })["catch"](function (err) {
-          return console.log(err.response.data.message);
+          return props.setSongPayouts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -102546,7 +102566,10 @@ var Settings = function Settings(props) {
     className: "text-success"
   }, "KES ", props.songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
-  }) ? props.songPayouts.balance > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }) ?
+  /*#__PURE__*/
+  // props.songPayouts.balance > props.auth.withdrawal &&
+  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnClass: "sonar-btn",
     onClick: onTransferFunds,
     btnText: "transfer funds"

@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'phone' => [
                 'required',
                 'string',
-                'startsWith:07',
+                'startsWith:0',
                 'min:10',
                 'max:10',
                 'unique:users',
@@ -104,6 +104,7 @@ class RegisterController extends Controller
             'remember_token' => $data['remember_token'],
             'phone' => $data['phone'],
             'pp' => $data['avatar'],
+            'withdrawal' => '1000',
         ]);
     }
 }

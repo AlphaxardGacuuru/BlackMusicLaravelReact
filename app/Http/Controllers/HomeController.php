@@ -29,6 +29,7 @@ class HomeController extends Controller
         // Check if user is logged in
         if (Auth::check()) {
             return [
+				"id" => Auth::user()->id,
                 "name" => Auth::user()->name,
                 "username" => Auth::user()->username,
                 "email" => Auth::user()->email,
@@ -38,6 +39,7 @@ class HomeController extends Controller
                 "pb" => Auth::user()->pb,
                 "bio" => Auth::user()->bio,
                 "dob" => Auth::user()->dob,
+				"withdrawal" => Auth::user()->withdrawal,
                 "decos" => Decos::where('username', Auth::user()->username)->count(),
                 "fans" => Follows::where('followed', Auth::user()->username)->count() - 1,
                 "following" => Follows::where('followed', Auth::user()->username)->count(),
