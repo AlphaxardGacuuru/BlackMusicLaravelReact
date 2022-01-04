@@ -92727,7 +92727,7 @@ var Login = function Login(_ref) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/login"), {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/api/login"), {
         phone: phone,
         password: phone,
         remember: 'checked'
@@ -92862,7 +92862,7 @@ var LoginPopUp = function LoginPopUp(props) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(props.url, "/login"), {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(props.url, "/api/login"), {
         phone: phone,
         password: phone,
         remember: 'checked'
@@ -96109,7 +96109,7 @@ var TopNavLinks = function TopNavLinks(props) {
   var logout = function logout(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/logout")).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/logout")).then(function (res) {
         props.setMessage("Logged out"); // Update Auth
 
         props.setAuth({

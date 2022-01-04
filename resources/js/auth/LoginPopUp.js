@@ -24,7 +24,7 @@ const LoginPopUp = (props) => {
 		e.preventDefault()
 
 		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/login`, {
+			axios.post(`${props.url}/api/login`, {
 				phone: phone,
 				password: phone,
 				remember: 'checked'

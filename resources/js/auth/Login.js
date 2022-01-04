@@ -15,7 +15,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 		e.preventDefault()
 
 		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/login`, {
+			axios.post(`${url}/api/login`, {
 				phone: phone,
 				password: phone,
 				remember: 'checked'

@@ -14,4 +14,4 @@
 // Route::view('/', 'layouts/app');
 Route::view('/{path?}', 'layouts/app');
 
-Auth::routes();
+// Auth::routes();
