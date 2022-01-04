@@ -99733,7 +99733,7 @@ __webpack_require__.r(__webpack_exports__);
 var Help = function Help(props) {
   var threadsArray = [];
   props.helpPosts.filter(function (helpPost) {
-    return helpPost.username == props.auth.username;
+    return helpPost.username == props.auth.username || helpPost.to == props.auth.username;
   }).forEach(function (helpPost) {
     // Populate threads array
     if (!threadsArray.some(function (username) {

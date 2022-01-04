@@ -8,8 +8,10 @@ const Help = (props) => {
 	var threadsArray = []
 
 	props.helpPosts
-		.filter((helpPost) => helpPost.username == props.auth.username)
-		.forEach((helpPost) => {
+		.filter((helpPost) => {
+			return helpPost.username == props.auth.username ||
+				helpPost.to == props.auth.username
+		}).forEach((helpPost) => {
 			// Populate threads array
 			if (!threadsArray.some((username) => username == helpPost.to)) {
 				// Add item if it doesn't exist
@@ -49,7 +51,7 @@ const Help = (props) => {
 							</Link>
 						</div>
 					</div>}
-					{/* Start Thread End */}
+				{/* Start Thread End */}
 
 				{/* Threads Start */}
 				{threadsArray
