@@ -76,6 +76,7 @@ function App() {
 	const [cartVideos, setCartVideos] = useState([])
 
 	const [helpPosts, setHelpPosts] = useState([])
+	const [helpThreads, setHelpThreads] = useState([])
 	const [kopokopoRecipients, setKopokopoRecipients] = useState([])
 	const [notifications, setNotifications] = useState([])
 	const [posts, setPosts] = useState([])
@@ -148,6 +149,11 @@ function App() {
 		axios.get(`${url}/api/help-posts`)
 			.then((res) => setHelpPosts(res.data))
 			.catch(() => setErrors(['Failed to fetch help posts']))
+
+		// Fetch Help Threads
+		axios.get(`${url}/api/help-posts/1`)
+			.then((res) => setHelpThreads(res.data))
+			.catch(() => setErrors(['Failed to fetch help threads']))
 
 		// Fetch Kopokopo Recipients
 		axios.get(`${url}/api/kopokopo-recipients`)
@@ -740,6 +746,7 @@ function App() {
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
 		helpPosts, setHelpPosts,
+		helpThreads, setHelpThreads,
 		kopokopoRecipients, setKopokopoRecipients,
 		notifications, setNotifications,
 		posts, setPosts,

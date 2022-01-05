@@ -93614,58 +93614,63 @@ function App() {
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      kopokopoRecipients = _useState32[0],
-      setKopokopoRecipients = _useState32[1];
+      helpThreads = _useState32[0],
+      setHelpThreads = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      notifications = _useState34[0],
-      setNotifications = _useState34[1];
+      kopokopoRecipients = _useState34[0],
+      setKopokopoRecipients = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      posts = _useState36[0],
-      setPosts = _useState36[1];
+      notifications = _useState36[0],
+      setNotifications = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      postComments = _useState38[0],
-      setPostComments = _useState38[1];
+      posts = _useState38[0],
+      setPosts = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      referrals = _useState40[0],
-      setReferrals = _useState40[1];
+      postComments = _useState40[0],
+      setPostComments = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      sms = _useState42[0],
-      setSMS = _useState42[1];
+      referrals = _useState42[0],
+      setReferrals = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      users = _useState44[0],
-      setUsers = _useState44[1];
+      sms = _useState44[0],
+      setSMS = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      videoAlbums = _useState46[0],
-      setVideoAlbums = _useState46[1];
+      users = _useState46[0],
+      setUsers = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      videoComments = _useState48[0],
-      setVideoComments = _useState48[1];
+      videoAlbums = _useState48[0],
+      setVideoAlbums = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      songPayouts = _useState50[0],
-      setSongPayouts = _useState50[1];
+      videoComments = _useState50[0],
+      setVideoComments = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      videos = _useState52[0],
-      setVideos = _useState52[1]; // Reset Messages and Errors to null after 3 seconds
+      songPayouts = _useState52[0],
+      setSongPayouts = _useState52[1];
+
+  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState54 = _slicedToArray(_useState53, 2),
+      videos = _useState54[0],
+      setVideos = _useState54[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93761,6 +93766,12 @@ function App() {
       return setHelpPosts(res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch help posts']);
+    }); // Fetch Help Threads
+
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/help-posts/1")).then(function (res) {
+      return setHelpThreads(res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch help threads']);
     }); // Fetch Kopokopo Recipients
 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-recipients")).then(function (res) {
@@ -94030,50 +94041,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState54 = _slicedToArray(_useState53, 2),
-      show = _useState54[0],
-      setShow = _useState54[1];
-
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState56 = _slicedToArray(_useState55, 2),
-      playBtn = _useState56[0],
-      setPlayBtn = _useState56[1];
+      show = _useState56[0],
+      setShow = _useState56[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState58 = _slicedToArray(_useState57, 2),
-      shuffle = _useState58[0],
-      setShuffle = _useState58[1];
+      playBtn = _useState58[0],
+      setPlayBtn = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState60 = _slicedToArray(_useState59, 2),
-      loop = _useState60[0],
-      setLoop = _useState60[1];
+      shuffle = _useState60[0],
+      setShuffle = _useState60[1];
 
-  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState62 = _slicedToArray(_useState61, 2),
-      dur = _useState62[0],
-      setDur = _useState62[1];
+      loop = _useState62[0],
+      setLoop = _useState62[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState64 = _slicedToArray(_useState63, 2),
-      volume = _useState64[0],
-      setVolume = _useState64[1];
+      dur = _useState64[0],
+      setDur = _useState64[1];
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
       _useState66 = _slicedToArray(_useState65, 2),
-      currentTime = _useState66[0],
-      setCurrentTime = _useState66[1];
+      volume = _useState66[0],
+      setVolume = _useState66[1];
 
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState68 = _slicedToArray(_useState67, 2),
-      progressPercent = _useState68[0],
-      setProgressPercent = _useState68[1];
+      currentTime = _useState68[0],
+      setCurrentTime = _useState68[1];
 
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState70 = _slicedToArray(_useState69, 2),
-      audioLoader = _useState70[0],
-      setAudioLoader = _useState70[1]; // Listen for show change and autoplay song
+      progressPercent = _useState70[0],
+      setProgressPercent = _useState70[1];
+
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState72 = _slicedToArray(_useState71, 2),
+      audioLoader = _useState72[0],
+      setAudioLoader = _useState72[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -94258,10 +94269,10 @@ function App() {
   } // Search State
 
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState72 = _slicedToArray(_useState71, 2),
-      search = _useState72[0],
-      setSearch = _useState72[1];
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState74 = _slicedToArray(_useState73, 2),
+      search = _useState74[0],
+      setSearch = _useState74[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94270,110 +94281,110 @@ function App() {
   }; // Social Input states
 
 
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState74 = _slicedToArray(_useState73, 2),
-      id = _useState74[0],
-      setId = _useState74[1];
-
   var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState76 = _slicedToArray(_useState75, 2),
-      to = _useState76[0],
-      setTo = _useState76[1];
+      id = _useState76[0],
+      setId = _useState76[1];
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      text = _useState78[0],
-      setText = _useState78[1];
+      to = _useState78[0],
+      setTo = _useState78[1];
 
   var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState80 = _slicedToArray(_useState79, 2),
-      media = _useState80[0],
-      setMedia = _useState80[1];
+      text = _useState80[0],
+      setText = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState82 = _slicedToArray(_useState81, 2),
-      para1 = _useState82[0],
-      setPara1 = _useState82[1];
+      media = _useState82[0],
+      setMedia = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState84 = _slicedToArray(_useState83, 2),
-      para2 = _useState84[0],
-      setPara2 = _useState84[1];
+      para1 = _useState84[0],
+      setPara1 = _useState84[1];
 
   var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState86 = _slicedToArray(_useState85, 2),
-      para3 = _useState86[0],
-      setPara3 = _useState86[1];
+      para2 = _useState86[0],
+      setPara2 = _useState86[1];
 
   var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState88 = _slicedToArray(_useState87, 2),
-      para4 = _useState88[0],
-      setPara4 = _useState88[1];
+      para3 = _useState88[0],
+      setPara3 = _useState88[1];
 
   var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState90 = _slicedToArray(_useState89, 2),
-      para5 = _useState90[0],
-      setPara5 = _useState90[1];
+      para4 = _useState90[0],
+      setPara4 = _useState90[1];
 
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState92 = _slicedToArray(_useState91, 2),
-      placeholder = _useState92[0],
-      setPlaceholder = _useState92[1];
+      para5 = _useState92[0],
+      setPara5 = _useState92[1];
 
   var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState94 = _slicedToArray(_useState93, 2),
-      urlTo = _useState94[0],
-      setUrlTo = _useState94[1];
+      placeholder = _useState94[0],
+      setPlaceholder = _useState94[1];
 
   var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState96 = _slicedToArray(_useState95, 2),
-      urlToTwo = _useState96[0],
-      setUrlToTwo = _useState96[1];
+      urlTo = _useState96[0],
+      setUrlTo = _useState96[1];
 
   var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState98 = _slicedToArray(_useState97, 2),
-      urlToDelete = _useState98[0],
-      setUrlToDelete = _useState98[1];
+      urlToTwo = _useState98[0],
+      setUrlToTwo = _useState98[1];
 
   var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState100 = _slicedToArray(_useState99, 2),
-      stateToUpdate = _useState100[0],
-      setStateToUpdate = _useState100[1];
+      urlToDelete = _useState100[0],
+      setUrlToDelete = _useState100[1];
 
   var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState102 = _slicedToArray(_useState101, 2),
-      stateToUpdateTwo = _useState102[0],
-      setStateToUpdateTwo = _useState102[1];
+      stateToUpdate = _useState102[0],
+      setStateToUpdate = _useState102[1];
 
   var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState104 = _slicedToArray(_useState103, 2),
-      showImage = _useState104[0],
-      setShowImage = _useState104[1];
+      stateToUpdateTwo = _useState104[0],
+      setStateToUpdateTwo = _useState104[1];
 
   var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState106 = _slicedToArray(_useState105, 2),
-      showPoll = _useState106[0],
-      setShowPoll = _useState106[1];
+      showImage = _useState106[0],
+      setShowImage = _useState106[1];
 
-  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState108 = _slicedToArray(_useState107, 2),
-      showMentionPicker = _useState108[0],
-      setShowMentionPicker = _useState108[1];
+      showPoll = _useState108[0],
+      setShowPoll = _useState108[1];
 
   var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState110 = _slicedToArray(_useState109, 2),
-      showEmojiPicker = _useState110[0],
-      setShowEmojiPicker = _useState110[1];
+      showMentionPicker = _useState110[0],
+      setShowMentionPicker = _useState110[1];
 
   var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState112 = _slicedToArray(_useState111, 2),
-      showImagePicker = _useState112[0],
-      setShowImagePicker = _useState112[1];
+      showEmojiPicker = _useState112[0],
+      setShowEmojiPicker = _useState112[1];
 
   var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState114 = _slicedToArray(_useState113, 2),
-      showPollPicker = _useState114[0],
-      setShowPollPicker = _useState114[1]; // Declare new FormData object for form data
+      showImagePicker = _useState114[0],
+      setShowImagePicker = _useState114[1];
+
+  var _useState115 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState116 = _slicedToArray(_useState115, 2),
+      showPollPicker = _useState116[0],
+      setShowPollPicker = _useState116[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -94544,6 +94555,8 @@ function App() {
     setCartVideos: setCartVideos,
     helpPosts: helpPosts,
     setHelpPosts: setHelpPosts,
+    helpThreads: helpThreads,
+    setHelpThreads: setHelpThreads,
     kopokopoRecipients: kopokopoRecipients,
     setKopokopoRecipients: setKopokopoRecipients,
     notifications: notifications,
@@ -99731,25 +99744,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Help = function Help(props) {
-  var threadsArray = [];
-  props.helpPosts.filter(function (helpPost) {
-    return helpPost.username == props.auth.username || helpPost.to == props.auth.username;
-  }).forEach(function (helpPost) {
-    // Populate threads array
-    if (!threadsArray.some(function (username) {
-      return username == helpPost.to;
-    })) {
-      // Add item if it doesn't exist
-      threadsArray.push(helpPost.to);
-    }
-  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, threadsArray.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.helpThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
@@ -99773,52 +99774,54 @@ var Help = function Help(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "@blackmusic")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0"
-  }, "Start a conversation")))), threadsArray.map(function (thread, key) {
+  }, "Start a conversation")))), props.helpThreads.map(function (helpThread, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: key
-    }, props.helpPosts.filter(function (helpPost) {
-      return helpPost.username == thread && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == thread;
-    }).reverse().slice(0, 1).map(function (helpPost, key) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: key,
-        className: "d-flex border-bottom ".concat(key == 0 && "border-top")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: thread != "@blackmusic" ? "/profile/".concat(thread) : "/help"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        src: props.users.find(function (user) {
-          return user.username == thread;
-        }) && props.users.find(function (user) {
-          return user.username == thread;
-        }).pp,
-        imgClass: "rounded-circle",
-        width: "50px",
-        height: "50px"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-2 flex-grow-1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/help/".concat(thread)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "m-0",
-        style: {
-          width: "100%",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "clip"
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.users.find(function (user) {
-        return user.username == thread;
-      }) && props.users.find(function (user) {
-        return user.username == thread;
-      }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, thread)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "mb-0"
-      }, helpPost.text))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "float-right mr-1"
-      }, helpPost.created_at.substr(11)))));
-    }));
+      key: key,
+      className: "d-flex border-bottom ".concat(key == 0 && "border-top")
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/profile/".concat(helpThread.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: helpThread.pp,
+      imgClass: "rounded-circle",
+      width: "50px",
+      height: "50px"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2 flex-grow-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/help/".concat(helpThread.link)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, helpThread.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, helpThread.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
+    }, helpThread.text, helpThread.hasMedia && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "ml-1",
+      style: {
+        cursor: "pointer"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "15",
+      height: "15",
+      fill: "currentColor",
+      className: "bi bi-image",
+      viewBox: "0 0 16 16"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      d: "M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
+    })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "float-right mr-1"
+    }, helpThread.created_at))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
@@ -99874,8 +99877,12 @@ var HelpThread = function HelpThread(props) {
     props.setShowPoll(false);
     props.setUrlTo("/help-posts");
     props.setUrlToDelete("/help-posts/".concat(props.media.substr(16)));
+    props.setUrlToTwo("/help-posts/1");
     props.setStateToUpdate(function () {
       return props.setHelpPosts;
+    });
+    props.setStateToUpdateTwo(function () {
+      return props.setHelpThreads;
     });
   }, 1000); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
@@ -99888,6 +99895,10 @@ var HelpThread = function HelpThread(props) {
 
         axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
           return props.setHelpPosts(res.data);
+        }); // Update help threads
+
+        axios.get("".concat(props.url, "/api/help-posts/1")).then(function (res) {
+          return props.setHelpThreads(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;

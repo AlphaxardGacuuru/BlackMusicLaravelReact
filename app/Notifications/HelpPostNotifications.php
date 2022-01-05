@@ -49,7 +49,7 @@ class HelpPostNotifications extends Notification
 	public function toDatabase()
 	{
 		return [
-			'url' => '/help',
+			'url' => '/help/' . auth()->user()->username,
 			'from' => auth()->user()->username,
 			'message' => auth()->user()->username . ' sent you a message.',
 		];

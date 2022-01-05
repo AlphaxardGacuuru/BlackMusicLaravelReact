@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\HelpPosts;
-use App\User;
 use App\Notifications\HelpPostNotifications;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -98,9 +98,66 @@ class HelpPostsController extends Controller
      * @param  \App\HelpPosts  $helpPosts
      * @return \Illuminate\Http\Response
      */
-    public function show(HelpPosts $helpPosts)
+    public function show($id)
     {
-        //
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+
+        $getHelpPosts = HelpPosts::where('username', auth()->user()->username)
+            ->orWhere('to', auth()->user()->username)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        $helpThreadsZero = [];
+        $helpThreads = [];
+
+        // Get sender and recipient
+        foreach ($getHelpPosts as $key => $helpPost) {
+            array_push($helpThreadsZero, $helpPost->username);
+            array_push($helpThreadsZero, $helpPost->to);
+        }
+
+        // Get only unique entries
+        $helpThreadsZero = array_unique($helpThreadsZero);
+
+        // Remove auth username
+        $key = array_search($authUsername, $helpThreadsZero);
+        unset($helpThreadsZero[$key]);
+
+        // Get threads
+        foreach ($helpThreadsZero as $key => $username) {
+            $array = HelpPosts::where('username', $authUsername)
+                ->where('to', $username)
+                ->orWhere('username', $username)
+                ->where('to', $authUsername)
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            // Get user info
+            $usernameInfo = User::where('username', $username)
+                ->first();
+
+            // Check if media exists
+			$hasMedia = $array->media;
+
+            array_push($helpThreads, [
+                'id' => $array->id,
+                'link' => $username,
+                'pp' => preg_match('/http/', $usernameInfo->pp) ? $usernameInfo->pp : '/storage/' . $usernameInfo->pp,
+                'name' => $usernameInfo->name,
+                'username' => $username,
+                'to' => $array->to,
+                'text' => $array->text,
+                'hasMedia' => $hasMedia,
+                'created_at' => $array->created_at->format('h:ia'),
+            ]);
+        }
+
+        return $helpThreads;
     }
 
     /**

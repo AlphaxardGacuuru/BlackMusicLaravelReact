@@ -17,7 +17,9 @@ const HelpThread = (props) => {
 		props.setShowPoll(false)
 		props.setUrlTo("/help-posts")
 		props.setUrlToDelete(`/help-posts/${props.media.substr(16)}`)
+		props.setUrlToTwo(`/help-posts/1`)
 		props.setStateToUpdate(() => props.setHelpPosts)
+		props.setStateToUpdateTwo(() => props.setHelpThreads)
 	}, 1000)
 
 	// Scroll to the bottom of the page
@@ -32,6 +34,9 @@ const HelpThread = (props) => {
 					// Update posts
 					axios.get(`${props.url}/api/help-posts`)
 						.then((res) => props.setHelpPosts(res.data))
+					// Update help threads
+					axios.get(`${props.url}/api/help-posts/1`)
+						.then((res) => props.setHelpThreads(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
