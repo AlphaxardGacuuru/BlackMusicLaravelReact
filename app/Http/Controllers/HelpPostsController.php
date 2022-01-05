@@ -107,8 +107,8 @@ class HelpPostsController extends Controller
             $authUsername = '@guest';
         }
 
-        $getHelpPosts = HelpPosts::where('username', auth()->user()->username)
-            ->orWhere('to', auth()->user()->username)
+        $getHelpPosts = HelpPosts::where('username', $authUsername)
+            ->orWhere('to', $authUsername)
             ->orderBy('id', 'DESC')
             ->get();
 
