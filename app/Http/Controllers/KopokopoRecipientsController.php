@@ -36,6 +36,16 @@ class KopokopoRecipientsController extends Controller
      */
     public function store(Request $request)
     {
+        // Get phone in better format
+        $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
+		
+        // Get first and last name
+        $parts = explode(" ", auth()->user()->name);
+
+        $lastname = array_pop($parts);
+
+        $firstname = implode(" ", $parts);
+
         // Do not hard code these values
         $options = [
             'clientId' => env('KOPOKOPO_CLIENT_ID_SANDBOX'),
@@ -66,10 +76,10 @@ class KopokopoRecipientsController extends Controller
 
         $response = $pay->addPayRecipient([
             'type' => 'mobile_wallet',
-            'firstName' => 'Alphaxard',
-            'lastName' => 'Gacuuru',
-            'email' => 'alphaxardgacuuru47@gmail.com',
-            'phoneNumber' => '+254700364446',
+            'firstName' => $firstname,
+            'lastName' => $lastname,
+            'email' => auth()->user()->email,
+            'phoneNumber' => $betterPhone,
             'network' => 'Safaricom',
             'accessToken' => $data['accessToken'],
         ]);

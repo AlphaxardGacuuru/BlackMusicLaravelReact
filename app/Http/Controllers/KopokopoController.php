@@ -91,6 +91,7 @@ class KopokopoController extends Controller
     {
         // Get phone in better format
         $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
+		
         // Get first and last name
         $parts = explode(" ", auth()->user()->name);
 
