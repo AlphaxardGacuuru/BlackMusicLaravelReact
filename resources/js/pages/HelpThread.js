@@ -30,12 +30,22 @@ const HelpThread = (props) => {
 
 	if (chat.current) {
 		chat.current.addEventListener("mousedown", () => {
-
 			const timeout = setTimeout(
 				() => setShowDelete(!showDelete),
 				1000)
 
 			chat.current.addEventListener("mouseup", () => {
+				clearTimeout(timeout)
+			})
+		})
+		
+		// For mobile
+		chat.current.addEventListener("touchstart", () => {
+			const timeout = setTimeout(
+				() => setShowDelete(!showDelete),
+				1000)
+
+			chat.current.addEventListener("touchend", () => {
 				clearTimeout(timeout)
 			})
 		})
