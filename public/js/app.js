@@ -99911,7 +99911,7 @@ var HelpThread = function HelpThread(props) {
     chat.current.addEventListener("mousedown", function () {
       var timeout = setTimeout(function () {
         return setShowDelete(!showDelete);
-      }, 2000);
+      }, 1000);
       chat.current.addEventListener("mouseup", function () {
         clearTimeout(timeout);
       });
@@ -100036,6 +100036,7 @@ var HelpThread = function HelpThread(props) {
       className: "d-flex ".concat(helpPost.username == props.auth.username && "flex-row-reverse text-white")
     }, helpPost.username == props.auth.username && showDelete && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
+        cursor: "pointer",
         backgroundColor: helpPost.username == props.auth.username && "#232323"
       },
       className: "card rounded-0 my-1 mx-0 p-2",

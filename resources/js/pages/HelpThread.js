@@ -33,7 +33,7 @@ const HelpThread = (props) => {
 
 			const timeout = setTimeout(
 				() => setShowDelete(!showDelete),
-				2000)
+				1000)
 
 			chat.current.addEventListener("mouseup", () => {
 				clearTimeout(timeout)
@@ -162,7 +162,10 @@ const HelpThread = (props) => {
 								{helpPost.username == props.auth.username &&
 									showDelete &&
 									<div
-										style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
+										style={{
+											cursor: "pointer",
+											backgroundColor: helpPost.username == props.auth.username && "#232323"
+										}}
 										className="card rounded-0 my-1 mx-0 p-2"
 										onClick={() => onDeletePost(helpPost.id)}>
 										<span>
