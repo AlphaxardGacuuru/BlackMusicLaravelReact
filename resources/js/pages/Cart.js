@@ -318,7 +318,7 @@ const Cart = (props) => {
 													e.preventDefault()
 													setBottomMenu("menu-open")
 													onPay()
-													// STKPush(total)
+													STKPush(total)
 												}} />
 										</div>
 									</div>

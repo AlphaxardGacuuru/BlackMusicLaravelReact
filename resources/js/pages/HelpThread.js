@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -24,6 +24,22 @@ const HelpThread = (props) => {
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
+
+	// Long hold to show delete button
+	var chat = useRef(null)
+
+	if (chat.current) {
+		chat.current.addEventListener("mousedown", () => {
+
+			const timeout = setTimeout(
+				() => setShowDelete(!showDelete),
+				2000)
+
+			chat.current.addEventListener("mouseup", () => {
+				clearTimeout(timeout)
+			})
+		})
+	}
 
 	// Function for deleting posts
 	const onDeletePost = (id) => {
@@ -163,9 +179,10 @@ const HelpThread = (props) => {
 										</span>
 									</div>}
 								<div
+									id="chat"
+									ref={chat}
 									className="card rounded-0 border border-0 p-2 my-1 mx-0"
-									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
-									onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
+									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}>
 									{helpPost.text}
 
 									{/* Show media */}
