@@ -58,9 +58,9 @@ const Cart = (props) => {
 							var message
 							// Proper grammar for message
 							if (res.data.length > 1) {
-								message = res.data.length + " Videos bought."
+								message = res.data.length + " Videos bought"
 							} else {
-								message = res.data.length + " Video bought."
+								message = res.data.length + " Video bought"
 							}
 							props.setMessage(message)
 							// Update Bought Videos
@@ -107,9 +107,9 @@ const Cart = (props) => {
 								var message
 								// Proper grammar for message
 								if (res.data.length > 1) {
-									message = res.data.length + " Audios bought."
+									message = res.data.length + " Audios bought"
 								} else {
-									message = res.data.length + " Audio bought."
+									message = res.data.length + " Audio bought"
 								}
 								props.setMessage(message)
 							}, 10000)
@@ -131,7 +131,6 @@ const Cart = (props) => {
 							clearInterval(intervalId)
 							setBottomMenu()
 						}, 30000)
-
 					}).catch((err) => {
 						console.log(err.response.data.message)
 						const resErrors = err.response.data.errors
@@ -285,20 +284,49 @@ const Cart = (props) => {
 							<h3 className="pt-4">Total</h3>
 							<hr />
 							<h3 className="text-success"> KES {total}</h3>
+							<h5 className="text-success">Your account balance: KES {props.auth.balance}</h5>
 							<br />
-							{/* Checkout button*/}
+
+							{/* {{-- Collapse --}} */}
 							{(videoTotal + audioTotal) > 0 &&
-								<Button
-									btnClass="mysonar-btn green-btn mb-4"
-									btnText="pay with mpesa"
-									btnStyle={{ width: "80%" }}
-									onClick={(e) => {
-										e.preventDefault()
-										setBottomMenu("menu-open")
-										onPay()
-										STKPush(total)
-									}} />}
+								<>
+									<button
+										className="mysonar-btn"
+										style={{ width: "80%" }}
+										type="button"
+										data-toggle="collapse"
+										data-target="#collapseExample"
+										aria-expanded="false"
+										aria-controls="collapseExample">
+										next
+									</button>
+									<div className="collapse" id="collapseExample">
+										<div className="">
+											<br />
+											<h5>Once you click the button below a pop up will appear on your phone asking you to pay</h5>
+											<h4 style={{ color: "green" }}>KES {total}</h4>
+											<h5>to</h5>
+											<h4 style={{ color: "dodgerblue" }}>Kopokopo</h4>
+											<br />
+
+											{/* Checkout button */}
+											<Button
+												btnClass="mysonar-btn green-btn mb-4"
+												btnText="pay with mpesa"
+												btnStyle={{ width: "80%" }}
+												onClick={(e) => {
+													e.preventDefault()
+													setBottomMenu("menu-open")
+													onPay()
+													// STKPush(total)
+												}} />
+										</div>
+									</div>
+								</>}
+							{/* {{-- Collapse End --}} */}
 							<br />
+							<br />
+
 							{/* Receipt button */}
 							{(receiptVideos.length + receiptAudios.length) > 0 &&
 								<Button btnClass="mysonar-btn mb-4"
@@ -343,16 +371,11 @@ const Cart = (props) => {
 					</div>
 
 					<center>
-						<h5>A pop up will appear on your phone asking you to pay</h5>
-						<h5 style={{ color: "green" }}>KES {total}</h5>
-						<h5>to</h5>
-						<h5 style={{ color: "dodgerblue" }}>Kopokopo</h5>
-						<br />
+						<h5>Request was sent to <span style={{ color: "dodgerblue" }}>{props.auth.phone}</span></h5>
 						<br />
 
 						<h6>Checking payment</h6>
 						<div id="sonar-load" className="mt-4 mb-4"></div>
-						<h6>Request was sent to <span style={{ color: "dodgerblue" }}>{props.auth.phone}</span></h6>
 					</center>
 
 					{/* {videoTotal > 0 && <h5 className="">Videos {videoTotal}</h5>}
@@ -444,7 +467,7 @@ const Cart = (props) => {
 				</div>
 			</div>
 			{/* Sliding Receipt Bottom Nav end */}
-		</div>
+		</div >
 	)
 }
 

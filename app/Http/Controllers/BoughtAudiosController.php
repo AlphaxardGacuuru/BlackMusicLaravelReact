@@ -91,6 +91,7 @@ class BoughtAudiosController extends Controller
                 ->where('price', 100)
                 ->count() * 100;
             $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
+			
             // Get Total Cash paid
             $kopokopo = Kopokopo::where('sender_phone_number', $betterPhone)->sum('amount');
             $balance = $kopokopo - ($totalVideos20 + $totalVideos200 + $totalAudios100);

@@ -242,6 +242,8 @@ const VideoCreate = (props) => {
 										<br />
 
 										<label>Upload Video</label>
+										<h6 className="text-primary">If the video is too large you can upload it to Youtube for compression, download it, delete it, then upload it here.</h6>
+										<br />
 
 										<FilePond
 											name="filepond-video"
@@ -269,13 +271,14 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
-										<button type="reset" className="sonar-btn">reset</button>
-										<br />
-										<br />
-
 										{/* {{-- Collapse --}} */}
-										<button className="sonar-btn" type="button" data-toggle="collapse" data-target="#collapseExample"
-											aria-expanded="false" aria-controls="collapseExample">
+										<button
+											className="sonar-btn"
+											type="button"
+											data-toggle="collapse"
+											data-target="#collapseExample"
+											aria-expanded="false"
+											aria-controls="collapseExample">
 											next
 										</button>
 										<div className="collapse" id="collapseExample">
@@ -297,6 +300,11 @@ const VideoCreate = (props) => {
 										</div>
 										{/* {{-- Collapse End --}} */}
 									</form>
+									<br />
+									<br />
+
+									<button type="reset" className="sonar-btn">reset</button>
+									<br />
 									<br />
 									<Link to="/videos" className="btn sonar-btn btn-2">studio</Link>
 								</div>
