@@ -26,30 +26,30 @@ const HelpThread = (props) => {
 	// window.scrollTo(0, document.body.scrollHeight)
 
 	// Long hold to show delete button
-	var chat = useRef(null)
+	// var chat = useRef(null)
 
-	if (chat.current) {
-		chat.current.addEventListener("mousedown", () => {
-			const timeout = setTimeout(
-				() => setShowDelete(!showDelete),
-				1000)
+	// if (chat.current) {
+	// 	chat.current.addEventListener("mousedown", () => {
+	// 		const timeout = setTimeout(
+	// 			() => setShowDelete(!showDelete),
+	// 			1000)
 
-			chat.current.addEventListener("mouseup", () => {
-				clearTimeout(timeout)
-			})
-		})
+	// 		chat.current.addEventListener("mouseup", () => {
+	// 			clearTimeout(timeout)
+	// 		})
+	// 	})
 		
-		// For mobile
-		chat.current.addEventListener("touchstart", () => {
-			const timeout = setTimeout(
-				() => setShowDelete(!showDelete),
-				1000)
+	// 	// For mobile
+	// 	chat.current.addEventListener("touchstart", () => {
+	// 		const timeout = setTimeout(
+	// 			() => setShowDelete(!showDelete),
+	// 			1000)
 
-			chat.current.addEventListener("touchend", () => {
-				clearTimeout(timeout)
-			})
-		})
-	}
+	// 		chat.current.addEventListener("touchend", () => {
+	// 			clearTimeout(timeout)
+	// 		})
+	// 	})
+	// }
 
 	// Function for deleting posts
 	const onDeletePost = (id) => {
@@ -192,10 +192,9 @@ const HelpThread = (props) => {
 										</span>
 									</div>}
 								<div
-									id="chat"
-									ref={chat}
 									className="card rounded-0 border border-0 p-2 my-1 mx-0"
-									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}>
+									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
+									onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
 									{helpPost.text}
 
 									{/* Show media */}

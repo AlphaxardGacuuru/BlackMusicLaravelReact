@@ -99904,20 +99904,27 @@ var HelpThread = function HelpThread(props) {
   }, 1000); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
-
-  var chat = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-
-  if (chat.current) {
-    chat.current.addEventListener("mousedown", function () {
-      var timeout = setTimeout(function () {
-        return setShowDelete(!showDelete);
-      }, 1000);
-      chat.current.addEventListener("mouseup", function () {
-        clearTimeout(timeout);
-      });
-    });
-  } // Function for deleting posts
-
+  // var chat = useRef(null)
+  // if (chat.current) {
+  // 	chat.current.addEventListener("mousedown", () => {
+  // 		const timeout = setTimeout(
+  // 			() => setShowDelete(!showDelete),
+  // 			1000)
+  // 		chat.current.addEventListener("mouseup", () => {
+  // 			clearTimeout(timeout)
+  // 		})
+  // 	})
+  // 	// For mobile
+  // 	chat.current.addEventListener("touchstart", () => {
+  // 		const timeout = setTimeout(
+  // 			() => setShowDelete(!showDelete),
+  // 			1000)
+  // 		chat.current.addEventListener("touchend", () => {
+  // 			clearTimeout(timeout)
+  // 		})
+  // 	})
+  // }
+  // Function for deleting posts
 
   var onDeletePost = function onDeletePost(id) {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -100056,11 +100063,12 @@ var HelpThread = function HelpThread(props) {
       fillRule: "evenodd",
       d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "chat",
-      ref: chat,
       className: "card rounded-0 border border-0 p-2 my-1 mx-0",
       style: {
         backgroundColor: helpPost.username == props.auth.username && "#232323"
+      },
+      onClick: function onClick() {
+        return helpPost.username == props.auth.username && setShowDelete(!showDelete);
       }
     }, helpPost.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-1",
