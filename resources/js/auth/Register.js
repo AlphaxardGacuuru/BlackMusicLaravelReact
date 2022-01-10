@@ -66,13 +66,6 @@ const Register = (props) => {
 
 	const onRegister = () => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
-			// Add referer if there's one
-			referer &&
-				axios.post(`${props.url}/api/referrals`, {
-					referer: referer,
-					username: username
-				})
-
 			// Register User
 			axios.post(`${props.url}/api/register`, {
 				name: name,
@@ -82,6 +75,13 @@ const Register = (props) => {
 				phone: phone,
 				// remember_token: 'true'
 			}).then((res) => {
+				// Add referer if there's one
+				referer &&
+					axios.post(`${props.url}/api/referrals`, {
+						referer: referer,
+						username: username
+					})
+	
 				props.setMessage("Account created")
 				// Update auth data
 				axios.get(`${props.url}/api/home`)
