@@ -64,6 +64,7 @@ const Register = (props) => {
 		});
 	}
 
+	console.log(name, email, avatar, username, phone)
 	const onRegister = () => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			// Register User
@@ -73,7 +74,7 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
-				// remember_token: 'true'
+				remember_token: 'true'
 			}).then((res) => {
 				// Add referer if there's one
 				referer &&
@@ -92,7 +93,7 @@ const Register = (props) => {
 				sessionStorage.clear("referer")
 				sessionStorage.clear("page")
 			}).catch(err => {
-				console.log(err.response.data)
+				console.log(err.response.data.errors)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []
