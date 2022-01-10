@@ -92,6 +92,7 @@ const Register = (props) => {
 				sessionStorage.clear("referer")
 				sessionStorage.clear("page")
 			}).catch(err => {
+				console.log(err.response.data)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []
