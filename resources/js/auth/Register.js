@@ -1,7 +1,6 @@
-import React from 'react'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 import Button from '../components/Button'
 
@@ -64,8 +63,7 @@ const Register = (props) => {
 		});
 	}
 
-	console.log("name")
-	console.log(name, email, avatar, username, phone)
+	console.log(name, email, avatar, username, phone, referer, page, props.url)
 	const onRegister = () => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			// Register User
@@ -75,7 +73,7 @@ const Register = (props) => {
 				avatar: avatar,
 				username: username,
 				phone: phone,
-				remember_token: 'true'
+				// remember_token: 'true'
 			}).then((res) => {
 				// Add referer if there's one
 				referer &&
@@ -94,7 +92,7 @@ const Register = (props) => {
 				sessionStorage.clear("referer")
 				sessionStorage.clear("page")
 			}).catch(err => {
-				console.log(err.response.data.errors)
+				console.log(err.response)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []

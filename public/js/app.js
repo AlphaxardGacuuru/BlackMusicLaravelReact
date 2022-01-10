@@ -93013,11 +93013,6 @@ var Referral = function Referral(props) {
     onClick: function onClick() {
       return onSocial("google");
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["FacebookLoginButton"], {
-    className: "mt-2 rounded-0",
-    onClick: function onClick() {
-      return onSocial("facebook");
-    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_2__["TwitterLoginButton"], {
     className: "mt-2 rounded-0",
     onClick: function onClick() {
@@ -93041,9 +93036,9 @@ var Referral = function Referral(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -93062,9 +93057,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var Register = function Register(props) {
-  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])(),
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       name = _useParams.name,
       email = _useParams.email,
       avatar = _useParams.avatar;
@@ -93102,7 +93096,7 @@ var Register = function Register(props) {
 
   var referer = sessionStorage.getItem("referer");
   var page = sessionStorage.getItem("page");
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])(); // Remove all spaces from avatar
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Remove all spaces from avatar
 
   avatar = avatar.replace(/\s/g, "/"); // Show error on space in username
 
@@ -93115,8 +93109,8 @@ var Register = function Register(props) {
     var id = props.users.find(function (user) {
       return user.username == username;
     }).id;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/login/update"), {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/login/update"), {
         id: id,
         name: name,
         email: email,
@@ -93126,7 +93120,7 @@ var Register = function Register(props) {
       }).then(function (res) {
         props.setMessage("Account Updated"); // Update Auth
 
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
         });
         setTimeout(function () {
@@ -93148,15 +93142,12 @@ var Register = function Register(props) {
     });
   };
 
-  var onRegister = function onRegister() {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function () {
-      // Add referer if there's one
-      referer && axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/referrals"), {
-        referer: referer,
-        username: username
-      }); // Register User
+  console.log(name, email, avatar, username, phone, referer, page, props.url);
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/register"), {
+  var onRegister = function onRegister() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
+      // Register User
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/register"), {
         name: name,
         email: email,
         avatar: avatar,
@@ -93164,9 +93155,14 @@ var Register = function Register(props) {
         phone: phone // remember_token: 'true'
 
       }).then(function (res) {
+        // Add referer if there's one
+        referer && axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/referrals"), {
+          referer: referer,
+          username: username
+        });
         props.setMessage("Account created"); // Update auth data
 
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
         }); // Redirect user
 
@@ -93177,6 +93173,7 @@ var Register = function Register(props) {
         sessionStorage.clear("referer");
         sessionStorage.clear("page");
       })["catch"](function (err) {
+        console.log(err.response);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
