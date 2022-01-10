@@ -93142,8 +93142,6 @@ var Register = function Register(props) {
     });
   };
 
-  console.log(name, email, avatar, username, phone, referer, page, props.url);
-
   var onRegister = function onRegister() {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
       // Register User

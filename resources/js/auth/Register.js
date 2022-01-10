@@ -63,7 +63,6 @@ const Register = (props) => {
 		});
 	}
 
-	console.log(name, email, avatar, username, phone, referer, page, props.url)
 	const onRegister = () => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			// Register User
