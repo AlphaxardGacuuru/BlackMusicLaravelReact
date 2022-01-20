@@ -45,6 +45,7 @@
             </h2>
         </center>
     </noscript>
+	
     <div id="app"></div>
 
     <!-- Scripts -->

@@ -96147,7 +96147,7 @@ var TopNavLinks = function TopNavLinks(props) {
     });
   };
 
-  var onDeleteComment = function onDeleteComment(id) {
+  var onDeleteNotifications = function onDeleteNotifications(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/notifications/").concat(id)).then(function (res) {
       // Update Notifications
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/notifications")).then(function (res) {
@@ -96294,7 +96294,7 @@ var TopNavLinks = function TopNavLinks(props) {
       to: notification.url,
       className: "p-2 dropdown-item border-bottom text-dark",
       onClick: function onClick() {
-        return onDeleteComment(notification.id);
+        return onDeleteNotifications(notification.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
   })), props.notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96303,7 +96303,7 @@ var TopNavLinks = function TopNavLinks(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return onDeleteComment(0);
+      return onDeleteNotifications(0);
     }
   }, "Clear notifications"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown"

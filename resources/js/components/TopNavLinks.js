@@ -40,7 +40,7 @@ const TopNavLinks = (props) => {
 		})
 	}
 
-	const onDeleteComment = (id) => {
+	const onDeleteNotifications = (id) => {
 		axios.delete(`${props.url}/api/notifications/${id}`)
 			.then((res) => {
 				// Update Notifications
@@ -101,7 +101,8 @@ const TopNavLinks = (props) => {
 
 			{/* Cart */}
 			<div className="dropdown mr-2 hidden">
-				<Link to="/cart"
+				<Link 
+				to="/cart"
 					role="button"
 					id="dropdownMenua"
 					// data-toggle="dropdown"
@@ -137,7 +138,8 @@ const TopNavLinks = (props) => {
 
 			{/* Notification Dropdown */}
 			<div className="dropdown mr-2">
-				<Link to="#"
+				<Link
+					to="#"
 					role="button"
 					id="dropdownMenua"
 					data-toggle="dropdown"
@@ -184,7 +186,7 @@ const TopNavLinks = (props) => {
 									key={key}
 									to={notification.url}
 									className="p-2 dropdown-item border-bottom text-dark"
-									onClick={() => onDeleteComment(notification.id)}>
+									onClick={() => onDeleteNotifications(notification.id)}>
 									<small>{notification.message}</small>
 								</Link>
 							))}
@@ -193,7 +195,7 @@ const TopNavLinks = (props) => {
 						<div
 							className="dropdown-header"
 							style={{ cursor: "pointer" }}
-							onClick={() => onDeleteComment(0)}>
+							onClick={() => onDeleteNotifications(0)}>
 							Clear notifications
 						</div>}
 				</div>
