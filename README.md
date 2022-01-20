@@ -22,7 +22,7 @@ Black Music is an online music store and social network, a site for musicians to
 4) php artisan key:generate
 5) php artisan storage:link
 6) php artisan migrate
-8) npm install
+7) npm install
 ```
 
 ### Compiles and hot-reloads for development (http://localhost/8000 or 3000)
