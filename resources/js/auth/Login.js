@@ -19,12 +19,14 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				phone: phone,
 				password: phone,
 				remember: 'checked'
-			}).then(res => {
+			}).then((res) => {
 				// const resStatus = res.statusText
 				setMessage("Logged in")
 				// Update Logged in user
 				axios.get(`${url}/api/home`)
 					.then((res) => setAuth(res.data))
+				// Save phone to Session Storage
+				sessionStorage.setItem("phone", phone)
 				// Redirect and reload page
 				setTimeout(() => {
 					history.push('/')

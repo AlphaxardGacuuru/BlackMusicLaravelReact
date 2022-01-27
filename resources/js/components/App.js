@@ -98,6 +98,27 @@ function App() {
 
 	// Fetch data on page load
 	useEffect(() => {
+		// Get phone
+		const phone = sessionStorage.getItem("phone", phone)
+
+		// Autologin if user has already registered
+		if (auth.username == "@guest" && phone) {
+			console.log("works")
+			axios.get('/sanctum/csrf-cookie').then(() => {
+				axios.post(`${url}/api/login`, {
+					phone: phone,
+					password: phone,
+					remember: 'checked'
+				}).then((res) => {
+					// Update Logged in user
+					axios.get(`${url}/api/home`)
+						.then((res) => setAuth(res.data))
+					// Redirect and reload page
+					// location.reload()
+				})
+			});
+		}
+
 		// For Auth
 		const getAuth = async () => {
 			const authFromServer = await fetchAuth()

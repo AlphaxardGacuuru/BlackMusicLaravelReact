@@ -92737,7 +92737,9 @@ var Login = function Login(_ref) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
-        }); // Redirect and reload page
+        }); // Save phone to Session Storage
+
+        sessionStorage.setItem("phone", phone); // Redirect and reload page
 
         setTimeout(function () {
           history.push('/');
@@ -92874,7 +92876,9 @@ var LoginPopUp = function LoginPopUp(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
-        }); // Reload page
+        }); // Save phone to Session Storage
+
+        sessionStorage.setItem("phone", phone); // Reload page
 
         setTimeout(function () {
           return location.reload();
@@ -93679,7 +93683,27 @@ function App() {
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // For Auth
+    // Get phone
+    var phone = sessionStorage.getItem("phone", phone); // Autologin if user has already registered
+
+    if (auth.username == "@guest" && phone) {
+      console.log("works");
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/login"), {
+          phone: phone,
+          password: phone,
+          remember: 'checked'
+        }).then(function (res) {
+          // Update Logged in user
+          axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
+            return setAuth(res.data);
+          }); // Redirect and reload page
+          // location.reload()
+        });
+      });
+    } // For Auth
+
+
     var getAuth = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var authFromServer;
