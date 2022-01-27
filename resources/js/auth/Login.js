@@ -26,7 +26,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				axios.get(`${url}/api/home`)
 					.then((res) => setAuth(res.data))
 				// Save phone to Session Storage
-				sessionStorage.setItem("phone", phone)
+				localStorage.setItem("phone", phone)
 				// Redirect and reload page
 				setTimeout(() => {
 					history.push('/')

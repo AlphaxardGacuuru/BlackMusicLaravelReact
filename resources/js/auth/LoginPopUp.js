@@ -35,7 +35,7 @@ const LoginPopUp = (props) => {
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
 				// Save phone to Session Storage
-				sessionStorage.setItem("phone", phone)
+				localStorage.setItem("phone", phone)
 				// Reload page
 				setTimeout(() => location.reload(), 1000)
 			}).catch(err => {

@@ -99,7 +99,7 @@ function App() {
 	// Fetch data on page load
 	useEffect(() => {
 		// Get phone
-		const phone = sessionStorage.getItem("phone", phone)
+		const phone = localStorage.getItem("phone", phone)
 
 		// Autologin if user has already registered
 		if (auth.username == "@guest" && phone) {

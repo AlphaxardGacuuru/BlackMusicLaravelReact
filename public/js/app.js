@@ -92739,7 +92739,7 @@ var Login = function Login(_ref) {
           return setAuth(res.data);
         }); // Save phone to Session Storage
 
-        sessionStorage.setItem("phone", phone); // Redirect and reload page
+        localStorage.setItem("phone", phone); // Redirect and reload page
 
         setTimeout(function () {
           history.push('/');
@@ -92878,7 +92878,7 @@ var LoginPopUp = function LoginPopUp(props) {
           return props.setAuth(res.data);
         }); // Save phone to Session Storage
 
-        sessionStorage.setItem("phone", phone); // Reload page
+        localStorage.setItem("phone", phone); // Reload page
 
         setTimeout(function () {
           return location.reload();
@@ -93684,7 +93684,7 @@ function App() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     // Get phone
-    var phone = sessionStorage.getItem("phone", phone); // Autologin if user has already registered
+    var phone = localStorage.getItem("phone", phone); // Autologin if user has already registered
 
     if (auth.username == "@guest" && phone) {
       console.log("works");
