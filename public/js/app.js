@@ -102160,6 +102160,22 @@ var ProfileEdit = function ProfileEdit(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
+        }); // Update Posts
+
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+          return props.setPosts(res.data);
+        }); // Update Posts comments
+
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
+          return props.setPostComments(res.data);
+        }); // Update Video Comments
+
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
+          return props.setVideoComments(res.data);
+        }); // Update Audio Comments
+
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
+          return props.setAudioComments(res.data);
         });
         setName("");
         setPhone("");

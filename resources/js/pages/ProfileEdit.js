@@ -60,6 +60,18 @@ const ProfileEdit = (props) => {
 					// Update auth details
 					axios.get(`${props.url}/api/home`)
 						.then((res) => props.setAuth(res.data))
+					// Update Posts
+					axios.get(`${props.url}/api/posts`)
+						.then((res) => props.setPosts(res.data))
+					// Update Posts comments
+					axios.get(`${props.url}/api/post-comments`)
+						.then((res) => props.setPostComments(res.data))
+					// Update Video Comments
+					axios.get(`${props.url}/api/video-comments`)
+						.then((res) => props.setVideoComments(res.data))
+					// Update Audio Comments
+					axios.get(`${props.url}/api/audio-comments`)
+						.then((res) => props.setAudioComments(res.data))
 					setName("")
 					setPhone("")
 					setBio("")
