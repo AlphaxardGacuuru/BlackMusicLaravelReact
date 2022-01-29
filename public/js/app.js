@@ -93863,7 +93863,7 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
     });
-  }, []); //Fetch Auth
+  }, [auth]); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
