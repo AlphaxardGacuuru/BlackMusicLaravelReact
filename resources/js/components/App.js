@@ -106,14 +106,14 @@ function App() {
 	// Fetch data on page load
 	useEffect(() => {
 		// Get phone
-		const phone = localStorage.getItem("phone", phone)
+		const sessionPhone = localStorage.getItem("phone")
 
 		// Autologin if user has already registered
-		if (auth.username == "@guest" && phone) {
+		if (auth.username == "@guest" && sessionPhone) {
 			axios.get('/sanctum/csrf-cookie').then(() => {
 				axios.post(`${url}/api/login`, {
-					phone: phone,
-					password: phone,
+					phone: sessionPhone,
+					password: sessionPhone,
 					remember: 'checked'
 				}).then((res) => {
 					// Update Logged in user
@@ -645,7 +645,7 @@ function App() {
 					setShowEmojiPicker(false)
 					setShowImagePicker(false)
 					setShowPollPicker(false)
-				}).catch(err => {
+				}).catch((err) => {
 					const resErrors = err.response.data.errors
 
 					var resError

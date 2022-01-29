@@ -93690,13 +93690,13 @@ function App() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     // Get phone
-    var phone = localStorage.getItem("phone", phone); // Autologin if user has already registered
+    var sessionPhone = localStorage.getItem("phone"); // Autologin if user has already registered
 
-    if (auth.username == "@guest" && phone) {
+    if (auth.username == "@guest" && sessionPhone) {
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
         axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/login"), {
-          phone: phone,
-          password: phone,
+          phone: sessionPhone,
+          password: sessionPhone,
           remember: 'checked'
         }).then(function (res) {
           // Update Logged in user
@@ -99926,7 +99926,28 @@ var HelpThread = function HelpThread(props) {
     props.setStateToUpdateTwo(function () {
       return props.setHelpThreads;
     });
-  }, 1000); // Scroll to the bottom of the page
+  }, 1000); // Fetch Help Posts
+
+  var checkHelpPosts = function checkHelpPosts() {
+    return axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
+      // Get new length of help posts
+      var currentHelpPostsLength = props.helpPosts.filter(function (helpPost) {
+        return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
+      }).length; // Get old length of help posts
+
+      var newHelpPostsLength = res.data.filter(function (helpPost) {
+        return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
+      }).length; // Update help posts if new one arrives
+
+      newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data);
+    })["catch"](function () {
+      return console.log(['Failed to fetch help posts']);
+    });
+  };
+
+  setInterval(function () {
+    return checkHelpPosts();
+  }, 2000); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
   // var chat = useRef(null)
@@ -99971,9 +99992,9 @@ var HelpThread = function HelpThread(props) {
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
         } // Get other errors
+        // newError.push(err.response.data.message)
 
 
-        newError.push(err.response.data.message);
         props.setErrors(newError);
       });
     });

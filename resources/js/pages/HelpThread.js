@@ -22,6 +22,34 @@ const HelpThread = (props) => {
 		props.setStateToUpdateTwo(() => props.setHelpThreads)
 	}, 1000)
 
+	// Fetch Help Posts
+	const checkHelpPosts = () => axios.get(`${props.url}/api/help-posts`)
+		.then((res) => {
+			// Get new length of help posts
+			var currentHelpPostsLength = props
+				.helpPosts
+				.filter((helpPost) => {
+					return helpPost.username == username &&
+						helpPost.to == props.auth.username ||
+						helpPost.username == props.auth.username &&
+						helpPost.to == username
+				}).length
+
+			// Get old length of help posts
+			var newHelpPostsLength = res.data
+				.filter((helpPost) => {
+					return helpPost.username == username &&
+						helpPost.to == props.auth.username ||
+						helpPost.username == props.auth.username &&
+						helpPost.to == username
+				}).length
+
+			// Update help posts if new one arrives
+			newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
+		}).catch(() => console.log(['Failed to fetch help posts']))
+
+	setInterval(() => checkHelpPosts(), 2000);
+
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
 
@@ -38,7 +66,7 @@ const HelpThread = (props) => {
 	// 			clearTimeout(timeout)
 	// 		})
 	// 	})
-		
+
 	// 	// For mobile
 	// 	chat.current.addEventListener("touchstart", () => {
 	// 		const timeout = setTimeout(
@@ -71,7 +99,7 @@ const HelpThread = (props) => {
 						newError.push(resErrors[resError])
 					}
 					// Get other errors
-					newError.push(err.response.data.message)
+					// newError.push(err.response.data.message)
 					props.setErrors(newError)
 				})
 		})
@@ -141,7 +169,6 @@ const HelpThread = (props) => {
 									<div className="menu-content-area d-flex align-items-center">
 										<div></div>
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -157,7 +184,6 @@ const HelpThread = (props) => {
 					<div className="backEnd-content">
 						<h2 className="p-2">Help Center</h2>
 					</div>
-
 					{props
 						.helpPosts
 						.filter((helpPost) => {
