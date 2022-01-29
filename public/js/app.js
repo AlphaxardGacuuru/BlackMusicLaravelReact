@@ -97546,7 +97546,7 @@ var AudioCharts = function AudioCharts(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key
     }, props.audios.filter(function (audio) {
-      return audio.id == audioArray.key;
+      return audio.id == audioArray.key && audio.username != "@blackmusic";
     }).map(function (audio, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: key,
@@ -103620,7 +103620,7 @@ var VideoCharts = function VideoCharts(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key
     }, props.videos.filter(function (video) {
-      return video.id == videoArray.key;
+      return video.id == videoArray.key && video.username != "@blackmusic";
     }).map(function (video, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: key,
@@ -103702,7 +103702,7 @@ var VideoCharts = function VideoCharts(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key
     }, props.videos.filter(function (video) {
-      return video.id == videoArray.key;
+      return video.id == videoArray.key && video.username != "@blackmusic";
     }).map(function (video, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_VideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: key,

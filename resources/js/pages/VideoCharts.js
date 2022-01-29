@@ -428,7 +428,7 @@ const VideoCharts = (props) => {
 							.map((videoArray, key) => (
 								<span key={key}>
 									{props.videos
-										.filter((video) => video.id == videoArray.key)
+										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
 										.map((video, key) => (
 											<span key={key}
 												className="card m-1 pb-2"
@@ -504,7 +504,7 @@ const VideoCharts = (props) => {
 							.map((videoArray, key) => (
 								<div key={key}>
 									{props.videos
-										.filter((video) => video.id == videoArray.key)
+										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
 										.map((video, key) => (
 											<VideoMediaHorizontal
 												key={key}

@@ -440,7 +440,7 @@ const AudioCharts = (props) => {
 						.map((audioArray, key) => (
 							<div key={key}>
 								{props.audios
-									.filter((audio) => audio.id == audioArray.key)
+									.filter((audio) => audio.id == audioArray.key && audio.username != "@blackmusic")
 									.map((audio, key) => (
 										<AudioMediaHorizontal
 											key={key}
