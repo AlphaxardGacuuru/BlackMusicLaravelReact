@@ -41,7 +41,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 					newError.push(resErrors[resError])
 				}
 				// Get other errors
-				newError.push(err.response.data.message)
+				// newError.push(err.response.data.message)
 				setErrors(newError)
 			});
 		});

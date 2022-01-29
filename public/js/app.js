@@ -92754,9 +92754,9 @@ var Login = function Login(_ref) {
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
         } // Get other errors
+        // newError.push(err.response.data.message)
 
 
-        newError.push(err.response.data.message);
         setErrors(newError);
       });
     });
@@ -94451,9 +94451,10 @@ function App() {
 
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
-        }
+        } // Show error message
+        // newError.push(err.response.data.message)
 
-        newError.push(err.response.data.message);
+
         setErrors(newError);
       });
     });
@@ -97747,9 +97748,9 @@ var AudioCreate = function AudioCreate(props) {
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
         } // Get other errors
+        // newError.push(err.response.data.message)
 
 
-        newError.push(err.response.data.message);
         console.log(err.response.data);
         props.setErrors(newError);
       });
@@ -103858,9 +103859,9 @@ var VideoCreate = function VideoCreate(props) {
         for (resError in resErrors) {
           newError.push(resErrors[resError]);
         } // Get other errors
+        // newError.push(err.response.data.message)
 
 
-        newError.push(err.response.data.message);
         console.log(err.response.data);
         props.setErrors(newError);
       });

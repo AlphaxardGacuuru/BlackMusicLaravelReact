@@ -653,7 +653,8 @@ function App() {
 					for (resError in resErrors) {
 						newError.push(resErrors[resError])
 					}
-					newError.push(err.response.data.message)
+					// Show error message
+					// newError.push(err.response.data.message)
 					setErrors(newError)
 				})
 		})
