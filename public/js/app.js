@@ -99909,7 +99909,12 @@ var HelpThread = function HelpThread(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       showDelete = _useState2[0],
-      setShowDelete = _useState2[1]; // Set states
+      setShowDelete = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      checkHelpPosts = _useState4[0],
+      setCheckHelpPosts = _useState4[1]; // Set states
 
 
   setTimeout(function () {
@@ -99926,10 +99931,10 @@ var HelpThread = function HelpThread(props) {
     props.setStateToUpdateTwo(function () {
       return props.setHelpThreads;
     });
-  }, 1000); // Fetch Help Posts
-
-  var checkHelpPosts = function checkHelpPosts() {
-    return axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
+  }, 1000);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Help Posts
+    axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
       // Get new length of help posts
       var currentHelpPostsLength = props.helpPosts.filter(function (helpPost) {
         return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
@@ -99940,14 +99945,14 @@ var HelpThread = function HelpThread(props) {
       }).length; // Update help posts if new one arrives
 
       newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data);
+      console.log("works");
+      setTimeout(function () {
+        return setCheckHelpPosts(!checkHelpPosts);
+      }, 3000);
     })["catch"](function () {
       return console.log(['Failed to fetch help posts']);
     });
-  };
-
-  setInterval(function () {
-    return checkHelpPosts();
-  }, 2000); // Scroll to the bottom of the page
+  }, [checkHelpPosts]); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
   // var chat = useRef(null)

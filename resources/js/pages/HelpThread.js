@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -8,6 +8,7 @@ const HelpThread = (props) => {
 	let { username } = useParams()
 
 	const [showDelete, setShowDelete] = useState()
+	const [checkHelpPosts, setCheckHelpPosts] = useState(true)
 
 	// Set states
 	setTimeout(() => {
@@ -22,33 +23,35 @@ const HelpThread = (props) => {
 		props.setStateToUpdateTwo(() => props.setHelpThreads)
 	}, 1000)
 
-	// Fetch Help Posts
-	const checkHelpPosts = () => axios.get(`${props.url}/api/help-posts`)
-		.then((res) => {
-			// Get new length of help posts
-			var currentHelpPostsLength = props
-				.helpPosts
-				.filter((helpPost) => {
-					return helpPost.username == username &&
-						helpPost.to == props.auth.username ||
-						helpPost.username == props.auth.username &&
-						helpPost.to == username
-				}).length
+	useEffect(() => {
+		// Fetch Help Posts
+		axios.get(`${props.url}/api/help-posts`)
+			.then((res) => {
+				// Get new length of help posts
+				var currentHelpPostsLength = props
+					.helpPosts
+					.filter((helpPost) => {
+						return helpPost.username == username &&
+							helpPost.to == props.auth.username ||
+							helpPost.username == props.auth.username &&
+							helpPost.to == username
+					}).length
 
-			// Get old length of help posts
-			var newHelpPostsLength = res.data
-				.filter((helpPost) => {
-					return helpPost.username == username &&
-						helpPost.to == props.auth.username ||
-						helpPost.username == props.auth.username &&
-						helpPost.to == username
-				}).length
+				// Get old length of help posts
+				var newHelpPostsLength = res.data
+					.filter((helpPost) => {
+						return helpPost.username == username &&
+							helpPost.to == props.auth.username ||
+							helpPost.username == props.auth.username &&
+							helpPost.to == username
+					}).length
 
-			// Update help posts if new one arrives
-			newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
-		}).catch(() => console.log(['Failed to fetch help posts']))
-
-	setInterval(() => checkHelpPosts(), 2000);
+				// Update help posts if new one arrives
+				newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
+				console.log("works")
+				setTimeout(() => setCheckHelpPosts(!checkHelpPosts), 3000)
+			}).catch(() => console.log(['Failed to fetch help posts']))
+	}, [checkHelpPosts])
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
