@@ -92737,9 +92737,9 @@ var Login = function Login(_ref) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
-        }); // Save phone to Session Storage
-
-        localStorage.setItem("phone", phone); // Redirect and reload page
+        }); // Save phone to Local Storage
+        // localStorage.setItem("phone", phone)
+        // Redirect and reload page
 
         setTimeout(function () {
           history.push('/');
@@ -92876,7 +92876,7 @@ var LoginPopUp = function LoginPopUp(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
-        }); // Save phone to Session Storage
+        }); // Save phone to Local Storage
 
         localStorage.setItem("phone", phone); // Reload page
 
@@ -93679,8 +93679,14 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Fetch data on page load
+  } // Set phone to localStorage
 
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (auth.phone) {
+      localStorage.setItem("phone", auth.phone);
+    }
+  }, [auth]); // Fetch data on page load
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     // Get phone
