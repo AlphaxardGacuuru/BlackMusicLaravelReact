@@ -230,7 +230,7 @@ const Index = (props) => {
 				<div className="col-sm-4">
 					{/* <!-- ****** Songs Area ****** --> */}
 					<div className="p-2 border">
-						<h5>Songs for you {localStorage.getItem("phone")}</h5>
+						<h5>Songs for you {localStorage.getItem("phone") ? localStorage.getItem("phone") : "Nothing saved"}</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{props.videos
 								.filter((video) => !video.hasBoughtVideo)
