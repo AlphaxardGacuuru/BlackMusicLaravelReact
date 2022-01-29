@@ -103,7 +103,6 @@ function App() {
 
 		// Autologin if user has already registered
 		if (auth.username == "@guest" && phone) {
-			console.log("works")
 			axios.get('/sanctum/csrf-cookie').then(() => {
 				axios.post(`${url}/api/login`, {
 					phone: phone,
