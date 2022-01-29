@@ -92738,8 +92738,8 @@ var Login = function Login(_ref) {
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
         }); // Save phone to Local Storage
-        // localStorage.setItem("phone", phone)
-        // Redirect and reload page
+
+        localStorage.setItem("phone", phone); // Redirect and reload page
 
         setTimeout(function () {
           history.push('/');
@@ -100395,7 +100395,7 @@ var Index = function Index(props) {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 border"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs for you ", localStorage.getItem("phone") ? localStorage.getItem("phone") : "Nothing saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs for you"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll",
     onScroll: handleScroll
   }, props.videos.filter(function (video) {
