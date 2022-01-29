@@ -99945,12 +99945,9 @@ var HelpThread = function HelpThread(props) {
       }).length; // Update help posts if new one arrives
 
       newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data);
-      console.log("works");
       setTimeout(function () {
         return setCheckHelpPosts(!checkHelpPosts);
       }, 3000);
-    })["catch"](function () {
-      return console.log(['Failed to fetch help posts']);
     });
   }, [checkHelpPosts]); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)

@@ -48,9 +48,9 @@ const HelpThread = (props) => {
 
 				// Update help posts if new one arrives
 				newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
-				console.log("works")
+
 				setTimeout(() => setCheckHelpPosts(!checkHelpPosts), 3000)
-			}).catch(() => console.log(['Failed to fetch help posts']))
+			})
 	}, [checkHelpPosts])
 
 	// Scroll to the bottom of the page
