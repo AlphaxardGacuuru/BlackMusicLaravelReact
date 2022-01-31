@@ -93679,17 +93679,15 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Set phone to localStorage
+  } // Fetch data on page load
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (auth.phone) {
       localStorage.setItem("phone", auth.phone);
-    }
-  }, [auth]); // Fetch data on page load
+    } // Get phone
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // Get phone
+
     var sessionPhone = localStorage.getItem("phone"); // Autologin if user has already registered
 
     if (auth.username == "@guest" && sessionPhone) {
@@ -101108,6 +101106,8 @@ var PostShow = function PostShow(props) {
   setTimeout(function () {
     props.setId(id);
     props.setPlaceholder("Add comment");
+    props.setShowImage(false);
+    props.setShowPoll(false);
     props.setUrlTo("/post-comments");
     props.setUrlToTwo("/posts");
     props.setStateToUpdate(function () {

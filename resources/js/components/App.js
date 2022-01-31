@@ -96,15 +96,12 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	// Set phone to localStorage
+	// Fetch data on page load
 	useEffect(() => {
 		if (auth.phone) {
 			localStorage.setItem("phone", auth.phone)
 		}
-	}, [auth])
-
-	// Fetch data on page load
-	useEffect(() => {
+		
 		// Get phone
 		const sessionPhone = localStorage.getItem("phone")
 
