@@ -101,7 +101,7 @@ function App() {
 		if (auth.phone) {
 			localStorage.setItem("phone", auth.phone)
 		}
-		
+
 		// Get phone
 		const sessionPhone = localStorage.getItem("phone")
 
@@ -660,12 +660,14 @@ function App() {
 	/*
 	*
 	* Register service worker */
-	if ('serviceWorker' in navigator) {
-		window.addEventListener('load', () => {
-			// navigator.serviceWorker.register('/sw.js')
-			// .then((reg) => console.log('Service worker registered', reg))
-			// .catch((err) => console.log('Service worker not registered', err));
-		})
+	if (window.location.href.match(/https/)) {
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('/sw.js')
+				// .then((reg) => console.log('Service worker registered', reg))
+				// .catch((err) => console.log('Service worker not registered', err));
+			})
+		}
 	}
 
 	/*

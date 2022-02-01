@@ -49,7 +49,7 @@ const HelpThread = (props) => {
 				// Update help posts if new one arrives
 				newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
 
-				setTimeout(() => setCheckHelpPosts(!checkHelpPosts), 3000)
+				setCheckHelpPosts(!checkHelpPosts)
 			})
 	}, [checkHelpPosts])
 
