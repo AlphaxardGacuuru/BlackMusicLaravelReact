@@ -93679,14 +93679,8 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  }
+  } // Login user
 
-  setInterval(function () {
-    // Fetch Admin
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
-      return setLogin(res.data);
-    });
-  }, 3000); // Login user
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (auth.phone) {

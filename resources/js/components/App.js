@@ -96,12 +96,6 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	setInterval(() => {
-		// Fetch Admin
-		axios.get(`${url}/api/home`)
-			.then((res) => setLogin(res.data))
-	}, 3000);
-
 	// Login user
 	useEffect(() => {
 		if (auth.phone) {
