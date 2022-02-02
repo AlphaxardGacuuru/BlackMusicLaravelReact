@@ -93679,8 +93679,14 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Login user
+  }
 
+  setInterval(function () {
+    // Fetch Admin
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
+      return setLogin(res.data);
+    });
+  }, 3000); // Login user
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (auth.phone) {
@@ -100187,21 +100193,21 @@ var Index = function Index(props) {
 
   var onCartVideos = function onCartVideos(video) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/api/cart-videos"), {
         video: video
       }).then(function (res) {
-        props.setMessage(res.data); // Update Videos
+        setMessage(res.data); // Update Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/videos")).then(function (res) {
+          return setVideos(res.data);
         }); // Update Cart Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
+          return setCartVideos(res.data);
         }); // Update Video Albums
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
-          return props.setVideoAlbums(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
+          return setVideoAlbums(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
@@ -100215,7 +100221,7 @@ var Index = function Index(props) {
 
 
         newError.push(err.response.data.message);
-        props.setErrors(newError);
+        setErrors(newError);
       });
     });
   }; // Buy function
@@ -100490,7 +100496,7 @@ var Index = function Index(props) {
         height: '33px'
       },
       onClick: function onClick() {
-        return onCartVideos(video.id);
+        return props.onCartVideos(video.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-cart3",
@@ -100509,7 +100515,7 @@ var Index = function Index(props) {
         height: '33px'
       },
       onClick: function onClick() {
-        return onCartVideos(video.id);
+        return props.onCartVideos(video.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-cart3",

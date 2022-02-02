@@ -15,19 +15,19 @@ const Index = (props) => {
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
+			axios.post(`${url}/api/cart-videos`, {
 				video: video
 			}).then((res) => {
-				props.setMessage(res.data)
+				setMessage(res.data)
 				// Update Videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
+				axios.get(`${url}/api/videos`)
+					.then((res) => setVideos(res.data))
 				// Update Cart Videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
+				axios.get(`${url}/api/cart-videos`)
+					.then((res) => setCartVideos(res.data))
 				// Update Video Albums
-				axios.get(`${props.url}/api/video-albums`)
-					.then((res) => props.setVideoAlbums(res.data))
+				axios.get(`${url}/api/video-albums`)
+					.then((res) => setVideoAlbums(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				// Get validation errors
@@ -38,7 +38,7 @@ const Index = (props) => {
 				}
 				// Get other errors
 				newError.push(err.response.data.message)
-				props.setErrors(newError)
+				setErrors(newError)
 			})
 		});
 	}
@@ -294,7 +294,7 @@ const Index = (props) => {
 										{video.inCart ?
 											<button className="btn btn-light mb-1 rounded-0"
 												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
+												onClick={() => props.onCartVideos(video.id)}>
 												<svg className='bi bi-cart3'
 													width='1em'
 													height='1em'
@@ -308,7 +308,7 @@ const Index = (props) => {
 											: <button
 												className="mysonar-btn mb-1"
 												style={{ minWidth: '90px', height: '33px' }}
-												onClick={() => onCartVideos(video.id)}>
+												onClick={() => props.onCartVideos(video.id)}>
 												<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 													fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 													<path fillRule='evenodd'
