@@ -96,11 +96,15 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	// Fetch data on page load
+	// Login user
 	useEffect(() => {
 		if (auth.phone) {
 			localStorage.setItem("phone", auth.phone)
 		}
+	}, [auth])
+
+	// Fetch data on page load
+	useEffect(() => {
 
 		// Get phone
 		const sessionPhone = localStorage.getItem("phone")
@@ -116,8 +120,6 @@ function App() {
 					// Update Logged in user
 					axios.get(`${url}/api/home`)
 						.then((res) => setAuth(res.data))
-					// Redirect and reload page
-					// location.reload()
 				})
 			});
 		}
@@ -233,7 +235,7 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [auth])
+	}, [])
 
 	//Fetch Auth
 	const fetchAuth = async () => {

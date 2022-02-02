@@ -93679,15 +93679,17 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Fetch data on page load
+  } // Login user
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (auth.phone) {
       localStorage.setItem("phone", auth.phone);
-    } // Get phone
+    }
+  }, [auth]); // Fetch data on page load
 
-
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    // Get phone
     var sessionPhone = localStorage.getItem("phone"); // Autologin if user has already registered
 
     if (auth.username == "@guest" && sessionPhone) {
@@ -93700,8 +93702,7 @@ function App() {
           // Update Logged in user
           axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
             return setAuth(res.data);
-          }); // Redirect and reload page
-          // location.reload()
+          });
         });
       });
     } // For Auth
@@ -93861,7 +93862,7 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
     });
-  }, [auth]); //Fetch Auth
+  }, []); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -94462,11 +94463,13 @@ function App() {
   * Register service worker */
 
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {// navigator.serviceWorker.register('/sw.js')
-      // .then((reg) => console.log('Service worker registered', reg))
-      // .catch((err) => console.log('Service worker not registered', err));
-    });
+  if (window.location.href.match(/https/)) {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js'); // .then((reg) => console.log('Service worker registered', reg))
+        // .catch((err) => console.log('Service worker not registered', err));
+      });
+    }
   }
   /*
   *
@@ -100180,7 +100183,43 @@ var Index = function Index(props) {
       videoSlice = _useState2[0],
       setVideoSlice = _useState2[1];
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Buy function
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for adding video to cart
+
+  var onCartVideos = function onCartVideos(video) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/cart-videos"), {
+        video: video
+      }).then(function (res) {
+        props.setMessage(res.data); // Update Videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
+          return props.setVideos(res.data);
+        }); // Update Cart Videos
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
+          return props.setCartVideos(res.data);
+        }); // Update Video Albums
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
+          return props.setVideoAlbums(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors; // Get validation errors
+
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  }; // Buy function
+
 
   var onBuyVideos = function onBuyVideos(video) {
     props.onBuyVideos(video);
@@ -100451,7 +100490,7 @@ var Index = function Index(props) {
         height: '33px'
       },
       onClick: function onClick() {
-        return props.onCartVideos(video.id);
+        return onCartVideos(video.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-cart3",
@@ -100470,7 +100509,7 @@ var Index = function Index(props) {
         height: '33px'
       },
       onClick: function onClick() {
-        return props.onCartVideos(video.id);
+        return onCartVideos(video.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "bi bi-cart3",
