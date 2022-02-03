@@ -102198,13 +102198,18 @@ var ProfileEdit = function ProfileEdit(props) {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
-      bio = _useState4[0],
-      setBio = _useState4[1];
+      phone = _useState4[0],
+      setPhone = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      withdrawal = _useState6[0],
-      setWithdrawal = _useState6[1]; // Get csrf token
+      bio = _useState6[0],
+      setBio = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      withdrawal = _useState8[0],
+      setWithdrawal = _useState8[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
@@ -102215,6 +102220,7 @@ var ProfileEdit = function ProfileEdit(props) {
     e.preventDefault(); // Add form data to FormData object
 
     name && formData.append("name", name);
+    phone && formData.append("phone", phone);
     bio && formData.append("bio", bio);
     withdrawal && formData.append("withdrawal", withdrawal);
     formData.append("_method", 'put'); // Send data to UsersController
@@ -102325,9 +102331,11 @@ var ProfileEdit = function ProfileEdit(props) {
     type: "text",
     name: "phone",
     className: "form-control",
-    placeholder: props.auth.phone // value={bio}
-    // onChange={(e) => { setBio(e.target.value) }}
-
+    placeholder: props.auth.phone,
+    value: phone,
+    onChange: function onChange(e) {
+      setPhone(e.target.value);
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "",
     className: "float-left"
@@ -102343,19 +102351,7 @@ var ProfileEdit = function ProfileEdit(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "",
     className: "float-left"
-  }, "Withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "sonar-btn",
-    type: "button",
-    "data-toggle": "collapse",
-    "data-target": "#collapseExample",
-    "aria-expanded": "false",
-    "aria-controls": "collapseExample"
-  }, "minimum withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "collapse",
-    id: "collapseExample"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "By setting your minimum withdrawal to less than ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+  }, "Cash Withdrawal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "By setting your minimum cash withdrawal to less than ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
     className: "mx-1 text-success"
   }, " KES 1000"), "you will incur additional withdrawal charges of ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
     className: "mx-1 text-success"
@@ -102363,12 +102359,12 @@ var ProfileEdit = function ProfileEdit(props) {
     type: "number",
     name: "withdrawal",
     className: "form-control",
-    placeholder: props.auth.withdrawal,
+    placeholder: "KES ".concat(props.auth.withdrawal),
     value: withdrawal,
     onChange: function onChange(e) {
       setWithdrawal(e.target.value);
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "reset",
     className: "sonar-btn"
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {

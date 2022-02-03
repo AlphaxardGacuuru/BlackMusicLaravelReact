@@ -33,6 +33,7 @@ const ProfileEdit = (props) => {
 
 	// Declare states
 	const [name, setName] = useState("")
+	const [phone, setPhone] = useState("")
 	const [bio, setBio] = useState("")
 	const [withdrawal, setWithdrawal] = useState("")
 
@@ -47,6 +48,7 @@ const ProfileEdit = (props) => {
 
 		// Add form data to FormData object
 		name && formData.append("name", name);
+		phone && formData.append("phone", phone);
 		bio && formData.append("bio", bio);
 		withdrawal && formData.append("withdrawal", withdrawal);
 		formData.append("_method", 'put');
@@ -144,8 +146,8 @@ const ProfileEdit = (props) => {
 								name="phone"
 								className="form-control"
 								placeholder={props.auth.phone}
-							// value={bio}
-							// onChange={(e) => { setBio(e.target.value) }}
+								value={phone}
+								onChange={(e) => { setPhone(e.target.value) }}
 							/>
 							<br />
 
@@ -159,32 +161,21 @@ const ProfileEdit = (props) => {
 								onChange={(e) => { setBio(e.target.value) }} />
 							<br />
 
-							<label htmlFor="" className="float-left">Withdrawal</label>
+							<label htmlFor="" className="float-left">Cash Withdrawal</label>
 							<br />
 							<br />
-							{/* {{-- Collapse --}} */}
-							<button className="sonar-btn" type="button" data-toggle="collapse" data-target="#collapseExample"
-								aria-expanded="false" aria-controls="collapseExample">
-								minimum withdrawal
-							</button>
-							<div className="collapse" id="collapseExample">
-								<div className="">
-									<br />
-									<h6>By setting your minimum withdrawal to less than <b className="mx-1 text-success"> KES 1000</b>
-										you will incur additional withdrawal charges of <b className="mx-1 text-success"> KES 50</b>
-										from our provider.
-									</h6>
-									<input
-										type="number"
-										name="withdrawal"
-										className="form-control"
-										placeholder={props.auth.withdrawal}
-										value={withdrawal}
-										onChange={(e) => { setWithdrawal(e.target.value) }}
-									/>
-								</div>
-							</div>
-							{/* {{-- Collapse End --}} */}
+							<h6>By setting your minimum cash withdrawal to less than <b className="mx-1 text-success"> KES 1000</b>
+								you will incur additional withdrawal charges of <b className="mx-1 text-success"> KES 50</b>
+								from our provider.
+							</h6>
+							<input
+								type="number"
+								name="withdrawal"
+								className="form-control"
+								placeholder={`KES ${props.auth.withdrawal}`}
+								value={withdrawal}
+								onChange={(e) => { setWithdrawal(e.target.value) }}
+							/>
 							<br />
 							<br />
 
