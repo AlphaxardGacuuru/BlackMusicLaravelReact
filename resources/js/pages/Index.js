@@ -12,37 +12,6 @@ const Index = (props) => {
 
 	const history = useHistory()
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				setMessage(res.data)
-				// Update Videos
-				axios.get(`${url}/api/videos`)
-					.then((res) => setVideos(res.data))
-				// Update Cart Videos
-				axios.get(`${url}/api/cart-videos`)
-					.then((res) => setCartVideos(res.data))
-				// Update Video Albums
-				axios.get(`${url}/api/video-albums`)
-					.then((res) => setVideoAlbums(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				// Get validation errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				setErrors(newError)
-			})
-		});
-	}
-
 	// Buy function
 	const onBuyVideos = (video) => {
 		props.onBuyVideos(video)
@@ -128,6 +97,9 @@ const Index = (props) => {
 			setVideoSlice(videoSlice + 10)
 		}
 	}
+
+	// Random array for dummy loading elements
+	const dummyVideos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	return (
 		<>
@@ -263,6 +235,37 @@ const Index = (props) => {
 					<div className="p-2 border">
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
+							{/* Loading Video items */}
+							{dummyVideos
+								.filter(() => props.videos.length < 1)
+								.map((item, key) => (
+									<span key={key} className="card pt-0 px-0 pb-2">
+										<div className="thumbnail">
+											<div className="bg-light" style={{ width: "160em", height: "90em" }}></div>
+										</div>
+										<h6 className="m-0 pt-2 px-1 bg-light text-light w-75"
+											style={{
+												width: "150px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											video
+										</h6>
+										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light w-50">username</h6>
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+										<br />
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+									</span>
+								))}
+
+							{/* Real Video items */}
 							{props.videos
 								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)

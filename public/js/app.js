@@ -100197,43 +100197,7 @@ var Index = function Index(props) {
       videoSlice = _useState2[0],
       setVideoSlice = _useState2[1];
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for adding video to cart
-
-  var onCartVideos = function onCartVideos(video) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(url, "/api/cart-videos"), {
-        video: video
-      }).then(function (res) {
-        setMessage(res.data); // Update Videos
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/videos")).then(function (res) {
-          return setVideos(res.data);
-        }); // Update Cart Videos
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-          return setCartVideos(res.data);
-        }); // Update Video Albums
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-          return setVideoAlbums(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors; // Get validation errors
-
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        } // Get other errors
-
-
-        newError.push(err.response.data.message);
-        setErrors(newError);
-      });
-    });
-  }; // Buy function
-
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Buy function
 
   var onBuyVideos = function onBuyVideos(video) {
     props.onBuyVideos(video);
@@ -100329,8 +100293,10 @@ var Index = function Index(props) {
     if (bottom) {
       setVideoSlice(videoSlice + 10);
     }
-  };
+  }; // Random array for dummy loading elements
 
+
+  var dummyVideos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.auth.account_type == 'musician' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "post-create",
     id: "floatBtn"
@@ -100471,7 +100437,44 @@ var Index = function Index(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs for you"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll",
     onScroll: handleScroll
-  }, props.videos.filter(function (video) {
+  }, dummyVideos.filter(function () {
+    return props.videos.length < 1;
+  }).map(function (item, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: key,
+      className: "card pt-0 px-0 pb-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "thumbnail"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "bg-light",
+      style: {
+        width: "160em",
+        height: "90em"
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0 pt-2 px-1 bg-light text-light w-75",
+      style: {
+        width: "150px",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, "video"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light w-50"
+    }, "username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-light mb-1 rounded-0",
+      style: {
+        minWidth: '90px',
+        height: '33px'
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-light mb-1 rounded-0",
+      style: {
+        minWidth: '90px',
+        height: '33px'
+      }
+    }));
+  }), props.videos.filter(function (video) {
     return !video.hasBoughtVideo;
   }).slice(0, videoSlice).map(function (video, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
