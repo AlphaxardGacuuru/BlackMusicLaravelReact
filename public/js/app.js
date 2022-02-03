@@ -93679,18 +93679,17 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Login user
+  } // Fetch data on page load
 
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    if (auth.phone) {
-      localStorage.setItem("phone", auth.phone);
-    }
-  }, [auth]); // Fetch data on page load
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     // Get phone
-    var sessionPhone = localStorage.getItem("phone"); // Autologin if user has already registered
+    var sessionPhone = localStorage.getItem("phone"); // Update new phone to localStorage
+
+    if (auth.phone && auth.phone == sessionPhone) {
+      localStorage.setItem("phone", auth.phone);
+    } // Autologin if user has already registered
+
 
     if (auth.username == "@guest" && sessionPhone) {
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
@@ -93698,10 +93697,25 @@ function App() {
           phone: sessionPhone,
           password: sessionPhone,
           remember: 'checked'
-        }).then(function (res) {
+        }).then(function () {
           // Update Logged in user
           axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
-            return setAuth(res.data);
+            // Check if login has worked
+            if (res.data) {
+              setAuth(res.data);
+            } else {
+              // If login failed logout
+              axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
+                axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/logout")).then(function () {
+                  return setAuth({
+                    "name": "Guest",
+                    "username": "@guest",
+                    "pp": "profile-pics/male_avatar.png",
+                    "account_type": "normal"
+                  });
+                });
+              });
+            }
           });
         });
       });
@@ -93862,7 +93876,7 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
     });
-  }, []); //Fetch Auth
+  }, [auth]); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -102364,10 +102378,7 @@ var ProfileEdit = function ProfileEdit(props) {
     onChange: function onChange(e) {
       setWithdrawal(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "reset",
-    className: "sonar-btn"
-  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     btnText: "save changes"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Link"], {

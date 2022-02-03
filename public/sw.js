@@ -30,7 +30,7 @@ self.addEventListener('activate', e => {
 			// Returns multiple promises 
 			return Promise.all(
 				//for each return check whether the key of the already cached assests is present if not delete 
-				cacheNames.map(cache => {
+				cacheNames.map((cache) => {
 					if (cache !== cacheName) {
 						// console.log('Service Worker: Clearing all cache');
 						return caches.delete(cache);
@@ -52,7 +52,7 @@ self.addEventListener('fetch', e => {
 				// Open cache
 				caches
 					.open(cacheName)
-					.then(cache => {
+					.then((cache) => {
 						// Add response to cache
 						cache.put(e.request, resClone);
 					});

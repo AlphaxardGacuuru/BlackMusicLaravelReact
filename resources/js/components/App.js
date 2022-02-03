@@ -96,18 +96,16 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	// Login user
-	useEffect(() => {
-		if (auth.phone) {
-			localStorage.setItem("phone", auth.phone)
-		}
-	}, [auth])
-
 	// Fetch data on page load
 	useEffect(() => {
 
 		// Get phone
 		const sessionPhone = localStorage.getItem("phone")
+
+		// Update new phone to localStorage
+		if (auth.phone && auth.phone == sessionPhone) {
+			localStorage.setItem("phone", auth.phone)
+		}
 
 		// Autologin if user has already registered
 		if (auth.username == "@guest" && sessionPhone) {
@@ -116,10 +114,26 @@ function App() {
 					phone: sessionPhone,
 					password: sessionPhone,
 					remember: 'checked'
-				}).then((res) => {
+				}).then(() => {
 					// Update Logged in user
 					axios.get(`${url}/api/home`)
-						.then((res) => setAuth(res.data))
+						.then((res) => {
+							// Check if login has worked
+							if (res.data) {
+								setAuth(res.data)
+							} else {
+								// If login failed logout
+								axios.get('/sanctum/csrf-cookie').then(() => {
+									axios.post(`${url}/api/logout`)
+										.then(() => setAuth({
+											"name": "Guest",
+											"username": "@guest",
+											"pp": "profile-pics/male_avatar.png",
+											"account_type": "normal"
+										}));
+								})
+							}
+						})
 				})
 			});
 		}
@@ -235,7 +249,7 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [])
+	}, [auth])
 
 	//Fetch Auth
 	const fetchAuth = async () => {
