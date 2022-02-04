@@ -99,7 +99,7 @@ const Index = (props) => {
 	}
 
 	// Random array for dummy loading elements
-	const dummyVideos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	return (
 		<>
@@ -181,6 +181,25 @@ const Index = (props) => {
 							<h2>Musicians to follow</h2>
 						</div>
 						{/* Slice to limit to 10 */}
+
+						{/* Loading Musician items */}
+						{dummyArray
+							.filter(() => props.videos.length < 1)
+							.map((item, key) => (
+								<div key={key} className='media p-2 border-bottom'>
+									<div className='media-left'>
+										<div className="rounded-circle" style={{ width: "30px", height: "30px" }}></div>
+									</div>
+									<div className='media-body'>
+										<b className="bg-light text-light gradient">namename</b>
+										<small className="bg-light text-light gradient"><i>usernameusename</i></small>
+										<button className="btn btn-light float-right rounded-0 text-light"
+											style={{ minWidth: '90px', height: '33px' }}></button>
+									</div>
+								</div>
+							))}
+
+						{/* Musicians */}
 						{props.users
 							.filter((user) => user.account_type == "musician" &&
 								user.username != props.auth.username &&
@@ -236,14 +255,14 @@ const Index = (props) => {
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{/* Loading Video items */}
-							{dummyVideos
+							{dummyArray
 								.filter(() => props.videos.length < 1)
 								.map((item, key) => (
 									<span key={key} className="card pt-0 px-0 pb-2">
 										<div className="thumbnail">
-											<div className="bg-light" style={{ width: "160em", height: "90em" }}></div>
+											<div className="bg-light gradient" style={{ width: "160em", height: "90em" }}></div>
 										</div>
-										<h6 className="m-0 pt-2 px-1 bg-light text-light w-75"
+										<h6 className="m-0 pt-2 px-1 bg-light text-light gradient w-75"
 											style={{
 												width: "150px",
 												whiteSpace: "nowrap",
@@ -252,7 +271,7 @@ const Index = (props) => {
 											}}>
 											video
 										</h6>
-										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light w-50">username</h6>
+										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light gradient w-50">username</h6>
 										<button
 											className="btn btn-light mb-1 rounded-0"
 											style={{ minWidth: '90px', height: '33px' }}>
@@ -333,6 +352,74 @@ const Index = (props) => {
 
 					{/* <!-- Posts area --> */}
 					<div className="border border-top-0 m-0 p-0">
+						{/* Loading Video items */}
+						{dummyArray
+							.filter(() => props.videos.length < 1)
+							.map((item, key) => (
+								<div key={key} className='media p-2 border-bottom'>
+									<div className='media-left'>
+										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}></div>
+									</div>
+									<div className='media-body'>
+										<h6 className="media-heading m-0"
+											style={{
+												width: "100%",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											<b className="bg-light text-light gradient">post.name</b>
+											<small className="bg-light text-light gradient">post.username</small>
+											<span className="ml-1 bg-light text-light gradient">
+												<svg className="bi bi-circle"
+													width="1em"
+													height="1em"
+													viewBox="0 0 16 16"
+													fill="currentColor"
+													xmlns="http://www.w3.org/2000/svg">
+													<path fillRule="evenodd"
+														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+												</svg>
+												<small className="ml-1">post.decos</small>
+											</span>
+											<small>
+												<i className="float-right mr-1 bg-light text-light gradient">post.created_at</i>
+											</small>
+										</h6>
+										<p className="my-2 bg-light text-light gradient">post.text</p>
+
+										{/* Post likes */}
+										<a href="#" className="bg-light text-light gradient" style={{ color: "#cc3300" }}>
+											<svg xmlns='http://www.w3.org/2000/svg'
+												width='1.2em'
+												height='1.2em'
+												fill='currentColor'
+												className='bi bi-heart-fill'
+												viewBox='0 0 16 16'>
+												<path fillRule='evenodd'
+													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
+											</svg>
+											<small className="ml-1">po</small>
+										</a>
+
+										{/* Post comments */}
+										<span className="bg-light text-light gradient">
+											<svg className="bi bi-chat ml-5"
+												width="1.2em"
+												height="1.2em"
+												viewBox="0 0 16 16"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
+												<path fillRule="evenodd"
+													d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+											</svg>
+											<small className="ml-1">post.comments</small>
+										</span>
+									</div>
+								</div>
+							))}
+
+						{/* Posts */}
 						{props.posts
 							.filter((post) => post.hasFollowed)
 							.map((post, index) => (
@@ -662,6 +749,47 @@ const Index = (props) => {
 						<h5>Songs to watch</h5>
 					</div>
 					<div className="border m-0 p-0">
+						{/* Loading Video items */}
+						{dummyArray
+							.filter(() => props.videos.length < 1)
+							.map((item, key) => (
+								<div key={key} className="d-flex p-2 border-bottom">
+									<div className="thumbnail gradient">
+										<div className="w-25 h-25"></div>
+									</div>
+									<div className="ml-2 mr-auto flex-grow-1">
+										<h6 className="mb-0 bg-light text-light gradient"
+											style={{
+												width: "8em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											props.name
+										</h6>
+										<h6 className="mb-3 bg-light text-light gradient"
+											style={{
+												width: "8em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											<small>props.username</small>
+											<small className="ml-1">props.ft</small>
+										</h6>
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '40px', height: '33px' }}>
+										</button>
+										<button
+											className="btn btn-light mb-1 rounded-0 float-right"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+									</div>
+								</div>
+							))}
+
+						{/* Real Video items */}
 						{props.videos
 							.filter((video) => !video.hasBoughtVideo)
 							.slice(0, 10)
