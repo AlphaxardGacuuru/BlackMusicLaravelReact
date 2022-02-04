@@ -14,7 +14,7 @@ const VideoCharts = (props) => {
 	const [chart, setChart] = useState("Newly Released")
 	const [genre, setGenre] = useState("All")
 	const [artistSlice, setArtistSlice] = useState(10)
-	const [videoSlice, setVideoSlice] = useState(8)
+	const [videoSlice, setVideoSlice] = useState(10)
 
 	// Array for links
 	const charts = ["Newly Released", "Trending", "Top Downloaded", "Top Liked"]
@@ -182,6 +182,9 @@ const VideoCharts = (props) => {
 			}
 		};
 	}
+
+	// Random array for dummy loading elements
+	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	return (
 		<>
@@ -374,6 +377,40 @@ const VideoCharts = (props) => {
 					{/* <!-- ****** Artists Area Start ****** - */}
 					<h5>Artists</h5>
 					<div className="hidden-scroll" onScroll={handleScroll}>
+						{/* Loading animation */}
+						{dummyArray
+							.filter(() => props.users.length < 1)
+							.map((item, key) => (
+								<span key={key} style={{ padding: "5px" }}>
+									<span key={key} className="m-0 p-0">
+										<center>
+											<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+												<div className="bg-light text-light gradient"
+													style={{ width: "150px", height: "150px" }}></div>
+											</div>
+											<h6 className="mt-2 mb-0 bg-light text-light gradient"
+												style={{
+													width: "100px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												user.name
+											</h6>
+											<h6 className="bg-light text-light gradient"
+												style={{
+													width: "100px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												user.username
+											</h6>
+										</center>
+									</span>
+								</span>
+							))}
+
 						{/*  Echo Artists  */}
 						{artistsArray
 							.filter((artist) => artist.key !=
@@ -423,6 +460,45 @@ const VideoCharts = (props) => {
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
 					<div className="hidden" onScroll={handleScroll}>
+						{/* Loading Video items */}
+						{dummyArray
+							.filter(() => props.videos.length < 1)
+							.map((item, key) => (
+								<span key={key}>
+									<span
+										className="card m-1 pb-2"
+										style={{
+											borderRadius: "0px",
+											display: "inline-block",
+											textAlign: "center"
+										}}>
+										<div className="thumbnail">
+											<div className="bg-light gradient" style={{ width: "160em", height: "90em" }}></div>
+										</div>
+										<h6 className="m-0 pt-2 px-1 bg-light text-light gradient w-75"
+											style={{
+												width: "150px",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											video
+										</h6>
+										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light gradient w-50">username</h6>
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+										<br />
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+									</span>
+								</span>
+							))}
+
+						{/* Real Video items */}
 						{videosArray
 							.slice(0, videoSlice)
 							.map((videoArray, key) => (
@@ -499,6 +575,47 @@ const VideoCharts = (props) => {
 
 					{/* For mobile */}
 					<div className="anti-hidden">
+						{/* Loading Video items */}
+						{dummyArray
+							.filter(() => props.videos.length < 1)
+							.map((item, key) => (
+								<div key={key} className="d-flex p-2 border-bottom">
+									<div className="thumbnail gradient">
+										<div className="w-25 h-25"></div>
+									</div>
+									<div className="ml-2 mr-auto flex-grow-1">
+										<h6 className="mb-0 bg-light text-light gradient"
+											style={{
+												width: "8em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											props.name
+										</h6>
+										<h6 className="mb-3 bg-light text-light gradient"
+											style={{
+												width: "8em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											<small>props.username</small>
+											<small className="ml-1">props.ft</small>
+										</h6>
+										<button
+											className="btn btn-light mb-1 rounded-0"
+											style={{ minWidth: '40px', height: '33px' }}>
+										</button>
+										<button
+											className="btn btn-light mb-1 rounded-0 float-right"
+											style={{ minWidth: '90px', height: '33px' }}>
+										</button>
+									</div>
+								</div>
+							))}
+
+						{/* Real Video items */}
 						{videosArray
 							.slice(0, videoSlice)
 							.map((videoArray, key) => (

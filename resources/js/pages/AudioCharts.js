@@ -187,6 +187,9 @@ const AudioCharts = (props) => {
 		};
 	}
 
+	// Random array for dummy loading elements
+	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 	return (
 		<>
 			{/* Carousel */}
@@ -380,6 +383,38 @@ const AudioCharts = (props) => {
 					{/* <!-- ****** Artists Area Start ****** - */}
 					<h5>Artists</h5>
 					<div className="hidden-scroll" onScroll={handleScroll}>
+						{/* Loading animation */}
+						{dummyArray
+							// .filter(() => props.users.length < 1)
+							.map((item, key) => (
+								<span key={key} style={{ padding: "5px" }}>
+									<span key={key} className="m-0 p-0">
+										<center>
+											<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+												<div className="bg-light text-light gradient" style={{ width: "150px", height: "150px" }}></div>
+											</div>
+											<h6 className="mt-2 mb-0 bg-light text-light gradient"
+												style={{
+													width: "100px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												user.name
+											</h6>
+											<h6 className="bg-light text-light gradient"
+												style={{
+													width: "100px",
+													whiteSpace: "nowrap",
+													overflow: "hidden",
+													textOverflow: "clip"
+												}}>
+												user.username
+											</h6>
+										</center>
+									</span>
+								</span>
+							))}
 						{/*  Echo Artists  */}
 						{artistsArray
 							.filter((artist) => artist.key !=

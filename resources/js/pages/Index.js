@@ -184,7 +184,7 @@ const Index = (props) => {
 
 						{/* Loading Musician items */}
 						{dummyArray
-							.filter(() => props.videos.length < 1)
+							.filter(() => props.users.length < 1)
 							.map((item, key) => (
 								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>

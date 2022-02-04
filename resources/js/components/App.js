@@ -96,23 +96,21 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	// Fetch data on page load
 	useEffect(() => {
-
 		// Get phone
-		const sessionPhone = localStorage.getItem("phone")
+		const storagePhone = localStorage.getItem("phone")
 
 		// Update new phone to localStorage
-		if (auth.phone && auth.phone == sessionPhone) {
+		if (auth.phone && auth.phone != storagePhone) {
 			localStorage.setItem("phone", auth.phone)
 		}
 
 		// Autologin if user has already registered
-		if (auth.username == "@guest" && sessionPhone) {
+		if (auth.username == "@guest" && storagePhone) {
 			axios.get('/sanctum/csrf-cookie').then(() => {
 				axios.post(`${url}/api/login`, {
-					phone: sessionPhone,
-					password: sessionPhone,
+					phone: storagePhone,
+					password: storagePhone,
 					remember: 'checked'
 				}).then(() => {
 					// Update Logged in user
@@ -137,6 +135,10 @@ function App() {
 				})
 			});
 		}
+	}, [auth])
+
+	// Fetch data on page load
+	useEffect(() => {
 
 		// For Auth
 		const getAuth = async () => {
@@ -249,7 +251,7 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [auth])
+	}, [])
 
 	//Fetch Auth
 	const fetchAuth = async () => {
