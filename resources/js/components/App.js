@@ -107,7 +107,7 @@ function App() {
 
 		// Autologin if user has already registered
 		if (auth.username == "@guest" && storagePhone) {
-			axios.get('/sanctum/csrf-cookie').then(() => {
+			const autoLogin = () => axios.get('/sanctum/csrf-cookie').then(() => {
 				axios.post(`${url}/api/login`, {
 					phone: storagePhone,
 					password: storagePhone,
@@ -123,17 +123,23 @@ function App() {
 								// If login failed logout
 								axios.get('/sanctum/csrf-cookie').then(() => {
 									axios.post(`${url}/api/logout`)
-										.then(() => setAuth({
+										.then(() => {
+											setAuth({
 											"name": "Guest",
 											"username": "@guest",
 											"pp": "profile-pics/male_avatar.png",
 											"account_type": "normal"
-										}));
+										})
+										autoLogin()
+									});
 								})
 							}
 						})
 				})
 			});
+
+			// Call the auto login function
+			autoLogin()
 		}
 	}, [auth])
 

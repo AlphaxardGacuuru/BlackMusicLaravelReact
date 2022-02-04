@@ -93691,33 +93691,39 @@ function App() {
 
 
     if (auth.username == "@guest" && storagePhone) {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/login"), {
-          phone: storagePhone,
-          password: storagePhone,
-          remember: 'checked'
-        }).then(function () {
-          // Update Logged in user
-          axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
-            // Check if login has worked
-            if (res.data) {
-              setAuth(res.data);
-            } else {
-              // If login failed logout
-              axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
-                axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/logout")).then(function () {
-                  return setAuth({
-                    "name": "Guest",
-                    "username": "@guest",
-                    "pp": "profile-pics/male_avatar.png",
-                    "account_type": "normal"
+      var autoLogin = function autoLogin() {
+        return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
+          axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/login"), {
+            phone: storagePhone,
+            password: storagePhone,
+            remember: 'checked'
+          }).then(function () {
+            // Update Logged in user
+            axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
+              // Check if login has worked
+              if (res.data) {
+                setAuth(res.data);
+              } else {
+                // If login failed logout
+                axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
+                  axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/logout")).then(function () {
+                    setAuth({
+                      "name": "Guest",
+                      "username": "@guest",
+                      "pp": "profile-pics/male_avatar.png",
+                      "account_type": "normal"
+                    });
+                    autoLogin();
                   });
                 });
-              });
-            }
+              }
+            });
           });
         });
-      });
+      }; // Call the auto login function
+
+
+      autoLogin();
     }
   }, [auth]); // Fetch data on page load
 
