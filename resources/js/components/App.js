@@ -141,7 +141,7 @@ function App() {
 			// Call the auto login function
 			autoLogin()
 		}
-	}, [auth])
+	}, [])
 
 	// Fetch data on page load
 	useEffect(() => {

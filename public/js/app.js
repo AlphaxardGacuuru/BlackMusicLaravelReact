@@ -93725,7 +93725,7 @@ function App() {
 
       autoLogin();
     }
-  }, [auth]); // Fetch data on page load
+  }, []); // Fetch data on page load
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     // For Auth
