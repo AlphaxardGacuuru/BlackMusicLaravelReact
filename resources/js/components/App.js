@@ -257,7 +257,7 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [])
+	}, [auth])
 
 	//Fetch Auth
 	const fetchAuth = async () => {

@@ -156,7 +156,7 @@ class UsersController extends Controller
         }
 
         if ($request->filled('phone')) {
-            $user->phone = $request->input('phone');
+            // $user->phone = $request->input('phone');
         }
 
         if ($request->filled('account_type')) {
