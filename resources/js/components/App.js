@@ -51,6 +51,7 @@ function App() {
 
 	// Declare states
 	const [login, setLogin] = useState()
+	const [autoLoginFailed, setAutoLoginFailed] = useState()
 	const [url, setUrl] = useState(window.location.href.match(/https/) ?
 		'https://music.black.co.ke' :
 		'http://localhost:3000')
@@ -119,19 +120,26 @@ function App() {
 							// Check if login has worked
 							if (res.data) {
 								setAuth(res.data)
+								// if auto login failed fetch everything
+								if (autoLoginFailed) {
+									setTimeout(() => setAutoLoginFailed(false), 5000)
+								}
 							} else {
 								// If login failed logout
 								axios.get('/sanctum/csrf-cookie').then(() => {
 									axios.post(`${url}/api/logout`)
 										.then(() => {
 											setAuth({
-											"name": "Guest",
-											"username": "@guest",
-											"pp": "profile-pics/male_avatar.png",
-											"account_type": "normal"
-										})
-										autoLogin()
-									});
+												"name": "Guest",
+												"username": "@guest",
+												"pp": "profile-pics/male_avatar.png",
+												"account_type": "normal"
+											})
+											// Set autoLoginFailed to refresh everything
+											setAutoLoginFailed(true)
+											// Retry login
+											autoLogin()
+										});
 								})
 							}
 						})
@@ -257,7 +265,7 @@ function App() {
 		axios.get(`${url}/api/videos`)
 			.then((res) => setVideos(res.data))
 			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [auth])
+	}, [auth, autoLoginFailed])
 
 	//Fetch Auth
 	const fetchAuth = async () => {

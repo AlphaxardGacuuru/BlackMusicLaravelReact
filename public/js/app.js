@@ -93536,140 +93536,145 @@ function App() {
       login = _useState2[0],
       setLogin = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000'),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
-      url = _useState4[0],
-      setUrl = _useState4[1];
+      autoLoginFailed = _useState4[0],
+      setAutoLoginFailed = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      url = _useState6[0],
+      setUrl = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     "name": "Guest",
     "username": "@guest",
     "pp": "/storage/profile-pics/male_avatar.png",
     "account_type": "normal"
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      auth = _useState6[0],
-      setAuth = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      message = _useState8[0],
-      setMessage = _useState8[1];
+      auth = _useState8[0],
+      setAuth = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      errors = _useState10[0],
-      setErrors = _useState10[1];
+      message = _useState10[0],
+      setMessage = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      admin = _useState12[0],
-      setAdmin = _useState12[1];
+      errors = _useState12[0],
+      setErrors = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      audioAlbums = _useState14[0],
-      setAudioAlbums = _useState14[1];
+      admin = _useState14[0],
+      setAdmin = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      audioComments = _useState16[0],
-      setAudioComments = _useState16[1];
+      audioAlbums = _useState16[0],
+      setAudioAlbums = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      audioPayouts = _useState18[0],
-      setAudioPayouts = _useState18[1];
+      audioComments = _useState18[0],
+      setAudioComments = _useState18[1];
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      audios = _useState20[0],
-      setAudios = _useState20[1];
+      audioPayouts = _useState20[0],
+      setAudioPayouts = _useState20[1];
 
   var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState22 = _slicedToArray(_useState21, 2),
-      boughtAudios = _useState22[0],
-      setBoughtAudios = _useState22[1];
+      audios = _useState22[0],
+      setAudios = _useState22[1];
 
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      boughtVideos = _useState24[0],
-      setBoughtVideos = _useState24[1];
+      boughtAudios = _useState24[0],
+      setBoughtAudios = _useState24[1];
 
   var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState26 = _slicedToArray(_useState25, 2),
-      cartAudios = _useState26[0],
-      setCartAudios = _useState26[1];
+      boughtVideos = _useState26[0],
+      setBoughtVideos = _useState26[1];
 
   var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState28 = _slicedToArray(_useState27, 2),
-      cartVideos = _useState28[0],
-      setCartVideos = _useState28[1];
+      cartAudios = _useState28[0],
+      setCartAudios = _useState28[1];
 
   var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState30 = _slicedToArray(_useState29, 2),
-      helpPosts = _useState30[0],
-      setHelpPosts = _useState30[1];
+      cartVideos = _useState30[0],
+      setCartVideos = _useState30[1];
 
   var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState32 = _slicedToArray(_useState31, 2),
-      helpThreads = _useState32[0],
-      setHelpThreads = _useState32[1];
+      helpPosts = _useState32[0],
+      setHelpPosts = _useState32[1];
 
   var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState34 = _slicedToArray(_useState33, 2),
-      kopokopoRecipients = _useState34[0],
-      setKopokopoRecipients = _useState34[1];
+      helpThreads = _useState34[0],
+      setHelpThreads = _useState34[1];
 
   var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState36 = _slicedToArray(_useState35, 2),
-      notifications = _useState36[0],
-      setNotifications = _useState36[1];
+      kopokopoRecipients = _useState36[0],
+      setKopokopoRecipients = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState38 = _slicedToArray(_useState37, 2),
-      posts = _useState38[0],
-      setPosts = _useState38[1];
+      notifications = _useState38[0],
+      setNotifications = _useState38[1];
 
   var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState40 = _slicedToArray(_useState39, 2),
-      postComments = _useState40[0],
-      setPostComments = _useState40[1];
+      posts = _useState40[0],
+      setPosts = _useState40[1];
 
   var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState42 = _slicedToArray(_useState41, 2),
-      referrals = _useState42[0],
-      setReferrals = _useState42[1];
+      postComments = _useState42[0],
+      setPostComments = _useState42[1];
 
   var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState44 = _slicedToArray(_useState43, 2),
-      sms = _useState44[0],
-      setSMS = _useState44[1];
+      referrals = _useState44[0],
+      setReferrals = _useState44[1];
 
   var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState46 = _slicedToArray(_useState45, 2),
-      users = _useState46[0],
-      setUsers = _useState46[1];
+      sms = _useState46[0],
+      setSMS = _useState46[1];
 
   var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState48 = _slicedToArray(_useState47, 2),
-      videoAlbums = _useState48[0],
-      setVideoAlbums = _useState48[1];
+      users = _useState48[0],
+      setUsers = _useState48[1];
 
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState50 = _slicedToArray(_useState49, 2),
-      videoComments = _useState50[0],
-      setVideoComments = _useState50[1];
+      videoAlbums = _useState50[0],
+      setVideoAlbums = _useState50[1];
 
   var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState52 = _slicedToArray(_useState51, 2),
-      songPayouts = _useState52[0],
-      setSongPayouts = _useState52[1];
+      videoComments = _useState52[0],
+      setVideoComments = _useState52[1];
 
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState54 = _slicedToArray(_useState53, 2),
-      videos = _useState54[0],
-      setVideos = _useState54[1]; // Reset Messages and Errors to null after 3 seconds
+      songPayouts = _useState54[0],
+      setSongPayouts = _useState54[1];
+
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState56 = _slicedToArray(_useState55, 2),
+      videos = _useState56[0],
+      setVideos = _useState56[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93702,7 +93707,13 @@ function App() {
             axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
               // Check if login has worked
               if (res.data) {
-                setAuth(res.data);
+                setAuth(res.data); // if auto login failed fetch everything
+
+                if (autoLoginFailed) {
+                  setTimeout(function () {
+                    return setAutoLoginFailed(false);
+                  }, 5000);
+                }
               } else {
                 // If login failed logout
                 axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
@@ -93712,7 +93723,10 @@ function App() {
                       "username": "@guest",
                       "pp": "profile-pics/male_avatar.png",
                       "account_type": "normal"
-                    });
+                    }); // Set autoLoginFailed to refresh everything
+
+                    setAutoLoginFailed(true); // Retry login
+
                     autoLogin();
                   });
                 });
@@ -93883,7 +93897,7 @@ function App() {
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
     });
-  }, [auth]); //Fetch Auth
+  }, [auth, autoLoginFailed]); //Fetch Auth
 
   var fetchAuth = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -94085,50 +94099,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState56 = _slicedToArray(_useState55, 2),
-      show = _useState56[0],
-      setShow = _useState56[1];
-
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState58 = _slicedToArray(_useState57, 2),
-      playBtn = _useState58[0],
-      setPlayBtn = _useState58[1];
+      show = _useState58[0],
+      setShow = _useState58[1];
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState60 = _slicedToArray(_useState59, 2),
-      shuffle = _useState60[0],
-      setShuffle = _useState60[1];
+      playBtn = _useState60[0],
+      setPlayBtn = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState62 = _slicedToArray(_useState61, 2),
-      loop = _useState62[0],
-      setLoop = _useState62[1];
+      shuffle = _useState62[0],
+      setShuffle = _useState62[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState64 = _slicedToArray(_useState63, 2),
-      dur = _useState64[0],
-      setDur = _useState64[1];
+      loop = _useState64[0],
+      setLoop = _useState64[1];
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState66 = _slicedToArray(_useState65, 2),
-      volume = _useState66[0],
-      setVolume = _useState66[1];
+      dur = _useState66[0],
+      setDur = _useState66[1];
 
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
       _useState68 = _slicedToArray(_useState67, 2),
-      currentTime = _useState68[0],
-      setCurrentTime = _useState68[1];
+      volume = _useState68[0],
+      setVolume = _useState68[1];
 
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState70 = _slicedToArray(_useState69, 2),
-      progressPercent = _useState70[0],
-      setProgressPercent = _useState70[1];
+      currentTime = _useState70[0],
+      setCurrentTime = _useState70[1];
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState72 = _slicedToArray(_useState71, 2),
-      audioLoader = _useState72[0],
-      setAudioLoader = _useState72[1]; // Listen for show change and autoplay song
+      progressPercent = _useState72[0],
+      setProgressPercent = _useState72[1];
+
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState74 = _slicedToArray(_useState73, 2),
+      audioLoader = _useState74[0],
+      setAudioLoader = _useState74[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -94313,10 +94327,10 @@ function App() {
   } // Search State
 
 
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState74 = _slicedToArray(_useState73, 2),
-      search = _useState74[0],
-      setSearch = _useState74[1];
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
+      _useState76 = _slicedToArray(_useState75, 2),
+      search = _useState76[0],
+      setSearch = _useState76[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
 
@@ -94325,110 +94339,110 @@ function App() {
   }; // Social Input states
 
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState76 = _slicedToArray(_useState75, 2),
-      id = _useState76[0],
-      setId = _useState76[1];
-
   var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      to = _useState78[0],
-      setTo = _useState78[1];
+      id = _useState78[0],
+      setId = _useState78[1];
 
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      text = _useState80[0],
-      setText = _useState80[1];
+      to = _useState80[0],
+      setTo = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState82 = _slicedToArray(_useState81, 2),
-      media = _useState82[0],
-      setMedia = _useState82[1];
+      text = _useState82[0],
+      setText = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState84 = _slicedToArray(_useState83, 2),
-      para1 = _useState84[0],
-      setPara1 = _useState84[1];
+      media = _useState84[0],
+      setMedia = _useState84[1];
 
   var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState86 = _slicedToArray(_useState85, 2),
-      para2 = _useState86[0],
-      setPara2 = _useState86[1];
+      para1 = _useState86[0],
+      setPara1 = _useState86[1];
 
   var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState88 = _slicedToArray(_useState87, 2),
-      para3 = _useState88[0],
-      setPara3 = _useState88[1];
+      para2 = _useState88[0],
+      setPara2 = _useState88[1];
 
   var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState90 = _slicedToArray(_useState89, 2),
-      para4 = _useState90[0],
-      setPara4 = _useState90[1];
+      para3 = _useState90[0],
+      setPara3 = _useState90[1];
 
   var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState92 = _slicedToArray(_useState91, 2),
-      para5 = _useState92[0],
-      setPara5 = _useState92[1];
+      para4 = _useState92[0],
+      setPara4 = _useState92[1];
 
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState94 = _slicedToArray(_useState93, 2),
-      placeholder = _useState94[0],
-      setPlaceholder = _useState94[1];
+      para5 = _useState94[0],
+      setPara5 = _useState94[1];
 
   var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState96 = _slicedToArray(_useState95, 2),
-      urlTo = _useState96[0],
-      setUrlTo = _useState96[1];
+      placeholder = _useState96[0],
+      setPlaceholder = _useState96[1];
 
   var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState98 = _slicedToArray(_useState97, 2),
-      urlToTwo = _useState98[0],
-      setUrlToTwo = _useState98[1];
+      urlTo = _useState98[0],
+      setUrlTo = _useState98[1];
 
   var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState100 = _slicedToArray(_useState99, 2),
-      urlToDelete = _useState100[0],
-      setUrlToDelete = _useState100[1];
+      urlToTwo = _useState100[0],
+      setUrlToTwo = _useState100[1];
 
   var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState102 = _slicedToArray(_useState101, 2),
-      stateToUpdate = _useState102[0],
-      setStateToUpdate = _useState102[1];
+      urlToDelete = _useState102[0],
+      setUrlToDelete = _useState102[1];
 
   var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState104 = _slicedToArray(_useState103, 2),
-      stateToUpdateTwo = _useState104[0],
-      setStateToUpdateTwo = _useState104[1];
+      stateToUpdate = _useState104[0],
+      setStateToUpdate = _useState104[1];
 
   var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState106 = _slicedToArray(_useState105, 2),
-      showImage = _useState106[0],
-      setShowImage = _useState106[1];
+      stateToUpdateTwo = _useState106[0],
+      setStateToUpdateTwo = _useState106[1];
 
   var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState108 = _slicedToArray(_useState107, 2),
-      showPoll = _useState108[0],
-      setShowPoll = _useState108[1];
+      showImage = _useState108[0],
+      setShowImage = _useState108[1];
 
-  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState110 = _slicedToArray(_useState109, 2),
-      showMentionPicker = _useState110[0],
-      setShowMentionPicker = _useState110[1];
+      showPoll = _useState110[0],
+      setShowPoll = _useState110[1];
 
   var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState112 = _slicedToArray(_useState111, 2),
-      showEmojiPicker = _useState112[0],
-      setShowEmojiPicker = _useState112[1];
+      showMentionPicker = _useState112[0],
+      setShowMentionPicker = _useState112[1];
 
   var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState114 = _slicedToArray(_useState113, 2),
-      showImagePicker = _useState114[0],
-      setShowImagePicker = _useState114[1];
+      showEmojiPicker = _useState114[0],
+      setShowEmojiPicker = _useState114[1];
 
   var _useState115 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState116 = _slicedToArray(_useState115, 2),
-      showPollPicker = _useState116[0],
-      setShowPollPicker = _useState116[1]; // Declare new FormData object for form data
+      showImagePicker = _useState116[0],
+      setShowImagePicker = _useState116[1];
+
+  var _useState117 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState118 = _slicedToArray(_useState117, 2),
+      showPollPicker = _useState118[0],
+      setShowPollPicker = _useState118[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
