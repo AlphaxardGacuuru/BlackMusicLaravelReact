@@ -3,6 +3,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 
 import AuthLinks from "./AuthLinks"
 import TopnavLinks from "./TopNavLinks"
+import Img from "./Img"
 
 const TopNav = (props) => {
 

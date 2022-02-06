@@ -17,6 +17,7 @@ const TopNavLinks = (props) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/logout`)
 				.then((res) => {
+					localStorage.setItem("phone", null)
 					props.setMessage("Logged out")
 					// Update Auth
 					props.setAuth({
