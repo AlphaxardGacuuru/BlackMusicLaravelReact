@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios';
 
 import Img from '../components/Img'
@@ -55,6 +55,8 @@ const AudioShow = (props) => {
 				// Update comments
 				axios.get(`${props.url}/api/audio-comments`)
 					.then((res) => props.setAudioComments(res.data))
+				// Return text to null 
+				setText("")
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -65,8 +67,6 @@ const AudioShow = (props) => {
 				props.setErrors(newError)
 			})
 		})
-
-		setText("")
 	}
 
 	// Function for liking posts

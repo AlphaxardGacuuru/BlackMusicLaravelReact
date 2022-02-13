@@ -184,18 +184,6 @@ function _setPrototypeOf(o, p) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/regenerator/index.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -89861,765 +89849,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var runtime = (function (exports) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function define(obj, key, value) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-    return obj[key];
-  }
-  try {
-    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-    define({}, "");
-  } catch (err) {
-    define = function(obj, key, value) {
-      return obj[key] = value;
-    };
-  }
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  exports.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunction.displayName = define(
-    GeneratorFunctionPrototype,
-    toStringTagSymbol,
-    "GeneratorFunction"
-  );
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      define(prototype, method, function(arg) {
-        return this._invoke(method, arg);
-      });
-    });
-  }
-
-  exports.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  exports.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      define(genFun, toStringTagSymbol, "GeneratorFunction");
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  exports.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  exports.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
-    );
-
-    return exports.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  define(Gp, toStringTagSymbol, "Generator");
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  exports.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-
-  // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-  return exports;
-
-}(
-  // If this script is executing as a CommonJS module, use module.exports
-  // as the regeneratorRuntime namespace. Otherwise create a new empty
-  // object. Either way, the resulting object will be used to initialize
-  // the regeneratorRuntime variable at the top of this file.
-   true ? module.exports : undefined
-));
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  Function("r", "regeneratorRuntime = r")(runtime);
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/resolve-pathname/esm/resolve-pathname.js":
 /*!***************************************************************!*\
   !*** ./node_modules/resolve-pathname/esm/resolve-pathname.js ***!
@@ -92737,9 +91966,7 @@ var Login = function Login(_ref) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
           return setAuth(res.data);
-        }); // Save phone to Local Storage
-
-        localStorage.setItem("phone", phone); // Redirect and reload page
+        }); // Redirect and reload page
 
         setTimeout(function () {
           history.push('/');
@@ -93428,54 +92655,48 @@ axios.defaults.withCredentials = true;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Messages */ "./resources/js/components/Messages.js");
-/* harmony import */ var _TopNav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TopNav */ "./resources/js/components/TopNav.js");
-/* harmony import */ var _BottomNav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BottomNav */ "./resources/js/components/BottomNav.js");
-/* harmony import */ var _auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../auth/LoginPopUp */ "./resources/js/auth/LoginPopUp.js");
-/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../auth/Login */ "./resources/js/auth/Login.js");
-/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../auth/Register */ "./resources/js/auth/Register.js");
-/* harmony import */ var _auth_Referral__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../auth/Referral */ "./resources/js/auth/Referral.js");
-/* harmony import */ var _pages_Index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/Index */ "./resources/js/pages/Index.js");
-/* harmony import */ var _pages_Search__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/Search */ "./resources/js/pages/Search.js");
-/* harmony import */ var _pages_Cart__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/Cart */ "./resources/js/pages/Cart.js");
-/* harmony import */ var _pages_Library__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/Library */ "./resources/js/pages/Library.js");
-/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pages/Profile */ "./resources/js/pages/Profile.js");
-/* harmony import */ var _pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../pages/ProfileEdit */ "./resources/js/pages/ProfileEdit.js");
-/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
-/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
-/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
-/* harmony import */ var _pages_VideoShow__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../pages/VideoShow */ "./resources/js/pages/VideoShow.js");
-/* harmony import */ var _pages_Videos__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../pages/Videos */ "./resources/js/pages/Videos.js");
-/* harmony import */ var _pages_VideoCreate__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pages/VideoCreate */ "./resources/js/pages/VideoCreate.js");
-/* harmony import */ var _pages_VideoEdit__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pages/VideoEdit */ "./resources/js/pages/VideoEdit.js");
-/* harmony import */ var _pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../pages/VideoAlbumCreate */ "./resources/js/pages/VideoAlbumCreate.js");
-/* harmony import */ var _pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../pages/VideoAlbumEdit */ "./resources/js/pages/VideoAlbumEdit.js");
-/* harmony import */ var _pages_AudioCharts__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../pages/AudioCharts */ "./resources/js/pages/AudioCharts.js");
-/* harmony import */ var _pages_AudioShow__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../pages/AudioShow */ "./resources/js/pages/AudioShow.js");
-/* harmony import */ var _pages_Audios__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../pages/Audios */ "./resources/js/pages/Audios.js");
-/* harmony import */ var _pages_AudioCreate__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../pages/AudioCreate */ "./resources/js/pages/AudioCreate.js");
-/* harmony import */ var _pages_AudioEdit__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../pages/AudioEdit */ "./resources/js/pages/AudioEdit.js");
-/* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
-/* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
-/* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
-/* harmony import */ var _pages_Settings__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Settings */ "./resources/js/pages/Settings.js");
-/* harmony import */ var _pages_Help__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/Help */ "./resources/js/pages/Help.js");
-/* harmony import */ var _pages_HelpThread__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/HelpThread */ "./resources/js/pages/HelpThread.js");
-/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Messages */ "./resources/js/components/Messages.js");
+/* harmony import */ var _TopNav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopNav */ "./resources/js/components/TopNav.js");
+/* harmony import */ var _BottomNav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BottomNav */ "./resources/js/components/BottomNav.js");
+/* harmony import */ var _auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth/LoginPopUp */ "./resources/js/auth/LoginPopUp.js");
+/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../auth/Login */ "./resources/js/auth/Login.js");
+/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../auth/Register */ "./resources/js/auth/Register.js");
+/* harmony import */ var _auth_Referral__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../auth/Referral */ "./resources/js/auth/Referral.js");
+/* harmony import */ var _pages_Index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Index */ "./resources/js/pages/Index.js");
+/* harmony import */ var _pages_Search__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/Search */ "./resources/js/pages/Search.js");
+/* harmony import */ var _pages_Cart__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/Cart */ "./resources/js/pages/Cart.js");
+/* harmony import */ var _pages_Library__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../pages/Library */ "./resources/js/pages/Library.js");
+/* harmony import */ var _pages_Profile__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pages/Profile */ "./resources/js/pages/Profile.js");
+/* harmony import */ var _pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pages/ProfileEdit */ "./resources/js/pages/ProfileEdit.js");
+/* harmony import */ var _pages_PostCreate__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../pages/PostCreate */ "./resources/js/pages/PostCreate.js");
+/* harmony import */ var _pages_PostShow__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../pages/PostShow */ "./resources/js/pages/PostShow.js");
+/* harmony import */ var _pages_VideoCharts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../pages/VideoCharts */ "./resources/js/pages/VideoCharts.js");
+/* harmony import */ var _pages_VideoShow__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../pages/VideoShow */ "./resources/js/pages/VideoShow.js");
+/* harmony import */ var _pages_Videos__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../pages/Videos */ "./resources/js/pages/Videos.js");
+/* harmony import */ var _pages_VideoCreate__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../pages/VideoCreate */ "./resources/js/pages/VideoCreate.js");
+/* harmony import */ var _pages_VideoEdit__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pages/VideoEdit */ "./resources/js/pages/VideoEdit.js");
+/* harmony import */ var _pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pages/VideoAlbumCreate */ "./resources/js/pages/VideoAlbumCreate.js");
+/* harmony import */ var _pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../pages/VideoAlbumEdit */ "./resources/js/pages/VideoAlbumEdit.js");
+/* harmony import */ var _pages_AudioCharts__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../pages/AudioCharts */ "./resources/js/pages/AudioCharts.js");
+/* harmony import */ var _pages_AudioShow__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../pages/AudioShow */ "./resources/js/pages/AudioShow.js");
+/* harmony import */ var _pages_Audios__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../pages/Audios */ "./resources/js/pages/Audios.js");
+/* harmony import */ var _pages_AudioCreate__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../pages/AudioCreate */ "./resources/js/pages/AudioCreate.js");
+/* harmony import */ var _pages_AudioEdit__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../pages/AudioEdit */ "./resources/js/pages/AudioEdit.js");
+/* harmony import */ var _pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../pages/AudioAlbumCreate */ "./resources/js/pages/AudioAlbumCreate.js");
+/* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
+/* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
+/* harmony import */ var _pages_Settings__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../pages/Settings */ "./resources/js/pages/Settings.js");
+/* harmony import */ var _pages_Help__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Help */ "./resources/js/pages/Help.js");
+/* harmony import */ var _pages_HelpThread__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/HelpThread */ "./resources/js/pages/HelpThread.js");
+/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -93529,152 +92750,160 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App() {
+  var _GLOBAL_STATE;
+
   // console.log(process.env.MIX_APP_URL)
-  // Declare states
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var url = window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000';
+  axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.baseURL = 'http://localhost:3000'; // Function for checking local storage
+
+  var getLocalStorage = function getLocalStorage(state) {
+    if (localStorage.getItem(state)) {
+      return JSON.parse(localStorage.getItem(state));
+    } else {
+      return [];
+    }
+  }; // Function to set local storage
+
+
+  var setLocalStorage = function setLocalStorage(state, data) {
+    localStorage.setItem(state, JSON.stringify(data));
+  }; // Declare states
+
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       login = _useState2[0],
       setLogin = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
       autoLoginFailed = _useState4[0],
       setAutoLoginFailed = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      url = _useState6[0],
-      setUrl = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth")) : {
     "name": "Guest",
     "username": "@guest",
     "pp": "/storage/profile-pics/male_avatar.png",
     "account_type": "normal"
   }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      auth = _useState6[0],
+      setAuth = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      auth = _useState8[0],
-      setAuth = _useState8[1];
+      message = _useState8[0],
+      setMessage = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      message = _useState10[0],
-      setMessage = _useState10[1];
+      errors = _useState10[0],
+      setErrors = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("admin")),
       _useState12 = _slicedToArray(_useState11, 2),
-      errors = _useState12[0],
-      setErrors = _useState12[1];
+      admin = _useState12[0],
+      setAdmin = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioAlbums")),
       _useState14 = _slicedToArray(_useState13, 2),
-      admin = _useState14[0],
-      setAdmin = _useState14[1];
+      audioAlbums = _useState14[0],
+      setAudioAlbums = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioPayouts")),
       _useState16 = _slicedToArray(_useState15, 2),
-      audioAlbums = _useState16[0],
-      setAudioAlbums = _useState16[1];
+      audioPayouts = _useState16[0],
+      setAudioPayouts = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audios")),
       _useState18 = _slicedToArray(_useState17, 2),
-      audioComments = _useState18[0],
-      setAudioComments = _useState18[1];
+      audios = _useState18[0],
+      setAudios = _useState18[1];
 
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioComments")),
       _useState20 = _slicedToArray(_useState19, 2),
-      audioPayouts = _useState20[0],
-      setAudioPayouts = _useState20[1];
+      audioComments = _useState20[0],
+      setAudioComments = _useState20[1];
 
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtAudios")),
       _useState22 = _slicedToArray(_useState21, 2),
-      audios = _useState22[0],
-      setAudios = _useState22[1];
+      boughtAudios = _useState22[0],
+      setBoughtAudios = _useState22[1];
 
-  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtVideos")),
       _useState24 = _slicedToArray(_useState23, 2),
-      boughtAudios = _useState24[0],
-      setBoughtAudios = _useState24[1];
+      boughtVideos = _useState24[0],
+      setBoughtVideos = _useState24[1];
 
-  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartAudios")),
       _useState26 = _slicedToArray(_useState25, 2),
-      boughtVideos = _useState26[0],
-      setBoughtVideos = _useState26[1];
+      cartAudios = _useState26[0],
+      setCartAudios = _useState26[1];
 
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartVideos")),
       _useState28 = _slicedToArray(_useState27, 2),
-      cartAudios = _useState28[0],
-      setCartAudios = _useState28[1];
+      cartVideos = _useState28[0],
+      setCartVideos = _useState28[1];
 
-  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("helpPosts")),
       _useState30 = _slicedToArray(_useState29, 2),
-      cartVideos = _useState30[0],
-      setCartVideos = _useState30[1];
+      helpPosts = _useState30[0],
+      setHelpPosts = _useState30[1];
 
-  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("helpThreads")),
       _useState32 = _slicedToArray(_useState31, 2),
-      helpPosts = _useState32[0],
-      setHelpPosts = _useState32[1];
+      helpThreads = _useState32[0],
+      setHelpThreads = _useState32[1];
 
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("kopokopoRecipients")),
       _useState34 = _slicedToArray(_useState33, 2),
-      helpThreads = _useState34[0],
-      setHelpThreads = _useState34[1];
+      kopokopoRecipients = _useState34[0],
+      setKopokopoRecipients = _useState34[1];
 
-  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("notifications")),
       _useState36 = _slicedToArray(_useState35, 2),
-      kopokopoRecipients = _useState36[0],
-      setKopokopoRecipients = _useState36[1];
+      notifications = _useState36[0],
+      setNotifications = _useState36[1];
 
-  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("posts")),
       _useState38 = _slicedToArray(_useState37, 2),
-      notifications = _useState38[0],
-      setNotifications = _useState38[1];
+      posts = _useState38[0],
+      setPosts = _useState38[1];
 
-  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("postComments")),
       _useState40 = _slicedToArray(_useState39, 2),
-      posts = _useState40[0],
-      setPosts = _useState40[1];
+      postComments = _useState40[0],
+      setPostComments = _useState40[1];
 
-  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("referrals")),
       _useState42 = _slicedToArray(_useState41, 2),
-      postComments = _useState42[0],
-      setPostComments = _useState42[1];
+      referrals = _useState42[0],
+      setReferrals = _useState42[1];
 
-  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("songPayouts")),
       _useState44 = _slicedToArray(_useState43, 2),
-      referrals = _useState44[0],
-      setReferrals = _useState44[1];
+      songPayouts = _useState44[0],
+      setSongPayouts = _useState44[1];
 
-  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("users")),
       _useState46 = _slicedToArray(_useState45, 2),
-      sms = _useState46[0],
-      setSMS = _useState46[1];
+      users = _useState46[0],
+      setUsers = _useState46[1];
 
-  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
       _useState48 = _slicedToArray(_useState47, 2),
-      users = _useState48[0],
-      setUsers = _useState48[1];
+      videoAlbums = _useState48[0],
+      setVideoAlbums = _useState48[1];
 
-  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
       _useState50 = _slicedToArray(_useState49, 2),
-      videoAlbums = _useState50[0],
-      setVideoAlbums = _useState50[1];
+      videos = _useState50[0],
+      setVideos = _useState50[1];
 
-  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoComments")),
       _useState52 = _slicedToArray(_useState51, 2),
       videoComments = _useState52[0],
-      setVideoComments = _useState52[1];
-
-  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState54 = _slicedToArray(_useState53, 2),
-      songPayouts = _useState54[0],
-      setSongPayouts = _useState54[1];
-
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState56 = _slicedToArray(_useState55, 2),
-      videos = _useState56[0],
-      setVideos = _useState56[1]; // Reset Messages and Errors to null after 3 seconds
+      setVideoComments = _useState52[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -93684,263 +92913,218 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  }
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // Get phone
-    var storagePhone = localStorage.getItem("phone"); // Update new phone to localStorage
-
-    if (auth.phone && auth.phone != storagePhone) {
-      localStorage.setItem("phone", auth.phone);
-    } // Autologin if user has already registered
+  } // Autologin if user has already registered
 
 
-    if (auth.username == "@guest" && storagePhone) {
-      var autoLogin = function autoLogin() {
-        return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
-          axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/login"), {
-            phone: storagePhone,
-            password: storagePhone,
-            remember: 'checked'
-          }).then(function () {
-            // Update Logged in user
-            axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/home")).then(function (res) {
-              // Check if login has worked
-              if (res.data) {
-                setAuth(res.data); // if auto login failed fetch everything
+  var autoLogin = function autoLogin() {
+    if (auth.username == "@guest" && localStorage.getItem("auth")) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/login", {
+          phone: getLocalStorage("auth").phone,
+          password: getLocalStorage("auth").phone,
+          remember: 'checked'
+        }).then(function () {
+          // Update Logged in user
+          axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/home").then(function (res) {
+            // Check if auto login has worked
+            if (res.data) {
+              setAuth(res.data); // if auto login failed fetch everything
 
-                if (autoLoginFailed) {
-                  setTimeout(function () {
-                    return setAutoLoginFailed(false);
-                  }, 5000);
-                }
-              } else {
-                // If login failed logout
-                axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
-                  axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/logout")).then(function () {
-                    setAuth({
-                      "name": "Guest",
-                      "username": "@guest",
-                      "pp": "profile-pics/male_avatar.png",
-                      "account_type": "normal"
-                    }); // Set autoLoginFailed to refresh everything
+              autoLoginFailed && setAutoLoginFailed(false);
+            } else {
+              // If auto login failed, logout
+              axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+                axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/logout").then(function () {
+                  setAuth({
+                    "name": "Guest",
+                    "username": "@guest",
+                    "pp": "profile-pics/male_avatar.png",
+                    "account_type": "normal"
+                  }); // Set autoLoginFailed to refresh everything
 
-                    setAutoLoginFailed(true); // Retry login
+                  setAutoLoginFailed(true); // Retry login
 
-                    autoLogin();
-                  });
+                  autoLogin();
                 });
-              }
-            });
+              });
+            }
           });
         });
-      }; // Call the auto login function
-
-
-      autoLogin();
+      });
     }
-  }, []); // Fetch data on page load
+  }; // Call the auto login function
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // For Auth
-    var getAuth = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var authFromServer;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return fetchAuth();
 
-              case 2:
-                authFromServer = _context.sent;
-                setAuth(authFromServer);
+  autoLogin(); // Fetch data on page load
 
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Auth
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/home").then(function (res) {
+      if (res.data) {
+        setAuth(res.data);
+        setLocalStorage("auth", res.data);
+      }
+    })["catch"](function () {
+      return setErrors(["Failed to fetch auth"]);
+    }); // Fetch Admin
 
-      return function getAuth() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    getAuth(); // Fetch Admin
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/admin")).then(function (res) {
-      return setAdmin(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/admin").then(function (res) {
+      setAdmin(res.data);
+      setLocalStorage("admin", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch admin"]);
     }); // Fetch Audio Albums
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
-      return setAudioAlbums(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
+      setAudioAlbums(res.data);
+      setLocalStorage("audioAlbums", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audio albums"]);
-    }); // Fetch Audio Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-comments")).then(function (res) {
-      return setAudioComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio comments"]);
     }); // Fetch Audios
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-      return setAudios(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
+      setAudios(res.data);
+      setLocalStorage("audios", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audios"]);
+    }); // Fetch Audio Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-comments").then(function (res) {
+      setAudioComments(res.data);
+      setLocalStorage("audioComments", res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch audio comments"]);
     }); // Fetch Bought Audios
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-audios")).then(function (res) {
-      return setBoughtAudios(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-audios").then(function (res) {
+      setBoughtAudios(res.data);
+      setLocalStorage("boughtAudios", res.data);
     })["catch"](function () {
-      return setErrors(["Failed to fetch bought audios"]);
+      return setErrors(['Failed to fetch bought audios']);
     }); // Fetch Bought Videos
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/bought-videos")).then(function (res) {
-      return setBoughtVideos(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-videos").then(function (res) {
+      setBoughtVideos(res.data);
+      setLocalStorage("boughtVideos", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch bought videos']);
     }); // Fetch Cart Audios
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
-      return setCartAudios(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
+      setCartAudios(res.data);
+      setLocalStorage("cartAudios", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch cart audios']);
     }); // Fetch Cart Videos
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-      return setCartVideos(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
+      setCartVideos(res.data);
+      setLocalStorage("cartVideos", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch cart videos']);
     }); // Fetch Help Posts
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/help-posts")).then(function (res) {
-      return setHelpPosts(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/help-posts").then(function (res) {
+      setHelpPosts(res.data);
+      setLocalStorage("helpPosts", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch help posts']);
     }); // Fetch Help Threads
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/help-posts/1")).then(function (res) {
-      return setHelpThreads(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/help-posts/1").then(function (res) {
+      setHelpThreads(res.data);
+      setLocalStorage("helpThreads", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch help threads']);
     }); // Fetch Kopokopo Recipients
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/kopokopo-recipients")).then(function (res) {
-      return setKopokopoRecipients(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/kopokopo-recipients").then(function (res) {
+      setKopokopoRecipients(res.data);
+      setLocalStorage("kopokopoRecipients", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch kopokopo recipients']);
     }); // Fetch Notifications
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/notifications")).then(function (res) {
-      return setNotifications(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/notifications").then(function (res) {
+      setNotifications(res.data);
+      setLocalStorage("notifications", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch notifications']);
-    }); // Fetch Post Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/post-comments")).then(function (res) {
-      return setPostComments(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch post comments']);
     }); //Fetch Posts
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
-      return setPosts(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
+      setPosts(res.data);
+      setLocalStorage("posts", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch posts']);
+    }); // Fetch Post Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/post-comments").then(function (res) {
+      setPostComments(res.data);
+      setLocalStorage("postComments", res.data);
+    })["catch"](function () {
+      return setErrors(['Failed to fetch post comments']);
     }); //Fetch Referrals
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/referrals")).then(function (res) {
-      return setReferrals(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/referrals").then(function (res) {
+      setReferrals(res.data);
+      setLocalStorage("referrals", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch referrals']);
     }); // Fetch Song Payouts
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/song-payouts")).then(function (res) {
-      return setSongPayouts(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/song-payouts").then(function (res) {
+      return setLocalStorage("songPayouts", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch song payouts"]);
-    }); //Fetch SMS
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/sms")).then(function (res) {
-      return setSMS(res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch SMSs']);
     }); //Fetch Users
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/users")).then(function (res) {
-      return setUsers(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
+      setUsers(res.data);
+      setLocalStorage("users", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch users']);
     }); // Fetch Video Albums
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-      return setVideoAlbums(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
+      setVideoAlbums(res.data);
+      setLocalStorage("videoAlbums", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch video albums"]);
-    }); // Fetch Video Comments
+    }); // Fetch Videos
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-comments")).then(function (res) {
-      return setVideoComments(res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comments"]);
-    }); //Fetch Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
-      return setVideos(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
+      setVideos(res.data);
+      setLocalStorage("videos", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
+    }); // Fetch Video Comments
+
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-comments").then(function (res) {
+      setVideoComments(res.data);
+      setLocalStorage("videoComments", res.data);
+    })["catch"](function () {
+      return setErrors(["Failed to fetch video comments"]);
     });
-  }, [auth, autoLoginFailed]); //Fetch Auth
-
-  var fetchAuth = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var res, data;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return fetch("".concat(url, "/api/home"));
-
-            case 2:
-              res = _context2.sent;
-              data = res.json();
-              return _context2.abrupt("return", data);
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function fetchAuth() {
-      return _ref2.apply(this, arguments);
-    };
-  }(); // Function for following users
-
+    console.log("effect rendered");
+  }, [autoLoginFailed]);
+  console.log("rendered"); // Function for following users
 
   var onFollow = function onFollow(musician) {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/follows"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/follows", {
         musician: musician
       }).then(function (res) {
         setMessage(res.data); // Update users
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/users")).then(function (res) {
-          return setUsers(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
+          setUsers(res.data);
+          setLocalStorage("users", res.data);
         }); // Update posts
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/posts")).then(function (res) {
-          return setPosts(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
+          setPosts(res.data);
+          setLocalStorage("posts", res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -93960,22 +93144,25 @@ function App() {
 
 
   var onCartVideos = function onCartVideos(video) {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/cart-videos"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
         video: video
       }).then(function (res) {
         setMessage(res.data); // Update Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
-          return setVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
+          setVideos(res.data);
+          setLocalStorage("videos", res.data);
         }); // Update Cart Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-          return setCartVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
+          setCartVideos(res.data);
+          setLocalStorage("cartVideos", res.data);
         }); // Update Video Albums
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-          return setVideoAlbums(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
+          setVideoAlbums(res.data);
+          setLocalStorage("videoAlbums");
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
@@ -93996,22 +93183,25 @@ function App() {
 
 
   var onBuyVideos = function onBuyVideos(video) {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/cart-videos"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
         video: video
       }).then(function (res) {
         setMessage(res.data); // Update Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/videos")).then(function (res) {
-          return setVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
+          setVideos(res.data);
+          setLocalStorage("videos", res.data);
         }); // Update Cart Videos
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-videos")).then(function (res) {
-          return setCartVideos(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
+          setCartVideos(res.data);
+          setLocalStorage("cartVideos", res.data);
         }); // Update Video Albums
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/video-albums")).then(function (res) {
-          return setVideoAlbums(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
+          setVideoAlbums(res.data);
+          setLocalStorage("videoAlbums", res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -94031,22 +93221,25 @@ function App() {
 
 
   var onCartAudios = function onCartAudios(audio) {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/cart-audios"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
         audio: audio
       }).then(function (res) {
         setMessage(res.data); // Update Audios
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-          return setAudios(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
+          setAudios(res.data);
+          setLocalStorage("audios", res.data);
         }); // Update Cart Audios
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
-          return setCartAudios(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
+          setCartAudios(res.data);
+          setLocalStorage("cartAudios", res.data);
         }); // Update Audio Albums
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
-          return setAudioAlbums(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
+          setAudioAlbums(res.data);
+          setLocalStorage("audioAlbums", res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -94064,22 +93257,25 @@ function App() {
 
 
   var onBuyAudios = function onBuyAudios(audio) {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api/cart-audios"), {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
         audio: audio
       }).then(function (res) {
         setMessage(res.data); // Update audios
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audios")).then(function (res) {
-          return setAudios(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
+          setAudios(res.data);
+          setLocalStorage("audios", res.data);
         }); // Update Cart Audios
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/cart-audios")).then(function (res) {
-          return setCartAudios(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
+          setCartAudios(res.data);
+          setLocalStorage("cartAudios", res.data);
         }); // Update Audio Albums
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api/audio-albums")).then(function (res) {
-          return setAudioAlbums(res.data);
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
+          setAudioAlbums(res.data);
+          setLocalStorage("audioAlbums", res.data);
         });
         history.push('/cart');
       })["catch"](function (err) {
@@ -94099,53 +93295,53 @@ function App() {
   * Audio Player */
 
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState54 = _slicedToArray(_useState53, 2),
+      show = _useState54[0],
+      setShow = _useState54[1];
+
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState56 = _slicedToArray(_useState55, 2),
+      playBtn = _useState56[0],
+      setPlayBtn = _useState56[1];
+
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState58 = _slicedToArray(_useState57, 2),
-      show = _useState58[0],
-      setShow = _useState58[1];
+      shuffle = _useState58[0],
+      setShuffle = _useState58[1];
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState60 = _slicedToArray(_useState59, 2),
-      playBtn = _useState60[0],
-      setPlayBtn = _useState60[1];
+      loop = _useState60[0],
+      setLoop = _useState60[1];
 
-  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState62 = _slicedToArray(_useState61, 2),
-      shuffle = _useState62[0],
-      setShuffle = _useState62[1];
+      dur = _useState62[0],
+      setDur = _useState62[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
       _useState64 = _slicedToArray(_useState63, 2),
-      loop = _useState64[0],
-      setLoop = _useState64[1];
+      volume = _useState64[0],
+      setVolume = _useState64[1];
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState66 = _slicedToArray(_useState65, 2),
-      dur = _useState66[0],
-      setDur = _useState66[1];
+      currentTime = _useState66[0],
+      setCurrentTime = _useState66[1];
 
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0.3),
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState68 = _slicedToArray(_useState67, 2),
-      volume = _useState68[0],
-      setVolume = _useState68[1];
+      progressPercent = _useState68[0],
+      setProgressPercent = _useState68[1];
 
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState70 = _slicedToArray(_useState69, 2),
-      currentTime = _useState70[0],
-      setCurrentTime = _useState70[1];
-
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState72 = _slicedToArray(_useState71, 2),
-      progressPercent = _useState72[0],
-      setProgressPercent = _useState72[1];
-
-  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
-      _useState74 = _slicedToArray(_useState73, 2),
-      audioLoader = _useState74[0],
-      setAudioLoader = _useState74[1]; // Listen for show change and autoplay song
+      audioLoader = _useState70[0],
+      setAudioLoader = _useState70[1]; // Listen for show change and autoplay song
 
 
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var playPromise = audio.current.play();
 
     if (playPromise != undefined) {
@@ -94163,11 +93359,11 @@ function App() {
     }
   }, [show]); // Set Refs
 
-  var audio = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef(null);
-  var audioProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef(null);
-  var audioContainer = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
-  var volumeProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
-  var volumeContainer = react__WEBPACK_IMPORTED_MODULE_1___default.a.useRef();
+  var audio = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var audioProgress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
+  var audioContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
+  var volumeProgress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
+  var volumeContainer = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef();
   var showAudio = [];
   var showArtist = []; // Get audio to show
 
@@ -94305,7 +93501,7 @@ function App() {
       artist: showArtist.username,
       album: showAudio.album,
       artwork: [{
-        src: "".concat(url, "/storage/").concat(showAudio.thumbnail),
+        src: "/storage/".concat(showAudio.thumbnail),
         sizes: '512x512',
         type: 'image/png'
       }]
@@ -94327,122 +93523,122 @@ function App() {
   } // Search State
 
 
-  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])("!@#$%^&"),
-      _useState76 = _slicedToArray(_useState75, 2),
-      search = _useState76[0],
-      setSearch = _useState76[1];
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
+      _useState72 = _slicedToArray(_useState71, 2),
+      search = _useState72[0],
+      setSearch = _useState72[1];
 
-  var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null); // Function to focus on search input
+  var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Function to focus on search input
 
   var onSearchIconClick = function onSearchIconClick() {
     window.location.href.match("/search") && searchInput.current.focus();
   }; // Social Input states
 
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState74 = _slicedToArray(_useState73, 2),
+      id = _useState74[0],
+      setId = _useState74[1];
+
+  var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState76 = _slicedToArray(_useState75, 2),
+      to = _useState76[0],
+      setTo = _useState76[1];
+
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState78 = _slicedToArray(_useState77, 2),
-      id = _useState78[0],
-      setId = _useState78[1];
+      text = _useState78[0],
+      setText = _useState78[1];
 
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState80 = _slicedToArray(_useState79, 2),
-      to = _useState80[0],
-      setTo = _useState80[1];
+      media = _useState80[0],
+      setMedia = _useState80[1];
 
-  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState82 = _slicedToArray(_useState81, 2),
-      text = _useState82[0],
-      setText = _useState82[1];
+      para1 = _useState82[0],
+      setPara1 = _useState82[1];
 
-  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState84 = _slicedToArray(_useState83, 2),
-      media = _useState84[0],
-      setMedia = _useState84[1];
+      para2 = _useState84[0],
+      setPara2 = _useState84[1];
 
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState86 = _slicedToArray(_useState85, 2),
-      para1 = _useState86[0],
-      setPara1 = _useState86[1];
+      para3 = _useState86[0],
+      setPara3 = _useState86[1];
 
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState88 = _slicedToArray(_useState87, 2),
-      para2 = _useState88[0],
-      setPara2 = _useState88[1];
+      para4 = _useState88[0],
+      setPara4 = _useState88[1];
 
-  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState90 = _slicedToArray(_useState89, 2),
-      para3 = _useState90[0],
-      setPara3 = _useState90[1];
+      para5 = _useState90[0],
+      setPara5 = _useState90[1];
 
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState92 = _slicedToArray(_useState91, 2),
-      para4 = _useState92[0],
-      setPara4 = _useState92[1];
+      placeholder = _useState92[0],
+      setPlaceholder = _useState92[1];
 
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState94 = _slicedToArray(_useState93, 2),
-      para5 = _useState94[0],
-      setPara5 = _useState94[1];
+      urlTo = _useState94[0],
+      setUrlTo = _useState94[1];
 
-  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState96 = _slicedToArray(_useState95, 2),
-      placeholder = _useState96[0],
-      setPlaceholder = _useState96[1];
+      urlToTwo = _useState96[0],
+      setUrlToTwo = _useState96[1];
 
-  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState98 = _slicedToArray(_useState97, 2),
-      urlTo = _useState98[0],
-      setUrlTo = _useState98[1];
+      urlToDelete = _useState98[0],
+      setUrlToDelete = _useState98[1];
 
-  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState100 = _slicedToArray(_useState99, 2),
-      urlToTwo = _useState100[0],
-      setUrlToTwo = _useState100[1];
+      stateToUpdate = _useState100[0],
+      setStateToUpdate = _useState100[1];
 
-  var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState102 = _slicedToArray(_useState101, 2),
-      urlToDelete = _useState102[0],
-      setUrlToDelete = _useState102[1];
+      stateToUpdateTwo = _useState102[0],
+      setStateToUpdateTwo = _useState102[1];
 
-  var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState104 = _slicedToArray(_useState103, 2),
-      stateToUpdate = _useState104[0],
-      setStateToUpdate = _useState104[1];
+      showImage = _useState104[0],
+      setShowImage = _useState104[1];
 
-  var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState106 = _slicedToArray(_useState105, 2),
-      stateToUpdateTwo = _useState106[0],
-      setStateToUpdateTwo = _useState106[1];
+      showPoll = _useState106[0],
+      setShowPoll = _useState106[1];
 
-  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState108 = _slicedToArray(_useState107, 2),
-      showImage = _useState108[0],
-      setShowImage = _useState108[1];
+      showMentionPicker = _useState108[0],
+      setShowMentionPicker = _useState108[1];
 
-  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState110 = _slicedToArray(_useState109, 2),
-      showPoll = _useState110[0],
-      setShowPoll = _useState110[1];
+      showEmojiPicker = _useState110[0],
+      setShowEmojiPicker = _useState110[1];
 
-  var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState112 = _slicedToArray(_useState111, 2),
-      showMentionPicker = _useState112[0],
-      setShowMentionPicker = _useState112[1];
+      showImagePicker = _useState112[0],
+      setShowImagePicker = _useState112[1];
 
-  var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState114 = _slicedToArray(_useState113, 2),
-      showEmojiPicker = _useState114[0],
-      setShowEmojiPicker = _useState114[1];
-
-  var _useState115 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState116 = _slicedToArray(_useState115, 2),
-      showImagePicker = _useState116[0],
-      setShowImagePicker = _useState116[1];
-
-  var _useState117 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState118 = _slicedToArray(_useState117, 2),
-      showPollPicker = _useState118[0],
-      setShowPollPicker = _useState118[1]; // Declare new FormData object for form data
+      showPollPicker = _useState114[0],
+      setShowPollPicker = _useState114[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -94461,15 +93657,15 @@ function App() {
     para5 && formData.append("para5", para5); // Send data to HelpPostsController
     // Get csrf cookie from Laravel inorder to send a POST request
 
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(url, "/api").concat(urlTo), formData).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api".concat(urlTo), formData).then(function (res) {
         setMessage(res.data); // Updated State One
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api").concat(urlTo)).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api".concat(urlTo)).then(function (res) {
           return stateToUpdate(res.data);
         }); // Updated State Two
 
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(url, "/api").concat(urlToTwo)).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api".concat(urlToTwo)).then(function (res) {
           return stateToUpdateTwo && stateToUpdateTwo(res.data);
         }); // Clear text
 
@@ -94585,11 +93781,12 @@ function App() {
   // All states
 
 
-  var GLOBAL_STATE = {
+  var GLOBAL_STATE = (_GLOBAL_STATE = {
+    getLocalStorage: getLocalStorage,
+    setLocalStorage: setLocalStorage,
     login: login,
     setLogin: setLogin,
     url: url,
-    setUrl: setUrl,
     auth: auth,
     setAuth: setAuth,
     message: message,
@@ -94600,12 +93797,12 @@ function App() {
     setAdmin: setAdmin,
     audioAlbums: audioAlbums,
     setAudioAlbums: setAudioAlbums,
-    audioComments: audioComments,
-    setAudioComments: setAudioComments,
     audioPayouts: audioPayouts,
     setAudioPayouts: setAudioPayouts,
     audios: audios,
     setAudios: setAudios,
+    audioComments: audioComments,
+    setAudioComments: setAudioComments,
     boughtAudios: boughtAudios,
     setBoughtAudios: setBoughtAudios,
     boughtVideos: boughtVideos,
@@ -94628,280 +93825,192 @@ function App() {
     setPostComments: setPostComments,
     referrals: referrals,
     setReferrals: setReferrals,
-    search: search,
-    setSearch: setSearch,
-    sms: sms,
-    setSMS: setSMS,
+    songPayouts: songPayouts,
+    setSongPayouts: setSongPayouts,
     users: users,
     setUsers: setUsers,
     videoAlbums: videoAlbums,
     setVideoAlbums: setVideoAlbums,
-    videoComments: videoComments,
-    setVideoComments: setVideoComments,
-    songPayouts: songPayouts,
-    setSongPayouts: setSongPayouts,
     videos: videos,
     setVideos: setVideos,
-    onFollow: onFollow,
-    onCartVideos: onCartVideos,
-    onBuyVideos: onBuyVideos,
-    onCartAudios: onCartAudios,
-    onBuyAudios: onBuyAudios,
-    // Search 
-    onSearchIconClick: onSearchIconClick,
-    searchInput: searchInput,
-    // Audio Player
-    showAudio: showAudio,
-    showArtist: showArtist,
-    show: show,
-    setShow: setShow,
-    playBtn: playBtn,
-    setPlayBtn: setPlayBtn,
-    shuffle: shuffle,
-    setShuffle: setShuffle,
-    loop: loop,
-    setLoop: setLoop,
-    dur: dur,
-    setDur: setDur,
-    volume: volume,
-    setVolume: setVolume,
-    currentTime: currentTime,
-    setCurrentTime: setCurrentTime,
-    audio: audio,
-    audioProgress: audioProgress,
-    audioContainer: audioContainer,
-    volumeProgress: volumeProgress,
-    volumeContainer: volumeContainer,
-    songs: songs,
-    playSong: playSong,
-    pauseSong: pauseSong,
-    prevSong: prevSong,
-    nextSong: nextSong,
-    setProgress: setProgress,
-    progressPercent: progressPercent,
-    onSetVolume: onSetVolume,
-    fmtMSS: fmtMSS,
-    audioLoader: audioLoader,
-    // Social Input
-    id: id,
-    setId: setId,
-    to: to,
-    setTo: setTo,
-    text: text,
-    setText: setText,
-    media: media,
-    setMedia: setMedia,
-    para1: para1,
-    setPara1: setPara1,
-    para2: para2,
-    setPara2: setPara2,
-    para3: para3,
-    setPara3: setPara3,
-    para4: para4,
-    setPara4: setPara4,
-    para5: para5,
-    setPara5: setPara5,
-    placeholder: placeholder,
-    setPlaceholder: setPlaceholder,
-    urlTo: urlTo,
-    setUrlTo: setUrlTo,
-    urlToTwo: urlToTwo,
-    setUrlToTwo: setUrlToTwo,
-    urlToDelete: urlToDelete,
-    setUrlToDelete: setUrlToDelete,
-    stateToUpdate: stateToUpdate,
-    setStateToUpdate: setStateToUpdate,
-    stateToUpdateTwo: stateToUpdateTwo,
-    setStateToUpdateTwo: setStateToUpdateTwo,
-    showImage: showImage,
-    setShowImage: setShowImage,
-    showPoll: showPoll,
-    setShowPoll: setShowPoll,
-    showMentionPicker: showMentionPicker,
-    setShowMentionPicker: setShowMentionPicker,
-    showEmojiPicker: showEmojiPicker,
-    setShowEmojiPicker: setShowEmojiPicker,
-    showImagePicker: showImagePicker,
-    setShowImagePicker: setShowImagePicker,
-    showPollPicker: showPollPicker,
-    setShowPollPicker: setShowPollPicker,
-    onSubmit: onSubmit
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    search: search,
+    setSearch: setSearch
+  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "videoComments", videoComments), _defineProperty(_GLOBAL_STATE, "setVideoComments", setVideoComments), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onBuyVideos", onBuyVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "onBuyAudios", onBuyAudios), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/login",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_Login__WEBPACK_IMPORTED_MODULE_9__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Login__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/register/:name/:email/:avatar",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_Register__WEBPACK_IMPORTED_MODULE_10__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Register__WEBPACK_IMPORTED_MODULE_9__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/referral/:referer",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_Referral__WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Referral__WEBPACK_IMPORTED_MODULE_10__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Index__WEBPACK_IMPORTED_MODULE_12__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Index__WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/search",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Search__WEBPACK_IMPORTED_MODULE_13__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Search__WEBPACK_IMPORTED_MODULE_12__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/cart",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_14__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Cart__WEBPACK_IMPORTED_MODULE_13__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/library",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_15__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Library__WEBPACK_IMPORTED_MODULE_14__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/profile/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_16__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Profile__WEBPACK_IMPORTED_MODULE_15__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/profile-edit",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_17__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_ProfileEdit__WEBPACK_IMPORTED_MODULE_16__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/post-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_18__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_PostCreate__WEBPACK_IMPORTED_MODULE_17__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/post-show/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_19__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_PostShow__WEBPACK_IMPORTED_MODULE_18__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-charts",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCharts__WEBPACK_IMPORTED_MODULE_20__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoCharts__WEBPACK_IMPORTED_MODULE_19__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-show/:show/:referer?",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoShow__WEBPACK_IMPORTED_MODULE_21__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoShow__WEBPACK_IMPORTED_MODULE_20__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/videos",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_22__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Videos__WEBPACK_IMPORTED_MODULE_21__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoCreate__WEBPACK_IMPORTED_MODULE_22__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoEdit__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-album-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_25__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoAlbumCreate__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/video-album-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_26__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_VideoAlbumEdit__WEBPACK_IMPORTED_MODULE_25__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-charts",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCharts__WEBPACK_IMPORTED_MODULE_27__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioCharts__WEBPACK_IMPORTED_MODULE_26__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-show/:show/:referer?",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_28__["default"], GLOBAL_STATE);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioShow__WEBPACK_IMPORTED_MODULE_27__["default"], GLOBAL_STATE);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audios",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_29__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Audios__WEBPACK_IMPORTED_MODULE_28__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_30__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioCreate__WEBPACK_IMPORTED_MODULE_29__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_31__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioEdit__WEBPACK_IMPORTED_MODULE_30__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-album-create",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_32__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioAlbumCreate__WEBPACK_IMPORTED_MODULE_31__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/audio-album-edit/:id",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_33__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_32__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/admin",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_34__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Admin__WEBPACK_IMPORTED_MODULE_33__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/settings",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_34__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/help",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Help__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Help__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/help/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_HelpThread__WEBPACK_IMPORTED_MODULE_37__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_HelpThread__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("audio", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
@@ -94920,7 +94029,7 @@ function App() {
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
 if (document.getElementById('app')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById('app'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app'));
 }
 
 /***/ }),
@@ -96192,7 +95301,8 @@ var TopNavLinks = function TopNavLinks(props) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/logout")).then(function (res) {
-        localStorage.setItem("phone", null);
+        // Remove phone from localStorage
+        localStorage.removeItem("auth");
         props.setMessage("Logged out"); // Update Auth
 
         props.setAuth({
@@ -98457,7 +97567,9 @@ var AudioShow = function AudioShow(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
           return props.setAudioComments(res.data);
-        });
+        }); // Return text to null 
+
+        setText("");
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -98470,7 +97582,6 @@ var AudioShow = function AudioShow(props) {
         props.setErrors(newError);
       });
     });
-    setText("");
   }; // Function for liking posts
 
 
@@ -100576,7 +99687,7 @@ var Index = function Index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "border border-top-0 m-0 p-0"
   }, dummyArray.filter(function () {
-    return props.videos.length < 1;
+    return props.posts.length < 1;
   }).map(function (item, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
@@ -104789,7 +103900,9 @@ var VideoShow = function VideoShow(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
           return props.setVideoComments(res.data);
-        });
+        }); // Return text to null 
+
+        setText("");
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -104802,7 +103915,6 @@ var VideoShow = function VideoShow(props) {
         props.setErrors(newError);
       });
     });
-    setText("");
   }; // Function for liking posts
 
 
@@ -105293,7 +104405,7 @@ var VideoShow = function VideoShow(props) {
       color: "grey"
     }
   }, "No comments to show")) : "")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: tabClass == "recommended" ? "" : "col-sm-3 hidden"
+    className: tabClass == "recommended" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Up next")), !props.boughtVideos.some(function (boughtVideo) {

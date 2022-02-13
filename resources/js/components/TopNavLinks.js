@@ -17,7 +17,8 @@ const TopNavLinks = (props) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/logout`)
 				.then((res) => {
-					localStorage.setItem("phone", null)
+					// Remove phone from localStorage
+					localStorage.removeItem("auth")
 					props.setMessage("Logged out")
 					// Update Auth
 					props.setAuth({
@@ -102,8 +103,8 @@ const TopNavLinks = (props) => {
 
 			{/* Cart */}
 			<div className="dropdown mr-2 hidden">
-				<Link 
-				to="/cart"
+				<Link
+					to="/cart"
 					role="button"
 					id="dropdownMenua"
 					// data-toggle="dropdown"

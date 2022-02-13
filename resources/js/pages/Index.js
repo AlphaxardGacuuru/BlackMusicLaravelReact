@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Img from '../components/Img'
@@ -354,7 +354,7 @@ const Index = (props) => {
 					<div className="border border-top-0 m-0 p-0">
 						{/* Loading Video items */}
 						{dummyArray
-							.filter(() => props.videos.length < 1)
+							.filter(() => props.posts.length < 1)
 							.map((item, key) => (
 								<div key={key} className='media p-2 border-bottom'>
 									<div className='media-left'>

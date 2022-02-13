@@ -65,6 +65,8 @@ const VideoShow = (props) => {
 				// Update Video Comments
 				axios.get(`${props.url}/api/video-comments`)
 					.then((res) => props.setVideoComments(res.data))
+				// Return text to null 
+				setText("")
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -75,8 +77,6 @@ const VideoShow = (props) => {
 				props.setErrors(newError)
 			})
 		})
-
-		setText("")
 	}
 
 	// Function for liking posts
@@ -105,20 +105,21 @@ const VideoShow = (props) => {
 	// Function for deleting comments
 	const onDeleteComment = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/video-comments/${id}`).then((res) => {
-				props.setMessage(res.data)
-				// Update Video Comments
-				axios.get(`${props.url}/api/video-comments`)
-					.then((res) => props.setVideoComments(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
+			axios.delete(`${props.url}/api/video-comments/${id}`)
+				.then((res) => {
+					props.setMessage(res.data)
+					// Update Video Comments
+					axios.get(`${props.url}/api/video-comments`)
+						.then((res) => props.setVideoComments(res.data))
+				}).catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
 		})
 	}
 
@@ -537,7 +538,7 @@ const VideoShow = (props) => {
 			{/* <!-- End of Comment Section --> */}
 
 			{/* -- Up next area -- */}
-			<div className={tabClass == "recommended" ? "" : "col-sm-3 hidden"}>
+			<div className={tabClass == "recommended" ? "col-sm-3" : "col-sm-3 hidden"}>
 				<div className="p-2">
 					<h5>Up next</h5>
 				</div>

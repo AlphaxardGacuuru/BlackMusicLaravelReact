@@ -49,47 +49,66 @@ function App() {
 
 	// console.log(process.env.MIX_APP_URL)
 
+	const url = window.location.href.match(/https/) ?
+		'https://music.black.co.ke' :
+		'http://localhost:3000'
+
+	axios.defaults.baseURL = 'http://localhost:3000';
+
+	// Function for checking local storage
+	const getLocalStorage = (state) => {
+		if (localStorage.getItem(state)) {
+			return JSON.parse(localStorage.getItem(state))
+		} else {
+			return []
+		}
+	}
+
+	// Function to set local storage
+	const setLocalStorage = (state, data) => {
+		localStorage.setItem(state, JSON.stringify(data))
+	}
+
 	// Declare states
 	const [login, setLogin] = useState()
 	const [autoLoginFailed, setAutoLoginFailed] = useState()
-	const [url, setUrl] = useState(window.location.href.match(/https/) ?
-		'https://music.black.co.ke' :
-		'http://localhost:3000')
-	const [auth, setAuth] = useState({
-		"name": "Guest",
-		"username": "@guest",
-		"pp": "/storage/profile-pics/male_avatar.png",
-		"account_type": "normal"
-	})
+	const [auth, setAuth] = useState(localStorage.getItem("auth") ?
+		JSON.parse(localStorage.getItem("auth")) :
+		{
+			"name": "Guest",
+			"username": "@guest",
+			"pp": "/storage/profile-pics/male_avatar.png",
+			"account_type": "normal"
+		})
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
 
-	const [admin, setAdmin] = useState([])
-	const [audioAlbums, setAudioAlbums] = useState([])
-	const [audioComments, setAudioComments] = useState([])
-	const [audioPayouts, setAudioPayouts] = useState([])
-	const [audios, setAudios] = useState([])
+	const [admin, setAdmin] = useState(getLocalStorage("admin"))
+	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
+	const [audioPayouts, setAudioPayouts] = useState(getLocalStorage("audioPayouts"))
+	const [audios, setAudios] = useState(getLocalStorage("audios"))
+	const [audioComments, setAudioComments] = useState(getLocalStorage("audioComments"))
 
-	const [boughtAudios, setBoughtAudios] = useState([])
-	const [boughtVideos, setBoughtVideos] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState(getLocalStorage("boughtAudios"))
+	const [boughtVideos, setBoughtVideos] = useState(getLocalStorage("boughtVideos"))
 
-	const [cartAudios, setCartAudios] = useState([])
-	const [cartVideos, setCartVideos] = useState([])
+	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
+	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
 
-	const [helpPosts, setHelpPosts] = useState([])
-	const [helpThreads, setHelpThreads] = useState([])
-	const [kopokopoRecipients, setKopokopoRecipients] = useState([])
-	const [notifications, setNotifications] = useState([])
-	const [posts, setPosts] = useState([])
-	const [postComments, setPostComments] = useState([])
-	const [referrals, setReferrals] = useState([])
-	const [sms, setSMS] = useState([])
-	const [users, setUsers] = useState([])
+	const [helpPosts, setHelpPosts] = useState(getLocalStorage("helpPosts"))
+	const [helpThreads, setHelpThreads] = useState(getLocalStorage("helpThreads"))
+	const [kopokopoRecipients, setKopokopoRecipients] = useState(getLocalStorage("kopokopoRecipients"))
+	const [notifications, setNotifications] = useState(getLocalStorage("notifications"))
 
-	const [videoAlbums, setVideoAlbums] = useState([])
-	const [videoComments, setVideoComments] = useState([])
-	const [songPayouts, setSongPayouts] = useState([])
-	const [videos, setVideos] = useState([])
+	const [posts, setPosts] = useState(getLocalStorage("posts"))
+	const [postComments, setPostComments] = useState(getLocalStorage("postComments"))
+	const [referrals, setReferrals] = useState(getLocalStorage("referrals"))
+	const [songPayouts, setSongPayouts] = useState(getLocalStorage("songPayouts"))
+	const [users, setUsers] = useState(getLocalStorage("users"))
+
+	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
+	const [videos, setVideos] = useState(getLocalStorage("videos"))
+	const [videoComments, setVideoComments] = useState(getLocalStorage("videoComments"))
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
@@ -97,37 +116,27 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	useEffect(() => {
-		// Get phone
-		const storagePhone = localStorage.getItem("phone")
-
-		// Update new phone to localStorage
-		if (auth.phone && auth.phone != storagePhone) {
-			localStorage.setItem("phone", auth.phone)
-		}
-
-		// Autologin if user has already registered
-		if (auth.username == "@guest" && storagePhone) {
-			const autoLogin = () => axios.get('/sanctum/csrf-cookie').then(() => {
-				axios.post(`${url}/api/login`, {
-					phone: storagePhone,
-					password: storagePhone,
+	// Autologin if user has already registered
+	const autoLogin = () => {
+		if (auth.username == "@guest" && localStorage.getItem("auth")) {
+			axios.get('/sanctum/csrf-cookie').then(() => {
+				axios.post(`/api/login`, {
+					phone: getLocalStorage("auth").phone,
+					password: getLocalStorage("auth").phone,
 					remember: 'checked'
 				}).then(() => {
 					// Update Logged in user
-					axios.get(`${url}/api/home`)
+					axios.get(`/api/home`)
 						.then((res) => {
-							// Check if login has worked
+							// Check if auto login has worked
 							if (res.data) {
 								setAuth(res.data)
 								// if auto login failed fetch everything
-								if (autoLoginFailed) {
-									setTimeout(() => setAutoLoginFailed(false), 5000)
-								}
+								autoLoginFailed && setAutoLoginFailed(false)
 							} else {
-								// If login failed logout
+								// If auto login failed, logout
 								axios.get('/sanctum/csrf-cookie').then(() => {
-									axios.post(`${url}/api/logout`)
+									axios.post(`/api/logout`)
 										.then(() => {
 											setAuth({
 												"name": "Guest",
@@ -145,149 +154,187 @@ function App() {
 						})
 				})
 			});
-
-			// Call the auto login function
-			autoLogin()
 		}
-	}, [])
+	}
+
+	// Call the auto login function
+	autoLogin()
 
 	// Fetch data on page load
 	useEffect(() => {
 
-		// For Auth
-		const getAuth = async () => {
-			const authFromServer = await fetchAuth()
-			setAuth(authFromServer)
-		}
-		getAuth()
+		// Fetch Auth
+		axios.get(`/api/home`)
+			.then((res) => {
+				if (res.data) {
+					setAuth(res.data)
+					setLocalStorage("auth", res.data)
+				}
+			}).catch(() => setErrors(["Failed to fetch auth"]))
 
 		// Fetch Admin
-		axios.get(`${url}/api/admin`)
-			.then((res) => setAdmin(res.data))
-			.catch(() => setErrors(["Failed to fetch admin"]))
+		axios.get(`/api/admin`)
+			.then((res) => {
+				setAdmin(res.data)
+				setLocalStorage("admin", res.data)
+			}).catch(() => setErrors(["Failed to fetch admin"]))
 
 		// Fetch Audio Albums
-		axios.get(`${url}/api/audio-albums`)
-			.then((res) => setAudioAlbums(res.data))
-			.catch(() => setErrors(["Failed to fetch audio albums"]))
-
-		// Fetch Audio Comments
-		axios.get(`${url}/api/audio-comments`)
-			.then((res) => setAudioComments(res.data))
-			.catch(() => setErrors(["Failed to fetch audio comments"]))
+		axios.get(`/api/audio-albums`)
+			.then((res) => {
+				setAudioAlbums(res.data)
+				setLocalStorage("audioAlbums", res.data)
+			}).catch(() => setErrors(["Failed to fetch audio albums"]))
 
 		// Fetch Audios
-		axios.get(`${url}/api/audios`)
-			.then((res) => setAudios(res.data))
-			.catch(() => setErrors(["Failed to fetch audios"]))
+		axios.get(`/api/audios`)
+			.then((res) => {
+				setAudios(res.data)
+				setLocalStorage("audios", res.data)
+			}).catch(() => setErrors(["Failed to fetch audios"]))
+
+		// Fetch Audio Comments
+		axios.get(`/api/audio-comments`)
+			.then((res) => {
+				setAudioComments(res.data)
+				setLocalStorage("audioComments", res.data)
+			}).catch(() => setErrors(["Failed to fetch audio comments"]))
 
 		// Fetch Bought Audios
-		axios.get(`${url}/api/bought-audios`)
-			.then((res) => setBoughtAudios(res.data))
-			.catch(() => setErrors(["Failed to fetch bought audios"]))
+		axios.get(`/api/bought-audios`)
+			.then((res) => {
+				setBoughtAudios(res.data)
+				setLocalStorage("boughtAudios", res.data)
+			}).catch(() => setErrors(['Failed to fetch bought audios']))
 
 		// Fetch Bought Videos
-		axios.get(`${url}/api/bought-videos`)
-			.then((res) => setBoughtVideos(res.data))
-			.catch(() => setErrors(['Failed to fetch bought videos']))
+		axios.get(`/api/bought-videos`)
+			.then((res) => {
+				setBoughtVideos(res.data)
+				setLocalStorage("boughtVideos", res.data)
+			}).catch(() => setErrors(['Failed to fetch bought videos']))
 
 		// Fetch Cart Audios
-		axios.get(`${url}/api/cart-audios`)
-			.then((res) => setCartAudios(res.data))
-			.catch(() => setErrors(['Failed to fetch cart audios']))
+		axios.get(`/api/cart-audios`)
+			.then((res) => {
+				setCartAudios(res.data)
+				setLocalStorage("cartAudios", res.data)
+			}).catch(() => setErrors(['Failed to fetch cart audios']))
 
 		// Fetch Cart Videos
-		axios.get(`${url}/api/cart-videos`)
-			.then((res) => setCartVideos(res.data))
-			.catch(() => setErrors(['Failed to fetch cart videos']))
+		axios.get(`/api/cart-videos`)
+			.then((res) => {
+				setCartVideos(res.data)
+				setLocalStorage("cartVideos", res.data)
+			}).catch(() => setErrors(['Failed to fetch cart videos']))
 
 		// Fetch Help Posts
-		axios.get(`${url}/api/help-posts`)
-			.then((res) => setHelpPosts(res.data))
-			.catch(() => setErrors(['Failed to fetch help posts']))
+		axios.get(`/api/help-posts`)
+			.then((res) => {
+				setHelpPosts(res.data)
+				setLocalStorage("helpPosts", res.data)
+			}).catch(() => setErrors(['Failed to fetch help posts']))
 
 		// Fetch Help Threads
-		axios.get(`${url}/api/help-posts/1`)
-			.then((res) => setHelpThreads(res.data))
-			.catch(() => setErrors(['Failed to fetch help threads']))
+		axios.get(`/api/help-posts/1`)
+			.then((res) => {
+				setHelpThreads(res.data)
+				setLocalStorage("helpThreads", res.data)
+			}).catch(() => setErrors(['Failed to fetch help threads']))
 
 		// Fetch Kopokopo Recipients
-		axios.get(`${url}/api/kopokopo-recipients`)
-			.then((res) => setKopokopoRecipients(res.data))
-			.catch(() => setErrors(['Failed to fetch kopokopo recipients']))
+		axios.get(`/api/kopokopo-recipients`)
+			.then((res) => {
+				setKopokopoRecipients(res.data)
+				setLocalStorage("kopokopoRecipients", res.data)
+			}).catch(() => setErrors(['Failed to fetch kopokopo recipients']))
 
 		// Fetch Notifications
-		axios.get(`${url}/api/notifications`)
-			.then((res) => setNotifications(res.data))
-			.catch(() => setErrors(['Failed to fetch notifications']))
-
-		// Fetch Post Comments
-		axios.get(`${url}/api/post-comments`)
-			.then((res) => setPostComments(res.data))
-			.catch(() => setErrors(['Failed to fetch post comments']))
+		axios.get(`/api/notifications`)
+			.then((res) => {
+				setNotifications(res.data)
+				setLocalStorage("notifications", res.data)
+			}).catch(() => setErrors(['Failed to fetch notifications']))
 
 		//Fetch Posts
-		axios.get(`${url}/api/posts`)
-			.then((res) => setPosts(res.data))
-			.catch(() => setErrors(['Failed to fetch posts']))
+		axios.get(`/api/posts`)
+			.then((res) => {
+				setPosts(res.data)
+				setLocalStorage("posts", res.data)
+			}).catch(() => setErrors(['Failed to fetch posts']))
+
+		// Fetch Post Comments
+		axios.get(`/api/post-comments`)
+			.then((res) => {
+				setPostComments(res.data)
+				setLocalStorage("postComments", res.data)
+			}).catch(() => setErrors(['Failed to fetch post comments']))
 
 		//Fetch Referrals
-		axios.get(`${url}/api/referrals`)
-			.then((res) => setReferrals(res.data))
-			.catch(() => setErrors(['Failed to fetch referrals']))
+		axios.get(`/api/referrals`)
+			.then((res) => {
+				setReferrals(res.data)
+				setLocalStorage("referrals", res.data)
+			}).catch(() => setErrors(['Failed to fetch referrals']))
 
 		// Fetch Song Payouts
-		axios.get(`${url}/api/song-payouts`)
-			.then((res) => setSongPayouts(res.data))
+		axios.get(`/api/song-payouts`)
+			.then((res) => setLocalStorage("songPayouts", res.data))
 			.catch(() => setErrors(["Failed to fetch song payouts"]))
 
-		//Fetch SMS
-		axios.get(`${url}/api/sms`)
-			.then((res) => setSMS(res.data))
-			.catch(() => setErrors(['Failed to fetch SMSs']))
-
 		//Fetch Users
-		axios.get(`${url}/api/users`)
-			.then((res) => setUsers(res.data))
-			.catch(() => setErrors(['Failed to fetch users']))
+		axios.get(`/api/users`)
+			.then((res) => {
+				setUsers(res.data)
+				setLocalStorage("users", res.data)
+			}).catch(() => setErrors(['Failed to fetch users']))
 
 		// Fetch Video Albums
-		axios.get(`${url}/api/video-albums`)
-			.then((res) => setVideoAlbums(res.data))
-			.catch(() => setErrors(["Failed to fetch video albums"]))
+		axios.get(`/api/video-albums`)
+			.then((res) => {
+				setVideoAlbums(res.data)
+				setLocalStorage("videoAlbums", res.data)
+			}).catch(() => setErrors(["Failed to fetch video albums"]))
+
+		// Fetch Videos
+		axios.get(`/api/videos`)
+			.then((res) => {
+				setVideos(res.data)
+				setLocalStorage("videos", res.data)
+			}).catch(() => setErrors(["Failed to fetch videos"]))
 
 		// Fetch Video Comments
-		axios.get(`${url}/api/video-comments`)
-			.then((res) => setVideoComments(res.data))
-			.catch(() => setErrors(["Failed to fetch video comments"]))
+		axios.get(`/api/video-comments`)
+			.then((res) => {
+				setVideoComments(res.data)
+				setLocalStorage("videoComments", res.data)
+			}).catch(() => setErrors(["Failed to fetch video comments"]))
 
-		//Fetch Videos
-		axios.get(`${url}/api/videos`)
-			.then((res) => setVideos(res.data))
-			.catch(() => setErrors(["Failed to fetch videos"]))
-	}, [auth, autoLoginFailed])
+		console.log("effect rendered")
 
-	//Fetch Auth
-	const fetchAuth = async () => {
-		const res = await fetch(`${url}/api/home`)
-		const data = res.json()
+	}, [autoLoginFailed])
 
-		return data
-	}
+	console.log("rendered")
 
 	// Function for following users
 	const onFollow = (musician) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/follows`, {
+			axios.post(`/api/follows`, {
 				musician: musician
 			}).then((res) => {
 				setMessage(res.data)
 				// Update users
-				axios.get(`${url}/api/users`)
-					.then((res) => setUsers(res.data))
+				axios.get(`/api/users`)
+					.then((res) => {
+						setUsers(res.data)
+						setLocalStorage("users", res.data)
+					})
 				// Update posts
-				axios.get(`${url}/api/posts`)
-					.then((res) => setPosts(res.data))
+				axios.get(`/api/posts`)
+					.then((res) => {
+						setPosts(res.data)
+						setLocalStorage("posts", res.data)
+					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -305,19 +352,28 @@ function App() {
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/cart-videos`, {
+			axios.post(`/api/cart-videos`, {
 				video: video
 			}).then((res) => {
 				setMessage(res.data)
 				// Update Videos
-				axios.get(`${url}/api/videos`)
-					.then((res) => setVideos(res.data))
+				axios.get(`/api/videos`)
+					.then((res) => {
+						setVideos(res.data)
+						setLocalStorage("videos", res.data)
+					})
 				// Update Cart Videos
-				axios.get(`${url}/api/cart-videos`)
-					.then((res) => setCartVideos(res.data))
+				axios.get(`/api/cart-videos`)
+					.then((res) => {
+						setCartVideos(res.data)
+						setLocalStorage("cartVideos", res.data)
+					})
 				// Update Video Albums
-				axios.get(`${url}/api/video-albums`)
-					.then((res) => setVideoAlbums(res.data))
+				axios.get(`/api/video-albums`)
+					.then((res) => {
+						setVideoAlbums(res.data)
+						setLocalStorage("videoAlbums")
+					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				// Get validation errors
@@ -336,19 +392,28 @@ function App() {
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/cart-videos`, {
+			axios.post(`/api/cart-videos`, {
 				video: video
 			}).then((res) => {
 				setMessage(res.data)
 				// Update Videos
-				axios.get(`${url}/api/videos`)
-					.then((res) => setVideos(res.data))
+				axios.get(`/api/videos`)
+					.then((res) => {
+						setVideos(res.data)
+						setLocalStorage("videos", res.data)
+					})
 				// Update Cart Videos
-				axios.get(`${url}/api/cart-videos`)
-					.then((res) => setCartVideos(res.data))
+				axios.get(`/api/cart-videos`)
+					.then((res) => {
+						setCartVideos(res.data)
+						setLocalStorage("cartVideos", res.data)
+					})
 				// Update Video Albums
-				axios.get(`${url}/api/video-albums`)
-					.then((res) => setVideoAlbums(res.data))
+				axios.get(`/api/video-albums`)
+					.then((res) => {
+						setVideoAlbums(res.data)
+						setLocalStorage("videoAlbums", res.data)
+					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -366,19 +431,28 @@ function App() {
 	// Function for adding audio to cart
 	const onCartAudios = (audio) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/cart-audios`, {
+			axios.post(`/api/cart-audios`, {
 				audio: audio
 			}).then((res) => {
 				setMessage(res.data)
 				// Update Audios
-				axios.get(`${url}/api/audios`)
-					.then((res) => setAudios(res.data))
+				axios.get(`/api/audios`)
+					.then((res) => {
+						setAudios(res.data)
+						setLocalStorage("audios", res.data)
+					})
 				// Update Cart Audios
-				axios.get(`${url}/api/cart-audios`)
-					.then((res) => setCartAudios(res.data))
+				axios.get(`/api/cart-audios`)
+					.then((res) => {
+						setCartAudios(res.data)
+						setLocalStorage("cartAudios", res.data)
+					})
 				// Update Audio Albums
-				axios.get(`${url}/api/audio-albums`)
-					.then((res) => setAudioAlbums(res.data))
+				axios.get(`/api/audio-albums`)
+					.then((res) => {
+						setAudioAlbums(res.data)
+						setLocalStorage("audioAlbums", res.data)
+					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -394,19 +468,28 @@ function App() {
 	// Function for buying audio to cart
 	const onBuyAudios = (audio) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api/cart-audios`, {
+			axios.post(`/api/cart-audios`, {
 				audio: audio
 			}).then((res) => {
 				setMessage(res.data)
 				// Update audios
-				axios.get(`${url}/api/audios`)
-					.then((res) => setAudios(res.data))
+				axios.get(`/api/audios`)
+					.then((res) => {
+						setAudios(res.data)
+						setLocalStorage("audios", res.data)
+					})
 				// Update Cart Audios
-				axios.get(`${url}/api/cart-audios`)
-					.then((res) => setCartAudios(res.data))
+				axios.get(`/api/cart-audios`)
+					.then((res) => {
+						setCartAudios(res.data)
+						setLocalStorage("cartAudios", res.data)
+					})
 				// Update Audio Albums
-				axios.get(`${url}/api/audio-albums`)
-					.then((res) => setAudioAlbums(res.data))
+				axios.get(`/api/audio-albums`)
+					.then((res) => {
+						setAudioAlbums(res.data)
+						setLocalStorage("audioAlbums", res.data)
+					})
 				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -587,7 +670,7 @@ function App() {
 			title: showAudio.name,
 			artist: showArtist.username,
 			album: showAudio.album,
-			artwork: [{ src: `${url}/storage/${showAudio.thumbnail}`, sizes: '512x512', type: 'image/png' }]
+			artwork: [{ src: `/storage/${showAudio.thumbnail}`, sizes: '512x512', type: 'image/png' }]
 		});
 
 		let skipTime = 10; // Time to skip in seconds
@@ -659,14 +742,14 @@ function App() {
 		// Send data to HelpPostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${url}/api${urlTo}`, formData)
+			axios.post(`/api${urlTo}`, formData)
 				.then((res) => {
 					setMessage(res.data)
 					// Updated State One
-					axios.get(`${url}/api${urlTo}`)
+					axios.get(`/api${urlTo}`)
 						.then((res) => stateToUpdate(res.data))
 					// Updated State Two
-					axios.get(`${url}/api${urlToTwo}`)
+					axios.get(`/api${urlToTwo}`)
 						.then((res) => stateToUpdateTwo && stateToUpdateTwo(res.data))
 					// Clear text
 					setText("")
@@ -790,16 +873,17 @@ function App() {
 
 	// All states
 	const GLOBAL_STATE = {
+		getLocalStorage, setLocalStorage,
 		login, setLogin,
-		url, setUrl,
+		url,
 		auth, setAuth,
 		message, setMessage,
 		errors, setErrors,
 		admin, setAdmin,
 		audioAlbums, setAudioAlbums,
-		audioComments, setAudioComments,
 		audioPayouts, setAudioPayouts,
 		audios, setAudios,
+		audioComments, setAudioComments,
 		boughtAudios, setBoughtAudios,
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
@@ -811,13 +895,15 @@ function App() {
 		posts, setPosts,
 		postComments, setPostComments,
 		referrals, setReferrals,
-		search, setSearch,
-		sms, setSMS,
+		songPayouts, setSongPayouts,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
-		videoComments, setVideoComments,
-		songPayouts, setSongPayouts,
 		videos, setVideos,
+		search, setSearch,
+		users, setUsers,
+		videoAlbums, setVideoAlbums,
+		videos, setVideos,
+		videoComments, setVideoComments,
 		onFollow,
 		onCartVideos,
 		onBuyVideos,
