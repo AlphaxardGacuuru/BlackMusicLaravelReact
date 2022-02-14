@@ -1,7 +1,5 @@
-import React from 'react'
-import { Link, useParams } from "react-router-dom";
-import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from 'axios';
 
 import Img from '../components/Img'
@@ -9,6 +7,8 @@ import Button from '../components/Button'
 import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
 
 const AudioShow = (props) => {
+
+	axios.defaults.baseURL = props.url
 
 	let { show } = useParams()
 	let history = useHistory()
@@ -19,6 +19,16 @@ const AudioShow = (props) => {
 	// Set State
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
+	const [audioComments, setAudioComments] = useState(props.getLocalStorage("audioComments"))
+
+	// Fetch Audio Comments
+	useEffect(() => {
+		axios.get('/api/audio-comments')
+			.then((res) => {
+				setAudioComments(res.data)
+				props.setLocalStorage("audioComments", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch audio comments"]))
+	}, [props.autoLoginFailed])
 
 	// Function for liking audio
 	const onAudioLike = () => {
@@ -54,7 +64,7 @@ const AudioShow = (props) => {
 				props.setMessage(res.data)
 				// Update comments
 				axios.get(`${props.url}/api/audio-comments`)
-					.then((res) => props.setAudioComments(res.data))
+					.then((res) => setAudioComments(res.data))
 				// Return text to null 
 				setText("")
 			}).catch((err) => {
@@ -78,7 +88,7 @@ const AudioShow = (props) => {
 				props.setMessage(res.data)
 				// Update audio comments
 				axios.get(`${props.url}/api/audio-comments`)
-					.then((res) => props.setAudioComments(res.data))
+					.then((res) => setAudioComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -98,7 +108,7 @@ const AudioShow = (props) => {
 				props.setMessage(res.data)
 				// Update audio comments
 				axios.get(`${props.url}/api/audio-comments`)
-					.then((res) => props.setAudioComments(res.data))
+					.then((res) => setAudioComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -534,7 +544,7 @@ const AudioShow = (props) => {
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
 					{props.showAudio.username == props.auth.username ||
-						props.showAudio.username == "@blackmusic" ||
+						props.auth.username == "@blackmusic" ||
 						props.showAudio.hasBoughtAudio ?
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
@@ -564,11 +574,12 @@ const AudioShow = (props) => {
 
 					{/* <!-- Comment Section --> */}
 					{props.showAudio.username == props.auth.username ||
+						props.auth.username == "@blackmusic" ||
 						props.showAudio.hasBoughtAudio ?
-						props.audioComments
+						audioComments
 							.filter((comment) => comment.audio_id == show)
 							.length > 0 ?
-							props.audioComments
+							audioComments
 								.filter((comment) => comment.audio_id == show)
 								.map((comment, index) => (
 									<div key={index} className='media p-2 border-bottom'>

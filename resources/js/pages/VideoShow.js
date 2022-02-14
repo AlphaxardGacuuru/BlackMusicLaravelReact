@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams, useHistory, useLocation } from "react-router-dom";
 import axios from 'axios'
 
@@ -28,6 +28,19 @@ const VideoShow = (props) => {
 
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
+	const [videoComments, setVideoComments] = useState(props.getLocalStorage("videoComments"))
+
+
+	axios.defaults.baseURL = props.url
+
+	// Fetch Video Comments
+	useEffect(() => {
+		axios.get(`/api/video-comments`)
+			.then((res) => {
+				setVideoComments(res.data)
+				props.setLocalStorage("videoComments", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch video comments"]))
+	}, [props.autoLoginFailed])
 
 	// Function for liking video
 	const onVideoLike = () => {
@@ -64,7 +77,7 @@ const VideoShow = (props) => {
 				props.setMessage(res.data)
 				// Update Video Comments
 				axios.get(`${props.url}/api/video-comments`)
-					.then((res) => props.setVideoComments(res.data))
+					.then((res) => setVideoComments(res.data))
 				// Return text to null 
 				setText("")
 			}).catch((err) => {
@@ -88,7 +101,7 @@ const VideoShow = (props) => {
 				props.setMessage(res.data)
 				// Update Video Comments
 				axios.get(`${props.url}/api/video-comments`)
-					.then((res) => props.setVideoComments(res.data))
+					.then((res) => setVideoComments(res.data))
 			}).catch((err) => {
 				console.log(err.response.data.message)
 				const resErrors = err.response.data.errors
@@ -110,7 +123,7 @@ const VideoShow = (props) => {
 					props.setMessage(res.data)
 					// Update Video Comments
 					axios.get(`${props.url}/api/video-comments`)
-						.then((res) => props.setVideoComments(res.data))
+						.then((res) => setVideoComments(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -405,9 +418,9 @@ const VideoShow = (props) => {
 
 				{/* <!-- Comment Form ---> */}
 				<div className={tabClass == "comments" ? "" : "hidden"}>
-					{showVideo.hasBoughtVideo ||
-						showVideo.username == props.auth.username ||
-						showVideo.username == "@blackmusic" ?
+					{showVideo.username == props.auth.username ||
+						props.auth.username == "@blackmusic" ||
+						showVideo.hasBoughtVideo ?
 						<div className='media p-2 border-bottom'>
 							<div className="media-left">
 								<Img
@@ -436,13 +449,13 @@ const VideoShow = (props) => {
 
 					{/* <!-- Comment Section --> */}
 					{showVideo.username == props.auth.username ||
-						showVideo.username == "@blackmusic" ||
+						props.auth.username == "@blackmusic" ||
 						showVideo.hasBoughtVideo ?
 						// Check if comments exists
-						props.videoComments
+						videoComments
 							.filter((comment) => comment.video_id == show)
 							.length > 0 ?
-							props.videoComments
+							videoComments
 								.filter((comment) => comment.video_id == show)
 								.map((comment, index) => (
 									<div key={index} className='media p-2 border-bottom'>

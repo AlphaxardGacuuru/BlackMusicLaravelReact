@@ -53,7 +53,7 @@ function App() {
 		'https://music.black.co.ke' :
 		'http://localhost:3000'
 
-	axios.defaults.baseURL = 'http://localhost:3000';
+	axios.defaults.baseURL = url
 
 	// Function for checking local storage
 	const getLocalStorage = (state) => {
@@ -83,11 +83,8 @@ function App() {
 	const [message, setMessage] = useState('')
 	const [errors, setErrors] = useState([])
 
-	const [admin, setAdmin] = useState(getLocalStorage("admin"))
 	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
-	const [audioPayouts, setAudioPayouts] = useState(getLocalStorage("audioPayouts"))
 	const [audios, setAudios] = useState(getLocalStorage("audios"))
-	const [audioComments, setAudioComments] = useState(getLocalStorage("audioComments"))
 
 	const [boughtAudios, setBoughtAudios] = useState(getLocalStorage("boughtAudios"))
 	const [boughtVideos, setBoughtVideos] = useState(getLocalStorage("boughtVideos"))
@@ -95,20 +92,13 @@ function App() {
 	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
 	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
 
-	const [helpPosts, setHelpPosts] = useState(getLocalStorage("helpPosts"))
-	const [helpThreads, setHelpThreads] = useState(getLocalStorage("helpThreads"))
-	const [kopokopoRecipients, setKopokopoRecipients] = useState(getLocalStorage("kopokopoRecipients"))
 	const [notifications, setNotifications] = useState(getLocalStorage("notifications"))
 
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
-	const [postComments, setPostComments] = useState(getLocalStorage("postComments"))
-	const [referrals, setReferrals] = useState(getLocalStorage("referrals"))
-	const [songPayouts, setSongPayouts] = useState(getLocalStorage("songPayouts"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
 
 	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
-	const [videoComments, setVideoComments] = useState(getLocalStorage("videoComments"))
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || message.length > 0) {
@@ -162,7 +152,6 @@ function App() {
 
 	// Fetch data on page load
 	useEffect(() => {
-
 		// Fetch Auth
 		axios.get(`/api/home`)
 			.then((res) => {
@@ -171,13 +160,6 @@ function App() {
 					setLocalStorage("auth", res.data)
 				}
 			}).catch(() => setErrors(["Failed to fetch auth"]))
-
-		// Fetch Admin
-		axios.get(`/api/admin`)
-			.then((res) => {
-				setAdmin(res.data)
-				setLocalStorage("admin", res.data)
-			}).catch(() => setErrors(["Failed to fetch admin"]))
 
 		// Fetch Audio Albums
 		axios.get(`/api/audio-albums`)
@@ -192,13 +174,6 @@ function App() {
 				setAudios(res.data)
 				setLocalStorage("audios", res.data)
 			}).catch(() => setErrors(["Failed to fetch audios"]))
-
-		// Fetch Audio Comments
-		axios.get(`/api/audio-comments`)
-			.then((res) => {
-				setAudioComments(res.data)
-				setLocalStorage("audioComments", res.data)
-			}).catch(() => setErrors(["Failed to fetch audio comments"]))
 
 		// Fetch Bought Audios
 		axios.get(`/api/bought-audios`)
@@ -228,27 +203,6 @@ function App() {
 				setLocalStorage("cartVideos", res.data)
 			}).catch(() => setErrors(['Failed to fetch cart videos']))
 
-		// Fetch Help Posts
-		axios.get(`/api/help-posts`)
-			.then((res) => {
-				setHelpPosts(res.data)
-				setLocalStorage("helpPosts", res.data)
-			}).catch(() => setErrors(['Failed to fetch help posts']))
-
-		// Fetch Help Threads
-		axios.get(`/api/help-posts/1`)
-			.then((res) => {
-				setHelpThreads(res.data)
-				setLocalStorage("helpThreads", res.data)
-			}).catch(() => setErrors(['Failed to fetch help threads']))
-
-		// Fetch Kopokopo Recipients
-		axios.get(`/api/kopokopo-recipients`)
-			.then((res) => {
-				setKopokopoRecipients(res.data)
-				setLocalStorage("kopokopoRecipients", res.data)
-			}).catch(() => setErrors(['Failed to fetch kopokopo recipients']))
-
 		// Fetch Notifications
 		axios.get(`/api/notifications`)
 			.then((res) => {
@@ -262,25 +216,6 @@ function App() {
 				setPosts(res.data)
 				setLocalStorage("posts", res.data)
 			}).catch(() => setErrors(['Failed to fetch posts']))
-
-		// Fetch Post Comments
-		axios.get(`/api/post-comments`)
-			.then((res) => {
-				setPostComments(res.data)
-				setLocalStorage("postComments", res.data)
-			}).catch(() => setErrors(['Failed to fetch post comments']))
-
-		//Fetch Referrals
-		axios.get(`/api/referrals`)
-			.then((res) => {
-				setReferrals(res.data)
-				setLocalStorage("referrals", res.data)
-			}).catch(() => setErrors(['Failed to fetch referrals']))
-
-		// Fetch Song Payouts
-		axios.get(`/api/song-payouts`)
-			.then((res) => setLocalStorage("songPayouts", res.data))
-			.catch(() => setErrors(["Failed to fetch song payouts"]))
 
 		//Fetch Users
 		axios.get(`/api/users`)
@@ -302,13 +237,6 @@ function App() {
 				setVideos(res.data)
 				setLocalStorage("videos", res.data)
 			}).catch(() => setErrors(["Failed to fetch videos"]))
-
-		// Fetch Video Comments
-		axios.get(`/api/video-comments`)
-			.then((res) => {
-				setVideoComments(res.data)
-				setLocalStorage("videoComments", res.data)
-			}).catch(() => setErrors(["Failed to fetch video comments"]))
 
 		console.log("effect rendered")
 
@@ -372,7 +300,7 @@ function App() {
 				axios.get(`/api/video-albums`)
 					.then((res) => {
 						setVideoAlbums(res.data)
-						setLocalStorage("videoAlbums")
+						setLocalStorage("videoAlbums", res.data)
 					})
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -874,28 +802,20 @@ function App() {
 	// All states
 	const GLOBAL_STATE = {
 		getLocalStorage, setLocalStorage,
+		autoLoginFailed,
 		login, setLogin,
 		url,
 		auth, setAuth,
 		message, setMessage,
 		errors, setErrors,
-		admin, setAdmin,
 		audioAlbums, setAudioAlbums,
-		audioPayouts, setAudioPayouts,
 		audios, setAudios,
-		audioComments, setAudioComments,
 		boughtAudios, setBoughtAudios,
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
-		helpPosts, setHelpPosts,
-		helpThreads, setHelpThreads,
-		kopokopoRecipients, setKopokopoRecipients,
 		notifications, setNotifications,
 		posts, setPosts,
-		postComments, setPostComments,
-		referrals, setReferrals,
-		songPayouts, setSongPayouts,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
 		videos, setVideos,
@@ -903,7 +823,6 @@ function App() {
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
 		videos, setVideos,
-		videoComments, setVideoComments,
 		onFollow,
 		onCartVideos,
 		onBuyVideos,

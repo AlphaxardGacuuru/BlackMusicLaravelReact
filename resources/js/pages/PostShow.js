@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import Img from '../components/Img'
-import Button from '../components/Button'
-import SocialMediaInput from '../components/SocialMediaInput'
 
 const PostShow = (props) => {
+
+	axios.defaults.baseURL = props.url
 
 	// Get id from URL
 	const { id } = useParams();
@@ -19,9 +19,20 @@ const PostShow = (props) => {
 		props.setShowPoll(false)
 		props.setUrlTo("/post-comments")
 		props.setUrlToTwo("/posts")
-		props.setStateToUpdate(() => props.setPostComments)
+		props.setStateToUpdate(() => setPostComments)
 		props.setStateToUpdateTwo(() => props.setPosts)
 	}, 1000)
+
+	const [postComments, setPostComments] = useState(props.getLocalStorage("postComments"))
+
+	// Fetch Post Comments
+	useEffect(() => {
+		axios.get(`/api/post-comments`)
+			.then((res) => {
+				setPostComments(res.data)
+				props.setLocalStorage("postComments", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch post comments']))
+	}, [props.autoLoginFailed])
 
 	// Function for liking comments
 	const onCommentLike = (comment) => {
@@ -32,7 +43,7 @@ const PostShow = (props) => {
 				props.setMessage(res.data)
 				// Update Post Comments
 				axios.get(`${props.url}/api/post-comments`)
-					.then((res) => props.setPostComments(res.data))
+					.then((res) => setPostComments(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -53,7 +64,7 @@ const PostShow = (props) => {
 					props.setMessage(res.data)
 					// Update Post Comments
 					axios.get(`${props.url}/api/post-comments`)
-						.then((res) => props.setPostComments(res.data))
+						.then((res) => setPostComments(res.data))
 					// Update Posts
 					axios.get(`${props.url}/api/posts`)
 						.then((res) => props.setPosts(res.data))
@@ -89,7 +100,7 @@ const PostShow = (props) => {
 					</Link>
 				</div>
 				<div className="border border-top-0 m-0 p-0">
-					{props.postComments
+					{postComments
 						.filter((comment) => comment.post_id == id)
 						.map((comment, index) => (
 							<div key={index} className={`media p-2 border-bottom`}>
@@ -166,11 +177,14 @@ const PostShow = (props) => {
 											</svg>
 										</a>
 										<div className="dropdown-menu dropdown-menu-right p-0" style={{ borderRadius: "0" }}>
-											{comment.user_id == props.auth.id &&
-												<a href='#' className="dropdown-item" onClick={(e) => {
-													e.preventDefault();
-													onDeleteComment(comment.id)
-												}}>
+											{comment.username == props.auth.username &&
+												<a
+													href='#'
+													className="dropdown-item"
+													onClick={(e) => {
+														e.preventDefault();
+														onDeleteComment(comment.id)
+													}}>
 													<h6>Delete comment</h6>
 												</a>}
 										</div>

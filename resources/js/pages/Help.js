@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import Img from '../components/Img'
 
 const Help = (props) => {
 
+	axios.defaults.baseURL = props.url
+
+	const [helpThreads, setHelpThreads] = useState(props.getLocalStorage("helpThreads"))
+
+	// Fetch Help Threads
+	useEffect(() => {
+		axios.get(`/api/help-posts/1`)
+			.then((res) => {
+				setHelpThreads(res.data)
+				props.setLocalStorage("helpThreads", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch help threads']))
+	}, [props.authLoginFailed])
+
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				{/* Start Thread */}
-				{props.helpThreads.length == 0 &&
+				{helpThreads.length == 0 &&
 					<div className="d-flex border-bottom">
 						<div className="p-2">
 							<Link to="/profile/@blackmusic">
@@ -40,7 +53,7 @@ const Help = (props) => {
 				{/* Start Thread End */}
 
 				{/* Threads Start */}
-				{props.helpThreads
+				{helpThreads
 					.map((helpThread, key) => (
 						<div key={key} className={`d-flex border-bottom ${key == 0 && "border-top"}`}>
 							<div className="p-2">

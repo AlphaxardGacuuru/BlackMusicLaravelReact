@@ -1,12 +1,39 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Button from '../components/Button'
 
 const Settings = (props) => {
 
-	const amount = props.songPayouts.balance
-	const reference = props.kopokopoRecipients
+	axios.defaults.baseURL = props.url
+
+	const [kopokopoRecipients, setKopokopoRecipients] = useState(props.getLocalStorage("kopokopoRecipients"))
+	const [referrals, setReferrals] = useState(props.getLocalStorage("referrals"))
+	const [songPayouts, setSongPayouts] = useState(props.getLocalStorage("songPayouts"))
+
+	// Fetch Kopokopo Recipients
+	useEffect(() => {
+		axios.get(`/api/kopokopo-recipients`)
+			.then((res) => {
+				// Save to state only to prevent wrong data persistence in local storage
+				setKopokopoRecipients(res.data)
+			}).catch(() => props.setErrors(['Failed to fetch kopokopo recipients']))
+
+		//Fetch Referrals
+		axios.get(`/api/referrals`)
+			.then((res) => {
+				setReferrals(res.data)
+			}).catch(() => props.setErrors(['Failed to fetch referrals']))
+
+		// Fetch Song Payouts
+		axios.get(`/api/song-payouts`)
+			.then((res) => {
+				setSongPayouts(res.data)
+			}).catch(() => props.setErrors(["Failed to fetch song payouts"]))
+	}, [props.autoLoginFailed])
+
+	const amount = songPayouts.balance
+	const reference = kopokopoRecipients
 		.find((reference) => reference.username == props.auth.username)
 
 	// Web Share API for share button
@@ -31,7 +58,7 @@ const Settings = (props) => {
 					props.setMessage(res.data)
 					// Update Kopokopo recipients
 					axios.get(`${props.url}/api/kopokopo-recipients`)
-						.then((res) => props.setKopokopoRecipients(res.data))
+						.then((res) => setKopokopoRecipients(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -55,7 +82,7 @@ const Settings = (props) => {
 				props.setMessage(res.data)
 				// Update song payouts
 				axios.get(`${props.url}/api/song-payouts`)
-					.then((res) => props.setSongPayouts(res.data))
+					.then((res) => setSongPayouts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -86,8 +113,8 @@ const Settings = (props) => {
 						<tbody>
 							{/* Show Video Payouts */}
 							{/* Level 1 */}
-							{props.songPayouts.songPayouts &&
-								props.songPayouts.songPayouts
+							{songPayouts.songPayouts &&
+								songPayouts.songPayouts
 									.map((videoPayout, key) => (
 										<tr key={key}>
 											<td className="text-success">KES {videoPayout.amount}</td>
@@ -98,12 +125,12 @@ const Settings = (props) => {
 					</table>
 
 					<h4>Outstanding cash</h4>
-					<h5 className='text-success'>KES {props.songPayouts.balance}</h5>
+					<h5 className='text-success'>KES {songPayouts.balance}</h5>
 					<br />
 
-					{props.kopokopoRecipients
+					{kopokopoRecipients
 						.some((recipient) => recipient.username == props.auth.username) ?
-						// props.songPayouts.balance > props.auth.withdrawal &&
+						// songPayouts.balance > props.auth.withdrawal &&
 						<Button
 							btnClass="sonar-btn"
 							onClick={onTransferFunds}
@@ -165,8 +192,8 @@ const Settings = (props) => {
 					<tbody>
 						{/* Show Referrals */}
 						{/* Level 1 */}
-						{props.referrals.referrals &&
-							props.referrals.referrals
+						{referrals.referrals &&
+							referrals.referrals
 								.map((referral, key) => (
 									<tr key={key}>
 										<td>{referral.level}</td>
@@ -195,11 +222,11 @@ const Settings = (props) => {
 					</thead>
 					<tbody>
 						<tr className="text-success">
-							<td>KES {props.referrals.level1Revenue}</td>
-							<td>KES {props.referrals.level2Revenue}</td>
-							<td>KES {props.referrals.level3Revenue}</td>
-							<td>KES {props.referrals.level4Revenue}</td>
-							<td>KES {props.referrals.totalRevenue}</td>
+							<td>KES {referrals.level1Revenue}</td>
+							<td>KES {referrals.level2Revenue}</td>
+							<td>KES {referrals.level3Revenue}</td>
+							<td>KES {referrals.level4Revenue}</td>
+							<td>KES {referrals.totalRevenue}</td>
 						</tr>
 					</tbody>
 				</table>

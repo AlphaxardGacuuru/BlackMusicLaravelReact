@@ -92754,7 +92754,7 @@ function App() {
 
   // console.log(process.env.MIX_APP_URL)
   var url = window.location.href.match(/https/) ? 'https://music.black.co.ke' : 'http://localhost:3000';
-  axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.baseURL = 'http://localhost:3000'; // Function for checking local storage
+  axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.baseURL = url; // Function for checking local storage
 
   var getLocalStorage = function getLocalStorage(state) {
     if (localStorage.getItem(state)) {
@@ -92800,110 +92800,60 @@ function App() {
       errors = _useState10[0],
       setErrors = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("admin")),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioAlbums")),
       _useState12 = _slicedToArray(_useState11, 2),
-      admin = _useState12[0],
-      setAdmin = _useState12[1];
+      audioAlbums = _useState12[0],
+      setAudioAlbums = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioAlbums")),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audios")),
       _useState14 = _slicedToArray(_useState13, 2),
-      audioAlbums = _useState14[0],
-      setAudioAlbums = _useState14[1];
+      audios = _useState14[0],
+      setAudios = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioPayouts")),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtAudios")),
       _useState16 = _slicedToArray(_useState15, 2),
-      audioPayouts = _useState16[0],
-      setAudioPayouts = _useState16[1];
+      boughtAudios = _useState16[0],
+      setBoughtAudios = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audios")),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtVideos")),
       _useState18 = _slicedToArray(_useState17, 2),
-      audios = _useState18[0],
-      setAudios = _useState18[1];
+      boughtVideos = _useState18[0],
+      setBoughtVideos = _useState18[1];
 
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioComments")),
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartAudios")),
       _useState20 = _slicedToArray(_useState19, 2),
-      audioComments = _useState20[0],
-      setAudioComments = _useState20[1];
+      cartAudios = _useState20[0],
+      setCartAudios = _useState20[1];
 
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtAudios")),
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartVideos")),
       _useState22 = _slicedToArray(_useState21, 2),
-      boughtAudios = _useState22[0],
-      setBoughtAudios = _useState22[1];
+      cartVideos = _useState22[0],
+      setCartVideos = _useState22[1];
 
-  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtVideos")),
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("notifications")),
       _useState24 = _slicedToArray(_useState23, 2),
-      boughtVideos = _useState24[0],
-      setBoughtVideos = _useState24[1];
+      notifications = _useState24[0],
+      setNotifications = _useState24[1];
 
-  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartAudios")),
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("posts")),
       _useState26 = _slicedToArray(_useState25, 2),
-      cartAudios = _useState26[0],
-      setCartAudios = _useState26[1];
+      posts = _useState26[0],
+      setPosts = _useState26[1];
 
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("cartVideos")),
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("users")),
       _useState28 = _slicedToArray(_useState27, 2),
-      cartVideos = _useState28[0],
-      setCartVideos = _useState28[1];
+      users = _useState28[0],
+      setUsers = _useState28[1];
 
-  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("helpPosts")),
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
       _useState30 = _slicedToArray(_useState29, 2),
-      helpPosts = _useState30[0],
-      setHelpPosts = _useState30[1];
+      videoAlbums = _useState30[0],
+      setVideoAlbums = _useState30[1];
 
-  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("helpThreads")),
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
       _useState32 = _slicedToArray(_useState31, 2),
-      helpThreads = _useState32[0],
-      setHelpThreads = _useState32[1];
-
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("kopokopoRecipients")),
-      _useState34 = _slicedToArray(_useState33, 2),
-      kopokopoRecipients = _useState34[0],
-      setKopokopoRecipients = _useState34[1];
-
-  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("notifications")),
-      _useState36 = _slicedToArray(_useState35, 2),
-      notifications = _useState36[0],
-      setNotifications = _useState36[1];
-
-  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("posts")),
-      _useState38 = _slicedToArray(_useState37, 2),
-      posts = _useState38[0],
-      setPosts = _useState38[1];
-
-  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("postComments")),
-      _useState40 = _slicedToArray(_useState39, 2),
-      postComments = _useState40[0],
-      setPostComments = _useState40[1];
-
-  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("referrals")),
-      _useState42 = _slicedToArray(_useState41, 2),
-      referrals = _useState42[0],
-      setReferrals = _useState42[1];
-
-  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("songPayouts")),
-      _useState44 = _slicedToArray(_useState43, 2),
-      songPayouts = _useState44[0],
-      setSongPayouts = _useState44[1];
-
-  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("users")),
-      _useState46 = _slicedToArray(_useState45, 2),
-      users = _useState46[0],
-      setUsers = _useState46[1];
-
-  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
-      _useState48 = _slicedToArray(_useState47, 2),
-      videoAlbums = _useState48[0],
-      setVideoAlbums = _useState48[1];
-
-  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
-      _useState50 = _slicedToArray(_useState49, 2),
-      videos = _useState50[0],
-      setVideos = _useState50[1];
-
-  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoComments")),
-      _useState52 = _slicedToArray(_useState51, 2),
-      videoComments = _useState52[0],
-      setVideoComments = _useState52[1]; // Reset Messages and Errors to null after 3 seconds
+      videos = _useState32[0],
+      setVideos = _useState32[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || message.length > 0) {
@@ -92966,13 +92916,6 @@ function App() {
       }
     })["catch"](function () {
       return setErrors(["Failed to fetch auth"]);
-    }); // Fetch Admin
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/admin").then(function (res) {
-      setAdmin(res.data);
-      setLocalStorage("admin", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch admin"]);
     }); // Fetch Audio Albums
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
@@ -92987,13 +92930,6 @@ function App() {
       setLocalStorage("audios", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch audios"]);
-    }); // Fetch Audio Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-comments").then(function (res) {
-      setAudioComments(res.data);
-      setLocalStorage("audioComments", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio comments"]);
     }); // Fetch Bought Audios
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-audios").then(function (res) {
@@ -93022,27 +92958,6 @@ function App() {
       setLocalStorage("cartVideos", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch cart videos']);
-    }); // Fetch Help Posts
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/help-posts").then(function (res) {
-      setHelpPosts(res.data);
-      setLocalStorage("helpPosts", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch help posts']);
-    }); // Fetch Help Threads
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/help-posts/1").then(function (res) {
-      setHelpThreads(res.data);
-      setLocalStorage("helpThreads", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch help threads']);
-    }); // Fetch Kopokopo Recipients
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/kopokopo-recipients").then(function (res) {
-      setKopokopoRecipients(res.data);
-      setLocalStorage("kopokopoRecipients", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch kopokopo recipients']);
     }); // Fetch Notifications
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/notifications").then(function (res) {
@@ -93057,26 +92972,6 @@ function App() {
       setLocalStorage("posts", res.data);
     })["catch"](function () {
       return setErrors(['Failed to fetch posts']);
-    }); // Fetch Post Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/post-comments").then(function (res) {
-      setPostComments(res.data);
-      setLocalStorage("postComments", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch post comments']);
-    }); //Fetch Referrals
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/referrals").then(function (res) {
-      setReferrals(res.data);
-      setLocalStorage("referrals", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch referrals']);
-    }); // Fetch Song Payouts
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/song-payouts").then(function (res) {
-      return setLocalStorage("songPayouts", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch song payouts"]);
     }); //Fetch Users
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
@@ -93098,13 +92993,6 @@ function App() {
       setLocalStorage("videos", res.data);
     })["catch"](function () {
       return setErrors(["Failed to fetch videos"]);
-    }); // Fetch Video Comments
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-comments").then(function (res) {
-      setVideoComments(res.data);
-      setLocalStorage("videoComments", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video comments"]);
     });
     console.log("effect rendered");
   }, [autoLoginFailed]);
@@ -93162,7 +93050,7 @@ function App() {
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
           setVideoAlbums(res.data);
-          setLocalStorage("videoAlbums");
+          setLocalStorage("videoAlbums", res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors; // Get validation errors
@@ -93295,50 +93183,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
-      _useState54 = _slicedToArray(_useState53, 2),
-      show = _useState54[0],
-      setShow = _useState54[1];
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState34 = _slicedToArray(_useState33, 2),
+      show = _useState34[0],
+      setShow = _useState34[1];
 
-  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState56 = _slicedToArray(_useState55, 2),
-      playBtn = _useState56[0],
-      setPlayBtn = _useState56[1];
+  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState36 = _slicedToArray(_useState35, 2),
+      playBtn = _useState36[0],
+      setPlayBtn = _useState36[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState58 = _slicedToArray(_useState57, 2),
-      shuffle = _useState58[0],
-      setShuffle = _useState58[1];
+  var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState38 = _slicedToArray(_useState37, 2),
+      shuffle = _useState38[0],
+      setShuffle = _useState38[1];
 
-  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState60 = _slicedToArray(_useState59, 2),
-      loop = _useState60[0],
-      setLoop = _useState60[1];
+  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState40 = _slicedToArray(_useState39, 2),
+      loop = _useState40[0],
+      setLoop = _useState40[1];
 
-  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
-      _useState62 = _slicedToArray(_useState61, 2),
-      dur = _useState62[0],
-      setDur = _useState62[1];
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState42 = _slicedToArray(_useState41, 2),
+      dur = _useState42[0],
+      setDur = _useState42[1];
 
-  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
-      _useState64 = _slicedToArray(_useState63, 2),
-      volume = _useState64[0],
-      setVolume = _useState64[1];
+  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
+      _useState44 = _slicedToArray(_useState43, 2),
+      volume = _useState44[0],
+      setVolume = _useState44[1];
 
-  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
-      _useState66 = _slicedToArray(_useState65, 2),
-      currentTime = _useState66[0],
-      setCurrentTime = _useState66[1];
+  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState46 = _slicedToArray(_useState45, 2),
+      currentTime = _useState46[0],
+      setCurrentTime = _useState46[1];
 
-  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState68 = _slicedToArray(_useState67, 2),
-      progressPercent = _useState68[0],
-      setProgressPercent = _useState68[1];
+  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState48 = _slicedToArray(_useState47, 2),
+      progressPercent = _useState48[0],
+      setProgressPercent = _useState48[1];
 
-  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState70 = _slicedToArray(_useState69, 2),
-      audioLoader = _useState70[0],
-      setAudioLoader = _useState70[1]; // Listen for show change and autoplay song
+  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState50 = _slicedToArray(_useState49, 2),
+      audioLoader = _useState50[0],
+      setAudioLoader = _useState50[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -93523,10 +93411,10 @@ function App() {
   } // Search State
 
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
-      _useState72 = _slicedToArray(_useState71, 2),
-      search = _useState72[0],
-      setSearch = _useState72[1];
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
+      _useState52 = _slicedToArray(_useState51, 2),
+      search = _useState52[0],
+      setSearch = _useState52[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Function to focus on search input
 
@@ -93535,110 +93423,110 @@ function App() {
   }; // Social Input states
 
 
+  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState54 = _slicedToArray(_useState53, 2),
+      id = _useState54[0],
+      setId = _useState54[1];
+
+  var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState56 = _slicedToArray(_useState55, 2),
+      to = _useState56[0],
+      setTo = _useState56[1];
+
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState58 = _slicedToArray(_useState57, 2),
+      text = _useState58[0],
+      setText = _useState58[1];
+
+  var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState60 = _slicedToArray(_useState59, 2),
+      media = _useState60[0],
+      setMedia = _useState60[1];
+
+  var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState62 = _slicedToArray(_useState61, 2),
+      para1 = _useState62[0],
+      setPara1 = _useState62[1];
+
+  var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState64 = _slicedToArray(_useState63, 2),
+      para2 = _useState64[0],
+      setPara2 = _useState64[1];
+
+  var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState66 = _slicedToArray(_useState65, 2),
+      para3 = _useState66[0],
+      setPara3 = _useState66[1];
+
+  var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState68 = _slicedToArray(_useState67, 2),
+      para4 = _useState68[0],
+      setPara4 = _useState68[1];
+
+  var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState70 = _slicedToArray(_useState69, 2),
+      para5 = _useState70[0],
+      setPara5 = _useState70[1];
+
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState72 = _slicedToArray(_useState71, 2),
+      placeholder = _useState72[0],
+      setPlaceholder = _useState72[1];
+
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState74 = _slicedToArray(_useState73, 2),
-      id = _useState74[0],
-      setId = _useState74[1];
+      urlTo = _useState74[0],
+      setUrlTo = _useState74[1];
 
   var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState76 = _slicedToArray(_useState75, 2),
-      to = _useState76[0],
-      setTo = _useState76[1];
+      urlToTwo = _useState76[0],
+      setUrlToTwo = _useState76[1];
 
-  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      text = _useState78[0],
-      setText = _useState78[1];
+      urlToDelete = _useState78[0],
+      setUrlToDelete = _useState78[1];
 
-  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      media = _useState80[0],
-      setMedia = _useState80[1];
+      stateToUpdate = _useState80[0],
+      setStateToUpdate = _useState80[1];
 
-  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState82 = _slicedToArray(_useState81, 2),
-      para1 = _useState82[0],
-      setPara1 = _useState82[1];
+      stateToUpdateTwo = _useState82[0],
+      setStateToUpdateTwo = _useState82[1];
 
-  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState84 = _slicedToArray(_useState83, 2),
-      para2 = _useState84[0],
-      setPara2 = _useState84[1];
+      showImage = _useState84[0],
+      setShowImage = _useState84[1];
 
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState86 = _slicedToArray(_useState85, 2),
-      para3 = _useState86[0],
-      setPara3 = _useState86[1];
+      showPoll = _useState86[0],
+      setShowPoll = _useState86[1];
 
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState88 = _slicedToArray(_useState87, 2),
-      para4 = _useState88[0],
-      setPara4 = _useState88[1];
+      showMentionPicker = _useState88[0],
+      setShowMentionPicker = _useState88[1];
 
-  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState90 = _slicedToArray(_useState89, 2),
-      para5 = _useState90[0],
-      setPara5 = _useState90[1];
+      showEmojiPicker = _useState90[0],
+      setShowEmojiPicker = _useState90[1];
 
-  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState92 = _slicedToArray(_useState91, 2),
-      placeholder = _useState92[0],
-      setPlaceholder = _useState92[1];
+      showImagePicker = _useState92[0],
+      setShowImagePicker = _useState92[1];
 
-  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState94 = _slicedToArray(_useState93, 2),
-      urlTo = _useState94[0],
-      setUrlTo = _useState94[1];
-
-  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState96 = _slicedToArray(_useState95, 2),
-      urlToTwo = _useState96[0],
-      setUrlToTwo = _useState96[1];
-
-  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState98 = _slicedToArray(_useState97, 2),
-      urlToDelete = _useState98[0],
-      setUrlToDelete = _useState98[1];
-
-  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState100 = _slicedToArray(_useState99, 2),
-      stateToUpdate = _useState100[0],
-      setStateToUpdate = _useState100[1];
-
-  var _useState101 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState102 = _slicedToArray(_useState101, 2),
-      stateToUpdateTwo = _useState102[0],
-      setStateToUpdateTwo = _useState102[1];
-
-  var _useState103 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState104 = _slicedToArray(_useState103, 2),
-      showImage = _useState104[0],
-      setShowImage = _useState104[1];
-
-  var _useState105 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState106 = _slicedToArray(_useState105, 2),
-      showPoll = _useState106[0],
-      setShowPoll = _useState106[1];
-
-  var _useState107 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState108 = _slicedToArray(_useState107, 2),
-      showMentionPicker = _useState108[0],
-      setShowMentionPicker = _useState108[1];
-
-  var _useState109 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState110 = _slicedToArray(_useState109, 2),
-      showEmojiPicker = _useState110[0],
-      setShowEmojiPicker = _useState110[1];
-
-  var _useState111 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState112 = _slicedToArray(_useState111, 2),
-      showImagePicker = _useState112[0],
-      setShowImagePicker = _useState112[1];
-
-  var _useState113 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState114 = _slicedToArray(_useState113, 2),
-      showPollPicker = _useState114[0],
-      setShowPollPicker = _useState114[1]; // Declare new FormData object for form data
+      showPollPicker = _useState94[0],
+      setShowPollPicker = _useState94[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -93784,6 +93672,7 @@ function App() {
   var GLOBAL_STATE = (_GLOBAL_STATE = {
     getLocalStorage: getLocalStorage,
     setLocalStorage: setLocalStorage,
+    autoLoginFailed: autoLoginFailed,
     login: login,
     setLogin: setLogin,
     url: url,
@@ -93793,16 +93682,10 @@ function App() {
     setMessage: setMessage,
     errors: errors,
     setErrors: setErrors,
-    admin: admin,
-    setAdmin: setAdmin,
     audioAlbums: audioAlbums,
     setAudioAlbums: setAudioAlbums,
-    audioPayouts: audioPayouts,
-    setAudioPayouts: setAudioPayouts,
     audios: audios,
     setAudios: setAudios,
-    audioComments: audioComments,
-    setAudioComments: setAudioComments,
     boughtAudios: boughtAudios,
     setBoughtAudios: setBoughtAudios,
     boughtVideos: boughtVideos,
@@ -93811,22 +93694,10 @@ function App() {
     setCartAudios: setCartAudios,
     cartVideos: cartVideos,
     setCartVideos: setCartVideos,
-    helpPosts: helpPosts,
-    setHelpPosts: setHelpPosts,
-    helpThreads: helpThreads,
-    setHelpThreads: setHelpThreads,
-    kopokopoRecipients: kopokopoRecipients,
-    setKopokopoRecipients: setKopokopoRecipients,
     notifications: notifications,
     setNotifications: setNotifications,
     posts: posts,
     setPosts: setPosts,
-    postComments: postComments,
-    setPostComments: setPostComments,
-    referrals: referrals,
-    setReferrals: setReferrals,
-    songPayouts: songPayouts,
-    setSongPayouts: setSongPayouts,
     users: users,
     setUsers: setUsers,
     videoAlbums: videoAlbums,
@@ -93835,7 +93706,7 @@ function App() {
     setVideos: setVideos,
     search: search,
     setSearch: setSearch
-  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "videoComments", videoComments), _defineProperty(_GLOBAL_STATE, "setVideoComments", setVideoComments), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onBuyVideos", onBuyVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "onBuyAudios", onBuyAudios), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
+  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onBuyVideos", onBuyVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "onBuyAudios", onBuyAudios), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/login",
     exact: true,
@@ -95717,11 +95588,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Admin = function Admin(props) {
+  axios.defaults.baseURL = props.url;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       search = _useState2[0],
-      setSearch = _useState2[1]; // Post song payout
+      setSearch = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("admin")),
+      _useState4 = _slicedToArray(_useState3, 2),
+      admin = _useState4[0],
+      setAdmin = _useState4[1]; // Fetch Admin
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios.get("/api/admin").then(function (res) {
+      setAdmin(res.data);
+      props.setLocalStorage("admin", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch admin"]);
+    });
+  }, [props.autoLoginFailed]); // Post song payout
 
   var onVideoPayout = function onVideoPayout(username, amount) {
     axios.get('sanctum/csrf-cookie').then(function () {
@@ -95763,9 +95650,42 @@ var Admin = function Admin(props) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Musicians"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Videos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Audios"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Videos Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Audios Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Video Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Audio Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Video Profit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Audio Profit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.users.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.users.filter(function (user) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Musicians"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Videos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Audios"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Videos Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Audios Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Video Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Audio Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Video Profit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border"
+  }, "Audio Profit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, props.users.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, props.users.filter(function (user) {
     return user.account_type == "musician";
-  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.videos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, props.audios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "KES ", props.boughtVideos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "KES ", props.boughtAudios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, props.videos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, props.audios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, "KES ", props.boughtVideos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border"
+  }, "KES ", props.boughtAudios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border",
     style: {
       color: "green"
     }
@@ -95774,12 +95694,14 @@ var Admin = function Admin(props) {
   }).length * 20 + props.boughtVideos.filter(function (boughtVideo) {
     return boughtVideo.price == 200;
   }).length * 200), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border",
     style: {
       color: "green"
     }
   }, "KES ", props.boughtAudios.filter(function (boughtAudio) {
     return boughtAudio.price == 100;
   }).length * 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border",
     style: {
       color: "green"
     }
@@ -95788,6 +95710,7 @@ var Admin = function Admin(props) {
   }).length * 10 + props.boughtVideos.filter(function (boughtVideo) {
     return boughtVideo.price == 200;
   }).length * 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border",
     style: {
       color: "green"
     }
@@ -95809,7 +95732,7 @@ var Admin = function Admin(props) {
     }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, musician.created_at)));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Song Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive thead-light"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), props.admin.songPayouts && props.admin.songPayouts.map(function (songPayout, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Send"))), admin.songPayouts && admin.songPayouts.map(function (songPayout, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, songPayout.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, songPayout.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, songPayout.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, songPayout.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, songPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -97508,9 +97431,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
 var AudioShow = function AudioShow(props) {
+  axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = props.url;
+
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       show = _useParams.show;
 
@@ -97528,8 +97451,22 @@ var AudioShow = function AudioShow(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
       _useState4 = _slicedToArray(_useState3, 2),
       tabClass = _useState4[0],
-      setTabClass = _useState4[1]; // Function for liking audio
+      setTabClass = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("audioComments")),
+      _useState6 = _slicedToArray(_useState5, 2),
+      audioComments = _useState6[0],
+      setAudioComments = _useState6[1]; // Fetch Audio Comments
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/audio-comments').then(function (res) {
+      setAudioComments(res.data);
+      props.setLocalStorage("audioComments", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch audio comments"]);
+    });
+  }, [props.autoLoginFailed]); // Function for liking audio
 
   var onAudioLike = function onAudioLike() {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
@@ -97566,7 +97503,7 @@ var AudioShow = function AudioShow(props) {
         props.setMessage(res.data); // Update comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
-          return props.setAudioComments(res.data);
+          return setAudioComments(res.data);
         }); // Return text to null 
 
         setText("");
@@ -97593,7 +97530,7 @@ var AudioShow = function AudioShow(props) {
         props.setMessage(res.data); // Update audio comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
-          return props.setAudioComments(res.data);
+          return setAudioComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -97616,7 +97553,7 @@ var AudioShow = function AudioShow(props) {
         props.setMessage(res.data); // Update audio comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
-          return props.setAudioComments(res.data);
+          return setAudioComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -98067,7 +98004,7 @@ var AudioShow = function AudioShow(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
-  }, props.showAudio.username == props.auth.username || props.showAudio.username == "@blackmusic" || props.showAudio.hasBoughtAudio ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.showAudio.username == props.auth.username || props.auth.username == "@blackmusic" || props.showAudio.hasBoughtAudio ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
@@ -98092,9 +98029,9 @@ var AudioShow = function AudioShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))) : "", props.showAudio.username == props.auth.username || props.showAudio.hasBoughtAudio ? props.audioComments.filter(function (comment) {
+  })))) : "", props.showAudio.username == props.auth.username || props.auth.username == "@blackmusic" || props.showAudio.hasBoughtAudio ? audioComments.filter(function (comment) {
     return comment.audio_id == show;
-  }).length > 0 ? props.audioComments.filter(function (comment) {
+  }).length > 0 ? audioComments.filter(function (comment) {
     return comment.audio_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98908,18 +98845,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 
 var Help = function Help(props) {
+  axios.defaults.baseURL = props.url;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpThreads")),
+      _useState2 = _slicedToArray(_useState, 2),
+      helpThreads = _useState2[0],
+      setHelpThreads = _useState2[1]; // Fetch Help Threads
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios.get("/api/help-posts/1").then(function (res) {
+      setHelpThreads(res.data);
+      props.setLocalStorage("helpThreads", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch help threads']);
+    });
+  }, [props.authLoginFailed]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, props.helpThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, helpThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
@@ -98943,7 +98908,7 @@ var Help = function Help(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "@blackmusic")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0"
-  }, "Start a conversation")))), props.helpThreads.map(function (helpThread, key) {
+  }, "Start a conversation")))), helpThreads.map(function (helpThread, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex border-bottom ".concat(key == 0 && "border-top")
@@ -99030,6 +98995,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var HelpThread = function HelpThread(props) {
+  axios.defaults.baseURL = props.url;
+
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       username = _useParams.username;
 
@@ -99038,11 +99005,32 @@ var HelpThread = function HelpThread(props) {
       showDelete = _useState2[0],
       setShowDelete = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpPosts")),
       _useState4 = _slicedToArray(_useState3, 2),
-      checkHelpPosts = _useState4[0],
-      setCheckHelpPosts = _useState4[1]; // Set states
+      helpPosts = _useState4[0],
+      setHelpPosts = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpThreads")),
+      _useState6 = _slicedToArray(_useState5, 2),
+      helpThreads = _useState6[0],
+      setHelpThreads = _useState6[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Help Threads
+    axios.get("/api/help-posts/1").then(function (res) {
+      setHelpThreads(res.data);
+      props.setLocalStorage("helpThreads", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch help threads']);
+    }); // Fetch Help Posts
+
+    axios.get("/api/help-posts").then(function (res) {
+      setHelpPosts(res.data);
+      props.setLocalStorage("helpPosts", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch help posts']);
+    });
+  }, [props.authLoginFailed]); // Set states
 
   setTimeout(function () {
     props.setTo(username);
@@ -99053,17 +99041,17 @@ var HelpThread = function HelpThread(props) {
     props.setUrlToDelete("/help-posts/".concat(props.media.substr(16)));
     props.setUrlToTwo("/help-posts/1");
     props.setStateToUpdate(function () {
-      return props.setHelpPosts;
+      return setHelpPosts;
     });
     props.setStateToUpdateTwo(function () {
-      return props.setHelpThreads;
+      return setHelpThreads;
     });
-  }, 1000);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    // Fetch Help Posts
+  }, 1000); // Function to Update Help Posts
+
+  var checkHelpPosts = function checkHelpPosts() {
     axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
       // Get new length of help posts
-      var currentHelpPostsLength = props.helpPosts.filter(function (helpPost) {
+      var currentHelpPostsLength = helpPosts.filter(function (helpPost) {
         return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
       }).length; // Get old length of help posts
 
@@ -99071,10 +99059,12 @@ var HelpThread = function HelpThread(props) {
         return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
       }).length; // Update help posts if new one arrives
 
-      newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data);
-      setCheckHelpPosts(!checkHelpPosts);
+      newHelpPostsLength > currentHelpPostsLength && setHelpPosts(res.data);
     });
-  }, [checkHelpPosts]); // Scroll to the bottom of the page
+  }; // trigger function in intervals 
+
+
+  checkHelpPosts(); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
   // var chat = useRef(null)
@@ -99105,11 +99095,11 @@ var HelpThread = function HelpThread(props) {
         props.setMessage(res.data); // Update posts
 
         axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
-          return props.setHelpPosts(res.data);
+          return setHelpPosts(res.data);
         }); // Update help threads
 
         axios.get("".concat(props.url, "/api/help-posts/1")).then(function (res) {
-          return props.setHelpThreads(res.data);
+          return setHelpThreads(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99208,7 +99198,7 @@ var HelpThread = function HelpThread(props) {
     className: "backEnd-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     className: "p-2"
-  }, "Help Center")), props.helpPosts.filter(function (helpPost) {
+  }, "Help Center")), helpPosts.filter(function (helpPost) {
     return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
   }).map(function (helpPost, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100402,9 +100392,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
-/* harmony import */ var _components_SocialMediaInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/SocialMediaInput */ "./resources/js/components/SocialMediaInput.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -100412,7 +100410,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var PostShow = function PostShow(props) {
-  // Get id from URL
+  axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = props.url; // Get id from URL
+
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       id = _useParams.id; // Set states
 
@@ -100425,12 +100424,27 @@ var PostShow = function PostShow(props) {
     props.setUrlTo("/post-comments");
     props.setUrlToTwo("/posts");
     props.setStateToUpdate(function () {
-      return props.setPostComments;
+      return setPostComments;
     });
     props.setStateToUpdateTwo(function () {
       return props.setPosts;
     });
-  }, 1000); // Function for liking comments
+  }, 1000);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("postComments")),
+      _useState2 = _slicedToArray(_useState, 2),
+      postComments = _useState2[0],
+      setPostComments = _useState2[1]; // Fetch Post Comments
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/post-comments").then(function (res) {
+      setPostComments(res.data);
+      props.setLocalStorage("postComments", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch post comments']);
+    });
+  }, [props.autoLoginFailed]); // Function for liking comments
 
   var onCommentLike = function onCommentLike(comment) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
@@ -100440,7 +100454,7 @@ var PostShow = function PostShow(props) {
         props.setMessage(res.data); // Update Post Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
-          return props.setPostComments(res.data);
+          return setPostComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -100463,7 +100477,7 @@ var PostShow = function PostShow(props) {
         props.setMessage(res.data); // Update Post Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
-          return props.setPostComments(res.data);
+          return setPostComments(res.data);
         }); // Update Posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
@@ -100508,7 +100522,7 @@ var PostShow = function PostShow(props) {
     d: "M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "border border-top-0 m-0 p-0"
-  }, props.postComments.filter(function (comment) {
+  }, postComments.filter(function (comment) {
     return comment.post_id == id;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100625,7 +100639,7 @@ var PostShow = function PostShow(props) {
       style: {
         borderRadius: "0"
       }
-    }, comment.user_id == props.auth.id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "#",
       className: "dropdown-item",
       onClick: function onClick(e) {
@@ -101895,13 +101909,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 
 var Settings = function Settings(props) {
-  var amount = props.songPayouts.balance;
-  var reference = props.kopokopoRecipients.find(function (reference) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = props.url;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(props.getLocalStorage("kopokopoRecipients")),
+      _useState2 = _slicedToArray(_useState, 2),
+      kopokopoRecipients = _useState2[0],
+      setKopokopoRecipients = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(props.getLocalStorage("referrals")),
+      _useState4 = _slicedToArray(_useState3, 2),
+      referrals = _useState4[0],
+      setReferrals = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(props.getLocalStorage("songPayouts")),
+      _useState6 = _slicedToArray(_useState5, 2),
+      songPayouts = _useState6[0],
+      setSongPayouts = _useState6[1]; // Fetch Kopokopo Recipients
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/kopokopo-recipients").then(function (res) {
+      // Save to state only to prevent wrong data persistence in local storage
+      setKopokopoRecipients(res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch kopokopo recipients']);
+    }); //Fetch Referrals
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/referrals").then(function (res) {
+      setReferrals(res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch referrals']);
+    }); // Fetch Song Payouts
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/song-payouts").then(function (res) {
+      setSongPayouts(res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch song payouts"]);
+    });
+  }, [props.autoLoginFailed]);
+  var amount = songPayouts.balance;
+  var reference = kopokopoRecipients.find(function (reference) {
     return reference.username == props.auth.username;
   }); // Web Share API for share button
   // Share must be triggered by "user activation"
@@ -101924,7 +101988,7 @@ var Settings = function Settings(props) {
         props.setMessage(res.data); // Update Kopokopo recipients
 
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/kopokopo-recipients")).then(function (res) {
-          return props.setKopokopoRecipients(res.data);
+          return setKopokopoRecipients(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -101951,7 +102015,7 @@ var Settings = function Settings(props) {
         props.setMessage(res.data); // Update song payouts
 
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("".concat(props.url, "/api/song-payouts")).then(function (res) {
-          return props.setSongPayouts(res.data);
+          return setSongPayouts(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -101977,7 +102041,7 @@ var Settings = function Settings(props) {
     className: "col-sm-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Song Payouts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "table table-responsive table-hover"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Date Sent"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, props.songPayouts.songPayouts && props.songPayouts.songPayouts.map(function (videoPayout, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Date Sent"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, songPayouts.songPayouts && songPayouts.songPayouts.map(function (videoPayout, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
@@ -101985,11 +102049,11 @@ var Settings = function Settings(props) {
     }, "KES ", videoPayout.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, videoPayout.created_at));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "text-success"
-  }, "KES ", props.songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), props.kopokopoRecipients.some(function (recipient) {
+  }, "KES ", songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
   }) ?
   /*#__PURE__*/
-  // props.songPayouts.balance > props.auth.withdrawal &&
+  // songPayouts.balance > props.auth.withdrawal &&
   react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnClass: "sonar-btn",
     onClick: onTransferFunds,
@@ -102036,7 +102100,7 @@ var Settings = function Settings(props) {
     }
   }, "Your Invites"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
     className: "table table-responsive table-hover"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Videos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Audios"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Revenue"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, props.referrals.referrals && props.referrals.referrals.map(function (referral, key) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Videos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Audios"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Revenue"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, referrals.referrals && referrals.referrals.map(function (referral, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: key
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, referral.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, referral.referee), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, referral.boughtVideos), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, referral.boughtAudios), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
@@ -102050,7 +102114,7 @@ var Settings = function Settings(props) {
     className: "table table-responsive table-hover"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Level 4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Total"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
     className: "text-success"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", props.referrals.level1Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", props.referrals.level2Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", props.referrals.level3Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", props.referrals.level4Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", props.referrals.totalRevenue))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", referrals.level1Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", referrals.level2Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", referrals.level3Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", referrals.level4Revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "KES ", referrals.totalRevenue))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-sm-2"
   }));
 };
@@ -103860,8 +103924,23 @@ var VideoShow = function VideoShow(props) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("comments"),
       _useState4 = _slicedToArray(_useState3, 2),
       tabClass = _useState4[0],
-      setTabClass = _useState4[1]; // Function for liking video
+      setTabClass = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("videoComments")),
+      _useState6 = _slicedToArray(_useState5, 2),
+      videoComments = _useState6[0],
+      setVideoComments = _useState6[1];
+
+  axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = props.url; // Fetch Video Comments
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/video-comments").then(function (res) {
+      setVideoComments(res.data);
+      props.setLocalStorage("videoComments", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch video comments"]);
+    });
+  }, [props.autoLoginFailed]); // Function for liking video
 
   var onVideoLike = function onVideoLike() {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
@@ -103899,7 +103978,7 @@ var VideoShow = function VideoShow(props) {
         props.setMessage(res.data); // Update Video Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
-          return props.setVideoComments(res.data);
+          return setVideoComments(res.data);
         }); // Return text to null 
 
         setText("");
@@ -103926,7 +104005,7 @@ var VideoShow = function VideoShow(props) {
         props.setMessage(res.data); // Update Video Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
-          return props.setVideoComments(res.data);
+          return setVideoComments(res.data);
         });
       })["catch"](function (err) {
         console.log(err.response.data.message);
@@ -103950,7 +104029,7 @@ var VideoShow = function VideoShow(props) {
         props.setMessage(res.data); // Update Video Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
-          return props.setVideoComments(res.data);
+          return setVideoComments(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -104248,7 +104327,7 @@ var VideoShow = function VideoShow(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
-  }, showVideo.hasBoughtVideo || showVideo.username == props.auth.username || showVideo.username == "@blackmusic" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, showVideo.username == props.auth.username || props.auth.username == "@blackmusic" || showVideo.hasBoughtVideo ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media p-2 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
@@ -104273,10 +104352,10 @@ var VideoShow = function VideoShow(props) {
     type: "submit",
     btnClass: "mysonar-btn float-right",
     btnText: "Comment"
-  })))) : "", showVideo.username == props.auth.username || showVideo.username == "@blackmusic" || showVideo.hasBoughtVideo ? // Check if comments exists
-  props.videoComments.filter(function (comment) {
+  })))) : "", showVideo.username == props.auth.username || props.auth.username == "@blackmusic" || showVideo.hasBoughtVideo ? // Check if comments exists
+  videoComments.filter(function (comment) {
     return comment.video_id == show;
-  }).length > 0 ? props.videoComments.filter(function (comment) {
+  }).length > 0 ? videoComments.filter(function (comment) {
     return comment.video_id == show;
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

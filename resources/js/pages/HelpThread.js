@@ -5,10 +5,29 @@ import Img from '../components/Img'
 
 const HelpThread = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	let { username } = useParams()
 
 	const [showDelete, setShowDelete] = useState()
-	const [checkHelpPosts, setCheckHelpPosts] = useState(true)
+	const [helpPosts, setHelpPosts] = useState(props.getLocalStorage("helpPosts"))
+	const [helpThreads, setHelpThreads] = useState(props.getLocalStorage("helpThreads"))
+
+	useEffect(() => {
+		// Fetch Help Threads
+		axios.get(`/api/help-posts/1`)
+			.then((res) => {
+				setHelpThreads(res.data)
+				props.setLocalStorage("helpThreads", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch help threads']))
+
+		// Fetch Help Posts
+		axios.get(`/api/help-posts`)
+			.then((res) => {
+				setHelpPosts(res.data)
+				props.setLocalStorage("helpPosts", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch help posts']))
+	}, [props.authLoginFailed])
 
 	// Set states
 	setTimeout(() => {
@@ -19,17 +38,16 @@ const HelpThread = (props) => {
 		props.setUrlTo("/help-posts")
 		props.setUrlToDelete(`/help-posts/${props.media.substr(16)}`)
 		props.setUrlToTwo(`/help-posts/1`)
-		props.setStateToUpdate(() => props.setHelpPosts)
-		props.setStateToUpdateTwo(() => props.setHelpThreads)
+		props.setStateToUpdate(() => setHelpPosts)
+		props.setStateToUpdateTwo(() => setHelpThreads)
 	}, 1000)
 
-	useEffect(() => {
-		// Fetch Help Posts
+	// Function to Update Help Posts
+	const checkHelpPosts = () => {
 		axios.get(`${props.url}/api/help-posts`)
 			.then((res) => {
 				// Get new length of help posts
-				var currentHelpPostsLength = props
-					.helpPosts
+				var currentHelpPostsLength = helpPosts
 					.filter((helpPost) => {
 						return helpPost.username == username &&
 							helpPost.to == props.auth.username ||
@@ -47,11 +65,12 @@ const HelpThread = (props) => {
 					}).length
 
 				// Update help posts if new one arrives
-				newHelpPostsLength > currentHelpPostsLength && props.setHelpPosts(res.data)
-
-				setCheckHelpPosts(!checkHelpPosts)
+				newHelpPostsLength > currentHelpPostsLength && setHelpPosts(res.data)
 			})
-	}, [checkHelpPosts])
+	}
+
+	// trigger function in intervals 
+	checkHelpPosts()
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
@@ -90,10 +109,10 @@ const HelpThread = (props) => {
 					props.setMessage(res.data)
 					// Update posts
 					axios.get(`${props.url}/api/help-posts`)
-						.then((res) => props.setHelpPosts(res.data))
+						.then((res) => setHelpPosts(res.data))
 					// Update help threads
 					axios.get(`${props.url}/api/help-posts/1`)
-						.then((res) => props.setHelpThreads(res.data))
+						.then((res) => setHelpThreads(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -187,8 +206,7 @@ const HelpThread = (props) => {
 					<div className="backEnd-content">
 						<h2 className="p-2">Help Center</h2>
 					</div>
-					{props
-						.helpPosts
+					{helpPosts
 						.filter((helpPost) => {
 							return helpPost.username == username &&
 								helpPost.to == props.auth.username ||
