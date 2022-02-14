@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import SocialMediaInput from '../components/SocialMediaInput';
+const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
 
 const PostCreate = (props) => {
 
@@ -17,7 +17,7 @@ const PostCreate = (props) => {
 
 	// Declare states
 	// const [preview, setPreview] = useState()
-	
+
 	// Assign id to element
 	// const mediaInput = React.useRef(null)
 
@@ -50,7 +50,14 @@ const PostCreate = (props) => {
 						onSubmit={props.onSubmit}
 						className="contact-form bg-white"
 						autoComplete="off">
-						<SocialMediaInput {...props} />
+						<React.Suspense
+							fallback={
+								<center>
+									<div id="sonar-load" className="mt-5 mb-5"></div>
+								</center>
+							}>
+							<SocialMediaInput {...props} />
+						</React.Suspense>
 					</form>
 
 					{/* <div

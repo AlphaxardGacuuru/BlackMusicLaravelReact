@@ -98992,7 +98992,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // import axios from '../components/Axios'
 
 var HelpThread = function HelpThread(props) {
   axios.defaults.baseURL = props.url;
@@ -100320,10 +100320,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SocialMediaInput */ "./resources/js/components/SocialMediaInput.js");
 
 
-
+var SocialMediaInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/SocialMediaInput */ "./resources/js/components/SocialMediaInput.js"));
+});
 
 var PostCreate = function PostCreate(props) {
   // Set states
@@ -100368,7 +100369,12 @@ var PostCreate = function PostCreate(props) {
     onSubmit: props.onSubmit,
     className: "contact-form bg-white",
     autoComplete: "off"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__["default"], props)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Suspense, {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "sonar-load",
+      className: "mt-5 mb-5"
+    }))
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SocialMediaInput, props))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
 };

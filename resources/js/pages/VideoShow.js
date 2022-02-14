@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
+import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 
 const VideoShow = (props) => {
 

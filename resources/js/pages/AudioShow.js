@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
+import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
 
 const AudioShow = (props) => {
 
