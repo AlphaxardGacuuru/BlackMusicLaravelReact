@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
+
+const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
 const AudioCharts = (props) => {
 
@@ -370,19 +371,26 @@ const AudioCharts = (props) => {
 								{props.audios
 									.filter((audio) => audio.id == audioArray.key && audio.username != "@blackmusic")
 									.map((audio, key) => (
-										<AudioMediaHorizontal
-											key={key}
-											setShow={props.setShow}
-											link={`/audio-show/${audio.id}`}
-											thumbnail={`/storage/${audio.thumbnail}`}
-											name={audio.name}
-											username={audio.username}
-											ft={audio.ft}
-											hasBoughtAudio={!audio.hasBoughtAudio}
-											audioInCart={audio.inCart}
-											audioId={audio.id}
-											onCartAudios={onCartAudios}
-											onBuyAudios={onBuyAudios} />
+										<Suspense
+											fallback={
+												<center>
+													<div id="sonar-load" className="mt-5 mb-5"></div>
+												</center>
+											}>
+											<AudioMediaHorizontal
+												key={key}
+												setShow={props.setShow}
+												link={`/audio-show/${audio.id}`}
+												thumbnail={`/storage/${audio.thumbnail}`}
+												name={audio.name}
+												username={audio.username}
+												ft={audio.ft}
+												hasBoughtAudio={!audio.hasBoughtAudio}
+												audioInCart={audio.inCart}
+												audioId={audio.id}
+												onCartAudios={onCartAudios}
+												onBuyAudios={onBuyAudios} />
+										</Suspense>
 									))}
 							</div>
 						))}

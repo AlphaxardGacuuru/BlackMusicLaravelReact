@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
+
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
 const Index = (props) => {
 
@@ -794,20 +795,27 @@ const Index = (props) => {
 							.filter((video) => !video.hasBoughtVideo)
 							.slice(0, 10)
 							.map((video, index) => (
-								<VideoMediaHorizontal
+								<Suspense
 									key={index}
-									onClick={() => props.setShow(0)}
-									setShow={props.setShow}
-									link={`/video-show/${video.id}`}
-									thumbnail={video.thumbnail}
-									name={video.name}
-									username={video.username}
-									ft={video.ft}
-									hasBoughtVideo={!video.hasBoughtVideo}
-									videoInCart={video.inCart}
-									videoId={video.id}
-									onCartVideos={props.onCartVideos}
-									onBuyVideos={onBuyVideos} />
+									fallback={
+										<center>
+											<div id="sonar-load" className="mt-5 mb-5"></div>
+										</center>
+									}>
+									<VideoMediaHorizontal
+										onClick={() => props.setShow(0)}
+										setShow={props.setShow}
+										link={`/video-show/${video.id}`}
+										thumbnail={video.thumbnail}
+										name={video.name}
+										username={video.username}
+										ft={video.ft}
+										hasBoughtVideo={!video.hasBoughtVideo}
+										videoInCart={video.inCart}
+										videoId={video.id}
+										onCartVideos={props.onCartVideos}
+										onBuyVideos={onBuyVideos} />
+								</Suspense>
 							))}
 					</div>
 				</div>

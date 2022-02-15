@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
+const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
 const Library = (props) => {
 	return (
@@ -18,16 +18,24 @@ const Library = (props) => {
 				{props.boughtVideos
 					.filter((boughtVideo) => boughtVideo.username == props.auth.username)
 					.map((boughtVideo, key) => (
-						<VideoMediaHorizontal
+						<Suspense
 							key={key}
-							onClick={() => props.setShow(0)}
-							setShow={props.setShow}
-							link={`/video-show/${boughtVideo.video_id}`}
-							thumbnail={boughtVideo.thumbnail}
-							name={boughtVideo.name}
-							username={boughtVideo.artist}
-							ft={boughtVideo.ft}
-							showCartandBuyButton={false} />
+							fallback={
+								<center>
+									<div id="sonar-load" className="mt-5 mb-5"></div>
+								</center>
+							}>
+							<VideoMediaHorizontal
+								key={key}
+								onClick={() => props.setShow(0)}
+								setShow={props.setShow}
+								link={`/video-show/${boughtVideo.video_id}`}
+								thumbnail={boughtVideo.thumbnail}
+								name={boughtVideo.name}
+								username={boughtVideo.artist}
+								ft={boughtVideo.ft}
+								showCartandBuyButton={false} />
+						</Suspense>
 					))}
 
 				{props.boughtAudios
@@ -38,16 +46,24 @@ const Library = (props) => {
 				{props.boughtAudios
 					.filter((boughtAudio) => boughtAudio.username == props.auth.username)
 					.map((boughtAudio, key) => (
-						<AudioMediaHorizontal
+						<Suspense
 							key={key}
-							setShow={props.setShow}
-							link={`/audio-show/${boughtAudio.audio_id}`}
-							thumbnail={`/storage/${boughtAudio.thumbnail}`}
-							name={boughtAudio.name}
-							username={boughtAudio.artist}
-							ft={boughtAudio.ft}
-							audioId={boughtAudio.audio_id}
-							showCartandBuyButton={false} />
+							fallback={
+								<center>
+									<div id="sonar-load" className="mt-5 mb-5"></div>
+								</center>
+							}>
+							<AudioMediaHorizontal
+								key={key}
+								setShow={props.setShow}
+								link={`/audio-show/${boughtAudio.audio_id}`}
+								thumbnail={`/storage/${boughtAudio.thumbnail}`}
+								name={boughtAudio.name}
+								username={boughtAudio.artist}
+								ft={boughtAudio.ft}
+								audioId={boughtAudio.audio_id}
+								showCartandBuyButton={false} />
+						</Suspense>
 					))}
 			</div>
 			<div className="col-sm-4"></div>

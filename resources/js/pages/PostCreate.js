@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Link } from 'react-router-dom'
 
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -50,14 +50,14 @@ const PostCreate = (props) => {
 						onSubmit={props.onSubmit}
 						className="contact-form bg-white"
 						autoComplete="off">
-						<React.Suspense
+						<Suspense
 							fallback={
 								<center>
 									<div id="sonar-load" className="mt-5 mb-5"></div>
 								</center>
 							}>
 							<SocialMediaInput {...props} />
-						</React.Suspense>
+						</Suspense>
 					</form>
 
 					{/* <div
