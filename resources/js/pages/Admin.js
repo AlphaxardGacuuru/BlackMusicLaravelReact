@@ -16,7 +16,7 @@ const Admin = (props) => {
 				setAdmin(res.data)
 				props.setLocalStorage("admin", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch admin"]))
-	}, [props.autoLoginFailed])
+	}, [])
 
 	// Post song payout
 	const onVideoPayout = (username, amount) => {

@@ -32,7 +32,7 @@ const PostShow = (props) => {
 				setPostComments(res.data)
 				props.setLocalStorage("postComments", res.data)
 			}).catch(() => props.setErrors(['Failed to fetch post comments']))
-	}, [props.autoLoginFailed])
+	}, [])
 
 	// Function for liking comments
 	const onCommentLike = (comment) => {

@@ -40,7 +40,7 @@ const VideoShow = (props) => {
 				setVideoComments(res.data)
 				props.setLocalStorage("videoComments", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch video comments"]))
-	}, [props.autoLoginFailed])
+	}, [])
 
 	// Function for liking video
 	const onVideoLike = () => {

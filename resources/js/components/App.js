@@ -71,7 +71,6 @@ function App() {
 
 	// Declare states
 	const [login, setLogin] = useState()
-	const [autoLoginFailed, setAutoLoginFailed] = useState()
 	const [auth, setAuth] = useState(localStorage.getItem("auth") ?
 		JSON.parse(localStorage.getItem("auth")) :
 		{
@@ -107,48 +106,18 @@ function App() {
 	}
 
 	// Autologin if user has already registered
-	const autoLogin = () => {
-		if (auth.username == "@guest" && localStorage.getItem("auth")) {
-			axios.get('/sanctum/csrf-cookie').then(() => {
-				axios.post(`/api/login`, {
-					phone: getLocalStorage("auth").phone,
-					password: getLocalStorage("auth").phone,
-					remember: 'checked'
-				}).then(() => {
-					// Update Logged in user
-					axios.get(`/api/home`)
-						.then((res) => {
-							// Check if auto login has worked
-							if (res.data) {
-								setAuth(res.data)
-								// if auto login failed fetch everything
-								autoLoginFailed && setAutoLoginFailed(false)
-							} else {
-								// If auto login failed, logout
-								axios.get('/sanctum/csrf-cookie').then(() => {
-									axios.post(`/api/logout`)
-										.then(() => {
-											setAuth({
-												"name": "Guest",
-												"username": "@guest",
-												"pp": "profile-pics/male_avatar.png",
-												"account_type": "normal"
-											})
-											// Set autoLoginFailed to refresh everything
-											setAutoLoginFailed(true)
-											// Retry login
-											autoLogin()
-										});
-								})
-							}
-						})
-				})
-			});
-		}
+	if (auth.username == "@guest" && localStorage.getItem("auth")) {
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.post(`/api/login`, {
+				phone: getLocalStorage("auth").phone,
+				password: getLocalStorage("auth").phone,
+				remember: 'checked'
+			})
+		})
 	}
 
 	// Call the auto login function
-	autoLogin()
+	// autoLogin()
 
 	// Fetch data on page load
 	useEffect(() => {
@@ -240,7 +209,7 @@ function App() {
 
 		console.log("effect rendered")
 
-	}, [autoLoginFailed])
+	}, [])
 
 	console.log("rendered")
 
@@ -802,7 +771,6 @@ function App() {
 	// All states
 	const GLOBAL_STATE = {
 		getLocalStorage, setLocalStorage,
-		autoLoginFailed,
 		login, setLogin,
 		url,
 		auth, setAuth,

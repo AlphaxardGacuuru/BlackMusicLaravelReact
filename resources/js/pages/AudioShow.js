@@ -28,7 +28,7 @@ const AudioShow = (props) => {
 				setAudioComments(res.data)
 				props.setLocalStorage("audioComments", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch audio comments"]))
-	}, [props.autoLoginFailed])
+	}, [])
 
 	// Function for liking audio
 	const onAudioLike = () => {

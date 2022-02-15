@@ -28,7 +28,7 @@ const HelpThread = (props) => {
 				setHelpPosts(res.data)
 				props.setLocalStorage("helpPosts", res.data)
 			}).catch(() => props.setErrors(['Failed to fetch help posts']))
-	}, [props.authLoginFailed])
+	}, [])
 
 	// Set states
 	setTimeout(() => {

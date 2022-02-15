@@ -30,7 +30,7 @@ const Settings = (props) => {
 			.then((res) => {
 				setSongPayouts(res.data)
 			}).catch(() => props.setErrors(["Failed to fetch song payouts"]))
-	}, [props.autoLoginFailed])
+	}, [])
 
 	const amount = songPayouts.balance
 	const reference = kopokopoRecipients

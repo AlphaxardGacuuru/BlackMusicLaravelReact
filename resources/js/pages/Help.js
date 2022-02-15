@@ -16,7 +16,7 @@ const Help = (props) => {
 				setHelpThreads(res.data)
 				props.setLocalStorage("helpThreads", res.data)
 			}).catch(() => props.setErrors(['Failed to fetch help threads']))
-	}, [props.authLoginFailed])
+	}, [])
 
 	return (
 		<div className="row">
