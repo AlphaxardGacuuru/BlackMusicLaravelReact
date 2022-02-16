@@ -194,7 +194,7 @@ const VideoCharts = (props) => {
 					style={{
 						width: "100%",
 						height: window.innerHeight * 0.75,
-						overflow: "hidden"
+						overflow: "hidden",
 					}}>
 					<Img src="/storage/img/Ad1.jpg" width="100%" />
 				</div>
@@ -221,6 +221,37 @@ const VideoCharts = (props) => {
 						overflow: "hidden"
 					}}>
 					<Img src="/storage/img/PSX_20220206_205133.jpg" width="100%" />
+				</div>
+				{/* Overlay gradient */}
+				<div className="mt-2" style={{
+					position: "absolute",
+					zIndex: "1",
+					top: 0,
+					right: 0,
+					left: 0,
+					bottom: 0,
+					height: window.innerHeight * 0.85,
+					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(35,35,35,0.7), rgba(0,0,0,0), rgba(255,255,255,1))"
+				}}>
+					{/* <div
+						className="d-flex justify-content-between"
+						style={{
+							position: "absolute",
+							zIndex: "1",
+							right: 0,
+							left: 0,
+							bottom: 50
+						}}>
+						<div className="p-2">
+							<h3>Kenya's best</h3>
+						</div>
+						<div className="p-2">
+							<Button
+								btnClass="mysonar-btn"
+								btnStyle={{ backgroundColor: "transparent" }}
+								btnText="Button" />
+						</div>
+					</div> */}
 				</div>
 			</div>
 

@@ -123,85 +123,85 @@ function App() {
 				} else {
 					setAuth(res.data)
 					setLocalStorage("auth", res.data)
+
+					// Fetch Audio Albums
+					axios.get(`/api/audio-albums`)
+						.then((res) => {
+							setAudioAlbums(res.data)
+							setLocalStorage("audioAlbums", res.data)
+						}).catch(() => setErrors(["Failed to fetch audio albums"]))
+
+					// Fetch Audios
+					axios.get(`/api/audios`)
+						.then((res) => {
+							setAudios(res.data)
+							setLocalStorage("audios", res.data)
+						}).catch(() => setErrors(["Failed to fetch audios"]))
+
+					// Fetch Bought Audios
+					axios.get(`/api/bought-audios`)
+						.then((res) => {
+							setBoughtAudios(res.data)
+							setLocalStorage("boughtAudios", res.data)
+						}).catch(() => setErrors(['Failed to fetch bought audios']))
+
+					// Fetch Bought Videos
+					axios.get(`/api/bought-videos`)
+						.then((res) => {
+							setBoughtVideos(res.data)
+							setLocalStorage("boughtVideos", res.data)
+						}).catch(() => setErrors(['Failed to fetch bought videos']))
+
+					// Fetch Cart Audios
+					axios.get(`/api/cart-audios`)
+						.then((res) => {
+							setCartAudios(res.data)
+							setLocalStorage("cartAudios", res.data)
+						}).catch(() => setErrors(['Failed to fetch cart audios']))
+
+					// Fetch Cart Videos
+					axios.get(`/api/cart-videos`)
+						.then((res) => {
+							setCartVideos(res.data)
+							setLocalStorage("cartVideos", res.data)
+						}).catch(() => setErrors(['Failed to fetch cart videos']))
+
+					// Fetch Notifications
+					axios.get(`/api/notifications`)
+						.then((res) => {
+							setNotifications(res.data)
+							setLocalStorage("notifications", res.data)
+						}).catch(() => setErrors(['Failed to fetch notifications']))
+
+					//Fetch Posts
+					axios.get(`/api/posts`)
+						.then((res) => {
+							setPosts(res.data)
+							setLocalStorage("posts", res.data)
+						}).catch(() => setErrors(['Failed to fetch posts']))
+
+					//Fetch Users
+					axios.get(`/api/users`)
+						.then((res) => {
+							setUsers(res.data)
+							setLocalStorage("users", res.data)
+						}).catch(() => setErrors(['Failed to fetch users']))
+
+					// Fetch Video Albums
+					axios.get(`/api/video-albums`)
+						.then((res) => {
+							setVideoAlbums(res.data)
+							setLocalStorage("videoAlbums", res.data)
+						}).catch(() => setErrors(["Failed to fetch video albums"]))
+
+					// Fetch Videos
+					axios.get(`/api/videos`)
+						.then((res) => {
+							setVideos(res.data)
+							setLocalStorage("videos", res.data)
+						}).catch(() => setErrors(["Failed to fetch videos"]))
 				}
 			}).catch(() => setErrors(["Failed to fetch auth"]))
-
-		// Fetch Audio Albums
-		axios.get(`/api/audio-albums`)
-			.then((res) => {
-				setAudioAlbums(res.data)
-				setLocalStorage("audioAlbums", res.data)
-			}).catch(() => setErrors(["Failed to fetch audio albums"]))
-
-		// Fetch Audios
-		axios.get(`/api/audios`)
-			.then((res) => {
-				setAudios(res.data)
-				setLocalStorage("audios", res.data)
-			}).catch(() => setErrors(["Failed to fetch audios"]))
-
-		// Fetch Bought Audios
-		axios.get(`/api/bought-audios`)
-			.then((res) => {
-				setBoughtAudios(res.data)
-				setLocalStorage("boughtAudios", res.data)
-			}).catch(() => setErrors(['Failed to fetch bought audios']))
-
-		// Fetch Bought Videos
-		axios.get(`/api/bought-videos`)
-			.then((res) => {
-				setBoughtVideos(res.data)
-				setLocalStorage("boughtVideos", res.data)
-			}).catch(() => setErrors(['Failed to fetch bought videos']))
-
-		// Fetch Cart Audios
-		axios.get(`/api/cart-audios`)
-			.then((res) => {
-				setCartAudios(res.data)
-				setLocalStorage("cartAudios", res.data)
-			}).catch(() => setErrors(['Failed to fetch cart audios']))
-
-		// Fetch Cart Videos
-		axios.get(`/api/cart-videos`)
-			.then((res) => {
-				setCartVideos(res.data)
-				setLocalStorage("cartVideos", res.data)
-			}).catch(() => setErrors(['Failed to fetch cart videos']))
-
-		// Fetch Notifications
-		axios.get(`/api/notifications`)
-			.then((res) => {
-				setNotifications(res.data)
-				setLocalStorage("notifications", res.data)
-			}).catch(() => setErrors(['Failed to fetch notifications']))
-
-		//Fetch Posts
-		axios.get(`/api/posts`)
-			.then((res) => {
-				setPosts(res.data)
-				setLocalStorage("posts", res.data)
-			}).catch(() => setErrors(['Failed to fetch posts']))
-
-		//Fetch Users
-		axios.get(`/api/users`)
-			.then((res) => {
-				setUsers(res.data)
-				setLocalStorage("users", res.data)
-			}).catch(() => setErrors(['Failed to fetch users']))
-
-		// Fetch Video Albums
-		axios.get(`/api/video-albums`)
-			.then((res) => {
-				setVideoAlbums(res.data)
-				setLocalStorage("videoAlbums", res.data)
-			}).catch(() => setErrors(["Failed to fetch video albums"]))
-
-		// Fetch Videos
-		axios.get(`/api/videos`)
-			.then((res) => {
-				setVideos(res.data)
-				setLocalStorage("videos", res.data)
-			}).catch(() => setErrors(["Failed to fetch videos"]))
 
 		console.log("effect rendered")
 

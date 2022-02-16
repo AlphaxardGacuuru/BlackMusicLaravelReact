@@ -92876,87 +92876,87 @@ function App() {
         });
       } else {
         setAuth(res.data);
-        setLocalStorage("auth", res.data);
+        setLocalStorage("auth", res.data); // Fetch Audio Albums
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
+          setAudioAlbums(res.data);
+          setLocalStorage("audioAlbums", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch audio albums"]);
+        }); // Fetch Audios
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
+          setAudios(res.data);
+          setLocalStorage("audios", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch audios"]);
+        }); // Fetch Bought Audios
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-audios").then(function (res) {
+          setBoughtAudios(res.data);
+          setLocalStorage("boughtAudios", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch bought audios']);
+        }); // Fetch Bought Videos
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-videos").then(function (res) {
+          setBoughtVideos(res.data);
+          setLocalStorage("boughtVideos", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch bought videos']);
+        }); // Fetch Cart Audios
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
+          setCartAudios(res.data);
+          setLocalStorage("cartAudios", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch cart audios']);
+        }); // Fetch Cart Videos
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
+          setCartVideos(res.data);
+          setLocalStorage("cartVideos", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch cart videos']);
+        }); // Fetch Notifications
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/notifications").then(function (res) {
+          setNotifications(res.data);
+          setLocalStorage("notifications", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch notifications']);
+        }); //Fetch Posts
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
+          setPosts(res.data);
+          setLocalStorage("posts", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch posts']);
+        }); //Fetch Users
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
+          setUsers(res.data);
+          setLocalStorage("users", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch users']);
+        }); // Fetch Video Albums
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
+          setVideoAlbums(res.data);
+          setLocalStorage("videoAlbums", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch video albums"]);
+        }); // Fetch Videos
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
+          setVideos(res.data);
+          setLocalStorage("videos", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch videos"]);
+        });
       }
     })["catch"](function () {
       return setErrors(["Failed to fetch auth"]);
-    }); // Fetch Audio Albums
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
-      setAudioAlbums(res.data);
-      setLocalStorage("audioAlbums", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audio albums"]);
-    }); // Fetch Audios
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
-      setAudios(res.data);
-      setLocalStorage("audios", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch audios"]);
-    }); // Fetch Bought Audios
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-audios").then(function (res) {
-      setBoughtAudios(res.data);
-      setLocalStorage("boughtAudios", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch bought audios']);
-    }); // Fetch Bought Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-videos").then(function (res) {
-      setBoughtVideos(res.data);
-      setLocalStorage("boughtVideos", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch bought videos']);
-    }); // Fetch Cart Audios
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
-      setCartAudios(res.data);
-      setLocalStorage("cartAudios", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch cart audios']);
-    }); // Fetch Cart Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
-      setCartVideos(res.data);
-      setLocalStorage("cartVideos", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch cart videos']);
-    }); // Fetch Notifications
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/notifications").then(function (res) {
-      setNotifications(res.data);
-      setLocalStorage("notifications", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch notifications']);
-    }); //Fetch Posts
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
-      setPosts(res.data);
-      setLocalStorage("posts", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch posts']);
-    }); //Fetch Users
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
-      setUsers(res.data);
-      setLocalStorage("users", res.data);
-    })["catch"](function () {
-      return setErrors(['Failed to fetch users']);
-    }); // Fetch Video Albums
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
-      setVideoAlbums(res.data);
-      setLocalStorage("videoAlbums", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch video albums"]);
-    }); // Fetch Videos
-
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
-      setVideos(res.data);
-      setLocalStorage("videos", res.data);
-    })["catch"](function () {
-      return setErrors(["Failed to fetch videos"]);
     });
     console.log("effect rendered");
   }, []);
@@ -96421,7 +96421,19 @@ var AudioCharts = function AudioCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: "/storage/img/PSX_20220206_205133.jpg",
     width: "100%"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-2",
+    style: {
+      position: "absolute",
+      zIndex: "1",
+      top: 0,
+      right: 0,
+      left: 0,
+      bottom: 0,
+      height: window.innerHeight * 0.85,
+      backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(35,35,35,0.7), rgba(0,0,0,0), rgba(255,255,255,1))"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
     className: "hidden-scroll mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -102828,7 +102840,19 @@ var VideoCharts = function VideoCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: "/storage/img/PSX_20220206_205133.jpg",
     width: "100%"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-2",
+    style: {
+      position: "absolute",
+      zIndex: "1",
+      top: 0,
+      right: 0,
+      left: 0,
+      bottom: 0,
+      height: window.innerHeight * 0.85,
+      backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(35,35,35,0.7), rgba(0,0,0,0), rgba(255,255,255,1))"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
     className: "hidden-scroll mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
