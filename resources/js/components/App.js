@@ -71,6 +71,7 @@ function App() {
 
 	// Declare states
 	const [login, setLogin] = useState()
+	const [autoLoggedIn, setAutoLoggedIn] = useState()
 	const [auth, setAuth] = useState(localStorage.getItem("auth") ?
 		JSON.parse(localStorage.getItem("auth")) :
 		{
@@ -120,6 +121,8 @@ function App() {
 							remember: 'checked'
 						})
 					})
+					// Trigger Fetch
+					setAutoLoggedIn(true)
 				} else {
 					setAuth(res.data)
 					setLocalStorage("auth", res.data)
@@ -205,7 +208,7 @@ function App() {
 
 		console.log("effect rendered")
 
-	}, [])
+	}, [autoLoggedIn])
 
 	console.log("rendered")
 

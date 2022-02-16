@@ -18,7 +18,7 @@ const TopNavLinks = (props) => {
 			axios.post(`${props.url}/api/logout`)
 				.then((res) => {
 					// Remove phone from localStorage
-					localStorage.removeItem("auth")
+					// localStorage.removeItem("auth")
 					props.setMessage("Logged out")
 					// Update Auth
 					props.setAuth({
