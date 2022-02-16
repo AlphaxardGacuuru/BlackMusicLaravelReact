@@ -105,26 +105,22 @@ function App() {
 		setTimeout(() => setMessage(''), 3000);
 	}
 
-	// Autologin if user has already registered
-	if (auth.username == "@guest" && localStorage.getItem("auth")) {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/login`, {
-				phone: getLocalStorage("auth").phone,
-				password: getLocalStorage("auth").phone,
-				remember: 'checked'
-			})
-		})
-	}
-
-	// Call the auto login function
-	// autoLogin()
-
 	// Fetch data on page load
 	useEffect(() => {
 		// Fetch Auth
 		axios.get(`/api/home`)
 			.then((res) => {
-				if (res.data) {
+				// Check if login expired
+				if (!res.data && localStorage.getItem("auth")) {
+					// Autologin if user has already registered
+					axios.get('/sanctum/csrf-cookie').then(() => {
+						axios.post(`/api/login`, {
+							phone: getLocalStorage("auth").phone,
+							password: getLocalStorage("auth").phone,
+							remember: 'checked'
+						})
+					})
+				} else {
 					setAuth(res.data)
 					setLocalStorage("auth", res.data)
 				}

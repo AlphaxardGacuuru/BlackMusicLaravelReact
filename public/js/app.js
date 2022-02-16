@@ -92858,26 +92858,23 @@ function App() {
     setTimeout(function () {
       return setMessage('');
     }, 3000);
-  } // Autologin if user has already registered
-
-
-  if (auth.username == "@guest" && localStorage.getItem("auth")) {
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/login", {
-        phone: getLocalStorage("auth").phone,
-        password: getLocalStorage("auth").phone,
-        remember: 'checked'
-      });
-    });
-  } // Call the auto login function
-  // autoLogin()
-  // Fetch data on page load
+  } // Fetch data on page load
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // Fetch Auth
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/home").then(function (res) {
-      if (res.data) {
+      // Check if login expired
+      if (!res.data && localStorage.getItem("auth")) {
+        // Autologin if user has already registered
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/sanctum/csrf-cookie').then(function () {
+          axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/login", {
+            phone: getLocalStorage("auth").phone,
+            password: getLocalStorage("auth").phone,
+            remember: 'checked'
+          });
+        });
+      } else {
         setAuth(res.data);
         setLocalStorage("auth", res.data);
       }
