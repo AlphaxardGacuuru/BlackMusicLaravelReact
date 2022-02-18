@@ -127,7 +127,7 @@ class SongPayoutsController extends Controller
             $songPayout->save();
 
             // Get send video payout notification
-            // auth()->user()->notify(new SongPayoutNotifications($amount));
+            auth()->user()->notify(new SongPayoutNotifications($amount));
 
             return response("Song Payout Added", 200);
         }
