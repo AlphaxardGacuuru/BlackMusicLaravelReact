@@ -104,7 +104,7 @@ const Settings = (props) => {
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
 				<center>
-					<h1>Song Payouts</h1>
+					<h1>Song Payout</h1>
 					<table className="table table-responsive table-hover">
 						<thead>
 							<tr>
