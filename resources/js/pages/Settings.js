@@ -32,7 +32,6 @@ const Settings = (props) => {
 			}).catch(() => props.setErrors(["Failed to fetch song payouts"]))
 	}, [])
 
-	const amount = songPayouts.balance
 	const reference = kopokopoRecipients
 		.find((reference) => reference.username == props.auth.username)
 
@@ -76,7 +75,7 @@ const Settings = (props) => {
 	const onTransferFunds = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/song-payouts`, {
-				amount: amount,
+				amount: songPayouts.balance,
 				destination_reference: reference.destination_reference,
 			}).then((res) => {
 				props.setMessage(res.data)
@@ -93,7 +92,6 @@ const Settings = (props) => {
 				// Get other errors
 				newError.push(err.response.data.message)
 				props.setErrors(newError)
-				console.log(err.response)
 			})
 		})
 	}

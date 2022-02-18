@@ -101978,7 +101978,6 @@ var Settings = function Settings(props) {
       return props.setErrors(["Failed to fetch song payouts"]);
     });
   }, []);
-  var amount = songPayouts.balance;
   var reference = kopokopoRecipients.find(function (reference) {
     return reference.username == props.auth.username;
   }); // Web Share API for share button
@@ -102023,7 +102022,7 @@ var Settings = function Settings(props) {
   var onTransferFunds = function onTransferFunds() {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/song-payouts", {
-        amount: amount,
+        amount: songPayouts.balance,
         destination_reference: reference.destination_reference
       }).then(function (res) {
         props.setMessage(res.data); // Update song payouts
@@ -102043,7 +102042,6 @@ var Settings = function Settings(props) {
 
         newError.push(err.response.data.message);
         props.setErrors(newError);
-        console.log(err.response);
       });
     });
   };
