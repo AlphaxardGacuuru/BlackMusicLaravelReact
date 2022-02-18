@@ -73,7 +73,9 @@ const Settings = (props) => {
 		})
 	}
 
+	console.log("works")
 	const onTransferFunds = () => {
+		console.log("works")
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/song-payouts`, {
 				amount: amount,
