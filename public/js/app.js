@@ -92882,8 +92882,11 @@ function App() {
 
         setAutoLoggedIn(true);
       } else {
-        setAuth(res.data);
-        setLocalStorage("auth", res.data); // Fetch Audio Albums
+        if (res.data) {
+          setAuth(res.data);
+          setLocalStorage("auth", res.data);
+        } // Fetch Audio Albums
+
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
           setAudioAlbums(res.data);
@@ -95143,7 +95146,7 @@ var TopNavLinks = function TopNavLinks(props) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/logout")).then(function (res) {
         // Remove phone from localStorage
-        // localStorage.removeItem("auth")
+        localStorage.removeItem("auth");
         props.setMessage("Logged out"); // Update Auth
 
         props.setAuth({

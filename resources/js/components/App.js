@@ -124,8 +124,10 @@ function App() {
 					// Trigger Fetch
 					setAutoLoggedIn(true)
 				} else {
-					setAuth(res.data)
-					setLocalStorage("auth", res.data)
+					if (res.data) {
+						setAuth(res.data)
+						setLocalStorage("auth", res.data)
+					}
 
 					// Fetch Audio Albums
 					axios.get(`/api/audio-albums`)
