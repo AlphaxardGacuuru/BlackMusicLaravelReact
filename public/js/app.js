@@ -102043,6 +102043,7 @@ var Settings = function Settings(props) {
 
         newError.push(err.response.data.message);
         props.setErrors(newError);
+        console.log(err.response);
       });
     });
   };

@@ -93,6 +93,7 @@ const Settings = (props) => {
 				// Get other errors
 				newError.push(err.response.data.message)
 				props.setErrors(newError)
+				console.log(err.response)
 			})
 		})
 	}
