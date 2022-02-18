@@ -102021,7 +102021,6 @@ var Settings = function Settings(props) {
   };
 
   var onTransferFunds = function onTransferFunds() {
-    console.log(props.url);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/song-payouts", {
         amount: amount,
