@@ -235,7 +235,7 @@ const AudioCharts = (props) => {
 					left: 0,
 					bottom: 0,
 					height: window.innerHeight * 0.85,
-					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(35,35,35,0.7), rgba(0,0,0,0), rgba(255,255,255,1))"
+					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(255,255,255,0.6))"
 				}}>
 					{/* <div
 						className="d-flex justify-content-between"

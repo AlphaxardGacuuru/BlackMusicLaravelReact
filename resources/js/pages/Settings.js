@@ -53,11 +53,11 @@ const Settings = (props) => {
 	// Function to create recipient
 	const onCreateRecipient = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/kopokopo-recipients`)
+			axios.post(`/api/kopokopo-recipients`)
 				.then((res) => {
 					props.setMessage(res.data)
 					// Update Kopokopo recipients
-					axios.get(`${props.url}/api/kopokopo-recipients`)
+					axios.get(`/api/kopokopo-recipients`)
 						.then((res) => setKopokopoRecipients(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
@@ -75,13 +75,13 @@ const Settings = (props) => {
 
 	const onTransferFunds = () => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/song-payouts`, {
+			axios.post(`/api/song-payouts`, {
 				amount: amount,
 				destination_reference: reference.destination_reference,
 			}).then((res) => {
 				props.setMessage(res.data)
 				// Update song payouts
-				axios.get(`${props.url}/api/song-payouts`)
+				axios.get(`/api/song-payouts`)
 					.then((res) => setSongPayouts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
