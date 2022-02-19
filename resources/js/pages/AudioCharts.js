@@ -111,61 +111,10 @@ const AudioCharts = (props) => {
 		audiosArray.reverse()
 	}
 
-	// Function for adding audio to cart
-	const onCartAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update Audios
-				axios.get(`${props.url}/api/audios`)
-					.then((res) => props.setAudios(res.data))
-				// Update Cart Audios
-				axios.get(`${props.url}/api/cart-audios`)
-					.then((res) => props.setCartAudios(res.data))
-				// Update Audio Albums
-				axios.get(`${props.url}/api/audio-albums`)
-					.then((res) => props.setAudioAlbums(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for buying audio to cart
 	const onBuyAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update Audios
-				axios.get(`${props.url}/api/audios`)
-					.then((res) => props.setAudios(res.data))
-				// Update Cart Audios
-				axios.get(`${props.url}/api/cart-audios`)
-					.then((res) => props.setCartAudios(res.data))
-				// Update Audio Albums
-				axios.get(`${props.url}/api/audio-albums`)
-					.then((res) => props.setAudioAlbums(res.data))
-				history.push('/cart')
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
+		props.onCartAudios(audio)
+		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for loading more artists
@@ -419,7 +368,7 @@ const AudioCharts = (props) => {
 												hasBoughtAudio={!audio.hasBoughtAudio}
 												audioInCart={audio.inCart}
 												audioId={audio.id}
-												onCartAudios={onCartAudios}
+												onCartAudios={props.onCartAudios}
 												onBuyAudios={onBuyAudios} />
 										</Suspense>
 									))}

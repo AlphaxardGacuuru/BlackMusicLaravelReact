@@ -249,6 +249,32 @@ function App() {
 
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
+		// Change cart button
+		const newVideos = videos
+			.filter((item) => {
+				// Get the exact video and change cart button
+				if (item.id == video) {
+					item.inCart = !item.inCart
+				}
+				return true
+			})
+		// Set new Videos
+		setVideos(newVideos)
+
+		// Change delete from cart button for cart videos
+		const newCartVideos = cartVideos
+			.filter((item) => {
+				// Get the exact video
+				if (item.video_id == video) {
+					return false
+				} else {
+					return true
+				}
+			})
+		// Set new Cart Videos
+		setCartVideos(newCartVideos)
+
+		// Add Video to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/cart-videos`, {
 				video: video
@@ -287,47 +313,34 @@ function App() {
 		});
 	}
 
-	// Function for buying video to cart
-	const onBuyVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				setMessage(res.data)
-				// Update Videos
-				axios.get(`/api/videos`)
-					.then((res) => {
-						setVideos(res.data)
-						setLocalStorage("videos", res.data)
-					})
-				// Update Cart Videos
-				axios.get(`/api/cart-videos`)
-					.then((res) => {
-						setCartVideos(res.data)
-						setLocalStorage("cartVideos", res.data)
-					})
-				// Update Video Albums
-				axios.get(`/api/video-albums`)
-					.then((res) => {
-						setVideoAlbums(res.data)
-						setLocalStorage("videoAlbums", res.data)
-					})
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				setErrors(newError)
-			})
-		});
-	}
-
 	// Function for adding audio to cart
 	const onCartAudios = (audio) => {
+		// Change cart button
+		const newAudios = audios
+			.filter((item) => {
+				// Get the exact audio and change cart button
+				if (item.id == audio) {
+					item.inCart = !item.inCart
+				}
+				return true
+			})
+		// Set new Audios
+		setAudios(newAudios)
+
+		// Change delete from cart button for cart audios
+		const newCartAudios = cartAudios
+			.filter((item) => {
+				// Get the exact audio
+				if (item.audio_id == audio) {
+					return false
+				} else {
+					return true
+				}
+			})
+		// Set new Cart Audios
+		setCartAudios(newCartAudios)
+
+		// Add Audio to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/cart-audios`, {
 				audio: audio
@@ -351,44 +364,6 @@ function App() {
 						setAudioAlbums(res.data)
 						setLocalStorage("audioAlbums", res.data)
 					})
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				setErrors(newError)
-			})
-		});
-	}
-
-	// Function for buying audio to cart
-	const onBuyAudios = (audio) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/cart-audios`, {
-				audio: audio
-			}).then((res) => {
-				setMessage(res.data)
-				// Update audios
-				axios.get(`/api/audios`)
-					.then((res) => {
-						setAudios(res.data)
-						setLocalStorage("audios", res.data)
-					})
-				// Update Cart Audios
-				axios.get(`/api/cart-audios`)
-					.then((res) => {
-						setCartAudios(res.data)
-						setLocalStorage("cartAudios", res.data)
-					})
-				// Update Audio Albums
-				axios.get(`/api/audio-albums`)
-					.then((res) => {
-						setAudioAlbums(res.data)
-						setLocalStorage("audioAlbums", res.data)
-					})
-				history.push('/cart')
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
 				var resError
@@ -794,9 +769,7 @@ function App() {
 		videos, setVideos,
 		onFollow,
 		onCartVideos,
-		onBuyVideos,
 		onCartAudios,
-		onBuyAudios,
 		// Search 
 		onSearchIconClick,
 		searchInput,

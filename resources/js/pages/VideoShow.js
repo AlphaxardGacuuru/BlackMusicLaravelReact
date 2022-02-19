@@ -138,7 +138,7 @@ const VideoShow = (props) => {
 
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
-		props.onBuyVideos(video)
+		props.onCartVideos(video)
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 

@@ -107,61 +107,10 @@ const VideoCharts = (props) => {
 		videosArray.reverse()
 	}
 
-	// Function for adding video to cart
-	const onCartVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update Videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update Cart Videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				// Update Videos Albums
-				axios.get(`${props.url}/api/video-albums`)
-					.then((res) => props.setVideoAlbums(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
-	}
-
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/cart-videos`, {
-				video: video
-			}).then((res) => {
-				props.setMessage(res.data)
-				// Update Videos
-				axios.get(`${props.url}/api/videos`)
-					.then((res) => props.setVideos(res.data))
-				// Update Cart Videos
-				axios.get(`${props.url}/api/cart-videos`)
-					.then((res) => props.setCartVideos(res.data))
-				// Update Videos Albums
-				axios.get(`${props.url}/api/video-albums`)
-					.then((res) => props.setVideoAlbums(res.data))
-				setTimeout(() => history.push('/cart'), 1000)
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		});
+		props.onCartVideos(video)
+		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for loading more artists
@@ -463,7 +412,7 @@ const VideoCharts = (props) => {
 													video.inCart ?
 														<button className="btn btn-light mb-1 rounded-0"
 															style={{ minWidth: '90px', height: '33px' }}
-															onClick={() => onCartVideos(videoArray.key)}>
+															onClick={() => props.onCartVideos(videoArray.key)}>
 															<svg className='bi bi-cart3'
 																width='1em'
 																height='1em'
@@ -476,7 +425,7 @@ const VideoCharts = (props) => {
 														</button> :
 														<button className="mysonar-btn mb-1"
 															style={{ minWidth: '90px', height: '33px' }}
-															onClick={() => onCartVideos(videoArray.key)}>
+															onClick={() => props.onCartVideos(videoArray.key)}>
 															<svg className='bi bi-cart3'
 																width='1em'
 																height='1em'
@@ -488,11 +437,12 @@ const VideoCharts = (props) => {
 															</svg>
 														</button> : ""}
 												<br />
-												{!video.hasBoughtVideo &&
+												{!video.hasBoughtVideo ?
+													!video.inCart &&
 													<Button
 														btnClass={'btn mysonar-btn green-btn'}
 														btnText={'buy'}
-														onClick={() => onBuyVideos(videoArray.key)} />}
+														onClick={() => onBuyVideos(videoArray.key)} /> : ""}
 											</span>
 										))}
 								</span>
@@ -568,7 +518,7 @@ const VideoCharts = (props) => {
 													hasBoughtVideo={!video.hasBoughtVideo}
 													videoInCart={video.inCart}
 													videoId={videoArray.key}
-													onCartVideos={onCartVideos}
+													onCartVideos={props.onCartVideos}
 													onBuyVideos={onBuyVideos} />
 											</Suspense>
 										))}

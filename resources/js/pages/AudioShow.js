@@ -123,7 +123,7 @@ const AudioShow = (props) => {
 
 	// Function for buying audio to cart
 	const onBuyAudios = (audio) => {
-		props.onBuyAudios(audio)
+		props.onCartAudios(audio)
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 

@@ -24,18 +24,31 @@ const Profile = (props) => {
 
 	// Function for buying video to cart
 	const onBuyVideos = (video) => {
-		props.onBuyVideos(video)
+		props.onCartVideos(video)
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for buying audio to cart
 	const onBuyAudios = (audio) => {
-		props.onBuyAudios(audio)
+		props.onCartAudios(audio)
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 
 	// Function for liking posts
 	const onPostLike = (post) => {
+		// Show like
+		const newPosts = props.posts
+			.filter((item) => {
+				// Get the exact post and change like status
+				if (item.id == post) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new posts
+		props.setPosts(newPosts)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/post-likes`, {
 				post: post

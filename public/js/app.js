@@ -93006,6 +93006,29 @@ function App() {
 
 
   var onCartVideos = function onCartVideos(video) {
+    // Change cart button
+    var newVideos = videos.filter(function (item) {
+      // Get the exact video and change cart button
+      if (item.id == video) {
+        item.inCart = !item.inCart;
+      }
+
+      return true;
+    }); // Set new Videos
+
+    setVideos(newVideos); // Change delete from cart button for cart videos
+
+    var newCartVideos = cartVideos.filter(function (item) {
+      // Get the exact video
+      if (item.video_id == video) {
+        return false;
+      } else {
+        return true;
+      }
+    }); // Set new Cart Videos
+
+    setCartVideos(newCartVideos); // Add Video to database
+
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
         video: video
@@ -93041,48 +93064,33 @@ function App() {
         setErrors(newError);
       });
     });
-  }; // Function for buying video to cart
-
-
-  var onBuyVideos = function onBuyVideos(video) {
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
-        video: video
-      }).then(function (res) {
-        setMessage(res.data); // Update Videos
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
-          setVideos(res.data);
-          setLocalStorage("videos", res.data);
-        }); // Update Cart Videos
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-videos").then(function (res) {
-          setCartVideos(res.data);
-          setLocalStorage("cartVideos", res.data);
-        }); // Update Video Albums
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
-          setVideoAlbums(res.data);
-          setLocalStorage("videoAlbums", res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        } // Get other errors
-
-
-        newError.push(err.response.data.message);
-        setErrors(newError);
-      });
-    });
   }; // Function for adding audio to cart
 
 
   var onCartAudios = function onCartAudios(audio) {
+    // Change cart button
+    var newAudios = audios.filter(function (item) {
+      // Get the exact audio and change cart button
+      if (item.id == audio) {
+        item.inCart = !item.inCart;
+      }
+
+      return true;
+    }); // Set new Audios
+
+    setAudios(newAudios); // Change delete from cart button for cart audios
+
+    var newCartAudios = cartAudios.filter(function (item) {
+      // Get the exact audio
+      if (item.audio_id == audio) {
+        return false;
+      } else {
+        return true;
+      }
+    }); // Set new Cart Audios
+
+    setCartAudios(newCartAudios); // Add Audio to database
+
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
         audio: audio
@@ -93103,43 +93111,6 @@ function App() {
           setAudioAlbums(res.data);
           setLocalStorage("audioAlbums", res.data);
         });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        setErrors(newError);
-      });
-    });
-  }; // Function for buying audio to cart
-
-
-  var onBuyAudios = function onBuyAudios(audio) {
-    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
-        audio: audio
-      }).then(function (res) {
-        setMessage(res.data); // Update audios
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
-          setAudios(res.data);
-          setLocalStorage("audios", res.data);
-        }); // Update Cart Audios
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/cart-audios").then(function (res) {
-          setCartAudios(res.data);
-          setLocalStorage("cartAudios", res.data);
-        }); // Update Audio Albums
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
-          setAudioAlbums(res.data);
-          setLocalStorage("audioAlbums", res.data);
-        });
-        history.push('/cart');
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -93679,7 +93650,7 @@ function App() {
     setVideos: setVideos,
     search: search,
     setSearch: setSearch
-  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onBuyVideos", onBuyVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "onBuyAudios", onBuyAudios), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
+  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/login",
     exact: true,
@@ -96296,73 +96267,14 @@ var AudioCharts = function AudioCharts(props) {
 
   if (chart == "Newly Released") {
     audiosArray.reverse();
-  } // Function for adding audio to cart
-
-
-  var onCartAudios = function onCartAudios(audio) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-audios"), {
-        audio: audio
-      }).then(function (res) {
-        props.setMessage(res.data); // Update Audios
-
-        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
-          return props.setAudios(res.data);
-        }); // Update Cart Audios
-
-        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
-          return props.setCartAudios(res.data);
-        }); // Update Audio Albums
-
-        axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
-          return props.setAudioAlbums(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for buying audio to cart
+  } // Function for buying audio to cart
 
 
   var onBuyAudios = function onBuyAudios(audio) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-audios"), {
-        audio: audio
-      }).then(function (res) {
-        props.setMessage(res.data); // Update Audios
-
-        axios.get("".concat(props.url, "/api/audios")).then(function (res) {
-          return props.setAudios(res.data);
-        }); // Update Cart Audios
-
-        axios.get("".concat(props.url, "/api/cart-audios")).then(function (res) {
-          return props.setCartAudios(res.data);
-        }); // Update Audio Albums
-
-        axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
-          return props.setAudioAlbums(res.data);
-        });
-        history.push('/cart');
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
+    props.onCartAudios(audio);
+    setTimeout(function () {
+      return history.push('/cart');
+    }, 1000);
   }; // Function for loading more artists
 
 
@@ -96599,7 +96511,7 @@ var AudioCharts = function AudioCharts(props) {
         hasBoughtAudio: !audio.hasBoughtAudio,
         audioInCart: audio.inCart,
         audioId: audio.id,
-        onCartAudios: onCartAudios,
+        onCartAudios: props.onCartAudios,
         onBuyAudios: onBuyAudios
       }));
     }));
@@ -97562,7 +97474,7 @@ var AudioShow = function AudioShow(props) {
 
 
   var onBuyAudios = function onBuyAudios(audio) {
-    props.onBuyAudios(audio);
+    props.onCartAudios(audio);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -99294,7 +99206,7 @@ var Index = function Index(props) {
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Buy function
 
   var onBuyVideos = function onBuyVideos(video) {
-    props.onBuyVideos(video);
+    props.onCartVideos(video);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -99302,6 +99214,18 @@ var Index = function Index(props) {
 
 
   var onPostLike = function onPostLike(post) {
+    // Show like
+    var newPosts = props.posts.filter(function (item) {
+      // Get the exact post and change like status
+      if (item.id == post) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new posts
+
+    props.setPosts(newPosts); // Add like to database
+
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
         post: post
@@ -99640,7 +99564,7 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       fillRule: "evenodd",
       d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn mb-1",
       style: {
         minWidth: '90px',
@@ -99665,7 +99589,7 @@ var Index = function Index(props) {
       onClick: function onClick() {
         return onBuyVideos(video.id);
       }
-    }));
+    })));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "border border-top-0 m-0 p-0"
   }, dummyArray.filter(function () {
@@ -100735,7 +100659,7 @@ var Profile = function Profile(props) {
 
 
   var onBuyVideos = function onBuyVideos(video) {
-    props.onBuyVideos(video);
+    props.onCartVideos(video);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -100743,7 +100667,7 @@ var Profile = function Profile(props) {
 
 
   var onBuyAudios = function onBuyAudios(audio) {
-    props.onBuyAudios(audio);
+    props.onCartAudios(audio);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -100751,6 +100675,18 @@ var Profile = function Profile(props) {
 
 
   var onPostLike = function onPostLike(post) {
+    // Show like
+    var newPosts = props.posts.filter(function (item) {
+      // Get the exact post and change like status
+      if (item.id == post) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new posts
+
+    props.setPosts(newPosts); // Add like to database
+
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
         post: post
@@ -101727,7 +101663,7 @@ var Search = function Search(props) {
   }); // Function for buying video to cart
 
   var onBuyVideos = function onBuyVideos(video) {
-    props.onBuyVideos(video);
+    props.onCartVideos(video);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -101735,7 +101671,7 @@ var Search = function Search(props) {
 
 
   var onBuyAudios = function onBuyAudios(audio) {
-    props.onBuyAudios(audio);
+    props.onCartAudios(audio);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
@@ -102712,75 +102648,14 @@ var VideoCharts = function VideoCharts(props) {
 
   if (chart == "Newly Released") {
     videosArray.reverse();
-  } // Function for adding video to cart
-
-
-  var onCartVideos = function onCartVideos(video) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-videos"), {
-        video: video
-      }).then(function (res) {
-        props.setMessage(res.data); // Update Videos
-
-        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setVideos(res.data);
-        }); // Update Cart Videos
-
-        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
-        }); // Update Videos Albums
-
-        axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
-          return props.setVideoAlbums(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for buying video to cart
+  } // Function for buying video to cart
 
 
   var onBuyVideos = function onBuyVideos(video) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/cart-videos"), {
-        video: video
-      }).then(function (res) {
-        props.setMessage(res.data); // Update Videos
-
-        axios.get("".concat(props.url, "/api/videos")).then(function (res) {
-          return props.setVideos(res.data);
-        }); // Update Cart Videos
-
-        axios.get("".concat(props.url, "/api/cart-videos")).then(function (res) {
-          return props.setCartVideos(res.data);
-        }); // Update Videos Albums
-
-        axios.get("".concat(props.url, "/api/video-albums")).then(function (res) {
-          return props.setVideoAlbums(res.data);
-        });
-        setTimeout(function () {
-          return history.push('/cart');
-        }, 1000);
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
+    props.onCartVideos(video);
+    setTimeout(function () {
+      return history.push('/cart');
+    }, 1000);
   }; // Function for loading more artists
 
 
@@ -103075,7 +102950,7 @@ var VideoCharts = function VideoCharts(props) {
           height: '33px'
         },
         onClick: function onClick() {
-          return onCartVideos(videoArray.key);
+          return props.onCartVideos(videoArray.key);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
         className: "bi bi-cart3",
@@ -103094,7 +102969,7 @@ var VideoCharts = function VideoCharts(props) {
           height: '33px'
         },
         onClick: function onClick() {
-          return onCartVideos(videoArray.key);
+          return props.onCartVideos(videoArray.key);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
         className: "bi bi-cart3",
@@ -103106,13 +102981,13 @@ var VideoCharts = function VideoCharts(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
         fillRule: "evenodd",
         d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
-      }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !video.hasBoughtVideo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !video.hasBoughtVideo ? !video.inCart && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
         btnClass: 'btn mysonar-btn green-btn',
         btnText: 'buy',
         onClick: function onClick() {
           return onBuyVideos(videoArray.key);
         }
-      }));
+      }) : "");
     }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "anti-hidden"
@@ -103184,7 +103059,7 @@ var VideoCharts = function VideoCharts(props) {
         hasBoughtVideo: !video.hasBoughtVideo,
         videoInCart: video.inCart,
         videoId: videoArray.key,
-        onCartVideos: onCartVideos,
+        onCartVideos: props.onCartVideos,
         onBuyVideos: onBuyVideos
       }));
     }));
@@ -104081,7 +103956,7 @@ var VideoShow = function VideoShow(props) {
 
 
   var onBuyVideos = function onBuyVideos(video) {
-    props.onBuyVideos(video);
+    props.onCartVideos(video);
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
