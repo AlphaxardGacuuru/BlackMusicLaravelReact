@@ -24,7 +24,7 @@ const Help = (props) => {
 			<div className="col-sm-4">
 				{/* Start Thread */}
 				{helpThreads.length == 0 &&
-					<div className="d-flex border-bottom">
+					<div className="d-flex border-bottom border-dark">
 						<div className="p-2">
 							<Link to="/profile/@blackmusic">
 								<Img
@@ -55,7 +55,7 @@ const Help = (props) => {
 				{/* Threads Start */}
 				{helpThreads
 					.map((helpThread, key) => (
-						<div key={key} className={`d-flex border-bottom ${key == 0 && "border-top"}`}>
+						<div key={key} className={`d-flex border-bottom border-dark ${key == 0 && "border-top"}`}>
 							<div className="p-2">
 								<Link to={`/profile/${helpThread.username}`}>
 									<Img

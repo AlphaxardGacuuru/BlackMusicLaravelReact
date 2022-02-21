@@ -60,55 +60,49 @@ const Admin = (props) => {
 				<table className="table table-responsive">
 					<thead>
 						<tr>
-							<th className="border">Users</th>
-							<th className="border">Musicians</th>
-							<th className="border">Videos</th>
-							<th className="border">Audios</th>
-							<th className="border">Videos Bought</th>
-							<th className="border">Audios Bought</th>
-							<th className="border">Video Revenue</th>
-							<th className="border">Audio Revenue</th>
-							<th className="border">Video Profit</th>
-							<th className="border">Audio Profit</th>
+							<th className="border-bottom-0 border-right border-dark">Users</th>
+							<th className="border-bottom-0 border-right border-dark">Musicians</th>
+							<th className="border-bottom-0 border-right border-dark">Videos</th>
+							<th className="border-bottom-0 border-right border-dark">Audios</th>
+							<th className="border-bottom-0 border-right border-dark">Videos Bought</th>
+							<th className="border-bottom-0 border-right border-dark">Audios Bought</th>
+							<th className="border-bottom-0 border-right border-dark">Video Revenue</th>
+							<th className="border-bottom-0 border-right border-dark">Audio Revenue</th>
+							<th className="border-bottom-0 border-right border-dark">Audio Profit</th>
+							<th className="border-bottom-0 border-right-0 border-dark">Video Profit</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							{/* Users */}
-							<td className="border">{props.users.length}</td>
+							<td className="border-right border-dark">{props.users.length}</td>
 							{/* Musicians */}
-							<td className="border">{props.users.filter((user) => user.account_type == "musician").length}</td>
+							<td className="border-right border-dark">{props.users.filter((user) => user.account_type == "musician").length}</td>
 							{/* Videos */}
-							<td className="border">{props.videos.length}</td>
+							<td className="border-right border-dark">{props.videos.length}</td>
 							{/* Audios */}
-							<td className="border">{props.audios.length}</td>
+							<td className="border-right border-dark">{props.audios.length}</td>
 							{/* Videos Bought */}
-							<td className="border">KES {props.boughtVideos.length}</td>
+							<td className="border-right border-dark">KES {props.boughtVideos.length}</td>
 							{/* Audios Bought */}
-							<td className="border">KES {props.boughtAudios.length}</td>
+							<td className="border-right border-dark">KES {props.boughtAudios.length}</td>
 							{/* Video Revenue */}
-							<td className="border" style={{ color: "green" }}>
-								KES {props.boughtVideos
-									.filter((boughtVideo) => boughtVideo.price == 20).length * 20 +
-									props.boughtVideos
-										.filter((boughtVideo) => boughtVideo.price == 200).length * 200}
+							<td className="border-right border-dark" style={{ color: "green" }}>
+								KES {props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 20).length * 20 +
+									props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 200).length * 200}
 							</td>
 							{/* Audio Revenue */}
-							<td className="border" style={{ color: "green" }}>
-								KES {props.boughtAudios
-									.filter((boughtAudio) => boughtAudio.price == 100).length * 100}
+							<td className="border-right border-dark" style={{ color: "green" }}>
+								KES {props.boughtAudios.filter((boughtAudio) => boughtAudio.price == 100).length * 100}
 							</td>
 							{/* Video Profit */}
-							<td className="border" style={{ color: "green" }}>
-								KES {props.boughtVideos
-									.filter((boughtVideo) => boughtVideo.price == 20).length * 10 +
-									props.boughtVideos
-										.filter((boughtVideo) => boughtVideo.price == 200).length * 100}
+							<td className="border-right border-dark" style={{ color: "green" }}>
+								KES {props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 20).length * 10 +
+									props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 200).length * 100}
 							</td>
 							{/* Audio Profit */}
-							<td className="border" style={{ color: "green" }}>
-								KES {props.boughtAudios
-									.filter((boughtAudio) => boughtAudio.price == 100).length * 50}
+							<td className="border-right-0 border-dark" style={{ color: "green" }}>
+								KES {props.boughtAudios.filter((boughtAudio) => boughtAudio.price == 100).length * 50}
 							</td>
 						</tr>
 					</tbody>
@@ -117,22 +111,22 @@ const Admin = (props) => {
 				<br />
 
 				<table className="table table-responsive">
-					<tbody>
-						<tr>
-							<th>User ID</th>
-							<th>Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Gender</th>
-							<th>Acc Type</th>
-							<th>Bio</th>
-							<th>Deco</th>
-							<th>DOB</th>
-							<th>Location</th>
-							<th>Audios Bought</th>
-							<th>Videos Bought</th>
-							<th>Date Joined</th>
+					<tbody className="border border-0">
+						<tr className="border border-0">
+							<th className="border-top border-dark">User ID</th>
+							<th className="border-top border-dark">Name</th>
+							<th className="border-top border-dark">Username</th>
+							<th className="border-top border-dark">Email</th>
+							<th className="border-top border-dark">Phone</th>
+							<th className="border-top border-dark">Gender</th>
+							<th className="border-top border-dark">Acc Type</th>
+							<th className="border-top border-dark">Bio</th>
+							<th className="border-top border-dark">Deco</th>
+							<th className="border-top border-dark">DOB</th>
+							<th className="border-top border-dark">Location</th>
+							<th className="border-top border-dark">Audios Bought</th>
+							<th className="border-top border-dark">Videos Bought</th>
+							<th className="border-top border-dark">Date Joined</th>
 						</tr>
 					</tbody>
 					{props.users
@@ -140,32 +134,32 @@ const Admin = (props) => {
 						.reverse((a, b) => (a - b))
 						.slice(0, 10)
 						.map((musician, key) => (
-							<tbody key={key}>
-								<tr>
-									<td>{musician.id}</td>
-									<td>{musician.name}</td>
-									<td>{musician.username}</td>
-									<td>{musician.email}</td>
-									<td>{musician.phone}</td>
-									<td>{musician.gender}</td>
-									<td>{musician.account_type}</td>
-									<td>{musician.bio}</td>
-									<td></td>
-									<td>{musician.dob}</td>
-									<td>{musician.location}</td>
-									<td>
+							<tbody key={key} className="border border-0">
+								<tr className="border border-0">
+									<td className="border-bottom border-dark">{musician.id}</td>
+									<td className="border-bottom border-dark">{musician.name}</td>
+									<td className="border-bottom border-dark">{musician.username}</td>
+									<td className="border-bottom border-dark">{musician.email}</td>
+									<td className="border-bottom border-dark">{musician.phone}</td>
+									<td className="border-bottom border-dark">{musician.gender}</td>
+									<td className="border-bottom border-dark">{musician.account_type}</td>
+									<td className="border-bottom border-dark">{musician.bio}</td>
+									<td className="border-bottom border-dark"></td>
+									<td className="border-bottom border-dark">{musician.dob}</td>
+									<td className="border-bottom border-dark">{musician.location}</td>
+									<td className="border-bottom border-dark">
 										{props.boughtAudios
 											.filter((boughtAudio) => {
 												boughtAudio.username == musician.username
 											}).length}
 									</td>
-									<td>
+									<td className="border-bottom border-dark">
 										{props.boughtVideos
 											.filter((boughtVideo) => {
 												boughtVideo.username == musician.username
 											}).length}
 									</td>
-									<td>{musician.created_at}
+									<td className="border-bottom border-dark">{musician.created_at}
 									</td>
 								</tr>
 							</tbody>
@@ -177,29 +171,29 @@ const Admin = (props) => {
 				{/* Song Payouts */}
 				<h1>Song Payouts</h1>
 				<table className="table table-responsive thead-light">
-					<tbody>
-						<tr>
-							<th>Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Amount</th>
-							<th>Send</th>
+					<tbody className="border border-0">
+						<tr className="border border-0">
+							<th className="border-top border-dark">Name</th>
+							<th className="border-top border-dark">Username</th>
+							<th className="border-top border-dark">Email</th>
+							<th className="border-top border-dark">Phone</th>
+							<th className="border-top border-dark">Amount</th>
+							<th className="border-top border-dark">Send</th>
 						</tr>
 					</tbody>
 					{admin.songPayouts &&
 						admin.songPayouts
 							.map((songPayout, key) => (
-								<tbody key={key}>
-									<tr>
-										<td>{songPayout.name}</td>
-										<td>{songPayout.username}</td>
-										<td>{songPayout.email}</td>
-										<td>{songPayout.phone}</td>
-										<td>{songPayout.amount}</td>
-										<td>
+								<tbody key={key} className="border border-0">
+									<tr className="border border-0">
+										<td className="border-bottom border-dark">{songPayout.name}</td>
+										<td className="border-bottom border-dark">{songPayout.username}</td>
+										<td className="border-bottom border-dark">{songPayout.email}</td>
+										<td className="border-bottom border-dark">{songPayout.phone}</td>
+										<td className="border-bottom border-dark">{songPayout.amount}</td>
+										<td className="border-bottom border-dark">
 											<Button
-												btnClass="mysonar-btn"
+												btnClass="mysonar-btn white-btn"
 												btnText="send"
 												onClick={() => onVideoPayout(songPayout.username, songPayout.amount)} />
 										</td>

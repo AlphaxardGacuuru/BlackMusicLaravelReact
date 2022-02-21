@@ -176,10 +176,10 @@ const TopNavLinks = (props) => {
 						props.notifications.filter((notification) => !notification.isRead).length}
 				</span>
 				<div
-					style={{ borderRadius: "0" }}
+					style={{ borderRadius: "0", backgroundColor: "#232323" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<div className="dropdown-header">Notifications</div>
+					<div className="dropdown-header border-bottom border-dark">Notifications</div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 						{/* Get Notifications */}
 						{props.notifications
@@ -187,7 +187,7 @@ const TopNavLinks = (props) => {
 								<Link
 									key={key}
 									to={notification.url}
-									className="p-2 dropdown-item border-bottom text-dark"
+									className="p-2 dropdown-item border-bottom text-dark border-dark"
 									onClick={() => onDeleteNotifications(notification.id)}>
 									<small>{notification.message}</small>
 								</Link>
@@ -221,10 +221,10 @@ const TopNavLinks = (props) => {
 						alt="Avatar" />
 				</Link>
 				<div
-					style={{ borderRadius: "0" }}
+					style={{ borderRadius: "0", backgroundColor: "#232323" }}
 					className="dropdown-menu dropdown-menu-right m-0 p-0"
 					aria-labelledby="dropdownMenuButton">
-					<Link to={`/profile/${props.auth.username}`} className="p-3 dropdown-item border-bottom">
+					<Link to={`/profile/${props.auth.username}`} className="p-3 dropdown-item border-bottom border-dark">
 						<h5>{props.auth.name}</h5>
 						<h6>{props.auth.username}</h6>
 					</Link>
@@ -232,23 +232,18 @@ const TopNavLinks = (props) => {
 						to="#"
 						ref={btnAdd}
 						style={{ display: "none" }}
-						className="p-3 dropdown-item border-bottom">
+						className="p-3 dropdown-item border-bottom border-dark">
 						<h6>Get App</h6>
 					</Link>
-					<Link to='/videos' className="p-3 dropdown-item border-bottom">
+					<Link to='/videos' className="p-3 dropdown-item border-bottom border-dark">
 						<h6>Studio</h6>
 					</Link>
-					<Link to='/settings' className="p-3 dropdown-item border-bottom">
+					<Link to='/settings' className="p-3 dropdown-item border-bottom border-dark">
 						<h6>Settings</h6>
 					</Link>
 					<Link
-						to="/help"
-						className="p-3 dropdown-item border-bottom">
-						<h6>Help Center</h6>
-					</Link>
-					<Link
 						to="#"
-						className="p-3 dropdown-item border-bottom"
+						className="p-3 dropdown-item border-bottom border-dark"
 						title="Privacy Policy"
 						onClick={onPrivacyPolicy}>
 						<h6>Privacy Policy</h6>

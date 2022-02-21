@@ -205,7 +205,7 @@ const HelpThread = (props) => {
 				{/* <!-- ***** Call to Action Area Start ***** --> */}
 				<div className="sonar-call-to-action-area section-padding-0-100">
 					<div className="backEnd-content">
-						<h2 className="p-2">Help Center</h2>
+						<h2 className="p-2" style={{ color: "rgba(255,255,255,0.1)" }}>Help Center</h2>
 					</div>
 					{helpPosts
 						.filter((helpPost) => {
@@ -216,7 +216,7 @@ const HelpThread = (props) => {
 						}).map((helpPost, key) => (
 							<div
 								key={key}
-								className={`d-flex ${helpPost.username == props.auth.username && "flex-row-reverse text-white"}`}>
+								className={`d-flex ${helpPost.username == props.auth.username ? "flex-row-reverse" : "text-white"}`}>
 								{helpPost.username == props.auth.username &&
 									showDelete &&
 									<div
@@ -224,7 +224,7 @@ const HelpThread = (props) => {
 											cursor: "pointer",
 											backgroundColor: helpPost.username == props.auth.username && "#232323"
 										}}
-										className="card rounded-0 my-1 mx-0 p-2"
+										className="rounded-0 my-1 mx-0 p-2"
 										onClick={() => onDeletePost(helpPost.id)}>
 										<span>
 											<svg
@@ -240,8 +240,8 @@ const HelpThread = (props) => {
 										</span>
 									</div>}
 								<div
-									className="card rounded-0 border border-0 p-2 my-1 mx-0"
-									style={{ backgroundColor: helpPost.username == props.auth.username && "#232323" }}
+									className="rounded-0 border border-0 p-2 my-1 mx-0"
+									style={{ backgroundColor: helpPost.username == props.auth.username ? "#FFD700" : "#232323" }}
 									onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
 									{helpPost.text}
 
@@ -254,7 +254,7 @@ const HelpThread = (props) => {
 												height="auto"
 												alt={'help-post-media'} />}
 									</div>
-									<small className="text-muted">
+									<small className={helpPost.username == props.auth.username ? "text-dark" : "text-muted"}>
 										<i className="float-right">
 											{helpPost.created_at}
 										</i>

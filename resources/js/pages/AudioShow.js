@@ -32,6 +32,19 @@ const AudioShow = (props) => {
 
 	// Function for liking audio
 	const onAudioLike = () => {
+		// Show like
+		const newAudios = props.audios
+			.filter((item) => {
+				// Get the exact audio and change like status
+				if (item.id == show) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new audios
+		props.setAudios(newAudios)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/audio-likes`, {
 				audio: show
@@ -81,6 +94,19 @@ const AudioShow = (props) => {
 
 	// Function for liking posts
 	const onCommentLike = (comment) => {
+		// Show like
+		const newAudioComments = audioComments
+			.filter((item) => {
+				// Get the exact audio and change like status
+				if (item.id == comment) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new audios
+		setAudioComments(newAudioComments)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/audio-comment-likes`, {
 				comment: comment
@@ -195,7 +221,7 @@ const AudioShow = (props) => {
 				{/* Progress Container End */}
 
 				{/* Audio Controls */}
-				<div className="d-flex justify-content-between">
+				<div className="d-flex justify-content-between" style={{ color: "rgba(220,220,220,1)" }}>
 					{/* Timer */}
 					<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.currentTime)}</div>
 					{/* Shuffle Button */}
@@ -301,7 +327,7 @@ const AudioShow = (props) => {
 
 				<div className="d-flex justify-content-end">
 					{/* <!-- Volume Container --> */}
-					<div style={{ cursor: "pointer" }} className="volume-show">
+					<div style={{ cursor: "pointer", color: "rgba(220,220,220,1)" }} className="volume-show">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-volume-up" viewBox="0 0 16 16">
 							<path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />
 							<path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z" />
@@ -333,7 +359,7 @@ const AudioShow = (props) => {
 					{/* Audio likes */}
 					<div className="p-2 mr-2">
 						{props.showAudio.hasLiked ?
-							<a href="#" style={{ color: "#cc3300" }}
+							<a href="#" style={{ color: "#fb3958" }}
 								onClick={(e) => {
 									e.preventDefault()
 									onAudioLike()
@@ -343,12 +369,15 @@ const AudioShow = (props) => {
 									<path fillRule='evenodd'
 										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 								</svg>
-								<small className="ml-1">{props.showAudio.likes}</small>
+								<small className="ml-1" style={{ color: "inherit" }}>{props.showAudio.likes}</small>
 							</a> :
-							<a href='#' onClick={(e) => {
-								e.preventDefault()
-								onAudioLike()
-							}}>
+							<a
+								href='#'
+								style={{ color: "rgba(220,220,220,1)" }}
+								onClick={(e) => {
+									e.preventDefault()
+									onAudioLike()
+								}}>
 								<svg xmlns='http://www.w3.org/2000/svg'
 									width='1.2em'
 									height='1.2em'
@@ -358,7 +387,7 @@ const AudioShow = (props) => {
 									<path
 										d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 								</svg>
-								<small className="ml-1">{props.showAudio.likes}</small>
+								<small className="ml-1" style={{ color: "inherit" }}>{props.showAudio.likes}</small>
 							</a>}
 					</div>
 
@@ -366,6 +395,7 @@ const AudioShow = (props) => {
 					<div className="p-2 mr-2">
 						<a
 							href="#"
+							style={{ color: "rgba(220,220,220,1)" }}
 							onClick={(e) => {
 								e.preventDefault()
 								props.auth.username != "@guest" && onShare()
@@ -385,15 +415,15 @@ const AudioShow = (props) => {
 						!props.showAudio.audio.match(/https/) &&
 						<div className="p-2">
 							<Button
-								btnClass="mysonar-btn"
+								btnClass="mysonar-btn white-btn"
 								btnText="download"
 								onClick={onDownload} />
 						</div> :
 						// Cart Button
 						props.showAudio.inCart ?
 							<div className="p-2">
-								<button className="btn btn-light mb-1 rounded-0"
-									style={{ minWidth: '90px', height: '33px' }}
+								<button className="btn text-light mb-1 rounded-0"
+									style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}
 									onClick={() => props.onCartAudios(show)}>
 									<svg className='bi bi-cart3'
 										width='1em'
@@ -408,7 +438,7 @@ const AudioShow = (props) => {
 							</div> :
 							<div className="p-2">
 								<Button
-									btnClass={'btn mysonar-btn green-btn'}
+									btnClass={'btn mysonar-btn green-btn btn-2'}
 									btnText={'buy'}
 									onClick={() => {
 										// If user is guest then redirect to Login
@@ -435,16 +465,19 @@ const AudioShow = (props) => {
 						<span className="ml-1">
 							{props.showAudio.album}
 						</span><br />
-						<small>Genre</small><span className="ml-1">{props.showAudio.genre}</span><br />
-						<small>Posted</small><span className="ml-1">{props.showAudio.created_at}</span>
+						<small>Genre</small>
+						<span className="ml-1">{props.showAudio.genre}</span>
+						<br />
+						<small>Posted</small>
+						<span className="ml-1">{props.showAudio.created_at}</span>
 					</div>
 				</div>
 
 				{/* <!-- Read more section --> */}
-				<div className="p-2 border-bottom">
+				<div className="p-2 border-bottom border-dark">
 					<button
 						href="#collapseExample"
-						className="mysonar-btn"
+						className="mysonar-btn white-btn"
 						data-toggle="collapse"
 						aria-expanded="false"
 						aria-controls="collapseExample">
@@ -459,7 +492,7 @@ const AudioShow = (props) => {
 				{/* Audio Info Area End */}
 
 				{/* Artist Area */}
-				<div className="p-2 border-bottom">
+				<div className="p-2 border-bottom border-dark">
 					<div className='media'>
 						<div className='media-left'>
 							<Link to={`/profile/${props.showArtist.username}`}>
@@ -511,10 +544,10 @@ const AudioShow = (props) => {
 													d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
 											</svg>
 										</button>
-										: <Button btnClass={'mysonar-btn float-right'}
+										: <Button btnClass={'mysonar-btn white-btn float-right'}
 											onClick={() => props.onFollow(props.showArtist.username)}
 											btnText={'follow'} />
-									: <Button btnClass={'mysonar-btn float-right'}
+									: <Button btnClass={'mysonar-btn white-btn float-right'}
 										onClick={() =>
 											props.setErrors([`You must have bought atleast one song by ${props.showArtist.username}`])}
 										btnText={'follow'} /> : ""}
@@ -546,7 +579,7 @@ const AudioShow = (props) => {
 					{props.showAudio.username == props.auth.username ||
 						props.auth.username == "@blackmusic" ||
 						props.showAudio.hasBoughtAudio ?
-						<div className='media p-2 border-bottom'>
+						<div className='media p-2 border-bottom border-dark'>
 							<div className="media-left">
 								<Img
 									src={props.auth.pp}
@@ -565,7 +598,7 @@ const AudioShow = (props) => {
 									<br />
 									<Button
 										type="submit"
-										btnClass={"mysonar-btn float-right"}
+										btnClass={"mysonar-btn white-btn float-right"}
 										btnText={"Comment"} />
 								</form>
 							</div>
@@ -582,7 +615,7 @@ const AudioShow = (props) => {
 							audioComments
 								.filter((comment) => comment.audio_id == show)
 								.map((comment, index) => (
-									<div key={index} className='media p-2 border-bottom'>
+									<div key={index} className='media p-2 border-bottom border-dark'>
 										<div className='media-left'>
 											<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 												<Link to={`/profile/${comment.username}`}>
@@ -601,7 +634,7 @@ const AudioShow = (props) => {
 													textOverflow: "clip"
 												}}>
 												<b>{comment.name}</b>
-												<small>{comment.username}</small>
+												<small className="text-secondary">{comment.username}</small>
 												<span className="ml-1" style={{ color: "gold" }}>
 													<svg className="bi bi-circle"
 														width="1em"
@@ -615,7 +648,7 @@ const AudioShow = (props) => {
 													<span className="ml-1" style={{ fontSize: "10px" }}>{comment.decos}</span>
 												</span>
 												<small>
-													<i className="float-right mr-1">{comment.created_at}</i>
+													<i className="float-right mr-1 text-secondary">{comment.created_at}</i>
 												</small>
 											</h6>
 											<p className="mb-0">{comment.text}</p>
@@ -623,7 +656,7 @@ const AudioShow = (props) => {
 											{/* Comment likes */}
 											{comment.hasLiked ?
 												<a href="#"
-													style={{ color: "#cc3300" }}
+													style={{ color: "#fb3958" }}
 													onClick={(e) => {
 														e.preventDefault()
 														onCommentLike(comment.id)
@@ -633,7 +666,7 @@ const AudioShow = (props) => {
 														<path fillRule='evenodd'
 															d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 													</svg>
-													<small className="ml-1">
+													<small className="ml-1" style={{ color: "inherit" }}>
 														{comment.likes}
 													</small>
 												</a> :
@@ -646,25 +679,40 @@ const AudioShow = (props) => {
 														<path
 															d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 													</svg>
-													<small className="ml-1">{comment.likes}</small>
+													<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 												</a>}
 
 											{/* <!-- Default dropup button --> */}
 											<div className="dropup float-right">
-												<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													<svg className="bi bi-three-dots-vertical" width="1em" height="1em" viewBox="0 0 16 16"
-														fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+												<a
+													href="#"
+													role="button"
+													id="dropdownMenuLink"
+													data-toggle="dropdown"
+													aria-haspopup="true"
+													aria-expanded="false">
+													<svg
+														className="bi bi-three-dots-vertical"
+														width="1em"
+														height="1em"
+														viewBox="0 0 16 16"
+														fill="currentColor"
+														xmlns="http://www.w3.org/2000/svg">
 														<path fillRule="evenodd"
 															d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 													</svg>
 												</a>
-												<div className="dropdown-menu dropdown-menu-right p-0" style={{ borderRadius: "0" }}>
+												<div
+													className="dropdown-menu dropdown-menu-right p-0"
+													style={{ borderRadius: "0", backgroundColor: "#232323" }}>
 													{comment.username == props.auth.username &&
-														<a href='#' className="dropdown-item" onClick={(e) => {
-															e.preventDefault();
-															onDeleteComment(comment.id)
-														}}>
+														<a
+															href='#'
+															className="dropdown-item"
+															onClick={(e) => {
+																e.preventDefault();
+																onDeleteComment(comment.id)
+															}}>
 															<h6>Delete comment</h6>
 														</a>}
 												</div>
@@ -681,7 +729,7 @@ const AudioShow = (props) => {
 
 			{/* -- Up next area -- */}
 			<div className={tabClass == "recommended" ? "col-sm-3" : "col-sm-3 hidden"}>
-				<div className="p-2 border-bottom">
+				<div className="p-2 border-bottom border-dark">
 					<h5>Up next</h5>
 				</div>
 				{!props.boughtAudios
@@ -709,7 +757,7 @@ const AudioShow = (props) => {
 				{/* <!-- End of Up next Area --> */}
 
 				{/* Song Suggestion Area */}
-				<div className="p-2 mt-5 border-bottom">
+				<div className="p-2 mt-5 border-bottom border-dark">
 					<h5>Songs to watch</h5>
 				</div>
 				{props.audios

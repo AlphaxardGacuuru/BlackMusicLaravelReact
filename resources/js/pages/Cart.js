@@ -155,7 +155,7 @@ const Cart = (props) => {
 			<div className="row">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3">
-					<div className="border mb-4">
+					<div className="border border-dark mb-4">
 						{/* Cart Videos */}
 						{props.cartVideos.length > 0 &&
 							<>
@@ -163,7 +163,7 @@ const Cart = (props) => {
 								<hr />
 							</>}
 						{props.cartVideos.map((cartVideo, key) => (
-							<div key={key} className="d-flex p-2 border-bottom">
+							<div key={key} className="d-flex p-2 border-bottom border-dark">
 								<div className="thumbnail">
 									<Link to={`/video-show/${cartVideo.video_id}`}>
 										<Img src={cartVideo.thumbnail}
@@ -186,7 +186,7 @@ const Cart = (props) => {
 									</h6>
 									<h6 className="text-success">KES 200</h6>
 									<button
-										className="mysonar-btn mb-1 float-right"
+										className="mysonar-btn white-btn mb-1 float-right"
 										onClick={() => props.onCartVideos(cartVideo.video_id)}>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +215,7 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="col-sm-4">
-					<div className="border mb-4">
+					<div className="border border-dark mb-4">
 						{/* Cart Audios */}
 						{props.cartAudios.length > 0 &&
 							<>
@@ -224,7 +224,7 @@ const Cart = (props) => {
 							</>}
 						{props.cartAudios
 							.map((cartAudio, key) => (
-								<div key={key} className="d-flex p-2 border-bottom">
+								<div key={key} className="d-flex p-2 border-bottom border-dark">
 									<div
 										className="thumbnail"
 										style={{ width: "50px", height: "50px" }}>
@@ -250,7 +250,7 @@ const Cart = (props) => {
 									</div>
 									<div className="ml-2">
 										<button
-											className="mysonar-btn mb-1 float-right"
+											className="mysonar-btn white-btn mb-1 float-right"
 											onClick={() => props.onCartAudios(cartAudio.audio_id)}>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +279,7 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="col-sm-3">
-					<div className="border mb-4">
+					<div className="border border-dark mb-4">
 						<center>
 							<h3 className="pt-4">Total</h3>
 							<hr />
@@ -291,7 +291,7 @@ const Cart = (props) => {
 							{(videoTotal + audioTotal) > 0 &&
 								<>
 									<button
-										className="mysonar-btn"
+										className="mysonar-btn white-btn"
 										style={{ width: "80%" }}
 										type="button"
 										data-toggle="collapse"
@@ -304,14 +304,14 @@ const Cart = (props) => {
 										<div className="">
 											<br />
 											<h5>Once you click the button below a pop up will appear on your phone asking you to pay</h5>
-											<h4 style={{ color: "green" }}>KES {total}</h4>
+											<h4 style={{ color: "#1e824c" }}>KES {total}</h4>
 											<h5>to</h5>
 											<h4 style={{ color: "dodgerblue" }}>Kopokopo</h4>
 											<br />
 
 											{/* Checkout button */}
 											<Button
-												btnClass="mysonar-btn green-btn mb-4"
+												btnClass="mysonar-btn green-btn btn-2 mb-4"
 												btnText="pay with mpesa"
 												btnStyle={{ width: "80%" }}
 												onClick={(e) => {
@@ -345,7 +345,7 @@ const Cart = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between border-bottom mb-3">
+					<div className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
 							<a href="#">Payment</a>
@@ -353,7 +353,7 @@ const Cart = (props) => {
 
 						{/* <!-- Close Icon --> */}
 						<div
-							className="closeIcon p-2 float-right text-dark"
+							className="closeIcon p-2 float-right"
 							onClick={() => {
 								setBottomMenu("")
 							}}>
@@ -400,7 +400,7 @@ const Cart = (props) => {
 			{/* Sliding Receipt Bottom Nav */}
 			<div className={receipt}>
 				<div className="bottomMenu" style={{ height: "50%" }}>
-					<div className="d-flex align-items-center justify-content-between border-bottom mb-3">
+					<div className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
 							<a href="#">Receipt</a>

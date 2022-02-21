@@ -180,7 +180,7 @@ const VideoCharts = (props) => {
 					left: 0,
 					bottom: 0,
 					height: window.innerHeight * 0.85,
-					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(255,255,255,0.6))"
+					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,1))"
 				}}>
 					{/* <div
 						className="d-flex justify-content-between"
@@ -203,6 +203,7 @@ const VideoCharts = (props) => {
 					</div> */}
 				</div>
 			</div>
+			<br />
 
 			{/* <!-- Scroll menu - */}
 			<div id="chartsMenu" className="hidden-scroll mt-2">
@@ -260,25 +261,29 @@ const VideoCharts = (props) => {
 								<span key={key} style={{ padding: "5px" }}>
 									<span key={key} className="m-0 p-0">
 										<center>
-											<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-												<div className="bg-light text-light gradient"
-													style={{ width: "150px", height: "150px" }}></div>
+											<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
+												<div
+													className="bg-dark text-light gradient"
+													style={{ width: "150px", height: "150px" }}>
+												</div>
 											</div>
-											<h6 className="mt-2 mb-0 bg-light text-light gradient"
+											<h6 className="mt-2 mb-0 gradient"
 												style={{
 													width: "100px",
 													whiteSpace: "nowrap",
 													overflow: "hidden",
-													textOverflow: "clip"
+													textOverflow: "clip",
+													color: "#232323"
 												}}>
 												user.name
 											</h6>
-											<h6 className="bg-light text-light gradient"
+											<h6 className="gradient"
 												style={{
 													width: "100px",
 													whiteSpace: "nowrap",
 													overflow: "hidden",
-													textOverflow: "clip"
+													textOverflow: "clip",
+													color: "#232323"
 												}}>
 												user.username
 											</h6>
@@ -300,7 +305,7 @@ const VideoCharts = (props) => {
 										.map((user, key) => (
 											<span key={key} className="m-0 p-0">
 												<center>
-													<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+													<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
 														<Link to={"/profile/" + user.username}>
 															<Img src={user.pp}
 																width='150px'
@@ -342,33 +347,35 @@ const VideoCharts = (props) => {
 							.map((item, key) => (
 								<span key={key}>
 									<span
-										className="card m-1 pb-2"
+										className="m-1 pb-2"
 										style={{
 											borderRadius: "0px",
 											display: "inline-block",
-											textAlign: "center"
+											textAlign: "center",
+											color: "#232323"
 										}}>
 										<div className="thumbnail">
 											<div className="bg-light gradient" style={{ width: "160em", height: "90em" }}></div>
 										</div>
-										<h6 className="m-0 pt-2 px-1 bg-light text-light gradient w-75"
+										<h6 className="m-0 pt-2 px-1 gradient w-75"
 											style={{
 												width: "150px",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
-												textOverflow: "clip"
+												textOverflow: "clip",
+												color: "#232323"
 											}}>
 											video
 										</h6>
-										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light gradient w-50">username</h6>
+										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50" style={{ color: "#232323"}}>username</h6>
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 										<br />
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 									</span>
 								</span>
@@ -383,7 +390,7 @@ const VideoCharts = (props) => {
 										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
 										.map((video, key) => (
 											<span key={key}
-												className="card m-1 pb-2"
+												className="border border-dark m-1 pb-2"
 												style={{
 													borderRadius: "0px",
 													display: "inline-block",
@@ -410,8 +417,8 @@ const VideoCharts = (props) => {
 												</h6>
 												{!video.hasBoughtVideo ?
 													video.inCart ?
-														<button className="btn btn-light mb-1 rounded-0"
-															style={{ minWidth: '90px', height: '33px' }}
+														<button className="btn mb-1 rounded-0"
+															style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}
 															onClick={() => props.onCartVideos(videoArray.key)}>
 															<svg className='bi bi-cart3'
 																width='1em'
@@ -423,7 +430,7 @@ const VideoCharts = (props) => {
 																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
 															</svg>
 														</button> :
-														<button className="mysonar-btn mb-1"
+														<button className="mysonar-btn white-btn mb-1"
 															style={{ minWidth: '90px', height: '33px' }}
 															onClick={() => props.onCartVideos(videoArray.key)}>
 															<svg className='bi bi-cart3'
@@ -440,7 +447,7 @@ const VideoCharts = (props) => {
 												{!video.hasBoughtVideo ?
 													!video.inCart &&
 													<Button
-														btnClass={'btn mysonar-btn green-btn'}
+														btnClass={'btn mysonar-btn green-btn btn-2'}
 														btnText={'buy'}
 														onClick={() => onBuyVideos(videoArray.key)} /> : ""}
 											</span>

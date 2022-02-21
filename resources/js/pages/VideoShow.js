@@ -44,6 +44,19 @@ const VideoShow = (props) => {
 
 	// Function for liking video
 	const onVideoLike = () => {
+		// Show like
+		const newVideos = props.videos
+			.filter((item) => {
+				// Get the exact audio and change like status
+				if (item.id == show) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new videos
+		props.setVideos(newVideos)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/video-likes`, {
 				video: show
@@ -92,8 +105,21 @@ const VideoShow = (props) => {
 		})
 	}
 
-	// Function for liking posts
+	// Function for liking comments
 	const onCommentLike = (comment) => {
+		// Show like
+		const newVideoComments = videoComments
+			.filter((item) => {
+				// Get the exact video and change like status
+				if (item.id == comment) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new videos
+		setVideoComments(newVideoComments)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/video-comment-likes`, {
 				comment: comment
@@ -264,7 +290,7 @@ const VideoShow = (props) => {
 						!showVideo.video.match(/https/) &&
 						<div className="p-2">
 							<Button
-								btnClass="mysonar-btn"
+								btnClass="mysonar-btn white-btn"
 								btnText="download"
 								onClick={onDownload} />
 						</div> :
@@ -287,7 +313,7 @@ const VideoShow = (props) => {
 							</div> :
 							<div className="p-2">
 								<Button
-									btnClass={'btn mysonar-btn green-btn'}
+									btnClass={'btn mysonar-btn green-btn btn-2'}
 									btnText={'buy'}
 									onClick={() => {
 										// If user is guest then redirect to Login
@@ -319,10 +345,10 @@ const VideoShow = (props) => {
 				{/* Video Area End */}
 
 				{/* <!-- Read more section --> */}
-				<div className="p-2 border-bottom">
+				<div className="p-2 border-bottom border-dark">
 					<button
 						href="#collapseExample"
-						className="mysonar-btn"
+						className="mysonar-btn white-btn"
 						data-toggle="collapse"
 						aria-expanded="false"
 						aria-controls="collapseExample">
@@ -336,7 +362,7 @@ const VideoShow = (props) => {
 				</div>
 
 				{/* Artist Area */}
-				<div className="p-2 border-bottom">
+				<div className="p-2 border-bottom border-dark">
 					<div className='media'>
 						<div className='media-left'>
 							<Link to={`/profile/${showArtist.username}`}>
@@ -386,11 +412,11 @@ const VideoShow = (props) => {
 											</svg>
 										</button> :
 										<Button
-											btnClass={'mysonar-btn float-right'}
+											btnClass={'mysonar-btn white-btn float-right'}
 											onClick={() => props.onFollow(showArtist.username)}
 											btnText={'follow'} /> :
 									<Button
-										btnClass={'mysonar-btn float-right'}
+										btnClass={'mysonar-btn white-btn float-right'}
 										onClick={() => props.setErrors([`You must have bought atleast one song by ${showArtist.username}`])}
 										btnText={'follow'} /> : ""}
 						</div>
@@ -421,7 +447,7 @@ const VideoShow = (props) => {
 					{showVideo.username == props.auth.username ||
 						props.auth.username == "@blackmusic" ||
 						showVideo.hasBoughtVideo ?
-						<div className='media p-2 border-bottom'>
+						<div className='media p-2 border-bottom border-dark'>
 							<div className="media-left">
 								<Img
 									src={props.auth.pp}
@@ -440,7 +466,7 @@ const VideoShow = (props) => {
 									<br />
 									<Button
 										type="submit"
-										btnClass={"mysonar-btn float-right"}
+										btnClass={"mysonar-btn white-btn float-right"}
 										btnText={"Comment"} />
 								</form>
 							</div>
@@ -458,7 +484,7 @@ const VideoShow = (props) => {
 							videoComments
 								.filter((comment) => comment.video_id == show)
 								.map((comment, index) => (
-									<div key={index} className='media p-2 border-bottom'>
+									<div key={index} className='media p-2 border-bottom border-dark'>
 										<div className='media-left'>
 											<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 												<Link to={`/profile/${comment.username}`}>
@@ -506,7 +532,7 @@ const VideoShow = (props) => {
 														<path fillRule='evenodd'
 															d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 													</svg>
-													<small className="ml-1">{comment.likes}</small>
+													<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 												</a> :
 												<a href='#' onClick={(e) => {
 													e.preventDefault()
@@ -517,20 +543,32 @@ const VideoShow = (props) => {
 														<path
 															d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 													</svg>
-													<small className="ml-1">{comment.likes}</small>
+													<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 												</a>}
 
 											{/* <!-- Default dropup button --> */}
 											<div className="dropup float-right">
-												<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													<svg className="bi bi-three-dots-vertical" width="1em" height="1em" viewBox="0 0 16 16"
-														fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+												<a
+													href="#"
+													role="button"
+													id="dropdownMenuLink"
+													data-toggle="dropdown"
+													aria-haspopup="true"
+													aria-expanded="false">
+													<svg
+														className="bi bi-three-dots-vertical"
+														width="1em"
+														height="1em"
+														viewBox="0 0 16 16"
+														fill="currentColor"
+														xmlns="http://www.w3.org/2000/svg">
 														<path fillRule="evenodd"
 															d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 													</svg>
 												</a>
-												<div className="dropdown-menu dropdown-menu-right p-0" style={{ borderRadius: "0" }}>
+												<div
+													className="dropdown-menu dropdown-menu-right p-0"
+													style={{ borderRadius: "0", backgroundColor: "#232323" }}>
 													{comment.username == props.auth.username &&
 														<a href='#' className="dropdown-item" onClick={(e) => {
 															e.preventDefault();

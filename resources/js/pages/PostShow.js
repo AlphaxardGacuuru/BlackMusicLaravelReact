@@ -36,6 +36,19 @@ const PostShow = (props) => {
 
 	// Function for liking comments
 	const onCommentLike = (comment) => {
+		// Show like
+		const newPostComments = postComments
+			.filter((item) => {
+				// Get the exact comment and change like status
+				if (item.id == comment) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new comments
+		setPostComments(newPostComments)
+
+		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/post-comment-likes`, {
 				comment: comment
@@ -99,11 +112,11 @@ const PostShow = (props) => {
 						</svg>
 					</Link>
 				</div>
-				<div className="border border-top-0 m-0 p-0">
+				<div className="border border-top-0 border-dark m-0 p-0">
 					{postComments
 						.filter((comment) => comment.post_id == id)
 						.map((comment, index) => (
-							<div key={index} className={`media p-2 border-bottom`}>
+							<div key={index} className={`media p-2 border-bottom border-dark`}>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/home/${comment.user_id}`}>
@@ -142,7 +155,7 @@ const PostShow = (props) => {
 
 									{/* Comment likes */}
 									{comment.hasLiked ?
-										<a href="#" style={{ color: "#cc3300" }} onClick={(e) => {
+										<a href="#" style={{ color: "#fb3958" }} onClick={(e) => {
 											e.preventDefault()
 											onCommentLike(comment.id)
 										}}>
@@ -151,7 +164,7 @@ const PostShow = (props) => {
 												<path fillRule='evenodd'
 													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 											</svg>
-											<small className="ml-1">{comment.likes}</small>
+											<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 										</a>
 										: <a href='#' onClick={(e) => {
 											e.preventDefault()
@@ -162,21 +175,33 @@ const PostShow = (props) => {
 												<path
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
-											<small className="ml-1">{comment.likes}</small>
+											<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 										</a>}
 									<small className="ml-1">{comment.comments}</small>
 
 									{/* <!-- Default dropup button --> */}
 									<div className="dropup float-right">
-										<a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false">
-											<svg className="bi bi-three-dots-vertical" width="1em" height="1em" viewBox="0 0 16 16"
-												fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<a
+											href="#"
+											role="button"
+											id="dropdownMenuLink"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false">
+											<svg
+												className="bi bi-three-dots-vertical"
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
 												<path fillRule="evenodd"
 													d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 											</svg>
 										</a>
-										<div className="dropdown-menu dropdown-menu-right p-0" style={{ borderRadius: "0" }}>
+										<div
+											className="dropdown-menu dropdown-menu-right p-0"
+											style={{ borderRadius: "0", backgroundColor: "#232323" }}>
 											{comment.username == props.auth.username &&
 												<a
 													href='#'

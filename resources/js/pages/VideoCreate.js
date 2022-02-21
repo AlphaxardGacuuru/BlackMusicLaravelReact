@@ -114,7 +114,7 @@ const VideoCreate = (props) => {
 			{/* <!-- ***** Call to Action Area Start ***** --> */}
 			<div className="sonar-call-to-action-area section-padding-0-100">
 				<div className="backEnd-content">
-					<h2>Studio</h2>
+					<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Studio</h2>
 				</div>
 
 				<div className="container">
@@ -136,7 +136,7 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
-										<label htmlFor="">
+										<label htmlFor="" className="text-light">
 											Featuring Artist
 											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
 										</label>
@@ -158,7 +158,12 @@ const VideoCreate = (props) => {
 											{props.videoAlbums
 												.filter((videoAlbum) => videoAlbum.username == props.auth.username)
 												.map((videoAlbum, key) => (
-													<option key={key} value={videoAlbum.id}>{videoAlbum.name}</option>
+													<option
+														key={key}
+														value={videoAlbum.id}
+														className="bg-dark text-light">
+														{videoAlbum.name}
+													</option>
 												))}
 										</select>
 										<br />
@@ -171,28 +176,28 @@ const VideoCreate = (props) => {
 											required={true}
 											onChange={(e) => { setGenre(e.target.value) }}>
 											<option defaultValue value="">Select Genre</option>
-											<option value="Afro">Afro</option>
-											<option value="Benga">Benga</option>
-											<option value="Blues">Blues</option>
-											<option value="Boomba">Boomba</option>
-											<option value="Country">Country</option>
-											<option value="Cultural">Cultural</option>
-											<option value="EDM">EDM</option>
-											<option value="Genge">Genge</option>
-											<option value="Gospel">Gospel</option>
-											<option value="Hiphop">Hiphop</option>
-											<option value="Jazz">Jazz</option>
-											<option value="Music of Kenya">Music of Kenya</option>
-											<option value="Pop">Pop</option>
-											<option value="R&B">R&B</option>
-											<option value="Rock">Rock</option>
-											<option value="Sesube">Sesube</option>
-											<option value="Taarab">Taarab</option>
+											<option value="Afro" className="bg-dark text-light">Afro</option>
+											<option value="Benga" className="bg-dark text-light">Benga</option>
+											<option value="Blues" className="bg-dark text-light">Blues</option>
+											<option value="Boomba" className="bg-dark text-light">Boomba</option>
+											<option value="Country" className="bg-dark text-light">Country</option>
+											<option value="Cultural" className="bg-dark text-light">Cultural</option>
+											<option value="EDM" className="bg-dark text-light">EDM</option>
+											<option value="Genge" className="bg-dark text-light">Genge</option>
+											<option value="Gospel" className="bg-dark text-light">Gospel</option>
+											<option value="Hiphop" className="bg-dark text-light">Hiphop</option>
+											<option value="Jazz" className="bg-dark text-light">Jazz</option>
+											<option value="Music of Kenya" className="bg-dark text-light">Music of Kenya</option>
+											<option value="Pop" className="bg-dark text-light">Pop</option>
+											<option value="R&B" className="bg-dark text-light">R&B</option>
+											<option value="Rock" className="bg-dark text-light">Rock</option>
+											<option value="Sesube" className="bg-dark text-light">Sesube</option>
+											<option value="Taarab" className="bg-dark text-light">Taarab</option>
 										</select>
 										<br />
 										<br />
 
-										<label>Released</label>
+										<label className="text-light">Released</label>
 
 										<input
 											type="date"
@@ -215,7 +220,7 @@ const VideoCreate = (props) => {
 											onChange={(e) => { setDescription(e.target.value) }}>
 										</textarea>
 
-										<label>Upload Video Thumbnail</label>
+										<label className="text-light">Upload Video Thumbnail</label>
 
 										<FilePond
 											name="filepond-thumbnail"
@@ -241,7 +246,7 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
-										<label>Upload Video</label>
+										<label className="text-light">Upload Video</label>
 										<h6 className="text-primary">If the video is too large you can upload it to Youtube for compression, download it, delete it, then upload it here.</h6>
 										<br />
 

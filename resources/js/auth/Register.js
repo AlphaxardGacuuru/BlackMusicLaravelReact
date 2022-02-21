@@ -80,7 +80,7 @@ const Register = (props) => {
 						referer: referer,
 						username: username
 					})
-	
+
 				props.setMessage("Account created")
 				// Update auth data
 				axios.get(`${props.url}/api/home`)
@@ -180,21 +180,21 @@ const Register = (props) => {
 	return (
 		<div
 			className="sonar-call-to-action-area section-padding-0-100"
-			style={{ background: "rgba(255, 215, 0, 0.9)" }}>
+			style={{ background: "rgba(0, 0, 0, 1)" }}>
 			<div className="backEnd-content">
-				<h2 style={{ color: "rgba(255, 215, 0, 1)" }}>Black Music</h2>
+				<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Black Music</h2>
 			</div>
 			<div className="container">
 				<div className="row">
 					<div className="col-12">
 						<div className="call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
-							<h2 className="mt-2">Register</h2>
+							<h2 className="mt-2" style={{ color: "#FFD700" }}>Register</h2>
 
 							<div className="card-body contact-form">
 								<form method="POST" action="" onSubmit={onSubmit}>
 									<div className="form-group row">
 										<label htmlFor="username" className="col-md-4 col-form-label text-md-right">
-											<p>Create a unique username</p>
+											<p style={{ color: "#FFD700" }}>Create a unique username</p>
 										</label>
 
 										<div className="col-md-6">
@@ -202,18 +202,18 @@ const Register = (props) => {
 												id="username"
 												type="text"
 												className="form-control"
+												style={{ color: "#FFD700", borderColor: "#FFD700" }}
 												name="username"
 												placeholder="@johndoe"
 												onChange={(e) => setUsername(e.target.value)}
 												required
-												autoFocus
-												style={{ borderColor: "black" }} />
+												autoFocus />
 										</div>
 									</div>
 
 									<div className="form-group row">
 										<label htmlFor="phone" className="col-md-4 col-form-label text-md-right">
-											<p>Enter your Safaricom number</p>
+											<p style={{ color: "#FFD700" }}>Enter your Safaricom number</p>
 										</label>
 
 										<div className="col-md-6">
@@ -221,11 +221,11 @@ const Register = (props) => {
 												id="phone"
 												type="text"
 												className="form-control"
+												style={{ color: "#FFD700", borderColor: "#FFD700" }}
 												name="phone"
 												value={phone}
 												onChange={(e) => setPhone(e.target.value)}
-												required
-												style={{ borderColor: "black" }} />
+												required />
 										</div>
 									</div>
 
@@ -233,7 +233,7 @@ const Register = (props) => {
 										<div className="col-md-8 offset-md-4">
 											<Button
 												type="submit"
-												btnClass="sonar-btn btn-2 float-right"
+												btnClass="sonar-btn gold-btn float-right"
 												btnText={'register'} />
 											<br />
 											<br />

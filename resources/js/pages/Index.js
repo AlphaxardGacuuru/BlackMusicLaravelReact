@@ -127,11 +127,24 @@ const Index = (props) => {
 					</svg>
 				</Link>}
 
+			{/* Help button */}
+			<Link to="/help" id="helpFloatBtn">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="30"
+					height="30"
+					fill="currentColor"
+					className="bi bi-person"
+					viewBox="0 0 16 16">
+					<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+				</svg>
+			</Link>
+
 			{/* <!-- Profile info area --> */}
 			<div className="row p-0">
 				<div className="col-sm-1 hidden"></div>
 				<div className="col-sm-3 hidden">
-					<div className="d-flex border">
+					<div className="d-flex border border-dark">
 						<div className="p-2">
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
 								<Link to={"/profile/" + props.auth.username}>
@@ -167,22 +180,20 @@ const Index = (props) => {
 									<path fillRule="evenodd"
 										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 								</svg>
-								<small className="ml-1">{props.auth.decos}</small>
+								<small className="ml-1" style={{ color: "inherit" }}>{props.auth.decos}</small>
 							</span>
 						</div>
 					</div>
-					<div className="d-flex border-bottom border-left border-right">
+					<div className="d-flex border-bottom border-left border-right border-dark">
 						<div className="p-2 flex-fill">
 							<h6>Posts</h6>
-							{props.auth.posts}
+							<span style={{ color: "rgba(220, 220, 220, 1)" }}>{props.auth.posts}</span>
 							<br />
 						</div>
-						<div className="p-2 flex-fill" style={{ color: "purple" }}>
-							<Link to='/fans'>
-								<h6>Fans</h6>
-								{props.auth.fans}
-								<br />
-							</Link>
+						<div className="p-2 flex-fill">
+							<h6>Fans</h6>
+							<span style={{ color: "rgba(220, 220, 220, 1)" }}>{props.auth.fans}</span>
+							<br />
 						</div>
 					</div>
 					{/* <!-- Profile info area End --> */}
@@ -190,8 +201,8 @@ const Index = (props) => {
 					<br />
 
 					{/* <!-- Musicians suggestions area --> */}
-					<div className="border">
-						<div className="p-2 border-bottom">
+					<div className="border border-dark">
+						<div className="p-2 border-bottom border-dark">
 							<h2>Musicians to follow</h2>
 						</div>
 						{/* Slice to limit to 10 */}
@@ -200,15 +211,17 @@ const Index = (props) => {
 						{dummyArray
 							.filter(() => props.users.length < 1)
 							.map((item, key) => (
-								<div key={key} className='media p-2 border-bottom'>
+								<div key={key} className='media p-2 border-bottom border-dark'>
 									<div className='media-left'>
 										<div className="rounded-circle" style={{ width: "30px", height: "30px" }}></div>
 									</div>
 									<div className='media-body'>
-										<b className="bg-light text-light gradient">namename</b>
-										<small className="bg-light text-light gradient"><i>usernameusename</i></small>
-										<button className="btn btn-light float-right rounded-0 text-light"
-											style={{ minWidth: '90px', height: '33px' }}></button>
+										<b className="bg-light gradient" style={{ color: "#232323" }}>namename</b>
+										<small className="bg-light text-light gradient">
+											<i style={{ color: "#232323" }}>usernameusename</i>
+										</small>
+										<button className="btn float-right rounded-0 text-light"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}></button>
 									</div>
 								</div>
 							))}
@@ -220,7 +233,7 @@ const Index = (props) => {
 								user.username != "@blackmusic")
 							.slice(0, 10)
 							.map((user, key) => (
-								<div key={key} className='media p-2 border-bottom'>
+								<div key={key} className='media p-2 border-bottom border-dark'>
 									<div className='media-left'>
 										<Link to={`/profile/${user.username}`}>
 											<Img
@@ -232,7 +245,7 @@ const Index = (props) => {
 										</Link>
 									</div>
 									<div className='media-body'>
-										<Link to={`/profile/${user.username}`} className="text-dark">
+										<Link to={`/profile/${user.username}`}>
 											<b>{user.name}</b>
 											<small><i>{user.username}</i></small>
 										</Link>
@@ -241,7 +254,9 @@ const Index = (props) => {
 										{/* Check whether user has followed user and display appropriate button */}
 										{user.hasBought1 || props.auth.username == "@blackmusic" ?
 											user.hasFollowed ?
-												<button className={'btn btn-light float-right rounded-0'}
+												<button
+													className={'btn float-right rounded-0 text-light'}
+													style={{ backgroundColor: "#232323" }}
 													onClick={() => props.onFollow(user.username)}>
 													Followed
 													<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
@@ -249,10 +264,10 @@ const Index = (props) => {
 															d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
 													</svg>
 												</button>
-												: <Button btnClass={'mysonar-btn float-right'}
+												: <Button btnClass={'mysonar-btn white-btn float-right'}
 													onClick={() => props.onFollow(user.username)}
 													btnText={'follow'} />
-											: <Button btnClass={'mysonar-btn float-right'}
+											: <Button btnClass={'mysonar-btn white-btn float-right'}
 												onClick={() =>
 													props.setErrors([`You must have bought atleast one song by ${user.username}`])}
 												btnText={'follow'} />}
@@ -265,35 +280,40 @@ const Index = (props) => {
 
 				<div className="col-sm-4">
 					{/* <!-- ****** Songs Area ****** --> */}
-					<div className="p-2 border">
+					<div className="p-2 border border-dark">
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{/* Loading Video items */}
 							{dummyArray
 								.filter(() => props.videos.length < 1)
 								.map((item, key) => (
-									<span key={key} className="card pt-0 px-0 pb-2">
+									<span key={key} className="pt-0 px-0 pb-2">
 										<div className="thumbnail">
-											<div className="bg-light gradient" style={{ width: "160em", height: "90em" }}></div>
+											<div className="gradient" style={{ width: "160em", height: "90em" }}></div>
 										</div>
-										<h6 className="m-0 pt-2 px-1 bg-light text-light gradient w-75"
+										<h6 className="m-0 pt-2 px-1 gradient w-75"
 											style={{
 												width: "150px",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
-												textOverflow: "clip"
+												textOverflow: "clip",
+												color: "#232323"
 											}}>
 											video
 										</h6>
-										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 bg-light text-light gradient w-50">username</h6>
+										<h6
+											className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50"
+											style={{ color: "#232323" }}>
+											username
+										</h6>
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 										<br />
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 									</span>
 								))}
@@ -303,7 +323,7 @@ const Index = (props) => {
 								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)
 								.map((video, index) => (
-									<span key={index} className="card pt-0 px-0 pb-2">
+									<span key={index} className="pt-0 px-0 pb-2 border border-dark">
 										<div className="thumbnail">
 											<Link to={`/video-show/${video.id}`}>
 												<Img src={video.thumbnail.match(/http/) ?
@@ -328,8 +348,13 @@ const Index = (props) => {
 											</h6>
 										</Link>
 										{video.inCart ?
-											<button className="btn btn-light mb-1 rounded-0"
-												style={{ minWidth: '90px', height: '33px' }}
+											<button
+												className="btn mb-1 rounded-0 text-light"
+												style={{
+													minWidth: '90px',
+													height: '33px',
+													backgroundColor: "#232323"
+												}}
 												onClick={() => props.onCartVideos(video.id)}>
 												<svg className='bi bi-cart3'
 													width='1em'
@@ -340,11 +365,10 @@ const Index = (props) => {
 													<path fillRule='evenodd'
 														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
 												</svg>
-											</button>
-											:
+											</button> :
 											<>
 												<button
-													className="mysonar-btn mb-1"
+													className="mysonar-btn white-btn mb-1"
 													style={{ minWidth: '90px', height: '33px' }}
 													onClick={() => props.onCartVideos(video.id)}>
 													<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
@@ -355,7 +379,7 @@ const Index = (props) => {
 												</button>
 												<br />
 												<Button
-													btnClass={'btn mysonar-btn green-btn'}
+													btnClass={'btn mysonar-btn green-btn btn-2'}
 													btnText={'buy'}
 													onClick={() => onBuyVideos(video.id)} />
 											</>}
@@ -368,8 +392,8 @@ const Index = (props) => {
 					{/* <!-- ****** Songs Area End ****** --> */}
 
 					{/* <!-- Posts area --> */}
-					<div className="border border-top-0 m-0 p-0">
-						{/* Loading Video items */}
+					<div className="border border-top-0 border-dark m-0 p-0">
+						{/* Loading Post items */}
 						{dummyArray
 							.filter(() => props.posts.length < 1)
 							.map((item, key) => (
@@ -385,9 +409,9 @@ const Index = (props) => {
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											<b className="bg-light text-light gradient">post.name</b>
-											<small className="bg-light text-light gradient">post.username</small>
-											<span className="ml-1 bg-light text-light gradient">
+											<b className="gradient" style={{ color: "#232323" }}>post.name</b>
+											<small className="gradient" style={{ color: "#232323" }}>post.username</small>
+											<span className="ml-1 gradient" style={{ color: "#232323" }}>
 												<svg className="bi bi-circle"
 													width="1em"
 													height="1em"
@@ -397,16 +421,16 @@ const Index = (props) => {
 													<path fillRule="evenodd"
 														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 												</svg>
-												<small className="ml-1">post.decos</small>
+												<small className="ml-1" style={{ color: "#232323" }}>post.decos</small>
 											</span>
 											<small>
-												<i className="float-right mr-1 bg-light text-light gradient">post.created_at</i>
+												<i className="float-right mr-1 gradient" style={{ color: "#232323" }}>post.created_at</i>
 											</small>
 										</h6>
-										<p className="my-2 bg-light text-light gradient">post.text</p>
+										<p className="my-2 gradient" style={{ color: "#232323" }}>post.text</p>
 
 										{/* Post likes */}
-										<a href="#" className="bg-light text-light gradient" style={{ color: "#cc3300" }}>
+										<a href="#" className="gradient" style={{ color: "#232323" }}>
 											<svg xmlns='http://www.w3.org/2000/svg'
 												width='1.2em'
 												height='1.2em'
@@ -416,11 +440,11 @@ const Index = (props) => {
 												<path fillRule='evenodd'
 													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 											</svg>
-											<small className="ml-1">po</small>
+											<small className="ml-1" style={{ color: "#232323" }}>po</small>
 										</a>
 
 										{/* Post comments */}
-										<span className="bg-light text-light gradient">
+										<span className="gradient" style={{ color: "#232323" }}>
 											<svg className="bi bi-chat ml-5"
 												width="1.2em"
 												height="1.2em"
@@ -430,7 +454,7 @@ const Index = (props) => {
 												<path fillRule="evenodd"
 													d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 											</svg>
-											<small className="ml-1">post.comments</small>
+											<small className="ml-1" style={{ color: "#232323" }}>post.comments</small>
 										</span>
 									</div>
 								</div>
@@ -440,8 +464,8 @@ const Index = (props) => {
 						{props.posts
 							.filter((post) => post.hasFollowed)
 							.map((post, index) => (
-								<div key={index} className='media p-2 border-bottom'>
-									<div className='media-left'>
+								<div key={index} className="d-flex border-bottom border-dark">
+									<div className="p-2">
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 											<Link to={`/profile/${post.username}`}>
 												<Img src={post.pp}
@@ -451,8 +475,8 @@ const Index = (props) => {
 											</Link>
 										</div>
 									</div>
-									<div className='media-body'>
-										<h6 className="media-heading m-0"
+									<div className="p-2 flex-grow-1">
+										<h6 className="m-0"
 											style={{
 												width: "100%",
 												whiteSpace: "nowrap",
@@ -460,7 +484,7 @@ const Index = (props) => {
 												textOverflow: "clip"
 											}}>
 											<b>{post.name}</b>
-											<small>{post.username}</small>
+											<small className="text-secondary">{post.username}</small>
 											<span className="ml-1" style={{ color: "gold" }}>
 												<svg className="bi bi-circle"
 													width="1em"
@@ -471,10 +495,10 @@ const Index = (props) => {
 													<path fillRule="evenodd"
 														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
 												</svg>
-												<small className="ml-1">{post.decos}</small>
+												<small className="ml-1" style={{ color: "inherit" }}>{post.decos}</small>
 											</span>
 											<small>
-												<i className="float-right mr-1">{post.created_at}</i>
+												<i className="float-right text-secondary mr-1">{post.created_at}</i>
 											</small>
 										</h6>
 										<p className="mb-0">{post.text}</p>
@@ -672,7 +696,7 @@ const Index = (props) => {
 										{/* Post likes */}
 										{post.hasLiked ?
 											<a href="#"
-												style={{ color: "#cc3300" }}
+												style={{ color: "#fb3958" }}
 												onClick={(e) => {
 													e.preventDefault()
 													onPostLike(post.id)
@@ -686,12 +710,15 @@ const Index = (props) => {
 													<path fillRule='evenodd'
 														d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 												</svg>
-												<small className="ml-1">{post.likes}</small>
+												<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
 											</a> :
-											<a href="#" onClick={(e) => {
-												e.preventDefault()
-												onPostLike(post.id)
-											}}>
+											<a
+												href="#"
+												style={{ color: "rgba(220, 220, 220, 1)" }}
+												onClick={(e) => {
+													e.preventDefault()
+													onPostLike(post.id)
+												}}>
 												<svg xmlns='http://www.w3.org/2000/svg'
 													width='1.2em'
 													height='1.2em'
@@ -701,11 +728,11 @@ const Index = (props) => {
 													<path
 														d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 												</svg>
-												<small className="ml-1">{post.likes}</small>
+												<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
 											</a>}
 
 										{/* Post comments */}
-										<Link to={"post-show/" + post.id}>
+										<Link to={"post-show/" + post.id} style={{ color: "rgba(220, 220, 220, 1)" }}>
 											<svg className="bi bi-chat ml-5"
 												width="1.2em"
 												height="1.2em"
@@ -715,7 +742,7 @@ const Index = (props) => {
 												<path fillRule="evenodd"
 													d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 											</svg>
-											<small className="ml-1">{post.comments}</small>
+											<small className="ml-1" style={{ color: "inherit" }}>{post.comments}</small>
 										</Link>
 
 										{/* <!-- Default dropup button --> */}
@@ -723,6 +750,7 @@ const Index = (props) => {
 											<a href="#"
 												role="button"
 												id="dropdownMenuLink"
+												className="text-secondary"
 												data-toggle="dropdown"
 												aria-haspopup="true"
 												aria-expanded="false">
@@ -736,7 +764,9 @@ const Index = (props) => {
 														d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 												</svg>
 											</a>
-											<div className="dropdown-menu dropdown-menu-right" style={{ borderRadius: "0" }}>
+											<div
+												className="dropdown-menu dropdown-menu-right"
+												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
 												{post.username != props.auth.username ?
 													post.username != "@blackmusic" &&
 													<a href="#" className="dropdown-item" onClick={(e) => {
@@ -762,10 +792,10 @@ const Index = (props) => {
 
 				{/* <!-- Song suggestion area --> */}
 				<div className="col-sm-3 hidden">
-					<div className="p-2 border-bottom border">
+					<div className="p-2 border-bottom border border-dark">
 						<h5>Songs to watch</h5>
 					</div>
-					<div className="border m-0 p-0">
+					<div className="border border-dark m-0 p-0">
 						{/* Loading Video items */}
 						{dummyArray
 							.filter(() => props.videos.length < 1)
@@ -775,32 +805,33 @@ const Index = (props) => {
 										<div className="w-25 h-25"></div>
 									</div>
 									<div className="ml-2 mr-auto flex-grow-1">
-										<h6 className="mb-0 bg-light text-light gradient"
+										<h6 className="mb-0 gradient"
 											style={{
 												width: "8em",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
-												textOverflow: "clip"
+												textOverflow: "clip",
+												color: "#232323"
 											}}>
 											props.name
 										</h6>
-										<h6 className="mb-3 bg-light text-light gradient"
+										<h6 className="mb-3 gradient"
 											style={{
 												width: "8em",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
 												textOverflow: "clip"
 											}}>
-											<small>props.username</small>
-											<small className="ml-1">props.ft</small>
+											<small style={{ color: "#232323" }}>props.username</small>
+											<small className="ml-1" style={{ color: "#232323" }}>props.ft</small>
 										</h6>
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 										<button
-											className="btn btn-light mb-1 rounded-0 float-right"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0 float-right"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 									</div>
 								</div>

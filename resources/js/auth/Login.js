@@ -52,8 +52,8 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 			<div className="container">
 				<div className="row justify-content-center">
 					<div className="col-md-8">
-						<div className="card">
-							<div className="card-header">Login</div>
+						<div className="rounded-0" style={{ backgroundColor: "#232323" }}>
+							<div className="card-header text-white">Login</div>
 							<div className="card-body contact-form">
 								<form method="POST" action="" onSubmit={onSubmit}>
 									<div className="form-group row">
@@ -66,6 +66,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 												id="phone"
 												type="text"
 												className="form-control"
+												style={{ color: "#fff", backgroundColor: "fff" }}
 												name="phone"
 												value={phone}
 												onChange={(e) => { setPhone(e.target.value) }}
@@ -76,7 +77,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 
 									<div className="form-group row mb-0">
 										<div className="col-md-8 offset-md-4">
-											<Button type="submit" btnClass="mysonar-btn float-right" btnText={'Login'} />
+											<Button type="submit" btnClass="mysonar-btn white-btn float-right" btnText={'Login'} />
 										</div>
 									</div>
 								</form>

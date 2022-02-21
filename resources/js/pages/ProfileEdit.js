@@ -100,7 +100,7 @@ const ProfileEdit = (props) => {
 					<center>
 						<h1>EDIT PROFILE</h1>
 						<br />
-						<label htmlFor="">Profile Pic</label>
+						<label htmlFor="" className="text-light">Profile Pic</label>
 						<div className="avatar-container">
 							<FilePond
 								name="filepond-profile-pic"
@@ -130,7 +130,7 @@ const ProfileEdit = (props) => {
 						</div>
 
 						<form onSubmit={onSubmit}>
-							<label htmlFor="" className="float-left">Name</label>
+							<label htmlFor="" className="float-left text-light">Name</label>
 							<input
 								type="text"
 								name="name"
@@ -140,7 +140,7 @@ const ProfileEdit = (props) => {
 								onChange={(e) => { setName(e.target.value) }} />
 							<br />
 
-							<label htmlFor="" className="float-left">Phone</label>
+							<label htmlFor="" className="float-left text-light">Phone</label>
 							<input
 								type="text"
 								name="phone"
@@ -151,7 +151,7 @@ const ProfileEdit = (props) => {
 							/>
 							<br />
 
-							<label htmlFor="" className="float-left">Bio</label>
+							<label htmlFor="" className="float-left text-light">Bio</label>
 							<input
 								type="text"
 								name="bio"
@@ -161,7 +161,7 @@ const ProfileEdit = (props) => {
 								onChange={(e) => { setBio(e.target.value) }} />
 							<br />
 
-							<label htmlFor="" className="float-left">Cash Withdrawal</label>
+							<label htmlFor="" className="float-left text-light">Cash Withdrawal</label>
 							<br />
 							<br />
 							<h6>By setting your minimum cash withdrawal to less than <b className="mx-1 text-success"> KES 1000</b>
@@ -181,6 +181,7 @@ const ProfileEdit = (props) => {
 
 							<Button
 								type="submit"
+								btnClass="sonar-btn white-btn"
 								btnText={"save changes"} />
 						</form>
 						<br />

@@ -65,10 +65,10 @@ const SocialMediaInput = (props) => {
 	}
 
 	return (
-		<center>
+		<center style={{ backgroundColor: "#232323" }}>
 			<div
-				className="d-flex"
-				style={{ borderBottom: "1px solid #c0c0c0" }}>
+				className="d-flex pt-2"
+				style={{ borderBottom: "1px solid #fff", backgroundColor: "#232323" }}>
 				{/* Profile pic */}
 				<div className='p-2'>
 					<Img
@@ -82,7 +82,7 @@ const SocialMediaInput = (props) => {
 				<div className="flex-grow-1">
 					<textarea
 						name='post-text'
-						className='form-control m-0 p-2'
+						className='form-control m-0 p-2 border-bottom border-dark'
 						style={{
 							border: "none",
 							outline: "none",
@@ -98,6 +98,7 @@ const SocialMediaInput = (props) => {
 				{/* Emoji icon */}
 				<div className="pt-2 px-1">
 					<span
+						className="text-light"
 						style={{ cursor: "pointer" }}
 						onClick={() => {
 							props.setShowEmojiPicker(!props.showEmojiPicker)
@@ -119,7 +120,7 @@ const SocialMediaInput = (props) => {
 				{/* Image icon */}
 				{props.showImage &&
 					<div
-						className="pt-2 px-1"
+						className="pt-2 px-1 text-light"
 						onClick={() => {
 							props.setShowImagePicker(!props.showImagePicker)
 							props.setShowEmojiPicker(true && false)
@@ -149,7 +150,7 @@ const SocialMediaInput = (props) => {
 				{/* Poll icon */}
 				{props.showPoll &&
 					<div
-						className="pt-2 px-1"
+						className="pt-2 px-1 text-white"
 						onClick={() => {
 							props.setShowPollPicker(!props.showPollPicker)
 							props.setShowEmojiPicker(true && false)
@@ -180,10 +181,10 @@ const SocialMediaInput = (props) => {
 				<div className="p-1">
 					<Button
 						type="submit"
-						btnClass="mysonar-btn-round"
+						btnClass="mysonar-btn-round white-btn"
 						btnStyle={{ borderRadius: "50%", minWidth: "33px", paddingRight: "2px" }}
 						btnText={
-							<span className="p-2">
+							<span className="p-2 text-dark">
 								<svg style={{ transform: "rotate(45deg)" }}
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"
@@ -282,7 +283,7 @@ const SocialMediaInput = (props) => {
 					{/* Poll inputs */}
 					<input
 						type='text'
-						className='form-control'
+						className='form-control border-dark'
 						placeholder="Parameter 1"
 						onChange={(e) => {
 							setDisplay2("inline")
@@ -291,7 +292,7 @@ const SocialMediaInput = (props) => {
 					<input
 						type='text'
 						style={{ display: display2 }}
-						className='form-control'
+						className='form-control border-dark'
 						placeholder='Parameter 2'
 						onChange={(e) => {
 							setDisplay3("inline")
@@ -300,7 +301,7 @@ const SocialMediaInput = (props) => {
 					<input
 						type='text'
 						style={{ display: display3 }}
-						className='form-control'
+						className='form-control border-dark'
 						placeholder='Parameter 3'
 						onChange={(e) => {
 							setDisplay4("inline")
@@ -309,7 +310,7 @@ const SocialMediaInput = (props) => {
 					<input
 						type='text'
 						style={{ display: display4 }}
-						className='form-control'
+						className='form-control border-dark'
 						placeholder='Parameter 4'
 						onChange={(e) => {
 							setDisplay5("inline")
@@ -318,7 +319,7 @@ const SocialMediaInput = (props) => {
 					<input
 						type='text'
 						style={{ display: display5 }}
-						className='form-control'
+						className='form-control border-dark'
 						placeholder='Parameter 5'
 						onChange={(e) => props.setPara5(e.target.value)} />
 				</center>}

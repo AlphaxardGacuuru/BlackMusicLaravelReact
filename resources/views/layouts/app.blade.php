@@ -28,7 +28,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
 
     {{-- IOS support --}}
     <link rel="apple-touch-icon" href="storage/img/musical-note-black-gold-512.png">

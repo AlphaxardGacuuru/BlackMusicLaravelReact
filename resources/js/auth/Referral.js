@@ -25,7 +25,8 @@ const Referral = (props) => {
 		<>
 			<div
 				className="sonar-call-to-action-area section-padding-0-100"
-				style={{ background: "rgba(255, 215, 0, 0.9)" }}>
+				// style={{ background: "rgba(255, 215, 0, 0.9)" }}>
+				style={{ background: "rgba(0, 0, 0, 1)" }}>
 				<div className="backEnd-content">
 					<h2></h2>
 				</div>
@@ -42,8 +43,8 @@ const Referral = (props) => {
 											// background: "rgba(255, 215, 0, 1)",
 											borderRadius: "50%"
 										}} />
-									<h2 className="mt-2">Welcome to Black Music</h2>
-									<h2>Kenya's best online music store.</h2>
+									<h2 className="mt-2" style={{ color: "#FFD700" }}>Welcome to Black Music</h2>
+									<h2 style={{ color: "#FFD700" }}>Kenya's best online music store.</h2>
 									<br />
 									<br />
 									<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />

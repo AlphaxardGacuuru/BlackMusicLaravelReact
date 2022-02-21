@@ -184,7 +184,7 @@ const AudioCharts = (props) => {
 					left: 0,
 					bottom: 0,
 					height: window.innerHeight * 0.85,
-					backgroundImage: "linear-gradient(to bottom, rgba(35,35,35,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(255,255,255,0.6))"
+					backgroundImage: "linear-gradient(to bottom, rgba(35, 35, 35, 1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0, 0, 0, 1))"
 				}}>
 					{/* <div
 						className="d-flex justify-content-between"
@@ -207,6 +207,7 @@ const AudioCharts = (props) => {
 					</div> */}
 				</div>
 			</div>
+			<br />
 
 			{/* <!-- Scroll menu - */}
 			<div id="chartsMenu" className="hidden-scroll mt-2">
@@ -259,29 +260,34 @@ const AudioCharts = (props) => {
 					<div className="hidden-scroll" onScroll={handleScroll}>
 						{/* Loading animation */}
 						{dummyArray
-							// .filter(() => props.users.length < 1)
+							.filter(() => props.users.length < 1)
 							.map((item, key) => (
 								<span key={key} style={{ padding: "5px" }}>
 									<span key={key} className="m-0 p-0">
 										<center>
-											<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
-												<div className="bg-light text-light gradient" style={{ width: "150px", height: "150px" }}></div>
+											<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
+												<div
+													className="bg-dark gradient"
+													style={{ width: "150px", height: "150px" }}>
+												</div>
 											</div>
-											<h6 className="mt-2 mb-0 bg-light text-light gradient"
+											<h6 className="mt-2 mb-0 bg-light gradient"
 												style={{
 													width: "100px",
 													whiteSpace: "nowrap",
 													overflow: "hidden",
-													textOverflow: "clip"
+													textOverflow: "clip",
+													color: "#232323"
 												}}>
 												user.name
 											</h6>
-											<h6 className="bg-light text-light gradient"
+											<h6 className="gradient"
 												style={{
 													width: "100px",
 													whiteSpace: "nowrap",
 													overflow: "hidden",
-													textOverflow: "clip"
+													textOverflow: "clip",
+													color: "#232323"
 												}}>
 												user.username
 											</h6>
@@ -289,6 +295,7 @@ const AudioCharts = (props) => {
 									</span>
 								</span>
 							))}
+							
 						{/*  Echo Artists  */}
 						{artistsArray
 							.filter((artist) => artist.key !=
@@ -302,7 +309,7 @@ const AudioCharts = (props) => {
 										.map((user, key) => (
 											<span key={key} className="m-0 p-0">
 												<center>
-													<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+													<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
 														<Link to={"/profile/" + user.username}>
 															<Img src={user.pp}
 																width='150px'

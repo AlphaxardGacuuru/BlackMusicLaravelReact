@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -7,7 +7,21 @@ import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
 
 const Search = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	const history = useHistory()
+	const [searchHistory, setSearchHistory] = useState(props.getLocalStorage("searchHistory"))
+
+	// Fetch Kopokopo Recipients
+	useEffect(() => {
+		axios.get(`/api/search`)
+			.then((res) => {
+				setSearchHistory(res.data)
+				props.setLocalStorage("searchHistory", res.data)
+			})
+			// .catch(() => props.setErrors(['Failed to fetch search history']))
+			.catch((err) => console.log(err.response.data))
+	}, [])
 
 	var userResults = props.users
 		.filter((user) => {
@@ -51,6 +65,26 @@ const Search = (props) => {
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 
+	// Save search
+	const onSearch = (keyword) => {
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.post(`/api/search`, { keyword: keyword })
+				.then((res) => props.setMessage(res.data))
+		})
+	}
+
+	// Delete search item
+	const onDeleteSearch = (id) => {
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.delete(`/api/search/${id}`)
+				.then((res) => {
+					// Update search
+					axios.get(`/api/search`)
+						.then((res) => setSearchHistory(res.data))
+				})
+		});
+	}
+
 	return (
 		<>
 			<div className="row">
@@ -80,6 +114,33 @@ const Search = (props) => {
 					</header>
 					<br className="anti-hidden" />
 
+					{userResults.length == 0 &&
+						videoResults.length == 0 &&
+						audioResults.length == 0 &&
+						videoAlbumResults.length == 0 &&
+						audioAlbumResults.length == 0 &&
+						searchHistory.map((search, key) => (
+							<div key={key} className="d-flex justify-content-between border-bottom border-dark">
+								<div className="p-2">
+									<span>{search.keyword}</span>
+								</div>
+								<div className="p-2">
+									<span onClick={() => onDeleteSearch(search.id)}>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="30"
+											height="30"
+											fill="currentColor"
+											className="bi bi-x"
+											viewBox="0 0 16 16">
+											<path
+												d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+										</svg>
+									</span>
+								</div>
+							</div>
+						))}
+
 					{/* <!-- ****** Artists Area Start ****** --> */}
 					{userResults.length > 0 && <h4>Artists</h4>}
 					<div className="hidden-scroll">
@@ -88,9 +149,10 @@ const Search = (props) => {
 							<span
 								key={key}
 								className="pt-0 px-0 pb-2"
-								style={{ borderRadius: "10px" }}>
+								style={{ borderRadius: "10px" }}
+								onClick={() => onSearch(artist.username)}>
 								<center>
-									<div className="card avatar-thumbnail" style={{ borderRadius: "50%" }}>
+									<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
 										<Link to={"/profile/" + artist.username}>
 											<Img src={artist.pp}
 												width='150px'
@@ -135,20 +197,22 @@ const Search = (props) => {
 					{videoResults
 						.slice(0, 5)
 						.map((video, key) => (
-							<VideoMediaHorizontal
-								key={key}
-								onClick={() => props.setShow(0)}
-								setShow={props.setShow}
-								link={`/video-show/${video.id}`}
-								thumbnail={video.thumbnail}
-								name={video.name}
-								username={video.username}
-								ft={video.ft}
-								videoInCart={video.inCart}
-								hasBoughtVideo={!video.hasBoughtVideo}
-								videoId={video.id}
-								onCartVideos={props.onCartVideos}
-								onBuyVideos={onBuyVideos} />
+							<div key={key} onClick={() => onSearch(video.name)}>
+								<VideoMediaHorizontal
+									key={key}
+									onClick={() => props.setShow(0)}
+									setShow={props.setShow}
+									link={`/video-show/${video.id}`}
+									thumbnail={video.thumbnail}
+									name={video.name}
+									username={video.username}
+									ft={video.ft}
+									videoInCart={video.inCart}
+									hasBoughtVideo={!video.hasBoughtVideo}
+									videoId={video.id}
+									onCartVideos={props.onCartVideos}
+									onBuyVideos={onBuyVideos} />
+							</div>
 						))}
 					{/* Videos End */}
 				</div>
@@ -162,19 +226,21 @@ const Search = (props) => {
 					{audioResults
 						.slice(0, 5)
 						.map((audio, key) => (
-							<AudioMediaHorizontal
-								key={key}
-								setShow={props.setShow}
-								link={`/audio-show/${audio.id}`}
-								thumbnail={`/storage/${audio.thumbnail}`}
-								name={audio.name}
-								username={audio.username}
-								ft={audio.ft}
-								hasBoughtAudio={!props.hasBought}
-								audioInCart={audio.inCart}
-								audioId={audio.id}
-								onCartAudios={props.onCartAudios}
-								onBuyAudios={onBuyAudios} />
+							<div key={key} onClick={() => onSearch(audio.name)}>
+								<AudioMediaHorizontal
+									key={key}
+									setShow={props.setShow}
+									link={`/audio-show/${audio.id}`}
+									thumbnail={`/storage/${audio.thumbnail}`}
+									name={audio.name}
+									username={audio.username}
+									ft={audio.ft}
+									hasBoughtAudio={!props.hasBought}
+									audioInCart={audio.inCart}
+									audioId={audio.id}
+									onCartAudios={props.onCartAudios}
+									onBuyAudios={onBuyAudios} />
+							</div>
 						))}
 					{/* Audios End */}
 				</div>
@@ -190,7 +256,7 @@ const Search = (props) => {
 						</div>}
 					{/* Video Albums */}
 					{videoAlbumResults.map((videoAlbum, key) => (
-						<div key={key} className="mb-3">
+						<div key={key} className="mb-3" onClick={() => onSearch(videoAlbum.name)}>
 							<div className="media">
 								<div className="media-left">
 									<Img src={`/storage/${videoAlbum.cover}`}
@@ -215,7 +281,7 @@ const Search = (props) => {
 						</div>}
 					{/* Audio Albums */}
 					{audioAlbumResults.map((audioAlbum, key) => (
-						<div key={key} className="mb-3">
+						<div key={key} className="mb-3" onClick={() => onSearch(audioAlbum.name)}>
 							<div className="media">
 								<div className="media-left">
 									<Img src={`/storage/${audioAlbum.cover}`}

@@ -6,7 +6,7 @@ import Button from '../components/Button'
 
 const VideoMediaHorizontal = (props) => {
 	return (
-		<div className="d-flex p-2 border-bottom">
+		<div className="d-flex p-2 border-bottom border-dark">
 			<div
 				className="thumbnail"
 				onClick={() => props.setShow(0)}>
@@ -43,8 +43,8 @@ const VideoMediaHorizontal = (props) => {
 					props.hasBoughtVideo ?
 						props.videoInCart ?
 							<button
-								className="btn btn-light mb-1 rounded-0"
-								style={{ minWidth: '40px', height: '33px' }}
+								className="btn text-light mb-1 rounded-0"
+								style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}
 								onClick={() => props.onCartVideos(props.videoId)}>
 								<svg
 									className='bi bi-cart3'
@@ -59,7 +59,7 @@ const VideoMediaHorizontal = (props) => {
 							</button> :
 							<>
 								<button
-									className="mysonar-btn mb-1"
+									className="mysonar-btn white-btn mb-1"
 									style={{ minWidth: '40px', height: '33px' }}
 									onClick={() => props.onCartVideos(props.videoId)}>
 									<svg
@@ -74,7 +74,7 @@ const VideoMediaHorizontal = (props) => {
 									</svg>
 								</button>
 								<Button
-									btnClass={'btn mysonar-btn green-btn float-right'}
+									btnClass={'btn mysonar-btn green-btn btn-2 float-right'}
 									btnText={'buy'}
 									onClick={() => props.onBuyVideos(props.videoId)} />
 							</> : ""

@@ -153,7 +153,7 @@ const Profile = (props) => {
 			{/* <!-- End of Profile pic area --> */}
 
 			{/* {{-- Profile Area --}} */}
-			<div className="row border-bottom">
+			<div className="row border-bottom border-dark">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-10">
 					<br />
@@ -163,7 +163,7 @@ const Profile = (props) => {
 					{/* Check whether user has followed musician and display appropriate button */}
 					{profile.username == props.auth.username ?
 						<Link to="/profile-edit">
-							<button className="float-right mysonar-btn">edit profile</button>
+							<button className="float-right mysonar-btn white-btn">edit profile</button>
 						</Link>
 						: profile.username != "@blackmusic" ?
 							profile.hasFollowed ?
@@ -182,11 +182,11 @@ const Profile = (props) => {
 								</button> :
 								profile.hasBought1 ?
 									<Button
-										btnClass={'mysonar-btn float-right'}
+										btnClass={'mysonar-btn white-btn float-right'}
 										onClick={() => props.onFollow(username)}
 										btnText={'follow'} />
 									: <Button
-										btnClass={'mysonar-btn float-right'}
+										btnClass={'mysonar-btn white-btn float-right'}
 										onClick={() => props.setErrors([`You must have bought atleast one song by ${username}`])}
 										btnText={'follow'} /> : ""}
 					<div>
@@ -207,11 +207,13 @@ const Profile = (props) => {
 						<h6>{profile.bio}</h6>
 					</div>
 					<div className="d-flex flex-row">
-						<div className="p-2">Following
+						<div className="p-2">
+							<span>Following</span>
 							<br />
 							{profile.following}
 						</div>
-						<div className="p-2">Fans
+						<div className="p-2">
+							<span>Fans</span>
 							<br />
 							{profile.fans}
 						</div>
@@ -305,7 +307,7 @@ const Profile = (props) => {
 					{props.posts
 						.filter((post) => post.username == username)
 						.map((post, index) => (
-							<div key={index} className='media p-2 border-bottom'>
+							<div key={index} className='media p-2 border-bottom border-dark'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
@@ -325,7 +327,7 @@ const Profile = (props) => {
 											textOverflow: "clip"
 										}}>
 										<b>{post.name}</b>
-										<small>{post.username}</small>
+										<small className="text-secondary">{post.username}</small>
 										<span className="ml-1" style={{ color: "gold" }}>
 											<svg className="bi bi-circle"
 												width="1em"
@@ -339,7 +341,7 @@ const Profile = (props) => {
 											<small className="ml-1">{post.decos}</small>
 										</span>
 										<small>
-											<i className="float-right mr-1">{post.created_at}</i>
+											<i className="float-right mr-1 text-secondary">{post.created_at}</i>
 										</small>
 									</h6>
 									<p className="mb-0">{post.text}</p>
@@ -366,12 +368,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted1 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn white-btn mb-1"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
@@ -400,12 +402,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted2 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn white-btn mb-1"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
@@ -434,12 +436,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted3 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn white-btn mb-1"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
@@ -468,12 +470,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted4 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn white-btn mb-1"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
@@ -499,12 +501,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted5 ?
 												<Button
-													btnClass={"mysonar-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
 												: <Button
-													btnClass={"mysonar-btn mb-1"}
+													btnClass={"mysonar-btn white-btn mb-1"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
@@ -539,7 +541,7 @@ const Profile = (props) => {
 									{/* Post likes */}
 									{post.hasLiked ?
 										<a href="#"
-											style={{ color: "#cc3300" }}
+											style={{ color: "#fb3958" }}
 											onClick={(e) => {
 												e.preventDefault()
 												onPostLike(post.id)
@@ -553,7 +555,7 @@ const Profile = (props) => {
 												<path fillRule='evenodd'
 													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
 											</svg>
-											<small className="ml-1">{post.likes}</small>
+											<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
 										</a> :
 										<a href="#" onClick={(e) => {
 											e.preventDefault()
@@ -568,7 +570,7 @@ const Profile = (props) => {
 												<path
 													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
 											</svg>
-											<small className="ml-1">{post.likes}</small>
+											<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
 										</a>}
 
 									{/* Post comments */}

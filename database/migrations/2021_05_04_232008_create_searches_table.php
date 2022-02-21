@@ -15,6 +15,7 @@ class CreateSearchesTable extends Migration
     {
         Schema::create('searches', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->nullable();
             $table->string('keyword')->nullable();
             $table->timestamps();
         });

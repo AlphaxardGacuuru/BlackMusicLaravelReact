@@ -63,18 +63,10 @@ const AudioAlbumCreate = (props) => {
 
 	return (
 		<div>
-			{/* < !--Preloader Start-- > */}
-			<div id="preloader">
-				<div className="preload-content">
-					<div id="sonar-load"></div>
-				</div>
-			</div>
-			{/* <!--Preloader End-- > */}
-
 			{/* <!-- ***** Call to Action Area Start ***** --> */}
 			<div className="sonar-call-to-action-area section-padding-0-100">
 				<div className="backEnd-content">
-					<h2>Studio</h2>
+					<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Studio</h2>
 				</div>
 
 				<div className="container">
@@ -97,7 +89,7 @@ const AudioAlbumCreate = (props) => {
 										<br />
 										<br />
 
-										<label>Released</label>
+										<label className="text-light">Released</label>
 										<input
 											type="date"
 											name="released"
@@ -109,7 +101,7 @@ const AudioAlbumCreate = (props) => {
 										<br />
 										<br />
 
-										<label>Upload Album Cover</label>
+										<label className="text-light">Upload Album Cover</label>
 										<div
 											className="mb-2"
 											style={{

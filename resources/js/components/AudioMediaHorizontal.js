@@ -6,7 +6,7 @@ import Button from '../components/Button'
 
 const AudioMediaHorizontal = (props) => {
 	return (
-		<div className="d-flex p-2 border-bottom">
+		<div className="d-flex p-2 border-bottom border-dark">
 			<div
 				className="thumbnail"
 				style={{
@@ -53,8 +53,8 @@ const AudioMediaHorizontal = (props) => {
 					props.audioInCart ?
 						<div>
 							<button
-								className="btn btn-light rounded-0"
-								style={{ minWidth: '40px', height: '33px' }}
+								className="btn text-light rounded-0"
+								style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}
 								onClick={() => props.onCartAudios(props.audioId)}>
 								<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
 									fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
@@ -66,7 +66,7 @@ const AudioMediaHorizontal = (props) => {
 						<>
 							<div>
 								<button
-									className="mysonar-btn"
+									className="mysonar-btn white-btn"
 									style={{ minWidth: '40px', height: '33px' }}
 									onClick={() => props.onCartAudios(props.audioId)}>
 									<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
@@ -78,7 +78,7 @@ const AudioMediaHorizontal = (props) => {
 							</div>
 							<div className="ml-2">
 								<Button
-									btnClass={'btn mysonar-btn green-btn float-right'}
+									btnClass={'btn mysonar-btn green-btn btn-2 float-right'}
 									btnText={'buy'}
 									onClick={() => props.onBuyAudios(props.audioId)} />
 							</div>

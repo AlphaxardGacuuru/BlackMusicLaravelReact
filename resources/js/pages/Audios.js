@@ -9,7 +9,7 @@ const Audios = (props) => {
 		<div className="sonar-call-to-action-area section-padding-0-100">
 			{/* <!-- ***** Call to Action Area Start ***** - */}
 			<div className="backEnd-content">
-				<h2>Studio</h2>
+				<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Studio</h2>
 			</div>
 			<div className="row">
 				<div className="col-sm-12">
@@ -29,34 +29,34 @@ const Audios = (props) => {
 				<div className="col-sm-2">
 					<h1>Stats</h1>
 					<table className='table'>
-						<tbody>
-							<tr>
+						<tbody className="border border-0">
+							<tr className="border-top border-dark">
 								<th className="border-top-0"><h5>Audios</h5></th>
 								<th className="border-top-0">
 									<h5>{props.audios.filter((audio) => audio.username == props.auth.username).length}</h5>
 								</th>
 							</tr>
 						</tbody>
-						<tbody>
-							<tr>
-								<th><h5>Audio Albums</h5></th>
-								<th><h5>{props.audioAlbums
+						<tbody className="border border-0">
+							<tr className="border-top border-dark">
+								<th className="border-top border-dark"><h5>Audio Albums</h5></th>
+								<th className="border-top border-dark"><h5>{props.audioAlbums
 									.filter((audioAlbum) => audioAlbum.username == props.auth.username).length - 1}</h5>
 								</th>
 							</tr>
 						</tbody>
-						<tbody>
-							<tr>
-								<td className="border-right-0"><h5>Downloads</h5></td>
-								<td><h5>{props.boughtAudios
+						<tbody className="border border-0">
+							<tr className="border-top border-dark">
+								<td className="border-top border-dark"><h5>Downloads</h5></td>
+								<td className="border-top border-dark"><h5>{props.boughtAudios
 									.filter((boughtAudio) => boughtAudio.artist == props.auth.username).length}</h5>
 								</td>
 							</tr>
 						</tbody>
-						<tbody>
-							<tr>
-								<td><h5>Revenue</h5></td>
-								<td><h5 style={{ color: "green" }}>
+						<tbody className="border border-0">
+							<tr className="border-top border-dark">
+								<td className="border-top border-dark"><h5>Revenue</h5></td>
+								<td className="border-top border-dark"><h5 style={{ color: "#1e824c" }}>
 									KES
 									<span> {props.boughtAudios
 										.filter((boughtAudio) => boughtAudio.artist == props.auth.username)
@@ -86,57 +86,74 @@ const Audios = (props) => {
 										<h6>{audioAlbum.created_at}</h6>
 									</div>
 									<div className="p-2">
-										<Link to={`/audio-album-edit/${audioAlbum.id}`} className="btn mysonar-btn">edit</Link>
+										<Link to={`/audio-album-edit/${audioAlbum.id}`} className="btn mysonar-btn white-btn">edit</Link>
 									</div>
 								</div>
 								<br />
 								<table className="table table-responsive table-hover">
-									<tbody>
-										<tr>
-											<th><h5>Thumbnail</h5></th>
-											<th><h5>Audio Name</h5></th>
-											<th><h5>ft</h5></th>
-											<th><h5>Genre</h5></th>
-											<th><h5>Description</h5></th>
-											<th><h5>Downloads</h5></th>
-											<th><h5 style={{ color: "green" }}>Revenue</h5></th>
-											<th><h5>Likes</h5></th>
-											<th><h5>Released</h5></th>
-											<th><h5>Uploaded</h5></th>
-											<th><h5></h5></th>
+									<tbody className="border border-0">
+										<tr className="border-top border-dark">
+											<th className="border-top border-dark"><h5>Thumbnail</h5></th>
+											<th className="border-top border-dark"><h5>Audio Name</h5></th>
+											<th className="border-top border-dark"><h5>ft</h5></th>
+											<th className="border-top border-dark"><h5>Genre</h5></th>
+											<th className="border-top border-dark"><h5>Description</h5></th>
+											<th className="border-top border-dark"><h5>Downloads</h5></th>
+											<th className="border-top border-dark"><h5 style={{ color: "#1e824c" }}>Revenue</h5></th>
+											<th className="border-top border-dark"><h5>Likes</h5></th>
+											<th className="border-top border-dark"><h5>Released</h5></th>
+											<th className="border-top border-dark"><h5>Uploaded</h5></th>
+											<th className="border-top border-dark"><h5></h5></th>
 										</tr>
 									</tbody>
 									{props.audios
-										.filter((audio) => audio.album == audioAlbum.id)
+										.filter((audio) => audio.album_id == audioAlbum.id)
 										.map((albumItem, key) => (
-											<tbody key={key}>
-												<tr>
-													<td>
+											<tbody key={key} className="border border-0">
+												<tr className="border-top border-dark">
+													<td className="border-top border-dark">
 														<Link to={`/audio-show/${albumItem.id}`}>
 															<Img
 																src={`storage/${albumItem.thumbnail}`}
-																width="100%"
+																width="auto"
 																height="50px"
 																alt={"thumbnail"} />
 														</Link>
 													</td>
-													<td>{albumItem.name}</td>
-													<td>{albumItem.ft}</td>
-													<td>{albumItem.genre}</td>
-													<td>{albumItem.description}</td>
-													<td>{audioAlbum.downloads}</td>
-													<td style={{ color: "green" }}>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{albumItem.name}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{albumItem.ft}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{albumItem.genre}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{albumItem.description}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{audioAlbum.downloads}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}
+														style={{ color: "#1e824c" }}>
 														KES <span>{props.boughtAudios.filter((boughtAudio) => {
 															return boughtAudio.video_id == albumItem.id
 														}).length * 10}
 														</span>
 													</td>
-													<td>{audioAlbum.likes}</td>
-													<td>{audioAlbum.released}</td>
-													<td>{audioAlbum.created_at}</td>
-													<td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{audioAlbum.likes}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{audioAlbum.released}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
+														{audioAlbum.created_at}
+													</td>
+													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
 														<Link to={`/audio-edit/${albumItem.id}`}>
-															<button className='mysonar-btn'>edit</button>
+															<button className='mysonar-btn white-btn'>edit</button>
 														</Link>
 													</td>
 												</tr>

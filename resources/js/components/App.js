@@ -216,6 +216,19 @@ function App() {
 
 	// Function for following users
 	const onFollow = (musician) => {
+		// Change follow button
+		const newUsers = users
+			.filter((item) => {
+				// Get the exact user and change follow button
+				if (item.username == musician) {
+					item.hasFollowed = !item.hasFollowed
+				}
+				return true
+			})
+		// Set new Users
+		setUsers(newUsers)
+
+		// Add follow
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/follows`, {
 				musician: musician

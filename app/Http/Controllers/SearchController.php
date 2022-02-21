@@ -14,7 +14,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        //
+        return Search::where('username', auth()->user()->username)->get();
     }
 
     /**
@@ -35,7 +35,10 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $search = new Search;
+        $search->username = auth()->user()->username;
+        $search->keyword = $request->input('keyword');
+        $search->save();
     }
 
     /**
@@ -78,8 +81,8 @@ class SearchController extends Controller
      * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Search $search)
+    public function destroy($id)
     {
-        //
+        Search::find($id)->delete();
     }
 }
