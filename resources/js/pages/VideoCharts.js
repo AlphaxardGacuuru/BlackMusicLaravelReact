@@ -417,7 +417,7 @@ const VideoCharts = (props) => {
 												</h6>
 												{!video.hasBoughtVideo ?
 													video.inCart ?
-														<button className="btn mb-1 rounded-0"
+														<button className="btn text-light mb-1 rounded-0"
 															style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}
 															onClick={() => props.onCartVideos(videoArray.key)}>
 															<svg className='bi bi-cart3'

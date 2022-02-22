@@ -214,7 +214,7 @@ const SocialMediaInput = (props) => {
 					<FilePond
 						name="filepond-media"
 						className="m-2"
-						labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
+						labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 						acceptedFileTypes={['image/*']}
 						allowRevert={true}
 						server={{

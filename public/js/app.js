@@ -94785,7 +94785,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), props.showImagePicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_3__["FilePond"], {
     name: "filepond-media",
     className: "m-2",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     acceptedFileTypes: ['image/*'],
     allowRevert: true,
     server: {
@@ -97029,7 +97029,7 @@ var AudioCreate = function AudioCreate(props) {
     className: "text-light"
   }, "Upload Audio Thumbnail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-thumbnail",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     imageCropAspectRatio: "1:1",
     acceptedFileTypes: ['image/*'],
     stylePanelAspectRatio: "16:9",
@@ -97062,7 +97062,7 @@ var AudioCreate = function AudioCreate(props) {
     className: "text-light"
   }, "Upload Audio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-audio",
-    labelIdle: "Drag & Drop your Audio or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Audio or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     acceptedFileTypes: ['audio/*'],
     allowRevert: true,
     maxFileSize: "50000000",
@@ -98824,13 +98824,13 @@ var Cart = function Cart(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-dark mb-4"
+    className: "mb-4"
   }, props.cartVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "pt-4"
+    className: "pt-4 pb-2 border-bottom border-dark"
   }, "Videos")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartVideos.map(function (cartVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "d-flex p-2 border-bottom border-dark"
+      className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -98870,7 +98870,7 @@ var Cart = function Cart(props) {
       d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
     })))));
   }), props.cartVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between"
+    className: "d-flex justify-content-between border-top border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
@@ -98882,13 +98882,13 @@ var Cart = function Cart(props) {
   }, videoTotalCash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-dark mb-4"
+    className: "mb-4"
   }, props.cartAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "pt-4"
+    className: "pt-4 pb-2 border-bottom border-dark"
   }, "Audios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), props.cartAudios.map(function (cartAudio, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "d-flex p-2 border-bottom border-dark"
+      className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "thumbnail",
       style: {
@@ -98935,7 +98935,7 @@ var Cart = function Cart(props) {
       d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
     })))));
   }), props.cartAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between"
+    className: "d-flex justify-content-between border-top border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
@@ -98947,9 +98947,9 @@ var Cart = function Cart(props) {
   }, audioTotalCash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-dark mb-4"
+    className: "mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "pt-4"
+    className: "pt-4 pb-2 border-bottom border-dark"
   }, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "text-success"
   }, " KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -99006,7 +99006,7 @@ var Cart = function Cart(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomMenu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between border-bottom border-dark mb-3"
+    className: "d-flex align-items-center justify-content-between mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo-area p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -99040,7 +99040,7 @@ var Cart = function Cart(props) {
       height: "50%"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between border-bottom border-dark mb-3"
+    className: "d-flex align-items-center justify-content-between mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo-area p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -102023,7 +102023,7 @@ var ProfileEdit = function ProfileEdit(props) {
     className: "avatar-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-profile-pic",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     stylePanelLayout: "compact circle",
     imageCropAspectRatio: "1:1",
     acceptedFileTypes: ['image/*'],
@@ -103599,7 +103599,7 @@ var VideoCharts = function VideoCharts(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, video.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
         className: "ml-1"
       }, video.ft)), !video.hasBoughtVideo ? video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn mb-1 rounded-0",
+        className: "btn text-light mb-1 rounded-0",
         style: {
           minWidth: '90px',
           height: '33px',
@@ -104065,7 +104065,7 @@ var VideoCreate = function VideoCreate(props) {
     className: "text-light"
   }, "Upload Video Thumbnail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-thumbnail",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-white\"> Browse </span>",
     imageCropAspectRatio: "16:9",
     acceptedFileTypes: ['image/*'],
     stylePanelAspectRatio: "16:9",
@@ -104100,7 +104100,7 @@ var VideoCreate = function VideoCreate(props) {
     className: "text-primary"
   }, "If the video is too large you can upload it to Youtube for compression, download it, delete it, then upload it here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_4__["FilePond"], {
     name: "filepond-video",
-    labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action\"> Browse </span>",
+    labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     acceptedFileTypes: ['video/*'],
     stylePanelAspectRatio: "16:9",
     maxFileSize: "200000000",

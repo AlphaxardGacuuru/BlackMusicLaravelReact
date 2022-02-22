@@ -155,15 +155,15 @@ const Cart = (props) => {
 			<div className="row">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3">
-					<div className="border border-dark mb-4">
+					<div className="mb-4">
 						{/* Cart Videos */}
 						{props.cartVideos.length > 0 &&
 							<>
-								<center><h3 className="pt-4">Videos</h3></center>
+								<center><h3 className="pt-4 pb-2 border-bottom border-dark">Videos</h3></center>
 								<hr />
 							</>}
 						{props.cartVideos.map((cartVideo, key) => (
-							<div key={key} className="d-flex p-2 border-bottom border-dark">
+							<div key={key} className="d-flex">
 								<div className="thumbnail">
 									<Link to={`/video-show/${cartVideo.video_id}`}>
 										<Img src={cartVideo.thumbnail}
@@ -203,7 +203,7 @@ const Cart = (props) => {
 							</div>
 						))}
 						{props.cartVideos.length > 0 &&
-							<div className="d-flex justify-content-between">
+							<div className="d-flex justify-content-between border-top border-dark">
 								<div className="p-2">
 									<h4 className="text-success">Sub Total</h4>
 								</div>
@@ -215,16 +215,16 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="col-sm-4">
-					<div className="border border-dark mb-4">
+					<div className="mb-4">
 						{/* Cart Audios */}
 						{props.cartAudios.length > 0 &&
 							<>
-								<center><h3 className="pt-4">Audios</h3></center>
+								<center><h3 className="pt-4 pb-2 border-bottom border-dark">Audios</h3></center>
 								<hr />
 							</>}
 						{props.cartAudios
 							.map((cartAudio, key) => (
-								<div key={key} className="d-flex p-2 border-bottom border-dark">
+								<div key={key} className="d-flex">
 									<div
 										className="thumbnail"
 										style={{ width: "50px", height: "50px" }}>
@@ -267,7 +267,7 @@ const Cart = (props) => {
 								</div>
 							))}
 						{props.cartAudios.length > 0 &&
-							<div className="d-flex justify-content-between">
+							<div className="d-flex justify-content-between border-top border-dark">
 								<div className="p-2">
 									<h4 className="text-success">Sub Total</h4>
 								</div>
@@ -279,9 +279,9 @@ const Cart = (props) => {
 					</div>
 				</div>
 				<div className="col-sm-3">
-					<div className="border border-dark mb-4">
+					<div className="mb-4">
 						<center>
-							<h3 className="pt-4">Total</h3>
+							<h3 className="pt-4 pb-2 border-bottom border-dark">Total</h3>
 							<hr />
 							<h3 className="text-success"> KES {total}</h3>
 							<h5 className="text-success">Your account balance: KES {props.auth.balance}</h5>
@@ -345,7 +345,7 @@ const Cart = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3">
+					<div className="d-flex align-items-center justify-content-between mb-3">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
 							<a href="#">Payment</a>
@@ -400,7 +400,7 @@ const Cart = (props) => {
 			{/* Sliding Receipt Bottom Nav */}
 			<div className={receipt}>
 				<div className="bottomMenu" style={{ height: "50%" }}>
-					<div className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3">
+					<div className="d-flex align-items-center justify-content-between mb-3">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
 							<a href="#">Receipt</a>

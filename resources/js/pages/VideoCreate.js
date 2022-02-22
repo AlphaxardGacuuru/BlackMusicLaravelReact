@@ -224,7 +224,7 @@ const VideoCreate = (props) => {
 
 										<FilePond
 											name="filepond-thumbnail"
-											labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-white"> Browse </span>'
 											imageCropAspectRatio="16:9"
 											acceptedFileTypes={['image/*']}
 											stylePanelAspectRatio="16:9"
@@ -252,7 +252,7 @@ const VideoCreate = (props) => {
 
 										<FilePond
 											name="filepond-video"
-											labelIdle='Drag & Drop your Video or <span class="filepond--label-action"> Browse </span>'
+											labelIdle='Drag & Drop your Video or <span class="filepond--label-action text-dark"> Browse </span>'
 											acceptedFileTypes={['video/*']}
 											stylePanelAspectRatio="16:9"
 											maxFileSize="200000000"

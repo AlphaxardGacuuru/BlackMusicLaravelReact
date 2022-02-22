@@ -276,7 +276,7 @@ const AudioCreate = (props) => {
 
 										<FilePond
 											name="filepond-thumbnail"
-											labelIdle='Drag & Drop your Image or <span class="filepond--label-action"> Browse </span>'
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 											imageCropAspectRatio="1:1"
 											acceptedFileTypes={['image/*']}
 											stylePanelAspectRatio="16:9"
@@ -321,7 +321,7 @@ const AudioCreate = (props) => {
 
 										<FilePond
 											name="filepond-audio"
-											labelIdle='Drag & Drop your Audio or <span class="filepond--label-action"> Browse </span>'
+											labelIdle='Drag & Drop your Audio or <span class="filepond--label-action text-dark"> Browse </span>'
 											acceptedFileTypes={['audio/*']}
 											allowRevert={true}
 											maxFileSize="50000000"
