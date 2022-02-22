@@ -203,7 +203,7 @@ a:focus {
 .poll-btn:focus,
 .poll-btn:hover {
     background-color: transparent;
-    color: #232323;
+    color: rgba(220,220,220,1);
 }
 
 .mysonar-btn-round {
@@ -247,7 +247,7 @@ a:focus {
     background-color: #232323;
 	border-color: #232323;
     font-size: 12px;
-    color: #ffffff;
+    color: rgba(220,220,220,1);
 }
 
 .mysonar-btn-round.btn-2 {

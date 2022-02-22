@@ -390,7 +390,7 @@ const VideoCharts = (props) => {
 										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
 										.map((video, key) => (
 											<span key={key}
-												className="border border-dark m-1 pb-2"
+												className="m-1 pb-2"
 												style={{
 													borderRadius: "0px",
 													display: "inline-block",

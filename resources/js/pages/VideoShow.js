@@ -447,7 +447,7 @@ const VideoShow = (props) => {
 					{showVideo.username == props.auth.username ||
 						props.auth.username == "@blackmusic" ||
 						showVideo.hasBoughtVideo ?
-						<div className='media p-2 border-bottom border-dark'>
+						<div className='media p-2'>
 							<div className="media-left">
 								<Img
 									src={props.auth.pp}

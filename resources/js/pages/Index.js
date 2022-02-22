@@ -144,7 +144,7 @@ const Index = (props) => {
 			<div className="row p-0">
 				<div className="col-sm-1 hidden"></div>
 				<div className="col-sm-3 hidden">
-					<div className="d-flex border border-dark">
+					<div className="d-flex">
 						<div className="p-2">
 							<div className="avatar-thumbnail-sm" style={{ borderRadius: "50%" }}>
 								<Link to={"/profile/" + props.auth.username}>
@@ -184,7 +184,7 @@ const Index = (props) => {
 							</span>
 						</div>
 					</div>
-					<div className="d-flex border-bottom border-left border-right border-dark">
+					<div className="d-flex">
 						<div className="p-2 flex-fill">
 							<h6>Posts</h6>
 							<span style={{ color: "rgba(220, 220, 220, 1)" }}>{props.auth.posts}</span>
@@ -201,8 +201,8 @@ const Index = (props) => {
 					<br />
 
 					{/* <!-- Musicians suggestions area --> */}
-					<div className="border border-dark">
-						<div className="p-2 border-bottom border-dark">
+					<div>
+						<div className="p-2">
 							<h2>Musicians to follow</h2>
 						</div>
 						{/* Slice to limit to 10 */}
@@ -211,7 +211,7 @@ const Index = (props) => {
 						{dummyArray
 							.filter(() => props.users.length < 1)
 							.map((item, key) => (
-								<div key={key} className='media p-2 border-bottom border-dark'>
+								<div key={key} className='media p-2'>
 									<div className='media-left'>
 										<div className="rounded-circle" style={{ width: "30px", height: "30px" }}></div>
 									</div>
@@ -233,8 +233,8 @@ const Index = (props) => {
 								user.username != "@blackmusic")
 							.slice(0, 10)
 							.map((user, key) => (
-								<div key={key} className='media p-2 border-bottom border-dark'>
-									<div className='media-left'>
+								<div key={key} className='d-flex justify-content-between'>
+									<div className='p-2'>
 										<Link to={`/profile/${user.username}`}>
 											<Img
 												src={user.pp}
@@ -242,13 +242,11 @@ const Index = (props) => {
 												width="30px"
 												height="30px"
 												alt="user" />
-										</Link>
-									</div>
-									<div className='media-body'>
-										<Link to={`/profile/${user.username}`}>
-											<b>{user.name}</b>
+											<b className="ml-2">{user.name}</b>
 											<small><i>{user.username}</i></small>
 										</Link>
+									</div>
+									<div className="p-2">
 
 										{/* Check whether user has bought at least one song from user */}
 										{/* Check whether user has followed user and display appropriate button */}
@@ -280,7 +278,7 @@ const Index = (props) => {
 
 				<div className="col-sm-4">
 					{/* <!-- ****** Songs Area ****** --> */}
-					<div className="p-2 border border-dark">
+					<div className="p-2">
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{/* Loading Video items */}
@@ -323,7 +321,7 @@ const Index = (props) => {
 								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)
 								.map((video, index) => (
-									<span key={index} className="pt-0 px-0 pb-2 border border-dark">
+									<span key={index} className="mx-1 pt-0 px-0 pb-2">
 										<div className="thumbnail">
 											<Link to={`/video-show/${video.id}`}>
 												<Img src={video.thumbnail.match(/http/) ?
@@ -392,12 +390,12 @@ const Index = (props) => {
 					{/* <!-- ****** Songs Area End ****** --> */}
 
 					{/* <!-- Posts area --> */}
-					<div className="border border-top-0 border-dark m-0 p-0">
+					<div className="m-0 p-0">
 						{/* Loading Post items */}
 						{dummyArray
 							.filter(() => props.posts.length < 1)
 							.map((item, key) => (
-								<div key={key} className='media p-2 border-bottom'>
+								<div key={key} className='media p-2'>
 									<div className='media-left'>
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}></div>
 									</div>
@@ -464,7 +462,7 @@ const Index = (props) => {
 						{props.posts
 							.filter((post) => post.hasFollowed)
 							.map((post, index) => (
-								<div key={index} className="d-flex border-bottom border-dark">
+								<div key={index} className="d-flex">
 									<div className="p-2">
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 											<Link to={`/profile/${post.username}`}>
@@ -523,7 +521,7 @@ const Index = (props) => {
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_1)} />
 													: <Button
-														btnClass={"mysonar-btn poll-btn mb-1"}
+														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 														btnText={post.parameter_1}
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_1)} />
@@ -557,7 +555,7 @@ const Index = (props) => {
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_2)} />
 													: <Button
-														btnClass={"mysonar-btn poll-btn mb-1"}
+														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 														btnText={post.parameter_2}
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_2)} />
@@ -591,7 +589,7 @@ const Index = (props) => {
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_3)} />
 													: <Button
-														btnClass={"mysonar-btn poll-btn mb-1"}
+														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 														btnText={post.parameter_3}
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_3)} />
@@ -625,7 +623,7 @@ const Index = (props) => {
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_4)} />
 													: <Button
-														btnClass={"mysonar-btn poll-btn mb-1"}
+														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 														btnText={post.parameter_4}
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_4)} />
@@ -659,7 +657,7 @@ const Index = (props) => {
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_5)} />
 													: <Button
-														btnClass={"mysonar-btn poll-btn mb-1"}
+														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 														btnText={post.parameter_5}
 														btnStyle={{ width: "100%" }}
 														onClick={() => onPoll(post.id, post.parameter_5)} />
@@ -792,10 +790,10 @@ const Index = (props) => {
 
 				{/* <!-- Song suggestion area --> */}
 				<div className="col-sm-3 hidden">
-					<div className="p-2 border-bottom border border-dark">
+					<div className="p-2">
 						<h5>Songs to watch</h5>
 					</div>
-					<div className="border border-dark m-0 p-0">
+					<div className=" m-0 p-0">
 						{/* Loading Video items */}
 						{dummyArray
 							.filter(() => props.videos.length < 1)

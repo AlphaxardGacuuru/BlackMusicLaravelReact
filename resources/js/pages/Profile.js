@@ -210,12 +210,12 @@ const Profile = (props) => {
 						<div className="p-2">
 							<span>Following</span>
 							<br />
-							{profile.following}
+							<span>{profile.following}</span>
 						</div>
 						<div className="p-2">
 							<span>Fans</span>
 							<br />
-							{profile.fans}
+							<span>{profile.fans}</span>
 						</div>
 					</div>
 				</div>
@@ -307,7 +307,7 @@ const Profile = (props) => {
 					{props.posts
 						.filter((post) => post.username == username)
 						.map((post, index) => (
-							<div key={index} className='media p-2 border-bottom border-dark'>
+							<div key={index} className='d-flex'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
@@ -318,7 +318,7 @@ const Profile = (props) => {
 										</Link>
 									</div>
 								</div>
-								<div className='media-body'>
+								<div className='p-2 flex-grow-1'>
 									<h6 className="media-heading m-0"
 										style={{
 											width: "100%",
@@ -368,12 +368,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted1 ?
 												<Button
-													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
 												: <Button
-													btnClass={"mysonar-btn white-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 													btnText={post.parameter_1}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_1)} />
@@ -402,12 +402,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted2 ?
 												<Button
-													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
 												: <Button
-													btnClass={"mysonar-btn white-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 													btnText={post.parameter_2}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_2)} />
@@ -436,12 +436,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted3 ?
 												<Button
-													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
 												: <Button
-													btnClass={"mysonar-btn white-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 													btnText={post.parameter_3}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_3)} />
@@ -470,12 +470,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted4 ?
 												<Button
-													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
 												: <Button
-													btnClass={"mysonar-btn white-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 													btnText={post.parameter_4}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_4)} />
@@ -501,12 +501,12 @@ const Profile = (props) => {
 										post.isWithin24Hrs ?
 											post.hasVoted5 ?
 												<Button
-													btnClass={"mysonar-btn white-btn mb-1 btn-2"}
+													btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />
 												: <Button
-													btnClass={"mysonar-btn white-btn mb-1"}
+													btnClass={"mysonar-btn poll-btn white-btn mb-1"}
 													btnText={post.parameter_5}
 													btnStyle={{ width: "100%" }}
 													onClick={() => onPoll(post.id, post.parameter_5)} />

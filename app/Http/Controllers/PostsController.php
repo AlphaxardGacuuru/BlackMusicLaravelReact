@@ -226,7 +226,7 @@ class PostsController extends Controller
             $post->parameter_5 = $request->input('para5') ? $request->input('para5') : "";
             $post->save();
 
-            return response('Post Sent', 200);
+            return response('Post Created', 200);
         }
     }
 

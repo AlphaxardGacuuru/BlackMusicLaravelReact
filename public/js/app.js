@@ -93910,7 +93910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex p-2 border-bottom border-dark"
+    className: "d-flex p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "thumbnail",
     style: {
@@ -94060,8 +94060,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SocialMediaInput */ "./resources/js/components/SocialMediaInput.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -94266,13 +94264,13 @@ var Bottomnav = function Bottomnav(props) {
     style: {
       textAlign: "center",
       fontSize: "10px",
-      fontWeight: "100",
-      color: location.pathname == "/" ? "gold" : "white"
+      fontWeight: "100"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "20px",
-      margin: "0"
+      margin: "0",
+      color: location.pathname == "/" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -94293,12 +94291,12 @@ var Bottomnav = function Bottomnav(props) {
     style: {
       textAlign: "center",
       fontSize: "10px",
-      fontWeight: "100",
-      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
+      fontWeight: "100"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
-      fontSize: "20px"
+      fontSize: "20px",
+      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -94315,16 +94313,17 @@ var Bottomnav = function Bottomnav(props) {
     d: "M6 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1zm.94 6.44l4.95-2.83-2.83 4.95-4.95 2.83 2.83-4.95z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/search",
-    style: _defineProperty({
+    style: {
       color: "white",
       textAlign: "center",
       fontSize: "10px",
       fontWeight: "100"
-    }, "color", location.pathname == "/search" ? "gold" : "white"),
+    },
     onClick: props.onSearchIconClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
-      fontSize: "20px"
+      fontSize: "20px",
+      color: location.pathname == "/search" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -94346,12 +94345,12 @@ var Bottomnav = function Bottomnav(props) {
       textAlign: "center",
       fontSize: "10px",
       fontWeight: "100",
-      position: "relative",
-      color: location.pathname == "/cart" ? "gold" : "white"
+      position: "relative"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
-      fontSize: "20px"
+      fontSize: "20px",
+      color: location.pathname == "/cart" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -94379,12 +94378,12 @@ var Bottomnav = function Bottomnav(props) {
     style: {
       textAlign: "center",
       fontSize: "10px",
-      fontWeight: "100",
-      color: location.pathname == "/library" ? "gold" : "white"
+      fontWeight: "100"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
-      fontSize: "20px"
+      fontSize: "20px",
+      color: location.pathname == "/library" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -94995,7 +94994,8 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       "float": "left",
-      paddingRight: "20px"
+      paddingRight: "20px",
+      color: location.pathname == "/" ? "gold" : "white"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "bi bi-house",
@@ -95024,7 +95024,8 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       "float": "left",
-      paddingRight: "20px"
+      paddingRight: "20px",
+      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "bi bi-compass",
@@ -95052,7 +95053,8 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       "float": "left",
-      paddingRight: "20px"
+      paddingRight: "20px",
+      color: location.pathname == "/library" ? "gold" : "white"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "bi bi-person",
@@ -95422,7 +95424,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var VideoMediaHorizontal = function VideoMediaHorizontal(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex p-2 border-bottom border-dark"
+    className: "d-flex p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "thumbnail",
     onClick: function onClick() {
@@ -98185,7 +98187,7 @@ var AudioShow = function AudioShow(props) {
   }).map(function (comment, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "media p-2 border-bottom border-dark"
+      className: "media p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99154,7 +99156,7 @@ var Help = function Help(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }, helpThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex border-bottom border-dark"
+    className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -99180,7 +99182,7 @@ var Help = function Help(props) {
   }, "Start a conversation")))), helpThreads.map(function (helpThread, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "d-flex border-bottom border-dark ".concat(key == 0 && "border-top")
+      className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -99715,7 +99717,7 @@ var Index = function Index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex border border-dark"
+    className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99769,7 +99771,7 @@ var Index = function Index(props) {
       color: "inherit"
     }
   }, props.auth.decos)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex border-bottom border-left border-right border-dark"
+    className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 flex-fill"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Posts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -99782,16 +99784,14 @@ var Index = function Index(props) {
     style: {
       color: "rgba(220, 220, 220, 1)"
     }
-  }, props.auth.fans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-dark"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 border-bottom border-dark"
+  }, props.auth.fans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Musicians to follow")), dummyArray.filter(function () {
     return props.users.length < 1;
   }).map(function (item, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "media p-2 border-bottom border-dark"
+      className: "media p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99826,9 +99826,9 @@ var Index = function Index(props) {
   }).slice(0, 10).map(function (user, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "media p-2 border-bottom border-dark"
+      className: "d-flex justify-content-between"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "media-left"
+      className: "p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/profile/".concat(user.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -99837,11 +99837,11 @@ var Index = function Index(props) {
       width: "30px",
       height: "30px",
       alt: "user"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "media-body"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(user.username)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, user.username))), user.hasBought1 || props.auth.username == "@blackmusic" ? user.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+      className: "ml-2"
+    }, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, user.username)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2"
+    }, user.hasBought1 || props.auth.username == "@blackmusic" ? user.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: 'btn float-right rounded-0 text-light',
       style: {
         backgroundColor: "#232323"
@@ -99875,7 +99875,7 @@ var Index = function Index(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 border border-dark"
+    className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs for you"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll",
     onScroll: handleScroll
@@ -99927,7 +99927,7 @@ var Index = function Index(props) {
   }).slice(0, videoSlice).map(function (video, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: index,
-      className: "pt-0 px-0 pb-2 border border-dark"
+      className: "mx-1 pt-0 px-0 pb-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "thumbnail"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -99995,13 +99995,13 @@ var Index = function Index(props) {
       }
     })));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-top-0 border-dark m-0 p-0"
+    className: "m-0 p-0"
   }, dummyArray.filter(function () {
     return props.posts.length < 1;
   }).map(function (item, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "media p-2 border-bottom"
+      className: "media p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100106,7 +100106,7 @@ var Index = function Index(props) {
   }).map(function (post, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "d-flex border-bottom border-dark"
+      className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100177,7 +100177,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_1);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_1,
       btnStyle: {
         width: "100%"
@@ -100217,7 +100217,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_2);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_2,
       btnStyle: {
         width: "100%"
@@ -100257,7 +100257,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_3);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_3,
       btnStyle: {
         width: "100%"
@@ -100297,7 +100297,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_4);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_4,
       btnStyle: {
         width: "100%"
@@ -100337,7 +100337,7 @@ var Index = function Index(props) {
         return onPoll(post.id, post.parameter_5);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_5,
       btnStyle: {
         width: "100%"
@@ -100482,9 +100482,9 @@ var Index = function Index(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 border-bottom border border-dark"
+    className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Songs to watch")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border border-dark m-0 p-0"
+    className: " m-0 p-0"
   }, dummyArray.filter(function () {
     return props.videos.length < 1;
   }).map(function (item, key) {
@@ -101339,9 +101339,9 @@ var Profile = function Profile(props) {
     className: "d-flex flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Following"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), profile.following), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Following"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, profile.following)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Fans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), profile.fans))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Fans"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, profile.fans)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
@@ -101435,7 +101435,7 @@ var Profile = function Profile(props) {
   }).map(function (post, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index,
-      className: "media p-2 border-bottom border-dark"
+      className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-left"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -101451,7 +101451,7 @@ var Profile = function Profile(props) {
       height: "40px",
       alt: 'avatar'
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "media-body"
+      className: "p-2 flex-grow-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "media-heading m-0",
       style: {
@@ -101499,7 +101499,7 @@ var Profile = function Profile(props) {
       height: "auto",
       alt: 'post-media'
     })), post.parameter_1 ? post.isWithin24Hrs ? post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_1,
       btnStyle: {
         width: "100%"
@@ -101508,7 +101508,7 @@ var Profile = function Profile(props) {
         return onPoll(post.id, post.parameter_1);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_1,
       btnStyle: {
         width: "100%"
@@ -101539,7 +101539,7 @@ var Profile = function Profile(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_1)) : "", post.parameter_2 ? post.isWithin24Hrs ? post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_2,
       btnStyle: {
         width: "100%"
@@ -101548,7 +101548,7 @@ var Profile = function Profile(props) {
         return onPoll(post.id, post.parameter_2);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_2,
       btnStyle: {
         width: "100%"
@@ -101579,7 +101579,7 @@ var Profile = function Profile(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_2)) : "", post.parameter_3 ? post.isWithin24Hrs ? post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_3,
       btnStyle: {
         width: "100%"
@@ -101588,7 +101588,7 @@ var Profile = function Profile(props) {
         return onPoll(post.id, post.parameter_3);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_3,
       btnStyle: {
         width: "100%"
@@ -101619,7 +101619,7 @@ var Profile = function Profile(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_3)) : "", post.parameter_4 ? post.isWithin24Hrs ? post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_4,
       btnStyle: {
         width: "100%"
@@ -101628,7 +101628,7 @@ var Profile = function Profile(props) {
         return onPoll(post.id, post.parameter_4);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_4,
       btnStyle: {
         width: "100%"
@@ -101659,7 +101659,7 @@ var Profile = function Profile(props) {
         backgroundColor: "grey"
       }
     }, post.parameter_4)) : "", post.parameter_5 ? post.isWithin24Hrs ? post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1 btn-2",
+      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
       btnText: post.parameter_5,
       btnStyle: {
         width: "100%"
@@ -101668,7 +101668,7 @@ var Profile = function Profile(props) {
         return onPoll(post.id, post.parameter_5);
       }
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn white-btn mb-1",
+      btnClass: "mysonar-btn poll-btn white-btn mb-1",
       btnText: post.parameter_5,
       btnStyle: {
         width: "100%"
@@ -103565,7 +103565,7 @@ var VideoCharts = function VideoCharts(props) {
     }).map(function (video, key) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: key,
-        className: "border border-dark m-1 pb-2",
+        className: "m-1 pb-2",
         style: {
           borderRadius: "0px",
           display: "inline-block",
@@ -104964,7 +104964,7 @@ var VideoShow = function VideoShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, "Recommended")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "comments" ? "" : "hidden"
   }, showVideo.username == props.auth.username || props.auth.username == "@blackmusic" || showVideo.hasBoughtVideo ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "media p-2 border-bottom border-dark"
+    className: "media p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "media-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {

@@ -53,7 +53,12 @@ const TopNav = (props) => {
 									style={{ color: location.pathname == "/" ? "gold" : "white" }}
 									className='nav-link'
 									onClick={() => setMenu("")}>
-									<span style={{ float: "left", paddingRight: "20px" }}>
+									<span
+										style={{
+											float: "left",
+											paddingRight: "20px",
+											color: location.pathname == "/" ? "gold" : "white"
+										}}>
 										<svg className="bi bi-house" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd"
@@ -68,12 +73,20 @@ const TopNav = (props) => {
 							<li className='nav-item active'>
 								<Link to='/video-charts'
 									style={{
-										color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ?
+										color: location.pathname == "/video-charts" ||
+											location.pathname == "/audio-charts" ?
 											"gold" : "white"
 									}}
 									className='nav-link'
 									onClick={() => setMenu("")}>
-									<span style={{ float: "left", paddingRight: "20px" }}>
+									<span
+										style={{
+											float: "left",
+											paddingRight: "20px",
+											color: location.pathname == "/video-charts" ||
+												location.pathname == "/audio-charts" ?
+												"gold" : "white"
+										}}>
 										<svg className="bi bi-compass" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd"
@@ -90,7 +103,12 @@ const TopNav = (props) => {
 									style={{ color: location.pathname == "/library" ? "gold" : "white" }}
 									className='nav-link'
 									onClick={() => setMenu("")}>
-									<span style={{ float: "left", paddingRight: "20px" }}>
+									<span
+										style={{
+											float: "left",
+											paddingRight: "20px",
+											color: location.pathname == "/library" ? "gold" : "white"
+										}}>
 										<svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 											xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd"

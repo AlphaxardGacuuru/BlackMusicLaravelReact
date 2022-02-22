@@ -615,7 +615,7 @@ const AudioShow = (props) => {
 							audioComments
 								.filter((comment) => comment.audio_id == show)
 								.map((comment, index) => (
-									<div key={index} className='media p-2 border-bottom border-dark'>
+									<div key={index} className='media p-2'>
 										<div className='media-left'>
 											<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 												<Link to={`/profile/${comment.username}`}>

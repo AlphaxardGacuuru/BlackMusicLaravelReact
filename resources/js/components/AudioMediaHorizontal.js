@@ -6,7 +6,7 @@ import Button from '../components/Button'
 
 const AudioMediaHorizontal = (props) => {
 	return (
-		<div className="d-flex p-2 border-bottom border-dark">
+		<div className="d-flex p-2">
 			<div
 				className="thumbnail"
 				style={{

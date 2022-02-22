@@ -21,7 +21,7 @@ const Bottomnav = (props) => {
 		display = "none" : display = ""
 
 	// Show Social Input in various pages
-		location.pathname.match("/post-show/") ||
+	location.pathname.match("/post-show/") ||
 		location.pathname.match("/help/") ?
 		inputDisplay = "" : inputDisplay = "none"
 
@@ -33,7 +33,7 @@ const Bottomnav = (props) => {
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
 	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length
 	const cartItems = vidCartItems + audCartItems
-
+	
 	return (
 		<>
 			{/* Add breaks if social input is visible */}
@@ -202,10 +202,15 @@ const Bottomnav = (props) => {
 							style={{
 								textAlign: "center",
 								fontSize: "10px",
-								fontWeight: "100",
-								color: location.pathname == "/" ? "gold" : "white"
+								fontWeight: "100"
 							}}>
-							<span style={{ fontSize: "20px", margin: "0" }} className="nav-link">
+							<span
+								style={{
+									fontSize: "20px",
+									margin: "0",
+									color: location.pathname == "/" ? "gold" : "white"
+								}}
+								className="nav-link">
 								<svg className="bi bi-house" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg">
 									<path fillRule="evenodd"
@@ -222,10 +227,15 @@ const Bottomnav = (props) => {
 							style={{
 								textAlign: "center",
 								fontSize: "10px",
-								fontWeight: "100",
-								color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
+								fontWeight: "100"
 							}}>
-							<span style={{ fontSize: "20px" }} className="nav-link">
+							<span
+								style={{
+									fontSize: "20px",
+									color: location.pathname == "/video-charts" ||
+										location.pathname == "/audio-charts" ?
+										"gold" : "white"
+								}} className="nav-link">
 								<svg className="bi bi-compass" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg">
 									<path fillRule="evenodd"
@@ -243,11 +253,14 @@ const Bottomnav = (props) => {
 								color: "white",
 								textAlign: "center",
 								fontSize: "10px",
-								fontWeight: "100",
-								color: location.pathname == "/search" ? "gold" : "white"
+								fontWeight: "100"
 							}}
 							onClick={props.onSearchIconClick}>
-							<span style={{ fontSize: "20px" }} className="nav-link">
+							<span
+								style={{
+									fontSize: "20px",
+									color: location.pathname == "/search" ? "gold" : "white"
+								}} className="nav-link">
 								<svg className="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg">
 									<path fillRule="evenodd"
@@ -264,10 +277,13 @@ const Bottomnav = (props) => {
 								textAlign: "center",
 								fontSize: "10px",
 								fontWeight: "100",
-								position: "relative",
-								color: location.pathname == "/cart" ? "gold" : "white"
+								position: "relative"
 							}}>
-							<span style={{ fontSize: "20px" }} className="nav-link">
+							<span
+								style={{
+									fontSize: "20px",
+									color: location.pathname == "/cart" ? "gold" : "white"
+								}} className="nav-link">
 								<svg className="bi bi-cart3"
 									width="1em"
 									height="1em"
@@ -297,10 +313,14 @@ const Bottomnav = (props) => {
 							style={{
 								textAlign: "center",
 								fontSize: "10px",
-								fontWeight: "100",
-								color: location.pathname == "/library" ? "gold" : "white"
+								fontWeight: "100"
 							}}>
-							<span style={{ fontSize: "20px" }} className="nav-link">
+							<span
+								style={{
+									fontSize: "20px",
+									color: location.pathname == "/library" ? "gold" : "white"
+								}}
+								className="nav-link">
 								<svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg">
 									<path fillRule="evenodd"
