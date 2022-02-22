@@ -531,7 +531,9 @@ const AudioShow = (props) => {
 							{props.showArtist.username != props.auth.username ?
 								props.showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ?
 									props.showArtist.hasFollowed ?
-										<button className={'btn btn-light float-right rounded-0'}
+										<button
+											className={'btn float-right rounded-0'}
+											style={{ backgroundColor: "#232323" }}
 											onClick={() => props.onFollow(props.showArtist.username)}>
 											Followed
 											<svg className='bi bi-check'

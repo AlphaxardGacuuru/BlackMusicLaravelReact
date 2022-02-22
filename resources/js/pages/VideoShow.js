@@ -403,7 +403,9 @@ const VideoShow = (props) => {
 							{showArtist.username != props.auth.username ?
 								showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
 									showArtist.hasFollowed ?
-										<button className={'btn btn-light float-right rounded-0'}
+										<button
+											className={'btn float-right rounded-0'}
+											style={{ backgroundColor: "#232323" }}
 											onClick={() => props.onFollow(showArtist.username)}>
 											Followed
 											<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>

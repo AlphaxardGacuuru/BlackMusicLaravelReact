@@ -98111,7 +98111,10 @@ var AudioShow = function AudioShow(props) {
   }, props.showArtist.decos))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.showArtist.fans, " fans"), props.showArtist.username != props.auth.username ? props.showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ? props.showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: 'btn btn-light float-right rounded-0',
+    className: 'btn float-right rounded-0',
+    style: {
+      backgroundColor: "#232323"
+    },
     onClick: function onClick() {
       return props.onFollow(props.showArtist.username);
     }
@@ -104919,7 +104922,10 @@ var VideoShow = function VideoShow(props) {
   }, showArtist.decos))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, " ", showArtist.fans, " fans"), showArtist.username != props.auth.username ? showArtist.hasBought1 || props.auth.username == "@blackmusic" ? showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: 'btn btn-light float-right rounded-0',
+    className: 'btn float-right rounded-0',
+    style: {
+      backgroundColor: "#232323"
+    },
     onClick: function onClick() {
       return props.onFollow(showArtist.username);
     }
