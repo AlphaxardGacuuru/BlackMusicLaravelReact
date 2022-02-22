@@ -216,17 +216,17 @@ const HelpThread = (props) => {
 						}).map((helpPost, key) => (
 							<div
 								key={key}
-								className={`d-flex ${helpPost.username == props.auth.username ? "flex-row-reverse" : "text-white"}`}>
+								className={`d-flex ${helpPost.username == props.auth.username ? "flex-row-reverse" : "text-light"}`}>
 								{helpPost.username == props.auth.username &&
 									showDelete &&
 									<div
 										style={{
 											cursor: "pointer",
-											backgroundColor: helpPost.username == props.auth.username && "#232323"
+											backgroundColor: helpPost.username == props.auth.username && "gold"
 										}}
 										className="rounded-0 my-1 mx-0 p-2"
 										onClick={() => onDeletePost(helpPost.id)}>
-										<span>
+										<span style={{ color: "#232323" }}>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												width="16"

@@ -99480,17 +99480,21 @@ var HelpThread = function HelpThread(props) {
   }).map(function (helpPost, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "d-flex ".concat(helpPost.username == props.auth.username ? "flex-row-reverse" : "text-white")
+      className: "d-flex ".concat(helpPost.username == props.auth.username ? "flex-row-reverse" : "text-light")
     }, helpPost.username == props.auth.username && showDelete && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         cursor: "pointer",
-        backgroundColor: helpPost.username == props.auth.username && "#232323"
+        backgroundColor: helpPost.username == props.auth.username && "gold"
       },
       className: "rounded-0 my-1 mx-0 p-2",
       onClick: function onClick() {
         return onDeletePost(helpPost.id);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        color: "#232323"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       width: "16",
       height: "16",
