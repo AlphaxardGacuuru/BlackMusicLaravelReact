@@ -532,7 +532,7 @@ const AudioShow = (props) => {
 								props.showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ?
 									props.showArtist.hasFollowed ?
 										<button
-											className={'btn float-right rounded-0'}
+											className={'btn text-white float-right rounded-0'}
 											style={{ backgroundColor: "#232323" }}
 											onClick={() => props.onFollow(props.showArtist.username)}>
 											Followed

@@ -304,7 +304,7 @@ const Cart = (props) => {
 										<div className="">
 											<br />
 											<h5>Once you click the button below a pop up will appear on your phone asking you to pay</h5>
-											<h4 style={{ color: "#1e824c" }}>KES {total}</h4>
+											<h4 className="text-success">KES {total}</h4>
 											<h5>to</h5>
 											<h4 style={{ color: "dodgerblue" }}>Kopokopo</h4>
 											<br />

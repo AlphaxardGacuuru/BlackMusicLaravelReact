@@ -98111,7 +98111,7 @@ var AudioShow = function AudioShow(props) {
   }, props.showArtist.decos))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.showArtist.fans, " fans"), props.showArtist.username != props.auth.username ? props.showArtist.hasBoughtAudio || props.auth.username == "@blackmusic" ? props.showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: 'btn float-right rounded-0',
+    className: 'btn text-white float-right rounded-0',
     style: {
       backgroundColor: "#232323"
     },
@@ -98970,9 +98970,7 @@ var Cart = function Cart(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Once you click the button below a pop up will appear on your phone asking you to pay"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    style: {
-      color: "#1e824c"
-    }
+    className: "text-success"
   }, "KES ", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "to"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     style: {
       color: "dodgerblue"
@@ -104926,7 +104924,7 @@ var VideoShow = function VideoShow(props) {
   }, showArtist.decos))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, " ", showArtist.fans, " fans"), showArtist.username != props.auth.username ? showArtist.hasBought1 || props.auth.username == "@blackmusic" ? showArtist.hasFollowed ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: 'btn float-right rounded-0',
+    className: 'btn text-white float-right rounded-0',
     style: {
       backgroundColor: "#232323"
     },

@@ -404,7 +404,7 @@ const VideoShow = (props) => {
 								showArtist.hasBought1 || props.auth.username == "@blackmusic" ?
 									showArtist.hasFollowed ?
 										<button
-											className={'btn float-right rounded-0'}
+											className={'btn text-white float-right rounded-0'}
 											style={{ backgroundColor: "#232323" }}
 											onClick={() => props.onFollow(showArtist.username)}>
 											Followed
