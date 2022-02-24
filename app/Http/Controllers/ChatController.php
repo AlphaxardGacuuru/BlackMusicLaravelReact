@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\HelpPosts;
-use App\Notifications\HelpPostNotifications;
+use App\Chat;
+use App\Notifications\ChatNotifications;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class HelpPostsController extends Controller
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,27 +25,27 @@ class HelpPostsController extends Controller
             $authUsername = '@guest';
         }
 
-        $getHelpPosts = HelpPosts::orderBy('id', 'ASC')->get();
+        $getChat = Chat::orderBy('id', 'ASC')->get();
 
-        $helpPosts = [];
+        $chat = [];
 
         // Populate array
-        foreach ($getHelpPosts as $key => $helpPost) {
+        foreach ($getChat as $key => $chatItem) {
 
-            array_push($helpPosts, [
-                "id" => $helpPost->id,
-                "name" => $helpPost->users->name,
-                "username" => $helpPost->users->username,
-                "to" => $helpPost->to,
-                "pp" => preg_match("/http/", $helpPost->users->pp) ? $helpPost->users->pp : "/storage/" . $helpPost->users->pp,
-                "decos" => $helpPost->users->decos->count(),
-                "text" => $helpPost->text,
-                "media" => $helpPost->media,
-                "created_at" => $helpPost->created_at->format("d/m/Y h:ia"),
+            array_push($chat, [
+                "id" => $chatItem->id,
+                "name" => $chatItem->users->name,
+                "username" => $chatItem->users->username,
+                "to" => $chatItem->to,
+                "pp" => preg_match("/http/", $chatItem->users->pp) ? $chatItem->users->pp : "/storage/" . $chatItem->users->pp,
+                "decos" => $chatItem->users->decos->count(),
+                "text" => $chatItem->text,
+                "media" => $chatItem->media,
+                "created_at" => $chatItem->created_at->format("d/m/Y h:ia"),
             ]);
         }
 
-        return $helpPosts;
+        return $chat;
     }
 
     /**
@@ -68,7 +68,7 @@ class HelpPostsController extends Controller
     {
         if ($request->hasFile('filepond-media')) {
             /* Handle media upload */
-            $media = $request->file('filepond-media')->store('public/help-post-media');
+            $media = $request->file('filepond-media')->store('public/chat-media');
             $media = substr($media, 7);
             return $media;
         } else {
@@ -77,16 +77,16 @@ class HelpPostsController extends Controller
             ]);
 
             /* Create new post */
-            $helpPost = new HelpPosts;
-            $helpPost->username = auth()->user()->username;
-            $helpPost->to = $request->input('to');
-            $helpPost->text = $request->input('text');
-            $helpPost->media = $request->input('media');
-            $helpPost->save();
+            $chat = new Chat;
+            $chat->username = auth()->user()->username;
+            $chat->to = $request->input('to');
+            $chat->text = $request->input('text');
+            $chat->media = $request->input('media');
+            $chat->save();
 
             // Get user
             $user = User::where('username', $request->input('to'))->first();
-            $user->notify(new HelpPostNotifications);
+            $user->notify(new ChatNotifications);
 
             return response('Sent', 200);
         }
@@ -95,7 +95,7 @@ class HelpPostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\HelpPosts  $helpPosts
+     * @param  \App\Chat  $chat
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -107,30 +107,30 @@ class HelpPostsController extends Controller
             $authUsername = '@guest';
         }
 
-        $getHelpPosts = HelpPosts::where('username', $authUsername)
+        $getChat = Chat::where('username', $authUsername)
             ->orWhere('to', $authUsername)
             ->orderBy('id', 'DESC')
             ->get();
 
-        $helpThreadsZero = [];
-        $helpThreads = [];
+        $chatThreadsZero = [];
+        $chatThreads = [];
 
         // Get sender and recipient
-        foreach ($getHelpPosts as $key => $helpPost) {
-            array_push($helpThreadsZero, $helpPost->username);
-            array_push($helpThreadsZero, $helpPost->to);
+        foreach ($getChat as $key => $chatItem) {
+            array_push($chatThreadsZero, $chatItem->username);
+            array_push($chatThreadsZero, $chatItem->to);
         }
 
         // Get only unique entries
-        $helpThreadsZero = array_unique($helpThreadsZero);
+        $chatThreadsZero = array_unique($chatThreadsZero);
 
         // Remove auth username
-        $key = array_search($authUsername, $helpThreadsZero);
-        unset($helpThreadsZero[$key]);
+        $key = array_search($authUsername, $chatThreadsZero);
+        unset($chatThreadsZero[$key]);
 
         // Get threads
-        foreach ($helpThreadsZero as $key => $username) {
-            $array = HelpPosts::where('username', $authUsername)
+        foreach ($chatThreadsZero as $key => $username) {
+            $array = Chat::where('username', $authUsername)
                 ->where('to', $username)
                 ->orWhere('username', $username)
                 ->where('to', $authUsername)
@@ -142,9 +142,9 @@ class HelpPostsController extends Controller
                 ->first();
 
             // Check if media exists
-			$hasMedia = $array->media;
+            $hasMedia = $array->media;
 
-            array_push($helpThreads, [
+            array_push($chatThreads, [
                 'id' => $array->id,
                 'link' => $username,
                 'pp' => preg_match('/http/', $usernameInfo->pp) ? $usernameInfo->pp : '/storage/' . $usernameInfo->pp,
@@ -157,16 +157,16 @@ class HelpPostsController extends Controller
             ]);
         }
 
-        return $helpThreads;
+        return $chatThreads;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\HelpPosts  $helpPosts
+     * @param  \App\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function edit(HelpPosts $helpPosts)
+    public function edit(Chat $chat)
     {
         //
     }
@@ -175,10 +175,10 @@ class HelpPostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\HelpPosts  $helpPosts
+     * @param  \App\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HelpPosts $helpPosts)
+    public function update(Request $request, Chat $chat)
     {
         //
     }
@@ -186,7 +186,7 @@ class HelpPostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\HelpPosts  $helpPosts
+     * @param  \App\Chat  $chat
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -195,14 +195,14 @@ class HelpPostsController extends Controller
         $ext = substr($id, -3);
 
         if ($ext == 'jpg' || $ext == 'png' || $ext == 'gif') {
-            Storage::delete('public/help-post-media/' . $id);
-            return response("Help Post media deleted", 200);
+            Storage::delete('public/chat-media/' . $id);
+            return response("Chat media deleted", 200);
         } else {
-            $helpPost = HelpPosts::where('id', $id)->first();
-            Storage::delete('public/' . $helpPost->media);
-            HelpPosts::find($id)->delete();
+            $chatItem = Chat::where('id', $id)->first();
+            Storage::delete('public/' . $chatItem->media);
+            Chat::find($id)->delete();
 
-            return response("Help Post deleted", 200);
+            return response("Chat deleted", 200);
         }
     }
 }

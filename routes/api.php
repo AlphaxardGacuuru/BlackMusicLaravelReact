@@ -44,7 +44,7 @@ Route::resources([
     'cart-videos' => 'CartVideosController',
     'decos' => 'DecosController',
     'follows' => 'FollowsController',
-	'help-posts' => 'HelpPostsController',
+	'chat' => 'ChatController',
     'kopokopo' => 'KopokopoController',
     'kopokopo-recipients' => 'KopokopoRecipientsController',
     'notifications' => 'NotificationsController',

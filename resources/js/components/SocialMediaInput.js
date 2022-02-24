@@ -181,10 +181,10 @@ const SocialMediaInput = (props) => {
 				<div className="p-1">
 					<Button
 						type="submit"
-						btnClass="mysonar-btn-round white-btn"
+						btnClass="mysonar-btn-round"
 						btnStyle={{ borderRadius: "50%", minWidth: "33px", paddingRight: "2px" }}
 						btnText={
-							<span className="p-2 text-dark">
+							<span className="p-2">
 								<svg style={{ transform: "rotate(45deg)" }}
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"

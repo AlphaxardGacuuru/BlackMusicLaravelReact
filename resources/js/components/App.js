@@ -40,8 +40,9 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
-import Help from '../pages/Help'
-import HelpThread from '../pages/HelpThread'
+import Chat from '../pages/Chat'
+import ChatThread from '../pages/ChatThread'
+import NewChat from '../pages/NewChat'
 
 import NotFound from '../pages/NotFound'
 
@@ -997,16 +998,23 @@ function App() {
 					</>
 				)} />
 
-				<Route path="/help" exact render={(props) => (
+				<Route path="/chat" exact render={(props) => (
 					<>
-						<Help {...GLOBAL_STATE} />
+						<Chat {...GLOBAL_STATE} />
 						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />
 
-				<Route path="/help/:username" exact render={(props) => (
+				<Route path="/chat/:username" exact render={(props) => (
 					<>
-						<HelpThread {...GLOBAL_STATE} />
+						<ChatThread {...GLOBAL_STATE} />
+						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+					</>
+				)} />
+
+				<Route path="/new-chat" exact render={(props) => (
+					<>
+						<NewChat {...GLOBAL_STATE} />
 						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
 					</>
 				)} />

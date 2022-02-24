@@ -12,15 +12,14 @@ const Search = (props) => {
 	const history = useHistory()
 	const [searchHistory, setSearchHistory] = useState(props.getLocalStorage("searchHistory"))
 
-	// Fetch Kopokopo Recipients
+	// Fetch Search History
 	useEffect(() => {
 		axios.get(`/api/search`)
 			.then((res) => {
 				setSearchHistory(res.data)
 				props.setLocalStorage("searchHistory", res.data)
 			})
-			// .catch(() => props.setErrors(['Failed to fetch search history']))
-			.catch((err) => console.log(err.response.data))
+			.catch(() => props.setErrors(['Failed to fetch search history']))
 	}, [])
 
 	var userResults = props.users

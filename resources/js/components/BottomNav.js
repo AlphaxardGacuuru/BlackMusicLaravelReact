@@ -12,7 +12,7 @@ const Bottomnav = (props) => {
 	var checkLocation = true
 
 	// Hide BottomNav from various pages
-	location.pathname.match("/help/") ||
+	location.pathname.match("/chat/") ||
 		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||
@@ -22,7 +22,7 @@ const Bottomnav = (props) => {
 
 	// Show Social Input in various pages
 	location.pathname.match("/post-show/") ||
-		location.pathname.match("/help/") ?
+		location.pathname.match("/chat/") ?
 		inputDisplay = "" : inputDisplay = "none"
 
 	if (props.show != 0) {

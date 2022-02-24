@@ -92721,9 +92721,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_AudioAlbumEdit__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../pages/AudioAlbumEdit */ "./resources/js/pages/AudioAlbumEdit.js");
 /* harmony import */ var _pages_Admin__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../pages/Admin */ "./resources/js/pages/Admin.js");
 /* harmony import */ var _pages_Settings__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../pages/Settings */ "./resources/js/pages/Settings.js");
-/* harmony import */ var _pages_Help__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Help */ "./resources/js/pages/Help.js");
-/* harmony import */ var _pages_HelpThread__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/HelpThread */ "./resources/js/pages/HelpThread.js");
-/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
+/* harmony import */ var _pages_Chat__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../pages/Chat */ "./resources/js/pages/Chat.js");
+/* harmony import */ var _pages_ChatThread__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../pages/ChatThread */ "./resources/js/pages/ChatThread.js");
+/* harmony import */ var _pages_NewChat__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../pages/NewChat */ "./resources/js/pages/NewChat.js");
+/* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -92737,6 +92738,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -93854,16 +93856,22 @@ function App() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Settings__WEBPACK_IMPORTED_MODULE_34__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/help",
+    path: "/chat",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Help__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Chat__WEBPACK_IMPORTED_MODULE_35__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/help/:username",
+    path: "/chat/:username",
     exact: true,
     render: function render(props) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_HelpThread__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_ChatThread__WEBPACK_IMPORTED_MODULE_36__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/new-chat",
+    exact: true,
+    render: function render(props) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_NewChat__WEBPACK_IMPORTED_MODULE_37__["default"], GLOBAL_STATE), auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
@@ -94070,9 +94078,9 @@ var Bottomnav = function Bottomnav(props) {
   var inputDisplay;
   var checkLocation = true; // Hide BottomNav from various pages
 
-  location.pathname.match("/help/") || location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = ""; // Show Social Input in various pages
+  location.pathname.match("/chat/") || location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = ""; // Show Social Input in various pages
 
-  location.pathname.match("/post-show/") || location.pathname.match("/help/") ? inputDisplay = "" : inputDisplay = "none";
+  location.pathname.match("/post-show/") || location.pathname.match("/chat/") ? inputDisplay = "" : inputDisplay = "none";
 
   if (props.show != 0) {
     checkLocation = location.pathname.match(/audio-show/);
@@ -94753,14 +94761,14 @@ var SocialMediaInput = function SocialMediaInput(props) {
     className: "p-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "submit",
-    btnClass: "mysonar-btn-round white-btn",
+    btnClass: "mysonar-btn-round",
     btnStyle: {
       borderRadius: "50%",
       minWidth: "33px",
       paddingRight: "2px"
     },
     btnText: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "p-2 text-dark"
+      className: "p-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       style: {
         transform: "rotate(45deg)"
@@ -94950,7 +94958,7 @@ var TopNav = function TopNav(props) {
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var display; // Hide TopNav from various pages
 
-  location.pathname.match("/help/") || location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = "";
+  location.pathname.match("/chat/") || location.pathname.match("/post-create") || location.pathname.match("/post-show/") || location.pathname.match("/referral") || location.pathname.match("/login") || location.pathname.match("/register") ? display = "none" : display = "";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "MyElement",
     style: {
@@ -99104,9 +99112,9 @@ var Cart = function Cart(props) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/Help.js":
+/***/ "./resources/js/pages/Chat.js":
 /*!************************************!*\
-  !*** ./resources/js/pages/Help.js ***!
+  !*** ./resources/js/pages/Chat.js ***!
   \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -99133,21 +99141,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Help = function Help(props) {
+var Chat = function Chat(props) {
   axios.defaults.baseURL = props.url;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpThreads")),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("chatThreads")),
       _useState2 = _slicedToArray(_useState, 2),
-      helpThreads = _useState2[0],
-      setHelpThreads = _useState2[1]; // Fetch Help Threads
+      chatThreads = _useState2[0],
+      setChatThreads = _useState2[1]; // Fetch Help Threads
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios.get("/api/help-posts/1").then(function (res) {
-      setHelpThreads(res.data);
-      props.setLocalStorage("helpThreads", res.data);
+    axios.get("/api/chat/1").then(function (res) {
+      setChatThreads(res.data);
+      props.setLocalStorage("chatThreads", res.data);
     })["catch"](function () {
-      return props.setErrors(['Failed to fetch help threads']);
+      return props.setErrors(['Failed to fetch chat threads']);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99156,20 +99164,39 @@ var Help = function Help(props) {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }, helpThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/new-chat",
+    id: "chatFloatBtn"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    fill: "currentColor",
+    className: "bi bi-chat-right-text",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+  }))), chatThreads.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/@blackmusic"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: props.users.find(function (user) {
+      return user.username == "@blackmusic";
+    }) && props.users.find(function (user) {
+      return user.username == "@blackmusic";
+    }).pp,
     imgClass: "rounded-circle",
     width: "50px",
     height: "50px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 flex-grow-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/help/@blackmusic"
+    to: "/chat/@blackmusic"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "m-0",
     style: {
@@ -99180,23 +99207,23 @@ var Help = function Help(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "@blackmusic")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0"
-  }, "Start a conversation")))), helpThreads.map(function (helpThread, key) {
+  }, "Start a conversation")))), chatThreads.map(function (chatThread, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2"
+      className: "p-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(helpThread.username)
+      to: "/profile/".concat(chatThread.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: helpThread.pp,
+      src: chatThread.pp,
       imgClass: "rounded-circle",
       width: "50px",
       height: "50px"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2 flex-grow-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/help/".concat(helpThread.link)
+      to: "/chat/".concat(chatThread.link)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "m-0",
       style: {
@@ -99205,9 +99232,9 @@ var Help = function Help(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, helpThread.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, helpThread.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, chatThread.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, chatThread.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, helpThread.text, helpThread.hasMedia && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, chatThread.text, chatThread.hasMedia && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "ml-1",
       style: {
         cursor: "pointer"
@@ -99224,22 +99251,22 @@ var Help = function Help(props) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
     })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2"
+      className: "p-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right mr-1"
-    }, helpThread.created_at))));
+    }, chatThread.created_at))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Help);
+/* harmony default export */ __webpack_exports__["default"] = (Chat);
 
 /***/ }),
 
-/***/ "./resources/js/pages/HelpThread.js":
+/***/ "./resources/js/pages/ChatThread.js":
 /*!******************************************!*\
-  !*** ./resources/js/pages/HelpThread.js ***!
+  !*** ./resources/js/pages/ChatThread.js ***!
   \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -99266,7 +99293,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
  // import axios from '../components/Axios'
 
-var HelpThread = function HelpThread(props) {
+var ChatThread = function ChatThread(props) {
   axios.defaults.baseURL = props.url;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
@@ -99277,66 +99304,66 @@ var HelpThread = function HelpThread(props) {
       showDelete = _useState2[0],
       setShowDelete = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpPosts")),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("chat")),
       _useState4 = _slicedToArray(_useState3, 2),
-      helpPosts = _useState4[0],
-      setHelpPosts = _useState4[1];
+      chat = _useState4[0],
+      setChat = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("helpThreads")),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("chatThreads")),
       _useState6 = _slicedToArray(_useState5, 2),
-      helpThreads = _useState6[0],
-      setHelpThreads = _useState6[1];
+      chatThreads = _useState6[0],
+      setChatThreads = _useState6[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    // Fetch Help Threads
-    axios.get("/api/help-posts/1").then(function (res) {
-      setHelpThreads(res.data);
-      props.setLocalStorage("helpThreads", res.data);
+    // Fetch Chat Threads
+    axios.get("/api/chat/1").then(function (res) {
+      setChatThreads(res.data);
+      props.setLocalStorage("chatThreads", res.data);
     })["catch"](function () {
-      return props.setErrors(['Failed to fetch help threads']);
-    }); // Fetch Help Posts
+      return props.setErrors(['Failed to fetch chat']);
+    }); // Fetch Chat
 
-    axios.get("/api/help-posts").then(function (res) {
-      setHelpPosts(res.data);
-      props.setLocalStorage("helpPosts", res.data);
+    axios.get("/api/chat").then(function (res) {
+      setChat(res.data);
+      props.setLocalStorage("chat", res.data);
     })["catch"](function () {
-      return props.setErrors(['Failed to fetch help posts']);
+      return props.setErrors(['Failed to fetch chat']);
     });
   }, []); // Set states
 
   setTimeout(function () {
     props.setTo(username);
-    props.setPlaceholder("Talk to us");
+    props.setPlaceholder("Message");
     props.setShowImage(true);
     props.setShowPoll(false);
-    props.setUrlTo("/help-posts");
-    props.setUrlToDelete("/help-posts/".concat(props.media.substr(16)));
-    props.setUrlToTwo("/help-posts/1");
+    props.setUrlTo("/chat");
+    props.setUrlToDelete("/chat/".concat(props.media.substr(16)));
+    props.setUrlToTwo("/chat/1");
     props.setStateToUpdate(function () {
-      return setHelpPosts;
+      return setChat;
     });
     props.setStateToUpdateTwo(function () {
-      return setHelpThreads;
+      return setChatThreads;
     });
-  }, 1000); // Function to Update Help Posts
+  }, 1000); // Function to Update Chat
 
-  var checkHelpPosts = function checkHelpPosts() {
-    axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
-      // Get new length of help posts
-      var currentHelpPostsLength = helpPosts.filter(function (helpPost) {
-        return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
-      }).length; // Get old length of help posts
+  var checkChat = function checkChat() {
+    axios.get("".concat(props.url, "/api/chat")).then(function (res) {
+      // Get new length of chat
+      var currentChatLength = chat.filter(function (chatItem) {
+        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
+      }).length; // Get old length of chat
 
-      var newHelpPostsLength = res.data.filter(function (helpPost) {
-        return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
-      }).length; // Update help posts if new one arrives
+      var newChatLength = res.data.filter(function (chatItem) {
+        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
+      }).length; // Update chat if new one arrives
 
-      newHelpPostsLength > currentHelpPostsLength && setHelpPosts(res.data);
+      newChatLength > currentChatLength && setChat(res.data);
     });
   }; // trigger function in intervals 
 
 
-  checkHelpPosts(); // Scroll to the bottom of the page
+  checkChat(); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
   // var chat = useRef(null)
@@ -99359,19 +99386,19 @@ var HelpThread = function HelpThread(props) {
   // 		})
   // 	})
   // }
-  // Function for deleting posts
+  // Function for deleting chat
 
-  var onDeletePost = function onDeletePost(id) {
+  var onDeleteChat = function onDeleteChat(id) {
     axios.get('sanctum/csrf-cookie').then(function () {
-      axios["delete"]("".concat(props.url, "/api/help-posts/").concat(id)).then(function (res) {
-        props.setMessage(res.data); // Update posts
+      axios["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
+        props.setMessage(res.data); // Update chat
 
-        axios.get("".concat(props.url, "/api/help-posts")).then(function (res) {
-          return setHelpPosts(res.data);
-        }); // Update help threads
+        axios.get("".concat(props.url, "/api/chat")).then(function (res) {
+          return setChat(res.data);
+        }); // Update chat
 
-        axios.get("".concat(props.url, "/api/help-posts/1")).then(function (res) {
-          return setHelpThreads(res.data);
+        axios.get("".concat(props.url, "/api/chat/1")).then(function (res) {
+          return setChatThreads(res.data);
         });
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
@@ -99414,7 +99441,7 @@ var HelpThread = function HelpThread(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/help"
+    to: "/chat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     width: "30",
     height: "30",
@@ -99432,7 +99459,7 @@ var HelpThread = function HelpThread(props) {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-white"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, props.auth.username == "@blackmusic" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "m-0",
     style: {
       width: "100%",
@@ -99448,21 +99475,20 @@ var HelpThread = function HelpThread(props) {
     return user.username == username;
   }).name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "text-white"
-  }, username)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "m-0",
-    style: {
-      width: "100%",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "clip"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    className: "text-white"
-  }, "Black Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "text-white"
-  }, "@blackmusic"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, username))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-content-area d-flex align-items-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/profile/".concat(username)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: props.users.find(function (user) {
+      return user.username == username;
+    }) && props.users.find(function (user) {
+      return user.username == username;
+    }).pp,
+    imgClass: "rounded-circle",
+    width: "40px",
+    height: "40px"
+  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     className: "hidden"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sonar-call-to-action-area section-padding-0-100"
@@ -99473,20 +99499,20 @@ var HelpThread = function HelpThread(props) {
     style: {
       color: "rgba(255,255,255,0.1)"
     }
-  }, "Help Center")), helpPosts.filter(function (helpPost) {
-    return helpPost.username == username && helpPost.to == props.auth.username || helpPost.username == props.auth.username && helpPost.to == username;
-  }).map(function (helpPost, key) {
+  }, "Chat")), chat.filter(function (chatItem) {
+    return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
+  }).map(function (chatItem, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "d-flex ".concat(helpPost.username == props.auth.username ? "flex-row-reverse" : "text-light")
-    }, helpPost.username == props.auth.username && showDelete && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "d-flex ".concat(chatItem.username == props.auth.username ? "flex-row-reverse" : "text-light")
+    }, chatItem.username == props.auth.username && showDelete && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         cursor: "pointer",
-        backgroundColor: helpPost.username == props.auth.username && "gold"
+        backgroundColor: chatItem.username == props.auth.username && "gold"
       },
       className: "rounded-0 my-1 mx-0 p-2",
       onClick: function onClick() {
-        return onDeletePost(helpPost.id);
+        return onDeleteChat(chatItem.id);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       style: {
@@ -99507,32 +99533,32 @@ var HelpThread = function HelpThread(props) {
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "rounded-0 border border-0 p-2 my-1 mx-0",
       style: {
-        backgroundColor: helpPost.username == props.auth.username ? "#FFD700" : "#232323"
+        backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323"
       },
       onClick: function onClick() {
-        return helpPost.username == props.auth.username && setShowDelete(!showDelete);
+        return chatItem.username == props.auth.username && setShowDelete(!showDelete);
       }
-    }, helpPost.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, chatItem.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-1",
       style: {
         overflow: "hidden"
       }
-    }, helpPost.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: "storage/".concat(helpPost.media),
+    }, chatItem.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: "storage/".concat(chatItem.media),
       width: "100%",
       height: "auto",
       alt: 'help-post-media'
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: helpPost.username == props.auth.username ? "text-dark" : "text-muted"
+      className: chatItem.username == props.auth.username ? "text-dark" : "text-muted"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right"
-    }, helpPost.created_at))));
+    }, chatItem.created_at))));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (HelpThread);
+/* harmony default export */ __webpack_exports__["default"] = (ChatThread);
 
 /***/ }),
 
@@ -99704,8 +99730,8 @@ var Index = function Index(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/help",
-    id: "helpFloatBtn"
+    to: "/chat",
+    id: "chatFloatBtn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "20",
@@ -100659,6 +100685,134 @@ var Library = function Library(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Library);
+
+/***/ }),
+
+/***/ "./resources/js/pages/NewChat.js":
+/*!***************************************!*\
+  !*** ./resources/js/pages/NewChat.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var NewChat = function NewChat(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
+      _useState2 = _slicedToArray(_useState, 2),
+      search = _useState2[0],
+      setSearch = _useState2[1];
+
+  var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  setTimeout(function () {
+    return searchInput.current.focus();
+  }, 1000); // Get user results
+
+  var userResults = props.users.filter(function (user) {
+    return user.username != props.auth.username && user.username.match(search);
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    style: {
+      backgroundColor: "#232323"
+    },
+    className: "header-area anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container-fluid p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "contact-form"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    ref: searchInput,
+    className: "form-control",
+    placeholder: "Select user",
+    style: {
+      width: "100%"
+    },
+    onChange: function onChange(e) {
+      var regex = new RegExp(e.target.value, 'gi');
+      setSearch(regex);
+    }
+  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "anti-hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden-scroll"
+  }, userResults.map(function (user, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key,
+      className: "d-flex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/chat/".concat(user.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: user.pp,
+      imgClass: "rounded-circle",
+      width: "50px",
+      height: "50px"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2 flex-grow-1",
+      style: {
+        width: "65%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/chat/".concat(user.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, user.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip",
+        margin: 0
+      }
+    }, user.bio))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "float-right mr-1"
+    }, user.account_type))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NewChat);
 
 /***/ }),
 
@@ -102162,16 +102316,15 @@ var Search = function Search(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("searchHistory")),
       _useState2 = _slicedToArray(_useState, 2),
       searchHistory = _useState2[0],
-      setSearchHistory = _useState2[1]; // Fetch Kopokopo Recipients
+      setSearchHistory = _useState2[1]; // Fetch Search History
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios.get("/api/search").then(function (res) {
       setSearchHistory(res.data);
       props.setLocalStorage("searchHistory", res.data);
-    }) // .catch(() => props.setErrors(['Failed to fetch search history']))
-    ["catch"](function (err) {
-      return console.log(err.response.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch search history']);
     });
   }, []);
   var userResults = props.users.filter(function (user) {

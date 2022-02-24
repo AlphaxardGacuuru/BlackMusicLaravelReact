@@ -132,8 +132,8 @@ const Index = (props) => {
 					</svg>
 				</Link>}
 
-			{/* Help button */}
-			<Link to="/help" id="helpFloatBtn">
+			{/* Chat button */}
+			<Link to="/chat" id="chatFloatBtn">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"

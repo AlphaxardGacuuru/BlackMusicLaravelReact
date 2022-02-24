@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHelpPostsTable extends Migration
+class CreateChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHelpPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('help_posts', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->string('username')->nullable();
             $table->string('to')->nullable();
@@ -30,6 +30,6 @@ class CreateHelpPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('help_posts');
+        Schema::dropIfExists('chats');
     }
 }

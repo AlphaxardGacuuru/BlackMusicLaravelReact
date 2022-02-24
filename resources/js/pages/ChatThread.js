@@ -4,74 +4,74 @@ import { Link, useParams } from 'react-router-dom'
 import Img from '../components/Img'
 // import axios from '../components/Axios'
 
-const HelpThread = (props) => {
+const ChatThread = (props) => {
 
 	axios.defaults.baseURL = props.url
 
 	let { username } = useParams()
 
 	const [showDelete, setShowDelete] = useState()
-	const [helpPosts, setHelpPosts] = useState(props.getLocalStorage("helpPosts"))
-	const [helpThreads, setHelpThreads] = useState(props.getLocalStorage("helpThreads"))
+	const [chat, setChat] = useState(props.getLocalStorage("chat"))
+	const [chatThreads, setChatThreads] = useState(props.getLocalStorage("chatThreads"))
 
 	useEffect(() => {
-		// Fetch Help Threads
-		axios.get(`/api/help-posts/1`)
+		// Fetch Chat Threads
+		axios.get(`/api/chat/1`)
 			.then((res) => {
-				setHelpThreads(res.data)
-				props.setLocalStorage("helpThreads", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch help threads']))
+				setChatThreads(res.data)
+				props.setLocalStorage("chatThreads", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch chat']))
 
-		// Fetch Help Posts
-		axios.get(`/api/help-posts`)
+		// Fetch Chat
+		axios.get(`/api/chat`)
 			.then((res) => {
-				setHelpPosts(res.data)
-				props.setLocalStorage("helpPosts", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch help posts']))
+				setChat(res.data)
+				props.setLocalStorage("chat", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch chat']))
 	}, [])
 
 	// Set states
 	setTimeout(() => {
 		props.setTo(username)
-		props.setPlaceholder("Talk to us")
+		props.setPlaceholder("Message")
 		props.setShowImage(true)
 		props.setShowPoll(false)
-		props.setUrlTo("/help-posts")
-		props.setUrlToDelete(`/help-posts/${props.media.substr(16)}`)
-		props.setUrlToTwo(`/help-posts/1`)
-		props.setStateToUpdate(() => setHelpPosts)
-		props.setStateToUpdateTwo(() => setHelpThreads)
+		props.setUrlTo("/chat")
+		props.setUrlToDelete(`/chat/${props.media.substr(16)}`)
+		props.setUrlToTwo(`/chat/1`)
+		props.setStateToUpdate(() => setChat)
+		props.setStateToUpdateTwo(() => setChatThreads)
 	}, 1000)
 
-	// Function to Update Help Posts
-	const checkHelpPosts = () => {
-		axios.get(`${props.url}/api/help-posts`)
+	// Function to Update Chat
+	const checkChat = () => {
+		axios.get(`${props.url}/api/chat`)
 			.then((res) => {
-				// Get new length of help posts
-				var currentHelpPostsLength = helpPosts
-					.filter((helpPost) => {
-						return helpPost.username == username &&
-							helpPost.to == props.auth.username ||
-							helpPost.username == props.auth.username &&
-							helpPost.to == username
+				// Get new length of chat
+				var currentChatLength = chat
+					.filter((chatItem) => {
+						return chatItem.username == username &&
+							chatItem.to == props.auth.username ||
+							chatItem.username == props.auth.username &&
+							chatItem.to == username
 					}).length
 
-				// Get old length of help posts
-				var newHelpPostsLength = res.data
-					.filter((helpPost) => {
-						return helpPost.username == username &&
-							helpPost.to == props.auth.username ||
-							helpPost.username == props.auth.username &&
-							helpPost.to == username
+				// Get old length of chat
+				var newChatLength = res.data
+					.filter((chatItem) => {
+						return chatItem.username == username &&
+							chatItem.to == props.auth.username ||
+							chatItem.username == props.auth.username &&
+							chatItem.to == username
 					}).length
 
-				// Update help posts if new one arrives
-				newHelpPostsLength > currentHelpPostsLength && setHelpPosts(res.data)
+				// Update chat if new one arrives
+				newChatLength > currentChatLength && setChat(res.data)
 			})
 	}
 
 	// trigger function in intervals 
-	checkHelpPosts()
+	checkChat()
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
@@ -102,18 +102,18 @@ const HelpThread = (props) => {
 	// 	})
 	// }
 
-	// Function for deleting posts
-	const onDeletePost = (id) => {
+	// Function for deleting chat
+	const onDeleteChat = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/help-posts/${id}`)
+			axios.delete(`${props.url}/api/chat/${id}`)
 				.then((res) => {
 					props.setMessage(res.data)
-					// Update posts
-					axios.get(`${props.url}/api/help-posts`)
-						.then((res) => setHelpPosts(res.data))
-					// Update help threads
-					axios.get(`${props.url}/api/help-posts/1`)
-						.then((res) => setHelpThreads(res.data))
+					// Update chat
+					axios.get(`${props.url}/api/chat`)
+						.then((res) => setChat(res.data))
+					// Update chat
+					axios.get(`${props.url}/api/chat/1`)
+						.then((res) => setChatThreads(res.data))
 				}).catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -141,7 +141,7 @@ const HelpThread = (props) => {
 								<div className="menu-area d-flex justify-content-between">
 									{/* <!-- Logo Area  --> */}
 									<div className="logo-area">
-										<Link to="/help">
+										<Link to="/chat">
 											<svg
 												width="30"
 												height="30"
@@ -160,37 +160,35 @@ const HelpThread = (props) => {
 									<div className="menu-content-area d-flex align-items-center">
 										<div className="text-white">
 											<center>
-												{props.auth.username == "@blackmusic" ?
-													<h6 className="m-0"
-														style={{
-															width: "100%",
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}><b className="text-white">
-															{props.users.find((user) => user.username == username) &&
-																props.users.find((user) => user.username == username).name}
-														</b>
-														<br />
-														<small className="text-white">{username}</small>
-													</h6> :
-													<h6 className="m-0"
-														style={{
-															width: "100%",
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}>
-														<b className="text-white">Black Music</b>
-														<br />
-														<small className="text-white">@blackmusic</small>
-													</h6>}
+												<h6 className="m-0"
+													style={{
+														width: "100%",
+														whiteSpace: "nowrap",
+														overflow: "hidden",
+														textOverflow: "clip"
+													}}>
+													<b className="text-white">
+														{props.users.find((user) => user.username == username) &&
+															props.users.find((user) => user.username == username).name}
+													</b>
+													<br />
+													<small className="text-white">{username}</small>
+												</h6>
 											</center>
 										</div>
 									</div>
 
 									<div className="menu-content-area d-flex align-items-center">
-										<div></div>
+										<div>
+											<Link to={`/profile/${username}`}>
+												<Img
+													src={props.users.find((user) => user.username == username) &&
+														props.users.find((user) => user.username == username).pp}
+													imgClass="rounded-circle"
+													width="40px"
+													height="40px" />
+											</Link>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -205,27 +203,27 @@ const HelpThread = (props) => {
 				{/* <!-- ***** Call to Action Area Start ***** --> */}
 				<div className="sonar-call-to-action-area section-padding-0-100">
 					<div className="backEnd-content">
-						<h2 className="p-2" style={{ color: "rgba(255,255,255,0.1)" }}>Help Center</h2>
+						<h2 className="p-2" style={{ color: "rgba(255,255,255,0.1)" }}>Chat</h2>
 					</div>
-					{helpPosts
-						.filter((helpPost) => {
-							return helpPost.username == username &&
-								helpPost.to == props.auth.username ||
-								helpPost.username == props.auth.username &&
-								helpPost.to == username
-						}).map((helpPost, key) => (
+					{chat
+						.filter((chatItem) => {
+							return chatItem.username == username &&
+								chatItem.to == props.auth.username ||
+								chatItem.username == props.auth.username &&
+								chatItem.to == username
+						}).map((chatItem, key) => (
 							<div
 								key={key}
-								className={`d-flex ${helpPost.username == props.auth.username ? "flex-row-reverse" : "text-light"}`}>
-								{helpPost.username == props.auth.username &&
+								className={`d-flex ${chatItem.username == props.auth.username ? "flex-row-reverse" : "text-light"}`}>
+								{chatItem.username == props.auth.username &&
 									showDelete &&
 									<div
 										style={{
 											cursor: "pointer",
-											backgroundColor: helpPost.username == props.auth.username && "gold"
+											backgroundColor: chatItem.username == props.auth.username && "gold"
 										}}
 										className="rounded-0 my-1 mx-0 p-2"
-										onClick={() => onDeletePost(helpPost.id)}>
+										onClick={() => onDeleteChat(chatItem.id)}>
 										<span style={{ color: "#232323" }}>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -241,22 +239,22 @@ const HelpThread = (props) => {
 									</div>}
 								<div
 									className="rounded-0 border border-0 p-2 my-1 mx-0"
-									style={{ backgroundColor: helpPost.username == props.auth.username ? "#FFD700" : "#232323" }}
-									onClick={() => helpPost.username == props.auth.username && setShowDelete(!showDelete)}>
-									{helpPost.text}
+									style={{ backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323" }}
+									onClick={() => chatItem.username == props.auth.username && setShowDelete(!showDelete)}>
+									{chatItem.text}
 
 									{/* Show media */}
 									<div className="mb-1" style={{ overflow: "hidden" }}>
-										{helpPost.media &&
+										{chatItem.media &&
 											<Img
-												src={`storage/${helpPost.media}`}
+												src={`storage/${chatItem.media}`}
 												width="100%"
 												height="auto"
 												alt={'help-post-media'} />}
 									</div>
-									<small className={helpPost.username == props.auth.username ? "text-dark" : "text-muted"}>
+									<small className={chatItem.username == props.auth.username ? "text-dark" : "text-muted"}>
 										<i className="float-right">
-											{helpPost.created_at}
+											{chatItem.created_at}
 										</i>
 									</small>
 								</div>
@@ -269,4 +267,4 @@ const HelpThread = (props) => {
 	)
 }
 
-export default HelpThread
+export default ChatThread

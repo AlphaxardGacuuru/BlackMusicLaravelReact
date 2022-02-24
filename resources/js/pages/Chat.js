@@ -3,38 +3,55 @@ import { Link } from 'react-router-dom'
 
 import Img from '../components/Img'
 
-const Help = (props) => {
+const Chat = (props) => {
 
 	axios.defaults.baseURL = props.url
 
-	const [helpThreads, setHelpThreads] = useState(props.getLocalStorage("helpThreads"))
+	const [chatThreads, setChatThreads] = useState(props.getLocalStorage("chatThreads"))
 
 	// Fetch Help Threads
 	useEffect(() => {
-		axios.get(`/api/help-posts/1`)
+		axios.get(`/api/chat/1`)
 			.then((res) => {
-				setHelpThreads(res.data)
-				props.setLocalStorage("helpThreads", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch help threads']))
+				setChatThreads(res.data)
+				props.setLocalStorage("chatThreads", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch chat threads']))
 	}, [])
 
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
+
+				{/* Chat button */}
+				<Link to="/new-chat" id="chatFloatBtn">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						fill="currentColor"
+						className="bi bi-chat-right-text"
+						viewBox="0 0 16 16">
+						<path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z" />
+						<path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+					</svg>
+				</Link>
+
 				{/* Start Thread */}
-				{helpThreads.length == 0 &&
+				{chatThreads.length == 0 &&
 					<div className="d-flex">
 						<div className="p-2">
 							<Link to="/profile/@blackmusic">
 								<Img
+									src={props.users.find((user) => user.username == "@blackmusic") &&
+										props.users.find((user) => user.username == "@blackmusic").pp}
 									imgClass="rounded-circle"
 									width="50px"
 									height="50px" />
 							</Link>
 						</div>
 						<div className="p-2 flex-grow-1">
-							<Link to="/help/@blackmusic">
+							<Link to="/chat/@blackmusic">
 								<h6
 									className="m-0"
 									style={{
@@ -53,20 +70,20 @@ const Help = (props) => {
 				{/* Start Thread End */}
 
 				{/* Threads Start */}
-				{helpThreads
-					.map((helpThread, key) => (
+				{chatThreads
+					.map((chatThread, key) => (
 						<div key={key} className="d-flex">
-							<div className="p-2">
-								<Link to={`/profile/${helpThread.username}`}>
+							<div className="p-1">
+								<Link to={`/profile/${chatThread.username}`}>
 									<Img
-										src={helpThread.pp}
+										src={chatThread.pp}
 										imgClass="rounded-circle"
 										width="50px"
 										height="50px" />
 								</Link>
 							</div>
 							<div className="p-2 flex-grow-1">
-								<Link to={`/help/${helpThread.link}`}>
+								<Link to={`/chat/${chatThread.link}`}>
 									<h6
 										className="m-0"
 										style={{
@@ -75,11 +92,11 @@ const Help = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip"
 										}}>
-										<b>{helpThread.name}</b>
-										<small>{helpThread.username}</small>
+										<b>{chatThread.name}</b>
+										<small>{chatThread.username}</small>
 									</h6>
-									<p className="mb-0">{helpThread.text}
-										{helpThread.hasMedia &&
+									<p className="mb-0">{chatThread.text}
+										{chatThread.hasMedia &&
 											<span className="ml-1" style={{ cursor: "pointer" }}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -95,9 +112,9 @@ const Help = (props) => {
 									</p>
 								</Link>
 							</div>
-							<div className="p-2">
+							<div className="p-1">
 								<small>
-									<i className="float-right mr-1">{helpThread.created_at}</i>
+									<i className="float-right mr-1">{chatThread.created_at}</i>
 								</small>
 							</div>
 						</div>
@@ -109,4 +126,4 @@ const Help = (props) => {
 	)
 }
 
-export default Help
+export default Chat

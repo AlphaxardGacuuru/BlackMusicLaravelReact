@@ -212,15 +212,14 @@ a:focus {
     min-width: 90px;
     height: 33px;
     border: 1px solid;
-    border-color: #2f2f2f;
     text-transform: uppercase;
-    color: #2f2f2f;
     font-size: 12px;
     letter-spacing: 1px;
     border-radius: 0;
-    /* line-height: 32px; */
     padding: 0;
-    background-color: #ffffff;
+    border-color: rgba(220,220,220,1);
+    color: rgba(220,220,220,1);
+    background-color: transparent;
 }
 
 .mysonar-btn-round:hover,
@@ -705,17 +704,11 @@ a:focus {
     position: fixed;
     /* Fixed/sticky position */
     bottom: 120px;
-    /* Place the button at the bottom of the page */
     right: 30px;
-    /* Place the button 30px from the right */
     z-index: 99;
-    /* Make sure it does not overlap */
     border: none;
-    /* Remove borders */
     outline: none;
-    /* Remove outline */
     cursor: pointer;
-    /* Add a mouse pointer on hover */
     background-color: #232323;
     border-radius: 50%;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
@@ -752,7 +745,7 @@ a:focus {
 }
 
 /*Floating button*/
-#helpFloatBtn {
+#chatFloatBtn {
     /* display: block;*/
     /* Hidden by default */
     position: fixed;
@@ -780,12 +773,12 @@ a:focus {
     line-height: 66px;
 }
 
-#helpFloatBtn:hover {
+#chatFloatBtn:hover {
     background-color: #192a56;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    #helpFloatBtn {
+    #chatFloatBtn {
         bottom: 70px;
         right: 20px;
         height: 50px;
@@ -795,7 +788,7 @@ a:focus {
 }
 
 @media only screen and (max-width: 767px) {
-    #helpFloatBtn {
+    #chatFloatBtn {
         bottom: 70px;
         right: 20px;
         height: 50px;
