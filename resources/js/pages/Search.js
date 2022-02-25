@@ -19,7 +19,8 @@ const Search = (props) => {
 				setSearchHistory(res.data)
 				props.setLocalStorage("searchHistory", res.data)
 			})
-			.catch(() => props.setErrors(['Failed to fetch search history']))
+			// .catch(() => props.setErrors(['Failed to fetch search history']))
+			.catch((err) => console.log(err.data))
 	}, [])
 
 	var userResults = props.users

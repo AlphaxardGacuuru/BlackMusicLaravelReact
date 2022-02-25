@@ -100322,9 +100322,7 @@ var Index = function Index(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, post.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "text-secondary"
-    }, post.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, post.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, post.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "ml-1",
       style: {
         color: "gold"
@@ -102488,8 +102486,9 @@ var Search = function Search(props) {
     axios.get("/api/search").then(function (res) {
       setSearchHistory(res.data);
       props.setLocalStorage("searchHistory", res.data);
-    })["catch"](function () {
-      return props.setErrors(['Failed to fetch search history']);
+    }) // .catch(() => props.setErrors(['Failed to fetch search history']))
+    ["catch"](function (err) {
+      return console.log(err.data);
     });
   }, []);
   var userResults = props.users.filter(function (user) {

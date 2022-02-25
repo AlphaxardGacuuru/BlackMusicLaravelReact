@@ -489,7 +489,7 @@ const Index = (props) => {
 												textOverflow: "clip"
 											}}>
 											<b>{post.name}</b>
-											<small className="text-secondary">{post.username}</small>
+											<small>{post.username}</small>
 											<span className="ml-1" style={{ color: "gold" }}>
 												<svg className="bi bi-circle"
 													width="1em"
