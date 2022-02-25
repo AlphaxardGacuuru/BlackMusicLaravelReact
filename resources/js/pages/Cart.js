@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
 import axios from 'axios'
+
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
+
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
+const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
 const Cart = (props) => {
 

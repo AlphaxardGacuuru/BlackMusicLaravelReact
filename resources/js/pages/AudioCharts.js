@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
+import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
@@ -295,7 +296,7 @@ const AudioCharts = (props) => {
 									</span>
 								</span>
 							))}
-							
+
 						{/*  Echo Artists  */}
 						{artistsArray
 							.filter((artist) => artist.key !=
@@ -358,12 +359,7 @@ const AudioCharts = (props) => {
 								{props.audios
 									.filter((audio) => audio.id == audioArray.key && audio.username != "@blackmusic")
 									.map((audio, key) => (
-										<Suspense
-											fallback={
-												<center>
-													<div id="sonar-load" className="mt-5 mb-5"></div>
-												</center>
-											}>
+										<Suspense fallback={<LoadingAudioMediaHorizontal />}>
 											<AudioMediaHorizontal
 												key={key}
 												setShow={props.setShow}

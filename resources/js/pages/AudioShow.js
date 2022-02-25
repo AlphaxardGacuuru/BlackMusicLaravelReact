@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from 'axios';
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
+import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
+
+const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
 const AudioShow = (props) => {
 
@@ -745,16 +747,18 @@ const AudioShow = (props) => {
 						return boughtAudio.username == props.auth.username &&
 							boughtAudio.audio_id != props.show
 					}).map((boughtAudio, key) => (
-						<AudioMediaHorizontal
-							key={key}
-							setShow={props.setShow}
-							link={`/audio-show/${boughtAudio.audio_id}`}
-							thumbnail={`/storage/${boughtAudio.thumbnail}`}
-							name={boughtAudio.name}
-							username={boughtAudio.username}
-							ft={boughtAudio.ft}
-							audioId={boughtAudio.audio_id}
-							showCartandBuyButton={false} />
+						<Suspense fallback={<LoadingAudioMediaHorizontal />}>
+							<AudioMediaHorizontal
+								key={key}
+								setShow={props.setShow}
+								link={`/audio-show/${boughtAudio.audio_id}`}
+								thumbnail={`/storage/${boughtAudio.thumbnail}`}
+								name={boughtAudio.name}
+								username={boughtAudio.username}
+								ft={boughtAudio.ft}
+								audioId={boughtAudio.audio_id}
+								showCartandBuyButton={false} />
+						</Suspense>
 					))}
 				{/* <!-- End of Up next Area --> */}
 
@@ -769,19 +773,21 @@ const AudioShow = (props) => {
 							audio.id != show
 					}).slice(0, 10)
 					.map((audio, key) => (
-						<AudioMediaHorizontal
-							key={key}
-							setShow={props.setShow}
-							link={`/audio-show/${audio.id}`}
-							thumbnail={`/storage/${audio.thumbnail}`}
-							name={audio.name}
-							username={audio.username}
-							ft={audio.ft}
-							hasBoughtAudio={!audio.hasBoughtAudio}
-							audioInCart={audio.inCart}
-							audioId={audio.id}
-							onCartAudios={props.onCartAudios}
-							onBuyAudios={onBuyAudios} />
+						<Suspense fallback={<LoadingAudioMediaHorizontal />}>
+							<AudioMediaHorizontal
+								key={key}
+								setShow={props.setShow}
+								link={`/audio-show/${audio.id}`}
+								thumbnail={`/storage/${audio.thumbnail}`}
+								name={audio.name}
+								username={audio.username}
+								ft={audio.ft}
+								hasBoughtAudio={!audio.hasBoughtAudio}
+								audioInCart={audio.inCart}
+								audioId={audio.id}
+								onCartAudios={props.onCartAudios}
+								onBuyAudios={onBuyAudios} />
+						</Suspense>
 					))}
 			</div>
 			{/* <!-- End of Song Suggestion Area --> */}

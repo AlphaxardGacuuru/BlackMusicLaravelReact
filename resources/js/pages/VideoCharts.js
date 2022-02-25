@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
@@ -367,7 +368,7 @@ const VideoCharts = (props) => {
 											}}>
 											video
 										</h6>
-										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50" style={{ color: "#232323"}}>username</h6>
+										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50" style={{ color: "#232323" }}>username</h6>
 										<button
 											className="btn mb-1 rounded-0"
 											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
@@ -507,13 +508,7 @@ const VideoCharts = (props) => {
 									{props.videos
 										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
 										.map((video, key) => (
-											<Suspense
-												key={key}
-												fallback={
-													<center>
-														<div id="sonar-load" className="mt-5 mb-5"></div>
-													</center>
-												}>
+											<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 												<VideoMediaHorizontal
 													onClick={() => props.setShow(0)}
 													setShow={props.setShow}

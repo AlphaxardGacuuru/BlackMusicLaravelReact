@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
@@ -846,13 +847,7 @@ const Index = (props) => {
 							.filter((video) => !video.hasBoughtVideo)
 							.slice(0, 10)
 							.map((video, index) => (
-								<Suspense
-									key={index}
-									fallback={
-										<center>
-											<div id="sonar-load" className="mt-5 mb-5"></div>
-										</center>
-									}>
+								<Suspense key={index} fallback={<LoadingVideoMediaHorizontal />}>
 									<VideoMediaHorizontal
 										onClick={() => props.setShow(0)}
 										setShow={props.setShow}

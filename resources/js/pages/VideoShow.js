@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useParams, useHistory, useLocation } from "react-router-dom";
 import axios from 'axios'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
 const VideoShow = (props) => {
 
@@ -606,22 +608,24 @@ const VideoShow = (props) => {
 						return boughtVideo.username == props.auth.username &&
 							boughtVideo.video_id != show
 					}).map((boughtVideo, key) => (
-						<VideoMediaHorizontal
-							key={key}
-							onClick={() => props.setShow(0)}
-							// onClick={
-							// 	window.scrollBy({
-							// 		top: -window.innerHeight,
-							// 		right: 0,
-							// 		behavior: "smooth"
-							// 	})}
-							setShow={props.setShow}
-							link={`/video-show/${boughtVideo.video_id}`}
-							thumbnail={boughtVideo.thumbnail}
-							name={boughtVideo.name}
-							username={boughtVideo.username}
-							ft={boughtVideo.ft}
-							showCartandBuyButton={false} />
+						<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
+							<VideoMediaHorizontal
+								key={key}
+								onClick={() => props.setShow(0)}
+								// onClick={
+								// 	window.scrollBy({
+								// 		top: -window.innerHeight,
+								// 		right: 0,
+								// 		behavior: "smooth"
+								// 	})}
+								setShow={props.setShow}
+								link={`/video-show/${boughtVideo.video_id}`}
+								thumbnail={boughtVideo.thumbnail}
+								name={boughtVideo.name}
+								username={boughtVideo.username}
+								ft={boughtVideo.ft}
+								showCartandBuyButton={false} />
+						</Suspense>
 					))}
 				{/* <!-- End of Up next Area --> */}
 
@@ -636,26 +640,30 @@ const VideoShow = (props) => {
 							video.id != show
 					}).slice(0, 10)
 					.map((video, key) => (
-						<VideoMediaHorizontal
+						<Suspense
 							key={key}
-							onClick={() => props.setShow(0)}
-							// onClick={
-							// 	window.scrollBy({
-							// 		top: -window.innerHeight,
-							// 		right: 0,
-							// 		behavior: "smooth"
-							// 	})}
-							setShow={props.setShow}
-							link={`/video-show/${video.id}`}
-							thumbnail={video.thumbnail}
-							name={video.name}
-							username={video.username}
-							ft={video.ft}
-							videoInCart={video.inCart}
-							hasBoughtVideo={!video.hasBoughtVideo}
-							videoId={video.id}
-							onCartVideos={props.onCartVideos}
-							onBuyVideos={onBuyVideos} />
+							fallback={<LoadingVideoMediaHorizontal />}>
+							<VideoMediaHorizontal
+								key={key}
+								onClick={() => props.setShow(0)}
+								// onClick={
+								// 	window.scrollBy({
+								// 		top: -window.innerHeight,
+								// 		right: 0,
+								// 		behavior: "smooth"
+								// 	})}
+								setShow={props.setShow}
+								link={`/video-show/${video.id}`}
+								thumbnail={video.thumbnail}
+								name={video.name}
+								username={video.username}
+								ft={video.ft}
+								videoInCart={video.inCart}
+								hasBoughtVideo={!video.hasBoughtVideo}
+								videoId={video.id}
+								onCartVideos={props.onCartVideos}
+								onBuyVideos={onBuyVideos} />
+						</Suspense>
 					))}
 			</div>
 			<div className="col-sm-1"></div>

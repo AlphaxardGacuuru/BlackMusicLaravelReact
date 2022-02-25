@@ -41,7 +41,7 @@ const Chat = (props) => {
 				{chatThreads.length == 0 &&
 					<div className="d-flex">
 						<div className="p-2">
-							<Link to="/profile/@blackmusic">
+							<Link to="/chat/@blackmusic">
 								<Img
 									src={props.users.find((user) => user.username == "@blackmusic") &&
 										props.users.find((user) => user.username == "@blackmusic").pp}
@@ -74,7 +74,7 @@ const Chat = (props) => {
 					.map((chatThread, key) => (
 						<div key={key} className="d-flex">
 							<div className="p-1">
-								<Link to={`/profile/${chatThread.username}`}>
+								<Link to={`/chat/${chatThread.username}`}>
 									<Img
 										src={chatThread.pp}
 										imgClass="rounded-circle"

@@ -1,5 +1,8 @@
 import React, { Suspense } from 'react'
 
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
+
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
@@ -18,13 +21,7 @@ const Library = (props) => {
 				{props.boughtVideos
 					.filter((boughtVideo) => boughtVideo.username == props.auth.username)
 					.map((boughtVideo, key) => (
-						<Suspense
-							key={key}
-							fallback={
-								<center>
-									<div id="sonar-load" className="mt-5 mb-5"></div>
-								</center>
-							}>
+						<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 							<VideoMediaHorizontal
 								key={key}
 								onClick={() => props.setShow(0)}
@@ -46,13 +43,7 @@ const Library = (props) => {
 				{props.boughtAudios
 					.filter((boughtAudio) => boughtAudio.username == props.auth.username)
 					.map((boughtAudio, key) => (
-						<Suspense
-							key={key}
-							fallback={
-								<center>
-									<div id="sonar-load" className="mt-5 mb-5"></div>
-								</center>
-							}>
+						<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}

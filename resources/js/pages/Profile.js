@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link, useParams, useHistory } from "react-router-dom";
 import axios from 'axios'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal';
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal';
+
+import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
+
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
+const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 
 const Profile = (props) => {
 
@@ -13,7 +17,7 @@ const Profile = (props) => {
 
 	let history = useHistory()
 
-	const [tabClass, setTabClass] = useState("audios")
+	const [tabClass, setTabClass] = useState("videos")
 
 	// Get profile info
 	if (props.users.find((user) => user.username == username)) {
@@ -226,9 +230,9 @@ const Profile = (props) => {
 			{/* Tabs for Audios, Posts and Videos */}
 			<div className="d-flex">
 				<div className="p-2 flex-fill anti-hidden">
-					<h4 className={tabClass == "audios" ? "active-scrollmenu" : "p-1"}
-						onClick={() => setTabClass("audios")}>
-						<center>Audios</center>
+					<h4 className={tabClass == "videos" ? "active-scrollmenu" : "p-1"}
+						onClick={() => setTabClass("videos")}>
+						<center>Videos</center>
 					</h4>
 				</div>
 				<div className="p-2 flex-fill anti-hidden">
@@ -238,62 +242,65 @@ const Profile = (props) => {
 					</h4>
 				</div>
 				<div className="p-2 flex-fill anti-hidden">
-					<h4 className={tabClass == "videos" ? "active-scrollmenu" : "p-1"}
-						onClick={() => setTabClass("videos")}>
-						<center>Videos</center>
+					<h4 className={tabClass == "audios" ? "active-scrollmenu" : "p-1"}
+						onClick={() => setTabClass("audios")}>
+						<center>Audios</center>
 					</h4>
 				</div>
 			</div>
 
 			<div className="row">
 				<div className="col-sm-1"></div>
-				<div className={tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"}>
-					<center className="hidden"><h4>Audios</h4></center>
-					{props.audioAlbums
-						.filter((audioAlbum) => audioAlbum.username == username).length == 0 &&
+				<div className={tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"}>
+					<center className="hidden"><h4>Videos</h4></center>
+					{props.videoAlbums
+						.filter((videoAlbum) => videoAlbum.username == username).length == 0 &&
 						<center className="mt-3">
-							<h6 style={{ color: "grey" }}>{username} does not have any audios</h6>
+							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
 						</center>}
 
-					{/* Audio Albums */}
-					{props.audioAlbums
-						.filter((audioAlbum) => audioAlbum.username == username)
-						.map((audioAlbum, key) => (
-							<div key={key} className="mb-5">
+					{/* Video Albums */}
+					{props.videoAlbums
+						.filter((videoAlbum) => videoAlbum.username == username)
+						.map((videoAlbum, key) => (
+							<div key={videoAlbum.id} className="mb-5">
 								<div className="media">
 									<div className="media-left">
-										<Img src={`storage/${audioAlbum.cover}`}
+										<Img src={`/storage/${videoAlbum.cover}`}
 											width="auto"
 											height="100"
 											alt={"album cover"} />
 									</div>
 									<div className="media-body p-2">
-										<small>Audio Album</small>
-										<h1>{audioAlbum.name}</h1>
-										<h6>{audioAlbum.created_at}</h6>
+										<small>Video Album</small>
+										<h1>{videoAlbum.name}</h1>
+										<h6>{videoAlbum.created_at}</h6>
 									</div>
 								</div>
-								{props.audios
-									.filter((audio) => audio.album_id == audioAlbum.id)
-									.map((audio, index) => (
-										<AudioMediaHorizontal
-											key={index}
-											onClick={() => props.setShow(0)}
-											setShow={props.setShow}
-											link={`/audio-show/${audio.id}`}
-											thumbnail={`storage/${audio.thumbnail}`}
-											name={audio.name}
-											username={audio.username}
-											ft={audio.ft}
-											hasBoughtAudio={!audio.hasBoughtAudio}
-											audioInCart={audio.inCart}
-											audioId={audio.id}
-											onCartAudios={props.onCartAudios}
-											onBuyAudios={onBuyAudios} />
+								{props.videos
+									.filter((video) => video.album_id == videoAlbum.id)
+									.map((video, index) => (
+										<Suspense key={video.id} fallback={<LoadingVideoMediaHorizontal />}>
+											<VideoMediaHorizontal
+												key={video.id}
+												onClick={() => props.setShow(0)}
+												setShow={props.setShow}
+												link={`/video-show/${video.id}`}
+												thumbnail={video.thumbnail}
+												name={video.name}
+												username={video.username}
+												ft={video.ft}
+												hasBoughtVideo={!video.hasBoughtVideo}
+												videoInCart={video.inCart}
+												videoId={video.id}
+												onCartVideos={props.onCartVideos}
+												onBuyVideos={onBuyVideos} />
+										</Suspense>
 									))}
 							</div>
 						))}
-					{/* Audio Albums End */}
+					{/* Videos Albums End */}
+
 				</div>
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
@@ -307,7 +314,7 @@ const Profile = (props) => {
 					{props.posts
 						.filter((post) => post.username == username)
 						.map((post, index) => (
-							<div key={index} className='d-flex'>
+							<div key={post.id} className='d-flex'>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
@@ -627,55 +634,55 @@ const Profile = (props) => {
 						))}
 				</div>
 				{/* <!-- Posts area end --> */}
-
-				<div className={tabClass == "videos" ? "col-sm-3" : "col-sm-3 hidden"}>
-					<center className="hidden"><h4>Videos</h4></center>
-					{props.videoAlbums
-						.filter((videoAlbum) => videoAlbum.username == username).length == 0 &&
+				<div className={tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"}>
+					<center className="hidden"><h4>Audios</h4></center>
+					{props.audioAlbums
+						.filter((audioAlbum) => audioAlbum.username == username).length == 0 &&
 						<center className="mt-3">
-							<h6 style={{ color: "grey" }}>{username} does not have any videos</h6>
+							<h6 style={{ color: "grey" }}>{username} does not have any audios</h6>
 						</center>}
 
-					{/* Video Albums */}
-					{props.videoAlbums
-						.filter((videoAlbum) => videoAlbum.username == username)
-						.map((videoAlbum, key) => (
-							<div key={key} className="mb-5">
+					{/* Audio Albums */}
+					{props.audioAlbums
+						.filter((audioAlbum) => audioAlbum.username == username)
+						.map((audioAlbum, key) => (
+							<div key={audioAlbum.id} className="mb-5">
 								<div className="media">
 									<div className="media-left">
-										<Img src={`/storage/${videoAlbum.cover}`}
+										<Img src={`storage/${audioAlbum.cover}`}
 											width="auto"
 											height="100"
 											alt={"album cover"} />
 									</div>
 									<div className="media-body p-2">
-										<small>Video Album</small>
-										<h1>{videoAlbum.name}</h1>
-										<h6>{videoAlbum.created_at}</h6>
+										<small>Audio Album</small>
+										<h1>{audioAlbum.name}</h1>
+										<h6>{audioAlbum.created_at}</h6>
 									</div>
 								</div>
-								{props.videos
-									.filter((video) => video.album_id == videoAlbum.id)
-									.map((video, index) => (
-										<VideoMediaHorizontal
-											key={index}
-											onClick={() => props.setShow(0)}
-											setShow={props.setShow}
-											link={`/video-show/${video.id}`}
-											thumbnail={video.thumbnail}
-											name={video.name}
-											username={video.username}
-											ft={video.ft}
-											hasBoughtVideo={!video.hasBoughtVideo}
-											videoInCart={video.inCart}
-											videoId={video.id}
-											onCartVideos={props.onCartVideos}
-											onBuyVideos={onBuyVideos} />
+								{props.audios
+									.filter((audio) => audio.album_id == audioAlbum.id)
+									.map((audio, index) => (
+										<Suspense key={audio.id} fallback={<LoadingAudioMediaHorizontal />}>
+											<AudioMediaHorizontal
+												key={audio.id}
+												onClick={() => props.setShow(0)}
+												setShow={props.setShow}
+												link={`/audio-show/${audio.id}`}
+												thumbnail={`storage/${audio.thumbnail}`}
+												name={audio.name}
+												username={audio.username}
+												ft={audio.ft}
+												hasBoughtAudio={!audio.hasBoughtAudio}
+												audioInCart={audio.inCart}
+												audioId={audio.id}
+												onCartAudios={props.onCartAudios}
+												onBuyAudios={onBuyAudios} />
+										</Suspense>
 									))}
 							</div>
 						))}
-					{/* Videos Albums End */}
-
+					{/* Audio Albums End */}
 				</div>
 				<div className="col-sm-1"></div>
 			</div>
