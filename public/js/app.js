@@ -102486,9 +102486,8 @@ var Search = function Search(props) {
     axios.get("/api/search").then(function (res) {
       setSearchHistory(res.data);
       props.setLocalStorage("searchHistory", res.data);
-    }) // .catch(() => props.setErrors(['Failed to fetch search history']))
-    ["catch"](function (err) {
-      return console.log(err.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch search history']);
     });
   }, []);
   var userResults = props.users.filter(function (user) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Search;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -14,7 +15,14 @@ class SearchController extends Controller
      */
     public function index()
     {
-        return Search::where('username', auth()->user()->username)->get();
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+
+        return Search::where('username', $authUsername)->get();
     }
 
     /**
