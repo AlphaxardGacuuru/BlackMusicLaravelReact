@@ -751,7 +751,7 @@ function App() {
 					applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
 				}).then((sub) => {
 					// send sub.toJSON() to server
-					console.log(sub)
+					console.log(JSON.stringify(sub))
 				})
 			})
 	}
@@ -765,6 +765,16 @@ function App() {
 		process.env.MIX_VAPID_PUBLIC_KEY,
 		process.env.MIX_VAPID_PRIVATE_KEY
 	);
+
+	const sub = {
+		endpoint: 'https://fcm.googleapis.com/fcm/send/f0WcO75iYTA:AP…DoB3heNn7LXnbKSAxJSeKqkYWK0TEoubRXA0BEMGKcFdcqZ7i', 
+		expirationTime: null, 
+		options: PushSubscriptionOptions
+	}
+
+	function sendPush() {
+		webpush.sendNotification(sub, "Push")
+	}
 
 	// All states
 	const GLOBAL_STATE = {
@@ -1007,6 +1017,9 @@ function App() {
 					<br />
 					<br />
 					<button className="mysonar-btn" onClick={subscribeToPush}>subscribe to push</button>
+					<br />
+					<br />
+					<button className="mysonar-btn" onClick={sendPush}>send push</button>
 				</center>
 				<br />
 				<br />
