@@ -743,16 +743,18 @@ function App() {
 		})
 
 	// Subscribe to push service
-	navigator.serviceWorker.getRegistration()
-		.then((reg) => {
-			reg.pushManager.subscribe({
-				userVisibleOnly: true,
-				applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
-			}).then((sub) => {
-				// send sub.toJSON() to server
-				console.log(sub)
+	function subscribeToPush() {
+		navigator.serviceWorker.getRegistration()
+			.then((reg) => {
+				reg.pushManager.subscribe({
+					userVisibleOnly: true,
+					applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
+				}).then((sub) => {
+					// send sub.toJSON() to server
+					console.log(sub)
+				})
 			})
-		})
+	}
 
 	self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
 
@@ -1002,6 +1004,9 @@ function App() {
 
 				<center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
+					<br />
+					<br />
+					<button className="mysonar-btn" onClick={subscribeToPush}>subscribe to push</button>
 				</center>
 				<br />
 				<br />
