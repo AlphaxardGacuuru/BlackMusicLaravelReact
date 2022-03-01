@@ -662,101 +662,107 @@ function App() {
 	/*
 	*
 	* Register service worker */
-	if (window.location.href.match(/https/)) {
-		if ('serviceWorker' in navigator) {
-			window.addEventListener('load', () => {
-				navigator.serviceWorker.register('/sw.js')
-				// .then((reg) => console.log('Service worker registered', reg))
-				// .catch((err) => console.log('Service worker not registered', err));
-			})
-		}
+	// if (window.location.href.match(/https/)) {
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/sw.js')
+			// .then((reg) => console.log('Service worker registered', reg))
+			// .catch((err) => console.log('Service worker not registered', err));
+		})
 	}
+	// }
 
 	/*
 	*
 	* Notifications */
 
-	// // Request permission for notifications
-	// Notification.requestPermission(
-	// 	function (status) {
-	// 		// console.log('Notification permission status: ', status)
-	// 	}
-	// )
+	// Request permission for notifications
+	Notification.requestPermission((status) => console.log('Notification permission status: ', status))
 
-	// // Show the notification
-	// function displayNotification() {
-	// 	if (Notification.permission == 'granted') {
-	// 		navigator.serviceWorker.getRegistration()
-	// 			.then(function (reg) {
+	// Show the notification
+	function displayNotification() {
+		if (Notification.permission == 'granted') {
+			navigator.serviceWorker.getRegistration()
+				.then((reg) => {
+					var options = {
+						body: 'Here is a notification body',
+						actions: [
+							{
+								action: 'explore',
+								title: 'Go to the site',
+								icon: 'storage/img/musical-note.png'
+							},
+							{
+								action: 'close',
+								title: 'No thank you',
+								icon: 'storage/img/musical-note.png'
+							}
+						],
+						icon: 'storage/img/musical-note.png',
+						vibrate: [100, 50, 100],
+						// Allows us to identify notification
+						data: { primaryKey: 1 }
+					}
+					reg.showNotification('Hello world', options)
+				})
+		}
+	}
 
-	// 				var options = {
-	// 					body: 'Here is a notification body',
-	// 					actions: [
-	// 						{
-	// 							action: 'explore',
-	// 							title: 'Go to the site',
-	// 							icon: 'storage/img/musical-note.png'
-	// 						}, {
-	// 							action: 'close',
-	// 							title: 'No thank you',
-	// 							icon: 'storage/img/musical-note.png'
-	// 						}
-	// 					],
-	// 					icon: 'storage/img/musical-note.png',
-	// 					vibrate: [100, 50, 100],
-	// 					// Allows us to identify notification
-	// 					data: { primaryKey: 1 }
-	// 				}
+	// Close the notification
+	self.addEventListener('notificationclose', (event) => {
+		var notification = event.notification
+		var primaryKey = notification.data.primaryKey
+		console.log('Closed notification: ', primaryKey)
+	})
 
-	// 				reg.showNotification('Hello world', options)
-	// 			})
-	// 	}
-	// }
+	// Notification Click
+	self.addEventListener('notificationclick', (event) => {
+		var notification = event.notification
+		var action = event.action
 
-	// // Close the notification
-	// self.addEventListener('notificationclose', function (event) {
-	// 	var notification = event.notification
-	// 	var primaryKey = notificatio.data.primaryKey
-	// 	console.log('Closed notification: ', primaryKey)
-	// })
+		if (action === 'close') {
+			notification.close()
+		} else {
+			clients.openWindow('https://music.black.co.ke')
+		}
+	})
 
-	// // Notification Click
-	// self.addEventListener('notificationclick', function (event) {
-	// 	var notification = event.notification
-	// 	var action = event.action
+	// Check if user is subscribed to push notifications
+	navigator.serviceWorker.ready
+		.then((reg) => {
+			reg.pushManager.getSubscription()
+				.then((sub) => {
+					if (sub == 'undefined') {
+						// Ask user to register for push
+						console.log("Not")
+					} else {
+						// You have subscription update server
+						console.log("Yes")
+					}
+				})
+		})
 
-	// 	if (action === 'close') {
-	// 		notification.close()
-	// 	} else {
-	// 		clients.openWindow('https://music.black.co.ke')
-	// 	}
-	// })
+	// Subscribe to push service
+	navigator.serviceWorker.getRegistration()
+		.then((reg) => {
+			reg.pushManager.subscribe({
+				userVisibleOnly: true,
+				applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
+			}).then((sub) => {
+				// send sub.toJSON() to server
+				console.log(sub)
+			})
+		})
 
-	// // Check if user is subscribed to push notifications
-	// navigator.serviceWorker.ready
-	// 	.then(function (reg) {
-	// 		reg.pushManager.getSubscription()
-	// 			.then(function (sub) {
-	// 				if (sub == 'undefined') {
-	// 					// Ask user to register for push
-	// 					console.log("Not")
-	// 				} else {
-	// 					// You have subscription update server
-	// 					console.log("Not")
-	// 				}
-	// 			})
-	// 	})
+	self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
 
-	// // Subscribe to push service
-	// navigator.serviceWorker.getRegistration()
-	// 	.then(function (reg) {
-	// 		reg.pushManager.subscribe({
-	// 			userVisibleOnly: true
-	// 		}).then(function (sub) {
-	// 			// send sub.toJSON() to server
-	// 			console.log(sub)
-	// 		})
-	// 	})
+	const webpush = require('web-push');
+
+	webpush.setVapidDetails(
+		'mailto:example@yourdomain.org',
+		process.env.MIX_VAPID_PUBLIC_KEY,
+		process.env.MIX_VAPID_PRIVATE_KEY
+	);
 
 	// All states
 	const GLOBAL_STATE = {
@@ -837,6 +843,8 @@ function App() {
 		onSubmit
 	}
 
+	const showLoginPopUp = auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />
+
 	return (
 		<>
 			<Router>
@@ -845,193 +853,160 @@ function App() {
 				<TopNav {...GLOBAL_STATE} />
 
 				<Route path="/login" exact render={(props) => (<Login {...GLOBAL_STATE} />)} />
-
 				<Route path="/register/:name/:email/:avatar" exact render={(props) => (<Register {...GLOBAL_STATE} />)} />
-
 				<Route path="/referral/:referer" exact render={(props) => (<Referral {...GLOBAL_STATE} />)} />
-
 				<Route path="/" exact render={(props) => (<Index {...GLOBAL_STATE} />)} />
-
 				<Route path="/search" exact render={(props) => (
 					<>
 						<Search {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/cart" exact render={(props) => (
 					<>
 						<Cart {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/library" exact render={(props) => (
 					<>
 						<Library {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
-
 				<Route path="/profile/:username" exact render={(props) => (
 					<>
 						<Profile {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/profile-edit" exact render={(props) => (
 					<>
 						<ProfileEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/post-create" exact render={(props) => (
 					<>
 						<PostCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
 						<PostShow {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />
-
 				<Route path="/video-show/:show/:referer?" exact render={(props) => (<VideoShow {...GLOBAL_STATE} />)} />
-
 				<Route path="/videos" exact render={(props) => (
 					<>
 						<Videos {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/video-create" exact render={(props) => (
 					<>
 						<VideoCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/video-edit/:id" exact render={(props) => (
 					<>
 						<VideoEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/video-album-create" exact render={(props) => (
 					<>
 						<VideoAlbumCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/video-album-edit/:id" exact render={(props) => (
 					<>
 						<VideoAlbumEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 
 				{/* Audio Routes */}
 				<Route path="/audio-charts" exact render={(props) => (<AudioCharts {...GLOBAL_STATE} />)} />
-
 				<Route path="/audio-show/:show/:referer?" exact render={(props) => (<AudioShow {...GLOBAL_STATE} />)} />
-
 				<Route path="/audios" exact render={(props) => (
 					<>
 						<Audios {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/audio-create" exact render={(props) => (
 					<>
 						<AudioCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/audio-edit/:id" exact render={(props) => (
 					<>
 						<AudioEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/audio-album-create" exact render={(props) => (
 					<>
 						<AudioAlbumCreate {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/audio-album-edit/:id" exact render={(props) => (
 					<>
 						<AudioAlbumEdit {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
-
 				<Route path="/admin" exact render={(props) => (
 					<>
 						<Admin {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/settings" exact render={(props) => (
 					<>
 						<Settings {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/chat" exact render={(props) => (
 					<>
 						<Chat {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/chat/:username" exact render={(props) => (
 					<>
 						<ChatThread {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
-
 				<Route path="/new-chat" exact render={(props) => (
 					<>
 						<NewChat {...GLOBAL_STATE} />
-						{auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />}
+						{showLoginPopUp}
 					</>
 				)} />
 
-
 				<Messages {...GLOBAL_STATE} />
-
 				<BottomNav {...GLOBAL_STATE} />
 
-				{/* <center>
+				<center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
 				</center>
 				<br />
 				<br />
 				<br />
-				<br /> */}
-
+				<br />
 			</Router>
 
 			<audio

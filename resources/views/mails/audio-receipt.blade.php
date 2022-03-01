@@ -10,7 +10,7 @@ Thank you for supporting Kenyan artists, here's your receipt.
 	@endforeach
 @endcomponent
 
-@component('mail::button', ['url' => 'https://music.black.co.ke/library'])
+@component('mail::button', ['url' => 'https://music.black.co.ke/#/library'])
 CHECK THEM OUT
 @endcomponent
 

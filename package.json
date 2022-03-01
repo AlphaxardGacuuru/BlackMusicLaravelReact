@@ -39,6 +39,7 @@
         "k2-connect-node": "^1.2.1",
         "react-filepond": "^7.1.1",
         "react-router-dom": "^5.2.0",
-        "react-social-login-buttons": "^3.4.0"
+        "react-social-login-buttons": "^3.4.0",
+        "web-push": "^3.4.5"
     }
 }

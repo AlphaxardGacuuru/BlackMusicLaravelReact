@@ -63,7 +63,7 @@ const Chat = (props) => {
 									<b>Black Music</b>
 									<small>@blackmusic</small>
 								</h6>
-								<p className="mb-0">Start a conversation</p>
+								<p className="mb-0">Need help? Start a conversation.</p>
 							</Link>
 						</div>
 					</div>}
