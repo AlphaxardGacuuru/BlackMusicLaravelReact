@@ -758,6 +758,9 @@ function App() {
 
 	self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
 
+	console.log("PUB :" + process.env.MIX_VAPID_PUBLIC_KEY)
+	console.log("PRI :" + process.env.MIX_VAPID_PRIVATE_KEY)
+
 	const webpush = require('web-push');
 
 	webpush.setVapidDetails(
@@ -772,7 +775,7 @@ function App() {
 		"endpoint": "https://fcm.googleapis.com/fcm/send/f0WcO75iYTA:APA91bEWUHQNIhqxkOoubg7u1IkJHZ-kfxw-_qiOGs40dDM8iWXHaUbyWvKurH1F6UJNN8TLspaPAzFIArcFe80vN_mDoB3heNn7LXnbKSAxJSeKqkYWK0TEoubRXA0BEMGKcFdcqZ7i",
 		"expirationTime": null,
 		"keys": {
-			"p256dh": "BJsoKx8j_qjhp5Am65-WAVN-D23LrxayZvqOgq905yh7YHJt0bZHO9gCi7jVVan8HRqCBWQQAl1wtW3BrOG5deQ", 
+			"p256dh": "BJsoKx8j_qjhp5Am65-WAVN-D23LrxayZvqOgq905yh7YHJt0bZHO9gCi7jVVan8HRqCBWQQAl1wtW3BrOG5deQ",
 			"auth": "pxg4S2zGPOg_QQL-jQCUYA"
 		}
 	}
