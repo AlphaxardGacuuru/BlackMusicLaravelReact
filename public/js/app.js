@@ -93567,16 +93567,16 @@ function App() {
   /*
   *
   * Register service worker */
+  // if (window.location.href.match(/https/)) {
 
 
-  if (window.location.href.match(/https/)) {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js'); // .then((reg) => console.log('Service worker registered', reg))
-        // .catch((err) => console.log('Service worker not registered', err));
-      });
-    }
-  } // Show the notification
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js'); // .then((reg) => console.log('Service worker registered', reg))
+      // .catch((err) => console.log('Service worker not registered', err));
+    });
+  } // }
+  // Show the notification
 
 
   function displayNotification() {
@@ -93642,7 +93642,7 @@ function App() {
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/push/create').then(function (res) {
       return console.log(res.data);
     })["catch"](function (err) {
-      return console.log(err.response.data.message);
+      return console.log(err.response.data);
     });
   } // All states
 
