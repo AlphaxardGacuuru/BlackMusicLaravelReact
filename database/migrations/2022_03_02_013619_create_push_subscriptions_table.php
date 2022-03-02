@@ -22,17 +22,6 @@ class CreatePushSubscriptionsTable extends Migration
             $table->string('content_encoding')->nullable();
             $table->timestamps();
         });
-		
-		// Schema::create('push_subscriptions', function (Blueprint $table) {
-		// 	$table->charset ='utf8';
-		// 	$table->collation = 'utf8_unicode_ci';
-		// 	$table->increments('id');
-		// 	$table->integer('guest_id')->unsigned()->index();
-		// 	$table->string('endpoint', 255)->unique();
-		// 	$table->string('public_key')->nullable();
-		// 	$table->string('auth_token')->nullable();
-		// 	$table->timestamps();
-		// });
     }
 
     /**
