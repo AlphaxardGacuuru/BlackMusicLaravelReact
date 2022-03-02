@@ -13,26 +13,26 @@ class CreatePushSubscriptionsTable extends Migration
      */
     public function up()
     {
-        // Schema::connection(config('webpush.database_connection'))->create(config('webpush.table_name'), function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     $table->morphs('subscribable');
-        //     $table->string('endpoint', 500)->unique();
-        //     $table->string('public_key')->nullable();
-        //     $table->string('auth_token')->nullable();
-        //     $table->string('content_encoding')->nullable();
-        //     $table->timestamps();
-        // });
+        Schema::connection(config('webpush.database_connection'))->create(config('webpush.table_name'), function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->morphs('subscribable');
+            $table->string('endpoint', 500)->unique();
+            $table->string('public_key')->nullable();
+            $table->string('auth_token')->nullable();
+            $table->string('content_encoding')->nullable();
+            $table->timestamps();
+        });
 		
-		Schema::create('push_subscriptions', function (Blueprint $table) {
-			$table->charset ='utf8';
-			$table->collation = 'utf8_unicode_ci';
-			$table->increments('id');
-			$table->integer('guest_id')->unsigned()->index();
-			$table->string('endpoint', 255)->unique();
-			$table->string('public_key')->nullable();
-			$table->string('auth_token')->nullable();
-			$table->timestamps();
-		});
+		// Schema::create('push_subscriptions', function (Blueprint $table) {
+		// 	$table->charset ='utf8';
+		// 	$table->collation = 'utf8_unicode_ci';
+		// 	$table->increments('id');
+		// 	$table->integer('guest_id')->unsigned()->index();
+		// 	$table->string('endpoint', 255)->unique();
+		// 	$table->string('public_key')->nullable();
+		// 	$table->string('auth_token')->nullable();
+		// 	$table->timestamps();
+		// });
     }
 
     /**

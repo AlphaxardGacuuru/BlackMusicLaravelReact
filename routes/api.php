@@ -53,6 +53,7 @@ Route::resources([
     'post-comments' => 'PostCommentsController',
     'post-comment-likes' => 'PostCommentLikesController',
     'polls' => 'PollsController',
+	'push' => 'PushController',
     'referrals' => 'ReferralsController',
     'search' => 'SearchController',
     'song-payouts' => 'SongPayoutsController',

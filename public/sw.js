@@ -6,7 +6,7 @@ const cacheAssets = [
 ]
 
 // Install event
-self.addEventListener('install', e => {
+self.addEventListener('install', (e) => {
 	// console.log('Service Worker installed');
 	// Function to prevent the install event from stopping the async methods from finishing 
 	e.waitUntil(
@@ -21,7 +21,7 @@ self.addEventListener('install', e => {
 });
 
 // Activate event
-self.addEventListener('activate', e => {
+self.addEventListener('activate', (e) => {
 	// console.log('Service Worker Activated');
 	// Function to prevent the install event from stopping the async methods from finishing 
 	e.waitUntil(
@@ -42,7 +42,7 @@ self.addEventListener('activate', e => {
 });
 
 // Fetch event
-self.addEventListener('fetch', e => {
+self.addEventListener('fetch', (e) => {
 	// console.log('Fetching')
 	e.respondWith(
 		fetch(e.request)
@@ -60,3 +60,21 @@ self.addEventListener('fetch', e => {
 			}).catch((err) => cache.match(e.request).then(res => res))
 	)
 })
+
+// Listen to push event and show notification
+self.addEventListener('push', function (e) {
+	if (!(self.Notification && self.Notification.permission === 'granted')) {
+		//notifications aren't supported or permission not granted!
+		return;
+	}
+
+	if (e.data) {
+		var msg = e.data.json();
+		console.log(msg)
+		e.waitUntil(self.registration.showNotification(msg.title, {
+			body: msg.body,
+			icon: msg.icon,
+			actions: msg.actions
+		}));
+	}
+});

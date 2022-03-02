@@ -672,91 +672,71 @@ function App() {
 		}
 	}
 
-	/*
-	*
-	* Notifications */
+	// Show the notification
+	function displayNotification() {
+		if (Notification.permission == 'granted') {
+			navigator.serviceWorker.getRegistration()
+				.then((reg) => {
+					var options = {
+						body: 'Here is a notification body',
+						actions: [
+							{
+								action: 'explore',
+								title: 'Go to the site',
+								icon: 'storage/img/musical-note.png'
+							},
+							{
+								action: 'close',
+								title: 'No thank you',
+								icon: 'storage/img/musical-note.png'
+							}
+						],
+						icon: 'storage/img/musical-note.png',
+						vibrate: [100, 50, 100],
+						// Allows us to identify notification
+						data: { primaryKey: 1 }
+					}
+					reg.showNotification('Hello world', options)
+				})
+		}
+	}
 
-	// // Request permission for notifications
-	// Notification.requestPermission((status) => console.log('Notification permission status: ', status))
+	// Subscribe to push service
+	function subscribeToPush() {
+		navigator.serviceWorker.getRegistration()
+			.then((reg) => {
+				reg.pushManager.subscribe({
+					userVisibleOnly: true,
+					applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
+				}).then((sub) => {
+					// send sub.toJSON() to server
+					console.log(JSON.parse(JSON.stringify(sub)).endpoint)
+					console.log(JSON.parse(JSON.stringify(sub)).keys.auth)
+					console.log(JSON.parse(JSON.stringify(sub)).keys.p256dh)
 
-	// // Show the notification
-	// function displayNotification() {
-	// 	if (Notification.permission == 'granted') {
-	// 		navigator.serviceWorker.getRegistration()
-	// 			.then((reg) => {
-	// 				var options = {
-	// 					body: 'Here is a notification body',
-	// 					actions: [
-	// 						{
-	// 							action: 'explore',
-	// 							title: 'Go to the site',
-	// 							icon: 'storage/img/musical-note.png'
-	// 						},
-	// 						{
-	// 							action: 'close',
-	// 							title: 'No thank you',
-	// 							icon: 'storage/img/musical-note.png'
-	// 						}
-	// 					],
-	// 					icon: 'storage/img/musical-note.png',
-	// 					vibrate: [100, 50, 100],
-	// 					// Allows us to identify notification
-	// 					data: { primaryKey: 1 }
-	// 				}
-	// 				reg.showNotification('Hello world', options)
-	// 			})
-	// 	}
-	// }
+					const parsed = JSON.parse(JSON.stringify(sub))
 
-	// // Close the notification
-	// self.addEventListener('notificationclose', (event) => {
-	// 	var notification = event.notification
-	// 	var primaryKey = notification.data.primaryKey
-	// 	console.log('Closed notification: ', primaryKey)
-	// })
-
-	// // Notification Click
-	// self.addEventListener('notificationclick', (event) => {
-	// 	var notification = event.notification
-	// 	var action = event.action
-
-	// 	if (action === 'close') {
-	// 		notification.close()
-	// 	} else {
-	// 		clients.openWindow('https://music.black.co.ke')
-	// 	}
-	// })
-
-	// // Check if user is subscribed to push notifications
-	// navigator.serviceWorker.ready
-	// 	.then((reg) => {
-	// 		reg.pushManager.getSubscription()
-	// 			.then((sub) => {
-	// 				if (sub == 'undefined') {
-	// 					// Ask user to register for push
-	// 					console.log("Not")
-	// 				} else {
-	// 					// You have subscription update server
-	// 					console.log("Yes")
-	// 				}
-	// 			})
-	// 	})
-
-	// // Subscribe to push service
-	// function subscribeToPush() {
-	// 	navigator.serviceWorker.getRegistration()
-	// 		.then((reg) => {
-	// 			reg.pushManager.subscribe({
-	// 				userVisibleOnly: true,
-	// 				applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
-	// 			}).then((sub) => {
-	// 				// send sub.toJSON() to server
-	// 				console.log(JSON.stringify(sub))
-	// 			})
-	// 		})
-	// }
-
-	// self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
+					axios.get('sanctum/csrf-cookie').then(() => {
+						axios.post(`/api/push`, {
+							endpoint: parsed.endpoint,
+							auth: parsed.keys.auth,
+							p256dh: parsed.keys.p256dh,
+						}).then((res) => {
+							setMessage(res.data)
+						}).catch((err) => {
+							const resErrors = err.response.data.errors
+							var resError
+							var newError = []
+							for (resError in resErrors) {
+								newError.push(resErrors[resError])
+							}
+							setErrors(newError)
+							console.log(err.response.data.message)
+						})
+					});
+				})
+			})
+	}
 
 	// const webpush = require('web-push');
 
@@ -770,9 +750,9 @@ function App() {
 
 	// const sub = {"endpoint":"https://fcm.googleapis.com/fcm/send/f0WcO75iYTA:APA91bEWUHQNIhqxkOoubg7u1IkJHZ-kfxw-_qiOGs40dDM8iWXHaUbyWvKurH1F6UJNN8TLspaPAzFIArcFe80vN_mDoB3heNn7LXnbKSAxJSeKqkYWK0TEoubRXA0BEMGKcFdcqZ7i","expirationTime":null,"keys":{"p256dh":"BJsoKx8j_qjhp5Am65-WAVN-D23LrxayZvqOgq905yh7YHJt0bZHO9gCi7jVVan8HRqCBWQQAl1wtW3BrOG5deQ","auth":"pxg4S2zGPOg_QQL-jQCUYA"}}
 
-	// function sendPush() {
-	// 	webpush.sendNotification(sub, "Push")
-	// }
+	function sendPush() {
+		webpush.sendNotification(sub, "Push")
+	}
 
 	// All states
 	const GLOBAL_STATE = {
@@ -1010,7 +990,7 @@ function App() {
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />
 
-				{/* <center>
+				<center>
 					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
 					<br />
 					<br />
@@ -1022,7 +1002,7 @@ function App() {
 				<br />
 				<br />
 				<br />
-				<br /> */}
+				<br />
 			</Router>
 
 			<audio

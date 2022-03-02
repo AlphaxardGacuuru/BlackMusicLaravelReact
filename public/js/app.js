@@ -93576,85 +93576,70 @@ function App() {
         // .catch((err) => console.log('Service worker not registered', err));
       });
     }
-  }
-  /*
-  *
-  * Notifications */
-  // // Request permission for notifications
-  // Notification.requestPermission((status) => console.log('Notification permission status: ', status))
-  // // Show the notification
-  // function displayNotification() {
-  // 	if (Notification.permission == 'granted') {
-  // 		navigator.serviceWorker.getRegistration()
-  // 			.then((reg) => {
-  // 				var options = {
-  // 					body: 'Here is a notification body',
-  // 					actions: [
-  // 						{
-  // 							action: 'explore',
-  // 							title: 'Go to the site',
-  // 							icon: 'storage/img/musical-note.png'
-  // 						},
-  // 						{
-  // 							action: 'close',
-  // 							title: 'No thank you',
-  // 							icon: 'storage/img/musical-note.png'
-  // 						}
-  // 					],
-  // 					icon: 'storage/img/musical-note.png',
-  // 					vibrate: [100, 50, 100],
-  // 					// Allows us to identify notification
-  // 					data: { primaryKey: 1 }
-  // 				}
-  // 				reg.showNotification('Hello world', options)
-  // 			})
-  // 	}
-  // }
-  // // Close the notification
-  // self.addEventListener('notificationclose', (event) => {
-  // 	var notification = event.notification
-  // 	var primaryKey = notification.data.primaryKey
-  // 	console.log('Closed notification: ', primaryKey)
-  // })
-  // // Notification Click
-  // self.addEventListener('notificationclick', (event) => {
-  // 	var notification = event.notification
-  // 	var action = event.action
-  // 	if (action === 'close') {
-  // 		notification.close()
-  // 	} else {
-  // 		clients.openWindow('https://music.black.co.ke')
-  // 	}
-  // })
-  // // Check if user is subscribed to push notifications
-  // navigator.serviceWorker.ready
-  // 	.then((reg) => {
-  // 		reg.pushManager.getSubscription()
-  // 			.then((sub) => {
-  // 				if (sub == 'undefined') {
-  // 					// Ask user to register for push
-  // 					console.log("Not")
-  // 				} else {
-  // 					// You have subscription update server
-  // 					console.log("Yes")
-  // 				}
-  // 			})
-  // 	})
-  // // Subscribe to push service
-  // function subscribeToPush() {
-  // 	navigator.serviceWorker.getRegistration()
-  // 		.then((reg) => {
-  // 			reg.pushManager.subscribe({
-  // 				userVisibleOnly: true,
-  // 				applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
-  // 			}).then((sub) => {
-  // 				// send sub.toJSON() to server
-  // 				console.log(JSON.stringify(sub))
-  // 			})
-  // 		})
-  // }
-  // self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
-  // const webpush = require('web-push');
+  } // Show the notification
+
+
+  function displayNotification() {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        var options = {
+          body: 'Here is a notification body',
+          actions: [{
+            action: 'explore',
+            title: 'Go to the site',
+            icon: 'storage/img/musical-note.png'
+          }, {
+            action: 'close',
+            title: 'No thank you',
+            icon: 'storage/img/musical-note.png'
+          }],
+          icon: 'storage/img/musical-note.png',
+          vibrate: [100, 50, 100],
+          // Allows us to identify notification
+          data: {
+            primaryKey: 1
+          }
+        };
+        reg.showNotification('Hello world', options);
+      });
+    }
+  } // Subscribe to push service
+
+
+  function subscribeToPush() {
+    navigator.serviceWorker.getRegistration().then(function (reg) {
+      reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: "BObIc1VkaW1SV9SmjRzIN_fB-SveuuUMWDi10Xg7hBotXBcJ541YmMwQFMR5JgTrBEOhVQ_QqTYCRFPBjk_6qm4"
+      }).then(function (sub) {
+        // send sub.toJSON() to server
+        console.log(JSON.parse(JSON.stringify(sub)).endpoint);
+        console.log(JSON.parse(JSON.stringify(sub)).keys.auth);
+        console.log(JSON.parse(JSON.stringify(sub)).keys.p256dh);
+        var parsed = JSON.parse(JSON.stringify(sub));
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
+          axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/push", {
+            endpoint: parsed.endpoint,
+            auth: parsed.keys.auth,
+            p256dh: parsed.keys.p256dh
+          }).then(function (res) {
+            setMessage(res.data);
+          })["catch"](function (err) {
+            var resErrors = err.response.data.errors;
+            var resError;
+            var newError = [];
+
+            for (resError in resErrors) {
+              newError.push(resErrors[resError]);
+            }
+
+            setErrors(newError);
+            console.log(err.response.data.message);
+          });
+        });
+      });
+    });
+  } // const webpush = require('web-push');
   // webpush.setVapidDetails(
   // 	'mailto:example@yourdomain.org',
   // 	process.env.MIX_VAPID_PUBLIC_KEY,
@@ -93662,10 +93647,11 @@ function App() {
   // );
   // // const sub = {"endpoint":"https://fcm.googleapis.com/fcm/send/fvjG2O0SBmM:APA91bFW9wR-JqVencL1PbSDSCdfKN2coRyemtRMDFij57XeuHmy15dtwURfNRHXR6EjfUd-aXm4gS3Nbjkyd3jsBniMSLscb9RklQOLum2PekIh0rFsMoyblMjYedVqTAtJtr3IU2rC","expirationTime":null,"keys":{"p256dh":"BPGZp0IpZoiOrnSI6-J34QzxxXUDwQd3E6B1jv5M8b1a-6ncLVpgPZkjEjEG8QO0Zfmu_I_aNq05Tm2CTpDIQu0","auth":"cjY1j0ZBzgLrwVpSD3UxTA"}}
   // const sub = {"endpoint":"https://fcm.googleapis.com/fcm/send/f0WcO75iYTA:APA91bEWUHQNIhqxkOoubg7u1IkJHZ-kfxw-_qiOGs40dDM8iWXHaUbyWvKurH1F6UJNN8TLspaPAzFIArcFe80vN_mDoB3heNn7LXnbKSAxJSeKqkYWK0TEoubRXA0BEMGKcFdcqZ7i","expirationTime":null,"keys":{"p256dh":"BJsoKx8j_qjhp5Am65-WAVN-D23LrxayZvqOgq905yh7YHJt0bZHO9gCi7jVVan8HRqCBWQQAl1wtW3BrOG5deQ","auth":"pxg4S2zGPOg_QQL-jQCUYA"}}
-  // function sendPush() {
-  // 	webpush.sendNotification(sub, "Push")
-  // }
-  // All states
+
+
+  function sendPush() {
+    webpush.sendNotification(sub, "Push");
+  } // All states
 
 
   var GLOBAL_STATE = (_GLOBAL_STATE = {
@@ -93886,7 +93872,16 @@ function App() {
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_NewChat__WEBPACK_IMPORTED_MODULE_37__["default"], GLOBAL_STATE), showLoginPopUp);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BottomNav__WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    onClick: displayNotification
+  }, "notify"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    onClick: subscribeToPush
+  }, "subscribe to push"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "mysonar-btn",
+    onClick: sendPush
+  }, "send push")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
