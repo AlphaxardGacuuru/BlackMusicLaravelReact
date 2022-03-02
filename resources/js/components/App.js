@@ -710,10 +710,6 @@ function App() {
 					applicationServerKey: process.env.MIX_VAPID_PUBLIC_KEY
 				}).then((sub) => {
 					// send sub.toJSON() to server
-					console.log(JSON.parse(JSON.stringify(sub)).endpoint)
-					console.log(JSON.parse(JSON.stringify(sub)).keys.auth)
-					console.log(JSON.parse(JSON.stringify(sub)).keys.p256dh)
-
 					const parsed = JSON.parse(JSON.stringify(sub))
 
 					axios.get('sanctum/csrf-cookie').then(() => {

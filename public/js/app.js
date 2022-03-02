@@ -93613,9 +93613,6 @@ function App() {
         applicationServerKey: "BObIc1VkaW1SV9SmjRzIN_fB-SveuuUMWDi10Xg7hBotXBcJ541YmMwQFMR5JgTrBEOhVQ_QqTYCRFPBjk_6qm4"
       }).then(function (sub) {
         // send sub.toJSON() to server
-        console.log(JSON.parse(JSON.stringify(sub)).endpoint);
-        console.log(JSON.parse(JSON.stringify(sub)).keys.auth);
-        console.log(JSON.parse(JSON.stringify(sub)).keys.p256dh);
         var parsed = JSON.parse(JSON.stringify(sub));
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
           axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/push", {
