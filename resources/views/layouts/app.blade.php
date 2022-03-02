@@ -46,11 +46,15 @@
             </h2>
         </center>
     </noscript>
-	
+
     <div id="app"></div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @auth
+        <script src="{{ asset('js/enable-push.js') }}" defer></script>
+    @endauth
 </body>
 
 </html>
