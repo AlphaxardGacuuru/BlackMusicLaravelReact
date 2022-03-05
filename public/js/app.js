@@ -102870,7 +102870,8 @@ var Settings = function Settings(props) {
   var onTransferFunds = function onTransferFunds() {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/song-payouts", {
-        amount: songPayouts.balance,
+        // amount: songPayouts.balance,
+        amount: 10,
         destination_reference: reference.destination_reference
       }).then(function (res) {
         props.setMessage(res.data); // Update song payouts
