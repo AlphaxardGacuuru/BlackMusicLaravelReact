@@ -28,9 +28,12 @@ class PushController extends Controller
      */
     public function create()
     {
-		Notification::send(User::all(), new PushNotifications);
+        Notification::send(User::all(), new PushNotifications);
 
-		// return redirect()->back();
+        auth()->user()->notify(new PushNotifications);
+
+        return response('success', 200);
+        // return redirect()->back();
     }
 
     /**

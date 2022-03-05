@@ -39,4 +39,4 @@
 				})
 		})
 
-	self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
+	// self.addEventListener('push', () => self.registration.sendNotification('Push Notification', {}))
