@@ -102938,7 +102938,9 @@ var Settings = function Settings(props) {
   }) ?
   /*#__PURE__*/
   // songPayouts.balance > props.auth.withdrawal &&
-  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, kopokopoRecipients.some(function (recipient) {
+    return recipient.username == props.auth.username && recipient.destination_reference;
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "sonar-btn white-btn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "spinner-border text-light",
@@ -102956,7 +102958,7 @@ var Settings = function Settings(props) {
       setLoadBtn(true);
     },
     btnText: "transfer funds"
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "sonar-btn white-btn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "spinner-border text-light",

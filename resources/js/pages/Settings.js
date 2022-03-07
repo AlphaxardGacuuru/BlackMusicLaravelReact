@@ -137,25 +137,30 @@ const Settings = (props) => {
 						.some((recipient) => recipient.username == props.auth.username) ?
 						// songPayouts.balance > props.auth.withdrawal &&
 						<div>
-							{loadBtn ?
-								<button className="sonar-btn white-btn">
-									<div className="spinner-border text-light"
-										style={{
-											borderTopWidth: "2px",
-											borderBottomWidth: "2px",
-											borderLeftWidth: "2px",
-											width: "20px",
-											height: "20px",
-										}}>
-									</div>
-								</button> :
-								<Button
-									btnClass="sonar-btn white-btn"
-									onClick={() => {
-										onTransferFunds()
-										setLoadBtn(true)
-									}}
-									btnText="transfer funds" />}
+							{kopokopoRecipients
+								.some((recipient) => recipient.username == props.auth.username &&
+									recipient.destination_reference) &&
+								<div>
+									{loadBtn ?
+										<button className="sonar-btn white-btn">
+											<div className="spinner-border text-light"
+												style={{
+													borderTopWidth: "2px",
+													borderBottomWidth: "2px",
+													borderLeftWidth: "2px",
+													width: "20px",
+													height: "20px",
+												}}>
+											</div>
+										</button> :
+										<Button
+											btnClass="sonar-btn white-btn"
+											onClick={() => {
+												onTransferFunds()
+												setLoadBtn(true)
+											}}
+											btnText="transfer funds" />}
+								</div>}
 						</div> :
 						<div>
 							{loadBtn ?

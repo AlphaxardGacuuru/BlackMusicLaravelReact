@@ -91,7 +91,7 @@ class KopokopoRecipientsController extends Controller
             // Save destination reference
             $kopokopoRecipient = new KopokopoRecipients;
             $kopokopoRecipient->username = auth()->user()->username;
-            $kopokopoRecipient->destination_reference = "";
+            // $kopokopoRecipient->destination_reference = "";
             $kopokopoRecipient->save();
 
             return response('Recipient Wallet Created', 200);
