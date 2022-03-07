@@ -130,7 +130,8 @@ const Settings = (props) => {
 					</table>
 
 					<h4>Outstanding cash</h4>
-					<h5 className='text-success'>KES {songPayouts.balance}</h5>
+					{/* <h5 className='text-success'>KES {songPayouts.balance}</h5> */}
+					<h5 className='text-success'>KES 10</h5>
 					<br />
 
 					{kopokopoRecipients

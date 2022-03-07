@@ -102933,7 +102933,7 @@ var Settings = function Settings(props) {
     }, videoPayout.created_at));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "text-success"
-  }, "KES ", songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), kopokopoRecipients.some(function (recipient) {
+  }, "KES 10"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
   }) ?
   /*#__PURE__*/
