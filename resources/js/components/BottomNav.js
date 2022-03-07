@@ -111,7 +111,7 @@ const Bottomnav = (props) => {
 							</h6>
 						</Link>
 					</div>
-					<div className="p-2" style={{ display: checkLocation && "none" }} >
+					<div className="p-2" style={{ display: checkLocation && "none" }}>
 						{props.audioLoader &&
 							<div className="spinner-border text-light"
 								style={{

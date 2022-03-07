@@ -23,7 +23,7 @@ const NewChat = (props) => {
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				{/* <!-- ***** Header Area Start ***** --> */}
-				<header style={{ backgroundColor: "#232323" }} className="header-area anti-hidden">
+				<header style={{ backgroundColor: "#232323" }} className="header-area">
 					<div className="container-fluid p-0">
 						<div className="row">
 							<div className="col-12 p-0">

@@ -204,6 +204,21 @@ const Admin = (props) => {
 				{/* Song Payouts End */}
 				<br />
 				<br />
+
+				<center>
+					<button className="mysonar-btn" onClick={props.displayNotification}>notify</button>
+					<br />
+					<br />
+					<button className="mysonar-btn" onClick={props.subscribeToPush}>subscribe to push</button>
+					<br />
+					<br />
+					<button className="mysonar-btn" onClick={props.sendPush}>send push</button>
+				</center>
+				<br />
+				<br />
+				<br />
+				<br />
+
 			</div>
 			<div className="col-sm-2"></div>
 		</div >

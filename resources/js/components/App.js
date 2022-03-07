@@ -766,6 +766,9 @@ function App() {
 		onFollow,
 		onCartVideos,
 		onCartAudios,
+		displayNotification,
+		subscribeToPush,
+		sendPush,
 		// Search 
 		onSearchIconClick,
 		searchInput,
@@ -975,20 +978,6 @@ function App() {
 
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />
-
-				<center>
-					<button className="mysonar-btn" onClick={displayNotification}>notify</button>
-					<br />
-					<br />
-					<button className="mysonar-btn" onClick={subscribeToPush}>subscribe to push</button>
-					<br />
-					<br />
-					<button className="mysonar-btn" onClick={sendPush}>send push</button>
-				</center>
-				<br />
-				<br />
-				<br />
-				<br />
 			</Router>
 
 			<audio
