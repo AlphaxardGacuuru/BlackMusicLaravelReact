@@ -99,13 +99,13 @@ class KopokopoRecipientsController extends Controller
         if ($response['status'] == 'success') {
             // echo "The resource location is:" . json_encode($response['location']);
 
-            // $array = explode('/', $response['location']);
-            // $destinationReferrence = end($array);
+            $array = explode('/', $response['location']);
+            $destinationReferrence = end($array);
 
             // Save destination reference
             $kopokopoRecipient = new KopokopoRecipients;
             $kopokopoRecipient->username = auth()->user()->username;
-            $kopokopoRecipient->destination_reference = "";
+            $kopokopoRecipient->destination_reference = $destinationReferrence;
             $kopokopoRecipient->save();
 
             return response('Recipient Wallet Created', 200);
