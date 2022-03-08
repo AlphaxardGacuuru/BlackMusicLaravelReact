@@ -99541,7 +99541,7 @@ var ChatThread = function ChatThread(props) {
   }, 1000); // Function to Update Chat
 
   var checkChat = function checkChat() {
-    axios.get("".concat(props.url, "/api/chat")).then(function (res) {
+    axios.get("/api/chat").then(function (res) {
       // Get new length of chat
       var currentChatLength = chat.filter(function (chatItem) {
         return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
@@ -99552,11 +99552,19 @@ var ChatThread = function ChatThread(props) {
       }).length; // Update chat if new one arrives
 
       newChatLength > currentChatLength && setChat(res.data);
+      console.log("checking chat");
     });
   }; // trigger function in intervals 
 
 
-  checkChat(); // Scroll to the bottom of the page
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var chatInterval = setInterval(function () {
+      return checkChat();
+    }, 2000);
+    return function () {
+      return clearInterval(chatInterval);
+    };
+  }, []); // Scroll to the bottom of the page
   // window.scrollTo(0, document.body.scrollHeight)
   // Long hold to show delete button
   // var chat = useRef(null)

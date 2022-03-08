@@ -45,7 +45,7 @@ const ChatThread = (props) => {
 
 	// Function to Update Chat
 	const checkChat = () => {
-		axios.get(`${props.url}/api/chat`)
+		axios.get(`/api/chat`)
 			.then((res) => {
 				// Get new length of chat
 				var currentChatLength = chat
@@ -67,11 +67,16 @@ const ChatThread = (props) => {
 
 				// Update chat if new one arrives
 				newChatLength > currentChatLength && setChat(res.data)
+				console.log("checking chat")
 			})
 	}
 
 	// trigger function in intervals 
-	checkChat()
+	useEffect(() => {
+		const chatInterval = setInterval(() => checkChat(), 2000)
+
+		return () => clearInterval(chatInterval)
+	}, [])
 
 	// Scroll to the bottom of the page
 	// window.scrollTo(0, document.body.scrollHeight)
