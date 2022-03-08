@@ -97735,7 +97735,7 @@ var AudioShow = function AudioShow(props) {
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Set Show if it's equal to 0
 
-  props.show == 0 && setTimeout(function () {
+  props.show == "" && setTimeout(function () {
     props.setShow(show);
     props.setLocalStorage("show", show); // Refresh Audio
 

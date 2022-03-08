@@ -16,7 +16,7 @@ const AudioShow = (props) => {
 	let history = useHistory()
 
 	// Set Show if it's equal to 0
-	props.show == 0 && setTimeout(() => {
+	props.show == "" && setTimeout(() => {
 		props.setShow(show)
 		props.setLocalStorage("show", show)
 		// Refresh Audio
