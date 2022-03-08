@@ -32,7 +32,7 @@ const Bottomnav = (props) => {
 	// Set Show if it's equal to 0
 	setTimeout(() => {
 		// Refresh Audio
-		props.audioLoader && props.setRefreshAudio(Math.random(10))
+		!checkLocation && props.audioLoader && props.setRefreshAudio(Math.random(10))
 	}, 1000)
 
 	// Get number of items in video cart

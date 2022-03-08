@@ -94089,7 +94089,7 @@ var Bottomnav = function Bottomnav(props) {
 
   setTimeout(function () {
     // Refresh Audio
-    props.audioLoader && props.setRefreshAudio(Math.random(10));
+    !checkLocation && props.audioLoader && props.setRefreshAudio(Math.random(10));
   }, 1000); // Get number of items in video cart
 
   var vidCartItems = props.cartVideos.filter(function (cartVideo) {
