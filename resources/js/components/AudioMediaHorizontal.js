@@ -29,7 +29,7 @@ const AudioMediaHorizontal = (props) => {
 					<h6
 						className="mb-0 pb-0"
 						style={{
-							maxWidth: "6em",
+							maxWidth: "9em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"
@@ -38,7 +38,7 @@ const AudioMediaHorizontal = (props) => {
 					</h6>
 					<h6 className="mt-0 pt-0"
 						style={{
-							maxWidth: "6em",
+							maxWidth: "9em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"

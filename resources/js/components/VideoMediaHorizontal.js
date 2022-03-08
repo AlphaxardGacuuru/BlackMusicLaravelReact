@@ -17,11 +17,11 @@ const VideoMediaHorizontal = (props) => {
 						height="90em" />
 				</Link>
 			</div>
-			<div className="ml-2 mr-auto flex-grow-1">
+			<div className="ml-2 mr-auto flex-grow-1" onClick={() => props.setShow(0)}>
 				<Link to={props.link}>
 					<h6 className="mb-0"
 						style={{
-							width: "8em",
+							width: "9em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"
@@ -30,7 +30,7 @@ const VideoMediaHorizontal = (props) => {
 					</h6>
 					<h6 className="mb-3"
 						style={{
-							width: "8em",
+							width: "9em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"

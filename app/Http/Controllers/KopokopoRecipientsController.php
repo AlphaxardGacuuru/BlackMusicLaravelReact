@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\KopokopoRecipients;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kopokopo\SDK\K2;
 
 class KopokopoRecipientsController extends Controller
@@ -15,7 +16,27 @@ class KopokopoRecipientsController extends Controller
      */
     public function index()
     {
-        return KopokopoRecipients::all();
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+
+        $getKopokopoRecipients = KopokopoRecipients::where('username', '!=', '@augustawacera')->get();
+
+        $kopokopoRecipients = [];
+
+        // Populate Kopokopo Recipients array
+        foreach ($getKopokopoRecipients as $key => $kopokopoRecipient) {
+            array_push($kopokopoRecipients, [
+                'username' => $kopokopoRecipient->username,
+                'phone' => $kopokopoRecipient->users->phone,
+                'destination_reference' => $kopokopoRecipient->destination_reference,
+            ]);
+        }
+
+        return $kopokopoRecipients;
     }
 
     /**
@@ -91,7 +112,7 @@ class KopokopoRecipientsController extends Controller
             // Save destination reference
             $kopokopoRecipient = new KopokopoRecipients;
             $kopokopoRecipient->username = auth()->user()->username;
-            // $kopokopoRecipient->destination_reference = "";
+            $kopokopoRecipient->destination_reference = false;
             $kopokopoRecipient->save();
 
             return response('Recipient Wallet Created', 200);

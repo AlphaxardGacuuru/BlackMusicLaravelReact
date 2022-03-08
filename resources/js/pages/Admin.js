@@ -8,35 +8,23 @@ const Admin = (props) => {
 
 	const [search, setSearch] = useState()
 	const [admin, setAdmin] = useState(props.getLocalStorage("admin"))
+	const [kopokopoRecipients, setKopokopoRecipients] = useState(props.getLocalStorage("kopokopoRecipients"))
 
-	// Fetch Admin
 	useEffect(() => {
+		// Fetch Admin
 		axios.get(`/api/admin`)
 			.then((res) => {
 				setAdmin(res.data)
 				props.setLocalStorage("admin", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch admin"]))
-	}, [])
 
-	// Post song payout
-	const onVideoPayout = (username, amount) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/song-payouts`, {
-				username: username,
-				amount: amount,
-			}).then((res) => props.setMessage(res.data))
-				.catch((err) => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					newError.push(err.response.data.message)
-					props.setErrors(newError)
-				})
-		})
-	}
+		// Fetch Kopokopo Recipients
+		axios.get(`/api/kopokopo-recipients`)
+			.then((res) => {
+				// Save to state only to prevent wrong data persistence in local storage
+				setKopokopoRecipients(res.data)
+			}).catch(() => props.setErrors(['Failed to fetch kopokopo recipients']))
+	}, [])
 
 	return (
 		<div className="row">
@@ -175,10 +163,10 @@ const Admin = (props) => {
 						<tr className="border border-0">
 							<th className="border-top border-dark">Name</th>
 							<th className="border-top border-dark">Username</th>
-							<th className="border-top border-dark">Email</th>
-							<th className="border-top border-dark">Phone</th>
 							<th className="border-top border-dark">Amount</th>
-							<th className="border-top border-dark">Send</th>
+							<th className="border-top border-dark">Earnings</th>
+							<th className="border-top border-dark">Payouts</th>
+							<th className="border-top border-dark">Balance</th>
 						</tr>
 					</tbody>
 					{admin.songPayouts &&
@@ -188,20 +176,42 @@ const Admin = (props) => {
 									<tr className="border border-0">
 										<td className="border-bottom border-dark">{songPayout.name}</td>
 										<td className="border-bottom border-dark">{songPayout.username}</td>
-										<td className="border-bottom border-dark">{songPayout.email}</td>
-										<td className="border-bottom border-dark">{songPayout.phone}</td>
 										<td className="border-bottom border-dark">{songPayout.amount}</td>
-										<td className="border-bottom border-dark">
-											<Button
-												btnClass="mysonar-btn white-btn"
-												btnText="send"
-												onClick={() => onVideoPayout(songPayout.username, songPayout.amount)} />
-										</td>
+										<td className="border-bottom border-dark">{songPayout.earnings}</td>
+										<td className="border-bottom border-dark">{songPayout.payouts}</td>
+										<td className="border-bottom border-dark">{songPayout.balance}</td>
 									</tr>
 								</tbody>
 							))}
 				</table>
 				{/* Song Payouts End */}
+				<br />
+				<br />
+
+				{/* Kopokopo Recipients */}
+				<h1>Kopokopo Recipients</h1>
+				<table className="table table-responsive thead-light">
+					<tbody className="border border-0">
+						<tr className="border border-0">
+							<th className="border-top border-dark">Name</th>
+							<th className="border-top border-dark">Username</th>
+							<th className="border-top border-dark">Phone</th>
+							<th className="border-top border-dark">Destination Reference</th>
+						</tr>
+					</tbody>
+					{kopokopoRecipients
+						.filter((kopokopoRecipient) => kopokopoRecipient.destination_reference == false)
+						.map((kopokopoRecipient, key) => (
+							<tbody key={key} className="border border-0">
+								<tr className="border border-0">
+									<td className="border-bottom border-dark">{kopokopoRecipient.name}</td>
+									<td className="border-bottom border-dark">{kopokopoRecipient.username}</td>
+									<td className="border-bottom border-dark">{kopokopoRecipient.phone}</td>
+									<td className="border-bottom border-dark">{kopokopoRecipient.destination_reference}</td>
+								</tr>
+							</tbody>
+						))}
+				</table>
 				<br />
 				<br />
 

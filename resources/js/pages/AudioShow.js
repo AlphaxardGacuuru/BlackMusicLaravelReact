@@ -16,7 +16,12 @@ const AudioShow = (props) => {
 	let history = useHistory()
 
 	// Set Show if it's equal to 0
-	props.show == 0 && setTimeout(() => props.setShow(show), 1000)
+	props.show == 0 && setTimeout(() => {
+		props.setShow(show)
+		props.setLocalStorage("show", show)
+		// Refresh Audio
+		props.audioLoader && props.setRefreshAudio(Math.random(10))
+	}, 1000)
 
 	// Set State
 	const [text, setText] = useState("")
@@ -747,7 +752,7 @@ const AudioShow = (props) => {
 						return boughtAudio.username == props.auth.username &&
 							boughtAudio.audio_id != props.show
 					}).map((boughtAudio, key) => (
-						<Suspense fallback={<LoadingAudioMediaHorizontal />}>
+						<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}
@@ -773,7 +778,7 @@ const AudioShow = (props) => {
 							audio.id != show
 					}).slice(0, 10)
 					.map((audio, key) => (
-						<Suspense fallback={<LoadingAudioMediaHorizontal />}>
+						<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}

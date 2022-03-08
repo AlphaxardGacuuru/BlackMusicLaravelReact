@@ -129,13 +129,12 @@ const Settings = (props) => {
 					</table>
 
 					<h4>Outstanding cash</h4>
-					{/* <h5 className='text-success'>KES {songPayouts.balance}</h5> */}
-					<h5 className='text-success'>KES 10</h5>
+					<h5 className='text-success'>KES {songPayouts.balance}</h5>
 					<br />
 
 					{kopokopoRecipients
 						.some((recipient) => recipient.username == props.auth.username) ?
-						// songPayouts.balance > props.auth.withdrawal &&
+						songPayouts.balance > props.auth.withdrawal &&
 						<div>
 							{kopokopoRecipients
 								.some((recipient) => recipient.username == props.auth.username &&

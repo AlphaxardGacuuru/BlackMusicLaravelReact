@@ -29,11 +29,17 @@ const Bottomnav = (props) => {
 		checkLocation = location.pathname.match(/audio-show/)
 	}
 
+	// Set Show if it's equal to 0
+	setTimeout(() => {
+		// Refresh Audio
+		props.audioLoader && props.setRefreshAudio(Math.random(10))
+	}, 1000)
+
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
 	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length
 	const cartItems = vidCartItems + audCartItems
-	
+
 	return (
 		<>
 			{/* Add breaks if social input is visible */}
@@ -81,7 +87,10 @@ const Bottomnav = (props) => {
 				<div className="container-fluid menu-area d-flex text-white hidden">
 					<div style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
-						<span onClick={() => props.setShow(0)}>
+						<span onClick={() => {
+							props.setShow(0)
+							props.setLocalStorage("show", "")
+						}}>
 							<svg xmlns="http://www.w3.org/2000/svg"
 								width="40"
 								height="40"

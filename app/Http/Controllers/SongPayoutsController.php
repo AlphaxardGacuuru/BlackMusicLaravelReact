@@ -104,8 +104,7 @@ class SongPayoutsController extends Controller
         $response = $pay->sendPay([
             'destinationType' => 'mobile_wallet',
             'destinationReference' => $request->input('destination_reference'),
-            // 'amount' => $amount > 1000 ? $amount : $amount - 50, 
-            'amount' => $amount,
+            'amount' => $amount > 1000 ? $amount : $amount - 50, 
             'currency' => 'KES',
             'callbackUrl' => 'https://music.black.co.ke/api/song-payouts',
             'description' => 'Song Payout',

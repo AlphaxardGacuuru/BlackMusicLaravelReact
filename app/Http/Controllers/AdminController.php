@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtVideos;
 use App\BoughtAudios;
+use App\BoughtVideos;
 use App\SongPayouts;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -17,13 +17,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // Check if user is logged in
-        if (Auth::check()) {
-            $authUsername = auth()->user()->username;
-        } else {
-            $authUsername = '@guest';
-        }
-
         // Get cost of bought videos at each price and multiply by profit
         $totalVideos20 = BoughtVideos::where('price', 20)
             ->count() * 10;
@@ -32,28 +25,47 @@ class AdminController extends Controller
         $totalAudios100 = BoughtAudios::where('price', 100)
             ->count() * 50;
 
-        // Get video payouts
-        $getSongPayouts = SongPayouts::get();
-
         $songPayouts = [];
 
-        // Populate song payouts array
-        foreach ($getSongPayouts as $key => $songPayout) {
-            array_push($songPayouts, [
-				'username' => $songPayout->username,
-                'amount' => $songPayout->amount,
-                'created_at' => $songPayout->created_at->format('d F Y'),
-            ]);
-        }
+        $getUsers = User::where('account_type', 'musician')->get();
 
-        // Check if there's any outstanding cash
-        $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
-        $balance = $totalEarnings - $getSongPayouts->sum('amount');
+        foreach ($getUsers as $key => $user) {
+            // Get cost of bought videos at each price and multiply by profit
+            $totalVideos20 = BoughtVideos::where('artist', $user->username)
+                ->where('price', 20)
+                ->count() * 10;
+            $totalVideos200 = BoughtVideos::where('artist', $user->username)
+                ->where('price', 200)
+                ->count() * 100;
+            $totalAudios100 = BoughtAudios::where('artist', $user->username)
+                ->where('price', 100)
+                ->count() * 50;
+
+            // Get song payouts
+            $songPayoutSum = SongPayouts::where('username', $user->username)
+                ->get()
+                ->sum('amount');
+
+            // Check if there's any outstanding cash
+            $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
+            $balance = $totalEarnings - $songPayoutSum;
+
+            // Populate song payouts array
+            // Only add recipients who don't have a balance
+            if ($balance) {
+                array_push($songPayouts, [
+                    'name' => $user->name,
+                    'username' => $user->username,
+                    'amount' => $user->amount,
+                    'earnings' => $totalEarnings,
+                    'payouts' => $songPayoutSum,
+                    'balance' => $balance,
+                ]);
+            }
+        }
 
         return response([
             'songPayouts' => $songPayouts,
-            'totalEarnings' => $totalEarnings,
-            'balance' => $balance,
         ], 200);
     }
 

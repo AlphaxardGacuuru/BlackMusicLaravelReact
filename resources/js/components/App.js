@@ -45,6 +45,7 @@ import ChatThread from '../pages/ChatThread'
 import NewChat from '../pages/NewChat'
 
 import NotFound from '../pages/NotFound'
+import { random } from 'lodash';
 
 function App() {
 
@@ -392,7 +393,7 @@ function App() {
 
 	/*
 	* Audio Player */
-	const [show, setShow] = useState(0)
+	const [show, setShow] = useState(getLocalStorage("show"))
 	const [playBtn, setPlayBtn] = useState(true)
 	const [shuffle, setShuffle] = useState(false)
 	const [loop, setLoop] = useState(false)
@@ -401,6 +402,7 @@ function App() {
 	const [currentTime, setCurrentTime] = useState(0)
 	const [progressPercent, setProgressPercent] = useState()
 	const [audioLoader, setAudioLoader] = useState(true)
+	const [refreshAudio, setRefreshAudio] = useState()
 
 	// Listen for show change and autoplay song
 	useEffect(() => {
@@ -419,7 +421,7 @@ function App() {
 				setAudioLoader(true)
 			});
 		}
-	}, [show])
+	}, [show, refreshAudio])
 
 	// Set Refs
 	const audio = React.useRef(null)
@@ -662,7 +664,7 @@ function App() {
 	/*
 	*
 	* Register service worker */
-	// if (window.location.href.match(/https/)) {
+	if (window.location.href.match(/https/)) {
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
 				navigator.serviceWorker.register('/sw.js')
@@ -670,7 +672,7 @@ function App() {
 				// .catch((err) => console.log('Service worker not registered', err));
 			})
 		}
-	// }
+	}
 
 	// Show the notification
 	function displayNotification() {
@@ -797,6 +799,7 @@ function App() {
 		onSetVolume,
 		fmtMSS,
 		audioLoader,
+		refreshAudio, setRefreshAudio,
 		// Social Input
 		id, setId,
 		to, setTo,
