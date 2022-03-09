@@ -47,6 +47,7 @@ const Library = (props) => {
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}
+								setLocalStorage={props.setLocalStorage}
 								link={`/audio-show/${boughtAudio.audio_id}`}
 								thumbnail={`/storage/${boughtAudio.thumbnail}`}
 								name={boughtAudio.name}

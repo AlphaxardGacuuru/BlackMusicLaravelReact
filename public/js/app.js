@@ -93216,12 +93216,7 @@ function App() {
   var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState50 = _slicedToArray(_useState49, 2),
       audioLoader = _useState50[0],
-      setAudioLoader = _useState50[1];
-
-  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState52 = _slicedToArray(_useState51, 2),
-      refreshAudio = _useState52[0],
-      setRefreshAudio = _useState52[1]; // Listen for show change and autoplay song
+      setAudioLoader = _useState50[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -93240,7 +93235,7 @@ function App() {
         setAudioLoader(true);
       });
     }
-  }, [show, refreshAudio]); // Set Refs
+  }, [show]); // Set Refs
 
   var audio = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
   var audioProgress = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null);
@@ -93406,10 +93401,10 @@ function App() {
   } // Search State
 
 
-  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
-      _useState54 = _slicedToArray(_useState53, 2),
-      search = _useState54[0],
-      setSearch = _useState54[1];
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
+      _useState52 = _slicedToArray(_useState51, 2),
+      search = _useState52[0],
+      setSearch = _useState52[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Function to focus on search input
 
@@ -93418,110 +93413,110 @@ function App() {
   }; // Social Input states
 
 
+  var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState54 = _slicedToArray(_useState53, 2),
+      id = _useState54[0],
+      setId = _useState54[1];
+
   var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState56 = _slicedToArray(_useState55, 2),
-      id = _useState56[0],
-      setId = _useState56[1];
+      to = _useState56[0],
+      setTo = _useState56[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState58 = _slicedToArray(_useState57, 2),
-      to = _useState58[0],
-      setTo = _useState58[1];
+      text = _useState58[0],
+      setText = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState60 = _slicedToArray(_useState59, 2),
-      text = _useState60[0],
-      setText = _useState60[1];
+      media = _useState60[0],
+      setMedia = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState62 = _slicedToArray(_useState61, 2),
-      media = _useState62[0],
-      setMedia = _useState62[1];
+      para1 = _useState62[0],
+      setPara1 = _useState62[1];
 
   var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState64 = _slicedToArray(_useState63, 2),
-      para1 = _useState64[0],
-      setPara1 = _useState64[1];
+      para2 = _useState64[0],
+      setPara2 = _useState64[1];
 
   var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState66 = _slicedToArray(_useState65, 2),
-      para2 = _useState66[0],
-      setPara2 = _useState66[1];
+      para3 = _useState66[0],
+      setPara3 = _useState66[1];
 
   var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState68 = _slicedToArray(_useState67, 2),
-      para3 = _useState68[0],
-      setPara3 = _useState68[1];
+      para4 = _useState68[0],
+      setPara4 = _useState68[1];
 
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState70 = _slicedToArray(_useState69, 2),
-      para4 = _useState70[0],
-      setPara4 = _useState70[1];
+      para5 = _useState70[0],
+      setPara5 = _useState70[1];
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState72 = _slicedToArray(_useState71, 2),
-      para5 = _useState72[0],
-      setPara5 = _useState72[1];
+      placeholder = _useState72[0],
+      setPlaceholder = _useState72[1];
 
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState74 = _slicedToArray(_useState73, 2),
-      placeholder = _useState74[0],
-      setPlaceholder = _useState74[1];
+      urlTo = _useState74[0],
+      setUrlTo = _useState74[1];
 
   var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState76 = _slicedToArray(_useState75, 2),
-      urlTo = _useState76[0],
-      setUrlTo = _useState76[1];
+      urlToTwo = _useState76[0],
+      setUrlToTwo = _useState76[1];
 
   var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      urlToTwo = _useState78[0],
-      setUrlToTwo = _useState78[1];
+      urlToDelete = _useState78[0],
+      setUrlToDelete = _useState78[1];
 
   var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      urlToDelete = _useState80[0],
-      setUrlToDelete = _useState80[1];
+      stateToUpdate = _useState80[0],
+      setStateToUpdate = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState82 = _slicedToArray(_useState81, 2),
-      stateToUpdate = _useState82[0],
-      setStateToUpdate = _useState82[1];
+      stateToUpdateTwo = _useState82[0],
+      setStateToUpdateTwo = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState84 = _slicedToArray(_useState83, 2),
-      stateToUpdateTwo = _useState84[0],
-      setStateToUpdateTwo = _useState84[1];
+      showImage = _useState84[0],
+      setShowImage = _useState84[1];
 
   var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState86 = _slicedToArray(_useState85, 2),
-      showImage = _useState86[0],
-      setShowImage = _useState86[1];
+      showPoll = _useState86[0],
+      setShowPoll = _useState86[1];
 
-  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState88 = _slicedToArray(_useState87, 2),
-      showPoll = _useState88[0],
-      setShowPoll = _useState88[1];
+      showMentionPicker = _useState88[0],
+      setShowMentionPicker = _useState88[1];
 
   var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState90 = _slicedToArray(_useState89, 2),
-      showMentionPicker = _useState90[0],
-      setShowMentionPicker = _useState90[1];
+      showEmojiPicker = _useState90[0],
+      setShowEmojiPicker = _useState90[1];
 
   var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState92 = _slicedToArray(_useState91, 2),
-      showEmojiPicker = _useState92[0],
-      setShowEmojiPicker = _useState92[1];
+      showImagePicker = _useState92[0],
+      setShowImagePicker = _useState92[1];
 
   var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState94 = _slicedToArray(_useState93, 2),
-      showImagePicker = _useState94[0],
-      setShowImagePicker = _useState94[1];
-
-  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState96 = _slicedToArray(_useState95, 2),
-      showPollPicker = _useState96[0],
-      setShowPollPicker = _useState96[1]; // Declare new FormData object for form data
+      showPollPicker = _useState94[0],
+      setShowPollPicker = _useState94[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -93691,7 +93686,7 @@ function App() {
     setVideos: setVideos,
     search: search,
     setSearch: setSearch
-  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "displayNotification", displayNotification), _defineProperty(_GLOBAL_STATE, "subscribeToPush", subscribeToPush), _defineProperty(_GLOBAL_STATE, "sendPush", sendPush), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "refreshAudio", refreshAudio), _defineProperty(_GLOBAL_STATE, "setRefreshAudio", setRefreshAudio), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
+  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "displayNotification", displayNotification), _defineProperty(_GLOBAL_STATE, "subscribeToPush", subscribeToPush), _defineProperty(_GLOBAL_STATE, "sendPush", sendPush), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _GLOBAL_STATE);
   var showLoginPopUp = auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/login",
@@ -93928,7 +93923,8 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: props.link,
     onClick: function onClick() {
-      return props.setShow(props.audioId);
+      props.setShow(props.audioId);
+      props.setLocalStorage("show", props.audioId);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.thumbnail,
@@ -93941,7 +93937,8 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return props.setShow(props.audioId);
+      props.setShow(props.audioId);
+      props.setLocalStorage("show", props.audioId);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
@@ -94052,6 +94049,25 @@ var AuthLinks = function AuthLinks(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AuthLinks);
+
+/***/ }),
+
+/***/ "./resources/js/components/Axios.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/Axios.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  baseURL: 'http://localhost:3000'
+});
+/* harmony default export */ __webpack_exports__["default"] = (instance);
 
 /***/ }),
 
@@ -96836,6 +96852,7 @@ var AudioCharts = function AudioCharts(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
         key: key,
         setShow: props.setShow,
+        setLocalStorage: props.setLocalStorage,
         link: "/audio-show/".concat(audio.id),
         thumbnail: "/storage/".concat(audio.thumbnail),
         name: audio.name,
@@ -97733,14 +97750,7 @@ var AudioShow = function AudioShow(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       show = _useParams.show;
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Set Show if it's equal to 0
-
-  props.show == "" && setTimeout(function () {
-    props.setShow(show);
-    props.setLocalStorage("show", show); // Refresh Audio
-
-    props.audioLoader && props.setRefreshAudio(Math.random(10));
-  }, 1000); // Set State
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Set State
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -98532,6 +98542,7 @@ var AudioShow = function AudioShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
       key: key,
       setShow: props.setShow,
+      setLocalStorage: props.setLocalStorage,
       link: "/audio-show/".concat(boughtAudio.audio_id),
       thumbnail: "/storage/".concat(boughtAudio.thumbnail),
       name: boughtAudio.name,
@@ -98551,6 +98562,7 @@ var AudioShow = function AudioShow(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
       key: key,
       setShow: props.setShow,
+      setLocalStorage: props.setLocalStorage,
       link: "/audio-show/".concat(audio.id),
       thumbnail: "/storage/".concat(audio.thumbnail),
       name: audio.name,
@@ -99470,6 +99482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_Axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Axios */ "./resources/js/components/Axios.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -99484,10 +99497,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // import axios from '../components/Axios'
+
+
 
 var ChatThread = function ChatThread(props) {
-  axios.defaults.baseURL = props.url;
+  _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].defaults.baseURL = props.url;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       username = _useParams.username;
@@ -99509,14 +99523,14 @@ var ChatThread = function ChatThread(props) {
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // Fetch Chat Threads
-    axios.get("/api/chat/1").then(function (res) {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat/1").then(function (res) {
       setChatThreads(res.data);
       props.setLocalStorage("chatThreads", res.data);
     })["catch"](function () {
       return props.setErrors(['Failed to fetch chat']);
     }); // Fetch Chat
 
-    axios.get("/api/chat").then(function (res) {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
       setChat(res.data);
       props.setLocalStorage("chat", res.data);
     })["catch"](function () {
@@ -99541,7 +99555,7 @@ var ChatThread = function ChatThread(props) {
   }, 1000); // Function to Update Chat
 
   var checkChat = function checkChat() {
-    axios.get("/api/chat").then(function (res) {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
       // Get new length of chat
       var currentChatLength = chat.filter(function (chatItem) {
         return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
@@ -99590,15 +99604,15 @@ var ChatThread = function ChatThread(props) {
   // Function for deleting chat
 
   var onDeleteChat = function onDeleteChat(id) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('sanctum/csrf-cookie').then(function () {
+      _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
         props.setMessage(res.data); // Update chat
 
-        axios.get("".concat(props.url, "/api/chat")).then(function (res) {
+        _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("".concat(props.url, "/api/chat")).then(function (res) {
           return setChat(res.data);
         }); // Update chat
 
-        axios.get("".concat(props.url, "/api/chat/1")).then(function (res) {
+        _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("".concat(props.url, "/api/chat/1")).then(function (res) {
           return setChatThreads(res.data);
         });
       })["catch"](function (err) {
@@ -100867,6 +100881,7 @@ var Library = function Library(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
       key: key,
       setShow: props.setShow,
+      setLocalStorage: props.setLocalStorage,
       link: "/audio-show/".concat(boughtAudio.audio_id),
       thumbnail: "/storage/".concat(boughtAudio.thumbnail),
       name: boughtAudio.name,
@@ -102206,6 +102221,7 @@ var Profile = function Profile(props) {
           return props.setShow(0);
         },
         setShow: props.setShow,
+        setLocalStorage: props.setLocalStorage,
         link: "/audio-show/".concat(audio.id),
         thumbnail: "storage/".concat(audio.thumbnail),
         name: audio.name,
@@ -102729,6 +102745,7 @@ var Search = function Search(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: key,
       setShow: props.setShow,
+      setLocalStorage: props.setLocalStorage,
       link: "/audio-show/".concat(audio.id),
       thumbnail: "/storage/".concat(audio.thumbnail),
       name: audio.name,

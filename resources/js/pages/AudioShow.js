@@ -15,14 +15,6 @@ const AudioShow = (props) => {
 	let { show } = useParams()
 	let history = useHistory()
 
-	// Set Show if it's equal to 0
-	props.show == "" && setTimeout(() => {
-		props.setShow(show)
-		props.setLocalStorage("show", show)
-		// Refresh Audio
-		props.audioLoader && props.setRefreshAudio(Math.random(10))
-	}, 1000)
-
 	// Set State
 	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
@@ -756,6 +748,7 @@ const AudioShow = (props) => {
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}
+								setLocalStorage={props.setLocalStorage}
 								link={`/audio-show/${boughtAudio.audio_id}`}
 								thumbnail={`/storage/${boughtAudio.thumbnail}`}
 								name={boughtAudio.name}
@@ -782,6 +775,7 @@ const AudioShow = (props) => {
 							<AudioMediaHorizontal
 								key={key}
 								setShow={props.setShow}
+								setLocalStorage={props.setLocalStorage}
 								link={`/audio-show/${audio.id}`}
 								thumbnail={`/storage/${audio.thumbnail}`}
 								name={audio.name}

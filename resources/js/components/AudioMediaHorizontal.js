@@ -15,7 +15,10 @@ const AudioMediaHorizontal = (props) => {
 				}}>
 				<Link
 					to={props.link}
-					onClick={() => props.setShow(props.audioId)}>
+					onClick={() => {
+						props.setShow(props.audioId)
+						props.setLocalStorage("show", props.audioId)
+					}}>
 					<Img
 						src={props.thumbnail}
 						width="100%"
@@ -25,7 +28,10 @@ const AudioMediaHorizontal = (props) => {
 			<div className="p-2 mr-auto">
 				<span
 					style={{ cursor: "pointer" }}
-					onClick={() => props.setShow(props.audioId)}>
+					onClick={() => {
+						props.setShow(props.audioId)
+						props.setLocalStorage("show", props.audioId)
+					}}>
 					<h6
 						className="mb-0 pb-0"
 						style={{

@@ -363,6 +363,7 @@ const AudioCharts = (props) => {
 											<AudioMediaHorizontal
 												key={key}
 												setShow={props.setShow}
+												setLocalStorage={props.setLocalStorage}
 												link={`/audio-show/${audio.id}`}
 												thumbnail={`/storage/${audio.thumbnail}`}
 												name={audio.name}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
-// import axios from '../components/Axios'
+import axios from '../components/Axios'
 
 const ChatThread = (props) => {
 

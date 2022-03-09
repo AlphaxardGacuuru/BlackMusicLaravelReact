@@ -668,6 +668,7 @@ const Profile = (props) => {
 												key={audio.id}
 												onClick={() => props.setShow(0)}
 												setShow={props.setShow}
+												setLocalStorage={props.setLocalStorage}
 												link={`/audio-show/${audio.id}`}
 												thumbnail={`storage/${audio.thumbnail}`}
 												name={audio.name}

@@ -402,7 +402,6 @@ function App() {
 	const [currentTime, setCurrentTime] = useState(0)
 	const [progressPercent, setProgressPercent] = useState()
 	const [audioLoader, setAudioLoader] = useState(true)
-	const [refreshAudio, setRefreshAudio] = useState()
 
 	// Listen for show change and autoplay song
 	useEffect(() => {
@@ -421,7 +420,7 @@ function App() {
 				setAudioLoader(true)
 			});
 		}
-	}, [show, refreshAudio])
+	}, [show])
 
 	// Set Refs
 	const audio = React.useRef(null)
@@ -799,7 +798,6 @@ function App() {
 		onSetVolume,
 		fmtMSS,
 		audioLoader,
-		refreshAudio, setRefreshAudio,
 		// Social Input
 		id, setId,
 		to, setTo,
