@@ -32,20 +32,13 @@ class HomeController extends Controller
         // Check if user is logged in
         if (Auth::check()) {
             // Get Cost of Bought Videos at each price
-            $totalVideos20 = BoughtVideos::where('username', auth()->user()->username)
-                ->where('price', 20)
-                ->count() * 20;
-            $totalVideos200 = BoughtVideos::where('username', auth()->user()->username)
-                ->where('price', 200)
-                ->count() * 200;
-            $totalAudios100 = BoughtAudios::where('username', auth()->user()->username)
-                ->where('price', 100)
-                ->count() * 100;
+            $totalVideos = BoughtVideos::where('username', auth()->user()->username)->count() * 20;
+            $totalAudios = BoughtAudios::where('username', auth()->user()->username)->count() * 10;
             $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
 			
             // Get Total Cash paid
             $kopokopo = Kopokopo::where('sender_phone_number', $betterPhone)->sum('amount');
-            $balance = $kopokopo - ($totalVideos20 + $totalVideos200 + $totalAudios100);
+            $balance = $kopokopo - ($totalVideos + $totalAudios);
 
             return [
 				"id" => Auth::user()->id,

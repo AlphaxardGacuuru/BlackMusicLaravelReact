@@ -470,7 +470,7 @@ const Index = (props) => {
 							.filter((post) => post.hasFollowed)
 							.map((post, index) => (
 								<div key={index} className="d-flex">
-									<div className="p-2">
+									<div className="p-1">
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 											<Link to={`/profile/${post.username}`}>
 												<Img src={post.pp}
@@ -480,7 +480,7 @@ const Index = (props) => {
 											</Link>
 										</div>
 									</div>
-									<div className="p-2 flex-grow-1">
+									<div className="p-1 flex-grow-1">
 										<h6 className="m-0"
 											style={{
 												width: "100%",

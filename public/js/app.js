@@ -98824,7 +98824,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js"));
 });
@@ -98926,7 +98925,7 @@ var Cart = function Cart(props) {
             setBottomMenu();
           }, 30000);
         })["catch"](function (err) {
-          console.log(err.response.data.message);
+          console.log(err.response.data.errors);
           var resErrors = err.response.data.errors;
           var resError;
           var newError = [];
@@ -99250,8 +99249,10 @@ var Cart = function Cart(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
   }, "Congratulations. Purchase successful!")), receiptVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), receiptVideos.map(function (receiptVideo, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoMediaHorizontal, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingVideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], null)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoMediaHorizontal, {
       onClick: function onClick() {
         return props.setShow(0);
       },
@@ -99261,16 +99262,22 @@ var Cart = function Cart(props) {
       name: receiptVideo.name,
       username: receiptVideo.username,
       ft: receiptVideo.ft,
-      videoInCart: false,
       hasBoughtVideo: false,
-      videoId: receiptVideo.id
-    });
+      videoInCart: false,
+      videoId: receiptVideo.id,
+      onCartVideos: props.onCartVideos,
+      onBuyVideos: props.onCartVideos
+    }));
   }), receiptAudios.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "mt-4"
   }, "Audios")), receiptAudios.map(function (receiptAudio, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+      key: key,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingAudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
       key: key,
       setShow: props.setShow,
+      setLocalStorage: props.setLocalStorage,
       link: "/audio-show/".concat(receiptAudio.id),
       thumbnail: "/storage/".concat(receiptAudio.thumbnail),
       name: receiptAudio.name,
@@ -99279,7 +99286,7 @@ var Cart = function Cart(props) {
       hasBoughtAudio: false,
       audioInCart: false,
       audioId: receiptAudio.id
-    });
+    }));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))));
 };
 
@@ -100328,7 +100335,7 @@ var Index = function Index(props) {
       key: index,
       className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2"
+      className: "p-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "avatar-thumbnail-xs",
       style: {
@@ -100342,7 +100349,7 @@ var Index = function Index(props) {
       height: "40px",
       alt: 'avatar'
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2 flex-grow-1"
+      className: "p-1 flex-grow-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "m-0",
       style: {

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -87,7 +86,7 @@ const Cart = (props) => {
 						}, 30000)
 
 					}).catch((err) => {
-						console.log(err.response.data.message)
+						console.log(err.response.data.errors)
 						const resErrors = err.response.data.errors
 						var resError
 						var newError = []
@@ -411,8 +410,7 @@ const Cart = (props) => {
 						</div>
 
 						{/* <!-- Close Icon --> */}
-						<div className="closeIcon p-2 float-right text-dark"
-							onClick={() => setReceipt("")}>
+						<div className="closeIcon p-2 float-right text-dark" onClick={() => setReceipt("")}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="40"
@@ -429,41 +427,45 @@ const Cart = (props) => {
 					<div className="px-2 pb-4" style={{ height: "100%", overflowY: "scroll", textAlign: "left" }}>
 						<center><h4 className="text-success">Congratulations. Purchase successful!</h4></center>
 						{/* Cart Videos */}
-						{receiptVideos.length > 0 &&
-							<center><h4>Videos</h4></center>}
+						{receiptVideos.length > 0 && <center><h4>Videos</h4></center>}
 						{receiptVideos
 							.map((receiptVideo, key) => (
-								<VideoMediaHorizontal
-									key={key}
-									onClick={() => props.setShow(0)}
-									setShow={props.setShow}
-									link={`/video-show/${receiptVideo.id}`}
-									thumbnail={receiptVideo.thumbnail}
-									name={receiptVideo.name}
-									username={receiptVideo.username}
-									ft={receiptVideo.ft}
-									videoInCart={false}
-									hasBoughtVideo={false}
-									videoId={receiptVideo.id} />
+								<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
+									<VideoMediaHorizontal
+										onClick={() => props.setShow(0)}
+										setShow={props.setShow}
+										link={`/video-show/${receiptVideo.id}`}
+										thumbnail={receiptVideo.thumbnail}
+										name={receiptVideo.name}
+										username={receiptVideo.username}
+										ft={receiptVideo.ft}
+										hasBoughtVideo={false}
+										videoInCart={false}
+										videoId={receiptVideo.id}
+										onCartVideos={props.onCartVideos}
+										onBuyVideos={props.onCartVideos} />
+								</Suspense>
 							))}
 						{/* Cart Videos End */}
 
 						{/* Cart Audios */}
-						{receiptAudios.length > 0 &&
-							<center><h4 className="mt-4">Audios</h4></center>}
+						{receiptAudios.length > 0 && <center><h4 className="mt-4">Audios</h4></center>}
 						{receiptAudios
 							.map((receiptAudio, key) => (
-								<AudioMediaHorizontal
-									key={key}
-									setShow={props.setShow}
-									link={`/audio-show/${receiptAudio.id}`}
-									thumbnail={`/storage/${receiptAudio.thumbnail}`}
-									name={receiptAudio.name}
-									username={receiptAudio.username}
-									ft={receiptAudio.ft}
-									hasBoughtAudio={false}
-									audioInCart={false}
-									audioId={receiptAudio.id} />
+								<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
+									<AudioMediaHorizontal
+										key={key}
+										setShow={props.setShow}
+										setLocalStorage={props.setLocalStorage}
+										link={`/audio-show/${receiptAudio.id}`}
+										thumbnail={`/storage/${receiptAudio.thumbnail}`}
+										name={receiptAudio.name}
+										username={receiptAudio.username}
+										ft={receiptAudio.ft}
+										hasBoughtAudio={false}
+										audioInCart={false}
+										audioId={receiptAudio.id} />
+								</Suspense>
 							))}
 						<br />
 						<br />
