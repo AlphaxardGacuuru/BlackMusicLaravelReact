@@ -21,9 +21,9 @@ const Cart = (props) => {
 
 	// Calculate totals
 	const videoTotal = props.cartVideos.length
-	const videoTotalCash = props.cartVideos.length * 200
+	const videoTotalCash = props.cartVideos.length * 20
 	const audioTotal = props.cartAudios.length
-	const audioTotalCash = props.cartAudios.length * 100
+	const audioTotalCash = props.cartAudios.length * 10
 	const total = videoTotalCash + audioTotalCash
 
 	// Send STKPush
@@ -188,7 +188,7 @@ const Cart = (props) => {
 									<h6>
 										<small>{cartVideo.artist} {cartVideo.ft}</small>
 									</h6>
-									<h6 className="text-success">KES 200</h6>
+									<h6 className="text-success">KES 20</h6>
 									<button
 										className="mysonar-btn white-btn mb-1 float-right"
 										onClick={() => props.onCartVideos(cartVideo.video_id)}>
@@ -250,7 +250,7 @@ const Cart = (props) => {
 										<h6 className="mt-0 pt-0">
 											<small>{cartAudio.username}</small>
 										</h6>
-										<h6 className="text-success">KES 100</h6>
+										<h6 className="text-success">KES 10</h6>
 									</div>
 									<div className="ml-2">
 										<button

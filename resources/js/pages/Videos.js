@@ -120,19 +120,12 @@ const Videos = (props) => {
 							<tr className="border-top border-dark">
 								<td className="border-top border-dark"><h5>Revenue</h5></td>
 								<td className="border-top border-dark">
-									<h5 style={{ color: "#1e824c" }}>
+									<h5 className="text-success">
 										KES
-										<span className="ml-1">
+										<span className="ml-1 text-success">
 											{props.boughtVideos
-												.filter((boughtVideo) => {
-													return boughtVideo.artist == props.auth.username && boughtVideo.price == 20
-												})
-												.length * 10 +
-												props.boughtVideos
-													.filter((boughtVideo) => {
-														return boughtVideo.artist == props.auth.username && boughtVideo.price == 200
-													})
-													.length * 100}
+												.filter((boughtVideo) => boughtVideo.artist == props.auth.username)
+												.length * 10}
 										</span>
 									</h5>
 								</td>
@@ -175,7 +168,7 @@ const Videos = (props) => {
 											<th className="border-top border-dark"><h5>Genre</h5></th>
 											<th className="border-top border-dark"><h5>Description</h5></th>
 											<th className="border-top border-dark"><h5>Downloads</h5></th>
-											<th className="border-top border-dark"><h5 style={{ color: "#1e824c" }}>Revenue</h5></th>
+											<th className="border-top border-dark"><h5 className="text-success">Revenue</h5></th>
 											<th className="border-top border-dark"><h5>Likes</h5></th>
 											<th className="border-top border-dark"><h5>Released</h5></th>
 											<th className="border-top border-dark"><h5>Uploaded</h5></th>
@@ -209,16 +202,8 @@ const Videos = (props) => {
 													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
 														{albumItem.downloads}
 													</td>
-													<td className="border-top border-dark" style={{ color: "#1e824c" }}>
-														KES <span>{props.boughtVideos
-															.filter((boughtVideo) => boughtVideo.video_id == albumItem.id &&
-																boughtVideo.price == 20)
-															.length * 10 +
-															props.boughtVideos
-																.filter((boughtVideo) => boughtVideo.video_id == albumItem.id &&
-																	boughtVideo.price == 200)
-																.length * 100}
-														</span>
+													<td className="border-top border-dark text-success">
+														KES <span className="text-success">{albumItem.downloads * 10}</span>
 													</td>
 													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
 														{albumItem.likes}

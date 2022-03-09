@@ -56,11 +56,11 @@ const Audios = (props) => {
 						<tbody className="border border-0">
 							<tr className="border-top border-dark">
 								<td className="border-top border-dark"><h5>Revenue</h5></td>
-								<td className="border-top border-dark"><h5 style={{ color: "#1e824c" }}>
+								<td className="border-top border-dark"><h5 className="text-success">
 									KES
-									<span> {props.boughtAudios
+									<span className="text-success"> {props.boughtAudios
 										.filter((boughtAudio) => boughtAudio.artist == props.auth.username)
-										.length * 10}</span>
+										.length * 5}</span>
 								</h5>
 								</td>
 							</tr>
@@ -99,7 +99,7 @@ const Audios = (props) => {
 											<th className="border-top border-dark"><h5>Genre</h5></th>
 											<th className="border-top border-dark"><h5>Description</h5></th>
 											<th className="border-top border-dark"><h5>Downloads</h5></th>
-											<th className="border-top border-dark"><h5 style={{ color: "#1e824c" }}>Revenue</h5></th>
+											<th className="border-top border-dark"><h5 className="text-success">Revenue</h5></th>
 											<th className="border-top border-dark"><h5>Likes</h5></th>
 											<th className="border-top border-dark"><h5>Released</h5></th>
 											<th className="border-top border-dark"><h5>Uploaded</h5></th>
@@ -133,14 +133,11 @@ const Audios = (props) => {
 														{albumItem.description}
 													</td>
 													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
-														{audioAlbum.downloads}
+														{albumItem.downloads}
 													</td>
-													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}
-														style={{ color: "#1e824c" }}>
-														KES <span>{props.boughtAudios.filter((boughtAudio) => {
-															return boughtAudio.video_id == albumItem.id
-														}).length * 10}
-														</span>
+													<td className="border-top border-dark text-success"
+														style={{ color: "rgba(220, 220, 220, 1) " }}>
+														KES <span className="text-success">{albumItem.downloads * 5}</span>
 													</td>
 													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
 														{audioAlbum.likes}

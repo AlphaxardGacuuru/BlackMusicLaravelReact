@@ -95822,14 +95822,14 @@ var Admin = function Admin(props) {
   }, "Videos Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "border-bottom-0 border-right border-dark"
   }, "Audios Bought"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "border-bottom-0 border-right border-dark"
+    className: "border-bottom-0 border-right border-dark text-success"
   }, "Video Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "border-bottom-0 border-right border-dark"
+    className: "border-bottom-0 border-right border-dark text-success"
   }, "Audio Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "border-bottom-0 border-right border-dark"
-  }, "Audio Profit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "border-bottom-0 border-right-0 border-dark"
-  }, "Video Profit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border-bottom-0 border-right border-dark text-success"
+  }, "Video Profit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "border-bottom-0 border-right-0 border-dark text-success"
+  }, "Audio Profit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark"
   }, props.users.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark"
@@ -95844,38 +95844,14 @@ var Admin = function Admin(props) {
   }, "KES ", props.boughtVideos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark"
   }, "KES ", props.boughtAudios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "border-right border-dark",
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.price == 20;
-  }).length * 20 + props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.price == 200;
-  }).length * 200), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "border-right border-dark",
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtAudios.filter(function (boughtAudio) {
-    return boughtAudio.price == 100;
-  }).length * 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "border-right border-dark",
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.price == 20;
-  }).length * 10 + props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.price == 200;
-  }).length * 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "border-right-0 border-dark",
-    style: {
-      color: "green"
-    }
-  }, "KES ", props.boughtAudios.filter(function (boughtAudio) {
-    return boughtAudio.price == 100;
-  }).length * 50)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "border-right border-dark text-success"
+  }, "KES ", props.boughtVideos.length * 20), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border-right border-dark text-success"
+  }, "KES ", props.boughtAudios.length * 10), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border-right border-dark text-success"
+  }, "KES ", props.boughtVideos.length * 10), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "border-right-0 border-dark text-success"
+  }, "KES ", props.boughtAudios.length * 5)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-responsive"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
     className: "border border-0"
@@ -98597,8 +98573,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -98671,12 +98645,12 @@ var Audios = function Audios(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-top border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    style: {
-      color: "#1e824c"
-    }
-  }, "KES", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " ", props.boughtAudios.filter(function (boughtAudio) {
+    className: "text-success"
+  }, "KES", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-success"
+  }, " ", props.boughtAudios.filter(function (boughtAudio) {
     return boughtAudio.artist == props.auth.username;
-  }).length * 10))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }).length * 5))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-9"
   }, props.audioAlbums.filter(function (audioAlbum) {
     return audioAlbum.username == props.auth.username;
@@ -98720,9 +98694,7 @@ var Audios = function Audios(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Downloads")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       className: "border-top border-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-      style: {
-        color: "#1e824c"
-      }
+      className: "text-success"
     }, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       className: "border-top border-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Likes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -98773,16 +98745,14 @@ var Audios = function Audios(props) {
         style: {
           color: "rgba(220, 220, 220, 1) "
         }
-      }, audioAlbum.downloads), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", _defineProperty({
-        className: "border-top border-dark",
+      }, albumItem.downloads), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "border-top border-dark text-success",
         style: {
           color: "rgba(220, 220, 220, 1) "
         }
-      }, "style", {
-        color: "#1e824c"
-      }), "KES ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.boughtAudios.filter(function (boughtAudio) {
-        return boughtAudio.video_id == albumItem.id;
-      }).length * 10)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, "KES ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success"
+      }, albumItem.downloads * 5)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "border-top border-dark",
         style: {
           color: "rgba(220, 220, 220, 1) "
@@ -98885,9 +98855,9 @@ var Cart = function Cart(props) {
 
 
   var videoTotal = props.cartVideos.length;
-  var videoTotalCash = props.cartVideos.length * 200;
+  var videoTotalCash = props.cartVideos.length * 20;
   var audioTotal = props.cartAudios.length;
-  var audioTotalCash = props.cartAudios.length * 100;
+  var audioTotalCash = props.cartAudios.length * 10;
   var total = videoTotalCash + audioTotalCash; // Send STKPush
 
   var STKPush = function STKPush(amount) {
@@ -99064,7 +99034,7 @@ var Cart = function Cart(props) {
       }
     }, cartVideo.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, cartVideo.artist, " ", cartVideo.ft)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "text-success"
-    }, "KES 200"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, "KES 20"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn white-btn mb-1 float-right",
       onClick: function onClick() {
         return props.onCartVideos(cartVideo.video_id);
@@ -99127,7 +99097,7 @@ var Cart = function Cart(props) {
       className: "mt-0 pt-0"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, cartAudio.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "text-success"
-    }, "KES 100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, "KES 10")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ml-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "mysonar-btn white-btn mb-1 float-right",
@@ -105781,16 +105751,12 @@ var Videos = function Videos(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-top border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    style: {
-      color: "#1e824c"
-    }
+    className: "text-success"
   }, "KES", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ml-1"
+    className: "ml-1 text-success"
   }, props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.artist == props.auth.username && boughtVideo.price == 20;
-  }).length * 10 + props.boughtVideos.filter(function (boughtVideo) {
-    return boughtVideo.artist == props.auth.username && boughtVideo.price == 200;
-  }).length * 100))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return boughtVideo.artist == props.auth.username;
+  }).length * 10))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-9"
   }, props.videoAlbums.filter(function (videoAlbum) {
     return videoAlbum.username == props.auth.username;
@@ -105834,9 +105800,7 @@ var Videos = function Videos(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Downloads")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       className: "border-top border-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-      style: {
-        color: "#1e824c"
-      }
+      className: "text-success"
     }, "Revenue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       className: "border-top border-dark"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Likes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -105886,15 +105850,10 @@ var Videos = function Videos(props) {
           color: "rgba(220, 220, 220, 1) "
         }
       }, albumItem.downloads), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "border-top border-dark",
-        style: {
-          color: "#1e824c"
-        }
-      }, "KES ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, props.boughtVideos.filter(function (boughtVideo) {
-        return boughtVideo.video_id == albumItem.id && boughtVideo.price == 20;
-      }).length * 10 + props.boughtVideos.filter(function (boughtVideo) {
-        return boughtVideo.video_id == albumItem.id && boughtVideo.price == 200;
-      }).length * 100)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "border-top border-dark text-success"
+      }, "KES ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success"
+      }, albumItem.downloads * 10)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "border-top border-dark",
         style: {
           color: "rgba(220, 220, 220, 1) "

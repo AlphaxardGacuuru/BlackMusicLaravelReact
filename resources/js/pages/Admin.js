@@ -54,10 +54,10 @@ const Admin = (props) => {
 							<th className="border-bottom-0 border-right border-dark">Audios</th>
 							<th className="border-bottom-0 border-right border-dark">Videos Bought</th>
 							<th className="border-bottom-0 border-right border-dark">Audios Bought</th>
-							<th className="border-bottom-0 border-right border-dark">Video Revenue</th>
-							<th className="border-bottom-0 border-right border-dark">Audio Revenue</th>
-							<th className="border-bottom-0 border-right border-dark">Audio Profit</th>
-							<th className="border-bottom-0 border-right-0 border-dark">Video Profit</th>
+							<th className="border-bottom-0 border-right border-dark text-success">Video Revenue</th>
+							<th className="border-bottom-0 border-right border-dark text-success">Audio Revenue</th>
+							<th className="border-bottom-0 border-right border-dark text-success">Video Profit</th>
+							<th className="border-bottom-0 border-right-0 border-dark text-success">Audio Profit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,7 +65,9 @@ const Admin = (props) => {
 							{/* Users */}
 							<td className="border-right border-dark">{props.users.length}</td>
 							{/* Musicians */}
-							<td className="border-right border-dark">{props.users.filter((user) => user.account_type == "musician").length}</td>
+							<td className="border-right border-dark">
+								{props.users.filter((user) => user.account_type == "musician").length}
+							</td>
 							{/* Videos */}
 							<td className="border-right border-dark">{props.videos.length}</td>
 							{/* Audios */}
@@ -75,22 +77,20 @@ const Admin = (props) => {
 							{/* Audios Bought */}
 							<td className="border-right border-dark">KES {props.boughtAudios.length}</td>
 							{/* Video Revenue */}
-							<td className="border-right border-dark" style={{ color: "green" }}>
-								KES {props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 20).length * 20 +
-									props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 200).length * 200}
+							<td className="border-right border-dark text-success">
+								KES {props.boughtVideos.length * 20}
 							</td>
 							{/* Audio Revenue */}
-							<td className="border-right border-dark" style={{ color: "green" }}>
-								KES {props.boughtAudios.filter((boughtAudio) => boughtAudio.price == 100).length * 100}
+							<td className="border-right border-dark text-success">
+								KES {props.boughtAudios.length * 10}
 							</td>
 							{/* Video Profit */}
-							<td className="border-right border-dark" style={{ color: "green" }}>
-								KES {props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 20).length * 10 +
-									props.boughtVideos.filter((boughtVideo) => boughtVideo.price == 200).length * 100}
+							<td className="border-right border-dark text-success">
+								KES {props.boughtVideos.length * 10}
 							</td>
 							{/* Audio Profit */}
-							<td className="border-right-0 border-dark" style={{ color: "green" }}>
-								KES {props.boughtAudios.filter((boughtAudio) => boughtAudio.price == 100).length * 50}
+							<td className="border-right-0 border-dark text-success">
+								KES {props.boughtAudios.length * 5}
 							</td>
 						</tr>
 					</tbody>

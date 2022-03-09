@@ -71,23 +71,16 @@ class BoughtVideosController extends Controller
             ->get();
 
         foreach ($cartVideos as $cartVideo) {
-            // Get Cost of Bought Videos at each price
-            $totalVideos20 = BoughtVideos::where('username', auth()->user()->username)
-                ->where('price', 20)
-                ->count() * 20;
-            $totalVideos200 = BoughtVideos::where('username', auth()->user()->username)
-                ->where('price', 200)
-                ->count() * 200;
-            $totalAudios100 = BoughtAudios::where('username', auth()->user()->username)
-                ->where('price', 100)
-                ->count() * 100;
+            // Get Cost of Bought Videos
+            $totalVideos = BoughtVideos::where('username', auth()->user()->username)->count() * 20;
+            $totalAudios = BoughtAudios::where('username', auth()->user()->username)->count() * 10;
             $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
 			
             // Get Total Cash paid
             $kopokopo = Kopokopo::where('sender_phone_number', $betterPhone)->sum('amount');
-            $balance = $kopokopo - ($totalVideos20 + $totalVideos200 + $totalAudios100);
+            $balance = $kopokopo - ($totalVideos + $totalAudios);
             // Check if user can buy songs in cart
-            $permission = intval($balance / 200);
+            $permission = intval($balance / 20);
 
             if ($permission >= 1) {
                 $bvQuery = BoughtVideos::where('username', auth()->user()->username)
@@ -98,7 +91,7 @@ class BoughtVideosController extends Controller
                     $boughtVideos = new BoughtVideos;
                     $boughtVideos->video_id = $cartVideo->video_id;
                     $boughtVideos->reference = "ODT2TA2060";
-                    $boughtVideos->price = 200;
+                    $boughtVideos->price = 20;
                     $boughtVideos->username = auth()->user()->username;
                     $boughtVideos->name = $cartVideo->videos->name;
                     $boughtVideos->artist = $cartVideo->videos->username;

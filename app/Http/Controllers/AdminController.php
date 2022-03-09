@@ -18,12 +18,8 @@ class AdminController extends Controller
     public function index()
     {
         // Get cost of bought videos at each price and multiply by profit
-        $totalVideos20 = BoughtVideos::where('price', 20)
-            ->count() * 10;
-        $totalVideos200 = BoughtVideos::where('price', 200)
-            ->count() * 100;
-        $totalAudios100 = BoughtAudios::where('price', 100)
-            ->count() * 50;
+        $totalVideos = BoughtVideos::where('price', 20)->count() * 10;
+        $totalAudios = BoughtAudios::where('price', 10)->count() * 5;
 
         $songPayouts = [];
 
@@ -31,15 +27,8 @@ class AdminController extends Controller
 
         foreach ($getUsers as $key => $user) {
             // Get cost of bought videos at each price and multiply by profit
-            $totalVideos20 = BoughtVideos::where('artist', $user->username)
-                ->where('price', 20)
-                ->count() * 10;
-            $totalVideos200 = BoughtVideos::where('artist', $user->username)
-                ->where('price', 200)
-                ->count() * 100;
-            $totalAudios100 = BoughtAudios::where('artist', $user->username)
-                ->where('price', 100)
-                ->count() * 50;
+            $totalVideos = BoughtVideos::where('artist', $user->username)->count() * 10;
+            $totalAudios = BoughtAudios::where('artist', $user->username)->count() * 5;
 
             // Get song payouts
             $songPayoutSum = SongPayouts::where('username', $user->username)
@@ -47,7 +36,7 @@ class AdminController extends Controller
                 ->sum('amount');
 
             // Check if there's any outstanding cash
-            $totalEarnings = $totalVideos20 + $totalVideos200 + $totalAudios100;
+            $totalEarnings = $totalVideos + $totalAudios;
             $balance = $totalEarnings - $songPayoutSum;
 
             // Populate song payouts array
