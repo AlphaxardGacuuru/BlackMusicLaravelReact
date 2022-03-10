@@ -100914,7 +100914,7 @@ var NewChat = function NewChat(props) {
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   setTimeout(function () {
     return searchInput.current.focus();
-  }, 1000); // Get user results
+  }, 100); // Get user results
 
   var userResults = props.users.filter(function (user) {
     return user.username != props.auth.username && user.username.match(search);

@@ -52,6 +52,7 @@ class PushController extends Controller
         $endpoint = $request->endpoint;
         $token = $request->auth;
         $key = $request->p256dh;
+
         $user = Auth::user();
         $user->updatePushSubscription($endpoint, $key, $token);
 
@@ -100,6 +101,10 @@ class PushController extends Controller
      */
     public function destroy(Push $push)
     {
-        //
+        $endpoint = Push::where('subscribable_id', auth()->user()->id)
+            ->get()
+            ->endpoint;
+
+        auth()->user(1)->deletePushSubscription($endpoint);
     }
 }

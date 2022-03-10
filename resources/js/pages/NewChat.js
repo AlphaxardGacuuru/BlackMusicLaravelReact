@@ -9,7 +9,7 @@ const NewChat = (props) => {
 
 	const searchInput = useRef(null)
 
-	setTimeout(() => searchInput.current.focus(), 1000)
+	setTimeout(() => searchInput.current.focus(), 100)
 
 	// Get user results
 	var userResults = props.users
