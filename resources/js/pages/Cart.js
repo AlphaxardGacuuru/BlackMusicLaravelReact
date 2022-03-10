@@ -14,7 +14,7 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 const Cart = (props) => {
 
 	const [bottomMenu, setBottomMenu] = useState()
-	const [receipt, setReceipt] = useState()
+	const [receipt, setReceipt] = useState("menu-open")
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
 
@@ -410,7 +410,7 @@ const Cart = (props) => {
 						</div>
 
 						{/* <!-- Close Icon --> */}
-						<div className="closeIcon p-2 float-right text-dark" onClick={() => setReceipt("")}>
+						<div className="closeIcon p-2 float-right" onClick={() => setReceipt("")}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="40"
@@ -425,7 +425,10 @@ const Cart = (props) => {
 					</div>
 
 					<div className="px-2 pb-4" style={{ height: "100%", overflowY: "scroll", textAlign: "left" }}>
-						<center><h4 className="text-success">Congratulations. Purchase successful!</h4></center>
+						<center>
+							<h4 className="text-success">Congratulations</h4>
+							<h5 className="text-success">Purchase successful!</h5>
+						</center>
 						{/* Cart Videos */}
 						{receiptVideos.length > 0 && <center><h4>Videos</h4></center>}
 						{receiptVideos

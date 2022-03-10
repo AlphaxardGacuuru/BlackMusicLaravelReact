@@ -98837,7 +98837,7 @@ var Cart = function Cart(props) {
       bottomMenu = _useState2[0],
       setBottomMenu = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("menu-open"),
       _useState4 = _slicedToArray(_useState3, 2),
       receipt = _useState4[0],
       setReceipt = _useState4[1];
@@ -99226,7 +99226,7 @@ var Cart = function Cart(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#"
   }, "Receipt")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right text-dark",
+    className: "closeIcon p-2 float-right",
     onClick: function onClick() {
       return setReceipt("");
     }
@@ -99248,7 +99248,9 @@ var Cart = function Cart(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-success"
-  }, "Congratulations. Purchase successful!")), receiptVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), receiptVideos.map(function (receiptVideo, key) {
+  }, "Congratulations"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "text-success"
+  }, "Purchase successful!")), receiptVideos.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Videos")), receiptVideos.map(function (receiptVideo, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingVideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__["default"], null)
