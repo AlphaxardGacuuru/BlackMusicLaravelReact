@@ -1283,17 +1283,17 @@ div.hidden-scroll span {
 
 /* the track (progress bar) of the scrollbar */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px white;
+    box-shadow: inset 0 0 5px black;
     border-radius: 10px;
     width: 10px;
-    border: 1px solid white;
+    border: 1px solid black;
 }
 
 /* the draggable scrolling handle */
 ::-webkit-scrollbar-thumb {
     background: #232323;
     border-radius: 20px;
-    border: 1px solid white;
+    border: 1px solid black;
 }
 
 /* Handle on hover */
@@ -1304,7 +1304,7 @@ div.hidden-scroll span {
 
 /*the track (progress bar) NOT covered by the handle*/
 ::-webkit-scrollbar-track-piece {
-    border: 1px solid white;
+    border: 1px solid black;
 }
 
 /*Horizontal Scroll buttons*/
