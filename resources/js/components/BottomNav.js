@@ -29,12 +29,6 @@ const Bottomnav = (props) => {
 		checkLocation = location.pathname.match(/audio-show/)
 	}
 
-	// Set Show if it's equal to 0
-	setTimeout(() => {
-		// Refresh Audio
-		!checkLocation && props.audioLoader && props.setRefreshAudio(Math.random(10))
-	}, 1000)
-
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
 	const audCartItems = props.cartAudios.filter((cartAudio) => cartAudio.username == props.auth.username).length

@@ -229,7 +229,10 @@ const ChatThread = (props) => {
 						}).map((chatItem, key) => (
 							<div
 								key={key}
-								className={`d-flex ${chatItem.username == props.auth.username ? "flex-row-reverse" : "text-light"}`}>
+								className={`d-flex
+								${chatItem.username == props.auth.username ?
+										"flex-row-reverse" :
+										"text-light"}`}>
 								{chatItem.username == props.auth.username &&
 									showDelete &&
 									<div
@@ -237,7 +240,7 @@ const ChatThread = (props) => {
 											cursor: "pointer",
 											backgroundColor: chatItem.username == props.auth.username && "gold"
 										}}
-										className="rounded-0 my-1 mx-0 p-2"
+										className="rounded-0 m-0 p-0"
 										onClick={() => onDeleteChat(chatItem.id)}>
 										<span style={{ color: "#232323" }}>
 											<svg
@@ -267,8 +270,10 @@ const ChatThread = (props) => {
 												height="auto"
 												alt={'help-post-media'} />}
 									</div>
-									<small className={chatItem.username == props.auth.username ? "text-dark" : "text-muted"}>
-										<i className="float-right">
+									<small className={chatItem.username == props.auth.username ?
+										"text-dark m-0 p-1" :
+										"text-muted m-0 p-1"}>
+										<i className="float-right m-0">
 											{chatItem.created_at}
 										</i>
 									</small>

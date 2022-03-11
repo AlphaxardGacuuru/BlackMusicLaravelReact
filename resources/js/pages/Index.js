@@ -116,11 +116,17 @@ const Index = (props) => {
 	// Random array for dummy loading elements
 	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+	var checkLocation = true
+
+	if (props.show != 0) {
+		checkLocation = location.pathname.match(/audio-show/)
+	}
+
 	return (
 		<>
 			{/* Post button */}
 			{props.auth.account_type == 'musician' &&
-				<Link to="post-create" id="floatBtn">
+				<Link to="post-create" id="floatBtn" className={`${!checkLocation && "mb-5"}`}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="20"
@@ -134,7 +140,7 @@ const Index = (props) => {
 				</Link>}
 
 			{/* Chat button */}
-			<Link to="/chat" id="chatFloatBtn">
+			<Link to="/chat" id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"
