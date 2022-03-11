@@ -109,15 +109,18 @@ const ChatThread = (props) => {
 			})
 	}
 
-	// trigger function in intervals 
+	// Trigger function in intervals 
 	useEffect(() => {
 		const chatInterval = setInterval(() => checkChat(), 2000)
 
-		// Scroll to the bottom of the page
-		window.scrollTo(0, document.body.scrollHeight)
-
 		return () => clearInterval(chatInterval)
 	}, [])
+
+	// Ensure latest chat is always visible
+	useEffect(() => {
+		// Scroll to the bottom of the page
+		window.scrollTo(0, document.body.scrollHeight)
+	}, [chat])
 
 	// // Long hold to show delete button
 	// var chatDiv = useRef(null)

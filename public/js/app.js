@@ -99588,19 +99588,22 @@ var ChatThread = function ChatThread(props) {
         console.log("checking chat");
       }
     });
-  }; // trigger function in intervals 
+  }; // Trigger function in intervals 
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var chatInterval = setInterval(function () {
       return checkChat();
-    }, 2000); // Scroll to the bottom of the page
-
-    window.scrollTo(0, document.body.scrollHeight);
+    }, 2000);
     return function () {
       return clearInterval(chatInterval);
     };
-  }, []); // // Long hold to show delete button
+  }, []); // Ensure latest chat is always visible
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Scroll to the bottom of the page
+    window.scrollTo(0, document.body.scrollHeight);
+  }, [chat]); // // Long hold to show delete button
   // var chatDiv = useRef(null)
   // if (chatDiv.current) {
   // 	chatDiv.current
