@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -43,70 +43,6 @@ const ChatThread = (props) => {
 		props.setStateToUpdateTwo(() => setChatThreads)
 	}, 1000)
 
-	// Function to Update Chat
-	const checkChat = () => {
-		axios.get(`/api/chat`)
-			.then((res) => {
-				// Get new length of chat
-				var currentChatLength = chat
-					.filter((chatItem) => {
-						return chatItem.username == username &&
-							chatItem.to == props.auth.username ||
-							chatItem.username == props.auth.username &&
-							chatItem.to == username
-					}).length
-
-				// Get old length of chat
-				var newChatLength = res.data
-					.filter((chatItem) => {
-						return chatItem.username == username &&
-							chatItem.to == props.auth.username ||
-							chatItem.username == props.auth.username &&
-							chatItem.to == username
-					}).length
-
-				// Update chat if new one arrives
-				newChatLength > currentChatLength && setChat(res.data)
-				console.log("checking chat")
-			})
-	}
-
-	// trigger function in intervals 
-	useEffect(() => {
-		const chatInterval = setInterval(() => checkChat(), 2000)
-
-		return () => clearInterval(chatInterval)
-	}, [])
-
-	// Scroll to the bottom of the page
-	// window.scrollTo(0, document.body.scrollHeight)
-
-	// Long hold to show delete button
-	// var chat = useRef(null)
-
-	// if (chat.current) {
-	// 	chat.current.addEventListener("mousedown", () => {
-	// 		const timeout = setTimeout(
-	// 			() => setShowDelete(!showDelete),
-	// 			1000)
-
-	// 		chat.current.addEventListener("mouseup", () => {
-	// 			clearTimeout(timeout)
-	// 		})
-	// 	})
-
-	// 	// For mobile
-	// 	chat.current.addEventListener("touchstart", () => {
-	// 		const timeout = setTimeout(
-	// 			() => setShowDelete(!showDelete),
-	// 			1000)
-
-	// 		chat.current.addEventListener("touchend", () => {
-	// 			clearTimeout(timeout)
-	// 		})
-	// 	})
-	// }
-
 	// Function for deleting chat
 	const onDeleteChat = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -133,11 +69,82 @@ const ChatThread = (props) => {
 		})
 	}
 
+	const onDeleteNotifications = (id) => {
+		axios.delete(`/api/notifications/${id}`)
+			.then((res) => {
+				// Update Notifications
+				axios.get(`/api/notifications`)
+					.then((res) => props.setNotifications(res.data))
+			})
+	}
+
+	// Function to Update Chat
+	const checkChat = () => {
+		axios.get(`/api/chat`)
+			.then((res) => {
+				// Get new length of chat
+				var currentChatLength = chat
+					.filter((chatItem) => {
+						return chatItem.username == username &&
+							chatItem.to == props.auth.username ||
+							chatItem.username == props.auth.username &&
+							chatItem.to == username
+					}).length
+
+				// Get old length of chat
+				var newChatLength = res.data
+					.filter((chatItem) => {
+						return chatItem.username == username &&
+							chatItem.to == props.auth.username ||
+							chatItem.username == props.auth.username &&
+							chatItem.to == username
+					}).length
+
+				// Update chat if new one arrives
+				if (newChatLength > currentChatLength) {
+					setChat(res.data)
+					onDeleteNotifications(0)
+					console.log("checking chat")
+				}
+			})
+	}
+
+	// trigger function in intervals 
+	useEffect(() => {
+		const chatInterval = setInterval(() => checkChat(), 2000)
+
+		// Scroll to the bottom of the page
+		window.scrollTo(0, document.body.scrollHeight)
+
+		return () => clearInterval(chatInterval)
+	}, [])
+
+	// // Long hold to show delete button
+	// var chatDiv = useRef(null)
+
+	// if (chatDiv.current) {
+	// 	chatDiv.current
+	// 		.addEventListener("mousedown", () => {
+	// 			const timeout = setTimeout(() => setShowDelete(!showDelete), 1000)
+
+	// 			chatDiv.current
+	// 				.addEventListener("mouseup", () => clearTimeout(timeout))
+	// 		})
+
+	// 	// For mobile
+	// 	chatDiv.current
+	// 		.addEventListener("touchstart", () => {
+	// 			const timeout = setTimeout(() => setShowDelete(!showDelete), 1000)
+
+	// 			chatDiv.current
+	// 				.addEventListener("touchend", () => clearTimeout(timeout))
+	// 		})
+	// }
+
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
-
 				{/* <!-- ***** Header Area Start ***** --> */}
 				<header style={{ backgroundColor: "#232323" }} className="header-area">
 					<div className="container-fluid p-0">
@@ -266,6 +273,9 @@ const ChatThread = (props) => {
 							</div>
 						))}
 				</div>
+				<br />
+				<br className="hidden" />
+				<br className="hidden" />
 			</div>
 			<div className="col-sm-4"></div>
 		</div>

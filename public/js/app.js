@@ -98837,7 +98837,7 @@ var Cart = function Cart(props) {
       bottomMenu = _useState2[0],
       setBottomMenu = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("menu-open"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
       receipt = _useState4[0],
       setReceipt = _useState4[1];
@@ -99531,56 +99531,7 @@ var ChatThread = function ChatThread(props) {
     props.setStateToUpdateTwo(function () {
       return setChatThreads;
     });
-  }, 1000); // Function to Update Chat
-
-  var checkChat = function checkChat() {
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
-      // Get new length of chat
-      var currentChatLength = chat.filter(function (chatItem) {
-        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
-      }).length; // Get old length of chat
-
-      var newChatLength = res.data.filter(function (chatItem) {
-        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
-      }).length; // Update chat if new one arrives
-
-      newChatLength > currentChatLength && setChat(res.data);
-      console.log("checking chat");
-    });
-  }; // trigger function in intervals 
-
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var chatInterval = setInterval(function () {
-      return checkChat();
-    }, 2000);
-    return function () {
-      return clearInterval(chatInterval);
-    };
-  }, []); // Scroll to the bottom of the page
-  // window.scrollTo(0, document.body.scrollHeight)
-  // Long hold to show delete button
-  // var chat = useRef(null)
-  // if (chat.current) {
-  // 	chat.current.addEventListener("mousedown", () => {
-  // 		const timeout = setTimeout(
-  // 			() => setShowDelete(!showDelete),
-  // 			1000)
-  // 		chat.current.addEventListener("mouseup", () => {
-  // 			clearTimeout(timeout)
-  // 		})
-  // 	})
-  // 	// For mobile
-  // 	chat.current.addEventListener("touchstart", () => {
-  // 		const timeout = setTimeout(
-  // 			() => setShowDelete(!showDelete),
-  // 			1000)
-  // 		chat.current.addEventListener("touchend", () => {
-  // 			clearTimeout(timeout)
-  // 		})
-  // 	})
-  // }
-  // Function for deleting chat
+  }, 1000); // Function for deleting chat
 
   var onDeleteChat = function onDeleteChat(id) {
     _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('sanctum/csrf-cookie').then(function () {
@@ -99609,6 +99560,63 @@ var ChatThread = function ChatThread(props) {
       });
     });
   };
+
+  var onDeleteNotifications = function onDeleteNotifications(id) {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/api/notifications/".concat(id)).then(function (res) {
+      // Update Notifications
+      _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/notifications").then(function (res) {
+        return props.setNotifications(res.data);
+      });
+    });
+  }; // Function to Update Chat
+
+
+  var checkChat = function checkChat() {
+    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
+      // Get new length of chat
+      var currentChatLength = chat.filter(function (chatItem) {
+        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
+      }).length; // Get old length of chat
+
+      var newChatLength = res.data.filter(function (chatItem) {
+        return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
+      }).length; // Update chat if new one arrives
+
+      if (newChatLength > currentChatLength) {
+        setChat(res.data);
+        onDeleteNotifications(0);
+        console.log("checking chat");
+      }
+    });
+  }; // trigger function in intervals 
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var chatInterval = setInterval(function () {
+      return checkChat();
+    }, 2000); // Scroll to the bottom of the page
+
+    window.scrollTo(0, document.body.scrollHeight);
+    return function () {
+      return clearInterval(chatInterval);
+    };
+  }, []); // // Long hold to show delete button
+  // var chatDiv = useRef(null)
+  // if (chatDiv.current) {
+  // 	chatDiv.current
+  // 		.addEventListener("mousedown", () => {
+  // 			const timeout = setTimeout(() => setShowDelete(!showDelete), 1000)
+  // 			chatDiv.current
+  // 				.addEventListener("mouseup", () => clearTimeout(timeout))
+  // 		})
+  // 	// For mobile
+  // 	chatDiv.current
+  // 		.addEventListener("touchstart", () => {
+  // 			const timeout = setTimeout(() => setShowDelete(!showDelete), 1000)
+  // 			chatDiv.current
+  // 				.addEventListener("touchend", () => clearTimeout(timeout))
+  // 		})
+  // }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -99747,7 +99755,11 @@ var ChatThread = function ChatThread(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right"
     }, chatItem.created_at))));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    className: "hidden"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));
 };
