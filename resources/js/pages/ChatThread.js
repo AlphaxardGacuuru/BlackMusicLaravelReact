@@ -103,7 +103,7 @@ const ChatThread = (props) => {
 				// Update chat if new one arrives
 				if (newChatLength > currentChatLength) {
 					setChat(res.data)
-					onDeleteNotifications(0)
+					// onDeleteNotifications(0)
 					console.log("checking chat")
 				}
 			})

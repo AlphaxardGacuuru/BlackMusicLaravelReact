@@ -393,7 +393,7 @@ function App() {
 
 	/*
 	* Audio Player */
-	const [show, setShow] = useState(getLocalStorage("show"))
+	const [show, setShow] = useState(getLocalStorage("show").id)
 	const [playBtn, setPlayBtn] = useState(true)
 	const [shuffle, setShuffle] = useState(false)
 	const [loop, setLoop] = useState(false)
@@ -413,6 +413,8 @@ function App() {
 				// Show playing UI.
 				setPlayBtn(true)
 				setAudioLoader(false)
+				// audio.current.currentTime = getLocalStorage("show").time
+				audio.current.currentTime = 10
 			}).catch((error) => {
 				// Auto-play was prevented
 				// Show paused UI.
@@ -522,7 +524,7 @@ function App() {
 		// audioProgress.current.style.width = `${progressPercent}%`;
 
 		{/* Pause at 10s if user has not bought the audio */ }
-		if (!showAudio.hasBoughtAudio) {
+		if (!showAudio.hasBoughtAudio && showAudio.username != auth.username) {
 			if (audio.current.currentTime >= 10) {
 				pauseSong()
 				setErrors([`Buy song to continue!`])
@@ -985,6 +987,10 @@ function App() {
 				onTimeUpdate={(e) => {
 					updateProgress()
 					setCurrentTime(e.target.currentTime)
+					setLocalStorage("show", {
+						"id": show, 
+						"time": e.target.currentTime
+					})
 				}}
 				onCanPlay={(e) => setDur(e.target.duration)}
 				ref={audio}

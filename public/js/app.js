@@ -93173,7 +93173,7 @@ function App() {
   * Audio Player */
 
 
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show")),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show").id),
       _useState34 = _slicedToArray(_useState33, 2),
       show = _useState34[0],
       setShow = _useState34[1];
@@ -93227,7 +93227,9 @@ function App() {
         // Automatic playback started!
         // Show playing UI.
         setPlayBtn(true);
-        setAudioLoader(false);
+        setAudioLoader(false); // audio.current.currentTime = getLocalStorage("show").time
+
+        audio.current.currentTime = 10;
       })["catch"](function (error) {
         // Auto-play was prevented
         // Show paused UI.
@@ -93343,7 +93345,7 @@ function App() {
       /* Pause at 10s if user has not bought the audio */
     }
 
-    if (!showAudio.hasBoughtAudio) {
+    if (!showAudio.hasBoughtAudio && showAudio.username != auth.username) {
       if (audio.current.currentTime >= 10) {
         pauseSong();
         setErrors(["Buy song to continue!"]);
@@ -93872,6 +93874,10 @@ function App() {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
+      setLocalStorage("show", {
+        "id": show,
+        "time": e.target.currentTime
+      });
     },
     onCanPlay: function onCanPlay(e) {
       return setDur(e.target.duration);
@@ -93924,7 +93930,10 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     to: props.link,
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", props.audioId);
+      props.setLocalStorage("show", {
+        "id": props.audioId,
+        "time": 0
+      });
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.thumbnail,
@@ -93938,7 +93947,10 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     },
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", props.audioId);
+      props.setLocalStorage("show", {
+        "id": props.audioId,
+        "time": 0
+      });
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
@@ -99578,8 +99590,8 @@ var ChatThread = function ChatThread(props) {
       }).length; // Update chat if new one arrives
 
       if (newChatLength > currentChatLength) {
-        setChat(res.data);
-        onDeleteNotifications(0);
+        setChat(res.data); // onDeleteNotifications(0)
+
         console.log("checking chat");
       }
     });
