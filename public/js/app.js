@@ -93173,7 +93173,7 @@ function App() {
   * Audio Player */
 
 
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show").id),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show")),
       _useState34 = _slicedToArray(_useState33, 2),
       show = _useState34[0],
       setShow = _useState34[1];
@@ -93227,8 +93227,7 @@ function App() {
         // Automatic playback started!
         // Show playing UI.
         setPlayBtn(true);
-        setAudioLoader(false); // audio.current.currentTime = getLocalStorage("show").time
-
+        setAudioLoader(false);
         audio.current.currentTime = 10;
       })["catch"](function (error) {
         // Auto-play was prevented
@@ -93874,10 +93873,6 @@ function App() {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
-      setLocalStorage("show", {
-        "id": show,
-        "time": e.target.currentTime
-      });
     },
     onCanPlay: function onCanPlay(e) {
       return setDur(e.target.duration);
@@ -93930,10 +93925,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     to: props.link,
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", {
-        "id": props.audioId,
-        "time": 0
-      });
+      props.setLocalStorage("show", props.audioId);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.thumbnail,
@@ -93947,10 +93939,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     },
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", {
-        "id": props.audioId,
-        "time": 0
-      });
+      props.setLocalStorage("show", props.audioId);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",

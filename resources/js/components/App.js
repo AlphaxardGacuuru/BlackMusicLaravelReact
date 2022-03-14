@@ -986,10 +986,6 @@ function App() {
 				onTimeUpdate={(e) => {
 					updateProgress()
 					setCurrentTime(e.target.currentTime)
-					setLocalStorage("show", {
-						"id": show, 
-						"time": e.target.currentTime
-					})
 				}}
 				onCanPlay={(e) => setDur(e.target.duration)}
 				ref={audio}
