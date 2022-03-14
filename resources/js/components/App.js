@@ -393,7 +393,7 @@ function App() {
 
 	/*
 	* Audio Player */
-	const [show, setShow] = useState(getLocalStorage("show"))
+	const [show, setShow] = useState(getLocalStorage("show").id)
 	const [playBtn, setPlayBtn] = useState(true)
 	const [shuffle, setShuffle] = useState(false)
 	const [loop, setLoop] = useState(false)
@@ -413,7 +413,7 @@ function App() {
 				// Show playing UI.
 				setPlayBtn(true)
 				setAudioLoader(false)
-				audio.current.currentTime = 10
+				audio.current.currentTime = getLocalStorage("show").time
 			}).catch((error) => {
 				// Auto-play was prevented
 				// Show paused UI.
@@ -986,6 +986,10 @@ function App() {
 				onTimeUpdate={(e) => {
 					updateProgress()
 					setCurrentTime(e.target.currentTime)
+					setLocalStorage("show", {
+						"id": show, 
+						"time": e.target.currentTime
+					})
 				}}
 				onCanPlay={(e) => setDur(e.target.duration)}
 				ref={audio}

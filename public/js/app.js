@@ -93173,7 +93173,7 @@ function App() {
   * Audio Player */
 
 
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show")),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show").id),
       _useState34 = _slicedToArray(_useState33, 2),
       show = _useState34[0],
       setShow = _useState34[1];
@@ -93228,7 +93228,7 @@ function App() {
         // Show playing UI.
         setPlayBtn(true);
         setAudioLoader(false);
-        audio.current.currentTime = 10;
+        audio.current.currentTime = getLocalStorage("show").time;
       })["catch"](function (error) {
         // Auto-play was prevented
         // Show paused UI.
@@ -93873,6 +93873,10 @@ function App() {
     onTimeUpdate: function onTimeUpdate(e) {
       updateProgress();
       setCurrentTime(e.target.currentTime);
+      setLocalStorage("show", {
+        "id": show,
+        "time": e.target.currentTime
+      });
     },
     onCanPlay: function onCanPlay(e) {
       return setDur(e.target.duration);
@@ -93925,7 +93929,10 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     to: props.link,
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", props.audioId);
+      props.setLocalStorage("show", {
+        "id": props.audioId,
+        "time": 0
+      });
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.thumbnail,
@@ -93939,7 +93946,10 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     },
     onClick: function onClick() {
       props.setShow(props.audioId);
-      props.setLocalStorage("show", props.audioId);
+      props.setLocalStorage("show", {
+        "id": props.audioId,
+        "time": 0
+      });
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
