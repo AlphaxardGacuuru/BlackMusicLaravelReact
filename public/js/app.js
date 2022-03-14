@@ -93268,8 +93268,9 @@ function App() {
   boughtAudios.map(function (boughtAudio) {
     return songs.push(boughtAudio.audio_id);
   }); // Keep track of song
+  // let songIndex = songs.indexOf(show.toString())
 
-  var songIndex = songs.indexOf(show.toString());
+  var songIndex = songs.indexOf(show);
 
   var fmtMSS = function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (10 < s ? ':' : ':0') + ~~s;

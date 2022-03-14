@@ -451,7 +451,8 @@ function App() {
 		.map((boughtAudio) => (songs.push(boughtAudio.audio_id)))
 
 	// Keep track of song
-	let songIndex = songs.indexOf(show.toString())
+	// let songIndex = songs.indexOf(show.toString())
+	let songIndex = songs.indexOf(show)
 
 	const fmtMSS = (s) => { return (s - (s %= 60)) / 60 + (10 < s ? ':' : ':0') + ~~(s) }
 
@@ -981,7 +982,7 @@ function App() {
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />
 			</Router>
-
+			
 			<audio
 				onTimeUpdate={(e) => {
 					updateProgress()
