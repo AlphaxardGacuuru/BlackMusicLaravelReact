@@ -393,7 +393,7 @@ function App() {
 
 	/*
 	* Audio Player */
-	const [show, setShow] = useState(getLocalStorage("show").id)
+	const [show, setShow] = useState(getLocalStorage("show"))
 	const [playBtn, setPlayBtn] = useState(true)
 	const [shuffle, setShuffle] = useState(false)
 	const [loop, setLoop] = useState(false)
@@ -413,7 +413,6 @@ function App() {
 				// Show playing UI.
 				setPlayBtn(true)
 				setAudioLoader(false)
-				// audio.current.currentTime = getLocalStorage("show").time
 				audio.current.currentTime = 10
 			}).catch((error) => {
 				// Auto-play was prevented
