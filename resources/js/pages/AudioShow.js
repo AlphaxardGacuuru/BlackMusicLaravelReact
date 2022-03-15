@@ -204,14 +204,14 @@ const AudioShow = (props) => {
 				{/* <!-- Progress Container --> */}
 				<div
 					ref={props.audioContainer}
-					className="progress ml-2 mr-2 mt-4"
+					className="progress ml-2 mr-2 mt-4 bg-dark"
 					style={{ height: "5px" }}
 					onClick={props.setProgress}>
 					<div
 						ref={props.audioProgress}
 						className="progress-bar"
 						style={{
-							background: "#232323",
+							background: "#FFD700",
 							height: "5px",
 							width: props.progressPercent
 						}}>
@@ -335,7 +335,7 @@ const AudioShow = (props) => {
 					</div>
 					<div
 						ref={props.volumeContainer}
-						className="progress volume-hide ml-2 mr-2 mt-2 float-right"
+						className="progress volume-hide ml-2 mr-2 mt-2 float-right bg-dark"
 						style={{
 							height: "5px",
 							width: "25%"
@@ -345,7 +345,7 @@ const AudioShow = (props) => {
 							ref={props.volumeProgress}
 							className="progress-bar"
 							style={{
-								background: "#232323",
+								background: "#FFD700",
 								height: "5px",
 								width: Math.round(props.volume * 100)
 							}}>
