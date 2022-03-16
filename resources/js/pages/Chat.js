@@ -18,13 +18,19 @@ const Chat = (props) => {
 			}).catch(() => props.setErrors(['Failed to fetch chat threads']))
 	}, [])
 
+	var checkLocation = true
+
+	if (props.show != 0) {
+		checkLocation = location.pathname.match(/audio-show/)
+	}
+
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 
 				{/* Chat button */}
-				<Link to="/new-chat" id="chatFloatBtn">
+				<Link to="/new-chat" id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="20"

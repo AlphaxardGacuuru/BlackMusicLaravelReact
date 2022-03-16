@@ -94165,14 +94165,7 @@ var Bottomnav = function Bottomnav(props) {
       height: "5px",
       width: props.progressPercent
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: props.onSubmit,
-    className: "contact-form bg-white",
-    style: {
-      display: inputDisplay
-    },
-    autoComplete: "off"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__["default"], props)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid menu-area d-flex text-white hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -94289,7 +94282,14 @@ var Bottomnav = function Bottomnav(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: props.onSubmit,
+    className: "contact-form bg-white",
+    style: {
+      display: inputDisplay
+    },
+    autoComplete: "off"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__["default"], props)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "anti-hidden",
     style: {
       display: display
@@ -99349,6 +99349,12 @@ var Chat = function Chat(props) {
       return props.setErrors(['Failed to fetch chat threads']);
     });
   }, []);
+  var checkLocation = true;
+
+  if (props.show != 0) {
+    checkLocation = location.pathname.match(/audio-show/);
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -99357,7 +99363,8 @@ var Chat = function Chat(props) {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/new-chat",
-    id: "chatFloatBtn"
+    id: "chatFloatBtn",
+    className: "".concat(!checkLocation && "mb-5")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "20",

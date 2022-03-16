@@ -68,15 +68,6 @@ const Bottomnav = (props) => {
 					</div>
 				</div>
 
-				{/* Social Input */}
-				<form
-					onSubmit={props.onSubmit}
-					className="contact-form bg-white"
-					style={{ display: inputDisplay }}
-					autoComplete="off">
-					<SocialMediaInput {...props} />
-				</form>
-
 				{/* Audio Player */}
 				<div className="container-fluid menu-area d-flex text-white hidden">
 					<div style={{ display: checkLocation && "none" }}>
@@ -195,6 +186,15 @@ const Bottomnav = (props) => {
 					</div>
 				</div>
 				{/* Audio Player End */}
+
+				{/* Social Input */}
+				<form
+					onSubmit={props.onSubmit}
+					className="contact-form bg-white"
+					style={{ display: inputDisplay }}
+					autoComplete="off">
+					<SocialMediaInput {...props} />
+				</form>
 
 				{/* Bottom Nav */}
 				<div className="anti-hidden" style={{ display: display }}>
