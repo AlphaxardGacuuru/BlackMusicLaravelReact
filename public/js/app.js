@@ -99729,7 +99729,7 @@ var ChatThread = function ChatThread(props) {
         cursor: "pointer",
         backgroundColor: chatItem.username == props.auth.username && "gold"
       },
-      className: "rounded-0 m-0 p-0",
+      className: "rounded-0 border border-secondary border-right-0 border-top-0 border-bottom-0 p-2 my-1 mx-0",
       onClick: function onClick() {
         return onDeleteChat(chatItem.id);
       }
