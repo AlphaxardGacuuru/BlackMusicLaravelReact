@@ -171,20 +171,21 @@ a:focus {
     background-color: rgba(220,220,220,1);
     color: #2f2f2f;
 }
-
+/*  #38C15C */
+/* #38C15C */
 .mysonar-btn.green-btn {
-    border-color: #1e824c;
-    color: #1e824c;
+    border-color:  #38C15C;
+    color:  #38C15C;
     background-color: transparent;
 }
 
 .mysonar-btn.green-btn:focus {
-    background-color: #1e824c;
+    background-color:  #38C15C;
     color: #ffffff;
 }
 
 .mysonar-btn.green-btn:hover {
-    background-color: #1e824c;
+    background-color:  #38C15C;
     color: #ffffff;
 }
 
@@ -236,8 +237,8 @@ a:focus {
 }
 
 .green-btn.btn-2 {
-    background-color: #1e824c;
-	border-color: #1e824c;
+    background-color:  #38C15C;
+	border-color:  #38C15C;
     font-size: 12px;
     color: #ffffff;
 }

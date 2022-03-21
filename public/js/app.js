@@ -94013,7 +94013,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     className: "ml-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     btnClass: 'btn mysonar-btn green-btn btn-2 float-right',
-    btnText: 'buy',
+    btnText: 'KES 10',
     onClick: function onClick() {
       return props.onBuyAudios(props.audioId);
     }
@@ -95683,7 +95683,7 @@ var VideoMediaHorizontal = function VideoMediaHorizontal(props) {
     d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     btnClass: 'btn mysonar-btn green-btn btn-2 float-right',
-    btnText: 'buy',
+    btnText: 'KES 20',
     onClick: function onClick() {
       return props.onBuyVideos(props.videoId);
     }
@@ -98215,7 +98215,7 @@ var AudioShow = function AudioShow(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: 'btn mysonar-btn green-btn btn-2',
-    btnText: 'buy',
+    btnText: 'KES 10',
     onClick: function onClick() {
       // If user is guest then redirect to Login
       props.auth.username == "@guest" ? onGuestBuy() : onBuyAudios(show);
@@ -100255,7 +100255,7 @@ var Index = function Index(props) {
       d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       btnClass: 'btn mysonar-btn green-btn btn-2',
-      btnText: 'buy',
+      btnText: 'KES 20',
       onClick: function onClick() {
         return onBuyVideos(video.id);
       }
@@ -103009,7 +103009,13 @@ var Settings = function Settings(props) {
     }, videoPayout.created_at));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Outstanding cash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "text-success"
-  }, "KES ", songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), kopokopoRecipients.some(function (recipient) {
+  }, "KES ", songPayouts.balance), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "text-muted"
+  }, "By withdrawing less than ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "text-success"
+  }, "KES 1000"), " you will incur additional withdrawal charges of ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "text-success"
+  }, "KES 50"), " from our provider."), kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username;
   }) ? songPayouts.balance > props.auth.withdrawal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username && recipient.destination_reference;
@@ -104073,7 +104079,7 @@ var VideoCharts = function VideoCharts(props) {
         d: "M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
       }))) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !video.hasBoughtVideo ? !video.inCart && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
         btnClass: 'btn mysonar-btn green-btn btn-2',
-        btnText: 'buy',
+        btnText: 'KES 20',
         onClick: function onClick() {
           return onBuyVideos(videoArray.key);
         }
@@ -105281,7 +105287,7 @@ var VideoShow = function VideoShow(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: 'btn mysonar-btn green-btn btn-2',
-    btnText: 'buy',
+    btnText: 'KES 20',
     onClick: function onClick() {
       // If user is guest then redirect to Login
       props.auth.username == "@guest" ? onGuestBuy() : onBuyVideos(show);

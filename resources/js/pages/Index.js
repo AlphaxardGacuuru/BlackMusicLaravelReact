@@ -391,7 +391,7 @@ const Index = (props) => {
 												<br />
 												<Button
 													btnClass={'btn mysonar-btn green-btn btn-2'}
-													btnText={'buy'}
+													btnText={'KES 20'}
 													onClick={() => onBuyVideos(video.id)} />
 											</>}
 									</span>

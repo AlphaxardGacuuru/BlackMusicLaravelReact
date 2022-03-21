@@ -438,7 +438,7 @@ const AudioShow = (props) => {
 							<div className="p-2">
 								<Button
 									btnClass={'btn mysonar-btn green-btn btn-2'}
-									btnText={'buy'}
+									btnText={'KES 10'}
 									onClick={() => {
 										// If user is guest then redirect to Login
 										props.auth.username == "@guest" ?

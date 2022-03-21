@@ -449,7 +449,7 @@ const VideoCharts = (props) => {
 													!video.inCart &&
 													<Button
 														btnClass={'btn mysonar-btn green-btn btn-2'}
-														btnText={'buy'}
+														btnText={'KES 20'}
 														onClick={() => onBuyVideos(videoArray.key)} /> : ""}
 											</span>
 										))}

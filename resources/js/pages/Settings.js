@@ -130,7 +130,8 @@ const Settings = (props) => {
 
 					<h4>Outstanding cash</h4>
 					<h5 className='text-success'>KES {songPayouts.balance}</h5>
-					<br />
+					
+					<p className="text-muted">By withdrawing less than <span className="text-success">KES 1000</span> you will incur additional withdrawal charges of <span className="text-success">KES 50</span> from our provider.</p>
 
 					{kopokopoRecipients
 						.some((recipient) => recipient.username == props.auth.username) ?

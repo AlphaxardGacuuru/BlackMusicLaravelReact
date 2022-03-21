@@ -75,7 +75,7 @@ const VideoMediaHorizontal = (props) => {
 								</button>
 								<Button
 									btnClass={'btn mysonar-btn green-btn btn-2 float-right'}
-									btnText={'buy'}
+									btnText={'KES 20'}
 									onClick={() => props.onBuyVideos(props.videoId)} />
 							</> : ""
 					: ""}

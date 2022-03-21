@@ -91,7 +91,7 @@ const AudioMediaHorizontal = (props) => {
 							<div className="ml-2">
 								<Button
 									btnClass={'btn mysonar-btn green-btn btn-2 float-right'}
-									btnText={'buy'}
+									btnText={'KES 10'}
 									onClick={() => props.onBuyAudios(props.audioId)} />
 							</div>
 						</> : ""

@@ -316,7 +316,7 @@ const VideoShow = (props) => {
 							<div className="p-2">
 								<Button
 									btnClass={'btn mysonar-btn green-btn btn-2'}
-									btnText={'buy'}
+									btnText={'KES 20'}
 									onClick={() => {
 										// If user is guest then redirect to Login
 										props.auth.username == "@guest" ?
