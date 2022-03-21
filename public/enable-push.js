@@ -3,7 +3,7 @@
 	* Notifications */
 
 	// Request permission for notifications
-	Notification.requestPermission((status) => console.log('Notification permission status: ', status))
+	// Notification.requestPermission((status) => console.log('Notification permission status: ', status))
 
 	// Close the notification
 	self.addEventListener('notificationclose', (event) => {
