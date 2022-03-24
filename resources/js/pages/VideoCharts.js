@@ -172,6 +172,25 @@ const VideoCharts = (props) => {
 					}}>
 					<Img src="/storage/img/PSX_20220206_205133.jpg" width="100%" />
 				</div>
+				{/* <div className="mt-2" style={{
+					position: "absolute",
+					zIndex: "1",
+					top: 180,
+					right: 0,
+					left: 1250,
+					bottom: 0,
+					height: "200px",
+					width: "200px"
+				}}>
+					<Img
+						src="/storage/img/musical-note-black-gold-512.png"
+						width="100%"
+						style={{
+							borderRadius: "50%",
+							// boxShadow: "0 10px 20px 0 rgba(255,215,0,0.9)"
+							boxShadow: "0 10px 20px 0 rgba(0,0,0,0.9)"
+						}} />
+				</div> */}
 				{/* Overlay gradient */}
 				<div className="mt-2" style={{
 					position: "absolute",

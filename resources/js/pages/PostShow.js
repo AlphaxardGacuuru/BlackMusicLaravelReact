@@ -97,7 +97,7 @@ const PostShow = (props) => {
 		<div className="row p-0">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
-				<div className="mt-2 ml-2">
+				<div className="my-2 ml-2">
 					<Link to="/">
 						<svg
 							width="2em"
@@ -112,11 +112,11 @@ const PostShow = (props) => {
 						</svg>
 					</Link>
 				</div>
-				<div className="border border-top-0 border-dark m-0 p-0">
+				<div className="m-0 p-0">
 					{postComments
 						.filter((comment) => comment.post_id == id)
 						.map((comment, index) => (
-							<div key={index} className={`media p-2 border-bottom border-dark`}>
+							<div key={index} className={`media p-2`}>
 								<div className='media-left'>
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/home/${comment.user_id}`}>

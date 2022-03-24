@@ -171,21 +171,26 @@ a:focus {
     background-color: rgba(220,220,220,1);
     color: #2f2f2f;
 }
-/*  #38C15C */
-/* #38C15C */
+/* 006F3E */
+/* 1C8541 */
+/* 379B42 */
+/* 54B141 */
+/* 72C73A */
+/* 93DD2F */
+/* B7F21B */
 .mysonar-btn.green-btn {
-    border-color:  #38C15C;
-    color:  #38C15C;
+    border-color:  #006F3E;
+    color:  #006F3E;
     background-color: transparent;
 }
 
 .mysonar-btn.green-btn:focus {
-    background-color:  #38C15C;
+    background-color:  #006F3E;
     color: #ffffff;
 }
 
 .mysonar-btn.green-btn:hover {
-    background-color:  #38C15C;
+    background-color:  #006F3E;
     color: #ffffff;
 }
 
@@ -237,8 +242,8 @@ a:focus {
 }
 
 .green-btn.btn-2 {
-    background-color:  #38C15C;
-	border-color:  #38C15C;
+    background-color:  #006F3E;
+	border-color:  #006F3E;
     font-size: 12px;
     color: #ffffff;
 }
