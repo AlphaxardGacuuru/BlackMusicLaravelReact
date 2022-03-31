@@ -390,10 +390,18 @@ function App() {
 			})
 		});
 	}
+	
+	var showId
+	
+	if (localStorage.getItem(show)) {
+		showId = JSON.parse(localStorage.getItem(show)).id
+	} else {
+		showId = ""
+	}
 
 	/*
 	* Audio Player */
-	const [show, setShow] = useState(getLocalStorage("show").id)
+	const [show, setShow] = useState(showId)
 	const [playBtn, setPlayBtn] = useState(true)
 	const [shuffle, setShuffle] = useState(false)
 	const [loop, setLoop] = useState(false)

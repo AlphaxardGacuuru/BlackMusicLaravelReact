@@ -93169,11 +93169,19 @@ function App() {
       });
     });
   };
+
+  var showId;
+
+  if (localStorage.getItem(show)) {
+    showId = JSON.parse(localStorage.getItem(show)).id;
+  } else {
+    showId = "";
+  }
   /*
   * Audio Player */
 
 
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("show").id),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(showId),
       _useState34 = _slicedToArray(_useState33, 2),
       show = _useState34[0],
       setShow = _useState34[1];
