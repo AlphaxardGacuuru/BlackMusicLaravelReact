@@ -2,7 +2,12 @@ import React from 'react'
 
 const Button = ({ btnStyle, btnClass, btnText, onClick }) => {
 	return (
-		<button style={btnStyle} className={btnClass} onClick={onClick}>{btnText}</button>
+		<button
+			style={btnStyle}
+			className={btnClass}
+			onClick={onClick}>
+			{btnText}
+		</button>
 	)
 }
 

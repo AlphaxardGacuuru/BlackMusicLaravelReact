@@ -150,7 +150,7 @@ a:focus {
     letter-spacing: 1px;
     border-radius: 0;
     line-height: 32px;
-    padding: 0;
+    padding: 0 10px;
     background-color: #ffffff;
 }
 
@@ -727,7 +727,7 @@ a:focus {
 }
 
 #floatBtn:hover {
-    background-color: #192a56;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -780,7 +780,7 @@ a:focus {
 }
 
 #chatFloatBtn:hover {
-    background-color: #192a56;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -1297,9 +1297,9 @@ div.hidden-scroll span {
 
 /* the draggable scrolling handle */
 ::-webkit-scrollbar-thumb {
-    background: #232323;
-    border-radius: 20px;
-    border: 1px solid black;
+    background: #fff;
+    border-radius: 0px;
+    border: 1px solid #232323;
 }
 
 /* Handle on hover */

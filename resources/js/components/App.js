@@ -393,12 +393,12 @@ function App() {
 	
 	var showId
 	
-	if (localStorage.getItem(show)) {
-		showId = JSON.parse(localStorage.getItem(show)).id
+	if (localStorage.getItem("show")) {
+		showId = JSON.parse(localStorage.getItem("show")).id
 	} else {
 		showId = ""
 	}
-
+	
 	/*
 	* Audio Player */
 	const [show, setShow] = useState(showId)

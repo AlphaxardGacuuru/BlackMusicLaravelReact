@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -6,14 +6,19 @@ const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput
 const PostCreate = (props) => {
 
 	// Set states
-	setTimeout(() => {
-		props.setPlaceholder("What's on your mind")
-		props.setShowImage(true)
-		props.setShowPoll(true)
-		props.setUrlTo("/posts")
-		props.setUrlToDelete(`/posts/${props.media.substr(11)}`)
-		props.setStateToUpdate(() => props.setPosts)
-	}, 1000)
+	useEffect(() => {
+		setTimeout(() => {
+			props.setPlaceholder("What's on your mind")
+			props.setShowImage(true)
+			props.setShowPoll(true)
+			props.setShowEmojiPicker(false)
+			props.setShowImagePicker(false)
+			props.setShowPollPicker(false)
+			props.setUrlTo("/posts")
+			props.setUrlToDelete(`/posts/${props.media.substr(11)}`)
+			props.setStateToUpdate(() => props.setPosts)
+		}, 1000)
+	}, [])
 
 	// Declare states
 	// const [preview, setPreview] = useState()
@@ -26,7 +31,7 @@ const PostCreate = (props) => {
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				<div className="contact-form">
-					<div className="d-flex justify-content-between">
+					<div className="d-flex justify-content-between mb-1">
 						{/* <!-- Close Icon --> */}
 						<div className="">
 							<Link to="/">
@@ -43,7 +48,6 @@ const PostCreate = (props) => {
 							</Link>
 						</div>
 					</div>
-					<br />
 
 					{/* Social Input */}
 					<form

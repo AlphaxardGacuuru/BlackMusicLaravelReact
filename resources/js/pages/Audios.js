@@ -75,18 +75,17 @@ const Audios = (props) => {
 							<div key={key}>
 								<div className="d-flex">
 									<div className="p-2">
-										<Img src={`/storage/${audioAlbum.cover}`}
-											width="auto"
-											height="100"
-											alt={"album cover"} />
+										<Link to={`/audio-album-edit/${audioAlbum.id}`}>
+											<Img src={`/storage/${audioAlbum.cover}`}
+												width="auto"
+												height="100"
+												alt={"album cover"} />
+										</Link>
 									</div>
 									<div className="p-2">
 										<small>Audio Album</small>
 										<h1>{audioAlbum.name}</h1>
 										<h6>{audioAlbum.created_at}</h6>
-									</div>
-									<div className="p-2">
-										<Link to={`/audio-album-edit/${audioAlbum.id}`} className="btn mysonar-btn white-btn">edit</Link>
 									</div>
 								</div>
 								<br />

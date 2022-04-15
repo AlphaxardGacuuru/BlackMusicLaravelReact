@@ -69,7 +69,7 @@ const Bottomnav = (props) => {
 				</div>
 
 				{/* Audio Player */}
-				<div className="container-fluid menu-area d-flex text-white hidden">
+				<div className="container-fluid menu-area d-flex text-white hidden px-1">
 					<div style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
 						<span onClick={() => {
@@ -92,6 +92,7 @@ const Bottomnav = (props) => {
 							<h6
 								className="mb-0 pb-0"
 								style={{
+									maxWidth: "14em",
 									whiteSpace: "nowrap",
 									overflow: "hidden",
 									textOverflow: "clip",
@@ -105,8 +106,8 @@ const Bottomnav = (props) => {
 							</h6>
 						</Link>
 					</div>
-					<div className="p-2" style={{ display: checkLocation && "none" }}>
-						{props.audioLoader &&
+					{props.audioLoader &&
+						<div className="p-2" style={{ display: checkLocation && "none" }}>
 							<div className="spinner-border text-light"
 								style={{
 									borderTopWidth: "2px",
@@ -115,8 +116,8 @@ const Bottomnav = (props) => {
 									width: "20px",
 									height: "20px",
 								}}>
-							</div>}
-					</div>
+							</div>
+						</div>}
 					<div
 						style={{
 							cursor: "pointer",

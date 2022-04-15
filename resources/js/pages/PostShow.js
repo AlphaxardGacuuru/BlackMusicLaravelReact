@@ -17,6 +17,8 @@ const PostShow = (props) => {
 		props.setPlaceholder("Add comment")
 		props.setShowImage(false)
 		props.setShowPoll(false)
+		props.setShowImagePicker(false)
+		props.setShowPollPicker(false)
 		props.setUrlTo("/post-comments")
 		props.setUrlToTwo("/posts")
 		props.setStateToUpdate(() => setPostComments)

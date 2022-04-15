@@ -79,7 +79,7 @@ const Chat = (props) => {
 				{chatThreads
 					.map((chatThread, key) => (
 						<div key={key} className="d-flex">
-							<div className="p-1">
+							<div className="pt-2">
 								<Link to={`/chat/${chatThread.username}`}>
 									<Img
 										src={chatThread.pp}
@@ -88,7 +88,12 @@ const Chat = (props) => {
 										height="50px" />
 								</Link>
 							</div>
-							<div className="p-2 flex-grow-1">
+							<div
+								className="p-2 flex-grow-1"
+								style={{
+									maxWidth: "70%",
+									wordWrap: "break-word"
+								}}>
 								<Link to={`/chat/${chatThread.link}`}>
 									<h6
 										className="m-0"
@@ -101,7 +106,8 @@ const Chat = (props) => {
 										<b>{chatThread.name}</b>
 										<small>{chatThread.username}</small>
 									</h6>
-									<p className="mb-0">{chatThread.text}
+									<p className="m-0">
+										{chatThread.text}
 										{chatThread.hasMedia &&
 											<span className="ml-1" style={{ cursor: "pointer" }}>
 												<svg
@@ -118,7 +124,7 @@ const Chat = (props) => {
 									</p>
 								</Link>
 							</div>
-							<div className="p-1">
+							<div className="py-2">
 								<small>
 									<i className="float-right mr-1">{chatThread.created_at}</i>
 								</small>

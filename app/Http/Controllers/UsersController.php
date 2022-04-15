@@ -58,15 +58,15 @@ class UsersController extends Controller
                 "account_type" => $user->account_type,
                 "pp" => preg_match("/http/", $user->pp) ? $user->pp : "/storage/" . $user->pp,
                 "bio" => $user->bio,
-				"withdrawal" => $user->withdrawal,
+                "withdrawal" => $user->withdrawal,
                 "posts" => $user->posts->count(),
                 "following" => $user->follows->count() - 1,
                 "fans" => Follows::where('followed', $user->username)->count() - 1,
                 "hasFollowed" => $hasFollowed,
                 "hasBought1" => $hasBought1,
                 "decos" => $user->decos->count(),
-				"updated_at" => $user->updated_at->format("d M Y"),
-				"created_at" => $user->created_at->format("d M Y"),
+                "updated_at" => $user->updated_at->format("d M Y"),
+                "created_at" => $user->created_at->format("d M Y"),
             ]);
         }
 
@@ -80,7 +80,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-		return User::whereBetween('id', [1, 261])->update(['withdrawal' => 1000]);
+        return User::whereBetween('id', [1, 261])->update(['withdrawal' => 1000]);
     }
 
     /**

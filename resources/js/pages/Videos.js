@@ -141,21 +141,18 @@ const Videos = (props) => {
 							<div key={key}>
 								<div className="d-flex">
 									<div className="p-2">
-										<Img
-											src={`/storage/${videoAlbum.cover}`}
-											width="auto"
-											height="100"
-											alt={"album cover"} />
+										<Link to={`/video-album-edit/${videoAlbum.id}`}>
+											<Img
+												src={`/storage/${videoAlbum.cover}`}
+												width="auto"
+												height="100"
+												alt={"album cover"} />
+										</Link>
 									</div>
 									<div className="p-2">
 										<small>Video Album</small>
 										<h1>{videoAlbum.name}</h1>
 										<h6>{videoAlbum.created_at}</h6>
-									</div>
-									<div className="p-2">
-										<Link
-											to={`/video-album-edit/${videoAlbum.id}`}
-											className="btn mysonar-btn white-btn">edit</Link>
 									</div>
 								</div>
 								<br />

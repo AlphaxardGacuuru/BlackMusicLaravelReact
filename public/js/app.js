@@ -93172,8 +93172,8 @@ function App() {
 
   var showId;
 
-  if (localStorage.getItem(show)) {
-    showId = JSON.parse(localStorage.getItem(show)).id;
+  if (localStorage.getItem("show")) {
+    showId = JSON.parse(localStorage.getItem("show")).id;
   } else {
     showId = "";
   }
@@ -94174,7 +94174,7 @@ var Bottomnav = function Bottomnav(props) {
       width: props.progressPercent
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid menu-area d-flex text-white hidden"
+    className: "container-fluid menu-area d-flex text-white hidden px-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: checkLocation && "none"
@@ -94203,6 +94203,7 @@ var Bottomnav = function Bottomnav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
     style: {
+      maxWidth: "14em",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip",
@@ -94215,12 +94216,12 @@ var Bottomnav = function Bottomnav(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.showAudio.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
-  }, props.showAudio.ft)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.showAudio.ft)))), props.audioLoader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
     style: {
       display: checkLocation && "none"
     }
-  }, props.audioLoader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "spinner-border text-light",
     style: {
       borderTopWidth: "2px",
@@ -94825,9 +94826,8 @@ var SocialMediaInput = function SocialMediaInput(props) {
       backgroundColor: "#232323"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex pt-2",
+    className: "d-flex pt-2 border-bottom border-dark",
     style: {
-      borderBottom: "1px solid #fff",
       backgroundColor: "#232323"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -94842,7 +94842,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
     className: "flex-grow-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     name: "post-text",
-    className: "form-control m-0 p-2 border-bottom border-dark",
+    className: "form-control m-0 p-2",
     style: {
       border: "none",
       outline: "none",
@@ -98676,19 +98676,16 @@ var Audios = function Audios(props) {
       className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/audio-album-edit/".concat(audioAlbum.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(audioAlbum.cover),
       width: "auto",
       height: "100",
       alt: "album cover"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Audio Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, audioAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioAlbum.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/audio-album-edit/".concat(audioAlbum.id),
-      className: "btn mysonar-btn white-btn"
-    }, "edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Audio Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, audioAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, audioAlbum.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
       className: "table table-responsive table-hover"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       className: "border border-0"
@@ -99418,7 +99415,7 @@ var Chat = function Chat(props) {
       key: key,
       className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1"
+      className: "pt-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/chat/".concat(chatThread.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -99427,7 +99424,11 @@ var Chat = function Chat(props) {
       width: "50px",
       height: "50px"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2 flex-grow-1"
+      className: "p-2 flex-grow-1",
+      style: {
+        maxWidth: "70%",
+        wordWrap: "break-word"
+      }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/chat/".concat(chatThread.link)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -99439,7 +99440,7 @@ var Chat = function Chat(props) {
         textOverflow: "clip"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, chatThread.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, chatThread.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "mb-0"
+      className: "m-0"
     }, chatThread.text, chatThread.hasMedia && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "ml-1",
       style: {
@@ -99457,7 +99458,7 @@ var Chat = function Chat(props) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
       d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
     })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1"
+      className: "py-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right mr-1"
     }, chatThread.created_at))));
@@ -99539,21 +99540,26 @@ var ChatThread = function ChatThread(props) {
     });
   }, []); // Set states
 
-  setTimeout(function () {
-    props.setTo(username);
-    props.setPlaceholder("Message");
-    props.setShowImage(true);
-    props.setShowPoll(false);
-    props.setUrlTo("/chat");
-    props.setUrlToDelete("/chat/".concat(props.media.substr(16)));
-    props.setUrlToTwo("/chat/1");
-    props.setStateToUpdate(function () {
-      return setChat;
-    });
-    props.setStateToUpdateTwo(function () {
-      return setChatThreads;
-    });
-  }, 1000); // Function for deleting chat
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      props.setTo(username);
+      props.setPlaceholder("Message");
+      props.setShowImage(true);
+      props.setShowPoll(false);
+      props.setShowEmojiPicker(false);
+      props.setShowImagePicker(false);
+      props.setShowPollPicker(false);
+      props.setUrlTo("/chat");
+      props.setUrlToDelete("/chat/".concat(props.media.substr(16)));
+      props.setUrlToTwo("/chat/1");
+      props.setStateToUpdate(function () {
+        return setChat;
+      });
+      props.setStateToUpdateTwo(function () {
+        return setChatThreads;
+      });
+    }, 1000);
+  }, []); // Function for deleting chat
 
   var onDeleteChat = function onDeleteChat(id) {
     _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('sanctum/csrf-cookie').then(function () {
@@ -99760,7 +99766,9 @@ var ChatThread = function ChatThread(props) {
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "rounded-0 border border-0 p-2 my-1 mx-0",
       style: {
-        backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323"
+        backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323",
+        maxWidth: "90%",
+        wordWrap: "break-word"
       },
       onClick: function onClick() {
         return chatItem.username == props.auth.username && setShowDelete(!showDelete);
@@ -101122,16 +101130,21 @@ var SocialMediaInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a
 
 var PostCreate = function PostCreate(props) {
   // Set states
-  setTimeout(function () {
-    props.setPlaceholder("What's on your mind");
-    props.setShowImage(true);
-    props.setShowPoll(true);
-    props.setUrlTo("/posts");
-    props.setUrlToDelete("/posts/".concat(props.media.substr(11)));
-    props.setStateToUpdate(function () {
-      return props.setPosts;
-    });
-  }, 1000); // Declare states
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      props.setPlaceholder("What's on your mind");
+      props.setShowImage(true);
+      props.setShowPoll(true);
+      props.setShowEmojiPicker(false);
+      props.setShowImagePicker(false);
+      props.setShowPollPicker(false);
+      props.setUrlTo("/posts");
+      props.setUrlToDelete("/posts/".concat(props.media.substr(11)));
+      props.setStateToUpdate(function () {
+        return props.setPosts;
+      });
+    }, 1000);
+  }, []); // Declare states
   // const [preview, setPreview] = useState()
   // Assign id to element
   // const mediaInput = React.useRef(null)
@@ -101145,7 +101158,7 @@ var PostCreate = function PostCreate(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "contact-form"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between"
+    className: "d-flex justify-content-between mb-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -101159,7 +101172,7 @@ var PostCreate = function PostCreate(props) {
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: props.onSubmit,
     className: "contact-form bg-white",
     autoComplete: "off"
@@ -101221,6 +101234,8 @@ var PostShow = function PostShow(props) {
     props.setPlaceholder("Add comment");
     props.setShowImage(false);
     props.setShowPoll(false);
+    props.setShowImagePicker(false);
+    props.setShowPollPicker(false);
     props.setUrlTo("/post-comments");
     props.setUrlToTwo("/posts");
     props.setStateToUpdate(function () {
@@ -105827,19 +105842,16 @@ var Videos = function Videos(props) {
       className: "d-flex"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/video-album-edit/".concat(videoAlbum.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
       src: "/storage/".concat(videoAlbum.cover),
       width: "auto",
       height: "100",
       alt: "album cover"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/video-album-edit/".concat(videoAlbum.id),
-      className: "btn mysonar-btn white-btn"
-    }, "edit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Video Album"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, videoAlbum.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, videoAlbum.created_at))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
       className: "table table-responsive table-hover"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
       className: "border border-0"

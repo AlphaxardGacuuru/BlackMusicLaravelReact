@@ -67,8 +67,8 @@ const SocialMediaInput = (props) => {
 	return (
 		<center style={{ backgroundColor: "#232323" }}>
 			<div
-				className="d-flex pt-2"
-				style={{ borderBottom: "1px solid #fff", backgroundColor: "#232323" }}>
+				className="d-flex pt-2 border-bottom border-dark"
+				style={{ backgroundColor: "#232323" }}>
 				{/* Profile pic */}
 				<div className='p-2'>
 					<Img
@@ -82,7 +82,7 @@ const SocialMediaInput = (props) => {
 				<div className="flex-grow-1">
 					<textarea
 						name='post-text'
-						className='form-control m-0 p-2 border-bottom border-dark'
+						className='form-control m-0 p-2'
 						style={{
 							border: "none",
 							outline: "none",

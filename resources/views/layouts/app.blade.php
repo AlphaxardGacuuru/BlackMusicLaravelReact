@@ -34,6 +34,20 @@
     {{-- IOS support --}}
     <link rel="apple-touch-icon" href="storage/img/musical-note-black-gold-512.png">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5K64MQR0RL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5K64MQR0RL');
+
+    </script>
 </head>
 
 <body>

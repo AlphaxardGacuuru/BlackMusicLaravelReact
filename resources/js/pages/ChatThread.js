@@ -31,17 +31,22 @@ const ChatThread = (props) => {
 	}, [])
 
 	// Set states
-	setTimeout(() => {
-		props.setTo(username)
-		props.setPlaceholder("Message")
-		props.setShowImage(true)
-		props.setShowPoll(false)
-		props.setUrlTo("/chat")
-		props.setUrlToDelete(`/chat/${props.media.substr(16)}`)
-		props.setUrlToTwo(`/chat/1`)
-		props.setStateToUpdate(() => setChat)
-		props.setStateToUpdateTwo(() => setChatThreads)
-	}, 1000)
+	useEffect(() => {
+		setTimeout(() => {
+			props.setTo(username)
+			props.setPlaceholder("Message")
+			props.setShowImage(true)
+			props.setShowPoll(false)
+			props.setShowEmojiPicker(false)
+			props.setShowImagePicker(false)
+			props.setShowPollPicker(false)
+			props.setUrlTo("/chat")
+			props.setUrlToDelete(`/chat/${props.media.substr(16)}`)
+			props.setUrlToTwo(`/chat/1`)
+			props.setStateToUpdate(() => setChat)
+			props.setStateToUpdateTwo(() => setChatThreads)
+		}, 1000)
+	}, [])
 
 	// Function for deleting chat
 	const onDeleteChat = (id) => {
@@ -257,7 +262,11 @@ const ChatThread = (props) => {
 									</div>}
 								<div
 									className="rounded-0 border border-0 p-2 my-1 mx-0"
-									style={{ backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323" }}
+									style={{
+										backgroundColor: chatItem.username == props.auth.username ? "#FFD700" : "#232323",
+										maxWidth: "90%",
+										wordWrap: "break-word"
+									}}
 									onClick={() => chatItem.username == props.auth.username && setShowDelete(!showDelete)}>
 									{chatItem.text}
 
