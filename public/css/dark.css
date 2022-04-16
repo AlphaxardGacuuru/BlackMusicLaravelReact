@@ -1238,47 +1238,31 @@ div.hidden-scroll span {
 
 /*remove extra padding/margin for rows on small screens*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .row {
-        margin: 0;
-    }
+    .row { margin: 0; }
 
-    .col-sm-4 {
-        padding: 0;
-    }
+    .col-sm-4 { padding: 0; }
 
-    .col-sm-3 {
-        padding: 0;
-    }
+    .col-sm-3 { padding: 0; }
 
-    .col-sm-7 {
-        padding: 0;
-    }
+    .col-sm-7 { padding: 0; }
 
-    .col-sm-12 {
-        padding: 0;
-    }
+    .col-sm-10 { padding: 0; }
+
+    .col-sm-12 { padding: 0; }
 }
 
 @media only screen and (max-width: 767px) {
-    .row {
-        margin: 0;
-    }
+    .row { margin: 0; }
 
-    .col-sm-4 {
-        padding: 0;
-    }
+    .col-sm-4 { padding: 0; }
 
-    .col-sm-3 {
-        padding: 0;
-    }
+    .col-sm-3 { padding: 0; }
 
-    .col-sm-7 {
-        padding: 0;
-    }
+    .col-sm-7 { padding: 0; }
 
-    .col-sm-12 {
-        padding: 0;
-    }
+    .col-sm-10 { padding: 0; }
+
+    .col-sm-12 { padding: 0; }
 }
 
 /*customize the scrollbar*/
