@@ -93963,7 +93963,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mb-0 pb-0",
     style: {
-      maxWidth: "8em",
+      maxWidth: "6em",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip"
