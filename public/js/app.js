@@ -95780,6 +95780,13 @@ var Admin = function Admin(props) {
       setKopokopoRecipients(res.data);
     })["catch"](function () {
       return props.setErrors(['Failed to fetch kopokopo recipients']);
+    }); //Fetch Users
+
+    axios.get("/api/users").then(function (res) {
+      props.setUsers(res.data);
+      props.setLocalStorage("users", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch users']);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -96455,6 +96462,22 @@ var AudioMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
 });
 
 var AudioCharts = function AudioCharts(props) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Audio Albums
+    axios.get("/api/audio-albums").then(function (res) {
+      props.setAudioAlbums(res.data);
+      props.setLocalStorage("audioAlbums", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch audio albums"]);
+    }); // Fetch Audios
+
+    axios.get("/api/audios").then(function (res) {
+      props.setAudios(res.data);
+      props.setLocalStorage("audios", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch audios"]);
+    });
+  }, []);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
 
@@ -99960,6 +99983,17 @@ var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
 });
 
 var Index = function Index(props) {
+  // Fetch posts
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    //Fetch Posts
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
+      props.setPosts(res.data);
+      props.setLocalStorage("posts", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch posts']);
+    });
+  }, []);
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10),
       _useState2 = _slicedToArray(_useState, 2),
       videoSlice = _useState2[0],
@@ -103748,6 +103782,22 @@ var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
 });
 
 var VideoCharts = function VideoCharts(props) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Video Albums
+    axios.get("/api/video-albums").then(function (res) {
+      props.setVideoAlbums(res.data);
+      props.setLocalStorage("videoAlbums", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch video albums"]);
+    }); // Fetch Videos
+
+    axios.get("/api/videos").then(function (res) {
+      props.setVideos(res.data);
+      props.setLocalStorage("videos", res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch videos"]);
+    });
+  }, []);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
 

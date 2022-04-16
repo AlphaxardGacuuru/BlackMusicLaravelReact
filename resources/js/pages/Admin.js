@@ -24,6 +24,13 @@ const Admin = (props) => {
 				// Save to state only to prevent wrong data persistence in local storage
 				setKopokopoRecipients(res.data)
 			}).catch(() => props.setErrors(['Failed to fetch kopokopo recipients']))
+
+		//Fetch Users
+		axios.get(`/api/users`)
+			.then((res) => {
+				props.setUsers(res.data)
+				props.setLocalStorage("users", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch users']))
 	}, [])
 
 	return (

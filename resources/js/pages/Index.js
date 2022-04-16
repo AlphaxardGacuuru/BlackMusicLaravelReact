@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
@@ -9,6 +9,16 @@ import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizont
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
 const Index = (props) => {
+
+	// Fetch posts
+	useEffect(() => {
+		//Fetch Posts
+		axios.get(`/api/posts`)
+			.then((res) => {
+				props.setPosts(res.data)
+				props.setLocalStorage("posts", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch posts']))
+	}, [])
 
 	const [videoSlice, setVideoSlice] = useState(10)
 

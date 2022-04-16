@@ -10,6 +10,22 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 
 const AudioCharts = (props) => {
 
+	useEffect(() => {
+		// Fetch Audio Albums
+		axios.get(`/api/audio-albums`)
+			.then((res) => {
+				props.setAudioAlbums(res.data)
+				props.setLocalStorage("audioAlbums", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch audio albums"]))
+
+		// Fetch Audios
+		axios.get(`/api/audios`)
+			.then((res) => {
+				props.setAudios(res.data)
+				props.setLocalStorage("audios", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch audios"]))
+	}, [])
+
 	const history = useHistory()
 
 	const location = useLocation()

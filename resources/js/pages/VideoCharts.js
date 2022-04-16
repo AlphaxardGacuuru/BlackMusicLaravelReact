@@ -9,6 +9,22 @@ const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHo
 
 const VideoCharts = (props) => {
 
+	useEffect(() => {
+		// Fetch Video Albums
+		axios.get(`/api/video-albums`)
+			.then((res) => {
+				props.setVideoAlbums(res.data)
+				props.setLocalStorage("videoAlbums", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch video albums"]))
+
+		// Fetch Videos
+		axios.get(`/api/videos`)
+			.then((res) => {
+				props.setVideos(res.data)
+				props.setLocalStorage("videos", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch videos"]))
+	}, [])
+
 	const history = useHistory()
 	const location = useLocation()
 
