@@ -16,6 +16,7 @@ import Index from '../pages/Index'
 import Search from '../pages/Search'
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
+import DownloadApp from '../pages/DownloadApp';
 
 import Profile from '../pages/Profile'
 import ProfileEdit from '../pages/ProfileEdit'
@@ -673,7 +674,7 @@ function App() {
 	/*
 	*
 	* Register service worker */
-	if (window.location.href.match(/https/)) {
+	// if (window.location.href.match(/https/)) {
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
 				navigator.serviceWorker.register('/sw.js')
@@ -681,7 +682,7 @@ function App() {
 				// .catch((err) => console.log('Service worker not registered', err));
 			})
 		}
-	}
+	// }
 
 	// Show the notification
 	function displayNotification() {
@@ -830,7 +831,7 @@ function App() {
 		showEmojiPicker, setShowEmojiPicker,
 		showImagePicker, setShowImagePicker,
 		showPollPicker, setShowPollPicker,
-		onSubmit
+		onSubmit,
 	}
 
 	const showLoginPopUp = auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />
@@ -841,6 +842,7 @@ function App() {
 				{login && <LoginPopUp {...GLOBAL_STATE} />}
 
 				<TopNav {...GLOBAL_STATE} />
+				<Route path="/download-app" exact render={(props) => (<DownloadApp {...GLOBAL_STATE} />)} />
 
 				<Route path="/login" exact render={(props) => (<Login {...GLOBAL_STATE} />)} />
 				<Route path="/register/:name/:email/:avatar" exact render={(props) => (<Register {...GLOBAL_STATE} />)} />

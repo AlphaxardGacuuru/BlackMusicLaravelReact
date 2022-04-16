@@ -51,37 +51,6 @@ const TopNavLinks = (props) => {
 			})
 	}
 
-	/*
-	*
-	* PWA Install button */
-	let deferredPrompt;
-	var btnAdd = React.useRef(null)
-
-	// Listen to the install prompt
-	window.addEventListener('beforeinstallprompt', (e) => {
-		deferredPrompt = e;
-
-		// Show the button
-		btnAdd.current.style.display = 'block';
-
-		// Action when button is clicked
-		btnAdd.current.addEventListener('click', (e) => {
-			// Show install banner
-			deferredPrompt.prompt();
-			// Check if the user accepted
-			deferredPrompt.userChoice.then((choiceResult) => {
-				if (choiceResult.outcome === 'accepted') {
-					btnAdd.current.innerHTML = '<h6>User accepted</h6>';
-				}
-				deferredPrompt = null;
-			});
-
-			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.current.innerHTML = '<h6>Installed</h6>';
-			});
-		});
-	});
-
 	// Function to get to Privacy Policy
 	const onPrivacyPolicy = () => window.location.href = "https://www.iubenda.com/privacy-policy/38639633"
 
@@ -229,9 +198,7 @@ const TopNavLinks = (props) => {
 						<h6>{props.auth.username}</h6>
 					</Link>
 					<Link
-						to="#"
-						ref={btnAdd}
-						style={{ display: "none" }}
+						to="/download-app"
 						className="p-3 dropdown-item border-bottom border-dark">
 						<h6>Get App</h6>
 					</Link>
