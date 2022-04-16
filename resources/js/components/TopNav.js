@@ -16,7 +16,8 @@ const TopNav = (props) => {
 	var display
 
 	// Hide TopNav from various pages
-	location.pathname.match("/chat/") ||
+	location.pathname.match("/download-app") ||
+		location.pathname.match("/chat/") ||
 		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||

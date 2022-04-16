@@ -674,7 +674,7 @@ function App() {
 	/*
 	*
 	* Register service worker */
-	// if (window.location.href.match(/https/)) {
+	if (window.location.href.match(/https/)) {
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
 				navigator.serviceWorker.register('/sw.js')
@@ -682,7 +682,7 @@ function App() {
 				// .catch((err) => console.log('Service worker not registered', err));
 			})
 		}
-	// }
+	}
 
 	// Show the notification
 	function displayNotification() {

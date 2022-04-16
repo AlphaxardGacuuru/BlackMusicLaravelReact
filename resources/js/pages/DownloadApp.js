@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Img from '../components/Img';
 
@@ -39,6 +40,25 @@ const DownloadApp = (props) => {
 		<div className="row">
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
+				<div className="d-flex justify-content-between mb-1">
+					{/* <!-- Close Icon --> */}
+					<div className="">
+						<Link to="/">
+							<svg
+								width="30"
+								height="30"
+								viewBox="0 0 16 16"
+								className="bi bi-arrow-left-short"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fillRule="evenodd"
+									d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+								<path fillRule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
+							</svg>
+						</Link>
+					</div>
+				</div>
+
 				<center>
 					<h1>Download the App</h1>
 					<h3>It's quick and easy</h3>

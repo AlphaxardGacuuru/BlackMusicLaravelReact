@@ -12,7 +12,8 @@ const Bottomnav = (props) => {
 	var checkLocation = true
 
 	// Hide BottomNav from various pages
-	location.pathname.match("/chat/") ||
+	location.pathname.match("/download-app") ||
+		location.pathname.match("/chat/") ||
 		location.pathname.match("/post-create") ||
 		location.pathname.match("/post-show/") ||
 		location.pathname.match("/referral") ||
