@@ -25,13 +25,13 @@ const DownloadApp = (props) => {
 			// Check if the user accepted
 			deferredPrompt.userChoice.then((choiceResult) => {
 				if (choiceResult.outcome === 'accepted') {
-					btnAdd.current.innerHTML = '<h6>User accepted</h6>';
+					btnAdd.current.dangerouslySetInnerHTML  = '<h6>User accepted</h6>';
 				}
 				deferredPrompt = null;
 			});
 
 			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.current.innerHTML = '<h6>Installed</h6>';
+				btnAdd.current.dangerouslySetInnerHTML  = '<h6>Installed</h6>';
 			});
 		});
 	});
@@ -74,7 +74,8 @@ const DownloadApp = (props) => {
 
 					<button
 						ref={btnAdd}
-						className="btn mysonar-btn btn-2">
+						className="btn mysonar-btn btn-2"
+						style={{ display: "none" }}>
 						Download and Install 328Kb
 					</button>
 					<br />

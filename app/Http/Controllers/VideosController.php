@@ -225,6 +225,20 @@ class VideosController extends Controller
         if ($request->filled('released')) {
             $video->released = $request->input('released');
         }
+        if ($request->filled('thumbnail')) {
+            $video->thumbnail = $request->input('thumbnail');
+
+            // Delete thumbnail
+            $oldThumbnail = Videos::find($id)->thumbnail;
+            Storage::delete('public/' . $oldThumbnail);
+        }
+        if ($request->filled('video')) {
+            $video->video = $request->input('video');
+
+            // Delete video
+            $oldVideo = Videos::find($id)->video;
+            Storage::delete('public/' . $oldVideo);
+        }
 
         $video->save();
 

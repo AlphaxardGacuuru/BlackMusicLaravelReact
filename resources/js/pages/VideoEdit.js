@@ -5,6 +5,32 @@ import axios from 'axios';
 import Button from '../components/Button'
 import Img from '../components/Img'
 
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateSize
+);
+
 const VideoEdit = (props) => {
 
 	let { id } = useParams();
@@ -19,6 +45,11 @@ const VideoEdit = (props) => {
 	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
+	const [thumbnail, setThumbnail] = useState("")
+	const [video, setVideo] = useState("");
+
+	// Get csrf token
+	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -33,6 +64,8 @@ const VideoEdit = (props) => {
 		formData.append("genre", genre);
 		formData.append("released", released);
 		formData.append("description", description);
+		formData.append("video", video);
+		formData.append("thumbnail", thumbnail);
 		formData.append("_method", 'put');
 
 		// Send data to VideosController
@@ -41,7 +74,9 @@ const VideoEdit = (props) => {
 			axios.post(`${props.url}/api/videos/${id}`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
-					axios.get(`${props.url}/api/videos`).then((res) => props.setVideos(res.data))
+					// Update Videos
+					axios.get(`${props.url}/api/videos`)
+						.then((res) => props.setVideos(res.data))
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -84,9 +119,7 @@ const VideoEdit = (props) => {
 									<div className="d-flex p-2">
 										<div className="thumbnail">
 											<Img
-												src={editVideo.thumbnail.match(/https/) ?
-													editVideo.thumbnail :
-													`storage/${editVideo.thumbnail}`}
+												src={editVideo.thumbnail}
 												width="160em"
 												height="90em" />
 										</div>
@@ -181,6 +214,7 @@ const VideoEdit = (props) => {
 											type="date"
 											name="released"
 											className="form-control"
+											style={{ colorScheme: "dark" }}
 											placeholder="Released"
 											onChange={(e) => { setReleased(e.target.value) }} />
 										<br />
@@ -197,9 +231,68 @@ const VideoEdit = (props) => {
 										<br />
 										<br />
 
+										<label className="text-light">Upload Video Thumbnail</label>
+										<br />
+										<br />
+
+										<FilePond
+											name="filepond-thumbnail"
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+											imageCropAspectRatio="16:9"
+											acceptedFileTypes={['image/*']}
+											stylePanelAspectRatio="16:9"
+											allowRevert={true}
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/videos",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => setThumbnail(res),
+													onerror: (err) => console.log(err.response.data)
+												},
+												revert: {
+													url: `/videos/${thumbnail.substr(17)}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => props.setMessage(res),
+												},
+											}} />
+										<br />
+										<br />
+
+										<label className="text-light">Upload Video</label>
+										<h6 className="text-primary">If the video is too large you can upload it to Youtube for compression, download it, delete it, then upload it here.</h6>
+										<br />
+
+										<FilePond
+											name="filepond-video"
+											labelIdle='Drag & Drop your Video or <span class="filepond--label-action text-dark"> Browse </span>'
+											acceptedFileTypes={['video/*']}
+											stylePanelAspectRatio="16:9"
+											maxFileSize="200000000"
+											allowRevert={true}
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/videos",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => setVideo(res),
+													onerror: (err) => console.log(err.response.data)
+												},
+												revert: {
+													url: `/${video}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => {
+														props.setMessage(res)
+													},
+												},
+											}} />
+										<br />
+										<br />
+
 										<button type="reset" className="sonar-btn">reset</button>
 										<br />
 										<br />
+
 										<Button btnText="edit video" />
 									</form>
 									<br />

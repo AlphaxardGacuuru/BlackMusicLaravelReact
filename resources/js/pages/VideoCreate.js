@@ -1,8 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios';
+
 import Button from '../components/Button'
 
 // Import React FilePond
@@ -221,10 +220,12 @@ const VideoCreate = (props) => {
 										</textarea>
 
 										<label className="text-light">Upload Video Thumbnail</label>
+										<br />
+										<br />
 
 										<FilePond
 											name="filepond-thumbnail"
-											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-white"> Browse </span>'
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 											imageCropAspectRatio="16:9"
 											acceptedFileTypes={['image/*']}
 											stylePanelAspectRatio="16:9"

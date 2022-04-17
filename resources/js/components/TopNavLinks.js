@@ -51,6 +51,17 @@ const TopNavLinks = (props) => {
 			})
 	}
 
+	/*
+	*
+	* PWA Install link */
+	var toDownload = useRef(null)
+
+	// Listen to the install prompt
+	window.addEventListener('beforeinstallprompt', (e) => {
+		// Show the button
+		toDownload.current.style.display = 'block';
+	});
+
 	// Function to get to Privacy Policy
 	const onPrivacyPolicy = () => window.location.href = "https://www.iubenda.com/privacy-policy/38639633"
 
@@ -198,8 +209,10 @@ const TopNavLinks = (props) => {
 						<h6>{props.auth.username}</h6>
 					</Link>
 					<Link
+						ref={toDownload}
 						to="/download-app"
-						className="p-3 dropdown-item border-bottom border-dark">
+						className="p-3 dropdown-item border-bottom border-dark"
+						style={{ display: "none" }}>
 						<h6>Get App</h6>
 					</Link>
 					<Link to='/videos' className="p-3 dropdown-item border-bottom border-dark">

@@ -141,13 +141,19 @@ const Videos = (props) => {
 							<div key={key}>
 								<div className="d-flex">
 									<div className="p-2">
-										<Link to={`/video-album-edit/${videoAlbum.id}`}>
+										{videoAlbum.name != "Singles" ?
+											<Link to={`/video-album-edit/${videoAlbum.id}`}>
+												<Img
+													src={`/storage/${videoAlbum.cover}`}
+													width="auto"
+													height="100"
+													alt={"album cover"} />
+											</Link> :
 											<Img
 												src={`/storage/${videoAlbum.cover}`}
 												width="auto"
 												height="100"
-												alt={"album cover"} />
-										</Link>
+												alt={"album cover"} />}
 									</div>
 									<div className="p-2">
 										<small>Video Album</small>
@@ -178,11 +184,13 @@ const Videos = (props) => {
 											<tbody key={key} className="border border-0">
 												<tr className="border-top border-dark">
 													<td className="border-top border-dark">
-														<Img
-															src={albumItem.thumbnail}
-															width="160em"
-															height="90em"
-															alt={"thumbnail"} />
+														<Link to={`/video-show/${albumItem.id}`}>
+															<Img
+																src={albumItem.thumbnail}
+																width="160em"
+																height="90em"
+																alt={"thumbnail"} />
+														</Link>
 													</td>
 													<td className="border-top border-dark" style={{ color: "rgba(220, 220, 220, 1) " }}>
 														{albumItem.name}
