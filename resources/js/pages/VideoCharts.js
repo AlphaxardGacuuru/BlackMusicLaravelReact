@@ -9,6 +9,8 @@ const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHo
 
 const VideoCharts = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	useEffect(() => {
 		// Fetch Video Albums
 		axios.get(`/api/video-albums`)

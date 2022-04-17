@@ -10,6 +10,8 @@ const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHo
 
 const Index = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	// Fetch posts
 	useEffect(() => {
 		//Fetch Posts

@@ -10,6 +10,8 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 
 const AudioCharts = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	useEffect(() => {
 		// Fetch Audio Albums
 		axios.get(`/api/audio-albums`)
