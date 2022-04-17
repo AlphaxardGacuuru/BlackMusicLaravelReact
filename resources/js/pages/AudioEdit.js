@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
 import axios from 'axios';
+
 import Button from '../components/Button'
 import Img from '../components/Img'
+
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+// Register the plugins
+registerPlugin(
+	FilePondPluginImageExifOrientation,
+	FilePondPluginImagePreview,
+	FilePondPluginFileValidateType,
+	FilePondPluginImageCrop,
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateSize
+);
 
 const AudioEdit = (props) => {
 
@@ -19,20 +45,11 @@ const AudioEdit = (props) => {
 	const [genre, setGenre] = useState("")
 	const [released, setReleased] = useState("")
 	const [description, setDescription] = useState("")
-	const [preview, setPreview] = useState()
-	const [thumbnail, setThumbnail] = useState()
+	const [thumbnail, setThumbnail] = useState("")
+	const [audio, setAudio] = useState()
 
-	// Assign id to element
-	const mediaInput = React.useRef(null)
-
-	// Fire when image is choosen
-	var onImageChange = event => {
-		if (event.target.files && event.target.files[0]) {
-			var img = event.target.files[0];
-			setThumbnail(img)
-			setPreview(URL.createObjectURL(img))
-		}
-	};
+	// Get csrf token
+	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -41,13 +58,14 @@ const AudioEdit = (props) => {
 		e.preventDefault()
 
 		// Add form data to FormData object
-		formData.append("thumbnail", thumbnail);
 		formData.append("name", name);
 		formData.append("ft", ft);
 		formData.append("album", album);
 		formData.append("genre", genre);
 		formData.append("released", released);
 		formData.append("description", description);
+		formData.append("thumbnail", thumbnail);
+		formData.append("audio", audio);
 		formData.append("_method", 'put');
 
 		// Send data to AudiosController
@@ -56,8 +74,9 @@ const AudioEdit = (props) => {
 			axios.post(`${props.url}/api/audios/${id}`, formData)
 				.then((res) => {
 					props.setMessage(res.data)
-					axios.get(`${props.url}/api/audios`).then((res) => props.setAudios(res.data))
-					setPreview()
+					// Update Audios
+					axios.get(`${props.url}/api/audios`)
+						.then((res) => props.setAudios(res.data))
 				}).catch(err => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -218,39 +237,58 @@ const AudioEdit = (props) => {
 										</textarea>
 
 										<label className="text-light">Upload Audio Thumbnail</label>
-										<div
-											className="mb-2"
-											style={{
-												borderTopLeftRadius: "10px",
-												borderTopRightRadius: "10px",
-												borderBottomRightRadius: "10px",
-												borderBottomLeftRadius: "10px",
-												overflow: "hidden"
-											}}>
 
-											<img
-												src={preview}
-												width="100%"
-												height="auto" />
-										</div>
+										<FilePond
+											name="filepond-thumbnail"
+											labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+											imageCropAspectRatio="1:1"
+											acceptedFileTypes={['image/*']}
+											stylePanelAspectRatio="16:9"
+											allowRevert={true}
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/audios",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => setThumbnail(res),
+													onerror: (err) => console.log(err.response.data)
+												},
+												revert: {
+													url: `/audios/${thumbnail.substr(17)}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => props.setMessage(res),
+												},
+											}} />
+										<br />
+										<br />
 
-										{/* Hidden file input */}
-										<input
-											type='file'
-											style={{ display: 'none' }}
-											ref={mediaInput}
-											onChange={onImageChange} />
+										<label className="text-light">Upload Audio</label>
+										<br />
+										<br />
 
-										<div
-											className="p-2"
-											style={{ backgroundColor: "#232323", color: "white" }}
-											onClick={() => mediaInput.current.click()}>
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-												className="bi bi-image" viewBox="0 0 16 16">
-												<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-												<path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
-											</svg>
-										</div>
+										<FilePond
+											name="filepond-audio"
+											labelIdle='Drag & Drop your Audio or <span class="filepond--label-action text-dark"> Browse </span>'
+											acceptedFileTypes={['audio/*']}
+											allowRevert={true}
+											maxFileSize="50000000"
+											server={{
+												url: `${props.url}/api`,
+												process: {
+													url: "/audios",
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => {
+														setAudio(res)
+													},
+												},
+												revert: {
+													url: `/${audio}`,
+													headers: { 'X-CSRF-TOKEN': token.content },
+													onload: res => {
+														props.setMessage(res)
+													},
+												},
+											}} />
 										<br />
 										<br />
 

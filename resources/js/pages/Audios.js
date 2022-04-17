@@ -117,7 +117,15 @@ const Audios = (props) => {
 											<tbody key={key} className="border border-0">
 												<tr className="border-top border-dark">
 													<td className="border-top border-dark">
-														<Link to={`/audio-show/${albumItem.id}`}>
+														<Link
+															to={`/audio-show/${albumItem.id}`}
+															onClick={() => {
+																props.setShow(albumItem.id)
+																props.setLocalStorage("show", {
+																	"id": albumItem.id,
+																	"time": 0
+																})
+															}}>
 															<Img
 																src={`storage/${albumItem.thumbnail}`}
 																width="auto"

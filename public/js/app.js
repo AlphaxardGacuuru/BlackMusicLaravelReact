@@ -96927,8 +96927,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
  // Import React FilePond
 
  // Import FilePond styles
@@ -97351,6 +97349,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-filepond */ "./node_modules/react-filepond/dist/react-filepond.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_filepond__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -97367,8 +97383,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // Import React FilePond
+
+ // Import FilePond styles
+
+ // Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
 
 
+
+
+
+
+
+ // Register the plugins
+
+Object(react_filepond__WEBPACK_IMPORTED_MODULE_5__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_11___default.a, filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12___default.a);
 
 var AudioEdit = function AudioEdit(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
@@ -97409,50 +97439,42 @@ var AudioEdit = function AudioEdit(props) {
       description = _useState12[0],
       setDescription = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState14 = _slicedToArray(_useState13, 2),
-      preview = _useState14[0],
-      setPreview = _useState14[1];
+      thumbnail = _useState14[0],
+      setThumbnail = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState16 = _slicedToArray(_useState15, 2),
-      thumbnail = _useState16[0],
-      setThumbnail = _useState16[1]; // Assign id to element
+      audio = _useState16[0],
+      setAudio = _useState16[1]; // Get csrf token
 
 
-  var mediaInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Fire when image is choosen
-
-  var onImageChange = function onImageChange(event) {
-    if (event.target.files && event.target.files[0]) {
-      var img = event.target.files[0];
-      setThumbnail(img);
-      setPreview(URL.createObjectURL(img));
-    }
-  }; // Declare new FormData object for form data
-
+  var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
 
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Add form data to FormData object
 
-    formData.append("thumbnail", thumbnail);
     formData.append("name", name);
     formData.append("ft", ft);
     formData.append("album", album);
     formData.append("genre", genre);
     formData.append("released", released);
     formData.append("description", description);
+    formData.append("thumbnail", thumbnail);
+    formData.append("audio", audio);
     formData.append("_method", 'put'); // Send data to AudiosController
     // Get csrf cookie from Laravel inorder to send a POST request
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audios/").concat(id), formData).then(function (res) {
-        props.setMessage(res.data);
+        props.setMessage(res.data); // Update Audios
+
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
         });
-        setPreview();
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -97655,47 +97677,67 @@ var AudioEdit = function AudioEdit(props) {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "text-light"
-  }, "Upload Audio Thumbnail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "mb-2",
-    style: {
-      borderTopLeftRadius: "10px",
-      borderTopRightRadius: "10px",
-      borderBottomRightRadius: "10px",
-      borderBottomLeftRadius: "10px",
-      overflow: "hidden"
+  }, "Upload Audio Thumbnail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-thumbnail",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    imageCropAspectRatio: "1:1",
+    acceptedFileTypes: ['image/*'],
+    stylePanelAspectRatio: "16:9",
+    allowRevert: true,
+    server: {
+      url: "".concat(props.url, "/api"),
+      process: {
+        url: "/audios",
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          return setThumbnail(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/audios/".concat(thumbnail.substr(17)),
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          return props.setMessage(res);
+        }
+      }
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: preview,
-    width: "100%",
-    height: "auto"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "file",
-    style: {
-      display: 'none'
-    },
-    ref: mediaInput,
-    onChange: onImageChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2",
-    style: {
-      backgroundColor: "#232323",
-      color: "white"
-    },
-    onClick: function onClick() {
-      return mediaInput.current.click();
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "text-light"
+  }, "Upload Audio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-audio",
+    labelIdle: "Drag & Drop your Audio or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    acceptedFileTypes: ['audio/*'],
+    allowRevert: true,
+    maxFileSize: "50000000",
+    server: {
+      url: "".concat(props.url, "/api"),
+      process: {
+        url: "/audios",
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          setAudio(res);
+        }
+      },
+      revert: {
+        url: "/".concat(audio),
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          props.setMessage(res);
+        }
+      }
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    fill: "currentColor",
-    className: "bi bi-image",
-    viewBox: "0 0 16 16"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "reset",
     className: "sonar-btn"
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -98745,7 +98787,14 @@ var Audios = function Audios(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "border-top border-dark"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/audio-show/".concat(albumItem.id)
+        to: "/audio-show/".concat(albumItem.id),
+        onClick: function onClick() {
+          props.setShow(albumItem.id);
+          props.setLocalStorage("show", {
+            "id": albumItem.id,
+            "time": 0
+          });
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
         src: "storage/".concat(albumItem.thumbnail),
         width: "auto",

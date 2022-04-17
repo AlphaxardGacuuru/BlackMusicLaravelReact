@@ -211,16 +211,28 @@ class AudiosController extends Controller
                 $audio->genre = $request->input('genre');
             }
 
-            if ($request->hasFile('thumbnail')) {
-                $audio->thumbnail = $thumbnail;
-            }
-
             if ($request->filled('description')) {
                 $audio->description = $request->input('description');
             }
 
             if ($request->filled('released')) {
                 $audio->released = $request->input('released');
+            }
+
+            if ($request->filled('thumbnail')) {
+				$audio->thumbnail = $request->input('thumbnail');
+
+				// Delete thumbnail
+				$oldThumbnail = Audios::find($id)->thumbnail;
+				Storage::delete('public/' . $oldThumbnail);
+            }
+
+            if ($request->filled('audio')) {
+				$audio->audio = $request->input('audio');
+
+				// Delete audio
+				$oldAudio = Audios::find($id)->audio;
+				Storage::delete('public/' . $oldAudio);
             }
 
             $audio->save();
