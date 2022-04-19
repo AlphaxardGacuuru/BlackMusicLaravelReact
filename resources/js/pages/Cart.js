@@ -13,7 +13,7 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 
 const Cart = (props) => {
 
-	const [bottomMenu, setBottomMenu] = useState("menu-open")
+	const [bottomMenu, setBottomMenu] = useState("")
 	const [receipt, setReceipt] = useState()
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
