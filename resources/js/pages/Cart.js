@@ -13,7 +13,7 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 
 const Cart = (props) => {
 
-	const [bottomMenu, setBottomMenu] = useState()
+	const [bottomMenu, setBottomMenu] = useState("menu-open")
 	const [receipt, setReceipt] = useState()
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
@@ -424,7 +424,13 @@ const Cart = (props) => {
 						</div>
 					</div>
 
-					<div className="px-2 pb-4" style={{ height: "100%", overflowY: "scroll", textAlign: "left" }}>
+					<div
+						className="px-2 pb-4"
+						style={{
+							height: "100%",
+							overflowY: "scroll",
+							textAlign: "left"
+						}}>
 						<center>
 							<h4 className="text-success">Congratulations</h4>
 							<h5 className="text-success">Purchase successful!</h5>

@@ -12,7 +12,10 @@ const Index = (props) => {
 
 	axios.defaults.baseURL = props.url
 
-	// Fetch posts
+	const [videoSlice, setVideoSlice] = useState(10)
+
+	const history = useHistory()
+
 	useEffect(() => {
 		//Fetch Posts
 		axios.get(`/api/posts`)
@@ -21,10 +24,6 @@ const Index = (props) => {
 				props.setLocalStorage("posts", res.data)
 			}).catch(() => props.setErrors(['Failed to fetch posts']))
 	}, [])
-
-	const [videoSlice, setVideoSlice] = useState(10)
-
-	const history = useHistory()
 
 	// Buy function
 	const onBuyVideos = (video) => {

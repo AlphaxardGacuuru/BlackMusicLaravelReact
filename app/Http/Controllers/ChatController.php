@@ -41,7 +41,7 @@ class ChatController extends Controller
                 "decos" => $chatItem->users->decos->count(),
                 "text" => $chatItem->text,
                 "media" => $chatItem->media,
-                "created_at" => $chatItem->created_at->format("d M Y h:ia"),
+                "created_at" => $chatItem->created_at->format("d M Y H:i"),
             ]);
         }
 
@@ -153,7 +153,7 @@ class ChatController extends Controller
                 'to' => $array->to,
                 'text' => $array->text,
                 'hasMedia' => $hasMedia,
-                'created_at' => $array->created_at->format('h:ia'),
+                'created_at' => $array->created_at->format('H:i'),
             ]);
         }
 

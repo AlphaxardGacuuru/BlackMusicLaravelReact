@@ -91,7 +91,7 @@ const Chat = (props) => {
 							<div
 								className="p-2 flex-grow-1"
 								style={{
-									maxWidth: "70%",
+									maxWidth: "75%",
 									wordWrap: "break-word"
 								}}>
 								<Link to={`/chat/${chatThread.link}`}>

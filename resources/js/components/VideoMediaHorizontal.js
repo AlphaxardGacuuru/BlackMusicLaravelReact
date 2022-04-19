@@ -21,7 +21,7 @@ const VideoMediaHorizontal = (props) => {
 				<Link to={props.link}>
 					<h6 className="mb-0"
 						style={{
-							width: "9em",
+							width: "7em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"
@@ -30,7 +30,7 @@ const VideoMediaHorizontal = (props) => {
 					</h6>
 					<h6 className="mb-3"
 						style={{
-							width: "9em",
+							width: "7em",
 							whiteSpace: "nowrap",
 							overflow: "hidden",
 							textOverflow: "clip"

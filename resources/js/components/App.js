@@ -95,8 +95,6 @@ function App() {
 	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
 	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
 
-	const [notifications, setNotifications] = useState(getLocalStorage("notifications"))
-
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
 
@@ -173,20 +171,6 @@ function App() {
 							setCartVideos(res.data)
 							setLocalStorage("cartVideos", res.data)
 						}).catch(() => setErrors(['Failed to fetch cart videos']))
-
-					// Fetch Notifications
-					axios.get(`/api/notifications`)
-						.then((res) => {
-							setNotifications(res.data)
-							setLocalStorage("notifications", res.data)
-						}).catch(() => setErrors(['Failed to fetch notifications']))
-
-					//Fetch Posts
-					axios.get(`/api/posts`)
-						.then((res) => {
-							setPosts(res.data)
-							setLocalStorage("posts", res.data)
-						}).catch(() => setErrors(['Failed to fetch posts']))
 
 					//Fetch Users
 					axios.get(`/api/users`)
@@ -766,7 +750,6 @@ function App() {
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
-		notifications, setNotifications,
 		posts, setPosts,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,

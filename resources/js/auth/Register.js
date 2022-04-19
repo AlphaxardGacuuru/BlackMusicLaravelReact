@@ -48,7 +48,7 @@ const Register = (props) => {
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
 				setTimeout(() => history.push('/'), 1000)
-			}).catch(err => {
+			}).catch((err) => {
 				const resErrors = err.response.data.errors
 
 				var resError
@@ -57,7 +57,7 @@ const Register = (props) => {
 					newError.push(resErrors[resError])
 				}
 				// Get other errors
-				newError.push(err.response.data.message)
+				newError.push((err).response.data.message)
 				props.setErrors(newError)
 			});
 		});
@@ -142,7 +142,7 @@ const Register = (props) => {
 			// })
 
 			onUpdate()
-		} else if (props.users.some((user) => user.username == username && user.id < 100)) {
+		} else if (props.users.some((user) => user.username == username && user.id < 235)) {
 			// If user in older than id 100 allow
 			onUpdate()
 		} else {

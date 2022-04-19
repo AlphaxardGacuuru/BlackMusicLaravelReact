@@ -13,11 +13,22 @@ const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHo
 
 const Profile = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	let { username } = useParams();
 
 	let history = useHistory()
 
 	const [tabClass, setTabClass] = useState("videos")
+
+	useEffect(() => {
+		//Fetch Posts
+		axios.get(`/api/posts`)
+			.then((res) => {
+				props.setPosts(res.data)
+				props.setLocalStorage("posts", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch posts']))
+	}, [])
 
 	// Get profile info
 	if (props.users.find((user) => user.username == username)) {
@@ -334,7 +345,7 @@ const Profile = (props) => {
 											textOverflow: "clip"
 										}}>
 										<b>{post.name}</b>
-										<small className="text-secondary">{post.username}</small>
+										<small>{post.username}</small>
 										<span className="ml-1" style={{ color: "gold" }}>
 											<svg className="bi bi-circle"
 												width="1em"
