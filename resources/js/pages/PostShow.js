@@ -23,6 +23,7 @@ const PostShow = (props) => {
 		props.setUrlToTwo("/posts")
 		props.setStateToUpdate(() => setPostComments)
 		props.setStateToUpdateTwo(() => props.setPosts)
+		props.setEditing(false)
 	}, 1000)
 
 	const [postComments, setPostComments] = useState(props.getLocalStorage("postComments"))

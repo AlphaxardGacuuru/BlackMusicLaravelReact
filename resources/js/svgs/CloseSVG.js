@@ -4,8 +4,8 @@ const CloseSVG = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="40"
-			height="40"
+			width="1em"
+			height="1em"
 			fill="currentColor"
 			className="bi bi-x"
 			viewBox="0 0 16 16">

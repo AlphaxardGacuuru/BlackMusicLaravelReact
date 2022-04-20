@@ -291,11 +291,12 @@ const TopNavLinks = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu} style={{ position: "fixed", left: "0" }}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between">
+					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
 						<div></div>
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
+							style={{ fontSize: "2em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>

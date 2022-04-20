@@ -9,6 +9,7 @@ const PostCreate = (props) => {
 	useEffect(() => {
 		setTimeout(() => {
 			props.setPlaceholder("What's on your mind")
+			props.setText("")
 			props.setShowImage(true)
 			props.setShowPoll(true)
 			props.setShowEmojiPicker(false)
@@ -17,6 +18,7 @@ const PostCreate = (props) => {
 			props.setUrlTo("/posts")
 			props.setUrlToDelete(`/posts/${props.media.substr(11)}`)
 			props.setStateToUpdate(() => props.setPosts)
+			props.setEditing(false)
 		}, 1000)
 	}, [])
 

@@ -1625,6 +1625,7 @@ html, body {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
+/* Element loading information */
 .gradient {
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
@@ -1634,9 +1635,7 @@ html, body {
     background: #f6f7f8;
     background: linear-gradient(to right, #232323 8%, #000 38%, #232323 54%);
     background-size: 1000px 640px;
-    
-    position: relative;
-    
+    position: relative;   
 }
 
 @keyframes placeHolderShimmer{
@@ -1647,3 +1646,11 @@ html, body {
         background-position: 468px 0
     }
 }
+/* Element loading information End */
+
+/* Overwrite Bootstrap dropdown hover color */
+.dropdown-item:hover {
+	background-color: #232323;
+	opacity: 0.5;
+}
+/* Overwrite Bootstrap dropdown hover color End */

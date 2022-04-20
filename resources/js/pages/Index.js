@@ -533,7 +533,8 @@ const Index = (props) => {
 												<small className="ml-1" style={{ color: "inherit" }}>{post.decos}</small>
 											</span>
 											<small>
-												<i className="float-right text-secondary mr-1">{post.created_at}</i>
+												<b><i className="float-right text-secondary mr-1">{post.created_at}</i></b>
+												<b><i className="float-right text-secondary mr-1">{post.hasEdited && "Edited"}</i></b>
 											</small>
 										</h6>
 										<p className="mb-0">{post.text}</p>
@@ -757,7 +758,53 @@ const Index = (props) => {
 										</Link>
 
 										{/* <!-- Default dropup button --> */}
-										<div className="float-right">
+										<div className="dropup float-right hidden">
+											<a href="#"
+												role="button"
+												id="dropdownMenuLink"
+												data-toggle="dropdown"
+												aria-haspopup="true"
+												aria-expanded="false">
+												<svg className="bi bi-three-dots-vertical"
+													width="1em"
+													height="1em"
+													viewBox="0 0 16 16"
+													fill="currentColor"
+													xmlns="http://www.w3.org/2000/svg">
+													<path fillRule="evenodd"
+														d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+												</svg>
+											</a>
+											<div className="dropdown-menu dropdown-menu-right"
+												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
+												{post.username != props.auth.username ?
+													post.username != "@blackmusic" &&
+													<a href="#" className="dropdown-item" onClick={(e) => {
+														e.preventDefault()
+														props.onFollow(post.username)
+													}}>
+														<h6>Unfollow</h6>
+													</a> :
+													<span>
+														<Link
+															to={`/post-edit/${post.id}`}
+															className="dropdown-item">
+															<h6>Edit post</h6>
+														</Link>
+														<a
+															href="#"
+															className="dropdown-item"
+															onClick={(e) => {
+																e.preventDefault();
+																onDeletePost(post.id)
+															}}>
+															<h6>Delete post</h6>
+														</a>
+													</span>}
+											</div>
+										</div>
+										{/* For small screens */}
+										<div className="float-right anti-hidden">
 											<a
 												href="#"
 												className="text-secondary"
@@ -867,12 +914,12 @@ const Index = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between">
+					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
 						<div></div>
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
-							style={{ fontSize: "0.5em" }}
+							style={{ fontSize: "2em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>
@@ -886,7 +933,7 @@ const Index = (props) => {
 						<h6 className="pb-2">Unfollow {userToUnfollow}</h6>
 					</div>
 					<Link
-					to={`/post-edit/${postToEdit}`}
+						to={`/post-edit/${postToEdit}`}
 						ref={editLink}
 						onClick={() => setBottomMenu("")}>
 						<h6 className="pb-2">Edit post</h6>

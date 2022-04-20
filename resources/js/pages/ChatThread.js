@@ -35,6 +35,7 @@ const ChatThread = (props) => {
 		setTimeout(() => {
 			props.setTo(username)
 			props.setPlaceholder("Message")
+			props.setText("")
 			props.setShowImage(true)
 			props.setShowPoll(false)
 			props.setShowEmojiPicker(false)
@@ -45,6 +46,7 @@ const ChatThread = (props) => {
 			props.setUrlToTwo(`/chat/1`)
 			props.setStateToUpdate(() => setChat)
 			props.setStateToUpdateTwo(() => setChatThreads)
+			props.setEditing(false)
 		}, 1000)
 	}, [])
 

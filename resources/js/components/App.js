@@ -22,6 +22,7 @@ import Profile from '../pages/Profile'
 import ProfileEdit from '../pages/ProfileEdit'
 import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
+import PostEdit from '../pages/PostEdit'
 
 import VideoCharts from '../pages/VideoCharts'
 import VideoShow from '../pages/VideoShow'
@@ -603,6 +604,7 @@ function App() {
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 	const [showImagePicker, setShowImagePicker] = useState(false)
 	const [showPollPicker, setShowPollPicker] = useState(false)
+	const [editing, setEditing] = useState(false)
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -621,6 +623,7 @@ function App() {
 		para3 && formData.append("para3", para3);
 		para4 && formData.append("para4", para4);
 		para5 && formData.append("para5", para5);
+		editing && formData.append("_method", "put");
 
 		// Send data to HelpPostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
@@ -634,8 +637,8 @@ function App() {
 					// Updated State Two
 					axios.get(`/api${urlToTwo}`)
 						.then((res) => stateToUpdateTwo && stateToUpdateTwo(res.data))
-					// Clear text
-					setText("")
+					// Clear text unless editing
+					!editing && setText("")
 					setShowMentionPicker(false)
 					setShowEmojiPicker(false)
 					setShowImagePicker(false)
@@ -814,6 +817,7 @@ function App() {
 		showEmojiPicker, setShowEmojiPicker,
 		showImagePicker, setShowImagePicker,
 		showPollPicker, setShowPollPicker,
+		editing, setEditing,
 		onSubmit,
 	}
 
@@ -870,6 +874,12 @@ function App() {
 				<Route path="/post-show/:id" exact render={(props) => (
 					<>
 						<PostShow {...GLOBAL_STATE} />
+						{showLoginPopUp}
+					</>
+				)} />
+				<Route path="/post-edit/:id" exact render={(props) => (
+					<>
+						<PostEdit {...GLOBAL_STATE} />
 						{showLoginPopUp}
 					</>
 				)} />

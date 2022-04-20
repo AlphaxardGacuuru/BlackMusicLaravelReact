@@ -11,8 +11,8 @@ use App\Posts;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -23,12 +23,12 @@ class PostsController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
         // Get Posts
         $getPosts = Posts::orderBy('id', 'DESC')->get();
@@ -140,6 +140,9 @@ class PostsController extends Controller
                 ->where('created_at', '>', Carbon::now()->subDays(1)->toDateTimeString())
                 ->exists();
 
+            // Check whether the post is edited
+            $hasEdited = $post->created_at != $post->updated_at ? true : false;
+
             array_push($posts, [
                 "id" => $post->id,
                 "name" => $post->users->name,
@@ -167,6 +170,7 @@ class PostsController extends Controller
                 "isWithin24Hrs" => $isWithin24Hrs,
                 "hasFollowed" => $hasFollowed,
                 "hasLiked" => $hasLiked,
+                "hasEdited" => $hasEdited,
                 "likes" => $post->postLikes->count(),
                 "comments" => $post->postComments->count(),
                 "created_at" => $post->created_at->format("d F Y"),
@@ -238,7 +242,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-		// 
+        //
     }
 
     /**
@@ -259,9 +263,13 @@ class PostsController extends Controller
      * @param  \App\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, $id)
     {
-        //
+        $post = Posts::find($id);
+        $post->text = $request->input('text');
+        $post->save();
+
+        return response("Post Edited", 200);
     }
 
     /**

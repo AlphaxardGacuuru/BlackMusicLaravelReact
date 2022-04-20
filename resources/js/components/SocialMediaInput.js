@@ -38,7 +38,6 @@ const SocialMediaInput = (props) => {
 
 	// const [chosenEmoji, setChosenEmoji] = useState(null);
 	const [doNotShowMentionPicker, setDoNotShowMentionPicker] = useState(true)
-	const [display1, setDisplay1] = useState("none")
 	const [display2, setDisplay2] = useState("none")
 	const [display3, setDisplay3] = useState("none")
 	const [display4, setDisplay4] = useState("none")
