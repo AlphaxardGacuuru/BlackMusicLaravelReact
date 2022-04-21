@@ -76,13 +76,13 @@ class VideoCommentsController extends Controller
 
         /* Create new post */
         $videoComment = new VideoComments;
-        $videoComment->video_id = $request->input('video');
+        $videoComment->video_id = $request->input('id');
         $videoComment->username = auth()->user()->username;
         $videoComment->text = $request->input('text');
         $videoComment->save();
 
         // Show notification
-        $video = Videos::where('id', $request->input('video'))->first();
+        $video = Videos::where('id', $request->input('id'))->first();
         $video->users->username != auth()->user()->username &&
         $video->users->notify(new VideoCommentNotifications($video->name));
 

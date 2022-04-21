@@ -100,7 +100,7 @@ const TopNavLinks = (props) => {
 				</Link>}
 
 			{/* Cart */}
-			<div className="dropdown mr-2 hidden">
+			<div className="dropdown mr-3 hidden">
 				<Link
 					to="/cart"
 					role="button"
@@ -129,7 +129,7 @@ const TopNavLinks = (props) => {
 			{/* Cart End */}
 
 			{/* Notification Dropdown */}
-			<div className="dropdown mr-2">
+			<div className="dropdown mr-3">
 				<Link
 					to="#"
 					role="button"

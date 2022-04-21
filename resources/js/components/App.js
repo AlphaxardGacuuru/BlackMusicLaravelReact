@@ -585,6 +585,7 @@ function App() {
 	// Social Input states
 	const [id, setId] = useState()
 	const [to, setTo] = useState()
+	const [placeholder, setPlaceholder] = useState()
 	const [text, setText] = useState("")
 	const [media, setMedia] = useState("")
 	const [para1, setPara1] = useState("")
@@ -592,7 +593,6 @@ function App() {
 	const [para3, setPara3] = useState("")
 	const [para4, setPara4] = useState("")
 	const [para5, setPara5] = useState("")
-	const [placeholder, setPlaceholder] = useState()
 	const [urlTo, setUrlTo] = useState()
 	const [urlToTwo, setUrlToTwo] = useState()
 	const [urlToDelete, setUrlToDelete] = useState()

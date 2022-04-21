@@ -482,7 +482,7 @@ const Cart = (props) => {
 				</div>
 			</div>
 			{/* Sliding Receipt Bottom Nav end */}
-		</div >
+		</div>
 	)
 }
 

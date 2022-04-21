@@ -77,13 +77,13 @@ class AudioCommentsController extends Controller
 
         /* Create new post */
         $audioComment = new AudioComments;
-        $audioComment->audio_id = $request->input('audio');
+        $audioComment->audio_id = $request->input('id');
         $audioComment->username = auth()->user()->username;
         $audioComment->text = $request->input('text');
         $audioComment->save();
 
         // Show notification
-        $audio = Audios::where('id', $request->input('audio'))->first();
+        $audio = Audios::where('id', $request->input('id'))->first();
         $audio->users->username != auth()->user()->username &&
         $audio->users->notify(new AudioCommentNotifications($audio->name));
 

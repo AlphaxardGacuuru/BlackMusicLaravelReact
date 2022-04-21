@@ -11,6 +11,11 @@ import OptionsSVG from '../svgs/OptionsSVG'
 import CommentSVG from '../svgs/CommentSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
+import PenSVG from '../svgs/PenSVG'
+import ChatSVG from '../svgs/ChatSVG'
+import DecoSVG from '../svgs/DecoSVG'
+import CheckSVG from '../svgs/CheckSVG'
+import CartSVG from '../svgs/CartSVG'
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
@@ -151,34 +156,16 @@ const Index = (props) => {
 			{/* Post button */}
 			{props.auth.account_type == 'musician' &&
 				<Link to="post-create" id="floatBtn" className={`${!checkLocation && "mb-5"}`}>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						fill="currentColor"
-						className="bi bi-pen"
-						viewBox="0 0 16 16">
-						<path
-							d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
-					</svg>
+					<PenSVG />
 				</Link>}
 
 			{/* Chat button */}
 			<Link to="/chat" id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="20"
-					height="20"
-					fill="currentColor"
-					className="bi bi-chat-right-text"
-					viewBox="0 0 16 16">
-					<path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z" />
-					<path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-				</svg>
+				<ChatSVG />
 			</Link>
 
 			{/* <!-- Profile info area --> */}
-			<div className="row p-0">
+			<div className="row">
 				<div className="col-sm-1 hidden"></div>
 				<div className="col-sm-3 hidden">
 					<div className="d-flex">
@@ -212,11 +199,7 @@ const Index = (props) => {
 								<small>{props.auth.username}</small>
 							</h6>
 							<span style={{ color: "gold" }} className="pr-1">
-								<svg className="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-								</svg>
+								<DecoSVG />
 								<small className="ml-1" style={{ color: "inherit" }}>{props.auth.decos}</small>
 							</span>
 						</div>
@@ -294,10 +277,7 @@ const Index = (props) => {
 													style={{ backgroundColor: "#232323" }}
 													onClick={() => props.onFollow(user.username)}>
 													Followed
-													<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-														<path fillRule='evenodd'
-															d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-													</svg>
+													<CheckSVG />
 												</button>
 												: <Button btnClass={'mysonar-btn white-btn float-right'}
 													onClick={() => props.onFollow(user.username)}
@@ -391,26 +371,14 @@ const Index = (props) => {
 													backgroundColor: "#232323"
 												}}
 												onClick={() => props.onCartVideos(video.id)}>
-												<svg className='bi bi-cart3'
-													width='1em'
-													height='1em'
-													viewBox='0 0 16 16'
-													fill='currentColor'
-													xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-												</svg>
+												<CartSVG />
 											</button> :
 											<>
 												<button
 													className="mysonar-btn white-btn mb-1"
 													style={{ minWidth: '90px', height: '33px' }}
 													onClick={() => props.onCartVideos(video.id)}>
-													<svg className='bi bi-cart3' width='1em' height='1em' viewBox='0 0 16 16'
-														fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-														<path fillRule='evenodd'
-															d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-													</svg>
+													<CartSVG />
 												</button>
 												<br />
 												<Button
@@ -447,15 +415,7 @@ const Index = (props) => {
 											<b className="gradient" style={{ color: "#232323" }}>post.name</b>
 											<small className="gradient" style={{ color: "#232323" }}>post.username</small>
 											<span className="ml-1 gradient" style={{ color: "#232323" }}>
-												<svg className="bi bi-circle"
-													width="1em"
-													height="1em"
-													viewBox="0 0 16 16"
-													fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg">
-													<path fillRule="evenodd"
-														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-												</svg>
+												<DecoSVG />
 												<small className="ml-1" style={{ color: "#232323" }}>post.decos</small>
 											</span>
 											<small>
@@ -466,29 +426,13 @@ const Index = (props) => {
 
 										{/* Post likes */}
 										<a href="#" className="gradient" style={{ color: "#232323" }}>
-											<svg xmlns='http://www.w3.org/2000/svg'
-												width='1.2em'
-												height='1.2em'
-												fill='currentColor'
-												className='bi bi-heart-fill'
-												viewBox='0 0 16 16'>
-												<path fillRule='evenodd'
-													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-											</svg>
+											<HeartSVG />
 											<small className="ml-1" style={{ color: "#232323" }}>po</small>
 										</a>
 
 										{/* Post comments */}
 										<span className="gradient" style={{ color: "#232323" }}>
-											<svg className="bi bi-chat ml-5"
-												width="1.2em"
-												height="1.2em"
-												viewBox="0 0 16 16"
-												fill="currentColor"
-												xmlns="http://www.w3.org/2000/svg">
-												<path fillRule="evenodd"
-													d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-											</svg>
+											<CommentSVG />
 											<small className="ml-1" style={{ color: "#232323" }}>post.comments</small>
 										</span>
 									</div>
@@ -521,15 +465,7 @@ const Index = (props) => {
 											<b>{post.name}</b>
 											<small>{post.username}</small>
 											<span className="ml-1" style={{ color: "gold" }}>
-												<svg className="bi bi-circle"
-													width="1em"
-													height="1em"
-													viewBox="0 0 16 16"
-													fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg">
-													<path fillRule="evenodd"
-														d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-												</svg>
+												<DecoSVG />
 												<small className="ml-1" style={{ color: "inherit" }}>{post.decos}</small>
 											</span>
 											<small>
@@ -765,15 +701,7 @@ const Index = (props) => {
 												data-toggle="dropdown"
 												aria-haspopup="true"
 												aria-expanded="false">
-												<svg className="bi bi-three-dots-vertical"
-													width="1em"
-													height="1em"
-													viewBox="0 0 16 16"
-													fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg">
-													<path fillRule="evenodd"
-														d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-												</svg>
+												<OptionsSVG />
 											</a>
 											<div className="dropdown-menu dropdown-menu-right"
 												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
@@ -783,7 +711,11 @@ const Index = (props) => {
 														e.preventDefault()
 														props.onFollow(post.username)
 													}}>
-														<h6>Unfollow</h6>
+														<h6>
+															{post.hasFollowed ?
+																`Unfollow ${post.username}` :
+																`Follow ${post.username}`}
+														</h6>
 													</a> :
 													<span>
 														<Link
@@ -805,8 +737,7 @@ const Index = (props) => {
 										</div>
 										{/* For small screens */}
 										<div className="float-right anti-hidden">
-											<a
-												href="#"
+											<span
 												className="text-secondary"
 												onClick={() => {
 													if (post.username != props.auth.username &&
@@ -827,7 +758,7 @@ const Index = (props) => {
 													}
 												}}>
 												<OptionsSVG />
-											</a>
+											</span>
 										</div>
 									</div>
 								</div>
