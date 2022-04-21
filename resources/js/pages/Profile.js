@@ -35,15 +35,6 @@ const Profile = (props) => {
 	var deleteLink = useRef(null)
 	var unfollowLink = useRef(null)
 
-	useEffect(() => {
-		//Fetch Posts
-		axios.get(`/api/posts`)
-			.then((res) => {
-				props.setPosts(res.data)
-				props.setLocalStorage("posts", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch posts']))
-	}, [])
-
 	// Get profile info
 	if (props.users.find((user) => user.username == username)) {
 		var profile = props.users.find((user) => user.username == username)

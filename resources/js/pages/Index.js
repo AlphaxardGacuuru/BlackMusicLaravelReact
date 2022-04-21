@@ -34,15 +34,6 @@ const Index = (props) => {
 
 	const history = useHistory()
 
-	useEffect(() => {
-		//Fetch Posts
-		axios.get(`/api/posts`)
-			.then((res) => {
-				props.setPosts(res.data)
-				props.setLocalStorage("posts", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch posts']))
-	}, [])
-
 	// Buy function
 	const onBuyVideos = (video) => {
 		props.onCartVideos(video)

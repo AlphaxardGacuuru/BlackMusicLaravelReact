@@ -173,6 +173,13 @@ function App() {
 							setLocalStorage("cartVideos", res.data)
 						}).catch(() => setErrors(['Failed to fetch cart videos']))
 
+					//Fetch Posts
+					axios.get(`/api/posts`)
+						.then((res) => {
+							setPosts(res.data)
+							setLocalStorage("posts", res.data)
+						}).catch(() => setErrors(['Failed to fetch posts']))
+
 					//Fetch Users
 					axios.get(`/api/users`)
 						.then((res) => {
@@ -376,15 +383,15 @@ function App() {
 			})
 		});
 	}
-	
+
 	var showId
-	
+
 	if (localStorage.getItem("show")) {
 		showId = JSON.parse(localStorage.getItem("show")).id
 	} else {
 		showId = ""
 	}
-	
+
 	/*
 	* Audio Player */
 	const [show, setShow] = useState(showId)
@@ -735,8 +742,8 @@ function App() {
 
 	function sendPush() {
 		axios.get('/api/push/create')
-		.then((res) => console.log(res.data))
-		.catch((err) => console.log(err.response.data))
+			.then((res) => console.log(res.data))
+			.catch((err) => console.log(err.response.data))
 	}
 
 	// All states
@@ -985,13 +992,13 @@ function App() {
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />
 			</Router>
-			
+
 			<audio
 				onTimeUpdate={(e) => {
 					updateProgress()
 					setCurrentTime(e.target.currentTime)
 					setLocalStorage("show", {
-						"id": show, 
+						"id": show,
 						"time": e.target.currentTime
 					})
 				}}
