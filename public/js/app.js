@@ -101079,13 +101079,15 @@ var Index = function Index(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "text-secondary",
       onClick: function onClick() {
-        if (post.username != props.auth.username && post.username != "@blackmusic") {
-          setBottomMenu("menu-open");
-          setUserToUnfollow(post.username); // Show and Hide elements
+        if (post.username != props.auth.username) {
+          if (post.username != "@blackmusic") {
+            setBottomMenu("menu-open");
+            setUserToUnfollow(post.username); // Show and Hide elements
 
-          unfollowLink.current.className = "d-block";
-          deleteLink.current.className = "d-none";
-          editLink.current.className = "d-none";
+            unfollowLink.current.className = "d-block";
+            deleteLink.current.className = "d-none";
+            editLink.current.className = "d-none";
+          }
         } else {
           setBottomMenu("menu-open");
           setPostToEdit(post.id); // Show and Hide elements
@@ -102693,13 +102695,15 @@ var Profile = function Profile(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "text-secondary",
       onClick: function onClick() {
-        if (post.username != props.auth.username && post.username != "@blackmusic") {
-          setBottomMenu("menu-open");
-          setUserToUnfollow(post.username); // Show and Hide elements
+        if (post.username != props.auth.username) {
+          if (post.username != "@blackmusic") {
+            setBottomMenu("menu-open");
+            setUserToUnfollow(post.username); // Show and Hide elements
 
-          unfollowLink.current.className = "d-block";
-          deleteLink.current.className = "d-none";
-          editLink.current.className = "d-none";
+            unfollowLink.current.className = "d-block";
+            deleteLink.current.className = "d-none";
+            editLink.current.className = "d-none";
+          }
         } else {
           setBottomMenu("menu-open");
           setPostToEdit(post.id); // Show and Hide elements

@@ -624,14 +624,15 @@ const Profile = (props) => {
 										<span
 											className="text-secondary"
 											onClick={() => {
-												if (post.username != props.auth.username &&
-													post.username != "@blackmusic") {
-													setBottomMenu("menu-open")
-													setUserToUnfollow(post.username)
-													// Show and Hide elements
-													unfollowLink.current.className = "d-block"
-													deleteLink.current.className = "d-none"
-													editLink.current.className = "d-none"
+												if (post.username != props.auth.username) {
+													if (post.username != "@blackmusic") {
+														setBottomMenu("menu-open")
+														setUserToUnfollow(post.username)
+														// Show and Hide elements
+														unfollowLink.current.className = "d-block"
+														deleteLink.current.className = "d-none"
+														editLink.current.className = "d-none"
+													}
 												} else {
 													setBottomMenu("menu-open")
 													setPostToEdit(post.id)

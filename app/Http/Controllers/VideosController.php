@@ -121,6 +121,7 @@ class VideosController extends Controller
             //     ->save('public/video-thumbnails/' . $videoName . '.png');
 
             return $videoShort;
+			
         } else {
             // Handle form for video
             $this->validate($request, [
