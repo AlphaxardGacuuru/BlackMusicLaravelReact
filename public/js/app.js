@@ -99686,7 +99686,13 @@ var Chat = function Chat(props) {
         textOverflow: "clip"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, chatThread.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, chatThread.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "m-0"
+      className: "m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
     }, chatThread.text, chatThread.hasMedia && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "ml-1",
       style: {

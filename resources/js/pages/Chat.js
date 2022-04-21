@@ -106,7 +106,14 @@ const Chat = (props) => {
 										<b>{chatThread.name}</b>
 										<small>{chatThread.username}</small>
 									</h6>
-									<p className="m-0">
+									<p
+										className="m-0"
+										style={{
+											width: "100%",
+											whiteSpace: "nowrap",
+											overflow: "hidden",
+											textOverflow: "clip"
+										}}>
 										{chatThread.text}
 										{chatThread.hasMedia &&
 											<span className="ml-1" style={{ cursor: "pointer" }}>
