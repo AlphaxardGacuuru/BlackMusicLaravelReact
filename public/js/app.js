@@ -92960,6 +92960,13 @@ function App() {
           setLocalStorage("cartVideos", res.data);
         })["catch"](function () {
           return setErrors(['Failed to fetch cart videos']);
+        }); //Fetch Posts
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
+          setPosts(res.data);
+          setLocalStorage("posts", res.data);
+        })["catch"](function () {
+          return setErrors(['Failed to fetch posts']);
         }); //Fetch Users
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
@@ -100273,16 +100280,7 @@ var Index = function Index(props) {
   var editLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   var deleteLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   var unfollowLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    //Fetch Posts
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
-      props.setPosts(res.data);
-      props.setLocalStorage("posts", res.data);
-    })["catch"](function () {
-      return props.setErrors(['Failed to fetch posts']);
-    });
-  }, []); // Buy function
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Buy function
 
   var onBuyVideos = function onBuyVideos(video) {
     props.onCartVideos(video);
@@ -100306,12 +100304,12 @@ var Index = function Index(props) {
     props.setPosts(newPosts); // Add like to database
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/post-likes", {
         post: post
       }).then(function (res) {
         props.setMessage(res.data); // Update posts
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
         });
       })["catch"](function (err) {
@@ -100333,10 +100331,10 @@ var Index = function Index(props) {
 
   var onDeletePost = function onDeletePost(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/api/posts/".concat(id)).then(function (res) {
         props.setMessage(res.data); // Update posts
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
         });
       })["catch"](function (err) {
@@ -100358,13 +100356,13 @@ var Index = function Index(props) {
 
   var onPoll = function onPoll(post, parameter) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/polls"), {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/polls", {
         post: post,
         parameter: parameter
       }).then(function (res) {
         props.setMessage(res.data); // Update posts
 
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
         });
       })["catch"](function (err) {
@@ -100771,9 +100769,7 @@ var Index = function Index(props) {
       }
     }, post.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "float-right text-secondary mr-1"
-    }, post.created_at)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "float-right text-secondary mr-1"
-    }, post.hasEdited && "Edited")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, post.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
     }, post.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-1",
@@ -101097,7 +101093,9 @@ var Index = function Index(props) {
           unfollowLink.current.className = "d-none";
         }
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "d-block text-secondary my-2"
+    }, post.hasEdited && "Edited")))));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102054,16 +102052,7 @@ var Profile = function Profile(props) {
 
   var editLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   var deleteLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var unfollowLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    //Fetch Posts
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
-      props.setPosts(res.data);
-      props.setLocalStorage("posts", res.data);
-    })["catch"](function () {
-      return props.setErrors(['Failed to fetch posts']);
-    });
-  }, []); // Get profile info
+  var unfollowLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Get profile info
 
   if (props.users.find(function (user) {
     return user.username == username;
