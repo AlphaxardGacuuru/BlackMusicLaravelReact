@@ -341,7 +341,6 @@ const Profile = (props) => {
 										</span>
 										<small>
 											<b><i className="float-right mr-1 text-secondary">{post.created_at}</i></b>
-											<b><i className="float-right text-secondary mr-1">{post.hasEdited && "Edited"}</i></b>
 										</small>
 									</h6>
 									<p className="mb-0">{post.text}</p>
@@ -636,6 +635,10 @@ const Profile = (props) => {
 											<OptionsSVG />
 										</span>
 									</div>
+									{/* Edited */}
+									<small>
+										<b><i className="d-block text-secondary my-2">{post.hasEdited && "Edited"}</i></b>
+									</small>
 								</div>
 							</div>
 						))}

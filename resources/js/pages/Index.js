@@ -752,7 +752,9 @@ const Index = (props) => {
 											</span>
 										</div>
 										{/* Edited */}
-										<small><b><i className="d-block text-secondary my-2">{post.hasEdited && "Edited"}</i></b></small>
+										<small>
+											<b><i className="d-block text-secondary my-2">{post.hasEdited && "Edited"}</i></b>
+										</small>
 									</div>
 								</div>
 							))}
