@@ -56,12 +56,12 @@ const Index = (props) => {
 
 		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/post-likes`, {
+			axios.post(`/api/post-likes`, {
 				post: post
 			}).then((res) => {
 				props.setMessage(res.data)
 				// Update posts
-				axios.get(`${props.url}/api/posts`)
+				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -80,10 +80,10 @@ const Index = (props) => {
 	// Function for deleting posts
 	const onDeletePost = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
+			axios.delete(`/api/posts/${id}`).then((res) => {
 				props.setMessage(res.data)
 				// Update posts
-				axios.get(`${props.url}/api/posts`)
+				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
@@ -102,13 +102,13 @@ const Index = (props) => {
 	// Function for voting in poll
 	const onPoll = (post, parameter) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/polls`, {
+			axios.post(`/api/polls`, {
 				post: post,
 				parameter: parameter
 			}).then((res) => {
 				props.setMessage(res.data)
 				// Update posts
-				axios.get(`${props.url}/api/posts`)
+				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))
 			}).catch((err) => {
 				const resErrors = err.response.data.errors
