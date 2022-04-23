@@ -315,8 +315,11 @@ const TopNavLinks = (props) => {
 										key={key}
 										to={notification.url}
 										className="p-2"
-										style={{ display: "block" }}
-										onClick={() => onDeleteNotifications(notification.id)}>
+										style={{ display: "block", textAlign: "left" }}
+										onClick={() => {
+											setBottomMenu("")
+											onDeleteNotifications(notification.id)
+										}}>
 										<small>{notification.message}</small>
 									</Link>
 								))}
@@ -325,7 +328,10 @@ const TopNavLinks = (props) => {
 							<div
 								className="dropdown-header"
 								style={{ cursor: "pointer" }}
-								onClick={() => onDeleteNotifications(0)}>
+								onClick={() => {
+									setBottomMenu("")
+									onDeleteNotifications(0)
+								}}>
 								Clear notifications
 							</div>}
 						<br />
@@ -350,51 +356,49 @@ const TopNavLinks = (props) => {
 							className="p-3 border-bottom border-dark"
 							style={{ display: "none" }}
 							onClick={() => setBottomMenu("")}>
-							<div className="d-flex justify-content-start">
-								<div></div>
-								<div>
-									<span className="mr-2"><DownloadSVG /></span>
-								</div>
-								<div><h6>Get App</h6></div>
-							</div>
+							<h6><span className="ml-3 mr-4"><DownloadSVG /></span>Get App</h6>
 						</Link>
 						<Link
 							to='/videos'
 							className="p-3 border-bottom border-dark"
+							style={{ textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
 							<h6>
-								<span className="mr-2"><StudioSVG /></span>
+								<span className="ml-3 mr-4"><StudioSVG /></span>
 								Studio
 							</h6>
 						</Link>
 						<Link
 							to='/settings'
 							className="p-3 border-bottom border-dark"
+							style={{ textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
 							<h6>
-								<span className="mr-2"><SettingsSVG /></span>
+								<span className="ml-3 mr-4"><SettingsSVG /></span>
 								Settings
 							</h6>
 						</Link>
 						<Link
 							to="#"
 							className="p-3 border-bottom border-dark"
+							style={{ textAlign: "left" }}
 							title="Privacy Policy"
 							onClick={onPrivacyPolicy}>
 							<h6>
-								<span className="mr-2"><PrivacySVG /></span>
+								<span className="ml-3 mr-4"><PrivacySVG /></span>
 								Privacy Policy
 							</h6>
 						</Link>
 						<Link
 							to="#"
 							className="p-3"
+							style={{ textAlign: "left" }}
 							onClick={(e) => {
 								setBottomMenu("")
 								logout(e)
 							}}>
 							<h6>
-								<span className="mr-2"><LogoutSVG /></span>
+								<span className="ml-3 mr-4"><LogoutSVG /></span>
 								Logout
 							</h6>
 						</Link>
