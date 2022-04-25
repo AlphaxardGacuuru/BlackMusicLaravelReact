@@ -105,10 +105,11 @@ const LoginPopUp = (props) => {
 								<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
 								<br />
 
-								{/* <Button
-									btnClass="mysonar-btn"
-									btnText="login with number"
-									onClick={() => setPhoneLogin(true)} /> */}
+								{props.getLocalStorage("auth").username == "@alphaxardG" &&
+									<Button
+										btnClass="mysonar-btn"
+										btnText="login with number"
+										onClick={() => setPhoneLogin(true)} />}
 							</>}
 					</div>
 				</div>

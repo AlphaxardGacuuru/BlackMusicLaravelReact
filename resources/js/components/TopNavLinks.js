@@ -19,7 +19,7 @@ const TopNavLinks = (props) => {
 	axios.defaults.baseURL = props.url
 
 	const [notifications, setNotifications] = useState(props.getLocalStorage("notifications"))
-	const [bottomMenu, setBottomMenu] = useState()
+	const [bottomMenu, setBottomMenu] = useState("")
 	const [avatarVisibility, setAvatarVisibility] = useState("none")
 	const [notificationVisibility, setNotificationVisibility] = useState("none")
 
@@ -287,6 +287,7 @@ const TopNavLinks = (props) => {
 					</Link>
 				</div>
 			</div>
+			{/* Avatar Dropdown End */}
 
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu} style={{ position: "fixed", left: "0" }}>
@@ -302,7 +303,7 @@ const TopNavLinks = (props) => {
 						</div>
 					</div>
 
-					{/* Notifications */}
+					{/* Notifications Bottom */}
 					<div className="m-0 p-0" style={{ display: notificationVisibility }}>
 						<div className="dropdown-header text-white">
 							<h5 style={{ margin: "0px" }}>Notifications</h5>
@@ -338,14 +339,14 @@ const TopNavLinks = (props) => {
 						<br />
 						<br />
 					</div>
-					{/* Notifications End */}
+					{/* Notifications Bottom End */}
 
-					{/* Avatar */}
+					{/* Avatar Bottom */}
 					<div className="m-0 p-0" style={{ display: avatarVisibility }}>
 						<Link
 							to={`/profile/${props.auth.username}`}
 							style={{ padding: "0px", margin: "0px" }}
-							className="border-bottom border-dark"
+							className="border-bottom"
 							onClick={() => setBottomMenu("")}>
 							<h5>{props.auth.name}</h5>
 							<h6>{props.auth.username}</h6>
@@ -353,41 +354,32 @@ const TopNavLinks = (props) => {
 						<Link
 							ref={toDownload}
 							to="/download-app"
-							className="p-3 border-bottom border-dark"
+							className="p-3"
 							style={{ display: "none" }}
 							onClick={() => setBottomMenu("")}>
 							<h6><span className="ml-3 mr-4"><DownloadSVG /></span>Get App</h6>
 						</Link>
 						<Link
 							to='/videos'
-							className="p-3 border-bottom border-dark"
+							className="p-3"
 							style={{ textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
-							<h6>
-								<span className="ml-3 mr-4"><StudioSVG /></span>
-								Studio
-							</h6>
+							<h6><span className="ml-3 mr-4"><StudioSVG /></span>Studio</h6>
 						</Link>
 						<Link
 							to='/settings'
-							className="p-3 border-bottom border-dark"
+							className="p-3"
 							style={{ textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
-							<h6>
-								<span className="ml-3 mr-4"><SettingsSVG /></span>
-								Settings
-							</h6>
+							<h6><span className="ml-3 mr-4"><SettingsSVG /></span>Settings</h6>
 						</Link>
 						<Link
 							to="#"
-							className="p-3 border-bottom border-dark"
+							className="p-3"
 							style={{ textAlign: "left" }}
 							title="Privacy Policy"
 							onClick={onPrivacyPolicy}>
-							<h6>
-								<span className="ml-3 mr-4"><PrivacySVG /></span>
-								Privacy Policy
-							</h6>
+							<h6><span className="ml-3 mr-4"><PrivacySVG /></span>Privacy Policy</h6>
 						</Link>
 						<Link
 							to="#"
@@ -397,16 +389,13 @@ const TopNavLinks = (props) => {
 								setBottomMenu("")
 								logout(e)
 							}}>
-							<h6>
-								<span className="ml-3 mr-4"><LogoutSVG /></span>
-								Logout
-							</h6>
+							<h6><span className="ml-3 mr-4"><LogoutSVG /></span>Logout</h6>
 						</Link>
 						<br />
 						<br />
 						<br />
 					</div>
-					{/* Avatar End */}
+					{/* Avatar Bottom End */}
 				</div>
 			</div>
 			{/* Sliding Bottom Nav  end */}

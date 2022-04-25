@@ -92182,7 +92182,13 @@ var LoginPopUp = function LoginPopUp(props) {
     onClick: function onClick() {
       return onSocial("twitter");
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.getLocalStorage("auth").username == "@alphaxardG" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    btnClass: "mysonar-btn",
+    btnText: "login with number",
+    onClick: function onClick() {
+      return setPhoneLogin(true);
+    }
+  }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LoginPopUp);
@@ -92807,7 +92813,7 @@ function App() {
   }; // Declare states
 
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
       login = _useState2[0],
       setLogin = _useState2[1];
@@ -95373,7 +95379,7 @@ var TopNavLinks = function TopNavLinks(props) {
       notifications = _useState2[0],
       setNotifications = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
       bottomMenu = _useState4[0],
       setBottomMenu = _useState4[1];
@@ -95695,14 +95701,14 @@ var TopNavLinks = function TopNavLinks(props) {
       padding: "0px",
       margin: "0px"
     },
-    className: "border-bottom border-dark",
+    className: "border-bottom",
     onClick: function onClick() {
       return setBottomMenu("");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     ref: toDownload,
     to: "/download-app",
-    className: "p-3 border-bottom border-dark",
+    className: "p-3",
     style: {
       display: "none"
     },
@@ -95713,7 +95719,7 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "ml-3 mr-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DownloadSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
-    className: "p-3 border-bottom border-dark",
+    className: "p-3",
     style: {
       textAlign: "left"
     },
@@ -95724,7 +95730,7 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "ml-3 mr-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_StudioSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)), "Studio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/settings",
-    className: "p-3 border-bottom border-dark",
+    className: "p-3",
     style: {
       textAlign: "left"
     },
@@ -95735,7 +95741,7 @@ var TopNavLinks = function TopNavLinks(props) {
     className: "ml-3 mr-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_SettingsSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), "Settings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#",
-    className: "p-3 border-bottom border-dark",
+    className: "p-3",
     style: {
       textAlign: "left"
     },
