@@ -74,7 +74,7 @@ function App() {
 	}
 
 	// Declare states
-	const [login, setLogin] = useState(true)
+	const [login, setLogin] = useState()
 	const [autoLoggedIn, setAutoLoggedIn] = useState()
 	const [auth, setAuth] = useState(localStorage.getItem("auth") ?
 		JSON.parse(localStorage.getItem("auth")) :
