@@ -22,14 +22,14 @@ class CreateEmailsTable extends Migration
 			$table->string('body_plain')->nullable();
 			$table->string('stripped_text')->nullable();
 			$table->string('stripped_signature')->nullable();
-			$table->string('body_html')->nullable();
-			$table->string('stripped_html')->nullable();
+			$table->text('body_html')->nullable();
+			$table->text('stripped_html')->nullable();
 			$table->string('attachment_count')->nullable();
 			$table->string('attachment_x')->nullable();
 			$table->string('timestamp')->nullable();
 			$table->string('token')->nullable();
 			$table->string('signature')->nullable();
-			$table->string('message_headers')->nullable();
+			$table->text('message_headers')->nullable();
 			$table->string('content_id_map')->nullable();
             $table->timestamps();
         });
