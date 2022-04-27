@@ -92182,7 +92182,7 @@ var LoginPopUp = function LoginPopUp(props) {
     onClick: function onClick() {
       return onSocial("twitter");
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.getLocalStorage("auth").username == "@alphaxardG" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: "mysonar-btn",
     btnText: "login with number",
     onClick: function onClick() {
