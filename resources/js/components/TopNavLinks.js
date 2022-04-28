@@ -242,8 +242,11 @@ const TopNavLinks = (props) => {
 					<Link
 						to={`/profile/${props.auth.username}`}
 						className="p-3 dropdown-item border-bottom border-dark">
-						<h5>{props.auth.name}</h5>
-						<h6>{props.auth.username}</h6>
+						<h5>
+							<span className="mr-2"><PersonSVG /></span>
+							{props.auth.name}
+							</h5>
+						<h6 className="ml-4">{props.auth.username}</h6>
 					</Link>
 					<Link
 						ref={toDownload}
@@ -349,7 +352,7 @@ const TopNavLinks = (props) => {
 							style={{ padding: "0px", margin: "0px", textAlign: "left" }}
 							className="border-bottom"
 							onClick={() => setBottomMenu("")}>
-							<h5 className="ml-3">{props.auth.name} <small>{props.auth.username}</small></h5>
+							<h5><span className="ml-3 mr-4"><PersonSVG /></span>{props.auth.name} <small>{props.auth.username}</small></h5>
 						</Link>
 						<Link
 							ref={toDownload}
