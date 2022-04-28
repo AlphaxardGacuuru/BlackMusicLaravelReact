@@ -8,6 +8,11 @@ import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizont
 
 import OptionsSVG from '../svgs/OptionsSVG';
 import CloseSVG from '../svgs/CloseSVG';
+import ShareSVG from '../svgs/ShareSVG';
+import CartSVG from '../svgs/CartSVG';
+import HeartFilledSVG from '../svgs/HeartFilledSVG'
+import HeartSVG from '../svgs/HeartSVG'
+import DecoSVG from '../svgs/DecoSVG'
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -239,26 +244,14 @@ const VideoShow = (props) => {
 										e.preventDefault()
 										onVideoLike()
 									}}>
-									<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-										className='bi bi-heart-fill' viewBox='0 0 16 16'>
-										<path fillRule='evenodd'
-											d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-									</svg>
+									<HeartFilledSVG />
 									<small className="ml-1">{showVideo.likes}</small>
 								</a> :
 								<a href='#' onClick={(e) => {
 									e.preventDefault()
 									onVideoLike()
 								}}>
-									<svg xmlns='http://www.w3.org/2000/svg'
-										width='1.2em'
-										height='1.2em'
-										fill='currentColor'
-										className='bi bi-heart'
-										viewBox='0 0 16 16'>
-										<path
-											d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
-									</svg>
+									<HeartSVG />
 									<small className="ml-1">{showVideo.likes}</small>
 								</a>}
 						</div>
@@ -270,15 +263,7 @@ const VideoShow = (props) => {
 									e.preventDefault()
 									props.auth.username != "@guest" && onShare()
 								}}>
-								<svg className='bi bi-reply'
-									width='1.5em'
-									height='1.5em'
-									viewBox='0 0 16 16'
-									fill='currentColor'
-									xmlns='http://www.w3.org/2000/svg'>
-									<path fillRule='evenodd'
-										d='M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z' />
-								</svg>
+								<ShareSVG />
 								<span className="ml-1">SHARE</span>
 							</a>
 						</div>
@@ -299,15 +284,7 @@ const VideoShow = (props) => {
 									<button className="btn btn-light mb-1 rounded-0"
 										style={{ minWidth: '90px', height: '33px' }}
 										onClick={() => props.onCartVideos(show)}>
-										<svg className='bi bi-cart3'
-											width='1em'
-											height='1em'
-											viewBox='0 0 16 16'
-											fill='currentColor'
-											xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
+										<CartSVG />
 									</button>
 								</div> :
 								<div className="p-2">
@@ -382,15 +359,7 @@ const VideoShow = (props) => {
 									}}>
 									<small>{showArtist.name}{showArtist.username}</small>
 									<span className="ml-1" style={{ color: "gold" }}>
-										<svg className="bi bi-circle"
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg">
-											<path fillRule="evenodd"
-												d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-										</svg>
+										<DecoSVG />
 										<small className="ml-1">{showArtist.decos}</small>
 									</span>
 								</h6>
@@ -407,10 +376,7 @@ const VideoShow = (props) => {
 												style={{ backgroundColor: "#232323" }}
 												onClick={() => props.onFollow(showArtist.username)}>
 												Followed
-												<svg className='bi bi-check' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-												</svg>
+												<CheckSVG />
 											</button> :
 											<Button
 												btnClass={'mysonar-btn white-btn float-right'}
@@ -494,11 +460,7 @@ const VideoShow = (props) => {
 													<b>{comment.name}</b>
 													<small>{comment.username} </small>
 													<span style={{ color: "gold" }}>
-														<svg className="bi bi-circle" width="1em" height="1em" viewBox="0 0 16 16"
-															fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-															<path fillRule="evenodd"
-																d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-														</svg>
+														<DecoSVG />
 														<span className="ml-1" style={{ fontSize: "10px" }}>
 															{comment.decos}
 														</span>
@@ -516,22 +478,14 @@ const VideoShow = (props) => {
 															e.preventDefault()
 															onCommentLike(comment.id)
 														}}>
-														<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-															className='bi bi-heart-fill' viewBox='0 0 16 16'>
-															<path fillRule='evenodd'
-																d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-														</svg>
+														<HeartFilledSVG />
 														<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 													</a> :
 													<a href='#' onClick={(e) => {
 														e.preventDefault()
 														onCommentLike(comment.id)
 													}}>
-														<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-															className='bi bi-heart' viewBox='0 0 16 16'>
-															<path
-																d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
-														</svg>
+														<HeartSVG />
 														<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 													</a>}
 
@@ -544,16 +498,7 @@ const VideoShow = (props) => {
 														data-toggle="dropdown"
 														aria-haspopup="true"
 														aria-expanded="false">
-														<svg
-															className="bi bi-three-dots-vertical"
-															width="1em"
-															height="1em"
-															viewBox="0 0 16 16"
-															fill="currentColor"
-															xmlns="http://www.w3.org/2000/svg">
-															<path fillRule="evenodd"
-																d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-														</svg>
+														<OptionsSVG />
 													</a>
 													<div
 														className="dropdown-menu dropdown-menu-right p-0"

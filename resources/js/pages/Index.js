@@ -16,6 +16,7 @@ import ChatSVG from '../svgs/ChatSVG'
 import DecoSVG from '../svgs/DecoSVG'
 import CheckSVG from '../svgs/CheckSVG'
 import CartSVG from '../svgs/CartSVG'
+import ShareSVG from '../svgs/ShareSVG'
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
@@ -131,6 +132,20 @@ const Index = (props) => {
 		if (bottom) {
 			setVideoSlice(videoSlice + 10)
 		}
+	}
+
+	// Web Share API for share button
+	// Share must be triggered by "user activation"
+	const onShare = (post) => {
+		// Define share data
+		const shareData = {
+			title: post.text,
+			text: `Check out my post on Black Music\n`,
+			url: `https://music.black.co.ke/#/post-show/${post.id}`
+		}
+		// Check if data is shareble
+		navigator.canShare(shareData) &&
+			navigator.share(shareData)
 	}
 
 	// Random array for dummy loading elements
@@ -682,6 +697,14 @@ const Index = (props) => {
 											<span className="ml-5" style={{ fontSize: "1.2em" }}><CommentSVG /></span>
 											<small className="ml-1" style={{ color: "inherit" }}>{post.comments}</small>
 										</Link>
+
+										{/* Share Post */}
+										<span
+											className="ml-5"
+											style={{ color: "rgba(220, 220, 220, 1)" }}
+											onClick={() => onShare(post)}>
+											<ShareSVG />
+										</span>
 
 										{/* <!-- Default dropup button --> */}
 										<div className="dropup float-right hidden">

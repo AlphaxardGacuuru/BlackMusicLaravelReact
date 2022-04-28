@@ -345,17 +345,16 @@ const TopNavLinks = (props) => {
 					<div className="m-0 p-0" style={{ display: avatarVisibility }}>
 						<Link
 							to={`/profile/${props.auth.username}`}
-							style={{ padding: "0px", margin: "0px" }}
+							style={{ padding: "0px", margin: "0px", textAlign: "left" }}
 							className="border-bottom"
 							onClick={() => setBottomMenu("")}>
-							<h5>{props.auth.name}</h5>
-							<h6>{props.auth.username}</h6>
+							<h5 className="ml-3">{props.auth.name} <small>{props.auth.username}</small></h5>
 						</Link>
 						<Link
 							ref={toDownload}
 							to="/download-app"
 							className="p-3"
-							style={{ display: "none" }}
+							style={{ display: "none", textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
 							<h6><span className="ml-3 mr-4"><DownloadSVG /></span>Get App</h6>
 						</Link>

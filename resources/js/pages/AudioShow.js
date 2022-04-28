@@ -8,6 +8,18 @@ import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizont
 
 import OptionsSVG from '../svgs/OptionsSVG';
 import CloseSVG from '../svgs/CloseSVG';
+import ShuffleSVG from '../svgs/ShuffleSVG';
+import PreviousSVG from '../svgs/PreviousSVG';
+import PauseSVG from '../svgs/PauseSVG';
+import PlaySVG from '../svgs/PlaySVG';
+import NextSVG from '../svgs/NextSVG';
+import LoopSVG from '../svgs/LoopSVG';
+import VolumeSVG from '../svgs/VolumeSVG';
+import ShareSVG from '../svgs/ShareSVG';
+import CartSVG from '../svgs/CartSVG';
+import HeartFilledSVG from '../svgs/HeartFilledSVG'
+import HeartSVG from '../svgs/HeartSVG'
+import DecoSVG from '../svgs/DecoSVG'
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -235,70 +247,21 @@ const AudioShow = (props) => {
 								props.setShuffle(props.shuffle ? false : true)
 								props.setLoop(props.loop && false)
 							}}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-shuffle"
-								viewBox="0 0 16 16">
-								<path fillRule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z" />
-								<path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
-							</svg>
+							<ShuffleSVG />
 						</div>
 						{/* Previous Button */}
 						<div style={{ cursor: "pointer" }} className="p-2">
-							<span onClick={props.prevSong}>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									className="bi bi-skip-backward"
-									viewBox="0 0 16 16">
-									<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
-								</svg>
-							</span>
+							<span onClick={props.prevSong}><PreviousSVG /></span>
 						</div>
 						{/* Pause/Play Button */}
 						<div style={{ cursor: "pointer" }} className="p-2">
-							<span
-								onClick={props.playBtn ? props.pauseSong : props.playSong}>
-								{props.playBtn ?
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="2em"
-										height="2em"
-										fill="currentColor"
-										className="bi bi-pause"
-										viewBox="0 0 16 16">
-										<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-									</svg> :
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="2em"
-										height="2em"
-										fill="currentColor"
-										className="bi bi-play"
-										viewBox="0 0 16 16">
-										<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-									</svg>
-								}
+							<span onClick={props.playBtn ? props.pauseSong : props.playSong}>
+								{props.playBtn ? <PauseSVG /> : <PlaySVG />}
 							</span>
 						</div>
 						{/* Next Button */}
 						<div style={{ cursor: "pointer" }} className="p-2">
-							<span onClick={props.nextSong}>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									className="bi bi-skip-forward"
-									viewBox="0 0 16 16">
-									<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
-								</svg>
-							</span>
+							<span onClick={props.nextSong}><NextSVG /></span>
 						</div>
 						{/* Loop Button */}
 						<div
@@ -311,16 +274,7 @@ const AudioShow = (props) => {
 								props.setLoop(props.loop ? false : true)
 								props.setShuffle(props.shuffle && false)
 							}}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-arrow-repeat"
-								viewBox="0 0 16 16">
-								<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
-								<path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
-							</svg>
+							<LoopSVG />
 						</div>
 						<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.dur)}</div>
 					</div>
@@ -328,11 +282,7 @@ const AudioShow = (props) => {
 					<div className="d-flex justify-content-end">
 						{/* <!-- Volume Container --> */}
 						<div style={{ cursor: "pointer", color: "rgba(220,220,220,1)" }} className="volume-show">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-volume-up" viewBox="0 0 16 16">
-								<path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />
-								<path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z" />
-								<path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z" />
-							</svg>
+							<VolumeSVG />
 						</div>
 						<div
 							ref={props.volumeContainer}
@@ -364,11 +314,7 @@ const AudioShow = (props) => {
 										e.preventDefault()
 										onAudioLike()
 									}}>
-									<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-										className='bi bi-heart-fill' viewBox='0 0 16 16'>
-										<path fillRule='evenodd'
-											d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-									</svg>
+									<HeartFilledSVG />
 									<small className="ml-1" style={{ color: "inherit" }}>{props.showAudio.likes}</small>
 								</a> :
 								<a
@@ -378,15 +324,7 @@ const AudioShow = (props) => {
 										e.preventDefault()
 										onAudioLike()
 									}}>
-									<svg xmlns='http://www.w3.org/2000/svg'
-										width='1.2em'
-										height='1.2em'
-										fill='currentColor'
-										className='bi bi-heart'
-										viewBox='0 0 16 16'>
-										<path
-											d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
-									</svg>
+									<HeartSVG />
 									<small className="ml-1" style={{ color: "inherit" }}>{props.showAudio.likes}</small>
 								</a>}
 						</div>
@@ -400,11 +338,7 @@ const AudioShow = (props) => {
 									e.preventDefault()
 									props.auth.username != "@guest" && onShare()
 								}}>
-								<svg className='bi bi-reply' width='1.5em' height='1.5em' viewBox='0 0 16 16' fill='currentColor'
-									xmlns='http://www.w3.org/2000/svg'>
-									<path fillRule='evenodd'
-										d='M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z' />
-								</svg>
+								<ShareSVG />
 								<span className="ml-1">SHARE</span>
 							</a>
 						</div>
@@ -425,15 +359,7 @@ const AudioShow = (props) => {
 									<button className="btn text-light mb-1 rounded-0"
 										style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}
 										onClick={() => props.onCartAudios(show)}>
-										<svg className='bi bi-cart3'
-											width='1em'
-											height='1em'
-											viewBox='0 0 16 16'
-											fill='currentColor'
-											xmlns='http://www.w3.org/2000/svg'>
-											<path fillRule='evenodd'
-												d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-										</svg>
+										<CartSVG />
 									</button>
 								</div> :
 								<div className="p-2">
@@ -513,14 +439,7 @@ const AudioShow = (props) => {
 									}}>
 									<small>{props.showArtist.name}{props.showArtist.username}</small>
 									<span className="ml-1" style={{ color: "gold" }}>
-										<svg xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											fill="currentColor"
-											className="bi bi-circle"
-											viewBox="0 0 16 16">
-											<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-										</svg>
+										<DecoSVG />
 										<small className="ml-1">{props.showArtist.decos}</small>
 									</span>
 								</h6>
@@ -536,15 +455,7 @@ const AudioShow = (props) => {
 												style={{ backgroundColor: "#232323" }}
 												onClick={() => props.onFollow(props.showArtist.username)}>
 												Followed
-												<svg className='bi bi-check'
-													width='1.5em'
-													height='1.5em'
-													viewBox='0 0 16 16'
-													fill='currentColor'
-													xmlns='http://www.w3.org/2000/svg'>
-													<path fillRule='evenodd'
-														d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z' />
-												</svg>
+												<CheckSVG />
 											</button>
 											: <Button btnClass={'mysonar-btn white-btn float-right'}
 												onClick={() => props.onFollow(props.showArtist.username)}
@@ -627,15 +538,7 @@ const AudioShow = (props) => {
 													<b>{comment.name}</b>
 													<small>{comment.username}</small>
 													<span className="ml-1" style={{ color: "gold" }}>
-														<svg className="bi bi-circle"
-															width="1em"
-															height="1em"
-															viewBox="0 0 16 16"
-															fill="currentColor"
-															xmlns="http://www.w3.org/2000/svg">
-															<path fillRule="evenodd"
-																d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-														</svg>
+														<DecoSVG />
 														<span className="ml-1" style={{ fontSize: "10px" }}>{comment.decos}</span>
 													</span>
 													<small>
@@ -652,11 +555,7 @@ const AudioShow = (props) => {
 															e.preventDefault()
 															onCommentLike(comment.id)
 														}}>
-														<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-															className='bi bi-heart-fill' viewBox='0 0 16 16'>
-															<path fillRule='evenodd'
-																d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-														</svg>
+														<HeartFilledSVG />
 														<small className="ml-1" style={{ color: "inherit" }}>
 															{comment.likes}
 														</small>
@@ -665,11 +564,7 @@ const AudioShow = (props) => {
 														e.preventDefault()
 														onCommentLike(comment.id)
 													}}>
-														<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-															className='bi bi-heart' viewBox='0 0 16 16'>
-															<path
-																d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
-														</svg>
+														<HeartSVG />
 														<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
 													</a>}
 
@@ -682,16 +577,7 @@ const AudioShow = (props) => {
 														data-toggle="dropdown"
 														aria-haspopup="true"
 														aria-expanded="false">
-														<svg
-															className="bi bi-three-dots-vertical"
-															width="1em"
-															height="1em"
-															viewBox="0 0 16 16"
-															fill="currentColor"
-															xmlns="http://www.w3.org/2000/svg">
-															<path fillRule="evenodd"
-																d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-														</svg>
+														<OptionsSVG />
 													</a>
 													<div
 														className="dropdown-menu dropdown-menu-right p-0"

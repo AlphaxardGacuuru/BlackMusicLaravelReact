@@ -3,6 +3,16 @@ import { Link, useLocation } from 'react-router-dom'
 
 import SocialMediaInput from './SocialMediaInput'
 
+import PreviousSVG from '../svgs/PreviousSVG';
+import PauseSVG from '../svgs/PauseSVG';
+import PlaySVG from '../svgs/PlaySVG';
+import NextSVG from '../svgs/NextSVG';
+import HomeSVG from '../svgs/HomeSVG';
+import DiscoverSVG from '../svgs/DiscoverSVG';
+import SearchSVG from '../svgs/SearchSVG';
+import CartSVG from '../svgs/CartSVG';
+import PersonSVG from '../svgs/PersonSVG';
+
 const Bottomnav = (props) => {
 
 	const location = useLocation()
@@ -78,7 +88,8 @@ const Bottomnav = (props) => {
 							props.setShow(0)
 							props.setLocalStorage("show", "")
 						}}>
-							<svg xmlns="http://www.w3.org/2000/svg"
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
 								width="40"
 								height="40"
 								fill="currentColor"
@@ -126,17 +137,7 @@ const Bottomnav = (props) => {
 							display: checkLocation && "none"
 						}}
 						className="p-2">
-						<span onClick={props.prevSong}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-skip-backward"
-								viewBox="0 0 16 16">
-								<path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z" />
-							</svg>
-						</span>
+						<span onClick={props.prevSong}><PreviousSVG /></span>
 					</div>
 					<div
 						style={{
@@ -147,26 +148,7 @@ const Bottomnav = (props) => {
 						className="p-2">
 						<span
 							onClick={props.playBtn ? props.pauseSong : props.playSong}>
-							{props.playBtn ?
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="2em"
-									height="2em"
-									fill="currentColor"
-									className="bi bi-pause"
-									viewBox="0 0 16 16">
-									<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
-								</svg> :
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="2em"
-									height="2em"
-									fill="currentColor"
-									className="bi bi-play"
-									viewBox="0 0 16 16">
-									<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
-								</svg>
-							}
+							{props.playBtn ? <PauseSVG /> : <PlaySVG />}
 						</span>
 					</div>
 					<div
@@ -175,17 +157,7 @@ const Bottomnav = (props) => {
 							display: checkLocation && "none"
 						}}
 						className="p-2">
-						<span onClick={props.nextSong}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="16"
-								height="16"
-								fill="currentColor"
-								className="bi bi-skip-forward"
-								viewBox="0 0 16 16">
-								<path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
-							</svg>
-						</span>
+						<span onClick={props.nextSong}><NextSVG /></span>
 					</div>
 				</div>
 				{/* Audio Player End */}
@@ -217,13 +189,7 @@ const Bottomnav = (props) => {
 									color: location.pathname == "/" ? "gold" : "white"
 								}}
 								className="nav-link">
-								<svg className="bi bi-house" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-									<path fillRule="evenodd"
-										d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-								</svg>
+								<HomeSVG />
 							</span>
 						</Link>
 						{/* Home End */}
@@ -242,13 +208,7 @@ const Bottomnav = (props) => {
 										location.pathname == "/audio-charts" ?
 										"gold" : "white"
 								}} className="nav-link">
-								<svg className="bi bi-compass" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M8 15.016a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zm0 1a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z" />
-									<path
-										d="M6 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1zm.94 6.44l4.95-2.83-2.83 4.95-4.95 2.83 2.83-4.95z" />
-								</svg>
+								<DiscoverSVG />
 							</span>
 						</Link>
 						{/* Discover End */}
@@ -267,13 +227,7 @@ const Bottomnav = (props) => {
 									fontSize: "20px",
 									color: location.pathname == "/search" ? "gold" : "white"
 								}} className="nav-link">
-								<svg className="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-									<path fillRule="evenodd"
-										d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-								</svg>
+								<SearchSVG />
 							</span>
 						</Link>
 						{/* Search End */}
@@ -290,15 +244,7 @@ const Bottomnav = (props) => {
 									fontSize: "20px",
 									color: location.pathname == "/cart" ? "gold" : "white"
 								}} className="nav-link">
-								<svg className="bi bi-cart3"
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-								</svg>
+								<CartSVG />
 							</span>
 							<span className="badge badge-danger rounded-circle"
 								style={{
@@ -323,15 +269,11 @@ const Bottomnav = (props) => {
 							}}>
 							<span
 								style={{
-									fontSize: "20px",
+									fontSize: "23px",
 									color: location.pathname == "/library" ? "gold" : "white"
 								}}
 								className="nav-link">
-								<svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg">
-									<path fillRule="evenodd"
-										d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-								</svg>
+								<PersonSVG />
 							</span>
 						</Link>
 						{/* Library End */}

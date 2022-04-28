@@ -76,28 +76,23 @@ var SocialMediaInput = function SocialMediaInput(props) {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
       _useState4 = _slicedToArray(_useState3, 2),
-      display1 = _useState4[0],
-      setDisplay1 = _useState4[1];
+      display2 = _useState4[0],
+      setDisplay2 = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
       _useState6 = _slicedToArray(_useState5, 2),
-      display2 = _useState6[0],
-      setDisplay2 = _useState6[1];
+      display3 = _useState6[0],
+      setDisplay3 = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
       _useState8 = _slicedToArray(_useState7, 2),
-      display3 = _useState8[0],
-      setDisplay3 = _useState8[1];
+      display4 = _useState8[0],
+      setDisplay4 = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
       _useState10 = _slicedToArray(_useState9, 2),
-      display4 = _useState10[0],
-      setDisplay4 = _useState10[1];
-
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
-      _useState12 = _slicedToArray(_useState11, 2),
-      display5 = _useState12[0],
-      setDisplay5 = _useState12[1];
+      display5 = _useState10[0],
+      setDisplay5 = _useState10[1];
 
   var onEmojiClick = function onEmojiClick(event, emojiObject) {
     // setChosenEmoji(emojiObject);
@@ -122,9 +117,8 @@ var SocialMediaInput = function SocialMediaInput(props) {
       backgroundColor: "#232323"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex pt-2",
+    className: "d-flex pt-2 border-bottom border-dark",
     style: {
-      borderBottom: "1px solid #fff",
       backgroundColor: "#232323"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -139,7 +133,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
     className: "flex-grow-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     name: "post-text",
-    className: "form-control m-0 p-2 border-bottom border-dark",
+    className: "form-control m-0 p-2",
     style: {
       border: "none",
       outline: "none",
