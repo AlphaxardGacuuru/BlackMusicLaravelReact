@@ -158,7 +158,7 @@ const TopNavLinks = (props) => {
 						setBottomMenu("menu-open")
 						setNotificationVisibility("block")
 						setAvatarVisibility("none")
-						// onNotification()
+						onNotification()
 					}}>
 					<BellSVG />
 				</span>
@@ -186,7 +186,8 @@ const TopNavLinks = (props) => {
 									key={key}
 									to={notification.url}
 									className="p-2 dropdown-item border-bottom text-dark border-dark"
-									onClick={() => onDeleteNotifications(notification.id)}>
+									// onClick={() => onDeleteNotifications(notification.id)}
+									>
 									<small>{notification.message}</small>
 								</Link>
 							))}
@@ -319,7 +320,7 @@ const TopNavLinks = (props) => {
 										style={{ display: "block", textAlign: "left" }}
 										onClick={() => {
 											setBottomMenu("")
-											onDeleteNotifications(notification.id)
+											// onDeleteNotifications(notification.id)
 										}}>
 										<small>{notification.message}</small>
 									</Link>

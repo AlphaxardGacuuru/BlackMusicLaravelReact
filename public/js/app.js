@@ -95437,7 +95437,8 @@ var TopNavLinks = function TopNavLinks(props) {
     onClick: function onClick() {
       setBottomMenu("menu-open");
       setNotificationVisibility("block");
-      setAvatarVisibility("none"); // onNotification()
+      setAvatarVisibility("none");
+      onNotification();
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_BellSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-danger rounded-circle",
@@ -95470,10 +95471,8 @@ var TopNavLinks = function TopNavLinks(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: notification.url,
-      className: "p-2 dropdown-item border-bottom text-dark border-dark",
-      onClick: function onClick() {
-        return onDeleteNotifications(notification.id);
-      }
+      className: "p-2 dropdown-item border-bottom text-dark border-dark" // onClick={() => onDeleteNotifications(notification.id)}
+
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
   })), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header",
@@ -95601,8 +95600,7 @@ var TopNavLinks = function TopNavLinks(props) {
         textAlign: "left"
       },
       onClick: function onClick() {
-        setBottomMenu("");
-        onDeleteNotifications(notification.id);
+        setBottomMenu(""); // onDeleteNotifications(notification.id)
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
   })), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
