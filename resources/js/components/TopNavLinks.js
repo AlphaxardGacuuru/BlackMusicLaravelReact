@@ -186,8 +186,8 @@ const TopNavLinks = (props) => {
 									key={key}
 									to={notification.url}
 									className="p-2 dropdown-item border-bottom text-dark border-dark"
-									// onClick={() => onDeleteNotifications(notification.id)}
-									>
+								// onClick={() => onDeleteNotifications(notification.id)}
+								>
 									<small>{notification.message}</small>
 								</Link>
 							))}
@@ -242,11 +242,20 @@ const TopNavLinks = (props) => {
 					<Link
 						to={`/profile/${props.auth.username}`}
 						className="p-3 dropdown-item border-bottom border-dark">
-						<h5>
-							<span className="mr-2"><PersonSVG /></span>
-							{props.auth.name}
-							</h5>
-						<h6 className="ml-4">{props.auth.username}</h6>
+						<div className="d-flex">
+							<div>
+								<Img
+									src={props.auth.pp}
+									imgClass="rounded-circle"
+									width="25px"
+									height="25px"
+									alt="Avatar" />
+							</div>
+							<div className="pl-2">
+								<h5>{props.auth.name}</h5>
+								<h6>{props.auth.username}</h6>
+							</div>
+						</div>
 					</Link>
 					<Link
 						ref={toDownload}
@@ -298,10 +307,12 @@ const TopNavLinks = (props) => {
 				<div className="bottomMenu">
 					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
 						<div></div>
+						<div className="dropdown-header text-white">
+							<h5 style={{ margin: "0px", display: notificationVisibility }}>Notifications</h5>
+						</div>
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
-							style={{ fontSize: "2em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>
@@ -309,9 +320,6 @@ const TopNavLinks = (props) => {
 
 					{/* Notifications Bottom */}
 					<div className="m-0 p-0" style={{ display: notificationVisibility }}>
-						<div className="dropdown-header text-white">
-							<h5 style={{ margin: "0px" }}>Notifications</h5>
-						</div>
 						<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 							{/* Get Notifications */}
 							{notifications
@@ -352,7 +360,17 @@ const TopNavLinks = (props) => {
 							style={{ padding: "0px", margin: "0px", textAlign: "left" }}
 							className="border-bottom"
 							onClick={() => setBottomMenu("")}>
-							<h5><span className="ml-3 mr-4"><PersonSVG /></span>{props.auth.name} <small>{props.auth.username}</small></h5>
+							<h5>
+								<span className="ml-3 mr-3">
+									<Img
+										src={props.auth.pp}
+										imgClass="rounded-circle"
+										width="25px"
+										height="25px"
+										alt="Avatar" />
+								</span>
+								{props.auth.name} <small>{props.auth.username}</small>
+							</h5>
 						</Link>
 						<Link
 							ref={toDownload}

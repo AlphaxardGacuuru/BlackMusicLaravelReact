@@ -94110,15 +94110,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _SocialMediaInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SocialMediaInput */ "./resources/js/components/SocialMediaInput.js");
-/* harmony import */ var _svgs_PreviousSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/PreviousSVG */ "./resources/js/svgs/PreviousSVG.js");
-/* harmony import */ var _svgs_PauseSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/PauseSVG */ "./resources/js/svgs/PauseSVG.js");
-/* harmony import */ var _svgs_PlaySVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/PlaySVG */ "./resources/js/svgs/PlaySVG.js");
-/* harmony import */ var _svgs_NextSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/NextSVG */ "./resources/js/svgs/NextSVG.js");
-/* harmony import */ var _svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/HomeSVG */ "./resources/js/svgs/HomeSVG.js");
-/* harmony import */ var _svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/DiscoverSVG */ "./resources/js/svgs/DiscoverSVG.js");
-/* harmony import */ var _svgs_SearchSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/SearchSVG */ "./resources/js/svgs/SearchSVG.js");
-/* harmony import */ var _svgs_CartSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/CartSVG */ "./resources/js/svgs/CartSVG.js");
-/* harmony import */ var _svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/PersonSVG */ "./resources/js/svgs/PersonSVG.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
+/* harmony import */ var _svgs_PreviousSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/PreviousSVG */ "./resources/js/svgs/PreviousSVG.js");
+/* harmony import */ var _svgs_PauseSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/PauseSVG */ "./resources/js/svgs/PauseSVG.js");
+/* harmony import */ var _svgs_PlaySVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/PlaySVG */ "./resources/js/svgs/PlaySVG.js");
+/* harmony import */ var _svgs_NextSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/NextSVG */ "./resources/js/svgs/NextSVG.js");
+/* harmony import */ var _svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/HomeSVG */ "./resources/js/svgs/HomeSVG.js");
+/* harmony import */ var _svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/DiscoverSVG */ "./resources/js/svgs/DiscoverSVG.js");
+/* harmony import */ var _svgs_SearchSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/SearchSVG */ "./resources/js/svgs/SearchSVG.js");
+/* harmony import */ var _svgs_CartSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/CartSVG */ "./resources/js/svgs/CartSVG.js");
+/* harmony import */ var _svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/PersonSVG */ "./resources/js/svgs/PersonSVG.js");
+
 
 
 
@@ -94198,8 +94200,9 @@ var Bottomnav = function Bottomnav(props) {
       width: props.progressPercent
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid menu-area d-flex text-white hidden px-1"
+    className: "container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2",
     style: {
       display: checkLocation && "none"
     }
@@ -94208,16 +94211,7 @@ var Bottomnav = function Bottomnav(props) {
       props.setShow(0);
       props.setLocalStorage("show", "");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "40",
-    height: "40",
-    fill: "currentColor",
-    className: "bi bi-x",
-    viewBox: "0 0 16 16"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-auto",
     style: {
       display: checkLocation && "none"
@@ -94241,8 +94235,8 @@ var Bottomnav = function Bottomnav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.showAudio.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.showAudio.ft)))), props.audioLoader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2",
     style: {
+      padding: "10px",
       display: checkLocation && "none"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -94262,7 +94256,7 @@ var Bottomnav = function Bottomnav(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: props.prevSong
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PreviousSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PreviousSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       cursor: "pointer",
       display: checkLocation && "none",
@@ -94271,7 +94265,7 @@ var Bottomnav = function Bottomnav(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: props.playBtn ? props.pauseSong : props.playSong
-  }, props.playBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PauseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlaySVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.playBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PauseSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlaySVG__WEBPACK_IMPORTED_MODULE_6__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       cursor: "pointer",
       display: checkLocation && "none"
@@ -94279,7 +94273,7 @@ var Bottomnav = function Bottomnav(props) {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: props.nextSong
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_NextSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_NextSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: props.onSubmit,
     className: "contact-form bg-white",
     style: {
@@ -94307,7 +94301,7 @@ var Bottomnav = function Bottomnav(props) {
       color: location.pathname == "/" ? "gold" : "white"
     },
     className: "nav-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/video-charts",
     style: {
       textAlign: "center",
@@ -94320,7 +94314,7 @@ var Bottomnav = function Bottomnav(props) {
       color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     },
     className: "nav-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/search",
     style: {
       color: "white",
@@ -94335,7 +94329,7 @@ var Bottomnav = function Bottomnav(props) {
       color: location.pathname == "/search" ? "gold" : "white"
     },
     className: "nav-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_SearchSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_SearchSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/cart",
     style: {
       textAlign: "center",
@@ -94349,7 +94343,7 @@ var Bottomnav = function Bottomnav(props) {
       color: location.pathname == "/cart" ? "gold" : "white"
     },
     className: "nav-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CartSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CartSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-danger rounded-circle",
     style: {
       fontSize: "12px",
@@ -94372,7 +94366,7 @@ var Bottomnav = function Bottomnav(props) {
       color: location.pathname == "/library" ? "gold" : "white"
     },
     className: "nav-link"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Bottomnav);
@@ -95521,11 +95515,17 @@ var TopNavLinks = function TopNavLinks(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/".concat(props.auth.username),
     className: "p-3 dropdown-item border-bottom border-dark"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "mr-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "ml-4"
-  }, props.auth.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    src: props.auth.pp,
+    imgClass: "rounded-circle",
+    width: "25px",
+    height: "25px",
+    alt: "Avatar"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.auth.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.auth.username)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     ref: toDownload,
     to: "/download-app",
     className: "p-3 dropdown-item border-bottom border-dark",
@@ -95571,10 +95571,14 @@ var TopNavLinks = function TopNavLinks(props) {
       height: "3em"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
+    className: "dropdown-header text-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     style: {
-      fontSize: "2em"
-    },
+      margin: "0px",
+      display: notificationVisibility
+    }
+  }, "Notifications")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
     onClick: function onClick() {
       return setBottomMenu("");
     }
@@ -95584,12 +95588,6 @@ var TopNavLinks = function TopNavLinks(props) {
       display: notificationVisibility
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "dropdown-header text-white"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    style: {
-      margin: "0px"
-    }
-  }, "Notifications")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       maxHeight: "500px",
       overflowY: "scroll"
@@ -95633,8 +95631,14 @@ var TopNavLinks = function TopNavLinks(props) {
       return setBottomMenu("");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ml-3 mr-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), props.auth.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.auth.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "ml-3 mr-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    src: props.auth.pp,
+    imgClass: "rounded-circle",
+    width: "25px",
+    height: "25px",
+    alt: "Avatar"
+  })), props.auth.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.auth.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     ref: toDownload,
     to: "/download-app",
     className: "p-3",
@@ -106536,8 +106540,8 @@ __webpack_require__.r(__webpack_exports__);
 var CloseSVG = function CloseSVG() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "1em",
-    height: "1em",
+    width: "2em",
+    height: "2em",
     fill: "currentColor",
     className: "bi bi-x",
     viewBox: "0 0 16 16"

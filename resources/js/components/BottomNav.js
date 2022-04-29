@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import SocialMediaInput from './SocialMediaInput'
 
+import CloseSVG from '../svgs/CloseSVG';
 import PreviousSVG from '../svgs/PreviousSVG';
 import PauseSVG from '../svgs/PauseSVG';
 import PlaySVG from '../svgs/PlaySVG';
@@ -81,23 +82,15 @@ const Bottomnav = (props) => {
 				</div>
 
 				{/* Audio Player */}
-				<div className="container-fluid menu-area d-flex text-white hidden px-1">
-					<div style={{ display: checkLocation && "none" }}>
+				<div className="container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark">
+					<div className="p-2" style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
-						<span onClick={() => {
-							props.setShow(0)
-							props.setLocalStorage("show", "")
-						}}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="40"
-								height="40"
-								fill="currentColor"
-								className="bi bi-x"
-								viewBox="0 0 16 16">
-								<path
-									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-							</svg>
+						<span
+							onClick={() => {
+								props.setShow(0)
+								props.setLocalStorage("show", "")
+							}}>
+							<CloseSVG />
 						</span>
 					</div>
 					<div className="p-2 mr-auto" style={{ display: checkLocation && "none" }} >
@@ -120,7 +113,7 @@ const Bottomnav = (props) => {
 						</Link>
 					</div>
 					{props.audioLoader &&
-						<div className="p-2" style={{ display: checkLocation && "none" }}>
+						<div style={{ padding: "10px", display: checkLocation && "none" }}>
 							<div className="spinner-border text-light"
 								style={{
 									borderTopWidth: "2px",
