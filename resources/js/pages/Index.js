@@ -454,8 +454,8 @@ const Index = (props) => {
 										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 											<Link to={`/profile/${post.username}`}>
 												<Img src={post.pp}
-													width="40px"
-													height="40px"
+													width="50px"
+													height="50px"
 													alt={'avatar'} />
 											</Link>
 										</div>
@@ -868,7 +868,7 @@ const Index = (props) => {
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
-							style={{ fontSize: "2em" }}
+							style={{ fontSize: "1em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>

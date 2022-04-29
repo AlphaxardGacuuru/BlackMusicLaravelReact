@@ -14,6 +14,7 @@ import HeartSVG from '../svgs/HeartSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import CheckSVG from '../svgs/CheckSVG';
 import DecoSVG from '../svgs/DecoSVG';
+import ShareSVG from '../svgs/ShareSVG';
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
@@ -136,6 +137,20 @@ const Profile = (props) => {
 				props.setErrors(newError)
 			})
 		})
+	}
+
+	// Web Share API for share button
+	// Share must be triggered by "user activation"
+	const onShare = (post) => {
+		// Define share data
+		const shareData = {
+			title: post.text,
+			text: `Check out my post on Black Music\n`,
+			url: `https://music.black.co.ke/#/post-show/${post.id}`
+		}
+		// Check if data is shareble
+		navigator.canShare(shareData) &&
+			navigator.share(shareData)
 	}
 
 	return (
@@ -314,8 +329,8 @@ const Profile = (props) => {
 					{props.posts
 						.filter((post) => post.username == username)
 						.map((post, index) => (
-							<div key={post.id} className='d-flex'>
-								<div className='media-left'>
+							<div key={post.id} className="d-flex">
+								<div className="p-1">
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
 											<Img src={post.pp}
@@ -325,8 +340,8 @@ const Profile = (props) => {
 										</Link>
 									</div>
 								</div>
-								<div className='p-2 flex-grow-1'>
-									<h6 className="media-heading m-0"
+								<div className='p-1 flex-grow-1'>
+									<h6 className="m-0"
 										style={{
 											width: "100%",
 											whiteSpace: "nowrap",
@@ -562,6 +577,14 @@ const Profile = (props) => {
 										<small className="ml-1">{post.comments}</small>
 									</Link>
 
+									{/* Share Post */}
+									<span
+										className="ml-5"
+										style={{ color: "rgba(220, 220, 220, 1)" }}
+										onClick={() => onShare(post)}>
+										<ShareSVG />
+									</span>
+
 									{/* <!-- Default dropup button --> */}
 									<div className="dropup float-right hidden">
 										<a
@@ -637,7 +660,7 @@ const Profile = (props) => {
 									</div>
 									{/* Edited */}
 									<small>
-										<b><i className="d-block text-secondary my-2">{post.hasEdited && "Edited"}</i></b>
+										<b><i className="d-block text-secondary my-1">{post.hasEdited && "Edited"}</i></b>
 									</small>
 								</div>
 							</div>
@@ -706,7 +729,7 @@ const Profile = (props) => {
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
-							style={{ fontSize: "2em" }}
+							style={{ fontSize: "1em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>

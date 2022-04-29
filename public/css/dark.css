@@ -1350,9 +1350,9 @@ div.hidden-scroll span {
 
 /* crop avatar thumbnails */
 .avatar-thumbnail-xs {
-    width: 40px;
+    width: 50px;
     /* width of container */
-    height: 40px;
+    height: 50px;
     /* height of container */
     overflow: hidden;
 }

@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import Img from '../components/Img'
+
+import CloseSVG from '../svgs/CloseSVG'
+import DecoSVG from '../svgs/DecoSVG'
+import OptionsSVG from '../svgs/OptionsSVG'
+import HeartSVG from '../svgs/HeartSVG'
+import HeartFilledSVG from '../svgs/HeartFilledSVG'
 
 const PostShow = (props) => {
 
@@ -27,6 +33,10 @@ const PostShow = (props) => {
 	}, 1000)
 
 	const [postComments, setPostComments] = useState(props.getLocalStorage("postComments"))
+	const [bottomMenu, setBottomMenu] = useState("")
+	const [commentToEdit, setPostToEdit] = useState()
+
+	var deleteLink = useRef(null)
 
 	// Fetch Post Comments
 	useEffect(() => {
@@ -97,133 +107,157 @@ const PostShow = (props) => {
 	}
 
 	return (
-		<div className="row p-0">
-			<div className="col-sm-4"></div>
-			<div className="col-sm-4">
-				<div className="my-2 ml-2">
-					<Link to="/">
-						<svg
-							width="2em"
-							height="2em"
-							viewBox="0 0 16 16"
-							className="bi bi-arrow-left-short"
-							fill="currentColor"
-							xmlns="http://www.w3.org/2000/svg">
-							<path fillRule="evenodd"
-								d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
-							<path fillRule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
-						</svg>
-					</Link>
-				</div>
-				<div className="m-0 p-0">
-					{postComments
-						.filter((comment) => comment.post_id == id)
-						.map((comment, index) => (
-							<div key={index} className={`media p-2`}>
-								<div className='media-left'>
-									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-										<Link to={`/home/${comment.user_id}`}>
-											<Img
-												src={comment.pp}
-												width="40px"
-												height="40px" />
-										</Link>
+		<>
+			<div className="row">
+				<div className="col-sm-4"></div>
+				<div className="col-sm-4">
+					<div className="my-2 ml-2">
+						<Link to="/">
+							<svg
+								width="2em"
+								height="2em"
+								viewBox="0 0 16 16"
+								className="bi bi-arrow-left-short"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg">
+								<path fillRule="evenodd"
+									d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+								<path fillRule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
+							</svg>
+						</Link>
+					</div>
+					<div className="m-0 p-0">
+						{postComments
+							.filter((comment) => comment.post_id == id)
+							.map((comment, index) => (
+								<div key={index} className="d-flex">
+									<div className="p-1">
+										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
+											<Link to={`/home/${comment.user_id}`}>
+												<Img
+													src={comment.pp}
+													width="40px"
+													height="40px" />
+											</Link>
+										</div>
 									</div>
-								</div>
-								<div className='media-body p-2'>
-									<h6 className="media-heading m-0"
-										style={{
-											width: "100%",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-										<b>{comment.name}</b>
-										<small>{comment.username}</small>
-										<span className="ml-1" style={{ color: "gold" }}>
-											<svg className="bi bi-circle"
-												width="1em"
-												height="1em"
-												viewBox="0 0 16 16"
-												fill="currentColor"
-												xmlns="http://www.w3.org/2000/svg">
-												<path fillRule="evenodd"
-													d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-											</svg>
-										</span>
-										<span className="ml-1" style={{ fontSize: "10px" }}>{comment.decos}</span>
-										<small><i className="float-right mr-1">{comment.created_at}</i></small>
-									</h6>
-									<p className="mb-0">{comment.text}</p>
+									<div className="p-1 flex-grow-1">
+										<h6 className="media-heading m-0"
+											style={{
+												width: "100%",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip"
+											}}>
+											<b>{comment.name}</b>
+											<small>{comment.username}</small>
+											<span className="ml-1" style={{ color: "gold" }}>
+												<DecoSVG />
+												<small className="ml-1" style={{ color: "inherit" }}>{comment.decos}</small>
+											</span>
+											<small>
+												<b><i className="float-right text-secondary mr-1">{comment.created_at}</i></b>
+											</small>
+										</h6>
+										<p className="mb-0">{comment.text}</p>
 
-									{/* Comment likes */}
-									{comment.hasLiked ?
-										<a href="#" style={{ color: "#fb3958" }} onClick={(e) => {
-											e.preventDefault()
-											onCommentLike(comment.id)
-										}}>
-											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-												className='bi bi-heart-fill' viewBox='0 0 16 16'>
-												<path fillRule='evenodd'
-													d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z' />
-											</svg>
-											<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
-										</a>
-										: <a href='#' onClick={(e) => {
-											e.preventDefault()
-											onCommentLike(comment.id)
-										}}>
-											<svg xmlns='http://www.w3.org/2000/svg' width='1.2em' height='1.2em' fill='currentColor'
-												className='bi bi-heart' viewBox='0 0 16 16'>
-												<path
-													d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z' />
-											</svg>
-											<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
-										</a>}
-									<small className="ml-1">{comment.comments}</small>
+										{/* Comment likes */}
+										{comment.hasLiked ?
+											<a
+												href="#"
+												style={{ color: "#fb3958" }}
+												onClick={(e) => {
+													e.preventDefault()
+													onCommentLike(comment.id)
+												}}>
+												<HeartFilledSVG />
+												<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
+											</a>
+											: <a
+												href='#'
+												style={{ color: "rgba(220, 220, 220, 1)" }}
+												onClick={(e) => {
+													e.preventDefault()
+													onCommentLike(comment.id)
+												}}>
+												<HeartSVG />
+												<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
+											</a>}
+										<small className="ml-1">{comment.comments}</small>
 
-									{/* <!-- Default dropup button --> */}
-									<div className="dropup float-right">
-										<a
-											href="#"
-											role="button"
-											id="dropdownMenuLink"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false">
-											<svg
-												className="bi bi-three-dots-vertical"
-												width="1em"
-												height="1em"
-												viewBox="0 0 16 16"
-												fill="currentColor"
-												xmlns="http://www.w3.org/2000/svg">
-												<path fillRule="evenodd"
-													d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-											</svg>
-										</a>
-										<div
-											className="dropdown-menu dropdown-menu-right p-0"
-											style={{ borderRadius: "0", backgroundColor: "#232323" }}>
-											{comment.username == props.auth.username &&
-												<a
-													href='#'
-													className="dropdown-item"
-													onClick={(e) => {
-														e.preventDefault();
-														onDeleteComment(comment.id)
-													}}>
-													<h6>Delete comment</h6>
-												</a>}
+										{/* <!-- Default dropup button --> */}
+										<div className="dropup float-right hidden">
+											<a
+												href="#"
+												role="button"
+												id="dropdownMenuLink"
+												data-toggle="dropdown"
+												aria-haspopup="true"
+												aria-expanded="false">
+												<OptionsSVG />
+											</a>
+											<div className="dropdown-menu dropdown-menu-right"
+												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
+												{comment.username == props.auth.username &&
+													<a
+														href="#"
+														className="dropdown-item"
+														onClick={(e) => {
+															e.preventDefault();
+															onDeleteComment(comment.id)
+														}}>
+														<h6>Delete comment</h6>
+													</a>}
+											</div>
+										</div>
+										{/* For small screens */}
+										<div className="float-right anti-hidden">
+											<span
+												className="text-secondary"
+												onClick={() => {
+													if (comment.username == props.auth.username) {
+														setBottomMenu("menu-open")
+														setPostToEdit(comment.id)
+														// Show and Hide elements
+														deleteLink.current.className = "d-block"
+													}
+												}}>
+												<OptionsSVG />
+											</span>
 										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
+					</div>
+				</div>
+				<div className="col-sm-4"></div>
+			</div>
+
+			{/* Sliding Bottom Nav */}
+			<div className={bottomMenu}>
+				<div className="bottomMenu">
+					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
+						<div></div>
+						{/* <!-- Close Icon --> */}
+						<div
+							className="closeIcon p-2 float-right"
+							style={{ fontSize: "1em" }}
+							onClick={() => setBottomMenu("")}>
+							<CloseSVG />
+						</div>
+					</div>
+					<div
+						ref={deleteLink}
+						onClick={() => {
+							setBottomMenu("")
+							onDeleteComment(commentToEdit)
+						}}>
+						<h6 className="pb-2">Delete comment</h6>
+					</div>
 				</div>
 			</div>
-			<div className="col-sm-4"></div>
-		</div>
+			{/* Sliding Bottom Nav  end */}
+		</>
 	)
 }
 

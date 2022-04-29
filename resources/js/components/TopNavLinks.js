@@ -313,6 +313,7 @@ const TopNavLinks = (props) => {
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
+							style={{ fontSize: "1em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>
