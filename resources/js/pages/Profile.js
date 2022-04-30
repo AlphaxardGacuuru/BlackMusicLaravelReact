@@ -334,8 +334,8 @@ const Profile = (props) => {
 									<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 										<Link to={`/profile/${post.username}`}>
 											<Img src={post.pp}
-												width="40px"
-												height="40px"
+												width="50px"
+												height="50px"
 												alt={'avatar'} />
 										</Link>
 									</div>

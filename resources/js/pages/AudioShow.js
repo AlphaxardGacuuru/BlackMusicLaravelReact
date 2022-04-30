@@ -522,8 +522,8 @@ const AudioShow = (props) => {
 												<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
 													<Link to={`/profile/${comment.username}`}>
 														<Img src={comment.pp}
-															width="40px"
-															height="40px" />
+															width="50px"
+															height="50px" />
 													</Link>
 												</div>
 											</div>

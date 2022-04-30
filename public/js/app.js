@@ -98440,8 +98440,8 @@ var AudioShow = function AudioShow(props) {
       to: "/profile/".concat(comment.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: comment.pp,
-      width: "40px",
-      height: "40px"
+      width: "50px",
+      height: "50px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body ml-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -101700,8 +101700,8 @@ var PostShow = function PostShow(props) {
       to: "/home/".concat(comment.user_id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: comment.pp,
-      width: "40px",
-      height: "40px"
+      width: "50px",
+      height: "50px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-1 flex-grow-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -102231,8 +102231,8 @@ var Profile = function Profile(props) {
       to: "/profile/".concat(post.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: post.pp,
-      width: "40px",
-      height: "40px",
+      width: "50px",
+      height: "50px",
       alt: 'avatar'
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "p-1 flex-grow-1"
@@ -105963,8 +105963,8 @@ var VideoShow = function VideoShow(props) {
       to: "/profile/".concat(comment.username)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: comment.pp,
-      width: "40px",
-      height: "40px"
+      width: "50px",
+      height: "50px"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "media-body ml-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
