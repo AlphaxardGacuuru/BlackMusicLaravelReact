@@ -6,10 +6,11 @@ import Img from '../components/Img'
 import Button from '../components/Button'
 import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
 
-import OptionsSVG from '../svgs/OptionsSVG';
-import CloseSVG from '../svgs/CloseSVG';
-import ShareSVG from '../svgs/ShareSVG';
-import CartSVG from '../svgs/CartSVG';
+import OptionsSVG from '../svgs/OptionsSVG'
+import CloseSVG from '../svgs/CloseSVG'
+import ShareSVG from '../svgs/ShareSVG'
+import CartSVG from '../svgs/CartSVG'
+import CheckSVG from '../svgs/CheckSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import DecoSVG from '../svgs/DecoSVG'
