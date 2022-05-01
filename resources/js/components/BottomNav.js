@@ -83,7 +83,7 @@ const Bottomnav = (props) => {
 
 				{/* Audio Player */}
 				<div className="container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark">
-					<div className="p-2" style={{ display: checkLocation && "none" }}>
+					<div className="pt-2 px-0" style={{ display: checkLocation && "none" }}>
 						{/* <!-- Close Icon --> */}
 						<span
 							onClick={() => {

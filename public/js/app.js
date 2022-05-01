@@ -94202,7 +94202,7 @@ var Bottomnav = function Bottomnav(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2",
+    className: "pt-2 px-0",
     style: {
       display: checkLocation && "none"
     }
