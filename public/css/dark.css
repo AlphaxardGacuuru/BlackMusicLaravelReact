@@ -785,7 +785,7 @@ a:focus {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #chatFloatBtn {
-        bottom: 70px;
+        bottom: 80px;
         right: 20px;
         height: 50px;
         width: 50px;
@@ -795,7 +795,7 @@ a:focus {
 
 @media only screen and (max-width: 767px) {
     #chatFloatBtn {
-        bottom: 70px;
+        bottom: 80px;
         right: 20px;
         height: 50px;
         width: 50px;

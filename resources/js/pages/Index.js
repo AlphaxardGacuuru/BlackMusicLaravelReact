@@ -161,12 +161,18 @@ const Index = (props) => {
 		<>
 			{/* Post button */}
 			{props.auth.account_type == 'musician' &&
-				<Link to="post-create" id="floatBtn" className={`${!checkLocation && "mb-5"}`}>
+				<Link
+					to="post-create"
+					id="floatBtn"
+					className={`${!checkLocation && "mb-5"}`}>
 					<PenSVG />
 				</Link>}
 
 			{/* Chat button */}
-			<Link to="/chat" id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
+			<Link
+				to="/chat"
+				id="chatFloatBtn"
+				className={`${!checkLocation && "mb-5"}`}>
 				<ChatSVG />
 			</Link>
 
