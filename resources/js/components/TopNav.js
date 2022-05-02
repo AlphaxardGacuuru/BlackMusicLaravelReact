@@ -135,7 +135,7 @@ const TopNav = (props) => {
 							<div className="menu-area d-flex justify-content-between">
 								{/* <!-- Logo Area  --> */}
 								<div className="logo-area">
-									<Link to="/"><Img imgClass="mr-2 mb-1" width="30px" height="30px" />Black Music</Link>
+									<Link to="/">Black Music</Link>
 								</div>
 								{/* <-- Search Form --> */}
 								<div className="contact-form hidden">

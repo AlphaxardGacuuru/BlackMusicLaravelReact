@@ -19,6 +19,7 @@ const AudioAlbumEdit = (props) => {
 	const [released, setReleased] = useState("")
 	const [preview, setPreview] = useState()
 	const [cover, setCover] = useState()
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Assign id to element
 	const mediaInput = React.useRef(null)
@@ -38,6 +39,9 @@ const AudioAlbumEdit = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
+		// Show loader for button
+		setBtnLoading(true)
+
 		// Add form data to FormData object
 		formData.append("name", name);
 		formData.append("released", released);
@@ -52,7 +56,11 @@ const AudioAlbumEdit = (props) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/audio-albums`).then((res) => props.setAudioAlbums(res.data))
 					setPreview()
+					// Remove loader for button
+					setBtnLoading(false)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -154,7 +162,10 @@ const AudioAlbumEdit = (props) => {
 										<br />
 										<br />
 
-										<Button type="submit" btnText="edit album" />
+										<Button
+											type="submit"
+											btnText="edit album"
+											loading={btnLoading} />
 										<br />
 										<br />
 

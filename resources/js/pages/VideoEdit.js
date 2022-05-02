@@ -47,6 +47,7 @@ const VideoEdit = (props) => {
 	const [description, setDescription] = useState("")
 	const [thumbnail, setThumbnail] = useState("")
 	const [video, setVideo] = useState("");
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -56,6 +57,9 @@ const VideoEdit = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+
+		// Show loader for button
+		setBtnLoading(true)
 
 		// Add form data to FormData object
 		formData.append("name", name);
@@ -77,7 +81,11 @@ const VideoEdit = (props) => {
 					// Update Videos
 					axios.get(`${props.url}/api/videos`)
 						.then((res) => props.setVideos(res.data))
+					// Remove loader for button
+					setBtnLoading(false)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -293,7 +301,7 @@ const VideoEdit = (props) => {
 										<br />
 										<br />
 
-										<Button btnText="edit video" />
+										<Button btnText="edit video" loading={btnLoading} />
 									</form>
 									<br />
 									<Link to="/videos" className="btn sonar-btn btn-2">studio</Link>

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
 import axios from 'axios';
+
 import Button from '../components/Button'
 import Img from '../components/Img'
 
@@ -20,6 +20,7 @@ const VideoAlbumEdit = (props) => {
 	const [released, setReleased] = useState()
 	const [preview, setPreview] = useState()
 	const [cover, setCover] = useState()
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Assign id to element
 	const mediaInput = React.useRef(null)
@@ -39,6 +40,9 @@ const VideoAlbumEdit = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
+		// Show loader for button
+		setBtnLoading(true)
+
 		// Add form data to FormData object
 		formData.append("name", name);
 		formData.append("released", released);
@@ -53,7 +57,11 @@ const VideoAlbumEdit = (props) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
 					setPreview()
-				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
+				}).catch((err) => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -155,7 +163,10 @@ const VideoAlbumEdit = (props) => {
 										<br />
 										<br />
 
-										<Button type="submit" btnClass="sonar-btn" btnText="edit album" />
+										<Button
+											type="submit"
+											btnText="edit album"
+											loading={btnLoading} />
 										<br />
 										<br />
 

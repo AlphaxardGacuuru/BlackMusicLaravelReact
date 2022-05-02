@@ -36,6 +36,7 @@ const ProfileEdit = (props) => {
 	const [phone, setPhone] = useState("")
 	const [bio, setBio] = useState("")
 	const [withdrawal, setWithdrawal] = useState("")
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -45,6 +46,9 @@ const ProfileEdit = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+
+		// Show loader for button
+		setBtnLoading(true)
 
 		// Add form data to FormData object
 		name && formData.append("name", name);
@@ -65,20 +69,15 @@ const ProfileEdit = (props) => {
 					// Update Posts
 					axios.get(`${props.url}/api/posts`)
 						.then((res) => props.setPosts(res.data))
-					// Update Posts comments
-					axios.get(`${props.url}/api/post-comments`)
-						.then((res) => props.setPostComments(res.data))
-					// Update Video Comments
-					axios.get(`${props.url}/api/video-comments`)
-						.then((res) => props.setVideoComments(res.data))
-					// Update Audio Comments
-					axios.get(`${props.url}/api/audio-comments`)
-						.then((res) => props.setAudioComments(res.data))
 					setName("")
 					setPhone("")
 					setBio("")
 					setWithdrawal("")
+					// Remove loader for button
+					setBtnLoading(false)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -182,7 +181,8 @@ const ProfileEdit = (props) => {
 							<Button
 								type="submit"
 								btnClass="sonar-btn white-btn"
-								btnText={"save changes"} />
+								btnText="save changes"
+								loading={btnLoading} />
 						</form>
 						<br />
 

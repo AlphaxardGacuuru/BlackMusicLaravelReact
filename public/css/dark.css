@@ -230,9 +230,9 @@ a:focus {
 
 .mysonar-btn-round:hover,
 .mysonar-btn-round:focus {
-    background-color: #2f2f2f;
+    background-color: #fff;
     font-size: 12px;
-    color: #ffffff;
+    color: #000;
 }
 
 .mysonar-btn.btn-2 {

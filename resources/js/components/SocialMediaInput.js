@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import Button from '../components/Button'
 import Img from '../components/Img'
@@ -181,10 +181,15 @@ const SocialMediaInput = (props) => {
 					<Button
 						type="submit"
 						btnClass="mysonar-btn-round"
-						btnStyle={{ borderRadius: "50%", minWidth: "33px", paddingRight: "2px" }}
+						btnStyle={{
+							borderRadius: "50%",
+							minWidth: "33px",
+							paddingRight: "2px"
+						}}
 						btnText={
 							<span className="p-2">
-								<svg style={{ transform: "rotate(45deg)" }}
+								<svg
+									style={{ transform: "rotate(45deg)" }}
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"
 									height="16"

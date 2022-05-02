@@ -47,6 +47,7 @@ const AudioEdit = (props) => {
 	const [description, setDescription] = useState("")
 	const [thumbnail, setThumbnail] = useState("")
 	const [audio, setAudio] = useState()
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -56,6 +57,9 @@ const AudioEdit = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+
+		// Show loader for button
+		setBtnLoading(true)
 
 		// Add form data to FormData object
 		formData.append("name", name);
@@ -77,7 +81,11 @@ const AudioEdit = (props) => {
 					// Update Audios
 					axios.get(`${props.url}/api/audios`)
 						.then((res) => props.setAudios(res.data))
+					// Remove loader for button
+					setBtnLoading(false)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -296,7 +304,7 @@ const AudioEdit = (props) => {
 										<br />
 										<br />
 
-										<Button btnText="edit audio" />
+										<Button btnText="edit audio" loading={btnLoading} />
 									</form>
 									<br />
 									<Link to="/audios" className="btn sonar-btn btn-2">studio</Link>

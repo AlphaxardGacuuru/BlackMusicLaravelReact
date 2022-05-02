@@ -619,7 +619,7 @@ function App() {
 	// Handle form submit for Social Input
 	const onSubmit = (e) => {
 		e.preventDefault()
-
+		
 		// Add form data to FormData object
 		formData.append("text", text);
 		id && formData.append("id", id);

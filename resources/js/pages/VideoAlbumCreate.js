@@ -12,6 +12,7 @@ const VideoAlbumCreate = (props) => {
 	const [released, setReleased] = useState("")
 	const [preview, setPreview] = useState()
 	const [cover, setCover] = useState()
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get history for page location
 	const history = useHistory()
@@ -34,6 +35,9 @@ const VideoAlbumCreate = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
+		// Show loader for button
+		setBtnLoading(true)
+
 		// Add form data to FormData object
 		formData.append("name", name);
 		formData.append("released", released);
@@ -46,8 +50,12 @@ const VideoAlbumCreate = (props) => {
 				.then((res) => {
 					props.setMessage(res.data)
 					axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
+					// Remove loader for button
+					setBtnLoading(false)
 					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 
 					var resError
@@ -138,7 +146,7 @@ const VideoAlbumCreate = (props) => {
 										<br />
 										<br />
 
-										<Button type="submit" btnClass="sonar-btn" btnText="create album" />
+										<Button type="submit" btnText="create album" loading={btnLoading} />
 
 										<br />
 										<br />

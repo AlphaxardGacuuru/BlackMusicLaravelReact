@@ -42,6 +42,7 @@ const VideoCreate = (props) => {
 	const [description, setDescription] = useState()
 	const [thumbnail, setThumbnail] = useState("")
 	const [files, setFiles] = useState([]);
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -54,6 +55,9 @@ const VideoCreate = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+
+		// Show loader for button
+		setBtnLoading(true)
 
 		// Add form data to FormData object
 		formData.append("video", video);
@@ -75,8 +79,12 @@ const VideoCreate = (props) => {
 					// Update Videos
 					axios.get(`${props.url}/api/videos`)
 						.then((res) => props.setVideos(res.data))
+					// Remove loader for button
+					setBtnLoading(false)
 					setTimeout(() => history.push('/videos'), 1000)
 				}).catch(err => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -301,7 +309,7 @@ const VideoCreate = (props) => {
 													<b style={{ color: "dodgerblue" }}> {props.auth.phone}</b>.
 												</h6>
 												<br />
-												<Button btnText="upload video" />
+												<Button btnText="upload video" loading={btnLoading} />
 											</div>
 										</div>
 										{/* {{-- Collapse End --}} */}

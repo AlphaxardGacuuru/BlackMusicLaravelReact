@@ -94390,16 +94390,28 @@ var Button = function Button(_ref) {
   var btnStyle = _ref.btnStyle,
       btnClass = _ref.btnClass,
       btnText = _ref.btnText,
-      onClick = _ref.onClick;
+      onClick = _ref.onClick,
+      loading = _ref.loading;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     style: btnStyle,
     className: btnClass,
     onClick: onClick
-  }, btnText);
+  }, btnText, loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border ml-2 my-auto",
+    style: {
+      borderTopWidth: "2px",
+      borderBottomWidth: "2px",
+      borderLeftWidth: "2px",
+      width: "15px",
+      height: "15px",
+      color: "inherit"
+    }
+  }));
 };
 
 Button.defaultProps = {
-  btnClass: 'sonar-btn'
+  btnClass: 'sonar-btn',
+  loading: false
 };
 /* harmony default export */ __webpack_exports__["default"] = (Button);
 
@@ -95190,11 +95202,7 @@ var TopNav = function TopNav(props) {
     className: "logo-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    imgClass: "mr-2 mb-1",
-    width: "30px",
-    height: "30px"
-  }), "Black Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Black Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "contact-form hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     name: "search",
@@ -95829,16 +95837,28 @@ var Button = function Button(_ref) {
   var btnStyle = _ref.btnStyle,
       btnClass = _ref.btnClass,
       btnText = _ref.btnText,
-      onClick = _ref.onClick;
+      onClick = _ref.onClick,
+      loading = _ref.loading;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     style: btnStyle,
     className: btnClass,
     onClick: onClick
-  }, btnText);
+  }, btnText, loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border ml-2 my-auto",
+    style: {
+      borderTopWidth: "2px",
+      borderBottomWidth: "2px",
+      borderLeftWidth: "2px",
+      width: "15px",
+      height: "15px",
+      color: "inherit"
+    }
+  }));
 };
 
 Button.defaultProps = {
-  btnClass: 'sonar-btn'
+  btnClass: 'sonar-btn',
+  loading: false
 };
 /* harmony default export */ __webpack_exports__["default"] = (Button);
 
@@ -96191,7 +96211,12 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       cover = _useState8[0],
-      setCover = _useState8[1]; // Get history for page location
+      setCover = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      btnLoading = _useState10[0],
+      setBtnLoading = _useState10[1]; // Get history for page location
 
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Assign id to element
@@ -96209,7 +96234,9 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
   };
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -96221,11 +96248,15 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
         props.setMessage(res.data);
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
           return props.setAudioAlbums(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
         setTimeout(function () {
           return history.push('/audios');
         }, 1000);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -96325,7 +96356,8 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     btnClass: "sonar-btn",
-    btnText: "create album"
+    btnText: "create album",
+    loading: btnLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audios",
     className: "btn sonar-btn btn-2"
@@ -96397,7 +96429,12 @@ var AudioAlbumEdit = function AudioAlbumEdit(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       cover = _useState8[0],
-      setCover = _useState8[1]; // Assign id to element
+      setCover = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      btnLoading = _useState10[0],
+      setBtnLoading = _useState10[1]; // Assign id to element
 
 
   var mediaInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Declare new FormData object for form data
@@ -96413,7 +96450,9 @@ var AudioAlbumEdit = function AudioAlbumEdit(props) {
   };
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -96427,8 +96466,12 @@ var AudioAlbumEdit = function AudioAlbumEdit(props) {
         axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
           return props.setAudioAlbums(res.data);
         });
-        setPreview();
+        setPreview(); // Remove loader for button
+
+        setBtnLoading(false);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -96536,7 +96579,8 @@ var AudioAlbumEdit = function AudioAlbumEdit(props) {
     d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "submit",
-    btnText: "edit album"
+    btnText: "edit album",
+    loading: btnLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audios",
     className: "btn sonar-btn btn-2"
@@ -97103,7 +97147,12 @@ var AudioCreate = function AudioCreate(props) {
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
       files = _useState20[0],
-      setFiles = _useState20[1]; // Get csrf token
+      setFiles = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState22 = _slicedToArray(_useState21, 2),
+      btnLoading = _useState22[0],
+      setBtnLoading = _useState22[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
@@ -97131,7 +97180,9 @@ var AudioCreate = function AudioCreate(props) {
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("audio", audio);
     formData.append("thumbnail", thumbnail);
@@ -97150,11 +97201,15 @@ var AudioCreate = function AudioCreate(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
         setTimeout(function () {
           return history.push('/audios');
         }, 1000);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -97431,7 +97486,8 @@ var AudioCreate = function AudioCreate(props) {
       color: "dodgerblue"
     }
   }, " ", props.auth.phone), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "upload audio"
+    btnText: "upload audio",
+    loading: btnLoading
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audios",
     className: "btn sonar-btn btn-2"
@@ -97556,7 +97612,12 @@ var AudioEdit = function AudioEdit(props) {
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState16 = _slicedToArray(_useState15, 2),
       audio = _useState16[0],
-      setAudio = _useState16[1]; // Get csrf token
+      setAudio = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      btnLoading = _useState18[0],
+      setBtnLoading = _useState18[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
@@ -97564,7 +97625,9 @@ var AudioEdit = function AudioEdit(props) {
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("ft", ft);
@@ -97583,8 +97646,12 @@ var AudioEdit = function AudioEdit(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -97850,7 +97917,8 @@ var AudioEdit = function AudioEdit(props) {
     type: "reset",
     className: "sonar-btn"
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "edit audio"
+    btnText: "edit audio",
+    loading: btnLoading
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audios",
     className: "btn sonar-btn btn-2"
@@ -102780,7 +102848,12 @@ var ProfileEdit = function ProfileEdit(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
       withdrawal = _useState8[0],
-      setWithdrawal = _useState8[1]; // Get csrf token
+      setWithdrawal = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      btnLoading = _useState10[0],
+      setBtnLoading = _useState10[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
@@ -102788,7 +102861,9 @@ var ProfileEdit = function ProfileEdit(props) {
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     name && formData.append("name", name);
     phone && formData.append("phone", phone);
@@ -102807,24 +102882,16 @@ var ProfileEdit = function ProfileEdit(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
           return props.setPosts(res.data);
-        }); // Update Posts comments
-
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
-          return props.setPostComments(res.data);
-        }); // Update Video Comments
-
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
-          return props.setVideoComments(res.data);
-        }); // Update Audio Comments
-
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
-          return props.setAudioComments(res.data);
         });
         setName("");
         setPhone("");
         setBio("");
-        setWithdrawal("");
+        setWithdrawal(""); // Remove loader for button
+
+        setBtnLoading(false);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -102939,7 +103006,8 @@ var ProfileEdit = function ProfileEdit(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     btnClass: "sonar-btn white-btn",
-    btnText: "save changes"
+    btnText: "save changes",
+    loading: btnLoading
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Link"], {
     to: "/profile/".concat(props.auth.username),
     className: "btn sonar-btn btn-2"
@@ -103645,7 +103713,12 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       cover = _useState8[0],
-      setCover = _useState8[1]; // Get history for page location
+      setCover = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      btnLoading = _useState10[0],
+      setBtnLoading = _useState10[1]; // Get history for page location
 
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Assign id to element
@@ -103663,7 +103736,9 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
   };
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -103675,11 +103750,15 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
         props.setMessage(res.data);
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
           return props.setVideoAlbums(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
         setTimeout(function () {
           return history.push('/videos');
         }, 1000);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -103778,8 +103857,8 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
     d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
-    btnClass: "sonar-btn",
-    btnText: "create album"
+    btnText: "create album",
+    loading: btnLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "btn sonar-btn btn-2"
@@ -103824,7 +103903,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var VideoAlbumEdit = function VideoAlbumEdit(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       id = _useParams.id; // Get Audio Album info
@@ -103854,7 +103932,12 @@ var VideoAlbumEdit = function VideoAlbumEdit(props) {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       cover = _useState8[0],
-      setCover = _useState8[1]; // Assign id to element
+      setCover = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      btnLoading = _useState10[0],
+      setBtnLoading = _useState10[1]; // Assign id to element
 
 
   var mediaInput = react__WEBPACK_IMPORTED_MODULE_0___default.a.useRef(null); // Declare new FormData object for form data
@@ -103870,7 +103953,9 @@ var VideoAlbumEdit = function VideoAlbumEdit(props) {
   };
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -103884,8 +103969,12 @@ var VideoAlbumEdit = function VideoAlbumEdit(props) {
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
           return props.setVideoAlbums(res.data);
         });
-        setPreview();
+        setPreview(); // Remove loader for button
+
+        setBtnLoading(false);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -103993,8 +104082,8 @@ var VideoAlbumEdit = function VideoAlbumEdit(props) {
     d: "M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
-    btnClass: "sonar-btn",
-    btnText: "edit album"
+    btnText: "edit album",
+    loading: btnLoading
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "btn sonar-btn btn-2"
@@ -104726,7 +104815,12 @@ var VideoCreate = function VideoCreate(props) {
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
       files = _useState18[0],
-      setFiles = _useState18[1]; // Get csrf token
+      setFiles = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState20 = _slicedToArray(_useState19, 2),
+      btnLoading = _useState20[0],
+      setBtnLoading = _useState20[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
@@ -104736,7 +104830,9 @@ var VideoCreate = function VideoCreate(props) {
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("video", video);
     formData.append("thumbnail", thumbnail);
@@ -104755,11 +104851,15 @@ var VideoCreate = function VideoCreate(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
         setTimeout(function () {
           return history.push('/videos');
         }, 1000);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -105046,7 +105146,8 @@ var VideoCreate = function VideoCreate(props) {
       color: "dodgerblue"
     }
   }, " ", props.auth.phone), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "upload video"
+    btnText: "upload video",
+    loading: btnLoading
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "reset",
     className: "sonar-btn"
@@ -105174,7 +105275,12 @@ var VideoEdit = function VideoEdit(props) {
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState16 = _slicedToArray(_useState15, 2),
       video = _useState16[0],
-      setVideo = _useState16[1]; // Get csrf token
+      setVideo = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      btnLoading = _useState18[0],
+      setBtnLoading = _useState18[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Declare new FormData object for form data
@@ -105182,7 +105288,9 @@ var VideoEdit = function VideoEdit(props) {
   var formData = new FormData();
 
   var onSubmit = function onSubmit(e) {
-    e.preventDefault(); // Add form data to FormData object
+    e.preventDefault(); // Show loader for button
+
+    setBtnLoading(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("ft", ft);
@@ -105201,8 +105309,12 @@ var VideoEdit = function VideoEdit(props) {
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
-        });
+        }); // Remove loader for button
+
+        setBtnLoading(false);
       })["catch"](function (err) {
+        // Remove loader for button
+        setBtnLoading(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -105467,7 +105579,8 @@ var VideoEdit = function VideoEdit(props) {
     type: "reset",
     className: "sonar-btn"
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "edit video"
+    btnText: "edit video",
+    loading: btnLoading
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "btn sonar-btn btn-2"

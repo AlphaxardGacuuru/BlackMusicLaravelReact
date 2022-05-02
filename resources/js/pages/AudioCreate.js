@@ -42,7 +42,8 @@ const AudioCreate = (props) => {
 	const [description, setDescription] = useState("")
 	const [preview, setPreview] = useState()
 	const [thumbnail, setThumbnail] = useState("")
-	const [files, setFiles] = useState([]);
+	const [files, setFiles] = useState([])
+	const [btnLoading, setBtnLoading] = useState()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -77,6 +78,9 @@ const AudioCreate = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
+		// Show loader for button
+		setBtnLoading(true)
+
 		// Add form data to FormData object
 		formData.append("audio", audio);
 		formData.append("thumbnail", thumbnail);
@@ -97,8 +101,12 @@ const AudioCreate = (props) => {
 					// Update Audios
 					axios.get(`${props.url}/api/audios`)
 						.then((res) => props.setAudios(res.data))
+					// Remove loader for button
+					setBtnLoading(false)
 					setTimeout(() => history.push('/audios'), 1000)
-				}).catch(err => {
+				}).catch((err) => {
+					// Remove loader for button
+					setBtnLoading(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -367,7 +375,7 @@ const AudioCreate = (props) => {
 													<b style={{ color: "dodgerblue" }}> {props.auth.phone}</b>.
 												</h6>
 												<br />
-												<Button btnText="upload audio" />
+												<Button btnText="upload audio" loading={btnLoading} />
 											</div>
 										</div>
 										{/* {{-- Collapse End --}} */}
