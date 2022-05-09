@@ -95392,7 +95392,7 @@ var TopNavLinks = function TopNavLinks(props) {
 
   window.addEventListener('beforeinstallprompt', function (e) {
     // Show the button
-    toDownload.current.style.display = 'block';
+    toDownload.current.style.display = 'inline';
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.auth.username == "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/admin",

@@ -85,7 +85,7 @@ const TopNavLinks = (props) => {
 	// Listen to the install prompt
 	window.addEventListener('beforeinstallprompt', (e) => {
 		// Show the button
-		toDownload.current.style.display = 'block';
+		toDownload.current.style.display = 'inline';
 	});
 
 	return (
