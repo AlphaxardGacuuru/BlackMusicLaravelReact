@@ -4,7 +4,7 @@
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#232323",
-	"background_color": "#000",
+	"background_color": "#FFD700",
 	"orientation": "portrait-primary",
 	"description": "A Music streaming app",
 	"icons": [

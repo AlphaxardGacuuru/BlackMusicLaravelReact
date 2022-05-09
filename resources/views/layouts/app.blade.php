@@ -28,14 +28,26 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
+    {{-- <link href='{{ asset('css/custom.css') }}' rel='stylesheet'> --}}
+    <link href='{{ asset('css/dark.css') }}' rel='stylesheet'>
+
+    {{-- Script for conditionally showing css based on user prefered theme --}}
+    {{-- <script>
+        const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+        if (!darkThemeMq.matches) {
+            document.write("<link href='{{ asset('css/dark.css') }}' rel='stylesheet'>")
+        } else {
+            document.write("<link href='{{ asset('css/custom.css') }}' rel='stylesheet'>")
+        }
+
+    </script> --}}
+
 
     {{-- IOS support --}}
     <link rel="apple-touch-icon" href="storage/img/musical-note.png">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {{-- <!-- Global site tag (gtag.js) - Google Analytics --> --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5K64MQR0RL"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
