@@ -42,6 +42,7 @@ import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
 import Admin from '../pages/Admin'
 import Settings from '../pages/Settings'
+import PrivacyPolicy from '../pages/PrivacyPolicy';
 import Chat from '../pages/Chat'
 import ChatThread from '../pages/ChatThread'
 import NewChat from '../pages/NewChat'
@@ -970,6 +971,7 @@ function App() {
 						{showLoginPopUp}
 					</>
 				)} />
+				<Route path="/privacy-policy" exact render={() => (<PrivacyPolicy />)} />
 				<Route path="/chat" exact render={(props) => (
 					<>
 						<Chat {...GLOBAL_STATE} />

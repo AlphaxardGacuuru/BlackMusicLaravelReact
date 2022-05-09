@@ -88,9 +88,6 @@ const TopNavLinks = (props) => {
 		toDownload.current.style.display = 'block';
 	});
 
-	// Function to get to Privacy Policy
-	const onPrivacyPolicy = () => window.location.href = "https://www.iubenda.com/privacy-policy/38639633"
-
 	return (
 		<>
 			{/* Admin */}
@@ -280,10 +277,9 @@ const TopNavLinks = (props) => {
 						</h6>
 					</Link>
 					<Link
-						to="#"
+						to="/privacy-policy"
 						className="p-3 dropdown-item border-bottom border-dark"
-						title="Privacy Policy"
-						onClick={onPrivacyPolicy}>
+						title="Privacy Policy">
 						<h6>
 							<span className="mr-2"><PrivacySVG /></span>
 							Privacy Policy
@@ -396,11 +392,10 @@ const TopNavLinks = (props) => {
 							<h6><span className="ml-3 mr-4"><SettingsSVG /></span>Settings</h6>
 						</Link>
 						<Link
-							to="#"
+							to="/privacy-policy"
 							className="p-3"
 							style={{ textAlign: "left" }}
-							title="Privacy Policy"
-							onClick={onPrivacyPolicy}>
+							title="Privacy Policy">
 							<h6><span className="ml-3 mr-4"><PrivacySVG /></span>Privacy Policy</h6>
 						</Link>
 						<Link
