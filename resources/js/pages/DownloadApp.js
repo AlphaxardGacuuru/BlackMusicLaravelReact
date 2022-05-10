@@ -5,37 +5,6 @@ import Img from '../components/Img';
 
 const DownloadApp = (props) => {
 
-	/*
-	*
-	* PWA Install button */
-	let deferredPrompt;
-	var btnAdd = React.useRef(null)
-
-	// Listen to the install prompt
-	window.addEventListener('beforeinstallprompt', (e) => {
-		deferredPrompt = e;
-
-		// Show the button
-		btnAdd.current.style.display = 'block';
-
-		// Action when button is clicked
-		btnAdd.current.addEventListener('click', (e) => {
-			// Show install banner
-			deferredPrompt.prompt();
-			// Check if the user accepted
-			deferredPrompt.userChoice.then((choiceResult) => {
-				if (choiceResult.outcome === 'accepted') {
-					btnAdd.current.dangerouslySetInnerHTML  = '<h6>User accepted</h6>';
-				}
-				deferredPrompt = null;
-			});
-
-			window.addEventListener('appinstalled', (evt) => {
-				btnAdd.current.dangerouslySetInnerHTML  = '<h6>Installed</h6>';
-			});
-		});
-	});
-
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
@@ -73,9 +42,9 @@ const DownloadApp = (props) => {
 					<br />
 
 					<button
-						ref={btnAdd}
 						className="btn mysonar-btn btn-2"
-						style={{ display: "none" }}>
+						style={{ display: props.downloadLink ? "inline" : "none" }}
+						onClick={() => props.btnAdd.current.click()}>
 						Download and Install 328Kb
 					</button>
 					<br />

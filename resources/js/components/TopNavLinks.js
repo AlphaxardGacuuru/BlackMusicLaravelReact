@@ -76,18 +76,7 @@ const TopNavLinks = (props) => {
 					.then((res) => setNotifications(res.data))
 			})
 	}
-
-	/*
-	*
-	* PWA Install link */
-	var toDownload = useRef(null)
-
-	// Listen to the install prompt
-	window.addEventListener('beforeinstallprompt', (e) => {
-		// Show the button
-		toDownload.current.style.display = 'inline';
-	});
-
+	
 	return (
 		<>
 			{/* Admin */}
@@ -255,44 +244,28 @@ const TopNavLinks = (props) => {
 						</div>
 					</Link>
 					<Link
-						ref={toDownload}
 						to="/download-app"
 						className="p-3 dropdown-item border-bottom border-dark"
-						style={{ display: "none" }}>
-						<h6>
-							<span className="mr-2"><DownloadSVG /></span>
-							Get App
-						</h6>
+						style={{ display: props.downloadLink ? "block" : "none" }}>
+						<h6><span className="mr-2"><DownloadSVG /></span>Get App</h6>
 					</Link>
 					<Link to='/videos' className="p-3 dropdown-item border-bottom border-dark">
-						<h6>
-							<span className="mr-2"><StudioSVG /></span>
-							Studio
-						</h6>
+						<h6><span className="mr-2"><StudioSVG /></span>Studio</h6>
 					</Link>
 					<Link to='/settings' className="p-3 dropdown-item border-bottom border-dark">
-						<h6>
-							<span className="mr-2"><SettingsSVG /></span>
-							Settings
-						</h6>
+						<h6><span className="mr-2"><SettingsSVG /></span>Settings</h6>
 					</Link>
 					<Link
 						to="/privacy-policy"
 						className="p-3 dropdown-item border-bottom border-dark"
 						title="Privacy Policy">
-						<h6>
-							<span className="mr-2"><PrivacySVG /></span>
-							Privacy Policy
-						</h6>
+						<h6><span className="mr-2"><PrivacySVG /></span>Privacy Policy</h6>
 					</Link>
 					<Link
 						to="#"
 						className="p-3 dropdown-item"
 						onClick={logout}>
-						<h6>
-							<span className="mr-2"><LogoutSVG /></span>
-							Logout
-						</h6>
+						<h6><span className="mr-2"><LogoutSVG /></span>Logout</h6>
 					</Link>
 				</div>
 			</div>
@@ -370,10 +343,9 @@ const TopNavLinks = (props) => {
 							</h5>
 						</Link>
 						<Link
-							ref={toDownload}
 							to="/download-app"
 							className="p-3"
-							style={{ display: "none", textAlign: "left" }}
+							style={{ display: props.downloadLink ? "inline" : "none", textAlign: "left" }}
 							onClick={() => setBottomMenu("")}>
 							<h6><span className="ml-3 mr-4"><DownloadSVG /></span>Get App</h6>
 						</Link>

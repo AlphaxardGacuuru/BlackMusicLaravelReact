@@ -679,6 +679,39 @@ function App() {
 		}
 	}
 
+	/*
+	*
+	* PWA Install button */
+	let deferredPrompt;
+	var btnAdd = useRef()
+	const [downloadLink, setDownloadLink] = useState();
+	const [downloadLinkText, setDownloadLinkText] = useState("");
+	
+	// Listen to the install prompt
+	window.addEventListener('beforeinstallprompt', (e) => {
+		deferredPrompt = e;
+
+		// Show the button
+		setDownloadLink(true)
+
+		// Action when button is clicked
+		btnAdd.current.addEventListener('click', (e) => {
+			// Show install banner
+			deferredPrompt.prompt();
+			// Check if the user accepted
+			deferredPrompt.userChoice.then((choiceResult) => {
+				if (choiceResult.outcome === 'accepted') {
+					setDownloadLinkText("User accepted")
+				}
+				deferredPrompt = null;
+			});
+
+			window.addEventListener('appinstalled', (evt) => {
+				setDownloadLinkText("Installed")
+			});
+		});
+	});
+
 	// Show the notification
 	function displayNotification() {
 		if (Notification.permission == 'granted') {
@@ -827,6 +860,10 @@ function App() {
 		showPollPicker, setShowPollPicker,
 		editing, setEditing,
 		onSubmit,
+		// PWA
+		btnAdd,
+		downloadLink, setDownloadLink,
+		downloadLinkText, setDownloadLinkText,
 	}
 
 	const showLoginPopUp = auth.username == "@guest" && <LoginPopUp {...GLOBAL_STATE} />
@@ -1010,6 +1047,9 @@ function App() {
 				preload='true'
 				// autoPlay={true}
 				src={`/storage/${showAudio.audio}`} />
+
+				{/* Install button */}
+				<button ref={btnAdd} style={{ display: "none" }}>test</button>
 		</>
 	);
 }
