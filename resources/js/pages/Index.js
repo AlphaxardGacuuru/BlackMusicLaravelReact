@@ -484,7 +484,9 @@ const Index = (props) => {
 												<b><i className="float-right text-secondary mr-1">{post.created_at}</i></b>
 											</small>
 										</h6>
-										<p className="mb-0">{post.text}</p>
+										<Link to={"post-show/" + post.id}>
+											<p className="mb-0">{post.text}</p>
+										</Link>
 
 										{/* Show media */}
 										<div className="mb-1" style={{ overflow: "hidden" }}>

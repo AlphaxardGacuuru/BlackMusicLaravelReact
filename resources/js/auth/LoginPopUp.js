@@ -6,6 +6,7 @@ import {
 	TwitterLoginButton
 } from "react-social-login-buttons";
 import axios from 'axios';
+
 import Button from '../components/button'
 
 const LoginPopUp = (props) => {
@@ -100,9 +101,13 @@ const LoginPopUp = (props) => {
 								</div>
 							</center> :
 							<>
-								<GoogleLoginButton className="mt-2 rounded-0" onClick={() => onSocial("google")} />
+								<GoogleLoginButton
+									className="mt-2 rounded-0"
+									onClick={() => onSocial("google")} />
 								{/* <FacebookLoginButton className="mt-2 rounded-0" onClick={() => onSocial("facebook")} /> */}
-								<TwitterLoginButton className="mt-2 rounded-0" onClick={() => onSocial("twitter")} />
+								<TwitterLoginButton
+									className="mt-2 rounded-0"
+									onClick={() => onSocial("twitter")} />
 								<br />
 
 								<Button
