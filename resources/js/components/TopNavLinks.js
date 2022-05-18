@@ -8,7 +8,6 @@ import PersonSVG from '../svgs/PersonSVG'
 import CartSVG from '../svgs/CartSVG'
 import BellSVG from '../svgs/BellSVG'
 import LogoutSVG from '../svgs/LogoutSVG'
-import CloseSVG from '../svgs/CloseSVG'
 import DownloadSVG from '../svgs/DownloadSVG'
 import PrivacySVG from '../svgs/PrivacySVG'
 import SettingsSVG from '../svgs/SettingsSVG'
@@ -19,9 +18,6 @@ const TopNavLinks = (props) => {
 	axios.defaults.baseURL = props.url
 
 	const [notifications, setNotifications] = useState(props.getLocalStorage("notifications"))
-	const [bottomMenu, setBottomMenu] = useState("")
-	const [avatarVisibility, setAvatarVisibility] = useState("none")
-	const [notificationVisibility, setNotificationVisibility] = useState("none")
 
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.length
@@ -141,9 +137,9 @@ const TopNavLinks = (props) => {
 						position: "relative",
 					}}
 					onClick={() => {
-						setBottomMenu("menu-open")
-						setNotificationVisibility("block")
-						setAvatarVisibility("none")
+						props.setBottomMenu("menu-open")
+						props.setNotificationVisibility("block")
+						props.setAvatarVisibility("none")
 						onNotification()
 					}}>
 					<BellSVG />
@@ -210,9 +206,9 @@ const TopNavLinks = (props) => {
 				<span
 					className="anti-hidden"
 					onClick={() => {
-						setBottomMenu("menu-open")
-						setAvatarVisibility("block")
-						setNotificationVisibility("none")
+						props.setBottomMenu("menu-open")
+						props.setAvatarVisibility("block")
+						props.setNotificationVisibility("none")
 					}}>
 					<Img
 						src={props.auth.pp}
@@ -270,124 +266,6 @@ const TopNavLinks = (props) => {
 				</div>
 			</div>
 			{/* Avatar Dropdown End */}
-
-			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu} style={{ position: "fixed", left: "0" }}>
-				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
-						<div></div>
-						<div className="dropdown-header text-white">
-							<h5 style={{ margin: "0px", display: notificationVisibility }}>Notifications</h5>
-						</div>
-						{/* <!-- Close Icon --> */}
-						<div
-							className="closeIcon p-2 float-right"
-							style={{ fontSize: "1em" }}
-							onClick={() => setBottomMenu("")}>
-							<CloseSVG />
-						</div>
-					</div>
-
-					{/* Notifications Bottom */}
-					<div className="m-0 p-0" style={{ display: notificationVisibility }}>
-						<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
-							{/* Get Notifications */}
-							{notifications
-								.map((notification, key) => (
-									<Link
-										key={key}
-										to={notification.url}
-										className="p-2"
-										style={{ display: "block", textAlign: "left" }}
-										onClick={() => {
-											setBottomMenu("")
-											// onDeleteNotifications(notification.id)
-										}}>
-										<small>{notification.message}</small>
-									</Link>
-								))}
-						</div>
-						{notifications.length > 0 &&
-							<div
-								className="dropdown-header"
-								style={{ cursor: "pointer" }}
-								onClick={() => {
-									setBottomMenu("")
-									onDeleteNotifications(0)
-								}}>
-								Clear notifications
-							</div>}
-						<br />
-						<br />
-						<br />
-					</div>
-					{/* Notifications Bottom End */}
-
-					{/* Avatar Bottom */}
-					<div className="m-0 p-0" style={{ display: avatarVisibility }}>
-						<Link
-							to={`/profile/${props.auth.username}`}
-							style={{ padding: "0px", margin: "0px", textAlign: "left" }}
-							className="border-bottom"
-							onClick={() => setBottomMenu("")}>
-							<h5>
-								<span className="ml-3 mr-3">
-									<Img
-										src={props.auth.pp}
-										imgClass="rounded-circle"
-										width="25px"
-										height="25px"
-										alt="Avatar" />
-								</span>
-								{props.auth.name} <small>{props.auth.username}</small>
-							</h5>
-						</Link>
-						<Link
-							to="/download-app"
-							className="p-3"
-							style={{ display: props.downloadLink ? "inline" : "none", textAlign: "left" }}
-							onClick={() => setBottomMenu("")}>
-							<h6><span className="ml-3 mr-4"><DownloadSVG /></span>Get App</h6>
-						</Link>
-						<Link
-							to='/videos'
-							className="p-3"
-							style={{ textAlign: "left" }}
-							onClick={() => setBottomMenu("")}>
-							<h6><span className="ml-3 mr-4"><StudioSVG /></span>Studio</h6>
-						</Link>
-						<Link
-							to='/settings'
-							className="p-3"
-							style={{ textAlign: "left" }}
-							onClick={() => setBottomMenu("")}>
-							<h6><span className="ml-3 mr-4"><SettingsSVG /></span>Settings</h6>
-						</Link>
-						<Link
-							to="/privacy-policy"
-							className="p-3"
-							style={{ textAlign: "left" }}
-							title="Privacy Policy">
-							<h6><span className="ml-3 mr-4"><PrivacySVG /></span>Privacy Policy</h6>
-						</Link>
-						<Link
-							to="#"
-							className="p-3"
-							style={{ textAlign: "left" }}
-							onClick={(e) => {
-								setBottomMenu("")
-								logout(e)
-							}}>
-							<h6><span className="ml-3 mr-4"><LogoutSVG /></span>Logout</h6>
-						</Link>
-						<br />
-						<br />
-						<br />
-					</div>
-					{/* Avatar Bottom End */}
-				</div>
-			</div>
-			{/* Sliding Bottom Nav  end */}
 		</>
 	)
 }

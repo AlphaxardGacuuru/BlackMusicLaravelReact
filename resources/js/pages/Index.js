@@ -480,9 +480,7 @@ const Index = (props) => {
 												<DecoSVG />
 												<small className="ml-1" style={{ color: "inherit" }}>{post.decos}</small>
 											</span>
-											<small>
-												<b><i className="float-right text-secondary mr-1">{post.created_at}</i></b>
-											</small>
+											<small><b><i className="float-right text-secondary mr-1">{post.created_at}</i></b></small>
 										</h6>
 										<Link to={"post-show/" + post.id}>
 											<p className="mb-0">{post.text}</p>
