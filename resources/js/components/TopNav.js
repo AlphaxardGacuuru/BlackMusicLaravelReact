@@ -329,9 +329,6 @@ const TopNav = (props) => {
 							}}>
 							<h6><span className="ml-3 mr-4"><LogoutSVG /></span>Logout</h6>
 						</Link>
-						<br />
-						<br />
-						<br />
 					</div>
 					{/* Avatar Bottom End */}
 				</div>
