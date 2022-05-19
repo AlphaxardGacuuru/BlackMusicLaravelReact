@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 
 import AuthLinks from "./AuthLinks"
@@ -14,6 +14,8 @@ import StudioSVG from '../svgs/StudioSVG'
 
 const TopNav = (props) => {
 
+	axios.defaults.baseURL = props.url
+
 	const [menu, setMenu] = useState("")
 
 	const location = useLocation()
@@ -23,6 +25,61 @@ const TopNav = (props) => {
 	const [bottomMenu, setBottomMenu] = useState("")
 	const [avatarVisibility, setAvatarVisibility] = useState("none")
 	const [notificationVisibility, setNotificationVisibility] = useState("none")
+	const [notifications, setNotifications] = useState(props.getLocalStorage("notifications"))
+
+	// Get number of items in video cart
+	const vidCartItems = props.cartVideos.length
+	const audCartItems = props.cartAudios.length
+	const cartItems = vidCartItems + audCartItems
+
+	useEffect(() => {
+		// Fetch Notifications
+		axios.get(`/api/notifications`)
+			.then((res) => {
+				setNotifications(res.data)
+				props.setLocalStorage("notifications", res.data)
+			}).catch(() => props.setErrors(['Failed to fetch notifications']))
+	}, [])
+
+	const logout = (e) => {
+		e.preventDefault()
+
+		axios.get('/sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/logout`)
+				.then((res) => {
+					// Remove phone from localStorage
+					localStorage.removeItem("auth")
+					props.setMessage("Logged out")
+					// Update Auth
+					props.setAuth({
+						"name": "Guest",
+						"username": "@guest",
+						"pp": "profile-pics/male_avatar.png",
+						"account_type": "normal"
+					})
+				});
+		})
+	}
+
+	const onNotification = () => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.put(`${props.url}/api/notifications/update`)
+				.then((res) => {
+					// Update notifications
+					axios.get(`${props.url}/api/notifications`)
+						.then((res) => setNotifications(res.data))
+				})
+		})
+	}
+
+	const onDeleteNotifications = (id) => {
+		axios.delete(`${props.url}/api/notifications/${id}`)
+			.then((res) => {
+				// Update Notifications
+				axios.get(`${props.url}/api/notifications`)
+					.then((res) => setNotifications(res.data))
+			})
+	}
 
 	var display
 
@@ -180,7 +237,15 @@ const TopNav = (props) => {
 													avatarVisibility={avatarVisibility}
 													setAvatarVisibility={setAvatarVisibility}
 													notificationVisibility={notificationVisibility}
-													setNotificationVisibility={setNotificationVisibility} />}
+													setNotificationVisibility={setNotificationVisibility}
+													notifications={notifications}
+													setNotifications={setNotifications}
+													vidCartItems={vidCartItems}
+													audCartItems={audCartItems}
+													cartItems={cartItems}
+													logout={logout}
+													onNotification={onNotification}
+													onDeleteNotifications={onDeleteNotifications} />}
 										</div>
 										{/* <!-- Menu Icon --> */}
 										<a href="#"
@@ -241,7 +306,7 @@ const TopNav = (props) => {
 					<div className="m-0 p-0" style={{ display: notificationVisibility }}>
 						<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 							{/* Get Notifications */}
-							{/* {notifications
+							{notifications
 								.map((notification, key) => (
 									<Link
 										key={key}
@@ -254,9 +319,9 @@ const TopNav = (props) => {
 										}}>
 										<small>{notification.message}</small>
 									</Link>
-								))} */}
+								))}
 						</div>
-						{/* {notifications.length > 0 &&
+						{notifications.length > 0 &&
 							<div
 								className="dropdown-header"
 								style={{ cursor: "pointer" }}
@@ -265,10 +330,7 @@ const TopNav = (props) => {
 									onDeleteNotifications(0)
 								}}>
 								Clear notifications
-							</div>} */}
-						<br />
-						<br />
-						<br />
+							</div>}
 					</div>
 					{/* Notifications Bottom End */}
 

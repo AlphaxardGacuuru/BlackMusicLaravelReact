@@ -14,64 +14,6 @@ import SettingsSVG from '../svgs/SettingsSVG'
 import StudioSVG from '../svgs/StudioSVG'
 
 const TopNavLinks = (props) => {
-
-	axios.defaults.baseURL = props.url
-
-	const [notifications, setNotifications] = useState(props.getLocalStorage("notifications"))
-
-	// Get number of items in video cart
-	const vidCartItems = props.cartVideos.length
-	const audCartItems = props.cartAudios.length
-	const cartItems = vidCartItems + audCartItems
-
-	useEffect(() => {
-		// Fetch Notifications
-		axios.get(`/api/notifications`)
-			.then((res) => {
-				setNotifications(res.data)
-				props.setLocalStorage("notifications", res.data)
-			}).catch(() => props.setErrors(['Failed to fetch notifications']))
-	}, [])
-
-	const logout = (e) => {
-		e.preventDefault()
-
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/logout`)
-				.then((res) => {
-					// Remove phone from localStorage
-					localStorage.removeItem("auth")
-					props.setMessage("Logged out")
-					// Update Auth
-					props.setAuth({
-						"name": "Guest",
-						"username": "@guest",
-						"pp": "profile-pics/male_avatar.png",
-						"account_type": "normal"
-					})
-				});
-		})
-	}
-
-	const onNotification = () => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.put(`${props.url}/api/notifications/update`)
-				.then((res) => {
-					// Update notifications
-					axios.get(`${props.url}/api/notifications`)
-						.then((res) => setNotifications(res.data))
-				})
-		})
-	}
-
-	const onDeleteNotifications = (id) => {
-		axios.delete(`${props.url}/api/notifications/${id}`)
-			.then((res) => {
-				// Update Notifications
-				axios.get(`${props.url}/api/notifications`)
-					.then((res) => setNotifications(res.data))
-			})
-	}
 	
 	return (
 		<>
@@ -105,7 +47,7 @@ const TopNavLinks = (props) => {
 						bottom: "0.5rem",
 						border: "solid #232323"
 					}}>
-					{cartItems > 0 && cartItems}
+					{props.cartItems > 0 && props.cartItems}
 				</span>
 			</div>
 			{/* Cart End */}
@@ -125,7 +67,7 @@ const TopNavLinks = (props) => {
 						fontWeight: "100",
 						position: "relative",
 					}}
-					onClick={onNotification}>
+					onClick={props.onNotification}>
 					<BellSVG />
 				</Link>
 				{/* For smaller screens */}
@@ -140,7 +82,7 @@ const TopNavLinks = (props) => {
 						props.setBottomMenu("menu-open")
 						props.setNotificationVisibility("block")
 						props.setAvatarVisibility("none")
-						onNotification()
+						props.onNotification()
 					}}>
 					<BellSVG />
 				</span>
@@ -152,8 +94,8 @@ const TopNavLinks = (props) => {
 						bottom: "0.5rem",
 						border: "solid #232323"
 					}}>
-					{notifications.filter((notification) => !notification.isRead).length > 0 &&
-						notifications.filter((notification) => !notification.isRead).length}
+					{props.notifications.filter((notification) => !notification.isRead).length > 0 &&
+						props.notifications.filter((notification) => !notification.isRead).length}
 				</span>
 				<div
 					style={{ borderRadius: "0", backgroundColor: "#232323" }}
@@ -162,23 +104,23 @@ const TopNavLinks = (props) => {
 					<div className="dropdown-header border-bottom border-dark">Notifications</div>
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 						{/* Get Notifications */}
-						{notifications
+						{props.notifications
 							.map((notification, key) => (
 								<Link
 									key={key}
 									to={notification.url}
 									className="p-2 dropdown-item border-bottom text-dark border-dark"
-								// onClick={() => onDeleteNotifications(notification.id)}
+								// onClick={() => props.onDeleteNotifications(notification.id)}
 								>
 									<small>{notification.message}</small>
 								</Link>
 							))}
 					</div>
-					{notifications.length > 0 &&
+					{props.notifications.length > 0 &&
 						<div
 							className="dropdown-header"
 							style={{ cursor: "pointer" }}
-							onClick={() => onDeleteNotifications(0)}>
+							onClick={() => props.onDeleteNotifications(0)}>
 							Clear notifications
 						</div>}
 				</div>
@@ -260,7 +202,7 @@ const TopNavLinks = (props) => {
 					<Link
 						to="#"
 						className="p-3 dropdown-item"
-						onClick={logout}>
+						onClick={props.logout}>
 						<h6><span className="mr-2"><LogoutSVG /></span>Logout</h6>
 					</Link>
 				</div>

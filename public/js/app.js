@@ -95123,6 +95123,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TopNav = function TopNav(props) {
+  axios.defaults.baseURL = props.url;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
       menu = _useState2[0],
@@ -95145,6 +95147,63 @@ var TopNav = function TopNav(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       notificationVisibility = _useState8[0],
       setNotificationVisibility = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("notifications")),
+      _useState10 = _slicedToArray(_useState9, 2),
+      notifications = _useState10[0],
+      setNotifications = _useState10[1]; // Get number of items in video cart
+
+
+  var vidCartItems = props.cartVideos.length;
+  var audCartItems = props.cartAudios.length;
+  var cartItems = vidCartItems + audCartItems;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Notifications
+    axios.get("/api/notifications").then(function (res) {
+      setNotifications(res.data);
+      props.setLocalStorage("notifications", res.data);
+    })["catch"](function () {
+      return props.setErrors(['Failed to fetch notifications']);
+    });
+  }, []);
+
+  var logout = function logout(e) {
+    e.preventDefault();
+    axios.get('/sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/logout")).then(function (res) {
+        // Remove phone from localStorage
+        localStorage.removeItem("auth");
+        props.setMessage("Logged out"); // Update Auth
+
+        props.setAuth({
+          "name": "Guest",
+          "username": "@guest",
+          "pp": "profile-pics/male_avatar.png",
+          "account_type": "normal"
+        });
+      });
+    });
+  };
+
+  var onNotification = function onNotification() {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.put("".concat(props.url, "/api/notifications/update")).then(function (res) {
+        // Update notifications
+        axios.get("".concat(props.url, "/api/notifications")).then(function (res) {
+          return setNotifications(res.data);
+        });
+      });
+    });
+  };
+
+  var onDeleteNotifications = function onDeleteNotifications(id) {
+    axios["delete"]("".concat(props.url, "/api/notifications/").concat(id)).then(function (res) {
+      // Update Notifications
+      axios.get("".concat(props.url, "/api/notifications")).then(function (res) {
+        return setNotifications(res.data);
+      });
+    });
+  };
 
   var display; // Hide TopNav from various pages
 
@@ -95310,7 +95369,15 @@ var TopNav = function TopNav(props) {
     avatarVisibility: avatarVisibility,
     setAvatarVisibility: setAvatarVisibility,
     notificationVisibility: notificationVisibility,
-    setNotificationVisibility: setNotificationVisibility
+    setNotificationVisibility: setNotificationVisibility,
+    notifications: notifications,
+    setNotifications: setNotifications,
+    vidCartItems: vidCartItems,
+    audCartItems: audCartItems,
+    cartItems: cartItems,
+    logout: logout,
+    onNotification: onNotification,
+    onDeleteNotifications: onDeleteNotifications
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     className: "hidden",
@@ -95367,7 +95434,29 @@ var TopNav = function TopNav(props) {
       maxHeight: "500px",
       overflowY: "scroll"
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, notifications.map(function (notification, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: key,
+      to: notification.url,
+      className: "p-2",
+      style: {
+        display: "block",
+        textAlign: "left"
+      },
+      onClick: function onClick() {
+        setBottomMenu(""); // onDeleteNotifications(notification.id)
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
+  })), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header",
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      setBottomMenu("");
+      onDeleteNotifications(0);
+    }
+  }, "Clear notifications")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-0 p-0",
     style: {
       display: avatarVisibility
@@ -95476,18 +95565,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_PrivacySVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/PrivacySVG */ "./resources/js/svgs/PrivacySVG.js");
 /* harmony import */ var _svgs_SettingsSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/SettingsSVG */ "./resources/js/svgs/SettingsSVG.js");
 /* harmony import */ var _svgs_StudioSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/StudioSVG */ "./resources/js/svgs/StudioSVG.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -95502,65 +95579,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TopNavLinks = function TopNavLinks(props) {
-  axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = props.url;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.getLocalStorage("notifications")),
-      _useState2 = _slicedToArray(_useState, 2),
-      notifications = _useState2[0],
-      setNotifications = _useState2[1]; // Get number of items in video cart
-
-
-  var vidCartItems = props.cartVideos.length;
-  var audCartItems = props.cartAudios.length;
-  var cartItems = vidCartItems + audCartItems;
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    // Fetch Notifications
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/notifications").then(function (res) {
-      setNotifications(res.data);
-      props.setLocalStorage("notifications", res.data);
-    })["catch"](function () {
-      return props.setErrors(['Failed to fetch notifications']);
-    });
-  }, []);
-
-  var logout = function logout(e) {
-    e.preventDefault();
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/logout")).then(function (res) {
-        // Remove phone from localStorage
-        localStorage.removeItem("auth");
-        props.setMessage("Logged out"); // Update Auth
-
-        props.setAuth({
-          "name": "Guest",
-          "username": "@guest",
-          "pp": "profile-pics/male_avatar.png",
-          "account_type": "normal"
-        });
-      });
-    });
-  };
-
-  var onNotification = function onNotification() {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put("".concat(props.url, "/api/notifications/update")).then(function (res) {
-        // Update notifications
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/notifications")).then(function (res) {
-          return setNotifications(res.data);
-        });
-      });
-    });
-  };
-
-  var onDeleteNotifications = function onDeleteNotifications(id) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/notifications/").concat(id)).then(function (res) {
-      // Update Notifications
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/notifications")).then(function (res) {
-        return setNotifications(res.data);
-      });
-    });
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.auth.username == "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/admin",
     className: "mr-2"
@@ -95587,7 +95605,7 @@ var TopNavLinks = function TopNavLinks(props) {
       bottom: "0.5rem",
       border: "solid #232323"
     }
-  }, cartItems > 0 && cartItems)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.cartItems > 0 && props.cartItems)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#",
@@ -95602,7 +95620,7 @@ var TopNavLinks = function TopNavLinks(props) {
       fontWeight: "100",
       position: "relative"
     },
-    onClick: onNotification
+    onClick: props.onNotification
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_BellSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "anti-hidden m-2",
     style: {
@@ -95614,7 +95632,7 @@ var TopNavLinks = function TopNavLinks(props) {
       props.setBottomMenu("menu-open");
       props.setNotificationVisibility("block");
       props.setAvatarVisibility("none");
-      onNotification();
+      props.onNotification();
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_BellSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-danger rounded-circle",
@@ -95625,9 +95643,9 @@ var TopNavLinks = function TopNavLinks(props) {
       bottom: "0.5rem",
       border: "solid #232323"
     }
-  }, notifications.filter(function (notification) {
+  }, props.notifications.filter(function (notification) {
     return !notification.isRead;
-  }).length > 0 && notifications.filter(function (notification) {
+  }).length > 0 && props.notifications.filter(function (notification) {
     return !notification.isRead;
   }).length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -95643,20 +95661,20 @@ var TopNavLinks = function TopNavLinks(props) {
       maxHeight: "500px",
       overflowY: "scroll"
     }
-  }, notifications.map(function (notification, key) {
+  }, props.notifications.map(function (notification, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: key,
       to: notification.url,
-      className: "p-2 dropdown-item border-bottom text-dark border-dark" // onClick={() => onDeleteNotifications(notification.id)}
+      className: "p-2 dropdown-item border-bottom text-dark border-dark" // onClick={() => props.onDeleteNotifications(notification.id)}
 
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, notification.message));
-  })), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), props.notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-header",
     style: {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return onDeleteNotifications(0);
+      return props.onDeleteNotifications(0);
     }
   }, "Clear notifications"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown"
@@ -95734,7 +95752,7 @@ var TopNavLinks = function TopNavLinks(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PrivacySVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), "Privacy Policy")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#",
     className: "p-3 dropdown-item",
-    onClick: logout
+    onClick: props.logout
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "mr-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LogoutSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), "Logout")))));
