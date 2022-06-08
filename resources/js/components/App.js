@@ -874,7 +874,7 @@ function App() {
 				{login && <LoginPopUp {...GLOBAL_STATE} />}
 
 				<TopNav {...GLOBAL_STATE} />
-				<Route path="/download-app" exact render={(props) => (<DownloadApp {...GLOBAL_STATE} />)} />
+				<Route path="/download" exact render={(props) => (<DownloadApp {...GLOBAL_STATE} />)} />
 
 				<Route path="/login" exact render={(props) => (<Login {...GLOBAL_STATE} />)} />
 				<Route path="/register/:name/:email/:avatar" exact render={(props) => (<Register {...GLOBAL_STATE} />)} />
