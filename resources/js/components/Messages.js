@@ -1,16 +1,16 @@
 import React from 'react'
 
 const Messages = ({ messages, errors }) => {
-console.log(messages)
+	messages && console.log(messages)
 	return (
 		<center>
 			<h6
 				id="snackbar"
 				className={errors.length > 0 || messages.length > 0 ? 'show' : ''}>
 				{/* Message Toast */}
-				{/* {messages.map((message, key) => (
+				{messages.map((message, key) => (
 					<div key={key} className="bg-success p-2 mt-2">{message}</div>
-				))} */}
+				))}
 				{/* Error Toast */}
 				{errors.map((error, key) => (
 					<div

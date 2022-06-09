@@ -68,7 +68,7 @@ const Search = (props) => {
 	const onSearch = (keyword) => {
 		axios.get('/sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/search`, { keyword: keyword })
-				.then((res) => props.setMessages(res.data))
+				.then((res) => props.setMessages([res.data]))
 		})
 	}
 

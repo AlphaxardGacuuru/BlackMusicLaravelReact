@@ -77,7 +77,7 @@ const VideoEdit = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/videos/${id}`, formData)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					// Update Videos
 					axios.get(`${props.url}/api/videos`)
 						.then((res) => props.setVideos(res.data))
@@ -261,7 +261,7 @@ const VideoEdit = (props) => {
 												revert: {
 													url: `/videos/${thumbnail.substr(17)}`,
 													headers: { 'X-CSRF-TOKEN': token.content },
-													onload: res => props.setMessages(res),
+													onload: res => props.setMessages([res]),
 												},
 											}} />
 										<br />
@@ -290,7 +290,7 @@ const VideoEdit = (props) => {
 													url: `/${video}`,
 													headers: { 'X-CSRF-TOKEN': token.content },
 													onload: res => {
-														props.setMessages(res)
+														props.setMessages([res])
 													},
 												},
 											}} />

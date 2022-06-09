@@ -82,7 +82,7 @@ const Index = (props) => {
 	const onDeletePost = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`/api/posts/${id}`).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))
@@ -107,7 +107,7 @@ const Index = (props) => {
 				post: post,
 				parameter: parameter
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))

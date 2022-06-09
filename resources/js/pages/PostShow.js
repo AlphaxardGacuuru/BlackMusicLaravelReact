@@ -68,7 +68,7 @@ const PostShow = (props) => {
 			axios.post(`${props.url}/api/post-comment-likes`, {
 				comment: comment
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update Post Comments
 				axios.get(`${props.url}/api/post-comments`)
 					.then((res) => setPostComments(res.data))
@@ -89,7 +89,7 @@ const PostShow = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/post-comments/${id}`)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					// Update Post Comments
 					axios.get(`${props.url}/api/post-comments`)
 						.then((res) => setPostComments(res.data))

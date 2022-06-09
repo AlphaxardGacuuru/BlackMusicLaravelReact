@@ -55,7 +55,7 @@ const ChatThread = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/chat/${id}`)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					// Update chat
 					axios.get(`${props.url}/api/chat`)
 						.then((res) => setChat(res.data))

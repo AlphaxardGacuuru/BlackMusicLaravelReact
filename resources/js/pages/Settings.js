@@ -55,7 +55,7 @@ const Settings = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/kopokopo-recipients`)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					// Update Kopokopo recipients
 					axios.get(`/api/kopokopo-recipients`)
 						.then((res) => setKopokopoRecipients(res.data))
@@ -81,7 +81,7 @@ const Settings = (props) => {
 				amount: songPayouts.balance,
 				destination_reference: reference.destination_reference,
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update song payouts
 				axios.get(`/api/song-payouts`)
 					.then((res) => setSongPayouts(res.data))

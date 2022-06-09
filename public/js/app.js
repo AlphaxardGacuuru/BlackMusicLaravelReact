@@ -91961,7 +91961,6 @@ var Login = function Login(_ref) {
         password: phone,
         remember: 'checked'
       }).then(function (res) {
-        // const resStatus = res.statusText
         setMessages(["Logged in"]); // Update Logged in user
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(url, "/api/home")).then(function (res) {
@@ -92106,7 +92105,7 @@ var LoginPopUp = function LoginPopUp(props) {
         remember: 'checked'
       }).then(function (res) {
         props.setLogin(false);
-        props.setMessages("Logged in"); // Update Logged in user
+        props.setMessages(["Logged in"]); // Update Logged in user
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
@@ -92167,7 +92166,8 @@ var LoginPopUp = function LoginPopUp(props) {
       setPhone(e.target.value);
     },
     required: true,
-    autoComplete: "phone"
+    autoComplete: "phone",
+    autoFocus: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "submit",
     btnClass: "mysonar-btn float-right",
@@ -92370,7 +92370,7 @@ var Register = function Register(props) {
         username: username,
         phone: phone
       }).then(function (res) {
-        props.setMessages("Account Updated"); // Update Auth
+        props.setMessages(["Account Updated"]); // Update Auth
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
@@ -92410,7 +92410,7 @@ var Register = function Register(props) {
           referer: referer,
           username: username
         });
-        props.setMessages("Account created"); // Update auth data
+        props.setMessages(["Account created"]); // Update auth data
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
@@ -92458,7 +92458,7 @@ var Register = function Register(props) {
       // 		phone: phone,
       // 		message: number
       // 	}).then((res) => {
-      // 		props.setMessages(res.data)
+      // 		props.setMessages([res.data])
       // 	}).catch((err) => {
       // 		const resErrors = err.response.data.errors
       // 		// Get validation errors
@@ -93022,7 +93022,7 @@ function App() {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/follows", {
         musician: musician
       }).then(function (res) {
-        setMessages(res.data); // Update users
+        messages.push(res.data); // Update users
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
           setUsers(res.data);
@@ -93073,7 +93073,7 @@ function App() {
       }
     }); // Set new Cart Videos
 
-    setCartVideos(newCartVideos); // Add Video to database
+    setCartVideos(newCartVideos); // Add Video to Cart
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
@@ -93135,13 +93135,13 @@ function App() {
       }
     }); // Set new Cart Audios
 
-    setCartAudios(newCartAudios); // Add Audio to database
+    setCartAudios(newCartAudios); // Add Audio to Cart
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
         audio: audio
       }).then(function (res) {
-        setMessages(res.data); // Update Audios
+        messages.push(res.data); // Update Audios
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
           setAudios(res.data);
@@ -94669,11 +94669,16 @@ __webpack_require__.r(__webpack_exports__);
 var Messages = function Messages(_ref) {
   var messages = _ref.messages,
       errors = _ref.errors;
-  console.log(messages);
+  messages && console.log(messages);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     id: "snackbar",
     className: errors.length > 0 || messages.length > 0 ? 'show' : ''
-  }, errors.map(function (error, key) {
+  }, messages.map(function (message, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key,
+      className: "bg-success p-2 mt-2"
+    }, message);
+  }), errors.map(function (error, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "p-2 mt-2",
@@ -94973,7 +94978,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          return props.setMessages(res);
+          return props.setMessages([res]);
         }
       }
     }
@@ -95173,7 +95178,7 @@ var TopNav = function TopNav(props) {
       axios.post("".concat(props.url, "/api/logout")).then(function (res) {
         // Remove phone from localStorage
         localStorage.removeItem("auth");
-        props.setMessages("Logged out"); // Update Auth
+        props.setMessages(["Logged out"]); // Update Auth
 
         props.setAuth({
           "name": "Guest",
@@ -96290,7 +96295,7 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audio-albums"), formData).then(function (res) {
-        props.setMessages(res.data);
+        props.setMessages([res.data]);
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
           return props.setAudioAlbums(res.data);
         }); // Remove loader for button
@@ -96507,7 +96512,7 @@ var AudioAlbumEdit = function AudioAlbumEdit(props) {
 
     axios.get('sanctum/csrf-cookie').then(function () {
       axios.post("".concat(props.url, "/api/audio-albums/").concat(id), formData).then(function (res) {
-        props.setMessages(res.data);
+        props.setMessages([res.data]);
         axios.get("".concat(props.url, "/api/audio-albums")).then(function (res) {
           return props.setAudioAlbums(res.data);
         });
@@ -97242,7 +97247,7 @@ var AudioCreate = function AudioCreate(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audios"), formData).then(function (res) {
-        props.setMessages(res.data); // Update Audios
+        props.setMessages([res.data]); // Update Audios
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
@@ -97466,7 +97471,7 @@ var AudioCreate = function AudioCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          return props.setMessages(res);
+          return props.setMessages([res]);
         }
       }
     }
@@ -97495,7 +97500,7 @@ var AudioCreate = function AudioCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessages(res);
+          props.setMessages([res]);
         }
       }
     }
@@ -97687,7 +97692,7 @@ var AudioEdit = function AudioEdit(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audios/").concat(id), formData).then(function (res) {
-        props.setMessages(res.data); // Update Audios
+        props.setMessages([res.data]); // Update Audios
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
@@ -97925,7 +97930,7 @@ var AudioEdit = function AudioEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          return props.setMessages(res);
+          return props.setMessages([res]);
         }
       }
     }
@@ -97954,7 +97959,7 @@ var AudioEdit = function AudioEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessages(res);
+          props.setMessages([res]);
         }
       }
     }
@@ -98126,7 +98131,7 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audio-likes"), {
         audio: show
       }).then(function (res) {
-        props.setMessages(res.data); // Update audios
+        props.setMessages([res.data]); // Update audios
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audios")).then(function (res) {
           return props.setAudios(res.data);
@@ -98163,7 +98168,7 @@ var AudioShow = function AudioShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/audio-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessages(res.data); // Update audio comments
+        props.setMessages([res.data]); // Update audio comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
           return setAudioComments(res.data);
@@ -98186,7 +98191,7 @@ var AudioShow = function AudioShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/audio-comments/").concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update audio comments
+        props.setMessages([res.data]); // Update audio comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/audio-comments")).then(function (res) {
           return setAudioComments(res.data);
@@ -98216,7 +98221,7 @@ var AudioShow = function AudioShow(props) {
 
   var onDownload = function onDownload() {
     window.open("".concat(props.url, "/api/audios/").concat(props.showAudio.id));
-    props.setMessages("Downloading ".concat(props.showAudio.name));
+    props.setMessages(["Downloading ".concat(props.showAudio.name)]);
   }; // Web Share API for share button
   // Share must be triggered by "user activation"
 
@@ -99047,7 +99052,7 @@ var Cart = function Cart(props) {
   var STKPush = function STKPush(amount) {
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.put("".concat(props.url, "/api/kopokopo/").concat(amount)).then(function (res) {
-        return props.setMessages(res.data);
+        return props.setMessages([res.data]);
       })["catch"](function (err) {
         var resErrors = err.response.data.errors;
         var resError;
@@ -99085,7 +99090,7 @@ var Cart = function Cart(props) {
               message = res.data.length + " Video bought";
             }
 
-            props.setMessages(message); // Update Bought Videos
+            props.setMessages([message]); // Update Bought Videos
 
             axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/bought-videos")).then(function (res) {
               return props.setBoughtVideos(res.data);
@@ -99139,7 +99144,7 @@ var Cart = function Cart(props) {
                 message = res.data.length + " Audio bought";
               }
 
-              props.setMessages(message);
+              props.setMessages([message]);
             }, 10000); // Update Bought Audio
 
             axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(props.url, "/api/bought-audios")).then(function (res) {
@@ -99745,7 +99750,7 @@ var ChatThread = function ChatThread(props) {
   var onDeleteChat = function onDeleteChat(id) {
     _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('sanctum/csrf-cookie').then(function () {
       _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update chat
+        props.setMessages([res.data]); // Update chat
 
         _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("".concat(props.url, "/api/chat")).then(function (res) {
           return setChat(res.data);
@@ -100242,7 +100247,7 @@ var Index = function Index(props) {
   var onDeletePost = function onDeletePost(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/api/posts/".concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
@@ -100270,7 +100275,7 @@ var Index = function Index(props) {
         post: post,
         parameter: parameter
       }).then(function (res) {
-        props.setMessages(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
@@ -101710,7 +101715,7 @@ var PostShow = function PostShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessages(res.data); // Update Post Comments
+        props.setMessages([res.data]); // Update Post Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
           return setPostComments(res.data);
@@ -101733,7 +101738,7 @@ var PostShow = function PostShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/post-comments/").concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update Post Comments
+        props.setMessages([res.data]); // Update Post Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
           return setPostComments(res.data);
@@ -102493,7 +102498,7 @@ var Profile = function Profile(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
         post: post
       }).then(function (res) {
-        props.setMessages(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
           return props.setPosts(res.data);
@@ -102518,7 +102523,7 @@ var Profile = function Profile(props) {
   var onDeletePost = function onDeletePost(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/posts/").concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
           return props.setPosts(res.data);
@@ -102546,7 +102551,7 @@ var Profile = function Profile(props) {
         post: post,
         parameter: parameter
       }).then(function (res) {
-        props.setMessages(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
           return props.setPosts(res.data);
@@ -103334,7 +103339,7 @@ var ProfileEdit = function ProfileEdit(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(props.url, "/api/users/").concat(props.auth.id), formData).then(function (res) {
-        props.setMessages(res.data); // Update auth details
+        props.setMessages([res.data]); // Update auth details
 
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
           return props.setAuth(res.data);
@@ -103394,7 +103399,7 @@ var ProfileEdit = function ProfileEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessages("Account updated"); // Update auth
+          props.setMessages(["Account updated"]); // Update auth
 
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(props.url, "/api/home")).then(function (res) {
             return props.setAuth(res.data);
@@ -103568,7 +103573,7 @@ var Search = function Search(props) {
       axios.post("/api/search", {
         keyword: keyword
       }).then(function (res) {
-        return props.setMessages(res.data);
+        return props.setMessages([res.data]);
       });
     });
   }; // Delete search item
@@ -103892,7 +103897,7 @@ var Settings = function Settings(props) {
   var onCreateRecipient = function onCreateRecipient() {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/kopokopo-recipients").then(function (res) {
-        props.setMessages(res.data); // Update Kopokopo recipients
+        props.setMessages([res.data]); // Update Kopokopo recipients
 
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/kopokopo-recipients").then(function (res) {
           return setKopokopoRecipients(res.data);
@@ -103921,7 +103926,7 @@ var Settings = function Settings(props) {
         amount: songPayouts.balance,
         destination_reference: reference.destination_reference
       }).then(function (res) {
-        props.setMessages(res.data); // Update song payouts
+        props.setMessages([res.data]); // Update song payouts
 
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/song-payouts").then(function (res) {
           return setSongPayouts(res.data);
@@ -104207,7 +104212,7 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-albums"), formData).then(function (res) {
-        props.setMessages(res.data);
+        props.setMessages([res.data]);
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
           return props.setVideoAlbums(res.data);
         }); // Remove loader for button
@@ -104425,7 +104430,7 @@ var VideoAlbumEdit = function VideoAlbumEdit(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-albums/").concat(id), formData).then(function (res) {
-        props.setMessages(res.data);
+        props.setMessages([res.data]);
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-albums")).then(function (res) {
           return props.setVideoAlbums(res.data);
         });
@@ -105307,7 +105312,7 @@ var VideoCreate = function VideoCreate(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/videos"), formData).then(function (res) {
-        props.setMessages(res.data); // Update Videos
+        props.setMessages([res.data]); // Update Videos
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
@@ -105538,7 +105543,7 @@ var VideoCreate = function VideoCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          return props.setMessages(res);
+          return props.setMessages([res]);
         }
       }
     }
@@ -105573,7 +105578,7 @@ var VideoCreate = function VideoCreate(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessages(res);
+          props.setMessages([res]);
         }
       }
     }
@@ -105765,7 +105770,7 @@ var VideoEdit = function VideoEdit(props) {
 
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/videos/").concat(id), formData).then(function (res) {
-        props.setMessages(res.data); // Update Videos
+        props.setMessages([res.data]); // Update Videos
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
@@ -105996,7 +106001,7 @@ var VideoEdit = function VideoEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          return props.setMessages(res);
+          return props.setMessages([res]);
         }
       }
     }
@@ -106031,7 +106036,7 @@ var VideoEdit = function VideoEdit(props) {
           'X-CSRF-TOKEN': token.content
         },
         onload: function onload(res) {
-          props.setMessages(res);
+          props.setMessages([res]);
         }
       }
     }
@@ -106204,7 +106209,7 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-likes"), {
         video: show
       }).then(function (res) {
-        props.setMessages(res.data); // Update videos
+        props.setMessages([res.data]); // Update videos
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/videos")).then(function (res) {
           return props.setVideos(res.data);
@@ -106242,7 +106247,7 @@ var VideoShow = function VideoShow(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/video-comment-likes"), {
         comment: comment
       }).then(function (res) {
-        props.setMessages(res.data); // Update Video Comments
+        props.setMessages([res.data]); // Update Video Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
           return setVideoComments(res.data);
@@ -106266,7 +106271,7 @@ var VideoShow = function VideoShow(props) {
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("".concat(props.url, "/api/video-comments/").concat(id)).then(function (res) {
-        props.setMessages(res.data); // Update Video Comments
+        props.setMessages([res.data]); // Update Video Comments
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/video-comments")).then(function (res) {
           return setVideoComments(res.data);
@@ -106296,7 +106301,7 @@ var VideoShow = function VideoShow(props) {
 
   var onDownload = function onDownload() {
     window.open("".concat(props.url, "/api/videos/").concat(showVideo.id));
-    props.setMessages("Downloading ".concat(showVideo.name));
+    props.setMessages(["Downloading ".concat(showVideo.name)]);
   }; // Web Share API for share button
   // Share must be triggered by "user activation"
 
@@ -106776,7 +106781,7 @@ var Videos = function Videos(props) {
         account_type: "musician",
         _method: "put"
       }).then(function (res) {
-        props.setMessages(res.data); // Update Users
+        props.setMessages([res.data]); // Update Users
 
         axios.get("".concat(props.url, "/api/users")).then(function (res) {
           return props.setUsers(res.data);

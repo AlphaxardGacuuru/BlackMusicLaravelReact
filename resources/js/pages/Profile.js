@@ -74,7 +74,7 @@ const Profile = (props) => {
 			axios.post(`${props.url}/api/post-likes`, {
 				post: post
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`${props.url}/api/posts`)
 					.then((res) => props.setPosts(res.data))
@@ -96,7 +96,7 @@ const Profile = (props) => {
 	const onDeletePost = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/posts/${id}`).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`${props.url}/api/posts`)
 					.then((res) => props.setPosts(res.data))
@@ -121,7 +121,7 @@ const Profile = (props) => {
 				post: post,
 				parameter: parameter
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`${props.url}/api/posts`)
 					.then((res) => props.setPosts(res.data))

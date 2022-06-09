@@ -20,7 +20,6 @@ const Login = ({ setMessages, setErrors, setAuth, url }) => {
 				password: phone,
 				remember: 'checked'
 			}).then((res) => {
-				// const resStatus = res.statusText
 				setMessages(["Logged in"])
 				// Update Logged in user
 				axios.get(`${url}/api/home`)

@@ -49,7 +49,7 @@ const TopNav = (props) => {
 				.then((res) => {
 					// Remove phone from localStorage
 					localStorage.removeItem("auth")
-					props.setMessages("Logged out")
+					props.setMessages(["Logged out"])
 					// Update Auth
 					props.setAuth({
 						"name": "Guest",

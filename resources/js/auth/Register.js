@@ -43,7 +43,7 @@ const Register = (props) => {
 				username: username,
 				phone: phone,
 			}).then((res) => {
-				props.setMessages("Account Updated")
+				props.setMessages(["Account Updated"])
 				// Update Auth
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
@@ -81,7 +81,7 @@ const Register = (props) => {
 						username: username
 					})
 
-				props.setMessages("Account created")
+				props.setMessages(["Account created"])
 				// Update auth data
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
@@ -126,7 +126,7 @@ const Register = (props) => {
 			// 		phone: phone,
 			// 		message: number
 			// 	}).then((res) => {
-			// 		props.setMessages(res.data)
+			// 		props.setMessages([res.data])
 			// 	}).catch((err) => {
 			// 		const resErrors = err.response.data.errors
 			// 		// Get validation errors

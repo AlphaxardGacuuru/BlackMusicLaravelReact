@@ -87,7 +87,7 @@ const AudioShow = (props) => {
 			axios.post(`${props.url}/api/audio-likes`, {
 				audio: show
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update audios
 				axios.get(`${props.url}/api/audios`)
 					.then((res) => props.setAudios(res.data))
@@ -122,7 +122,7 @@ const AudioShow = (props) => {
 			axios.post(`${props.url}/api/audio-comment-likes`, {
 				comment: comment
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update audio comments
 				axios.get(`${props.url}/api/audio-comments`)
 					.then((res) => setAudioComments(res.data))
@@ -142,7 +142,7 @@ const AudioShow = (props) => {
 	const onDeleteComment = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/audio-comments/${id}`).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update audio comments
 				axios.get(`${props.url}/api/audio-comments`)
 					.then((res) => setAudioComments(res.data))
@@ -167,7 +167,7 @@ const AudioShow = (props) => {
 	// Function for downloading audio
 	const onDownload = () => {
 		window.open(`${props.url}/api/audios/${props.showAudio.id}`)
-		props.setMessages(`Downloading ${props.showAudio.name}`)
+		props.setMessages([`Downloading ${props.showAudio.name}`])
 	}
 
 	// Web Share API for share button

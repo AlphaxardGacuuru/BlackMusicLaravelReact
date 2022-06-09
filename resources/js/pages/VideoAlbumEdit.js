@@ -54,7 +54,7 @@ const VideoAlbumEdit = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/video-albums/${id}`, formData)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
 					setPreview()
 					// Remove loader for button

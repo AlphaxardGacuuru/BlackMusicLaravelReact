@@ -30,7 +30,7 @@ const Videos = (props) => {
 				account_type: "musician",
 				_method: "put"
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update Users
 				axios.get(`${props.url}/api/users`)
 					.then((res) => props.setUsers(res.data))

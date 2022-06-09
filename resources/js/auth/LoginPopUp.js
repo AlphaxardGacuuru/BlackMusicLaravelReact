@@ -31,7 +31,7 @@ const LoginPopUp = (props) => {
 				remember: 'checked'
 			}).then(res => {
 				props.setLogin(false)
-				props.setMessages("Logged in")
+				props.setMessages(["Logged in"])
 				// Update Logged in user
 				axios.get(`${props.url}/api/home`)
 					.then((res) => props.setAuth(res.data))
@@ -84,7 +84,8 @@ const LoginPopUp = (props) => {
 											value={phone}
 											onChange={(e) => { setPhone(e.target.value) }}
 											required={true}
-											autoComplete="phone" />
+											autoComplete="phone"
+											autoFocus />
 										<br />
 
 										<Button type="submit"

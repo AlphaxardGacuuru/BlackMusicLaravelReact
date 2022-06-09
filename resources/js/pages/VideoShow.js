@@ -92,7 +92,7 @@ const VideoShow = (props) => {
 			axios.post(`${props.url}/api/video-likes`, {
 				video: show
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update videos
 				axios.get(`${props.url}/api/videos`)
 					.then((res) => props.setVideos(res.data))
@@ -128,7 +128,7 @@ const VideoShow = (props) => {
 			axios.post(`${props.url}/api/video-comment-likes`, {
 				comment: comment
 			}).then((res) => {
-				props.setMessages(res.data)
+				props.setMessages([res.data])
 				// Update Video Comments
 				axios.get(`${props.url}/api/video-comments`)
 					.then((res) => setVideoComments(res.data))
@@ -150,7 +150,7 @@ const VideoShow = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.delete(`${props.url}/api/video-comments/${id}`)
 				.then((res) => {
-					props.setMessages(res.data)
+					props.setMessages([res.data])
 					// Update Video Comments
 					axios.get(`${props.url}/api/video-comments`)
 						.then((res) => setVideoComments(res.data))
@@ -175,7 +175,7 @@ const VideoShow = (props) => {
 	// Function for downloading audio
 	const onDownload = () => {
 		window.open(`${props.url}/api/videos/${showVideo.id}`)
-		props.setMessages(`Downloading ${showVideo.name}`)
+		props.setMessages([`Downloading ${showVideo.name}`])
 	}
 
 	// Web Share API for share button

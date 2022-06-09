@@ -229,7 +229,7 @@ function App() {
 			axios.post(`/api/follows`, {
 				musician: musician
 			}).then((res) => {
-				setMessages(res.data)
+				messages.push(res.data)
 				// Update users
 				axios.get(`/api/users`)
 					.then((res) => {
@@ -283,7 +283,7 @@ function App() {
 		// Set new Cart Videos
 		setCartVideos(newCartVideos)
 
-		// Add Video to database
+		// Add Video to Cart
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/cart-videos`, {
 				video: video
@@ -349,12 +349,12 @@ function App() {
 		// Set new Cart Audios
 		setCartAudios(newCartAudios)
 
-		// Add Audio to database
+		// Add Audio to Cart
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/cart-audios`, {
 				audio: audio
 			}).then((res) => {
-				setMessages(res.data)
+				messages.push(res.data)
 				// Update Audios
 				axios.get(`/api/audios`)
 					.then((res) => {
