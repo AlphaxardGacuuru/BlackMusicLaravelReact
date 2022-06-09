@@ -29,7 +29,7 @@ const Cart = (props) => {
 	const STKPush = (amount) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.put(`${props.url}/api/kopokopo/${amount}`)
-				.then((res) => props.setMessage(res.data))
+				.then((res) => props.setMessages(res.data))
 				.catch((err) => {
 					const resErrors = err.response.data.errors
 					var resError
@@ -65,7 +65,7 @@ const Cart = (props) => {
 							} else {
 								message = res.data.length + " Video bought"
 							}
-							props.setMessage(message)
+							props.setMessages(message)
 							// Update Bought Videos
 							axios.get(`${props.url}/api/bought-videos`)
 								.then((res) => props.setBoughtVideos(res.data))
@@ -114,7 +114,7 @@ const Cart = (props) => {
 								} else {
 									message = res.data.length + " Audio bought"
 								}
-								props.setMessage(message)
+								props.setMessages(message)
 							}, 10000)
 							// Update Bought Audio
 							axios.get(`${props.url}/api/bought-audios`)

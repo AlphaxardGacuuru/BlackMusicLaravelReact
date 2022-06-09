@@ -231,7 +231,7 @@ const SocialMediaInput = (props) => {
 							revert: {
 								url: props.urlToDelete,
 								headers: { 'X-CSRF-TOKEN': token.content },
-								onload: res => props.setMessage(res),
+								onload: res => props.setMessages(res),
 							},
 						}} />
 					<br />

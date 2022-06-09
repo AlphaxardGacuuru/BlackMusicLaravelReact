@@ -49,7 +49,7 @@ const AudioAlbumCreate = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/audio-albums`, formData)
 				.then((res) => {
-					props.setMessage(res.data)
+					props.setMessages(res.data)
 					axios.get(`${props.url}/api/audio-albums`).then((res) => props.setAudioAlbums(res.data))
 					// Remove loader for button
 					setBtnLoading(false)

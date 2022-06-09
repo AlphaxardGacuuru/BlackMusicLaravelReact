@@ -55,7 +55,7 @@ const Settings = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api/kopokopo-recipients`)
 				.then((res) => {
-					props.setMessage(res.data)
+					props.setMessages(res.data)
 					// Update Kopokopo recipients
 					axios.get(`/api/kopokopo-recipients`)
 						.then((res) => setKopokopoRecipients(res.data))
@@ -81,7 +81,7 @@ const Settings = (props) => {
 				amount: songPayouts.balance,
 				destination_reference: reference.destination_reference,
 			}).then((res) => {
-				props.setMessage(res.data)
+				props.setMessages(res.data)
 				// Update song payouts
 				axios.get(`/api/song-payouts`)
 					.then((res) => setSongPayouts(res.data))
@@ -130,7 +130,7 @@ const Settings = (props) => {
 
 					<h4>Outstanding cash</h4>
 					<h5 className='text-success'>KES {songPayouts.balance}</h5>
-					
+
 					<p className="text-muted">By withdrawing less than <span className="text-success">KES 1000</span> you will incur additional withdrawal charges of <span className="text-success">KES 50</span> from our provider.</p>
 
 					{kopokopoRecipients

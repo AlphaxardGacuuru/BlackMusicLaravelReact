@@ -48,7 +48,7 @@ const VideoAlbumCreate = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/video-albums`, formData)
 				.then((res) => {
-					props.setMessage(res.data)
+					props.setMessages(res.data)
 					axios.get(`${props.url}/api/video-albums`).then((res) => props.setVideoAlbums(res.data))
 					// Remove loader for button
 					setBtnLoading(false)

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import Button from '../components/Button'
 
-const Login = ({ setMessage, setErrors, setAuth, url }) => {
+const Login = ({ setMessages, setErrors, setAuth, url }) => {
 
 	const [phone, setPhone] = useState('07')
 
@@ -21,7 +21,7 @@ const Login = ({ setMessage, setErrors, setAuth, url }) => {
 				remember: 'checked'
 			}).then((res) => {
 				// const resStatus = res.statusText
-				setMessage("Logged in")
+				setMessages(["Logged in"])
 				// Update Logged in user
 				axios.get(`${url}/api/home`)
 					.then((res) => setAuth(res.data))

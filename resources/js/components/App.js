@@ -85,7 +85,7 @@ function App() {
 			"pp": "/storage/profile-pics/male_avatar.png",
 			"account_type": "normal"
 		})
-	const [message, setMessage] = useState('')
+	const [messages, setMessages] = useState([])
 	const [errors, setErrors] = useState([])
 
 	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
@@ -104,9 +104,9 @@ function App() {
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
 
 	// Reset Messages and Errors to null after 3 seconds
-	if (errors.length > 0 || message.length > 0) {
-		setTimeout(() => setErrors([]), 3000);
-		setTimeout(() => setMessage(''), 3000);
+	if (errors.length > 0 || messages.length > 0) {
+		setTimeout(() => setErrors([]), 2900);
+		setTimeout(() => setMessages([]), 2900);
 	}
 
 	// Fetch data on page load
@@ -229,7 +229,7 @@ function App() {
 			axios.post(`/api/follows`, {
 				musician: musician
 			}).then((res) => {
-				setMessage(res.data)
+				setMessages(res.data)
 				// Update users
 				axios.get(`/api/users`)
 					.then((res) => {
@@ -255,7 +255,7 @@ function App() {
 			})
 		});
 	}
-
+	// console.log(message)
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		// Change cart button
@@ -288,7 +288,7 @@ function App() {
 			axios.post(`/api/cart-videos`, {
 				video: video
 			}).then((res) => {
-				setMessage(res.data)
+				messages.push(res.data)
 				// Update Videos
 				axios.get(`/api/videos`)
 					.then((res) => {
@@ -354,7 +354,7 @@ function App() {
 			axios.post(`/api/cart-audios`, {
 				audio: audio
 			}).then((res) => {
-				setMessage(res.data)
+				setMessages(res.data)
 				// Update Audios
 				axios.get(`/api/audios`)
 					.then((res) => {
@@ -620,7 +620,7 @@ function App() {
 	// Handle form submit for Social Input
 	const onSubmit = (e) => {
 		e.preventDefault()
-		
+
 		// Add form data to FormData object
 		formData.append("text", text);
 		id && formData.append("id", id);
@@ -638,7 +638,7 @@ function App() {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api${urlTo}`, formData)
 				.then((res) => {
-					setMessage(res.data)
+					setMessages(res.data)
 					// Updated State One
 					axios.get(`/api${urlTo}`)
 						.then((res) => stateToUpdate(res.data))
@@ -686,7 +686,7 @@ function App() {
 	var btnAdd = useRef()
 	const [downloadLink, setDownloadLink] = useState();
 	const [downloadLinkText, setDownloadLinkText] = useState("");
-	
+
 	// Listen to the install prompt
 	window.addEventListener('beforeinstallprompt', (e) => {
 		deferredPrompt = e;
@@ -758,7 +758,7 @@ function App() {
 							auth: parsed.keys.auth,
 							p256dh: parsed.keys.p256dh,
 						}).then((res) => {
-							setMessage(res.data)
+							setMessages(res.data)
 						}).catch((err) => {
 							const resErrors = err.response.data.errors
 							var resError
@@ -786,7 +786,7 @@ function App() {
 		login, setLogin,
 		url,
 		auth, setAuth,
-		message, setMessage,
+		messages, setMessages,
 		errors, setErrors,
 		audioAlbums, setAudioAlbums,
 		audios, setAudios,
@@ -1048,8 +1048,8 @@ function App() {
 				// autoPlay={true}
 				src={`/storage/${showAudio.audio}`} />
 
-				{/* Install button */}
-				<button ref={btnAdd} style={{ display: "none" }}>test</button>
+			{/* Install button */}
+			<button ref={btnAdd} style={{ display: "none" }}>test</button>
 		</>
 	);
 }

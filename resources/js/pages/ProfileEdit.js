@@ -62,7 +62,7 @@ const ProfileEdit = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/users/${props.auth.id}`, formData)
 				.then((res) => {
-					props.setMessage(res.data)
+					props.setMessages(res.data)
 					// Update auth details
 					axios.get(`${props.url}/api/home`)
 						.then((res) => props.setAuth(res.data))
@@ -115,7 +115,7 @@ const ProfileEdit = (props) => {
 										url: `/users`,
 										headers: { 'X-CSRF-TOKEN': token.content },
 										onload: (res) => {
-											props.setMessage("Account updated")
+											props.setMessages("Account updated")
 											// Update auth
 											axios.get(`${props.url}/api/home`)
 												.then((res) => props.setAuth(res.data))
