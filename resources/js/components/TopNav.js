@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 
-import AuthLinks from "./AuthLinks"
 import TopnavLinks from "./TopNavLinks"
 import Img from "./Img"
 
@@ -229,7 +228,11 @@ const TopNav = (props) => {
 										{/* <!-- Header Social Area --> */}
 										<div className="header-social-area d-flex align-items-center">
 											{props.auth.username == "@guest" ?
-												<AuthLinks {...props} /> :
+												<Link className="display-4"
+													to="#"
+													onClick={() => props.setLogin(true)}>
+													Login
+												</Link> :
 												<TopnavLinks
 													{...props}
 													bottomMenu={bottomMenu}

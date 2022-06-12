@@ -94669,7 +94669,6 @@ __webpack_require__.r(__webpack_exports__);
 var Messages = function Messages(_ref) {
   var messages = _ref.messages,
       errors = _ref.errors;
-  messages && console.log(messages);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     id: "snackbar",
     className: errors.length > 0 || messages.length > 0 ? 'show' : ''

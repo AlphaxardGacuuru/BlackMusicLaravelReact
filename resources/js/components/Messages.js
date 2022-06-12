@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Messages = ({ messages, errors }) => {
-	messages && console.log(messages)
+
 	return (
 		<center>
 			<h6
