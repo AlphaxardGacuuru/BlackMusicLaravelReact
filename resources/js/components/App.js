@@ -6,6 +6,7 @@ import axios from 'axios';
 import Messages from './Messages'
 import TopNav from './TopNav'
 import BottomNav from './BottomNav'
+import ScrollToTop from "./ScrollToTop"
 
 import LoginPopUp from '../auth/LoginPopUp'
 import Login from '../auth/Login'
@@ -871,6 +872,7 @@ function App() {
 	return (
 		<>
 			<Router>
+				<ScrollToTop />
 				{login && <LoginPopUp {...GLOBAL_STATE} />}
 
 				<TopNav {...GLOBAL_STATE} />
