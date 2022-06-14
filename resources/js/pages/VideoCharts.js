@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -25,10 +25,27 @@ const VideoCharts = (props) => {
 				props.setVideos(res.data)
 				props.setLocalStorage("videos", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch videos"]))
+
+		// Set interval for changing images
+		const bannerImages = [
+			"/storage/img/Ad1.jpg",
+			"/storage/img/PSX_20220206_210037.jpg",
+			"/storage/img/PSX_20220206_205615.jpg",
+			"/storage/img/PSX_20220206_205133.jpg"
+		]
+		var index = 0
+		const bannerSwitch = setInterval(() => {
+			banner.current.src = bannerImages[index++ % bannerImages.length]
+		}, 3000);
+
+		return () => {
+			clearInterval(bannerSwitch)
+		}
 	}, [])
 
 	const history = useHistory()
 	const location = useLocation()
+	const banner = useRef()
 
 	//Declare States 
 	const [chart, setChart] = useState("Newly Released")
@@ -158,13 +175,26 @@ const VideoCharts = (props) => {
 	return (
 		<>
 			<div className="d-flex mt-2">
-				<div className=""
+				<div className="anti-hidden"
 					style={{
 						width: "100%",
 						height: window.innerHeight * 0.75,
 						overflow: "hidden",
 					}}>
-					<Img src="/storage/img/Ad1.jpg" width="100%" />
+					<img
+						ref={banner}
+						src="/storage/img/Ad1.jpg"
+						width="100%"
+						style={{ transition: "display 3s ease-out" }} />
+				</div>
+				<div className="hidden"
+					style={{
+						width: "100%",
+						height: window.innerHeight * 0.75,
+						overflow: "hidden",
+					}}>
+					<Img src="/storage/img/Ad1.jpg"
+						width="100%" />
 				</div>
 				<div className="hidden"
 					style={{
@@ -506,32 +536,34 @@ const VideoCharts = (props) => {
 										<div className="w-25 h-25"></div>
 									</div>
 									<div className="ml-2 mr-auto flex-grow-1">
-										<h6 className="mb-0 bg-light text-light gradient"
+										<h6 className="mb-0 gradient"
 											style={{
 												width: "8em",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
-												textOverflow: "clip"
+												textOverflow: "clip",
+												color: "#232323"
 											}}>
 											props.name
 										</h6>
-										<h6 className="mb-3 bg-light text-light gradient"
+										<h6 className="mb-3 gradient"
 											style={{
 												width: "8em",
 												whiteSpace: "nowrap",
 												overflow: "hidden",
-												textOverflow: "clip"
+												textOverflow: "clip",
+												color: "#232323"
 											}}>
-											<small>props.username</small>
-											<small className="ml-1">props.ft</small>
+											<small style={{ color: "#232332" }}>props.username</small>
+											<small style={{ color: "#232332" }} className="ml-1">props.ft</small>
 										</h6>
 										<button
-											className="btn btn-light mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px' }}>
+											className="btn mb-1 rounded-0"
+											style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 										<button
-											className="btn btn-light mb-1 rounded-0 float-right"
-											style={{ minWidth: '90px', height: '33px' }}>
+											className="btn mb-1 rounded-0 float-right"
+											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
 										</button>
 									</div>
 								</div>

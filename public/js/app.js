@@ -96677,7 +96677,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var AudioMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js"));
 });
@@ -96698,10 +96697,24 @@ var AudioCharts = function AudioCharts(props) {
       props.setLocalStorage("audios", res.data);
     })["catch"](function () {
       return props.setErrors(["Failed to fetch audios"]);
-    });
+    }); // Set interval for changing images
+    // const bannerImages = [
+    // 	"/storage/img/Ad1.jpg",
+    // 	"/storage/img/PSX_20220206_210037.jpg",
+    // 	"/storage/img/PSX_20220206_205615.jpg",
+    // 	"/storage/img/PSX_20220206_205133.jpg"
+    // ]
+    // var index = 0
+    // const bannerSwitch = setInterval(() => {
+    // 	banner.current.src = bannerImages[index++ % bannerImages.length]
+    // }, 3000);
+    // return () => {
+    // 	clearInterval(bannerSwitch)
+    // }
   }, []);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
+  var banner = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); //Declare States 
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("Newly Released"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -96865,7 +96878,18 @@ var AudioCharts = function AudioCharts(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "",
+    className: "anti-hidden",
+    style: {
+      width: "100%",
+      height: window.innerHeight * 0.75,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    ref: banner,
+    src: "/storage/img/Ad1.jpg",
+    width: "100%"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden",
     style: {
       width: "100%",
       height: window.innerHeight * 0.75,
@@ -104615,10 +104639,20 @@ var VideoCharts = function VideoCharts(props) {
       props.setLocalStorage("videos", res.data);
     })["catch"](function () {
       return props.setErrors(["Failed to fetch videos"]);
-    });
+    }); // Set interval for changing images
+
+    var bannerImages = ["/storage/img/Ad1.jpg", "/storage/img/PSX_20220206_210037.jpg", "/storage/img/PSX_20220206_205615.jpg", "/storage/img/PSX_20220206_205133.jpg"];
+    var index = 0;
+    var bannerSwitch = setInterval(function () {
+      banner.current.src = bannerImages[index++ % bannerImages.length];
+    }, 3000);
+    return function () {
+      clearInterval(bannerSwitch);
+    };
   }, []);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //Declare States 
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
+  var banner = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); //Declare States 
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("Newly Released"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -104782,7 +104816,21 @@ var VideoCharts = function VideoCharts(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex mt-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "",
+    className: "anti-hidden",
+    style: {
+      width: "100%",
+      height: window.innerHeight * 0.75,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    ref: banner,
+    src: "/storage/img/Ad1.jpg",
+    width: "100%",
+    style: {
+      transition: "display 3s ease-out"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden",
     style: {
       width: "100%",
       height: window.innerHeight * 0.75,
@@ -105111,34 +105159,45 @@ var VideoCharts = function VideoCharts(props) {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ml-2 mr-auto flex-grow-1"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mb-0 bg-light text-light gradient",
+      className: "mb-0 gradient",
       style: {
         width: "8em",
         whiteSpace: "nowrap",
         overflow: "hidden",
-        textOverflow: "clip"
+        textOverflow: "clip",
+        color: "#232323"
       }
     }, "props.name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mb-3 bg-light text-light gradient",
+      className: "mb-3 gradient",
       style: {
         width: "8em",
         whiteSpace: "nowrap",
         overflow: "hidden",
-        textOverflow: "clip"
+        textOverflow: "clip",
+        color: "#232323"
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "props.username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      style: {
+        color: "#232332"
+      }
+    }, "props.username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      style: {
+        color: "#232332"
+      },
       className: "ml-1"
     }, "props.ft")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "btn btn-light mb-1 rounded-0",
+      className: "btn mb-1 rounded-0",
       style: {
         minWidth: '40px',
-        height: '33px'
+        height: '33px',
+        backgroundColor: "#232323"
       }
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "btn btn-light mb-1 rounded-0 float-right",
+      className: "btn mb-1 rounded-0 float-right",
       style: {
         minWidth: '90px',
-        height: '33px'
+        height: '33px',
+        backgroundColor: "#232323"
       }
     })));
   }), videosArray.slice(0, videoSlice).map(function (videoArray, key) {

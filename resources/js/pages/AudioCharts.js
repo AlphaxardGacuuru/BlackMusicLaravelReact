@@ -1,6 +1,5 @@
-import React, { Suspense } from 'react'
+import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
@@ -26,11 +25,27 @@ const AudioCharts = (props) => {
 				props.setAudios(res.data)
 				props.setLocalStorage("audios", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch audios"]))
+
+		// Set interval for changing images
+		// const bannerImages = [
+		// 	"/storage/img/Ad1.jpg",
+		// 	"/storage/img/PSX_20220206_210037.jpg",
+		// 	"/storage/img/PSX_20220206_205615.jpg",
+		// 	"/storage/img/PSX_20220206_205133.jpg"
+		// ]
+		// var index = 0
+		// const bannerSwitch = setInterval(() => {
+		// 	banner.current.src = bannerImages[index++ % bannerImages.length]
+		// }, 3000);
+
+		// return () => {
+		// 	clearInterval(bannerSwitch)
+		// }
 	}, [])
 
 	const history = useHistory()
-
 	const location = useLocation()
+	const banner = useRef()
 
 	//Declare States 
 	const [chart, setChart] = useState("Newly Released")
@@ -162,7 +177,18 @@ const AudioCharts = (props) => {
 	return (
 		<>
 			<div className="d-flex mt-2">
-				<div className=""
+				<div className="anti-hidden"
+					style={{
+						width: "100%",
+						height: window.innerHeight * 0.75,
+						overflow: "hidden",
+					}}>
+					<img
+						ref={banner}
+						src="/storage/img/Ad1.jpg"
+						width="100%" />
+				</div>
+				<div className="hidden"
 					style={{
 						width: "100%",
 						height: window.innerHeight * 0.75,
