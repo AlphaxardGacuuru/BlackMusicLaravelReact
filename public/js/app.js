@@ -104825,10 +104825,7 @@ var VideoCharts = function VideoCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     ref: banner,
     src: "/storage/img/Ad1.jpg",
-    width: "100%",
-    style: {
-      transition: "display 3s ease-out"
-    }
+    width: "100%"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden",
     style: {

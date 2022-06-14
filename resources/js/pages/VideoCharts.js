@@ -184,8 +184,7 @@ const VideoCharts = (props) => {
 					<img
 						ref={banner}
 						src="/storage/img/Ad1.jpg"
-						width="100%"
-						style={{ transition: "display 3s ease-out" }} />
+						width="100%" />
 				</div>
 				<div className="hidden"
 					style={{
