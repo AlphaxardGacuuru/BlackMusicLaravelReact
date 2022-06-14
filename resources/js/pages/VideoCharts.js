@@ -184,7 +184,9 @@ const VideoCharts = (props) => {
 					<img
 						ref={banner}
 						src="/storage/img/Ad1.jpg"
-						width="100%" />
+						width="100%"
+						loading="lazy"
+						alt="Banner" />
 				</div>
 				<div className="hidden"
 					style={{

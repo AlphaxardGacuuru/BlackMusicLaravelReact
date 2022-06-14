@@ -104825,7 +104825,9 @@ var VideoCharts = function VideoCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     ref: banner,
     src: "/storage/img/Ad1.jpg",
-    width: "100%"
+    width: "100%",
+    loading: "lazy",
+    alt: "Banner"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden",
     style: {
