@@ -94647,14 +94647,20 @@ var Messages = function Messages(_ref) {
   }, messages.map(function (message, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
-      className: "bg-success p-2 mt-2"
+      className: "bg-success p-2 mt-2",
+      style: {
+        boxShadow: "0 4px 8px 0 rgba(56, 193, 114, 0.5)",
+        transition: "0.3s"
+      }
     }, message);
   }), errors.map(function (error, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "p-2 mt-2",
       style: {
-        backgroundColor: "#232323"
+        backgroundColor: "#232323",
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
+        transition: "0.3s"
       }
     }, error);
   })));

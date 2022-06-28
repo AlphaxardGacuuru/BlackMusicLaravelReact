@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 |
 //  */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Auth::routes();
 
 // Social logins
@@ -24,10 +20,6 @@ Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallb
 
 // Update on Login Route
 Route::post('login/update', 'Auth\LoginController@update');
-
-// Register page
-// Route::get('register', 'Auth\LoginController@index');
-// Route::post('register', 'Auth\LoginController@register');
 
 Route::get('home', 'HomeController@index')->name('home');
 
