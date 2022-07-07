@@ -96042,9 +96042,9 @@ var Admin = function Admin(props) {
     className: "border-right border-dark"
   }, props.audios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark"
-  }, "KES ", props.boughtVideos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.boughtVideos.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark"
-  }, "KES ", props.boughtAudios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.boughtAudios.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark text-success"
   }, "KES ", props.boughtVideos.length * 20), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "border-right border-dark text-success"

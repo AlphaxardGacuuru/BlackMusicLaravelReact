@@ -80,9 +80,9 @@ const Admin = (props) => {
 							{/* Audios */}
 							<td className="border-right border-dark">{props.audios.length}</td>
 							{/* Videos Bought */}
-							<td className="border-right border-dark">KES {props.boughtVideos.length}</td>
+							<td className="border-right border-dark">{props.boughtVideos.length}</td>
 							{/* Audios Bought */}
-							<td className="border-right border-dark">KES {props.boughtAudios.length}</td>
+							<td className="border-right border-dark">{props.boughtAudios.length}</td>
 							{/* Video Revenue */}
 							<td className="border-right border-dark text-success">
 								KES {props.boughtVideos.length * 20}
