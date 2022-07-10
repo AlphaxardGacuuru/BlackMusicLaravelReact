@@ -10,7 +10,7 @@ const Settings = (props) => {
 	const [kopokopoRecipients, setKopokopoRecipients] = useState(props.getLocalStorage("kopokopoRecipients"))
 	const [referrals, setReferrals] = useState(props.getLocalStorage("referrals"))
 	const [songPayouts, setSongPayouts] = useState(props.getLocalStorage("songPayouts"))
-	const [loadBtn, setLoadBtn] = useState(false)
+	const [loadingBtn, setLoadingBtn] = useState(false)
 
 	// Fetch Kopokopo Recipients
 	useEffect(() => {
@@ -60,8 +60,9 @@ const Settings = (props) => {
 					axios.get(`/api/kopokopo-recipients`)
 						.then((res) => setKopokopoRecipients(res.data))
 					// Remove loading button
-					setLoadBtn(false)
+					setLoadingBtn(false)
 				}).catch((err) => {
+					setLoadingBtn(false)
 					const resErrors = err.response.data.errors
 					var resError
 					var newError = []
@@ -86,8 +87,9 @@ const Settings = (props) => {
 				axios.get(`/api/song-payouts`)
 					.then((res) => setSongPayouts(res.data))
 				// Remove loading button
-				setLoadBtn(false)
+				setLoadingBtn(false)
 			}).catch((err) => {
+				setLoadingBtn(false)
 				const resErrors = err.response.data.errors
 				var resError
 				var newError = []
@@ -140,49 +142,25 @@ const Settings = (props) => {
 							{kopokopoRecipients
 								.some((recipient) => recipient.username == props.auth.username &&
 									recipient.destination_reference) &&
-								<div>
-									{loadBtn ?
-										<button className="sonar-btn white-btn">
-											<div className="spinner-border text-light"
-												style={{
-													borderTopWidth: "2px",
-													borderBottomWidth: "2px",
-													borderLeftWidth: "2px",
-													width: "20px",
-													height: "20px",
-												}}>
-											</div>
-										</button> :
-										<Button
-											btnClass="sonar-btn white-btn"
-											onClick={() => {
-												onTransferFunds()
-												setLoadBtn(true)
-											}}
-											btnText="transfer funds" />}
-								</div>}
-						</div> :
-						<div>
-							{loadBtn ?
-								<button className="sonar-btn white-btn">
-									<div className="spinner-border text-light"
-										style={{
-											borderTopWidth: "2px",
-											borderBottomWidth: "2px",
-											borderLeftWidth: "2px",
-											width: "20px",
-											height: "20px",
-										}}>
-									</div>
-								</button> :
+								// Transfer funds button
 								<Button
 									btnClass="sonar-btn white-btn"
 									onClick={() => {
-										onCreateRecipient()
-										setLoadBtn(true)
+										onTransferFunds()
+										setLoadingBtn(true)
 									}}
-									btnText="create wallet" />}
-						</div>}
+									btnText="transfer funds"
+									loading={loadingBtn} />}
+						</div> :
+						// Create wallet button
+						<Button
+							btnClass="sonar-btn white-btn"
+							onClick={() => {
+								onCreateRecipient()
+								setLoadingBtn(true)
+							}}
+							btnText="create wallet"
+							loading={loadingBtn} />}
 					<br />
 					<hr className="border border-dark w-50" />
 					<br />

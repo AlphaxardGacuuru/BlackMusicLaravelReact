@@ -13,7 +13,7 @@ const AudioAlbumCreate = (props) => {
 	const [released, setReleased] = useState("")
 	const [preview, setPreview] = useState()
 	const [cover, setCover] = useState()
-	const [btnLoading, setBtnLoading] = useState()
+	const [loadingBtn, setLoadingBtn] = useState()
 
 	// Get history for page location
 	const history = useHistory()
@@ -37,7 +37,7 @@ const AudioAlbumCreate = (props) => {
 		e.preventDefault()
 
 		// Show loader for button
-		setBtnLoading(true)
+		setLoadingBtn(true)
 
 		// Add form data to FormData object
 		formData.append("name", name);
@@ -52,11 +52,11 @@ const AudioAlbumCreate = (props) => {
 					props.setMessages([res.data])
 					axios.get(`${props.url}/api/audio-albums`).then((res) => props.setAudioAlbums(res.data))
 					// Remove loader for button
-					setBtnLoading(false)
+					setLoadingBtn(false)
 					setTimeout(() => history.push('/audios'), 1000)
 				}).catch(err => {
 					// Remove loader for button
-					setBtnLoading(false)
+					setLoadingBtn(false)
 					const resErrors = err.response.data.errors
 
 					var resError
@@ -151,7 +151,7 @@ const AudioAlbumCreate = (props) => {
 											type="submit"
 											btnClass="sonar-btn"
 											btnText="create album"
-											loading={btnLoading} />
+											loading={loadingBtn} />
 
 										<br />
 										<br />

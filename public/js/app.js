@@ -96275,8 +96275,8 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      btnLoading = _useState10[0],
-      setBtnLoading = _useState10[1]; // Get history for page location
+      loadingBtn = _useState10[0],
+      setLoadingBtn = _useState10[1]; // Get history for page location
 
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Assign id to element
@@ -96296,7 +96296,7 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Show loader for button
 
-    setBtnLoading(true); // Add form data to FormData object
+    setLoadingBtn(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -96310,13 +96310,13 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
           return props.setAudioAlbums(res.data);
         }); // Remove loader for button
 
-        setBtnLoading(false);
+        setLoadingBtn(false);
         setTimeout(function () {
           return history.push('/audios');
         }, 1000);
       })["catch"](function (err) {
         // Remove loader for button
-        setBtnLoading(false);
+        setLoadingBtn(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -96417,7 +96417,7 @@ var AudioAlbumCreate = function AudioAlbumCreate(props) {
     type: "submit",
     btnClass: "sonar-btn",
     btnText: "create album",
-    loading: btnLoading
+    loading: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audios",
     className: "btn sonar-btn btn-2"
@@ -103887,8 +103887,8 @@ var Settings = function Settings(props) {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      loadBtn = _useState8[0],
-      setLoadBtn = _useState8[1]; // Fetch Kopokopo Recipients
+      loadingBtn = _useState8[0],
+      setLoadingBtn = _useState8[1]; // Fetch Kopokopo Recipients
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
@@ -103937,8 +103937,9 @@ var Settings = function Settings(props) {
           return setKopokopoRecipients(res.data);
         }); // Remove loading button
 
-        setLoadBtn(false);
+        setLoadingBtn(false);
       })["catch"](function (err) {
+        setLoadingBtn(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -103966,8 +103967,9 @@ var Settings = function Settings(props) {
           return setSongPayouts(res.data);
         }); // Remove loading button
 
-        setLoadBtn(false);
+        setLoadingBtn(false);
       })["catch"](function (err) {
+        setLoadingBtn(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -104022,43 +104024,29 @@ var Settings = function Settings(props) {
     return recipient.username == props.auth.username;
   }) ? songPayouts.balance > props.auth.withdrawal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, kopokopoRecipients.some(function (recipient) {
     return recipient.username == props.auth.username && recipient.destination_reference;
-  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "sonar-btn white-btn"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "spinner-border text-light",
-    style: {
-      borderTopWidth: "2px",
-      borderBottomWidth: "2px",
-      borderLeftWidth: "2px",
-      width: "20px",
-      height: "20px"
-    }
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }) &&
+  /*#__PURE__*/
+  // Transfer funds button
+  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnClass: "sonar-btn white-btn",
     onClick: function onClick() {
       onTransferFunds();
-      setLoadBtn(true);
+      setLoadingBtn(true);
     },
-    btnText: "transfer funds"
-  }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, loadBtn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-    className: "sonar-btn white-btn"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "spinner-border text-light",
-    style: {
-      borderTopWidth: "2px",
-      borderBottomWidth: "2px",
-      borderLeftWidth: "2px",
-      width: "20px",
-      height: "20px"
-    }
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    btnText: "transfer funds",
+    loading: loadingBtn
+  })) :
+  /*#__PURE__*/
+  // Create wallet button
+  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnClass: "sonar-btn white-btn",
     onClick: function onClick() {
       onCreateRecipient();
-      setLoadBtn(true);
+      setLoadingBtn(true);
     },
-    btnText: "create wallet"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", {
+    btnText: "create wallet",
+    loading: loadingBtn
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", {
     className: "border border-dark w-50"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
     id: "invites"
@@ -104216,8 +104204,8 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      btnLoading = _useState10[0],
-      setBtnLoading = _useState10[1]; // Get history for page location
+      loadingBtn = _useState10[0],
+      setLoadingBtn = _useState10[1]; // Get history for page location
 
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Assign id to element
@@ -104237,7 +104225,7 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Show loader for button
 
-    setBtnLoading(true); // Add form data to FormData object
+    setLoadingBtn(true); // Add form data to FormData object
 
     formData.append("name", name);
     formData.append("released", released);
@@ -104251,13 +104239,13 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
           return props.setVideoAlbums(res.data);
         }); // Remove loader for button
 
-        setBtnLoading(false);
+        setLoadingBtn(false);
         setTimeout(function () {
           return history.push('/videos');
         }, 1000);
       })["catch"](function (err) {
         // Remove loader for button
-        setBtnLoading(false);
+        setLoadingBtn(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -104357,7 +104345,7 @@ var VideoAlbumCreate = function VideoAlbumCreate(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     btnText: "create album",
-    loading: btnLoading
+    loading: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/videos",
     className: "btn sonar-btn btn-2"
@@ -105352,8 +105340,8 @@ var VideoCreate = function VideoCreate(props) {
 
   var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState20 = _slicedToArray(_useState19, 2),
-      btnLoading = _useState20[0],
-      setBtnLoading = _useState20[1]; // Get csrf token
+      loadingBtn = _useState20[0],
+      setLoadingBtn = _useState20[1]; // Get csrf token
 
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
@@ -105365,7 +105353,7 @@ var VideoCreate = function VideoCreate(props) {
   var onSubmit = function onSubmit(e) {
     e.preventDefault(); // Show loader for button
 
-    setBtnLoading(true); // Add form data to FormData object
+    setLoadingBtn(true); // Add form data to FormData object
 
     formData.append("video", video);
     formData.append("thumbnail", thumbnail);
@@ -105386,13 +105374,13 @@ var VideoCreate = function VideoCreate(props) {
           return props.setVideos(res.data);
         }); // Remove loader for button
 
-        setBtnLoading(false);
+        setLoadingBtn(false);
         setTimeout(function () {
           return history.push('/videos');
         }, 1000);
       })["catch"](function (err) {
         // Remove loader for button
-        setBtnLoading(false);
+        setLoadingBtn(false);
         var resErrors = err.response.data.errors;
         var resError;
         var newError = [];
@@ -105680,7 +105668,7 @@ var VideoCreate = function VideoCreate(props) {
     }
   }, " ", props.auth.phone), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     btnText: "upload video",
-    loading: btnLoading
+    loading: loadingBtn
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "reset",
     className: "sonar-btn"
