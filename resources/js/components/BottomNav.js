@@ -23,7 +23,9 @@ const Bottomnav = (props) => {
 	var checkLocation = true
 
 	// Hide BottomNav from various pages
-	location.pathname.match("/privacy-policy") ||
+	location.pathname.match("/karaoke-show") ||
+		location.pathname.match("/karaoke-create") ||
+		location.pathname.match("/privacy-policy") ||
 		location.pathname.match("/download-app") ||
 		location.pathname.match("/chat/") ||
 		location.pathname.match("/post-edit") ||

@@ -2,6 +2,7 @@ body {
     font-family: "Roboto", sans-serif;
     overflow-x: hidden;
 	background-color: #000;
+	max-width: 100%;
 }
 
 h1,
@@ -1361,11 +1362,6 @@ div.hidden-scroll span {
     margin: 0px;
 }
 
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -1654,3 +1650,26 @@ html, body {
 	opacity: 0.5;
 }
 /* Overwrite Bootstrap dropdown hover color End */
+
+/* Karaoke Overlay */
+.karaoke-overlay {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+/* Karaoke Overlay End */
+
+/* Rotating Image */
+.rotate-record {
+	animation: rotation 10s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+/* Rotating Image End */

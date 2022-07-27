@@ -25,6 +25,9 @@ import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import PostEdit from '../pages/PostEdit'
 
+import KaraokeShow from '../pages/KaraokeShow'
+import KaraokeCreate from '../pages/KaraokeCreate'
+
 import VideoCharts from '../pages/VideoCharts'
 import VideoShow from '../pages/VideoShow'
 import Videos from '../pages/Videos'
@@ -930,6 +933,10 @@ function App() {
 						{showLoginPopUp}
 					</>
 				)} />
+
+				{/* Karaoke Routes */}
+				<Route path="/karaoke-create" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
+				<Route path="/karaoke-show" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />

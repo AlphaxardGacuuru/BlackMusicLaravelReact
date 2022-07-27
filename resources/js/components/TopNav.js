@@ -83,7 +83,9 @@ const TopNav = (props) => {
 	var display
 
 	// Hide TopNav from various pages
-	location.pathname.match("/privacy-policy") ||
+	location.pathname.match("/karaoke-show") ||
+		location.pathname.match("/karaoke-create") ||
+		location.pathname.match("/privacy-policy") ||
 		location.pathname.match("/download-app") ||
 		location.pathname.match("/chat/") ||
 		location.pathname.match("/post-edit") ||
@@ -97,6 +99,97 @@ const TopNav = (props) => {
 	return (
 		<>
 			<div id="MyElement" style={{ display: display }} className={menu}>
+
+				{/* <!-- ***** Header Area Start ***** --> */}
+				<header style={{ backgroundColor: "#232323" }} className="header-area">
+					<div className="container-fluid p-0">
+						<div className="row">
+							<div className="col-12" style={{ padding: "0" }}>
+								<div className="menu-area d-flex justify-content-between">
+									{/* <!-- Logo Area  --> */}
+									<div className="logo-area">
+										<Link to="/">Black Music</Link>
+									</div>
+									{/* <-- Search Form --> */}
+									<div className="contact-form hidden">
+										<input
+											name="search"
+											className="form-control"
+											placeholder="Search songs and artists"
+											style={{
+												textColor: "white",
+												color: "white",
+												width: "400px"
+											}}
+											onChange={(e) => {
+												var regex = new RegExp(e.target.value, 'gi');
+												props.setSearch(regex)
+												history.push("/search")
+											}} />
+									</div>
+									{/* Search Form End */}
+									<div className="menu-content-area d-flex align-items-center">
+										{/* <!-- Header Social Area --> */}
+										<div className="header-social-area d-flex align-items-center">
+											{props.auth.username == "@guest" ?
+												<Link className="display-4"
+													to="#"
+													onClick={() => props.setLogin(true)}>
+													Login
+												</Link> :
+												<TopnavLinks
+													{...props}
+													bottomMenu={bottomMenu}
+													setBottomMenu={setBottomMenu}
+													avatarVisibility={avatarVisibility}
+													setAvatarVisibility={setAvatarVisibility}
+													notificationVisibility={notificationVisibility}
+													setNotificationVisibility={setNotificationVisibility}
+													notifications={notifications}
+													setNotifications={setNotifications}
+													vidCartItems={vidCartItems}
+													audCartItems={audCartItems}
+													cartItems={cartItems}
+													logout={logout}
+													onNotification={onNotification}
+													onDeleteNotifications={onDeleteNotifications} />}
+										</div>
+										{/* <!-- Menu Icon --> */}
+										<a href="#"
+											className="hidden"
+											id="menuIcon"
+											onClick={(e) => {
+												e.preventDefault()
+												setMenu("menu-open")
+											}}>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="25"
+												height="25"
+												fill="#fff"
+												className="bi bi-list"
+												viewBox="0 0 16 16">
+												<path fillRule="evenodd"
+													d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<br />
+				<br />
+				{/* Remove for profile page for better background image */}
+				{location.pathname.match(/profile/) ||
+					location.pathname.match(/video-charts/) ||
+					location.pathname.match(/audio-charts/) ?
+					<br className="hidden" /> :
+					<span>
+						<br />
+						<br className="hidden" />
+					</span>}
 				{/* <!-- ***** Main Menu Area Start ***** --> */}
 				<div className="mainMenu d-flex align-items-center justify-content-between">
 					{/* <!-- Close Icon --> */}
@@ -195,97 +288,6 @@ const TopNav = (props) => {
 					<br />
 				</div>
 				{/* <!-- ***** Main Menu Area End ***** --> */}
-
-				{/* <!-- ***** Header Area Start ***** --> */}
-				<header style={{ backgroundColor: "#232323" }} className="header-area">
-					<div className="container-fluid p-0">
-						<div className="row">
-							<div className="col-12" style={{ padding: "0" }}>
-								<div className="menu-area d-flex justify-content-between">
-									{/* <!-- Logo Area  --> */}
-									<div className="logo-area">
-										<Link to="/">Black Music</Link>
-									</div>
-									{/* <-- Search Form --> */}
-									<div className="contact-form hidden">
-										<input
-											name="search"
-											className="form-control"
-											placeholder="Search songs and artists"
-											style={{
-												textColor: "white",
-												color: "white",
-												width: "400px"
-											}}
-											onChange={(e) => {
-												var regex = new RegExp(e.target.value, 'gi');
-												props.setSearch(regex)
-												history.push("/search")
-											}} />
-									</div>
-									{/* Search Form End */}
-									<div className="menu-content-area d-flex align-items-center">
-										{/* <!-- Header Social Area --> */}
-										<div className="header-social-area d-flex align-items-center">
-											{props.auth.username == "@guest" ?
-												<Link className="display-4"
-													to="#"
-													onClick={() => props.setLogin(true)}>
-													Login
-												</Link> :
-												<TopnavLinks
-													{...props}
-													bottomMenu={bottomMenu}
-													setBottomMenu={setBottomMenu}
-													avatarVisibility={avatarVisibility}
-													setAvatarVisibility={setAvatarVisibility}
-													notificationVisibility={notificationVisibility}
-													setNotificationVisibility={setNotificationVisibility}
-													notifications={notifications}
-													setNotifications={setNotifications}
-													vidCartItems={vidCartItems}
-													audCartItems={audCartItems}
-													cartItems={cartItems}
-													logout={logout}
-													onNotification={onNotification}
-													onDeleteNotifications={onDeleteNotifications} />}
-										</div>
-										{/* <!-- Menu Icon --> */}
-										<a href="#"
-											className="hidden"
-											id="menuIcon"
-											onClick={(e) => {
-												e.preventDefault()
-												setMenu("menu-open")
-											}}>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="25"
-												height="25"
-												fill="#fff"
-												className="bi bi-list"
-												viewBox="0 0 16 16">
-												<path fillRule="evenodd"
-													d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-											</svg>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</header>
-				<br />
-				<br />
-				{/* Remove for profile page for better background image */}
-				{location.pathname.match(/profile/) ||
-					location.pathname.match(/video-charts/) ||
-					location.pathname.match(/audio-charts/) ?
-					<br className="hidden" /> :
-					<span>
-						<br />
-						<br className="hidden" />
-					</span>}
 			</div>
 
 			{/* Sliding Bottom Nav */}

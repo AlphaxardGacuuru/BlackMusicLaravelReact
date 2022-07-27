@@ -13,7 +13,7 @@ const Messages = ({ messages, errors }) => {
 						key={key}
 						className="bg-success p-2 mt-2"
 						style={{
-							boxShadow: "0 4px 8px 0 rgba(56, 193, 114, 0.5)",
+							boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
 							transition: "0.3s"
 						}}>
 						{message}

@@ -707,7 +707,7 @@ const Index = (props) => {
 										{/* Share Post */}
 										<span
 											className="ml-5"
-											style={{ color: "rgba(220, 220, 220, 1)" }}
+											style={{ fontSize: "1.3em", color: "rgba(220, 220, 220, 1)" }}
 											onClick={() => onShare(post)}>
 											<ShareSVG />
 										</span>
