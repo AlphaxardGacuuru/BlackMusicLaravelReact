@@ -17,11 +17,9 @@ const KaraokeCreate = () => {
 	const video = useRef(null)
 
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("environment")
+	const [camera, setCamera] = useState("user")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
-
-	console.log(camera)
 
 	// Older browsers might not implement mediaDevices at all, so we set an empty object first
 	if (navigator.mediaDevices === undefined) {
@@ -50,7 +48,15 @@ const KaraokeCreate = () => {
 		}
 	}
 
-	const constraints = { audio: false, video: { facingMode: camera } }
+	const constraints = {
+		audio: false,
+		video: {
+			facingMode: { exact: camera },
+			width: { min: 1280, ideal: 1920, max: 2560 },
+			height: { min: 720, ideal: 1080, max: 1440 },
+			frameRate: { min: 24 }
+		}
+	}
 
 	navigator.mediaDevices.getUserMedia(constraints)
 		.then((stream) => {
@@ -107,6 +113,7 @@ const KaraokeCreate = () => {
 						<div className="p-2 mr-1">
 							<Link to="/" style={{ fontSize: "1.8em" }}>
 								<FlashSVG />
+								<h6>{flash}</h6>
 							</Link>
 						</div>
 					</div>

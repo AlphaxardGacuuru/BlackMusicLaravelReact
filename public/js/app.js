@@ -101478,7 +101478,7 @@ var KaraokeCreate = function KaraokeCreate() {
       flash = _useState2[0],
       setFlash = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("environment"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("user"),
       _useState4 = _slicedToArray(_useState3, 2),
       camera = _useState4[0],
       setCamera = _useState4[1];
@@ -101491,9 +101491,8 @@ var KaraokeCreate = function KaraokeCreate() {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       record = _useState8[0],
-      setRecord = _useState8[1];
+      setRecord = _useState8[1]; // Older browsers might not implement mediaDevices at all, so we set an empty object first
 
-  console.log(camera); // Older browsers might not implement mediaDevices at all, so we set an empty object first
 
   if (navigator.mediaDevices === undefined) {
     navigator.mediaDevices = {};
@@ -101522,7 +101521,22 @@ var KaraokeCreate = function KaraokeCreate() {
   var constraints = {
     audio: false,
     video: {
-      facingMode: camera
+      facingMode: {
+        exact: camera
+      },
+      width: {
+        min: 1280,
+        ideal: 1920,
+        max: 2560
+      },
+      height: {
+        min: 720,
+        ideal: 1080,
+        max: 1440
+      },
+      frameRate: {
+        min: 24
+      }
     }
   };
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
@@ -101587,7 +101601,7 @@ var KaraokeCreate = function KaraokeCreate() {
     style: {
       fontSize: "1.8em"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "karaoke-overlay w-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-column mb-2"
