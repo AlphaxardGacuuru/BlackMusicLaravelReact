@@ -17,7 +17,7 @@ const KaraokeCreate = () => {
 	const video = useRef(null)
 
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("user")
+	const [camera, setCamera] = useState("environment")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
 

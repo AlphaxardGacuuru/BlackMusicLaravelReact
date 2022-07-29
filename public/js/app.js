@@ -101478,7 +101478,7 @@ var KaraokeCreate = function KaraokeCreate() {
       flash = _useState2[0],
       setFlash = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("user"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("environment"),
       _useState4 = _slicedToArray(_useState3, 2),
       camera = _useState4[0],
       setCamera = _useState4[1];
