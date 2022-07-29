@@ -101524,16 +101524,8 @@ var KaraokeCreate = function KaraokeCreate() {
       facingMode: {
         exact: camera
       },
-      width: {
-        min: 1280,
-        ideal: 1920,
-        max: 2560
-      },
-      height: {
-        min: 720,
-        ideal: 1080,
-        max: 1440
-      },
+      // width: { min: 1280, ideal: 1920, max: 2560 },
+      // height: { min: 720, ideal: 1080, max: 1440 },
       frameRate: {
         min: 24
       }
@@ -101557,7 +101549,8 @@ var KaraokeCreate = function KaraokeCreate() {
 
     var imageCapture = new ImageCapture(track);
     imageCapture.getPhotoCapabilities().then(function (capabilities) {
-      // Check if camera has a torch
+      setFlash(capabilities.fillLightMode); // Check if camera has a torch
+
       if (capabilities.fillLightMode) {
         // auto, off, or flash
         setFlash(capabilities.fillLightMode);
