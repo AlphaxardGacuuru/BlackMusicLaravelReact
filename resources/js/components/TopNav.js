@@ -183,6 +183,7 @@ const TopNav = (props) => {
 				<br />
 				{/* Remove for profile page for better background image */}
 				{location.pathname.match(/profile/) ||
+					location.pathname.match(/karaoke-charts/) ||
 					location.pathname.match(/video-charts/) ||
 					location.pathname.match(/audio-charts/) ?
 					<br className="hidden" /> :

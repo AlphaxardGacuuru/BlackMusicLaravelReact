@@ -16,6 +16,13 @@ const KaraokeCreate = () => {
 	// ID for video element
 	const video = useRef(null)
 
+	const [flash, setFlash] = useState()
+	const [camera, setCamera] = useState("user")
+	const [timer, setTimer] = useState()
+	const [record, setRecord] = useState()
+
+	console.log(camera)
+
 	// Older browsers might not implement mediaDevices at all, so we set an empty object first
 	if (navigator.mediaDevices === undefined) {
 		navigator.mediaDevices = {};
@@ -43,7 +50,9 @@ const KaraokeCreate = () => {
 		}
 	}
 
-	navigator.mediaDevices.getUserMedia({ video: true })
+	const constraints = { audio: false, video: { facingMode: camera } }
+
+	navigator.mediaDevices.getUserMedia(constraints)
 		.then((stream) => {
 			// Older browsers may not have srcObject
 			if ("srcObject" in video.current) {
@@ -56,8 +65,21 @@ const KaraokeCreate = () => {
 			video.current.onloadedmetadata = (e) => {
 				video.current.play();
 			};
-		})
-		.catch(function (err) {
+
+			const track = stream.getVideoTracks()[0];
+
+			//Create image capture object and get camera capabilities
+			const imageCapture = new ImageCapture(track)
+
+			imageCapture.getPhotoCapabilities().then((capabilities) => {
+				// Check if camera has a torch
+				if (capabilities.fillLightMode) {
+					// auto, off, or flash
+					setFlash(capabilities.fillLightMode)
+				}
+			});
+
+		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);
 		});
 
@@ -77,12 +99,12 @@ const KaraokeCreate = () => {
 					<div className="d-flex justify-content-between">
 						{/* Close Icon */}
 						<div className="p-2">
-							<Link to="/" style={{ fontSize: "1.5em" }}>
+							<Link to="/karaoke-charts" style={{ fontSize: "1.5em" }}>
 								<CloseSVG />
 							</Link>
 						</div>
 						{/* Flash Light */}
-						<div className="p-2">
+						<div className="p-2 mr-1">
 							<Link to="/" style={{ fontSize: "1.8em" }}>
 								<FlashSVG />
 							</Link>
@@ -97,14 +119,24 @@ const KaraokeCreate = () => {
 						{/* Flip Camera */}
 						<div className="ml-auto mr-2">
 							<center>
-								<span style={{ fontSize: "2.2em" }}><LoopSVG /></span>
+								<span
+									style={{ fontSize: "2.2em" }}
+									onClick={() => {
+										setCamera(camera == "user" ? "environment" : "user")
+									}}>
+									<LoopSVG />
+								</span>
 								<h6>Flip</h6>
 							</center>
 						</div>
 						{/* Timer  */}
 						<div className="ml-auto mr-2">
 							<center>
-								<span style={{ fontSize: "2em" }}><TimerSVG /></span>
+								<span
+									style={{ fontSize: "2em" }}
+									onClick={() => setTimer(3)}>
+									<TimerSVG />
+								</span>
 								<h6>Timer</h6>
 							</center>
 						</div>

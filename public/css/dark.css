@@ -1,4 +1,4 @@
-body {
+html, body {
     font-family: "Roboto", sans-serif;
     overflow-x: hidden;
 	background-color: #000;
@@ -1313,14 +1313,18 @@ div.hidden-scroll span {
 /* crop thumbnails */
 .thumbnail {
     width: 160px;
-    /* width of container */
     height: 90px;
-    /* height of container */
     overflow: hidden;
 }
 
 .thumbnail img {
     margin: 0px 0px 0px 0px;
+}
+
+.karaoke-thumbnail {
+    width: 90px;
+    height: 220px;
+    overflow: hidden;
 }
 
 /* crop avatar thumbnails */

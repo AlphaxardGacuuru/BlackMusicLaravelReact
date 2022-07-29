@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
+import Carousel from '../components/Carousel'
 import Img from '../components/Img'
 import Button from '../components/Button'
 import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
@@ -25,27 +26,10 @@ const AudioCharts = (props) => {
 				props.setAudios(res.data)
 				props.setLocalStorage("audios", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch audios"]))
-
-		// Set interval for changing images
-		// const bannerImages = [
-		// 	"/storage/img/Ad1.jpg",
-		// 	"/storage/img/PSX_20220206_210037.jpg",
-		// 	"/storage/img/PSX_20220206_205615.jpg",
-		// 	"/storage/img/PSX_20220206_205133.jpg"
-		// ]
-		// var index = 0
-		// const bannerSwitch = setInterval(() => {
-		// 	banner.current.src = bannerImages[index++ % bannerImages.length]
-		// }, 3000);
-
-		// return () => {
-		// 	clearInterval(bannerSwitch)
-		// }
 	}, [])
 
 	const history = useHistory()
 	const location = useLocation()
-	const banner = useRef()
 
 	//Declare States 
 	const [chart, setChart] = useState("Newly Released")
@@ -176,86 +160,16 @@ const AudioCharts = (props) => {
 
 	return (
 		<>
-			<div className="d-flex mt-2">
-				<div className="anti-hidden"
-					style={{
-						width: "100%",
-						height: window.innerHeight * 0.75,
-						overflow: "hidden",
-					}}>
-					<img
-						ref={banner}
-						src="/storage/img/Ad1.jpg"
-						width="100%" />
-				</div>
-				<div className="hidden"
-					style={{
-						width: "100%",
-						height: window.innerHeight * 0.75,
-						overflow: "hidden"
-					}}>
-					<Img src="/storage/img/Ad1.jpg" width="100%" />
-				</div>
-				<div className="hidden"
-					style={{
-						width: "100%",
-						height: window.innerHeight * 0.75,
-						overflow: "hidden"
-					}}>
-					<Img src="/storage/img/PSX_20220206_210037.jpg" width="100%" />
-				</div>
-				<div className="hidden"
-					style={{
-						width: "100%",
-						height: window.innerHeight * 0.75,
-						overflow: "hidden"
-					}}>
-					<Img src="/storage/img/PSX_20220206_205615.jpg" width="100%" />
-				</div>
-				<div className="hidden"
-					style={{
-						width: "100%",
-						height: window.innerHeight * 0.75,
-						overflow: "hidden"
-					}}>
-					<Img src="/storage/img/PSX_20220206_205133.jpg" width="100%" />
-				</div>
-				{/* Overlay gradient */}
-				<div className="mt-2" style={{
-					position: "absolute",
-					zIndex: "1",
-					top: 0,
-					right: 0,
-					left: 0,
-					bottom: 0,
-					height: window.innerHeight * 0.85,
-					backgroundImage: "linear-gradient(to bottom, rgba(35, 35, 35, 1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0, 0, 0, 1))"
-				}}>
-					{/* <div
-						className="d-flex justify-content-between"
-						style={{
-							position: "absolute",
-							zIndex: "1",
-							right: 0,
-							left: 0,
-							bottom: 50
-						}}>
-						<div className="p-2">
-							<h3>Kenya's best</h3>
-						</div>
-						<div className="p-2">
-							<Button
-								btnClass="mysonar-btn"
-								btnStyle={{ backgroundColor: "transparent" }}
-								btnText="Button" />
-						</div>
-					</div> */}
-				</div>
-			</div>
+			<Carousel />
 			<br />
 
 			{/* <!-- Scroll menu - */}
 			<div id="chartsMenu" className="hidden-scroll mt-2">
+				<span>
+					<Link to="/karaoke-charts">
+						<h3>Karaoke</h3>
+					</Link>
+				</span>
 				<span>
 					<Link to="/video-charts">
 						<h3>Videos</h3>

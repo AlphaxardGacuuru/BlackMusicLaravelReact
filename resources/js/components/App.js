@@ -25,6 +25,7 @@ import PostCreate from '../pages/PostCreate'
 import PostShow from '../pages/PostShow'
 import PostEdit from '../pages/PostEdit'
 
+import KaraokeCharts from '../pages/KaraokeCharts'
 import KaraokeShow from '../pages/KaraokeShow'
 import KaraokeCreate from '../pages/KaraokeCreate'
 
@@ -935,6 +936,7 @@ function App() {
 				)} />
 
 				{/* Karaoke Routes */}
+				<Route path="/karaoke-charts" exact render={(props) => (<KaraokeCharts {...GLOBAL_STATE} />)} />
 				<Route path="/karaoke-create" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
 				<Route path="/karaoke-show" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
 

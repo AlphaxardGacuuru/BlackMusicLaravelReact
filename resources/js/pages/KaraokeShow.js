@@ -77,13 +77,22 @@ const KaraokeShow = () => {
 					height: window.innerHeight,
 					overflow: "hidden"
 				}}>
-				<video src={videoItem.video}></video>
+				<video
+					src={videoItem.video}
+					width="100%"
+					loading="lazy"
+					preload="none"
+					autoPlay
+					muted
+					loop
+					playsInline>
+				</video>
 				{/* Floating Video Info Top */}
 				<div style={{ position: "absolute", top: 0 }}>
 					<div className="d-flex">
 						{/* Close Icon */}
 						<div className="p-2">
-							<Link to="/">
+							<Link to="/karaoke-charts" style={{ fontSize: "1.5em" }}>
 								<CloseSVG />
 							</Link>
 						</div>
