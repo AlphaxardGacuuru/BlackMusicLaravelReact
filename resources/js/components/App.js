@@ -234,7 +234,7 @@ function App() {
 			axios.post(`/api/follows`, {
 				musician: musician
 			}).then((res) => {
-				messages.push(res.data)
+				setMessages([res.data])
 				// Update users
 				axios.get(`/api/users`)
 					.then((res) => {
@@ -293,7 +293,7 @@ function App() {
 			axios.post(`/api/cart-videos`, {
 				video: video
 			}).then((res) => {
-				messages.push(res.data)
+				setMessages([res.data])
 				// Update Videos
 				axios.get(`/api/videos`)
 					.then((res) => {
@@ -359,7 +359,7 @@ function App() {
 			axios.post(`/api/cart-audios`, {
 				audio: audio
 			}).then((res) => {
-				messages.push(res.data)
+				setMessages([res.data])
 				// Update Audios
 				axios.get(`/api/audios`)
 					.then((res) => {
@@ -643,7 +643,7 @@ function App() {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`/api${urlTo}`, formData)
 				.then((res) => {
-					setMessages(res.data)
+					setMessages([res.data])
 					// Updated State One
 					axios.get(`/api${urlTo}`)
 						.then((res) => stateToUpdate(res.data))
@@ -763,7 +763,7 @@ function App() {
 							auth: parsed.keys.auth,
 							p256dh: parsed.keys.p256dh,
 						}).then((res) => {
-							setMessages(res.data)
+							setMessages([res.data])
 						}).catch((err) => {
 							const resErrors = err.response.data.errors
 							var resError
@@ -937,8 +937,8 @@ function App() {
 
 				{/* Karaoke Routes */}
 				<Route path="/karaoke-charts" exact render={(props) => (<KaraokeCharts {...GLOBAL_STATE} />)} />
-				<Route path="/karaoke-create" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
-				<Route path="/karaoke-show" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
+				<Route path="/karaoke-create/:audio" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
+				<Route path="/karaoke-show/:id" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />

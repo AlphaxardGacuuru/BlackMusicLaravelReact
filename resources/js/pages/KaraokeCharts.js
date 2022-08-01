@@ -7,63 +7,20 @@ import PlusSVG from '../svgs/PlusSVG'
 
 const KaraokeCharts = (props) => {
 
-	const user = {
-		"id": 4,
-		"name": "Black Music",
-		"username": "@blackmusic",
-		"account_type": "musician",
-		"pp": "/storage/profile-pics/1CY5klslqGjjEnRQiGFw5yOz1z4TQM31Wnut4OFp.jpg",
-		"bio": "Changing the music scene.",
-		"withdrawal": "1000",
-		"posts": 1,
-		"following": 4,
-		"fans": 154,
-		"hasFollowed": true,
-		"hasBought1": false,
-		"decos": 0,
-		"updated_at": "04 Jan 2022",
-		"created_at": "30 Nov -0001"
-	}
+	const [karaokes, setKaraokes] = useState([])
+	const [week, setWeek] = useState(0)
+	const weeks = [0, 1, 2, 3, 4, 5]
 
-	const videoItem = [{
-		"id": 91,
-		"video": "storage/karaoke/e66dcdc190f3e041a04aec9443118d0c.mp4",
-		"name": "Kenyan Shrap Gang Type Beat Supreme",
-		"username": "@sammyking",
-		"ft": "",
-		"album_id": "15",
-		"album": "Singles",
-		"genre": "Hiphop",
-		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-		"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. In dolor quas ipsum, iste quidem mollitia amet suscipit aut fuga eveniet distinctio minima alias maiores sunt soluta magnam possimus est aliquam.",
-		"released": null,
-		"hasLiked": true,
-		"likes": 2,
-		"inCart": true,
-		"hasBoughtVideo": false,
-		"downloads": 4,
-		"comments": 5,
-		"created_at": "08 May 2020"
-	}, {
-		"id": 91,
-		"video": "storage/karaoke/e66dcdc190f3e041a04aec9443118d0c.mp4",
-		"name": "Kenyan Shrap Gang Type Beat Supreme",
-		"username": "@sammyking",
-		"ft": "",
-		"album_id": "15",
-		"album": "Singles",
-		"genre": "Hiphop",
-		"thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-		"description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. In dolor quas ipsum, iste quidem mollitia amet suscipit aut fuga eveniet distinctio minima alias maiores sunt soluta magnam possimus est aliquam.",
-		"released": null,
-		"hasLiked": true,
-		"likes": 2,
-		"inCart": true,
-		"hasBoughtVideo": false,
-		"downloads": 4,
-		"comments": 5,
-		"created_at": "08 May 2020"
-	}]
+	axios.defaults.baseURL = props.url
+
+	useEffect(() => {
+		// Fetch Karaokes
+		axios.get(`/api/karaokes`)
+			.then((res) => {
+				setKaraokes(res.data)
+				// props.setLocalStorage("videos", res.data)
+			}).catch(() => props.setErrors(["Failed to fetch karaokes"]))
+	}, [])
 
 	// Random array for dummy loading elements
 	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -71,7 +28,7 @@ const KaraokeCharts = (props) => {
 	return (
 		<>
 			<Link
-				to="karaoke-create"
+				to="karaoke-create/15"
 				id="chatFloatBtn">
 				<PlusSVG />
 			</Link>
@@ -98,14 +55,37 @@ const KaraokeCharts = (props) => {
 				</span>
 			</div>
 
+			{/* Week */}
+			<div id="chartsMenu" className="hidden-scroll m-0">
+				{weeks.map((weekItem, key) => (
+					<span key={key}>
+						<a href="#" onClick={(e) => {
+							e.preventDefault()
+							setWeek(weekItem++)
+						}}>
+							<h5 className={week == weekItem ?
+								"active-scrollmenu m-0" :
+								"m-0"}>
+								{weekItem == 0 ?
+									"This Week" :
+									weekItem == 1 ?
+										"Last week" :
+										weekItem + " weeks ago"}
+							</h5>
+						</a>
+					</span>
+				))}
+			</div>
+			{/* Week End */}
+
 			<div className="row">
 				<div className="col-sm-4"></div>
 				<div className="col-sm-4">
 					<div className="d-flex justify-content-center flex-wrap">
-						{/* Loading Video items */}
+						{/* Loading Karaoke items */}
 						{dummyArray
-							.filter(() => props.videos.length < 1)
-							.map((item, key) => (
+							.filter(() => karaokes.length < 1)
+							.map((karaoke, key) => (
 								<div key={key}
 									className="m-1"
 									style={{
@@ -131,13 +111,13 @@ const KaraokeCharts = (props) => {
 								</div>
 							))}
 					</div>
-					{/* Loading Video Items End */}
+					{/* Loading Karaoke Items End */}
 
 					{/* Karaoke Items */}
 					<div className="d-flex justify-content-center flex-wrap">
-						{/* Loading Video items */}
-						{videoItem
-							.map((item, key) => (
+						{/* Loading Karaoke items */}
+						{karaokes
+							.map((karaoke, key) => (
 								<div key={key}
 									className="m-1"
 									style={{
@@ -146,9 +126,9 @@ const KaraokeCharts = (props) => {
 										width: "45%"
 									}}>
 									<div className="w-100">
-										<Link to="karaoke-show">
+										<Link to={`karaoke-show/${karaoke.id}`}>
 											<video
-												src={item.video}
+												src={`/storage/${karaoke.karaoke}`}
 												width="100%"
 												preload="none"
 												autoPlay
@@ -165,9 +145,9 @@ const KaraokeCharts = (props) => {
 											overflow: "hidden",
 											textOverflow: "clip",
 										}}>
-										{item.name}
+										{karaoke.name}
 									</h6>
-									<h6 className="mt-0 mx-1 mb-2 px-1 py-0 w-50">{user.username}</h6>
+									<h6 className="mt-0 mx-1 mb-2 px-1 py-0">{karaoke.username}</h6>
 								</div>
 							))}
 					</div>

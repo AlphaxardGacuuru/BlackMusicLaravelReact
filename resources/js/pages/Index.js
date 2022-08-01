@@ -60,7 +60,7 @@ const Index = (props) => {
 			axios.post(`/api/post-likes`, {
 				post: post
 			}).then((res) => {
-				props.message.push(res.data)
+				props.setMessages([res.data])
 				// Update posts
 				axios.get(`/api/posts`)
 					.then((res) => props.setPosts(res.data))

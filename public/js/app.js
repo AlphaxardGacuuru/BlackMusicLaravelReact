@@ -93027,7 +93027,7 @@ function App() {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/follows", {
         musician: musician
       }).then(function (res) {
-        messages.push(res.data); // Update users
+        setMessages([res.data]); // Update users
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/users").then(function (res) {
           setUsers(res.data);
@@ -93084,7 +93084,7 @@ function App() {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-videos", {
         video: video
       }).then(function (res) {
-        messages.push(res.data); // Update Videos
+        setMessages([res.data]); // Update Videos
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
           setVideos(res.data);
@@ -93146,7 +93146,7 @@ function App() {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/cart-audios", {
         audio: audio
       }).then(function (res) {
-        messages.push(res.data); // Update Audios
+        setMessages([res.data]); // Update Audios
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
           setAudios(res.data);
@@ -93559,7 +93559,7 @@ function App() {
 
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('sanctum/csrf-cookie').then(function () {
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api".concat(urlTo), formData).then(function (res) {
-        setMessages(res.data); // Updated State One
+        setMessages([res.data]); // Updated State One
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api".concat(urlTo)).then(function (res) {
           return stateToUpdate(res.data);
@@ -93684,7 +93684,7 @@ function App() {
             auth: parsed.keys.auth,
             p256dh: parsed.keys.p256dh
           }).then(function (res) {
-            setMessages(res.data);
+            setMessages([res.data]);
           })["catch"](function (err) {
             var resErrors = err.response.data.errors;
             var resError;
@@ -93832,13 +93832,13 @@ function App() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_KaraokeCharts__WEBPACK_IMPORTED_MODULE_22__["default"], GLOBAL_STATE);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/karaoke-create",
+    path: "/karaoke-create/:audio",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_KaraokeCreate__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/karaoke-show",
+    path: "/karaoke-show/:id",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_KaraokeShow__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE);
@@ -94773,7 +94773,6 @@ var Messages = function Messages(_ref) {
       key: key,
       className: "bg-success p-2 mt-2",
       style: {
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
         transition: "0.3s"
       }
     }, message);
@@ -94783,7 +94782,6 @@ var Messages = function Messages(_ref) {
       className: "p-2 mt-2",
       style: {
         backgroundColor: "#232323",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
         transition: "0.3s"
       }
     }, error);
@@ -100305,7 +100303,7 @@ var Index = function Index(props) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/post-likes", {
         post: post
       }).then(function (res) {
-        props.message.push(res.data); // Update posts
+        props.setMessages([res.data]); // Update posts
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
           return props.setPosts(res.data);
@@ -101263,72 +101261,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Carousel */ "./resources/js/components/Carousel.js");
 /* harmony import */ var _svgs_PlusSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/PlusSVG */ "./resources/js/svgs/PlusSVG.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 
 
 var KaraokeCharts = function KaraokeCharts(props) {
-  var user = {
-    "id": 4,
-    "name": "Black Music",
-    "username": "@blackmusic",
-    "account_type": "musician",
-    "pp": "/storage/profile-pics/1CY5klslqGjjEnRQiGFw5yOz1z4TQM31Wnut4OFp.jpg",
-    "bio": "Changing the music scene.",
-    "withdrawal": "1000",
-    "posts": 1,
-    "following": 4,
-    "fans": 154,
-    "hasFollowed": true,
-    "hasBought1": false,
-    "decos": 0,
-    "updated_at": "04 Jan 2022",
-    "created_at": "30 Nov -0001"
-  };
-  var videoItem = [{
-    "id": 91,
-    "video": "storage/karaoke/e66dcdc190f3e041a04aec9443118d0c.mp4",
-    "name": "Kenyan Shrap Gang Type Beat Supreme",
-    "username": "@sammyking",
-    "ft": "",
-    "album_id": "15",
-    "album": "Singles",
-    "genre": "Hiphop",
-    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. In dolor quas ipsum, iste quidem mollitia amet suscipit aut fuga eveniet distinctio minima alias maiores sunt soluta magnam possimus est aliquam.",
-    "released": null,
-    "hasLiked": true,
-    "likes": 2,
-    "inCart": true,
-    "hasBoughtVideo": false,
-    "downloads": 4,
-    "comments": 5,
-    "created_at": "08 May 2020"
-  }, {
-    "id": 91,
-    "video": "storage/karaoke/e66dcdc190f3e041a04aec9443118d0c.mp4",
-    "name": "Kenyan Shrap Gang Type Beat Supreme",
-    "username": "@sammyking",
-    "ft": "",
-    "album_id": "15",
-    "album": "Singles",
-    "genre": "Hiphop",
-    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. In dolor quas ipsum, iste quidem mollitia amet suscipit aut fuga eveniet distinctio minima alias maiores sunt soluta magnam possimus est aliquam.",
-    "released": null,
-    "hasLiked": true,
-    "likes": 2,
-    "inCart": true,
-    "hasBoughtVideo": false,
-    "downloads": 4,
-    "comments": 5,
-    "created_at": "08 May 2020"
-  }]; // Random array for dummy loading elements
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      karaokes = _useState2[0],
+      setKaraokes = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      week = _useState4[0],
+      setWeek = _useState4[1];
+
+  var weeks = [0, 1, 2, 3, 4, 5];
+  axios.defaults.baseURL = props.url;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Karaokes
+    axios.get("/api/karaokes").then(function (res) {
+      setKaraokes(res.data); // props.setLocalStorage("videos", res.data)
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch karaokes"]);
+    });
+  }, []); // Random array for dummy loading elements
 
   var dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "karaoke-create",
+    to: "karaoke-create/15",
     id: "chatFloatBtn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlusSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "chartsMenu",
@@ -101342,6 +101316,21 @@ var KaraokeCharts = function KaraokeCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Videos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audio-charts"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Audios")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "chartsMenu",
+    className: "hidden-scroll m-0"
+  }, weeks.map(function (weekItem, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: key
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        setWeek(weekItem++);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      className: week == weekItem ? "active-scrollmenu m-0" : "m-0"
+    }, weekItem == 0 ? "This Week" : weekItem == 1 ? "Last week" : weekItem + " weeks ago")));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
@@ -101350,8 +101339,8 @@ var KaraokeCharts = function KaraokeCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-center flex-wrap"
   }, dummyArray.filter(function () {
-    return props.videos.length < 1;
-  }).map(function (item, key) {
+    return karaokes.length < 1;
+  }).map(function (karaoke, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "m-1",
@@ -101385,7 +101374,7 @@ var KaraokeCharts = function KaraokeCharts(props) {
     }, "username"));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-center flex-wrap"
-  }, videoItem.map(function (item, key) {
+  }, karaokes.map(function (karaoke, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
       className: "m-1",
@@ -101397,9 +101386,9 @@ var KaraokeCharts = function KaraokeCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "w-100"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "karaoke-show"
+      to: "karaoke-show/".concat(karaoke.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-      src: item.video,
+      src: "/storage/".concat(karaoke.karaoke),
       width: "100%",
       preload: "none",
       autoPlay: true,
@@ -101414,9 +101403,9 @@ var KaraokeCharts = function KaraokeCharts(props) {
         overflow: "hidden",
         textOverflow: "clip"
       }
-    }, item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "mt-0 mx-1 mb-2 px-1 py-0 w-50"
-    }, user.username));
+    }, karaoke.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-0 mx-1 mb-2 px-1 py-0"
+    }, karaoke.username));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   })));
@@ -101439,13 +101428,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
-/* harmony import */ var _svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/FlashSVG */ "./resources/js/svgs/FlashSVG.js");
-/* harmony import */ var _svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/LoopSVG */ "./resources/js/svgs/LoopSVG.js");
-/* harmony import */ var _svgs_TimerSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/TimerSVG */ "./resources/js/svgs/TimerSVG.js");
-/* harmony import */ var _svgs_RecordFilledSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/RecordFilledSVG */ "./resources/js/svgs/RecordFilledSVG.js");
-/* harmony import */ var _svgs_UploadSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/UploadSVG */ "./resources/js/svgs/UploadSVG.js");
-/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
+/* harmony import */ var _svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/FlashSVG */ "./resources/js/svgs/FlashSVG.js");
+/* harmony import */ var _svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/LoopSVG */ "./resources/js/svgs/LoopSVG.js");
+/* harmony import */ var _svgs_TimerSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/TimerSVG */ "./resources/js/svgs/TimerSVG.js");
+/* harmony import */ var _svgs_RecordFilledSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/RecordFilledSVG */ "./resources/js/svgs/RecordFilledSVG.js");
+/* harmony import */ var _svgs_UploadSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/UploadSVG */ "./resources/js/svgs/UploadSVG.js");
+/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-filepond */ "./node_modules/react-filepond/dist/react-filepond.js");
+/* harmony import */ var react_filepond__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_filepond__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! filepond-plugin-image-exif-orientation */ "./node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js");
+/* harmony import */ var filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! filepond-plugin-image-preview */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js");
+/* harmony import */ var filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
+/* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! filepond-plugin-image-crop */ "./node_modules/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js");
+/* harmony import */ var filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! filepond-plugin-image-transform */ "./node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js");
+/* harmony import */ var filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! filepond-plugin-file-validate-size */ "./node_modules/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js");
+/* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_19__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -101468,10 +101476,30 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // Import React FilePond
 
-var KaraokeCreate = function KaraokeCreate() {
-  // ID for video element
-  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+ // Import FilePond styles
+
+ // Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+
+
+
+
+
+
+
+ // Register the plugins
+
+Object(react_filepond__WEBPACK_IMPORTED_MODULE_11__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_13___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_14___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_15___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_16___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_17___default.a, filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_18___default.a);
+
+var KaraokeCreate = function KaraokeCreate(props) {
+  // Get params
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      audio = _useParams.audio; // ID for video element
+
+
+  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Declare states
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -101491,7 +101519,80 @@ var KaraokeCreate = function KaraokeCreate() {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
       record = _useState8[0],
-      setRecord = _useState8[1]; // Older browsers might not implement mediaDevices at all, so we set an empty object first
+      setRecord = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      bottomMenu = _useState10[0],
+      setBottomMenu = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      karaoke = _useState12[0],
+      setKaraoke = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      description = _useState14[0],
+      setDescription = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      loadingBtn = _useState16[0],
+      setLoadingBtn = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      showForm = _useState18[0],
+      setShowForm = _useState18[1]; // Get csrf token
+
+
+  var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
+
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Declare new FormData object for form data
+
+  var formData = new FormData();
+
+  var onSubmit = function onSubmit(e) {
+    e.preventDefault(); // Show loader for button
+
+    setLoadingBtn(true); // Add form data to FormData object
+
+    formData.append("audio", audio);
+    formData.append("karaoke", karaoke);
+    formData.append("description", description); // Send data to PostsController
+    // Get csrf cookie from Laravel inorder to send a POST request
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/karaokes"), formData).then(function (res) {
+        props.setMessages([res.data]); // Update Karaokes
+
+        axios.get("".concat(props.url, "/api/karaokes")).then(function (res) {
+          return setKaraoke(res.data);
+        }); // Remove loader for button
+
+        setLoadingBtn(false); // Redirect to Karaoke Charts
+
+        setTimeout(function () {
+          return history.push("/karaoke-charts");
+        }, 500);
+      })["catch"](function (err) {
+        // Remove loader for button
+        setLoadingBtn(false);
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+        // newError.push(err.response.data.message)
+
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Older browsers might not implement mediaDevices at all, so we set an empty object first
 
 
   if (navigator.mediaDevices === undefined) {
@@ -101530,7 +101631,8 @@ var KaraokeCreate = function KaraokeCreate() {
         min: 24
       }
     }
-  };
+  }; // Get Video stream
+
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     // Older browsers may not have srcObject
     if ("srcObject" in video.current) {
@@ -101559,7 +101661,7 @@ var KaraokeCreate = function KaraokeCreate() {
   })["catch"](function (err) {
     console.log(err.name + ": " + err.message);
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
@@ -101587,14 +101689,14 @@ var KaraokeCreate = function KaraokeCreate() {
     style: {
       fontSize: "1.5em"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 mr-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     to: "/",
     style: {
       fontSize: "1.8em"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "karaoke-overlay w-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-column mb-2"
@@ -101607,7 +101709,7 @@ var KaraokeCreate = function KaraokeCreate() {
     onClick: function onClick() {
       setCamera(camera == "user" ? "environment" : "user");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -101616,22 +101718,25 @@ var KaraokeCreate = function KaraokeCreate() {
     onClick: function onClick() {
       return setTimer(3);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_TimerSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Timer")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_TimerSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Timer")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 align-self-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "2em"
+    },
+    onClick: function onClick() {
+      return setBottomMenu("menu-open");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_UploadSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Upload"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_UploadSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Upload"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "4em",
       color: "#fb3958"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_RecordFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_RecordFilledSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
       color: "#fb3958"
     }
@@ -101663,9 +101768,89 @@ var KaraokeCreate = function KaraokeCreate() {
       fontSize: "1.5em",
       color: "inherit"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), "Kenyan Shrap Gang Type Beat Supreme"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)), "Kenyan Shrap Gang Type Beat Supreme"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: bottomMenu
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between",
+    style: {
+      height: "3em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header text-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    style: {
+      margin: "0px"
+    }
+  }, "Upload")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
+    style: {
+      fontSize: "1em"
+    },
+    onClick: function onClick() {
+      return setBottomMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), !showForm && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_11__["FilePond"], {
+    name: "filepond-karaoke",
+    labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    acceptedFileTypes: ['video/*'],
+    stylePanelAspectRatio: "16:9",
+    maxFileSize: "200000000",
+    allowRevert: true,
+    server: {
+      url: "".concat(props.url, "/api"),
+      process: {
+        url: "/karaokes",
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          return setKaraoke(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/".concat(karaoke),
+        headers: {
+          'X-CSRF-TOKEN': token.content
+        },
+        onload: function onload(res) {
+          props.setMessages([res]);
+        }
+      }
+    }
+  }), karaoke && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn mb-4",
+    btnText: "next",
+    onClick: function onClick() {
+      return setShowForm(true);
+    }
+  })), showForm && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "contact-form text-center call-to-action-content wow fadeInUp",
+    "data-wow-delay": "0.5s"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: onSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "description",
+    className: "form-control",
+    placeholder: "Karaoke description",
+    required: true,
+    onChange: function onChange(e) {
+      setDescription(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mysonar-btn",
+    btnText: "upload video",
+    loading: loadingBtn
+  })))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (KaraokeCreate);
@@ -101692,6 +101877,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
 /* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
 /* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -101703,57 +101905,90 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var KaraokeShow = function KaraokeShow() {
-  var user = {
-    "id": 4,
-    "name": "Black Music",
-    "username": "@blackmusic",
-    "account_type": "musician",
-    "pp": "/storage/profile-pics/1CY5klslqGjjEnRQiGFw5yOz1z4TQM31Wnut4OFp.jpg",
-    "bio": "Changing the music scene.",
-    "withdrawal": "1000",
-    "posts": 1,
-    "following": 4,
-    "fans": 154,
-    "hasFollowed": true,
-    "hasBought1": false,
-    "decos": 0,
-    "updated_at": "04 Jan 2022",
-    "created_at": "30 Nov -0001"
-  };
-  var videoItem = {
-    "id": 91,
-    "video": "storage/karaoke/e66dcdc190f3e041a04aec9443118d0c.mp4",
-    "name": "Kenyan Shrap Gang Type Beat Supreme",
-    "username": "@sammyking",
-    "ft": "",
-    "album_id": "15",
-    "album": "Singles",
-    "genre": "Hiphop",
-    "thumbnail": "https://img.youtube.com/vi/EdKKYry-FwQ/hqdefault.jpg",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. In dolor quas ipsum, iste quidem mollitia amet suscipit aut fuga eveniet distinctio minima alias maiores sunt soluta magnam possimus est aliquam.",
-    "released": null,
-    "hasLiked": true,
-    "likes": 2,
-    "inCart": true,
-    "hasBoughtVideo": false,
-    "downloads": 4,
-    "comments": 5,
-    "created_at": "08 May 2020"
-  }; // ID for Video Description
 
-  var videoDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description text
+var KaraokeShow = function KaraokeShow(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      id = _useParams.id;
 
-  var showDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Show More
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      karaoke = _useState2[0],
+      setKaraoke = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([{
+    "text": "Hey, nice!"
+  }, {
+    "text": "Hey, what's up?"
+  }]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      karaokeComments = _useState4[0],
+      setKaraokeComments = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      bottomMenu = _useState6[0],
+      setBottomMenu = _useState6[1]; // ID for Video Description
+
+
+  var karaokeDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description text
+
+  var showDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Karaoke
+    axios.get("/api/karaokes/".concat(id)).then(function (res) {
+      setKaraoke(res.data); // props.setLocalStorage("videos", res.data)
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch karaoke"]);
+    }); // Fetch Karaoke Comments
+
+    axios.get("/api/karaoke-comments/".concat(id)).then(function (res) {// setKaraokeComments(res.data)
+      // props.setLocalStorage("videos", res.data)
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch karaoke comments"]);
+    });
+  }, []); // Show More
 
   var showMore = function showMore() {
-    var d = videoDescription.current.style.display;
-    videoDescription.current.style.display = d == "none" ? "block" : "none";
+    var d = karaokeDescription.current.style.display;
+    karaokeDescription.current.style.display = d == "none" ? "block" : "none";
     var t = showDescription.current.innerHTML;
     showDescription.current.innerHTML = t == "show more" ? "show less" : "show more";
+  }; // Function for liking karaoke
+
+
+  var onKaraokeLike = function onKaraokeLike(id) {
+    // Show like
+    var newKaraoke = _objectSpread(_objectSpread({}, karaoke), {}, {
+      "hasLiked": !karaoke.hasLiked
+    }); // Set new karaokes
+
+
+    setKaraoke(newKaraoke); // Add like to database
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/karaoke-likes"), {
+        karaoke: id
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke
+
+        axios.get("".concat(props.url, "/api/karaokes/").concat(id)).then(function (res) {
+          return setKaraoke(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
@@ -101765,7 +102000,7 @@ var KaraokeShow = function KaraokeShow() {
       overflow: "hidden"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-    src: videoItem.video,
+    src: "/storage/".concat(karaoke.karaoke),
     width: "100%",
     loading: "lazy",
     preload: "none",
@@ -101801,7 +102036,7 @@ var KaraokeShow = function KaraokeShow() {
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, karaoke.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, karaoke.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "ml-1",
     style: {
       color: "gold"
@@ -101811,15 +102046,15 @@ var KaraokeShow = function KaraokeShow() {
     style: {
       color: "inherit"
     }
-  }, user.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, karaoke.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "text-secondary d-block"
-  }, videoItem.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    ref: videoDescription,
+  }, karaoke.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    ref: karaokeDescription,
     className: "m-0 mx-1 p-0",
     style: {
       display: "none"
     }
-  }, videoItem.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+  }, karaoke.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     ref: showDescription,
     className: "text-secondary ml-1",
     onClick: showMore
@@ -101837,31 +102072,32 @@ var KaraokeShow = function KaraokeShow() {
       fontSize: "1.5em",
       color: "inherit"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), videoItem.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), karaoke.audio)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2 align-self-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-column mb-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "avatar-thumbnail-xs ml-auto mr-2 mb-3",
+    className: "avatar-thumbnail-xs ml-auto mr-1 mb-3",
     style: {
       borderRadius: "50%"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/".concat(user.username)
+    to: "/profile/".concat(karaoke.karaokename)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: user.pp,
+    src: "/storage/".concat(karaoke.pp),
     width: "50px",
     height: "50px",
     alt: 'avatar'
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, videoItem.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "ml-auto mr-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, karaoke.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     style: {
       color: "#fb3958"
     },
     onClick: function onClick(e) {
-      e.preventDefault(); // onPostLike(post.id)
+      e.preventDefault();
+      onKaraokeLike(karaoke.id);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -101872,13 +102108,14 @@ var KaraokeShow = function KaraokeShow() {
     style: {
       color: "inherit"
     }
-  }, videoItem.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, karaoke.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     style: {
       color: "rgba(220, 220, 220, 1)"
     },
     onClick: function onClick(e) {
-      e.preventDefault(); // onPostLike(post.id)
+      e.preventDefault();
+      onKaraokeLike(karaoke.id);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -101889,33 +102126,36 @@ var KaraokeShow = function KaraokeShow() {
     style: {
       color: "inherit"
     }
-  }, videoItem.likes)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-2",
+  }, karaoke.likes)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-3",
     style: {
       color: "rgba(220, 220, 220, 1)"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "2em"
+    },
+    onClick: function onClick() {
+      return setBottomMenu("menu-open");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
       color: "inherit"
     }
-  }, videoItem.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-2 mb-3"
+  }, karaoke.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-3 mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "2em",
       color: "rgba(220, 220, 220, 1)"
-    } // onClick={() => onShare(post)}
+    } // onClick={() => setBottomMenu("menu-open")}
 
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-2"
+    className: "ml-auto mr-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rotate-record"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/audio-show/".concat(videoItem.id)
+    to: "/audio-show/".concat(karaoke.audio_id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     width: "50px",
     height: "50px",
@@ -101925,7 +102165,46 @@ var KaraokeShow = function KaraokeShow() {
     alt: "current audio"
   })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: bottomMenu
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between",
+    style: {
+      height: "3em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header text-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    style: {
+      margin: "0px"
+    }
+  }, "Comments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
+    style: {
+      fontSize: "1em"
+    },
+    onClick: function onClick() {
+      return setBottomMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "m-0 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      maxHeight: window.innerHeight * 0.75,
+      overflowY: "scroll"
+    }
+  }, karaokeComments.map(function (karaokeComment, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      key: key,
+      className: "text-light p-2",
+      style: {
+        display: "block",
+        textAlign: "left"
+      }
+    }, karaokeComment.text);
+  }))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (KaraokeShow);
@@ -102228,7 +102507,7 @@ var PostCreate = function PostCreate(props) {
         return props.setPosts;
       });
       props.setEditing(false);
-    }, 1000);
+    }, 500);
   }, []); // Declare states
   // const [preview, setPreview] = useState()
   // Assign id to element

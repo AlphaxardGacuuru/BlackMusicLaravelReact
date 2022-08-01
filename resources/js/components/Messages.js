@@ -12,10 +12,7 @@ const Messages = ({ messages, errors }) => {
 					<div
 						key={key}
 						className="bg-success p-2 mt-2"
-						style={{
-							boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
-							transition: "0.3s"
-						}}>
+						style={{ transition: "0.3s" }}>
 						{message}
 					</div>
 				))}
@@ -26,7 +23,6 @@ const Messages = ({ messages, errors }) => {
 						className="p-2 mt-2"
 						style={{
 							backgroundColor: "#232323",
-							boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.5)",
 							transition: "0.3s"
 						}}>
 						{error}
