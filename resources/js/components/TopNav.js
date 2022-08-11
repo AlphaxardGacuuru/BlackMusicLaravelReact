@@ -236,7 +236,7 @@ const TopNav = (props) => {
 									</Link>
 								</li>
 								<li className='nav-item active'>
-									<Link to='/video-charts'
+									<Link to='/karaoke-charts'
 										style={{
 											color: location.pathname == "/video-charts" ||
 												location.pathname == "/audio-charts" ?
@@ -294,7 +294,9 @@ const TopNav = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
+					<div
+						className="d-flex align-items-center justify-content-between border-bottom border-dark"
+						style={{ height: "3em" }}>
 						<div></div>
 						<div className="dropdown-header text-white">
 							<h5 style={{ margin: "0px", display: notificationVisibility }}>Notifications</h5>
@@ -307,6 +309,7 @@ const TopNav = (props) => {
 							<CloseSVG />
 						</div>
 					</div>
+					<br />
 
 					{/* Notifications Bottom */}
 					<div className="m-0 p-0" style={{ display: notificationVisibility }}>

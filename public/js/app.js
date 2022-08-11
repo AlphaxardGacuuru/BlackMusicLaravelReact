@@ -94349,7 +94349,7 @@ var Bottomnav = function Bottomnav(props) {
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/video-charts",
+    to: "/karaoke-charts",
     style: {
       textAlign: "center",
       fontSize: "10px",
@@ -95487,7 +95487,7 @@ var TopNav = function TopNav(props) {
   }))), "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/video-charts",
+    to: "/karaoke-charts",
     style: {
       color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     },
@@ -95545,7 +95545,7 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomMenu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between",
+    className: "d-flex align-items-center justify-content-between border-bottom border-dark",
     style: {
       height: "3em"
     }
@@ -95564,7 +95564,7 @@ var TopNav = function TopNav(props) {
     onClick: function onClick() {
       return setBottomMenu("");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-0 p-0",
     style: {
       display: notificationVisibility
@@ -101204,7 +101204,7 @@ var Index = function Index(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomMenu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between",
+    className: "d-flex align-items-center justify-content-between border-bottom border-dark mb-3",
     style: {
       height: "3em"
     }
@@ -101337,7 +101337,7 @@ var KaraokeCharts = function KaraokeCharts(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center flex-wrap"
+    className: "d-flex justify-content-around flex-wrap"
   }, dummyArray.filter(function () {
     return karaokes.length < 1;
   }).map(function (karaoke, key) {
@@ -101373,7 +101373,7 @@ var KaraokeCharts = function KaraokeCharts(props) {
       }
     }, "username"));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center flex-wrap"
+    className: "d-flex justify-content-around flex-wrap"
   }, karaokes.map(function (karaoke, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key,
@@ -101381,7 +101381,7 @@ var KaraokeCharts = function KaraokeCharts(props) {
       style: {
         borderRadius: "0px",
         textAlign: "center",
-        width: "45%"
+        width: "47%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "w-100"

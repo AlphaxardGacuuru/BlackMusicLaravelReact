@@ -109,7 +109,7 @@ class KaraokesController extends Controller
         }
 
         // Get Karaokes
-        $getKaraoke = Karaokes::find($id)->first();
+        $getKaraoke = Karaokes::find($id);
 
         // Check if user has liked karaoke
         $hasLiked = KaraokeLikes::where('username', $authUsername)

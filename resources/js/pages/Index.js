@@ -869,7 +869,9 @@ const Index = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
+					<div
+						className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3"
+						style={{ height: "3em" }}>
 						<div></div>
 						{/* <!-- Close Icon --> */}
 						<div
@@ -879,6 +881,7 @@ const Index = (props) => {
 							<CloseSVG />
 						</div>
 					</div>
+
 					<div
 						ref={unfollowLink}
 						onClick={() => {

@@ -61,7 +61,6 @@ const Bottomnav = (props) => {
 			<br style={{ display: checkLocation && "none" }} />
 			<br className="anti-hidden" />
 			<br className="anti-hidden" />
-			{/* // <div className="col-sm-12 m-0 p-0"> */}
 			<div className="bottomNav menu-content-area header-social-area">
 				{/* <!-- Progress Container --> */}
 				<div
@@ -191,7 +190,7 @@ const Bottomnav = (props) => {
 						{/* Home End */}
 						{/* Discover */}
 						<Link
-							to="/video-charts"
+							to="/karaoke-charts"
 							style={{
 								textAlign: "center",
 								fontSize: "10px",

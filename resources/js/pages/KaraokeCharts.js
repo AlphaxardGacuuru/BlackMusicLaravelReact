@@ -81,7 +81,7 @@ const KaraokeCharts = (props) => {
 			<div className="row">
 				<div className="col-sm-4"></div>
 				<div className="col-sm-4">
-					<div className="d-flex justify-content-center flex-wrap">
+					<div className="d-flex justify-content-around flex-wrap">
 						{/* Loading Karaoke items */}
 						{dummyArray
 							.filter(() => karaokes.length < 1)
@@ -114,7 +114,7 @@ const KaraokeCharts = (props) => {
 					{/* Loading Karaoke Items End */}
 
 					{/* Karaoke Items */}
-					<div className="d-flex justify-content-center flex-wrap">
+					<div className="d-flex justify-content-around flex-wrap">
 						{/* Loading Karaoke items */}
 						{karaokes
 							.map((karaoke, key) => (
@@ -123,7 +123,7 @@ const KaraokeCharts = (props) => {
 									style={{
 										borderRadius: "0px",
 										textAlign: "center",
-										width: "45%"
+										width: "47%"
 									}}>
 									<div className="w-100">
 										<Link to={`karaoke-show/${karaoke.id}`}>
