@@ -25,11 +25,18 @@ const KaraokeCharts = (props) => {
 	// Random array for dummy loading elements
 	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+	var checkLocation = true
+
+	if (props.show != 0) {
+		checkLocation = location.pathname.match(/audio-show/)
+	}
+
 	return (
 		<>
 			<Link
 				to="karaoke-create/15"
-				id="chatFloatBtn">
+				id="chatFloatBtn"
+				className={`${!checkLocation && "mb-5"}`}>
 				<PlusSVG />
 			</Link>
 
@@ -124,7 +131,8 @@ const KaraokeCharts = (props) => {
 										borderRadius: "0px",
 										textAlign: "center",
 										width: "47%"
-									}}>
+									}}
+									onClick={() => props.setShow(0)}>
 									<div className="w-100">
 										<Link to={`karaoke-show/${karaoke.id}`}>
 											<video

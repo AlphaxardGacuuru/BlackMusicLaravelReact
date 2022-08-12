@@ -140,7 +140,7 @@ const Index = (props) => {
 		// Define share data
 		const shareData = {
 			title: post.text,
-			text: `Check out my post on Black Music\n`,
+			text: `Check out this post on Black Music\n`,
 			url: `https://music.black.co.ke/#/post-show/${post.id}`
 		}
 		// Check if data is shareble

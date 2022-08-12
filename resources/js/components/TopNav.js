@@ -387,6 +387,7 @@ const TopNav = (props) => {
 							to="/privacy-policy"
 							className="p-3"
 							style={{ textAlign: "left" }}
+							onClick={() => setBottomMenu("")}
 							title="Privacy Policy">
 							<h6><span className="ml-3 mr-4"><PrivacySVG /></span>Privacy Policy</h6>
 						</Link>

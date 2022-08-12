@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
@@ -10,14 +10,19 @@ import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import ShareSVG from '../svgs/ShareSVG'
 import MusicNoteSVG from '../svgs/MusicNoteSVG'
+import OptionsSVG from '../svgs/OptionsSVG'
+
+const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
 
 const KaraokeShow = (props) => {
 
 	const { id } = useParams()
 
 	const [karaoke, setKaraoke] = useState([])
-	const [karaokeComments, setKaraokeComments] = useState([{ "text": "Hey, nice!" }, { "text": "Hey, what's up?" }])
+	const [karaokeComments, setKaraokeComments] = useState([])
 	const [bottomMenu, setBottomMenu] = useState()
+	const [bottomOptionsMenu, setBottomOptionsMenu] = useState()
+	const [postToEdit, setPostToEdit] = useState()
 
 	// ID for Video Description
 	const karaokeDescription = useRef()
@@ -25,20 +30,37 @@ const KaraokeShow = (props) => {
 	// ID for Video Description text
 	const showDescription = useRef()
 
+	// ID for delete link
+	var deleteLink = useRef(null)
+
 	useEffect(() => {
 		// Fetch Karaoke
 		axios.get(`/api/karaokes/${id}`)
 			.then((res) => {
 				setKaraoke(res.data)
-				// props.setLocalStorage("videos", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch karaoke"]))
 
 		// Fetch Karaoke Comments
-		axios.get(`/api/karaoke-comments/${id}`)
+		axios.get(`/api/karaoke-comments`)
 			.then((res) => {
-				// setKaraokeComments(res.data)
-				// props.setLocalStorage("videos", res.data)
+				setKaraokeComments(res.data)
 			}).catch(() => props.setErrors(["Failed to fetch karaoke comments"]))
+
+		// Set states
+		setTimeout(() => {
+			props.setPlaceholder("Add a comment")
+			props.setText("")
+			props.setId(id)
+			props.setShowImage(false)
+			props.setShowPoll(false)
+			props.setShowEmojiPicker(false)
+			props.setShowImagePicker(false)
+			props.setShowPollPicker(false)
+			props.setUrlTo("/karaoke-comments")
+			props.setUrlToDelete(`/karaoke-comments/${props.media.substr(11)}`)
+			props.setStateToUpdate(() => setKaraokeComments)
+			props.setEditing(false)
+		}, 1000)
 	}, [])
 
 	// Show More
@@ -53,7 +75,7 @@ const KaraokeShow = (props) => {
 	// Function for liking karaoke
 	const onKaraokeLike = (id) => {
 		// Show like
-		const newKaraoke = {...karaoke, "hasLiked": !karaoke.hasLiked}
+		const newKaraoke = { ...karaoke, "hasLiked": !karaoke.hasLiked }
 
 		// Set new karaokes
 		setKaraoke(newKaraoke)
@@ -76,6 +98,41 @@ const KaraokeShow = (props) => {
 				}
 				props.setErrors(newError)
 			})
+		})
+	}
+
+	// Web Share API for share button
+	// Share must be triggered by "user activation"
+	const onShare = () => {
+		// Define share data
+		const shareData = {
+			title: karaoke.audio,
+			text: `Check out this karaoke on Black Music\n`,
+			url: `https://music.black.co.ke/#/karaoke-show/${id}`
+		}
+		// Check if data is shareble
+		navigator.canShare(shareData) &&
+			navigator.share(shareData)
+	}
+
+	// Function for deleting comments
+	const onDeleteComment = (id) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.delete(`${props.url}/api/karaoke-comments/${id}`)
+				.then((res) => {
+					props.setMessages([res.data])
+					// Update karaoke comments
+					axios.get(`${props.url}/api/karaoke-comments`)
+						.then((res) => setKaraokeComments(res.data))
+				}).catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
 		})
 	}
 
@@ -132,12 +189,14 @@ const KaraokeShow = (props) => {
 									</span>
 									<small><b><i className="text-secondary d-block">{karaoke.created_at}</i></b></small>
 								</div>
+								{/* Description */}
 								<p
 									ref={karaokeDescription}
 									className="m-0 mx-1 p-0"
 									style={{ display: "none" }}>
 									{karaoke.description}
 								</p>
+								{/* Show More */}
 								<small>
 									<b>
 										<i
@@ -148,6 +207,7 @@ const KaraokeShow = (props) => {
 										</i>
 									</b>
 								</small>
+								{/* Audio Name */}
 								<h6
 									style={{
 										width: "20em",
@@ -219,8 +279,7 @@ const KaraokeShow = (props) => {
 										<center>
 											<span
 												style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}
-											// onClick={() => setBottomMenu("menu-open")}
-											>
+												onClick={() => onShare()}>
 												<ShareSVG />
 											</span>
 										</center>
@@ -253,8 +312,9 @@ const KaraokeShow = (props) => {
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
 				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
-						<div></div>
+					<div
+						className="d-flex align-items-center justify-content-between border-bottom border-dark"
+						style={{ height: "3em" }}>
 						<div className="dropdown-header text-white">
 							<h5 style={{ margin: "0px" }}>Comments</h5>
 						</div>
@@ -267,25 +327,168 @@ const KaraokeShow = (props) => {
 						</div>
 					</div>
 
+					{/* Comment Form */}
+					<form
+						onSubmit={props.onSubmit}
+						className="contact-form bg-white mb-2"
+						autoComplete="off">
+						<Suspense
+							fallback={
+								<center>
+									<div id="sonar-load" className="mt-5 mb-5"></div>
+								</center>
+							}>
+							<SocialMediaInput {...props} />
+						</Suspense>
+					</form>
+
 					{/* Karaoke Comments */}
 					<div className="m-0 p-0">
 						<div style={{ maxHeight: window.innerHeight * 0.75, overflowY: "scroll" }}>
 							{/* Get Notifications */}
+
+							{/* <!-- Comment Section --> */}
 							{karaokeComments
-								.map((karaokeComment, key) => (
-									<p
-										key={key}
-										className="text-light p-2"
-										style={{ display: "block", textAlign: "left" }}>
-										{karaokeComment.text}
-									</p>
-								))}
+								.filter((comment) => comment.karaoke_id == id)
+								.length > 0 ?
+								karaokeComments
+									.filter((comment) => comment.karaoke_id == id)
+									.map((comment, index) => (
+										<div key={index} className="d-flex p-2">
+											<div className="">
+												<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
+													<Link to={`/profile/${comment.username}`}>
+														<Img src={comment.pp}
+															width="50px"
+															height="50px" />
+													</Link>
+												</div>
+											</div>
+											<div className="flex-grow-1 ml-2 text-left">
+												<h6 className="media-heading m-0"
+													style={{
+														width: "100%",
+														whiteSpace: "nowrap",
+														overflow: "hidden",
+														textOverflow: "clip"
+													}}>
+													<b>{comment.name}</b>
+													<small>{comment.username}</small>
+													<span className="ml-1" style={{ color: "gold" }}>
+														<DecoSVG />
+														<span className="ml-1" style={{ fontSize: "10px" }}>{comment.decos}</span>
+													</span>
+													<small>
+														<b>
+															<i className="float-right mr-1 text-secondary">
+																{comment.created_at}
+															</i>
+														</b>
+													</small>
+												</h6>
+												<p className="mb-0 text-light">{comment.text}</p>
+
+												{/* Comment likes */}
+												{comment.hasLiked ?
+													<a href="#"
+														style={{ color: "#fb3958" }}
+														onClick={(e) => {
+															e.preventDefault()
+															onCommentLike(comment.id)
+														}}>
+														<HeartFilledSVG />
+														<small className="ml-1" style={{ color: "inherit" }}>
+															{comment.likes}
+														</small>
+													</a> :
+													<a href='#'
+														className="text-light"
+														onClick={(e) => {
+															e.preventDefault()
+															onCommentLike(comment.id)
+														}}>
+														<HeartSVG />
+														<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
+													</a>}
+
+												{/* <!-- Default dropup button --> */}
+												<div className="dropup float-right hidden">
+													<a
+														href="#"
+														role="button"
+														id="dropdownMenuLink"
+														data-toggle="dropdown"
+														aria-haspopup="true"
+														aria-expanded="false">
+														<OptionsSVG />
+													</a>
+													<div
+														className="dropdown-menu dropdown-menu-right p-0"
+														style={{ borderRadius: "0", backgroundColor: "#232323" }}>
+														{comment.username == props.auth.username &&
+															<a
+																href='#'
+																className="dropdown-item"
+																onClick={(e) => {
+																	e.preventDefault();
+																	onDeleteComment(comment.id)
+																}}>
+																<h6>Delete comment</h6>
+															</a>}
+													</div>
+												</div>
+												{/* For small screens */}
+												<div className="float-right anti-hidden">
+													<span
+														className="text-secondary"
+														onClick={() => {
+															if (comment.username == props.auth.username) {
+																setBottomOptionsMenu("menu-open")
+																setPostToEdit(comment.id)
+																// Show and Hide elements
+																deleteLink.current.className = "d-block"
+															}
+														}}>
+														<OptionsSVG />
+													</span>
+												</div>
+											</div>
+										</div>
+									)) :
+								<center className="my-3">
+									<h6 style={{ color: "grey" }}>No comments to show</h6>
+								</center>}
 						</div>
+						{/* Karaoke Comments End */}
 					</div>
-					{/* Karaoke Comments End */}
 				</div>
 			</div>
 			{/* Sliding Bottom Nav End */}
+
+			{/* Sliding Bottom Nav */}
+			<div className={bottomOptionsMenu}>
+				<div className="bottomMenu">
+					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
+						<div></div>
+						{/* <!-- Close Icon --> */}
+						<div
+							className="closeIcon p-2 float-right"
+							style={{ fontSize: "1em" }}
+							onClick={() => setBottomOptionsMenu("")}>
+							<CloseSVG />
+						</div>
+					</div>
+					<div
+						ref={deleteLink}
+						onClick={() => {
+							setBottomOptionsMenu("")
+							onDeleteComment(postToEdit)
+						}}>
+						<h6 className="pb-2">Delete comment</h6>
+					</div>
+				</div>
+			</div>
+			{/* Sliding Bottom Nav  end */}
 		</>
 	)
 }

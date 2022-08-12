@@ -692,7 +692,7 @@ const AudioShow = (props) => {
 						{/* <!-- Close Icon --> */}
 						<div
 							className="closeIcon p-2 float-right"
-							style={{ fontSize: "2em" }}
+							style={{ fontSize: "1em" }}
 							onClick={() => setBottomMenu("")}>
 							<CloseSVG />
 						</div>
@@ -703,7 +703,7 @@ const AudioShow = (props) => {
 							setBottomMenu("")
 							onDeleteComment(postToEdit)
 						}}>
-						<h6 className="pb-2">Delete post</h6>
+						<h6 className="pb-2">Delete comment</h6>
 					</div>
 				</div>
 			</div>

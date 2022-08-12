@@ -21,6 +21,7 @@ const Bottomnav = (props) => {
 	var display
 	var inputDisplay
 	var checkLocation = true
+	var isInKaraoke = false
 
 	// Hide BottomNav from various pages
 	location.pathname.match("/karaoke-show") ||
@@ -41,9 +42,14 @@ const Bottomnav = (props) => {
 		location.pathname.match("/chat/") ?
 		inputDisplay = "" : inputDisplay = "none"
 
+	// Check if audio is in queue and location is in audio show
 	if (props.show != 0) {
 		checkLocation = location.pathname.match(/audio-show/)
 	}
+
+	// Check if location is in Karaoke
+	isInKaraoke = location.pathname.match("/karaoke-show") ||
+		location.pathname.match("/karaoke-create")
 
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.filter((cartVideo) => cartVideo.username == props.auth.username).length
@@ -59,8 +65,8 @@ const Bottomnav = (props) => {
 			<br style={{ display: checkLocation && "none" }} />
 			<br style={{ display: checkLocation && "none" }} />
 			<br style={{ display: checkLocation && "none" }} />
-			<br className="anti-hidden" />
-			<br className="anti-hidden" />
+			<br style={{ display: isInKaraoke && "none" }} className="anti-hidden" />
+			<br style={{ display: isInKaraoke && "none" }} className="anti-hidden" />
 			<div className="bottomNav menu-content-area header-social-area">
 				{/* <!-- Progress Container --> */}
 				<div

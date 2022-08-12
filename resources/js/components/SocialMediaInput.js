@@ -91,7 +91,8 @@ const SocialMediaInput = (props) => {
 						placeholder={props.placeholder}
 						value={props.text}
 						row="1"
-						onChange={(e) => props.setText(e.target.value)}>
+						onChange={(e) => props.setText(e.target.value)}
+						required={true}>
 					</textarea>
 				</div>
 				{/* Emoji icon */}
@@ -187,7 +188,7 @@ const SocialMediaInput = (props) => {
 							paddingRight: "2px"
 						}}
 						btnText={
-							<span className="p-2">
+							<span className="p-2" style={{ color: "inherit" }}>
 								<svg
 									style={{ transform: "rotate(45deg)" }}
 									xmlns="http://www.w3.org/2000/svg"
