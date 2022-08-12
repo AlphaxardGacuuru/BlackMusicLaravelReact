@@ -103,7 +103,7 @@ const AudioShow = (props) => {
 		})
 	}
 
-	// Function for liking posts
+	// Function for liking comments
 	const onCommentLike = (comment) => {
 		// Show like
 		const newAudioComments = audioComments

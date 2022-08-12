@@ -98245,7 +98245,7 @@ var AudioShow = function AudioShow(props) {
         props.setErrors(newError);
       });
     });
-  }; // Function for liking posts
+  }; // Function for liking comments
 
 
   var onCommentLike = function onCommentLike(comment) {
@@ -102078,6 +102078,43 @@ var KaraokeShow = function KaraokeShow(props) {
         props.setErrors(newError);
       });
     });
+  }; // Function for liking comments
+
+
+  var onCommentLike = function onCommentLike(comment) {
+    // Show like
+    var newKaraokeComments = karaokeComments.filter(function (item) {
+      // Get the exact karaoke and change like status
+      if (item.id == comment) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new karaokes
+
+    setKaraokeComments(newKaraokeComments); // Add like to database
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/karaoke-comment-likes"), {
+        comment: comment
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke comments
+
+        axios.get("".concat(props.url, "/api/karaoke-comments")).then(function (res) {
+          return setKaraokeComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102295,7 +102332,7 @@ var KaraokeShow = function KaraokeShow(props) {
     className: "m-0 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      maxHeight: window.innerHeight * 0.75,
+      maxHeight: window.innerHeight * 0.60,
       overflowY: "scroll"
     }
   }, karaokeComments.filter(function (comment) {

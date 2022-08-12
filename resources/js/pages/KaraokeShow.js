@@ -136,6 +136,41 @@ const KaraokeShow = (props) => {
 		})
 	}
 
+	// Function for liking comments
+	const onCommentLike = (comment) => {
+		// Show like
+		const newKaraokeComments = karaokeComments
+			.filter((item) => {
+				// Get the exact karaoke and change like status
+				if (item.id == comment) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new karaokes
+		setKaraokeComments(newKaraokeComments)
+
+		// Add like to database
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/karaoke-comment-likes`, {
+				comment: comment
+			}).then((res) => {
+				props.setMessages([res.data])
+				// Update karaoke comments
+				axios.get(`${props.url}/api/karaoke-comments`)
+					.then((res) => setKaraokeComments(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		})
+	}
+
 	return (
 		<>
 			<div className="row p-0">
@@ -344,7 +379,7 @@ const KaraokeShow = (props) => {
 
 					{/* Karaoke Comments */}
 					<div className="m-0 p-0">
-						<div style={{ maxHeight: window.innerHeight * 0.75, overflowY: "scroll" }}>
+						<div style={{ maxHeight: window.innerHeight * 0.60, overflowY: "scroll" }}>
 							{/* Get Notifications */}
 
 							{/* <!-- Comment Section --> */}

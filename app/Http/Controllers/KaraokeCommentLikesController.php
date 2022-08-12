@@ -25,7 +25,32 @@ class KaraokeCommentLikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $karaokeCommentLikeCount = KaraokeCommentLikes::where('comment_id', $request->input('comment'))
+            ->where('username', auth()->user()->username)
+            ->count();
+
+        if ($karaokeCommentLikeCount > 0) {
+            KaraokeCommentLikes::where('comment_id', $request->input('comment'))
+                ->where('username', auth()->user()->username)
+                ->delete();
+
+            $message = "Like removed";
+        } else {
+            $karaokeCommentLike = new KaraokeCommentLikes;
+            $karaokeCommentLike->comment_id = $request->input('comment');
+            $karaokeCommentLike->username = auth()->user()->username;
+            $karaokeCommentLike->save();
+
+            $message = "Comment liked";
+
+            // Show notification
+            // $karaokeComment = KaraokeComments::where('id', $request->input('comment'))->first();
+            // $karaoke = $karaokeComment->karaokes;
+            // $karaoke->users->username != auth()->user()->username &&
+            // $karaoke->users->notify(new KaraokeCommentLikeNotifications($karaoke->name));
+        }
+
+        return response($message, 200);
     }
 
     /**

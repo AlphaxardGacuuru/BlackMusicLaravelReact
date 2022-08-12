@@ -40,6 +40,7 @@ Route::resources([
     'follows' => 'FollowsController',
 	'karaokes' => 'KaraokesController',
 	'karaoke-comments' => 'KaraokeCommentsController',
+	'karaoke-comment-likes' => 'KaraokeCommentLikesController',
 	'karaoke-likes' => 'KaraokeLikesController',
     'kopokopo' => 'KopokopoController',
     'kopokopo-recipients' => 'KopokopoRecipientsController',
