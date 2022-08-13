@@ -101904,6 +101904,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
 /* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
 /* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
+/* harmony import */ var _svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/PlayFilledSVG */ "./resources/js/svgs/PlayFilledSVG.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -101921,6 +101922,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -101964,8 +101966,15 @@ var KaraokeShow = function KaraokeShow(props) {
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
       postToEdit = _useState10[0],
-      setPostToEdit = _useState10[1]; // ID for Video Description
+      setPostToEdit = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      play = _useState12[0],
+      setPlay = _useState12[1]; // ID for video
+
+
+  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description
 
   var karaokeDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description text
 
@@ -102002,7 +102011,18 @@ var KaraokeShow = function KaraokeShow(props) {
       });
       props.setEditing(false);
     }, 1000);
-  }, []); // Show More
+  }, []); // Pause or Play Video
+
+  var onPause = function onPause() {
+    video.current.pause();
+    setPlay(true);
+  };
+
+  var onPlay = function onPlay() {
+    video.current.play();
+    setPlay(false);
+  }; // Show More
+
 
   var showMore = function showMore() {
     var d = karaokeDescription.current.style.display;
@@ -102117,6 +102137,60 @@ var KaraokeShow = function KaraokeShow(props) {
     });
   };
 
+  document.addEventListener('touchstart', handleTouchStart, false);
+  document.addEventListener('touchmove', handleTouchMove, false);
+  var xDown = null;
+  var yDown = null;
+
+  function getTouches(evt) {
+    return evt.touches || // browser API
+    evt.originalEvent.touches; // jQuery
+  }
+
+  function handleTouchStart(evt) {
+    var firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+  }
+
+  ;
+
+  function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+      return;
+    }
+
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      /*most significant*/
+      if (xDiff > 0) {
+        /* right swipe */
+        console.log("right");
+      } else {
+        /* left swipe */
+        console.log("left");
+      }
+    } else {
+      if (yDiff > 0) {
+        /* down swipe */
+        console.log("down");
+      } else {
+        /* up swipe */
+        console.log("up");
+      }
+    }
+    /* reset values */
+
+
+    xDown = null;
+    yDown = null;
+  }
+
+  ;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102124,11 +102198,17 @@ var KaraokeShow = function KaraokeShow(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4",
     style: {
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
       width: window.innerWidth,
       height: window.innerHeight,
       overflow: "hidden"
-    }
+    },
+    onClick: play ? onPlay : onPause
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+    ref: video,
     src: "/storage/".concat(karaoke.karaoke),
     width: "100%",
     loading: "lazy",
@@ -102154,6 +102234,14 @@ var KaraokeShow = function KaraokeShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "karaoke-overlay w-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      fontSize: "4em",
+      color: "rgba(220, 220, 220, 1)"
+    }
+  }, play && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-1 flex-grow-1 align-self-end"
@@ -102294,7 +102382,7 @@ var KaraokeShow = function KaraokeShow(props) {
       animation: "rotation 2s infinite linear"
     },
     alt: "current audio"
-  })))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: bottomMenu
@@ -108952,6 +109040,36 @@ var PersonSVG = function PersonSVG() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PersonSVG);
+
+/***/ }),
+
+/***/ "./resources/js/svgs/PlayFilledSVG.js":
+/*!********************************************!*\
+  !*** ./resources/js/svgs/PlayFilledSVG.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var PlayFilledSVG = function PlayFilledSVG() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1em",
+    height: "1em",
+    fill: "currentColor",
+    className: "bi bi-play-fill",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PlayFilledSVG);
 
 /***/ }),
 

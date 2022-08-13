@@ -1660,7 +1660,20 @@ div.hidden-scroll span {
 	position: absolute;
 	left: 0;
 	bottom: 0;
+   	animation-duration:3s;
+   	animation-name:slidein-low;
 }
+
+/* @keyframes slidein-low  {
+   from {
+      top:0;
+   }
+   
+   to {
+      top:80%;
+   }
+
+} */
 /* Karaoke Overlay End */
 
 /* Rotating Image */
