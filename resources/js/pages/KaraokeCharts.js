@@ -134,7 +134,7 @@ const KaraokeCharts = (props) => {
 									}}
 									onClick={() => props.setShow(0)}>
 									<div className="w-100">
-										<Link to={`karaoke-show/${karaoke.id}`}>
+										<Link to={`karaoke-show`}>
 											<video
 												src={`/storage/${karaoke.karaoke}`}
 												width="100%"

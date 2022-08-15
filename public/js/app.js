@@ -87908,6 +87908,668 @@ module.exports=function(e){var t={};function n(r){if(t[r])return t[r].exports;va
 
 /***/ }),
 
+/***/ "./node_modules/react-ticker/dist/index.es.js":
+/*!****************************************************!*\
+  !*** ./node_modules/react-ticker/dist/index.es.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var debounce = function debounce(fn, time) {
+  var timeout = void 0;
+
+  return function () {
+    var _this = this,
+        _arguments = arguments;
+
+    var functionCall = function functionCall() {
+      return fn.apply(_this, _arguments);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(functionCall, time);
+  };
+};
+
+// https://stackoverflow.com/questions/6860853/generate-random-string-for-div-id#6860916
+
+var guidGenerator = (function () {
+  var S4 = function S4() {
+    return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+  };
+  return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+});
+
+function getHighest(elements) {
+  var highest = 0;
+  elements.forEach(function (el) {
+    if (el.rect && el.rect.height > highest) {
+      highest = el.rect.height;
+    }
+  });
+  return highest;
+}
+
+function nextTriggerOnMount(_ref) {
+  var rect = _ref.rect,
+      mode = _ref.mode,
+      prevOffset = _ref.prevOffset,
+      position = _ref.position,
+      direction = _ref.direction,
+      width = _ref.width;
+
+  if (mode !== 'chain') return false;
+  switch (direction) {
+    case 'toRight':
+      return position.from > 0;
+    case 'toLeft':
+    default:
+      return rect.width + position.from <= width;
+  }
+}
+
+function getFromOffset(_ref) {
+  var rect = _ref.rect,
+      offset = _ref.offset,
+      direction = _ref.direction;
+
+  switch (direction) {
+    case 'toRight':
+      return offset - rect.width;
+    case 'toLeft':
+    default:
+      return offset;
+  }
+}
+
+function getFrom(_ref2) {
+  var index = _ref2.index,
+      rect = _ref2.rect,
+      offset = _ref2.offset,
+      width = _ref2.width,
+      direction = _ref2.direction;
+
+  if (index === 0) return offset;
+
+  if (typeof offset === 'number') {
+    return getFromOffset({ rect: rect, offset: offset, direction: direction });
+  }
+
+  switch (direction) {
+    case 'toRight':
+      return -rect.width;
+    case 'toLeft':
+    default:
+      return width;
+  }
+}
+
+function getTo(_ref3) {
+  var rect = _ref3.rect,
+      width = _ref3.width,
+      direction = _ref3.direction;
+
+  switch (direction) {
+    case 'toRight':
+      return width;
+    case 'toLeft':
+    default:
+      return -rect.width;
+  }
+}
+
+function getNext(_ref4) {
+  var mode = _ref4.mode,
+      from = _ref4.from,
+      direction = _ref4.direction,
+      rect = _ref4.rect,
+      width = _ref4.width;
+
+  var start = from || 0;
+
+  switch (mode) {
+    case 'await':
+      switch (direction) {
+        case 'toRight':
+          return width;
+        case 'toLeft':
+        default:
+          return -rect.width;
+      }
+    case 'smooth':
+      switch (direction) {
+        case 'toRight':
+          return rect.width > width ? 0 : width - rect.width;
+        case 'toLeft':
+        default:
+          return rect.width > width ? width - rect.width : 0;
+      }
+    case 'chain':
+    default:
+      switch (direction) {
+        case 'toRight':
+          return 0;
+        case 'toLeft':
+        default:
+          return rect.width + start > width ? width - rect.width : width - rect.left - rect.width;
+      }
+  }
+}
+
+var getPosition = (function (_ref5) {
+  var mode = _ref5.mode,
+      index = _ref5.index,
+      rect = _ref5.rect,
+      offset = _ref5.offset,
+      width = _ref5.width,
+      direction = _ref5.direction;
+
+  var from = getFrom({ index: index, rect: rect, offset: offset, width: width, direction: direction });
+  var to = getTo({ rect: rect, width: width, direction: direction });
+  return {
+    from: from,
+    to: to,
+    next: getNext({ mode: mode, from: from, direction: direction, rect: rect, width: width })
+  };
+});
+
+function getNextOffset(_ref) {
+  var from = _ref.from,
+      rect = _ref.rect,
+      direction = _ref.direction;
+
+  switch (direction) {
+    case 'toRight':
+      {
+        return from;
+      }
+    case 'toLeft':
+    default:
+      {
+        return from + rect.width;
+      }
+  }
+}
+
+function getStartOffset(_ref) {
+  var offset = _ref.offset,
+      rect = _ref.rect,
+      direction = _ref.direction,
+      width = _ref.width;
+
+  if (offset === 'run-in') {
+    switch (direction) {
+      case 'toRight':
+        return -rect.width;
+      case 'toLeft':
+      default:
+        return width;
+    }
+  }
+  if (typeof offset === 'string') {
+    var offsetRelative = Number(offset.replace('%', ''));
+    if (offsetRelative) return width / 100 * offsetRelative;
+  }
+  return offset;
+}
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+var TickerElement = function (_React$Component) {
+  inherits(TickerElement, _React$Component);
+
+  function TickerElement() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    classCallCheck(this, TickerElement);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = TickerElement.__proto__ || Object.getPrototypeOf(TickerElement)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      children: _this.props.children({
+        index: _this.props.index
+      }),
+      move: _this.props.move,
+      position: { from: undefined, to: undefined, next: undefined },
+      offset: _this.props.offset,
+      rect: null
+    }, _this.x = 0, _this.isMoving = false, _this.nextTriggered = false, _this.elementRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef(), _this.raf = null, _this.componentDidMount = function () {
+      _this.setPosition(true);
+      _this.observer = new MutationObserver(_this.onMutation);
+      _this.observer.observe(_this.elementRef.current, { characterData: true, childList: true, subtree: true });
+    }, _this.componentWillUnmount = function () {
+      _this.observer.disconnect();
+    }, _this.onMutation = function () {
+      _this.setPosition();
+    }, _this.componentDidUpdate = function (prevProps, prevState) {
+      if (!_this.x && prevState.position.from !== _this.state.position.from) {
+        _this.x = _this.state.position.from;
+        _this.elementRef.current.style.transform = 'translate3d(' + _this.x + 'px, 0, 0)';
+      }
+      if (_this.x !== _this.state.position.from && prevProps.prevRect && _this.props.prevRect && prevProps.prevRect.width !== _this.props.prevRect.width) {
+        if (_this.props.offset) {
+          _this.x = _this.x + (_this.props.offset - prevProps.offset);
+        } else {
+          _this.x = _this.x + (_this.props.prevRect.width - prevProps.prevRect.width);
+        }
+        _this.elementRef.current.style.transform = 'translate3d(' + _this.x + 'px, 0, 0)';
+      }
+      if (_this.props.move && !prevProps.start && _this.props.start) {
+        _this.animate();
+      }
+      if (_this.props.start && !prevProps.move && _this.props.move) {
+        _this.animate();
+      }
+      if (prevProps.move && !_this.props.move) {
+        _this.isMoving = false;
+        window.cancelAnimationFrame(_this.raf);
+      }
+    }, _this.setPosition = function (isMount) {
+      var _this$props = _this.props,
+          mode = _this$props.mode,
+          width = _this$props.width,
+          id = _this$props.id,
+          onNext = _this$props.onNext,
+          direction = _this$props.direction,
+          index = _this$props.index,
+          setRect = _this$props.setRect;
+
+
+      var rect = _this.elementRef.current.getBoundingClientRect();
+      if (rect.width === 0) return;
+
+      var offset = _this.props.index === 0 ? getStartOffset({ offset: _this.props.offset, rect: rect, direction: direction, width: width }) : _this.props.offset;
+
+      var position = getPosition({ mode: mode, rect: rect, index: index, offset: offset, width: width, direction: direction });
+
+      setRect({
+        index: _this.props.index,
+        rect: rect,
+        offset: offset,
+        nextOffset: getNextOffset({ from: position.from, rect: rect, direction: direction })
+      });
+
+      if (isMount) {
+        var nextTriggerOnMount$$1 = nextTriggerOnMount({ mode: mode, rect: rect, position: position, offset: offset, direction: direction, width: width });
+        if (nextTriggerOnMount$$1) {
+          onNext({
+            id: id,
+            index: index,
+            rect: rect,
+            nextOffset: getNextOffset({ from: position.from, rect: rect, direction: direction })
+          });
+        }
+        if (!nextTriggerOnMount$$1 && (offset || index === 0)) {
+          onNext({ id: id, index: index, rect: rect });
+        }
+        _this.nextTriggered = nextTriggerOnMount$$1;
+      }
+
+      _this.setState({
+        rect: rect,
+        offset: offset,
+        position: position
+      });
+    }, _this.shouldTriggerNext = function () {
+      if (_this.nextTriggered) return false;
+      return _this.props.direction === 'toLeft' ? _this.x <= _this.state.position.next : _this.x >= _this.state.position.next;
+    }, _this.triggerNext = function () {
+      if (_this.shouldTriggerNext()) {
+        // if (this.props.index === 5) console.log(this.x)
+        _this.nextTriggered = true;
+        _this.props.onNext({
+          id: _this.props.id,
+          index: _this.props.index,
+          rect: _this.state.rect
+        });
+      }
+    }, _this.shouldFinish = function () {
+      switch (_this.props.direction) {
+        case 'toRight':
+          return _this.x >= _this.state.position.to;
+        case 'toLeft':
+        default:
+          return _this.x <= _this.state.position.to;
+      }
+    }, _this.animate = function () {
+      if (_this.isMoving) return;
+      _this.isMoving = true;
+
+      var prevTimestamp = null;
+
+      var step = function step(timestamp) {
+        if (!_this.isMoving) return;
+        if (!_this.elementRef.current) return;
+
+        var progress = prevTimestamp ? timestamp - prevTimestamp : 0;
+
+        _this.x = _this.props.direction === 'toLeft' ? _this.x - progress / 100 * _this.props.speed : _this.x + progress / 100 * _this.props.speed;
+        _this.elementRef.current.style.transform = 'translate3d(' + _this.x + 'px, 0, 0)';
+        _this.triggerNext();
+
+        if (_this.shouldFinish()) {
+          _this.isMoving = false;
+          prevTimestamp = null;
+          _this.props.onFinish(_this.props.id);
+        } else {
+          prevTimestamp = timestamp;
+          _this.raf = window.requestAnimationFrame(step);
+        }
+      };
+      _this.raf = window.requestAnimationFrame(step);
+    }, _this.render = function () {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+        'div',
+        {
+          className: 'ticker__element',
+          style: {
+            willChange: 'transform',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            transform: 'translate3d(' + _this.x + 'px, 0, 0)'
+          },
+          ref: _this.elementRef
+        },
+        _this.state.children
+      );
+    }, _temp), possibleConstructorReturn(_this, _ret);
+  }
+
+  return TickerElement;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+TickerElement.propTypes = {
+  children: Object(prop_types__WEBPACK_IMPORTED_MODULE_1__["oneOfType"])([prop_types__WEBPACK_IMPORTED_MODULE_1__["node"], prop_types__WEBPACK_IMPORTED_MODULE_1__["func"]]).isRequired,
+  direction: prop_types__WEBPACK_IMPORTED_MODULE_1__["string"].isRequired,
+  speed: prop_types__WEBPACK_IMPORTED_MODULE_1__["number"].isRequired,
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1__["string"].isRequired,
+  index: prop_types__WEBPACK_IMPORTED_MODULE_1__["number"].isRequired,
+  mode: prop_types__WEBPACK_IMPORTED_MODULE_1__["string"].isRequired,
+  move: prop_types__WEBPACK_IMPORTED_MODULE_1__["bool"].isRequired,
+  onNext: prop_types__WEBPACK_IMPORTED_MODULE_1__["func"].isRequired,
+  onFinish: prop_types__WEBPACK_IMPORTED_MODULE_1__["func"].isRequired,
+  setRect: prop_types__WEBPACK_IMPORTED_MODULE_1__["func"].isRequired,
+  start: prop_types__WEBPACK_IMPORTED_MODULE_1__["bool"].isRequired,
+
+  offset: Object(prop_types__WEBPACK_IMPORTED_MODULE_1__["oneOfType"])([prop_types__WEBPACK_IMPORTED_MODULE_1__["number"], prop_types__WEBPACK_IMPORTED_MODULE_1__["string"]]),
+  prevRect: prop_types__WEBPACK_IMPORTED_MODULE_1__["object"],
+  width: prop_types__WEBPACK_IMPORTED_MODULE_1__["number"]
+};
+TickerElement.defaultProps = {
+  offset: undefined,
+  width: undefined,
+  prevRect: null
+};
+
+var getDefaultState = function getDefaultState(offset, width) {
+  return {
+    elements: [{
+      id: guidGenerator(),
+      index: 0,
+      height: 0,
+      start: false,
+      offset: offset,
+      rect: null,
+      prevRect: null
+    }],
+    width: width,
+    height: 0
+  };
+};
+
+var Ticker = function (_React$Component) {
+  inherits(Ticker, _React$Component);
+
+  function Ticker() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    classCallCheck(this, Ticker);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = Ticker.__proto__ || Object.getPrototypeOf(Ticker)).call.apply(_ref, [this].concat(args))), _this), _this.next = null, _this.state = getDefaultState(_this.props.offset), _this.tickerRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef(), _this.dOnResize = debounce(function () {
+      return _this.onResize();
+    }, 150), _this.componentDidMount = function () {
+      _this.setState({
+        width: _this.tickerRef.current.offsetWidth,
+        height: _this.props.height
+      });
+      window.addEventListener('resize', _this.dOnResize);
+    }, _this.componentWillUnmount = function () {
+      window.removeEventListener('resize', _this.dOnResize);
+    }, _this.setRect = function (_ref2) {
+      var index = _ref2.index,
+          rect = _ref2.rect,
+          offset = _ref2.offset,
+          nextOffset = _ref2.nextOffset;
+
+      _this.setState(function (prevState) {
+        var elements = prevState.elements.map(function (el) {
+          var newEl = el;
+          if (el.index === index) newEl.rect = rect;
+          // next element
+          if (el.index === index + 1) {
+            newEl.prevRect = rect;
+            if (newEl.offset) {
+              newEl.offset = nextOffset;
+            }
+          }
+          return newEl;
+        });
+        return {
+          elements: elements,
+          height: _this.props.height ? prevState.height : getHighest(elements)
+        };
+      });
+    }, _this.onResize = function () {
+      if (!_this.tickerRef.current || _this.tickerRef.current.offsetWidth === _this.state.width) return;
+      _this.setState(_extends({}, getDefaultState(_this.props.offset, _this.tickerRef.current.offsetWidth), {
+        height: _this.props.height
+      }));
+    }, _this.onFinish = function (id) {
+      _this.props.onFinish();
+      _this.setState(function (prevState) {
+        return {
+          elements: prevState.elements.filter(function (el) {
+            return el.id !== id;
+          })
+        };
+      });
+    }, _this.onNext = function (_ref3) {
+      var id = _ref3.id,
+          index = _ref3.index,
+          rect = _ref3.rect,
+          nextOffset = _ref3.nextOffset;
+
+      _this.props.onNext(index);
+
+      _this.setState(function (prevState) {
+        return {
+          elements: [].concat(toConsumableArray(prevState.elements.map(function (el) {
+            var newEl = el;
+            if (el.index === index) newEl.rect = rect;
+            if (el.index === 0 || el.offset || newEl.index === index + 1) {
+              newEl.start = true;
+            }
+            return newEl;
+            // create new element
+          })), [{
+            id: guidGenerator(),
+            index: prevState.elements[prevState.elements.length - 1].index + 1,
+            height: 0,
+            start: false,
+            offset: nextOffset,
+            rect: null,
+            prevRect: rect
+          }])
+        };
+      });
+    }, _temp), possibleConstructorReturn(_this, _ret);
+  }
+
+  createClass(Ticker, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+        'div',
+        {
+          className: 'ticker',
+          ref: this.tickerRef,
+          style: {
+            position: 'relative',
+            overflow: 'hidden',
+            height: this.state.height && this.state.height + 'px'
+          }
+        },
+        this.state.width && this.state.elements.map(function (el) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+            TickerElement,
+            {
+              key: el.id,
+              id: el.id,
+              index: el.index,
+              start: el.start,
+              offset: el.offset,
+              prevRect: el.prevRect,
+
+              direction: _this2.props.direction,
+              mode: _this2.props.mode,
+              move: _this2.props.move,
+              speed: _this2.props.speed,
+
+              onFinish: _this2.onFinish,
+              onNext: _this2.onNext,
+              setRect: _this2.setRect,
+              width: _this2.state.width
+            },
+            _this2.props.children
+          );
+        })
+      );
+    }
+  }]);
+  return Ticker;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+Ticker.propTypes = {
+  children: Object(prop_types__WEBPACK_IMPORTED_MODULE_1__["oneOfType"])([prop_types__WEBPACK_IMPORTED_MODULE_1__["node"], prop_types__WEBPACK_IMPORTED_MODULE_1__["func"]]).isRequired,
+
+  direction: prop_types__WEBPACK_IMPORTED_MODULE_1__["string"],
+  mode: prop_types__WEBPACK_IMPORTED_MODULE_1__["string"],
+  move: prop_types__WEBPACK_IMPORTED_MODULE_1__["bool"],
+  offset: Object(prop_types__WEBPACK_IMPORTED_MODULE_1__["oneOfType"])([prop_types__WEBPACK_IMPORTED_MODULE_1__["number"], prop_types__WEBPACK_IMPORTED_MODULE_1__["string"]]),
+  speed: prop_types__WEBPACK_IMPORTED_MODULE_1__["number"],
+  height: Object(prop_types__WEBPACK_IMPORTED_MODULE_1__["oneOfType"])([prop_types__WEBPACK_IMPORTED_MODULE_1__["number"], prop_types__WEBPACK_IMPORTED_MODULE_1__["string"]]),
+  onNext: prop_types__WEBPACK_IMPORTED_MODULE_1__["func"],
+  onFinish: prop_types__WEBPACK_IMPORTED_MODULE_1__["func"]
+};
+Ticker.defaultProps = {
+  offset: 0,
+  speed: 5,
+  direction: 'toLeft',
+  mode: 'chain',
+  move: true,
+  height: undefined,
+  onNext: function onNext() {},
+  onFinish: function onFinish() {}
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Ticker);
+//# sourceMappingURL=index.es.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react.development.js":
 /*!*****************************************************!*\
   !*** ./node_modules/react/cjs/react.development.js ***!
@@ -92850,15 +93512,15 @@ function App() {
       errors = _useState10[0],
       setErrors = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioAlbums")),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audios")),
       _useState12 = _slicedToArray(_useState11, 2),
-      audioAlbums = _useState12[0],
-      setAudioAlbums = _useState12[1];
+      audios = _useState12[0],
+      setAudios = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audios")),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("audioAlbums")),
       _useState14 = _slicedToArray(_useState13, 2),
-      audios = _useState14[0],
-      setAudios = _useState14[1];
+      audioAlbums = _useState14[0],
+      setAudioAlbums = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("boughtAudios")),
       _useState16 = _slicedToArray(_useState15, 2),
@@ -92890,15 +93552,20 @@ function App() {
       users = _useState26[0],
       setUsers = _useState26[1];
 
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
       _useState28 = _slicedToArray(_useState27, 2),
-      videoAlbums = _useState28[0],
-      setVideoAlbums = _useState28[1];
+      videos = _useState28[0],
+      setVideos = _useState28[1];
 
-  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
       _useState30 = _slicedToArray(_useState29, 2),
-      videos = _useState30[0],
-      setVideos = _useState30[1]; // Reset Messages and Errors to null after 3 seconds
+      videoAlbums = _useState30[0],
+      setVideoAlbums = _useState30[1];
+
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState32 = _slicedToArray(_useState31, 2),
+      karaokes = _useState32[0],
+      setKaraokes = _useState32[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || messages.length > 0) {
@@ -92930,21 +93597,21 @@ function App() {
         if (res.data) {
           setAuth(res.data);
           setLocalStorage("auth", res.data);
-        } // Fetch Audio Albums
+        } // Fetch Audios
 
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
-          setAudioAlbums(res.data);
-          setLocalStorage("audioAlbums", res.data);
-        })["catch"](function () {
-          return setErrors(["Failed to fetch audio albums"]);
-        }); // Fetch Audios
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audios").then(function (res) {
           setAudios(res.data);
           setLocalStorage("audios", res.data);
         })["catch"](function () {
           return setErrors(["Failed to fetch audios"]);
+        }); // Fetch Audio Albums
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/audio-albums").then(function (res) {
+          setAudioAlbums(res.data);
+          setLocalStorage("audioAlbums", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch audio albums"]);
         }); // Fetch Bought Audios
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/bought-audios").then(function (res) {
@@ -92987,13 +93654,6 @@ function App() {
           setLocalStorage("users", res.data);
         })["catch"](function () {
           return setErrors(['Failed to fetch users']);
-        }); // Fetch Video Albums
-
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
-          setVideoAlbums(res.data);
-          setLocalStorage("videoAlbums", res.data);
-        })["catch"](function () {
-          return setErrors(["Failed to fetch video albums"]);
         }); // Fetch Videos
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/videos").then(function (res) {
@@ -93001,6 +93661,19 @@ function App() {
           setLocalStorage("videos", res.data);
         })["catch"](function () {
           return setErrors(["Failed to fetch videos"]);
+        }); // Fetch Video Albums
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/video-albums").then(function (res) {
+          setVideoAlbums(res.data);
+          setLocalStorage("videoAlbums", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch video albums"]);
+        }); // Fetch Karaokes
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/karaokes").then(function (res) {
+          setKaraokes(res.data);
+        })["catch"](function () {
+          return props.setErrors(["Failed to fetch karaokes"]);
         });
       }
     })["catch"](function () {
@@ -93187,50 +93860,50 @@ function App() {
   * Audio Player */
 
 
-  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(showId),
-      _useState32 = _slicedToArray(_useState31, 2),
-      show = _useState32[0],
-      setShow = _useState32[1];
-
-  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+  var _useState33 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(showId),
       _useState34 = _slicedToArray(_useState33, 2),
-      playBtn = _useState34[0],
-      setPlayBtn = _useState34[1];
+      show = _useState34[0],
+      setShow = _useState34[1];
 
-  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState35 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState36 = _slicedToArray(_useState35, 2),
-      shuffle = _useState36[0],
-      setShuffle = _useState36[1];
+      playBtn = _useState36[0],
+      setPlayBtn = _useState36[1];
 
   var _useState37 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState38 = _slicedToArray(_useState37, 2),
-      loop = _useState38[0],
-      setLoop = _useState38[1];
+      shuffle = _useState38[0],
+      setShuffle = _useState38[1];
 
-  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState39 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState40 = _slicedToArray(_useState39, 2),
-      dur = _useState40[0],
-      setDur = _useState40[1];
+      loop = _useState40[0],
+      setLoop = _useState40[1];
 
-  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
+  var _useState41 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState42 = _slicedToArray(_useState41, 2),
-      volume = _useState42[0],
-      setVolume = _useState42[1];
+      dur = _useState42[0],
+      setDur = _useState42[1];
 
-  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState43 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0.3),
       _useState44 = _slicedToArray(_useState43, 2),
-      currentTime = _useState44[0],
-      setCurrentTime = _useState44[1];
+      volume = _useState44[0],
+      setVolume = _useState44[1];
 
-  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState45 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState46 = _slicedToArray(_useState45, 2),
-      progressPercent = _useState46[0],
-      setProgressPercent = _useState46[1];
+      currentTime = _useState46[0],
+      setCurrentTime = _useState46[1];
 
-  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+  var _useState47 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState48 = _slicedToArray(_useState47, 2),
-      audioLoader = _useState48[0],
-      setAudioLoader = _useState48[1]; // Listen for show change and autoplay song
+      progressPercent = _useState48[0],
+      setProgressPercent = _useState48[1];
+
+  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState50 = _slicedToArray(_useState49, 2),
+      audioLoader = _useState50[0],
+      setAudioLoader = _useState50[1]; // Listen for show change and autoplay song
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -93417,10 +94090,10 @@ function App() {
   } // Search State
 
 
-  var _useState49 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
-      _useState50 = _slicedToArray(_useState49, 2),
-      search = _useState50[0],
-      setSearch = _useState50[1];
+  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("!@#$%^&"),
+      _useState52 = _slicedToArray(_useState51, 2),
+      search = _useState52[0],
+      setSearch = _useState52[1];
 
   var searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Function to focus on search input
 
@@ -93429,115 +94102,115 @@ function App() {
   }; // Social Input states
 
 
-  var _useState51 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState52 = _slicedToArray(_useState51, 2),
-      id = _useState52[0],
-      setId = _useState52[1];
-
   var _useState53 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState54 = _slicedToArray(_useState53, 2),
-      to = _useState54[0],
-      setTo = _useState54[1];
+      id = _useState54[0],
+      setId = _useState54[1];
 
   var _useState55 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState56 = _slicedToArray(_useState55, 2),
-      placeholder = _useState56[0],
-      setPlaceholder = _useState56[1];
+      to = _useState56[0],
+      setTo = _useState56[1];
 
-  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState57 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState58 = _slicedToArray(_useState57, 2),
-      text = _useState58[0],
-      setText = _useState58[1];
+      placeholder = _useState58[0],
+      setPlaceholder = _useState58[1];
 
   var _useState59 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState60 = _slicedToArray(_useState59, 2),
-      media = _useState60[0],
-      setMedia = _useState60[1];
+      text = _useState60[0],
+      setText = _useState60[1];
 
   var _useState61 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState62 = _slicedToArray(_useState61, 2),
-      para1 = _useState62[0],
-      setPara1 = _useState62[1];
+      media = _useState62[0],
+      setMedia = _useState62[1];
 
   var _useState63 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState64 = _slicedToArray(_useState63, 2),
-      para2 = _useState64[0],
-      setPara2 = _useState64[1];
+      para1 = _useState64[0],
+      setPara1 = _useState64[1];
 
   var _useState65 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState66 = _slicedToArray(_useState65, 2),
-      para3 = _useState66[0],
-      setPara3 = _useState66[1];
+      para2 = _useState66[0],
+      setPara2 = _useState66[1];
 
   var _useState67 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState68 = _slicedToArray(_useState67, 2),
-      para4 = _useState68[0],
-      setPara4 = _useState68[1];
+      para3 = _useState68[0],
+      setPara3 = _useState68[1];
 
   var _useState69 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState70 = _slicedToArray(_useState69, 2),
-      para5 = _useState70[0],
-      setPara5 = _useState70[1];
+      para4 = _useState70[0],
+      setPara4 = _useState70[1];
 
-  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState71 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState72 = _slicedToArray(_useState71, 2),
-      urlTo = _useState72[0],
-      setUrlTo = _useState72[1];
+      para5 = _useState72[0],
+      setPara5 = _useState72[1];
 
   var _useState73 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState74 = _slicedToArray(_useState73, 2),
-      urlToTwo = _useState74[0],
-      setUrlToTwo = _useState74[1];
+      urlTo = _useState74[0],
+      setUrlTo = _useState74[1];
 
   var _useState75 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState76 = _slicedToArray(_useState75, 2),
-      urlToDelete = _useState76[0],
-      setUrlToDelete = _useState76[1];
+      urlToTwo = _useState76[0],
+      setUrlToTwo = _useState76[1];
 
   var _useState77 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState78 = _slicedToArray(_useState77, 2),
-      stateToUpdate = _useState78[0],
-      setStateToUpdate = _useState78[1];
+      urlToDelete = _useState78[0],
+      setUrlToDelete = _useState78[1];
 
   var _useState79 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState80 = _slicedToArray(_useState79, 2),
-      stateToUpdateTwo = _useState80[0],
-      setStateToUpdateTwo = _useState80[1];
+      stateToUpdate = _useState80[0],
+      setStateToUpdate = _useState80[1];
 
   var _useState81 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState82 = _slicedToArray(_useState81, 2),
-      showImage = _useState82[0],
-      setShowImage = _useState82[1];
+      stateToUpdateTwo = _useState82[0],
+      setStateToUpdateTwo = _useState82[1];
 
   var _useState83 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState84 = _slicedToArray(_useState83, 2),
-      showPoll = _useState84[0],
-      setShowPoll = _useState84[1];
+      showImage = _useState84[0],
+      setShowImage = _useState84[1];
 
-  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState85 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState86 = _slicedToArray(_useState85, 2),
-      showMentionPicker = _useState86[0],
-      setShowMentionPicker = _useState86[1];
+      showPoll = _useState86[0],
+      setShowPoll = _useState86[1];
 
   var _useState87 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState88 = _slicedToArray(_useState87, 2),
-      showEmojiPicker = _useState88[0],
-      setShowEmojiPicker = _useState88[1];
+      showMentionPicker = _useState88[0],
+      setShowMentionPicker = _useState88[1];
 
   var _useState89 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState90 = _slicedToArray(_useState89, 2),
-      showImagePicker = _useState90[0],
-      setShowImagePicker = _useState90[1];
+      showEmojiPicker = _useState90[0],
+      setShowEmojiPicker = _useState90[1];
 
   var _useState91 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState92 = _slicedToArray(_useState91, 2),
-      showPollPicker = _useState92[0],
-      setShowPollPicker = _useState92[1];
+      showImagePicker = _useState92[0],
+      setShowImagePicker = _useState92[1];
 
   var _useState93 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState94 = _slicedToArray(_useState93, 2),
-      editing = _useState94[0],
-      setEditing = _useState94[1]; // Declare new FormData object for form data
+      showPollPicker = _useState94[0],
+      setShowPollPicker = _useState94[1];
+
+  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState96 = _slicedToArray(_useState95, 2),
+      editing = _useState96[0],
+      setEditing = _useState96[1]; // Declare new FormData object for form data
 
 
   var formData = new FormData(); // Handle form submit for Social Input
@@ -93610,15 +94283,15 @@ function App() {
   var deferredPrompt;
   var btnAdd = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
 
-  var _useState95 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState96 = _slicedToArray(_useState95, 2),
-      downloadLink = _useState96[0],
-      setDownloadLink = _useState96[1];
-
-  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState97 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState98 = _slicedToArray(_useState97, 2),
-      downloadLinkText = _useState98[0],
-      setDownloadLinkText = _useState98[1]; // Listen to the install prompt
+      downloadLink = _useState98[0],
+      setDownloadLink = _useState98[1];
+
+  var _useState99 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState100 = _slicedToArray(_useState99, 2),
+      downloadLinkText = _useState100[0],
+      setDownloadLinkText = _useState100[1]; // Listen to the install prompt
 
 
   window.addEventListener('beforeinstallprompt', function (e) {
@@ -93745,7 +94418,7 @@ function App() {
     setVideos: setVideos,
     search: search,
     setSearch: setSearch
-  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "displayNotification", displayNotification), _defineProperty(_GLOBAL_STATE, "subscribeToPush", subscribeToPush), _defineProperty(_GLOBAL_STATE, "sendPush", sendPush), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "editing", editing), _defineProperty(_GLOBAL_STATE, "setEditing", setEditing), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _defineProperty(_GLOBAL_STATE, "btnAdd", btnAdd), _defineProperty(_GLOBAL_STATE, "downloadLink", downloadLink), _defineProperty(_GLOBAL_STATE, "setDownloadLink", setDownloadLink), _defineProperty(_GLOBAL_STATE, "downloadLinkText", downloadLinkText), _defineProperty(_GLOBAL_STATE, "setDownloadLinkText", setDownloadLinkText), _GLOBAL_STATE);
+  }, _defineProperty(_GLOBAL_STATE, "users", users), _defineProperty(_GLOBAL_STATE, "setUsers", setUsers), _defineProperty(_GLOBAL_STATE, "videoAlbums", videoAlbums), _defineProperty(_GLOBAL_STATE, "setVideoAlbums", setVideoAlbums), _defineProperty(_GLOBAL_STATE, "videos", videos), _defineProperty(_GLOBAL_STATE, "setVideos", setVideos), _defineProperty(_GLOBAL_STATE, "karaokes", karaokes), _defineProperty(_GLOBAL_STATE, "setKaraokes", setKaraokes), _defineProperty(_GLOBAL_STATE, "onFollow", onFollow), _defineProperty(_GLOBAL_STATE, "onCartVideos", onCartVideos), _defineProperty(_GLOBAL_STATE, "onCartAudios", onCartAudios), _defineProperty(_GLOBAL_STATE, "displayNotification", displayNotification), _defineProperty(_GLOBAL_STATE, "subscribeToPush", subscribeToPush), _defineProperty(_GLOBAL_STATE, "sendPush", sendPush), _defineProperty(_GLOBAL_STATE, "onSearchIconClick", onSearchIconClick), _defineProperty(_GLOBAL_STATE, "searchInput", searchInput), _defineProperty(_GLOBAL_STATE, "showAudio", showAudio), _defineProperty(_GLOBAL_STATE, "showArtist", showArtist), _defineProperty(_GLOBAL_STATE, "show", show), _defineProperty(_GLOBAL_STATE, "setShow", setShow), _defineProperty(_GLOBAL_STATE, "playBtn", playBtn), _defineProperty(_GLOBAL_STATE, "setPlayBtn", setPlayBtn), _defineProperty(_GLOBAL_STATE, "shuffle", shuffle), _defineProperty(_GLOBAL_STATE, "setShuffle", setShuffle), _defineProperty(_GLOBAL_STATE, "loop", loop), _defineProperty(_GLOBAL_STATE, "setLoop", setLoop), _defineProperty(_GLOBAL_STATE, "dur", dur), _defineProperty(_GLOBAL_STATE, "setDur", setDur), _defineProperty(_GLOBAL_STATE, "volume", volume), _defineProperty(_GLOBAL_STATE, "setVolume", setVolume), _defineProperty(_GLOBAL_STATE, "currentTime", currentTime), _defineProperty(_GLOBAL_STATE, "setCurrentTime", setCurrentTime), _defineProperty(_GLOBAL_STATE, "audio", audio), _defineProperty(_GLOBAL_STATE, "audioProgress", audioProgress), _defineProperty(_GLOBAL_STATE, "audioContainer", audioContainer), _defineProperty(_GLOBAL_STATE, "volumeProgress", volumeProgress), _defineProperty(_GLOBAL_STATE, "volumeContainer", volumeContainer), _defineProperty(_GLOBAL_STATE, "songs", songs), _defineProperty(_GLOBAL_STATE, "playSong", playSong), _defineProperty(_GLOBAL_STATE, "pauseSong", pauseSong), _defineProperty(_GLOBAL_STATE, "prevSong", prevSong), _defineProperty(_GLOBAL_STATE, "nextSong", nextSong), _defineProperty(_GLOBAL_STATE, "setProgress", setProgress), _defineProperty(_GLOBAL_STATE, "progressPercent", progressPercent), _defineProperty(_GLOBAL_STATE, "onSetVolume", onSetVolume), _defineProperty(_GLOBAL_STATE, "fmtMSS", fmtMSS), _defineProperty(_GLOBAL_STATE, "audioLoader", audioLoader), _defineProperty(_GLOBAL_STATE, "id", id), _defineProperty(_GLOBAL_STATE, "setId", setId), _defineProperty(_GLOBAL_STATE, "to", to), _defineProperty(_GLOBAL_STATE, "setTo", setTo), _defineProperty(_GLOBAL_STATE, "text", text), _defineProperty(_GLOBAL_STATE, "setText", setText), _defineProperty(_GLOBAL_STATE, "media", media), _defineProperty(_GLOBAL_STATE, "setMedia", setMedia), _defineProperty(_GLOBAL_STATE, "para1", para1), _defineProperty(_GLOBAL_STATE, "setPara1", setPara1), _defineProperty(_GLOBAL_STATE, "para2", para2), _defineProperty(_GLOBAL_STATE, "setPara2", setPara2), _defineProperty(_GLOBAL_STATE, "para3", para3), _defineProperty(_GLOBAL_STATE, "setPara3", setPara3), _defineProperty(_GLOBAL_STATE, "para4", para4), _defineProperty(_GLOBAL_STATE, "setPara4", setPara4), _defineProperty(_GLOBAL_STATE, "para5", para5), _defineProperty(_GLOBAL_STATE, "setPara5", setPara5), _defineProperty(_GLOBAL_STATE, "placeholder", placeholder), _defineProperty(_GLOBAL_STATE, "setPlaceholder", setPlaceholder), _defineProperty(_GLOBAL_STATE, "urlTo", urlTo), _defineProperty(_GLOBAL_STATE, "setUrlTo", setUrlTo), _defineProperty(_GLOBAL_STATE, "urlToTwo", urlToTwo), _defineProperty(_GLOBAL_STATE, "setUrlToTwo", setUrlToTwo), _defineProperty(_GLOBAL_STATE, "urlToDelete", urlToDelete), _defineProperty(_GLOBAL_STATE, "setUrlToDelete", setUrlToDelete), _defineProperty(_GLOBAL_STATE, "stateToUpdate", stateToUpdate), _defineProperty(_GLOBAL_STATE, "setStateToUpdate", setStateToUpdate), _defineProperty(_GLOBAL_STATE, "stateToUpdateTwo", stateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "setStateToUpdateTwo", setStateToUpdateTwo), _defineProperty(_GLOBAL_STATE, "showImage", showImage), _defineProperty(_GLOBAL_STATE, "setShowImage", setShowImage), _defineProperty(_GLOBAL_STATE, "showPoll", showPoll), _defineProperty(_GLOBAL_STATE, "setShowPoll", setShowPoll), _defineProperty(_GLOBAL_STATE, "showMentionPicker", showMentionPicker), _defineProperty(_GLOBAL_STATE, "setShowMentionPicker", setShowMentionPicker), _defineProperty(_GLOBAL_STATE, "showEmojiPicker", showEmojiPicker), _defineProperty(_GLOBAL_STATE, "setShowEmojiPicker", setShowEmojiPicker), _defineProperty(_GLOBAL_STATE, "showImagePicker", showImagePicker), _defineProperty(_GLOBAL_STATE, "setShowImagePicker", setShowImagePicker), _defineProperty(_GLOBAL_STATE, "showPollPicker", showPollPicker), _defineProperty(_GLOBAL_STATE, "setShowPollPicker", setShowPollPicker), _defineProperty(_GLOBAL_STATE, "editing", editing), _defineProperty(_GLOBAL_STATE, "setEditing", setEditing), _defineProperty(_GLOBAL_STATE, "onSubmit", onSubmit), _defineProperty(_GLOBAL_STATE, "btnAdd", btnAdd), _defineProperty(_GLOBAL_STATE, "downloadLink", downloadLink), _defineProperty(_GLOBAL_STATE, "setDownloadLink", setDownloadLink), _defineProperty(_GLOBAL_STATE, "downloadLinkText", downloadLinkText), _defineProperty(_GLOBAL_STATE, "setDownloadLinkText", setDownloadLinkText), _GLOBAL_STATE);
   var showLoginPopUp = auth.username == "@guest" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ScrollToTop__WEBPACK_IMPORTED_MODULE_7__["default"], null), login && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_LoginPopUp__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TopNav__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/download",
@@ -93838,7 +94511,7 @@ function App() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_KaraokeCreate__WEBPACK_IMPORTED_MODULE_24__["default"], GLOBAL_STATE);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/karaoke-show/:id",
+    path: "/karaoke-show",
     exact: true,
     render: function render(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_KaraokeShow__WEBPACK_IMPORTED_MODULE_23__["default"], GLOBAL_STATE);
@@ -94611,6 +95284,703 @@ Img.defaultProps = {
   alt: 'image'
 };
 /* harmony default export */ __webpack_exports__["default"] = (Img);
+
+/***/ }),
+
+/***/ "./resources/js/components/Karaoke.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/Karaoke.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_ticker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-ticker */ "./node_modules/react-ticker/dist/index.es.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _KaraokeCommentSection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./KaraokeCommentSection */ "./resources/js/components/KaraokeCommentSection.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
+/* harmony import */ var _svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/CommentSVG */ "./resources/js/svgs/CommentSVG.js");
+/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
+/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
+/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
+/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
+/* harmony import */ var _svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/PlayFilledSVG */ "./resources/js/svgs/PlayFilledSVG.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Karaoke = function Karaoke(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      karaokeComments = _useState2[0],
+      setKaraokeComments = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      play = _useState4[0],
+      setPlay = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      bottomMenu = _useState6[0],
+      setBottomMenu = _useState6[1]; // ID for video
+
+
+  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description
+
+  var karaokeDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description text
+
+  var showDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Id for rotating record
+
+  var record = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Fetch Karaoke Comments
+    axios.get("/api/karaoke-comments").then(function (res) {
+      setKaraokeComments(res.data);
+    })["catch"](function () {
+      return props.setErrors(["Failed to fetch karaoke comments"]);
+    });
+  }, []); // Function for liking karaoke
+
+  var onKaraokeLike = function onKaraokeLike(id) {
+    // Show like
+    var newKaraokes = props.karaokes.filter(function (item) {
+      // Get the exact karaoke and change like status
+      if (item.id == props.karaoke.id) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new karaokes
+
+    props.setKaraokes(newKaraokes); // Add like to database
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/karaoke-likes"), {
+        karaoke: id
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke
+
+        axios.get("".concat(props.url, "/api/karaokes")).then(function (res) {
+          return props.setKaraokes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Web Share API for share button
+  // Share must be triggered by "user activation"
+
+
+  var onShare = function onShare() {
+    // Define share data
+    var shareData = {
+      title: props.karaoke.audio,
+      text: "Check out this karaoke on Black Music\n",
+      url: "https://music.black.co.ke/#/karaoke-show/".concat(props.karaoke.id)
+    }; // Check if data is shareble
+
+    navigator.canShare(shareData) && navigator.share(shareData);
+  }; // Pause or Play Video
+
+
+  var onPause = function onPause() {
+    video.current.pause();
+    record.current.style.animationPlayState = "paused";
+    setPlay(true);
+  };
+
+  var onPlay = function onPlay() {
+    video.current.play();
+    record.current.style.animationPlayState = "running";
+    setPlay(false);
+  }; // Show More
+
+
+  var showMore = function showMore() {
+    var d = karaokeDescription.current.style.display;
+    karaokeDescription.current.style.display = d == "none" ? "block" : "none";
+    var t = showDescription.current.innerHTML;
+    showDescription.current.innerHTML = t == "show more" ? "show less" : "show more";
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "single-karaoke",
+    onClick: play ? onPlay : onPause
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+    ref: video,
+    src: "/storage/".concat(props.karaoke.karaoke),
+    className: "karaoke-player",
+    width: "100%",
+    loading: "lazy",
+    preload: "none",
+    autoPlay: true,
+    muted: true,
+    loop: true,
+    playsInline: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      position: "absolute",
+      top: 0
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/karaoke-charts",
+    style: {
+      fontSize: "1.5em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "karaoke-overlay w-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2",
+    style: {
+      fontSize: "4em",
+      color: "rgba(220, 220, 220, 1)"
+    }
+  }, play && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-1 flex-grow-1 align-self-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "m-1",
+    style: {
+      width: "100%",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.karaoke.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.karaoke.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
+    style: {
+      color: "gold"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.karaoke.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "text-secondary d-block"
+  }, props.karaoke.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    ref: karaokeDescription,
+    className: "m-0 mx-1 p-0",
+    style: {
+      display: "none"
+    }
+  }, props.karaoke.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    ref: showDescription,
+    className: "text-secondary ml-1",
+    onClick: showMore
+  }, "show more"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex py-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mr-2",
+    style: {
+      fontSize: "1.5em",
+      color: "#FFD700"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex-grow-1 align-self-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ticker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    mode: "smooth"
+  }, function (_ref) {
+    var index = _ref.index;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      style: {
+        color: "#FFD700"
+      }
+    }, props.karaoke.audio);
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-2 align-self-end"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-column mb-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-thumbnail-xs ml-auto mr-1 mb-3",
+    style: {
+      borderRadius: "50%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/profile/".concat(props.karaoke.username)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    src: "/storage/".concat(props.karaoke.pp),
+    width: "50px",
+    height: "50px",
+    alt: 'avatar'
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, props.karaoke.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "#fb3958"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onKaraokeLike(props.karaoke.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "inherit",
+      fontSize: "2em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "inherit"
+    }
+  }, props.karaoke.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "rgba(220, 220, 220, 1)"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onKaraokeLike(props.karaoke.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "inherit",
+      fontSize: "2em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "inherit"
+    }
+  }, props.karaoke.likes)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-1",
+    style: {
+      color: "rgba(220, 220, 220, 1)"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "2em"
+    },
+    onClick: function onClick() {
+      return setBottomMenu("menu-open");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "inherit"
+    }
+  }, props.karaoke.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-1 mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "2em",
+      color: "rgba(220, 220, 220, 1)"
+    },
+    onClick: function onClick() {
+      return onShare();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: record,
+    className: "rotate-record"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/audio-show/".concat(props.karaoke.audio_id)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    width: "50px",
+    height: "50px",
+    alt: "current audio"
+  }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_KaraokeCommentSection__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, props, {
+    karaokeComments: karaokeComments,
+    setKaraokeComments: setKaraokeComments,
+    bottomMenu: bottomMenu,
+    setBottomMenu: setBottomMenu,
+    id: props.karaoke.id
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Karaoke);
+
+/***/ }),
+
+/***/ "./resources/js/components/KaraokeCommentSection.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/KaraokeCommentSection.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
+/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
+/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
+/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var SocialMediaInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/SocialMediaInput */ "./resources/js/components/SocialMediaInput.js"));
+});
+
+var KaraokeCommentSection = function KaraokeCommentSection(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState2 = _slicedToArray(_useState, 2),
+      bottomOptionsMenu = _useState2[0],
+      setBottomOptionsMenu = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      postToEdit = _useState4[0],
+      setPostToEdit = _useState4[1]; // ID for delete link
+
+
+  var deleteLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Set states
+    setTimeout(function () {
+      props.setPlaceholder("Add a comment");
+      props.setShowImage(false);
+      props.setShowPoll(false);
+      props.setShowEmojiPicker(false);
+      props.setShowImagePicker(false);
+      props.setShowPollPicker(false);
+    }, 1000);
+  }); // Declare new FormData object for form data
+
+  var formData = new FormData(); // Handle form submit for Social Input
+
+  var onSubmit = function onSubmit(e) {
+    e.preventDefault(); // Add form data to FormData object
+
+    formData.append("text", props.text);
+    formData.append("id", props.id); // Send data to HelpPostsController
+    // Get csrf cookie from Laravel inorder to send a POST request
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("/api/karaoke-comments", formData).then(function (res) {
+        props.setMessages([res.data]); // Updated Karaoke Comments One
+
+        axios.get("/api/karaoke-comments").then(function (res) {
+          return props.setKaraokeComments(res.data);
+        }); // Clear text unless editing
+
+        props.setText("");
+        props.setShowMentionPicker(false);
+        props.setShowEmojiPicker(false);
+        props.setShowImagePicker(false);
+        props.setShowPollPicker(false);
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Show error message
+        // newError.push(err.response.data.message)
+
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for deleting comments
+
+
+  var onDeleteComment = function onDeleteComment(id) {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios["delete"]("".concat(props.url, "/api/karaoke-comments/").concat(id)).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke comments
+
+        axios.get("".concat(props.url, "/api/karaoke-comments")).then(function (res) {
+          return props.setKaraokeComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for liking comments
+
+
+  var onCommentLike = function onCommentLike(comment) {
+    // Show like
+    var newKaraokeComments = props.karaokeComments.filter(function (item) {
+      // Get the exact karaoke and change like status
+      if (item.id == comment) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new karaokes
+
+    props.setKaraokeComments(newKaraokeComments); // Add like to database
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("".concat(props.url, "/api/karaoke-comment-likes"), {
+        comment: comment
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke comments
+
+        axios.get("".concat(props.url, "/api/karaoke-comments")).then(function (res) {
+          return props.setKaraokeComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: props.bottomMenu
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between border-bottom border-dark",
+    style: {
+      height: "3em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-header text-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    style: {
+      margin: "0px"
+    }
+  }, "Comments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
+    style: {
+      fontSize: "1em"
+    },
+    onClick: function onClick() {
+      return props.setBottomMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: onSubmit,
+    className: "contact-form bg-white mb-2",
+    autoComplete: "off"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "sonar-load",
+      className: "mt-5 mb-5"
+    }))
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SocialMediaInput, props))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "m-0 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      maxHeight: window.innerHeight * 0.60,
+      overflowY: "scroll"
+    }
+  }, props.karaokeComments.filter(function (comment) {
+    return comment.karaoke_id == props.karaoke.id;
+  }).length > 0 ? props.karaokeComments.filter(function (comment) {
+    return comment.karaoke_id == props.karaoke.id;
+  }).map(function (comment, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: index,
+      className: "d-flex p-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: ""
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "avatar-thumbnail-xs",
+      style: {
+        borderRadius: "50%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/profile/".concat(comment.username)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      src: comment.pp,
+      width: "50px",
+      height: "50px"
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "flex-grow-1 ml-2 text-left"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "media-heading m-0",
+      style: {
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "clip"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "ml-1",
+      style: {
+        color: "gold"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "ml-1",
+      style: {
+        fontSize: "10px"
+      }
+    }, comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "float-right mr-1 text-secondary"
+    }, comment.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0 text-light"
+    }, comment.text), comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      style: {
+        color: "#fb3958"
+      },
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onCommentLike(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      className: "ml-1",
+      style: {
+        color: "inherit"
+      }
+    }, comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      className: "text-light",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onCommentLike(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      className: "ml-1",
+      style: {
+        color: "inherit"
+      }
+    }, comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropup float-right hidden"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      role: "button",
+      id: "dropdownMenuLink",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "dropdown-menu dropdown-menu-right p-0",
+      style: {
+        borderRadius: "0",
+        backgroundColor: "#232323"
+      }
+    }, comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      className: "dropdown-item",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        onDeleteComment(comment.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "float-right anti-hidden"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "text-secondary",
+      onClick: function onClick() {
+        if (comment.username == props.auth.username) {
+          setBottomOptionsMenu("menu-open");
+          setPostToEdit(comment.id); // Show and Hide elements
+
+          deleteLink.current.className = "d-block";
+        }
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+    className: "my-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      color: "grey"
+    }
+  }, "No comments to show")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: bottomOptionsMenu
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between",
+    style: {
+      height: "3em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
+    style: {
+      fontSize: "1em"
+    },
+    onClick: function onClick() {
+      return setBottomOptionsMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: deleteLink,
+    onClick: function onClick() {
+      setBottomOptionsMenu("");
+      onDeleteComment(postToEdit);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "pb-2"
+  }, "Delete comment")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (KaraokeCommentSection);
 
 /***/ }),
 
@@ -101412,7 +102782,7 @@ var KaraokeCharts = function KaraokeCharts(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "w-100"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "karaoke-show/".concat(karaoke.id)
+      to: "karaoke-show"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
       src: "/storage/".concat(karaoke.karaoke),
       width: "100%",
@@ -101894,673 +103264,31 @@ var KaraokeCreate = function KaraokeCreate(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
-/* harmony import */ var _svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/CommentSVG */ "./resources/js/svgs/CommentSVG.js");
-/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
-/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
-/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
-/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
-/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
-/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
-/* harmony import */ var _svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/PlayFilledSVG */ "./resources/js/svgs/PlayFilledSVG.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _components_Karaoke__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Karaoke */ "./resources/js/components/Karaoke.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
-
-
-
-
-
-
-
-
-
-
-var SocialMediaInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/SocialMediaInput */ "./resources/js/components/SocialMediaInput.js"));
-});
 
 var KaraokeShow = function KaraokeShow(props) {
-  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
-      id = _useParams.id;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      karaoke = _useState2[0],
-      setKaraoke = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      karaokeComments = _useState4[0],
-      setKaraokeComments = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState6 = _slicedToArray(_useState5, 2),
-      bottomMenu = _useState6[0],
-      setBottomMenu = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState8 = _slicedToArray(_useState7, 2),
-      bottomOptionsMenu = _useState8[0],
-      setBottomOptionsMenu = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState10 = _slicedToArray(_useState9, 2),
-      postToEdit = _useState10[0],
-      setPostToEdit = _useState10[1];
-
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState12 = _slicedToArray(_useState11, 2),
-      play = _useState12[0],
-      setPlay = _useState12[1]; // ID for video
-
-
-  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description
-
-  var karaokeDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for Video Description text
-
-  var showDescription = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // ID for delete link
-
-  var deleteLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    // Fetch Karaoke
-    axios.get("/api/karaokes/".concat(id)).then(function (res) {
-      setKaraoke(res.data);
-    })["catch"](function () {
-      return props.setErrors(["Failed to fetch karaoke"]);
-    }); // Fetch Karaoke Comments
-
-    axios.get("/api/karaoke-comments").then(function (res) {
-      setKaraokeComments(res.data);
-    })["catch"](function () {
-      return props.setErrors(["Failed to fetch karaoke comments"]);
-    }); // Set states
-
-    setTimeout(function () {
-      props.setPlaceholder("Add a comment");
-      props.setText("");
-      props.setId(id);
-      props.setShowImage(false);
-      props.setShowPoll(false);
-      props.setShowEmojiPicker(false);
-      props.setShowImagePicker(false);
-      props.setShowPollPicker(false);
-      props.setUrlTo("/karaoke-comments");
-      props.setUrlToDelete("/karaoke-comments/".concat(props.media.substr(11)));
-      props.setStateToUpdate(function () {
-        return setKaraokeComments;
-      });
-      props.setEditing(false);
-    }, 1000);
-  }, []); // Pause or Play Video
-
-  var onPause = function onPause() {
-    video.current.pause();
-    setPlay(true);
-  };
-
-  var onPlay = function onPlay() {
-    video.current.play();
-    setPlay(false);
-  }; // Show More
-
-
-  var showMore = function showMore() {
-    var d = karaokeDescription.current.style.display;
-    karaokeDescription.current.style.display = d == "none" ? "block" : "none";
-    var t = showDescription.current.innerHTML;
-    showDescription.current.innerHTML = t == "show more" ? "show less" : "show more";
-  }; // Function for liking karaoke
-
-
-  var onKaraokeLike = function onKaraokeLike(id) {
-    // Show like
-    var newKaraoke = _objectSpread(_objectSpread({}, karaoke), {}, {
-      "hasLiked": !karaoke.hasLiked
-    }); // Set new karaokes
-
-
-    setKaraoke(newKaraoke); // Add like to database
-
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/karaoke-likes"), {
-        karaoke: id
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update karaoke
-
-        axios.get("".concat(props.url, "/api/karaokes/").concat(id)).then(function (res) {
-          return setKaraoke(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Web Share API for share button
-  // Share must be triggered by "user activation"
-
-
-  var onShare = function onShare() {
-    // Define share data
-    var shareData = {
-      title: karaoke.audio,
-      text: "Check out this karaoke on Black Music\n",
-      url: "https://music.black.co.ke/#/karaoke-show/".concat(id)
-    }; // Check if data is shareble
-
-    navigator.canShare(shareData) && navigator.share(shareData);
-  }; // Function for deleting comments
-
-
-  var onDeleteComment = function onDeleteComment(id) {
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios["delete"]("".concat(props.url, "/api/karaoke-comments/").concat(id)).then(function (res) {
-        props.setMessages([res.data]); // Update karaoke comments
-
-        axios.get("".concat(props.url, "/api/karaoke-comments")).then(function (res) {
-          return setKaraokeComments(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for liking comments
-
-
-  var onCommentLike = function onCommentLike(comment) {
-    // Show like
-    var newKaraokeComments = karaokeComments.filter(function (item) {
-      // Get the exact karaoke and change like status
-      if (item.id == comment) {
-        item.hasLiked = !item.hasLiked;
-      }
-
-      return true;
-    }); // Set new karaokes
-
-    setKaraokeComments(newKaraokeComments); // Add like to database
-
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/karaoke-comment-likes"), {
-        comment: comment
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update karaoke comments
-
-        axios.get("".concat(props.url, "/api/karaoke-comments")).then(function (res) {
-          return setKaraokeComments(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  };
-
-  document.addEventListener('touchstart', handleTouchStart, false);
-  document.addEventListener('touchmove', handleTouchMove, false);
-  var xDown = null;
-  var yDown = null;
-
-  function getTouches(evt) {
-    return evt.touches || // browser API
-    evt.originalEvent.touches; // jQuery
-  }
-
-  function handleTouchStart(evt) {
-    var firstTouch = getTouches(evt)[0];
-    xDown = firstTouch.clientX;
-    yDown = firstTouch.clientY;
-  }
-
-  ;
-
-  function handleTouchMove(evt) {
-    if (!xDown || !yDown) {
-      return;
-    }
-
-    var xUp = evt.touches[0].clientX;
-    var yUp = evt.touches[0].clientY;
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-      /*most significant*/
-      if (xDiff > 0) {
-        /* right swipe */
-        console.log("right");
-      } else {
-        /* left swipe */
-        console.log("left");
-      }
-    } else {
-      if (yDiff > 0) {
-        /* down swipe */
-        console.log("down");
-      } else {
-        /* up swipe */
-        console.log("up");
-      }
-    }
-    /* reset values */
-
-
-    xDown = null;
-    yDown = null;
-  }
-
-  ;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-4",
-    style: {
-      overflow: "hidden"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      overflow: "hidden"
-    },
-    onClick: play ? onPlay : onPause
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-    ref: video,
-    src: "/storage/".concat(karaoke.karaoke),
-    width: "100%",
-    loading: "lazy",
-    preload: "none",
-    autoPlay: true,
-    muted: true,
-    loop: true,
-    playsInline: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      position: "absolute",
-      top: 0
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/karaoke-charts",
-    style: {
-      fontSize: "1.5em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "karaoke-overlay w-100"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2",
-    style: {
-      fontSize: "4em",
-      color: "rgba(220, 220, 220, 1)"
-    }
-  }, play && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-1 flex-grow-1 align-self-end"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "m-1",
-    style: {
-      width: "100%",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "clip"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, karaoke.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, karaoke.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ml-1",
-    style: {
-      color: "gold"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "ml-1",
-    style: {
-      color: "inherit"
-    }
-  }, karaoke.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "text-secondary d-block"
-  }, karaoke.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    ref: karaokeDescription,
-    className: "m-0 mx-1 p-0",
-    style: {
-      display: "none"
-    }
-  }, karaoke.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    ref: showDescription,
-    className: "text-secondary ml-1",
-    onClick: showMore
-  }, "show more"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      width: "20em",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "clip",
-      color: "#FFD700"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "mr-2",
-    style: {
-      fontSize: "1.5em",
-      color: "inherit"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), karaoke.audio)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "p-2 align-self-end"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex flex-column mb-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "avatar-thumbnail-xs ml-auto mr-1 mb-3",
-    style: {
-      borderRadius: "50%"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/profile/".concat(karaoke.karaokename)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: "/storage/".concat(karaoke.pp),
-    width: "50px",
-    height: "50px",
-    alt: 'avatar'
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, karaoke.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    style: {
-      color: "#fb3958"
-    },
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onKaraokeLike(karaoke.id);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    style: {
-      color: "inherit",
-      fontSize: "2em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      color: "inherit"
-    }
-  }, karaoke.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    style: {
-      color: "rgba(220, 220, 220, 1)"
-    },
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onKaraokeLike(karaoke.id);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    style: {
-      color: "inherit",
-      fontSize: "2em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      color: "inherit"
-    }
-  }, karaoke.likes)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-3",
-    style: {
-      color: "rgba(220, 220, 220, 1)"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    style: {
-      fontSize: "2em"
-    },
-    onClick: function onClick() {
-      return setBottomMenu("menu-open");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      color: "inherit"
-    }
-  }, karaoke.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-3 mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    style: {
-      fontSize: "2em",
-      color: "rgba(220, 220, 220, 1)"
-    },
-    onClick: function onClick() {
-      return onShare();
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ml-auto mr-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "rotate-record"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/audio-show/".concat(karaoke.audio_id)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    width: "50px",
-    height: "50px",
-    style: {
-      animation: "rotation 2s infinite linear"
-    },
-    alt: "current audio"
-  }))))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: bottomMenu
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bottomMenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between border-bottom border-dark",
-    style: {
-      height: "3em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "dropdown-header text-white"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    style: {
-      margin: "0px"
-    }
-  }, "Comments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
-    style: {
-      fontSize: "1em"
-    },
-    onClick: function onClick() {
-      return setBottomMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: props.onSubmit,
-    className: "contact-form bg-white mb-2",
-    autoComplete: "off"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "sonar-load",
-      className: "mt-5 mb-5"
-    }))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SocialMediaInput, props))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "m-0 p-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      maxHeight: window.innerHeight * 0.60,
-      overflowY: "scroll"
-    }
-  }, karaokeComments.filter(function (comment) {
-    return comment.karaoke_id == id;
-  }).length > 0 ? karaokeComments.filter(function (comment) {
-    return comment.karaoke_id == id;
-  }).map(function (comment, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: index,
-      className: "d-flex p-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: ""
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "avatar-thumbnail-xs",
-      style: {
-        borderRadius: "50%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(comment.username)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      src: comment.pp,
-      width: "50px",
-      height: "50px"
-    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "flex-grow-1 ml-2 text-left"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "media-heading m-0",
-      style: {
-        width: "100%",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-1",
-      style: {
-        color: "gold"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-1",
-      style: {
-        fontSize: "10px"
-      }
-    }, comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "float-right mr-1 text-secondary"
-    }, comment.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "mb-0 text-light"
-    }, comment.text), comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      style: {
-        color: "#fb3958"
-      },
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onCommentLike(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      className: "text-light",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onCommentLike(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropup float-right hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      role: "button",
-      id: "dropdownMenuLink",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropdown-menu dropdown-menu-right p-0",
-      style: {
-        borderRadius: "0",
-        backgroundColor: "#232323"
-      }
-    }, comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      className: "dropdown-item",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onDeleteComment(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "float-right anti-hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "text-secondary",
-      onClick: function onClick() {
-        if (comment.username == props.auth.username) {
-          setBottomOptionsMenu("menu-open");
-          setPostToEdit(comment.id); // Show and Hide elements
-
-          deleteLink.current.className = "d-block";
-        }
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)))));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
-    className: "my-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    style: {
-      color: "grey"
-    }
-  }, "No comments to show")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: bottomOptionsMenu
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bottomMenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between",
-    style: {
-      height: "3em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
-    style: {
-      fontSize: "1em"
-    },
-    onClick: function onClick() {
-      return setBottomOptionsMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    ref: deleteLink,
-    onClick: function onClick() {
-      setBottomOptionsMenu("");
-      onDeleteComment(postToEdit);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Delete comment")))));
+    className: "karaokes hidden-scroll"
+  }, props.karaokes.map(function (karaoke, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Karaoke__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, props, {
+      key: key,
+      karaoke: karaoke,
+      karaokes: props.karaokes,
+      setKaraokes: props.setKaraokes
+    }));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-4"
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (KaraokeShow);

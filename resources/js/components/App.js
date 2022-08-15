@@ -93,8 +93,8 @@ function App() {
 	const [messages, setMessages] = useState([])
 	const [errors, setErrors] = useState([])
 
-	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
 	const [audios, setAudios] = useState(getLocalStorage("audios"))
+	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
 
 	const [boughtAudios, setBoughtAudios] = useState(getLocalStorage("boughtAudios"))
 	const [boughtVideos, setBoughtVideos] = useState(getLocalStorage("boughtVideos"))
@@ -105,8 +105,10 @@ function App() {
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
 
-	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
+	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
+
+	const [karaokes, setKaraokes] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || messages.length > 0) {
@@ -137,19 +139,19 @@ function App() {
 						setLocalStorage("auth", res.data)
 					}
 
-					// Fetch Audio Albums
-					axios.get(`/api/audio-albums`)
-						.then((res) => {
-							setAudioAlbums(res.data)
-							setLocalStorage("audioAlbums", res.data)
-						}).catch(() => setErrors(["Failed to fetch audio albums"]))
-
 					// Fetch Audios
 					axios.get(`/api/audios`)
 						.then((res) => {
 							setAudios(res.data)
 							setLocalStorage("audios", res.data)
 						}).catch(() => setErrors(["Failed to fetch audios"]))
+
+					// Fetch Audio Albums
+					axios.get(`/api/audio-albums`)
+						.then((res) => {
+							setAudioAlbums(res.data)
+							setLocalStorage("audioAlbums", res.data)
+						}).catch(() => setErrors(["Failed to fetch audio albums"]))
 
 					// Fetch Bought Audios
 					axios.get(`/api/bought-audios`)
@@ -193,6 +195,13 @@ function App() {
 							setLocalStorage("users", res.data)
 						}).catch(() => setErrors(['Failed to fetch users']))
 
+					// Fetch Videos
+					axios.get(`/api/videos`)
+						.then((res) => {
+							setVideos(res.data)
+							setLocalStorage("videos", res.data)
+						}).catch(() => setErrors(["Failed to fetch videos"]))
+
 					// Fetch Video Albums
 					axios.get(`/api/video-albums`)
 						.then((res) => {
@@ -200,12 +209,11 @@ function App() {
 							setLocalStorage("videoAlbums", res.data)
 						}).catch(() => setErrors(["Failed to fetch video albums"]))
 
-					// Fetch Videos
-					axios.get(`/api/videos`)
+					// Fetch Karaokes
+					axios.get(`/api/karaokes`)
 						.then((res) => {
-							setVideos(res.data)
-							setLocalStorage("videos", res.data)
-						}).catch(() => setErrors(["Failed to fetch videos"]))
+							setKaraokes(res.data)
+						}).catch(() => props.setErrors(["Failed to fetch karaokes"]))
 				}
 			}).catch(() => setErrors(["Failed to fetch auth"]))
 
@@ -807,6 +815,7 @@ function App() {
 		users, setUsers,
 		videoAlbums, setVideoAlbums,
 		videos, setVideos,
+		karaokes, setKaraokes,
 		onFollow,
 		onCartVideos,
 		onCartAudios,
@@ -938,7 +947,7 @@ function App() {
 				{/* Karaoke Routes */}
 				<Route path="/karaoke-charts" exact render={(props) => (<KaraokeCharts {...GLOBAL_STATE} />)} />
 				<Route path="/karaoke-create/:audio" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
-				<Route path="/karaoke-show/:id" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
+				<Route path="/karaoke-show" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />

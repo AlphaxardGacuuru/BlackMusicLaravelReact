@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\KaraokeComments;
 use App\KaraokeCommentLikes;
-use App\Karaokes;
+use App\KaraokeComments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,14 +16,14 @@ class KaraokeCommentsController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
-        $getKaraokeComments = KaraokeComments::all();
+        $getKaraokeComments = KaraokeComments::orderBy('id', 'DESC')->get();
 
         $karaokeComments = [];
 
@@ -71,9 +70,9 @@ class KaraokeCommentsController extends Controller
         $karaokeComment->save();
 
         // Show notification
-        $karaoke = Karaokes::where('id', $request->input('id'))->first();
-        $karaoke->users->username != auth()->user()->username &&
-        $karaoke->users->notify(new KaraokeCommentNotifications($karaoke->name));
+        // $karaoke = Karaokes::where('id', $request->input('id'))->first();
+        // $karaoke->users->username != auth()->user()->username &&
+        // $karaoke->users->notify(new KaraokeCommentNotifications($karaoke->name));
 
         return response('Comment Posted', 200);
     }

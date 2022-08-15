@@ -3,6 +3,7 @@ html, body {
     overflow-x: hidden;
 	background-color: #000;
 	max-width: 100%;
+	scroll-snap-type: y mandatory;
 }
 
 h1,
@@ -1655,38 +1656,83 @@ div.hidden-scroll span {
 }
 /* Overwrite Bootstrap dropdown hover color End */
 
+/* Karaoke */
+.karaokes {
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	/* max-width: 500px; */
+	overflow: scroll;
+	scroll-snap-type: y mandatory;
+}
+
+.single-karaoke {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	scroll-snap-align: start;
+}
+
+.karaoke-player {
+	/* object-fit: fill; */
+	width: 100%;
+	height: auto;
+}
+
+.slide-down {
+	animation-name: scroll-down;
+	animation-duration: 2s;
+  	animation-iteration-count: 1;
+}
+
+.slide-up {
+	animation-name: scroll-up;
+	animation-duration: 2s;
+  	animation-iteration-count: 1;
+}
+
 /* Karaoke Overlay */
 .karaoke-overlay {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-   	animation-duration:3s;
-   	animation-name:slidein-low;
 }
 
-/* @keyframes slidein-low  {
-   from {
-      top:0;
-   }
-   
-   to {
-      top:80%;
-   }
+@keyframes scroll-down {
+	from {
+		margin-top: 0;
+	}
+	
+	to {
+		margin-top: 200%;
+	}
+	
+}
 
-} */
+@keyframes scroll-up {
+	from {
+		margin-bottom: 0;
+	}
+	
+	to {
+		margin-bottom: 200%;
+	}
+	
+}
 /* Karaoke Overlay End */
 
 /* Rotating Image */
 .rotate-record {
-	animation: rotation 10s infinite linear;
+	animation: rotation 2s infinite linear;
 }
 
 @keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
 }
 /* Rotating Image End */
+/* Karaoke End */

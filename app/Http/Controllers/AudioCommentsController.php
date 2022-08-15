@@ -18,14 +18,14 @@ class AudioCommentsController extends Controller
      */
     public function index()
     {
-		// Check if user is logged in
+        // Check if user is logged in
         if (Auth::check()) {
-			$authUsername = auth()->user()->username;
+            $authUsername = auth()->user()->username;
         } else {
-			$authUsername = '@guest';
-		}
+            $authUsername = '@guest';
+        }
 
-        $getAudioComments = AudioComments::all();
+        $getAudioComments = AudioComments::orderBy('id', 'DESC')->get();
 
         $audioComments = [];
 

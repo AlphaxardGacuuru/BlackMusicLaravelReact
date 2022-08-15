@@ -25,7 +25,7 @@ class VideoCommentsController extends Controller
 			$authUsername = '@guest';
 		}
 
-        $getVideoComments = VideoComments::all();
+        $getVideoComments = VideoComments::orderBy('id', 'DESC')->get();
 
         $videoComments = [];
 
