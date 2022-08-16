@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
+import Ticker from 'react-ticker'
 
 import Img from '../components/Img'
 import Button from '../components/Button'
@@ -8,9 +9,11 @@ import CloseSVG from '../svgs/CloseSVG'
 import FlashSVG from '../svgs/FlashSVG'
 import LoopSVG from '../svgs/LoopSVG'
 import TimerSVG from '../svgs/TimerSVG'
+import RecordSVG from '../svgs/RecordSVG'
 import RecordFilledSVG from '../svgs/RecordFilledSVG'
-import UploadSVG from '../svgs/UploadSVG'
+import UploadBoxSVG from '../svgs/UploadBoxSVG'
 import MusicNoteSVG from '../svgs/MusicNoteSVG'
+import ImageSVG from '../svgs/ImageSVG'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -46,8 +49,11 @@ const KaraokeCreate = (props) => {
 	// ID for video element
 	const video = useRef(null)
 
+	// Id for rotating record
+	const spiningRecord = useRef()
+
 	// Declare states
-	const [flash, setFlash] = useState()
+	const [flash, setFlash] = useState("flash")
 	const [camera, setCamera] = useState("user")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
@@ -145,6 +151,8 @@ const KaraokeCreate = (props) => {
 		}
 	}
 
+	let imageCapture;
+
 	// Get Video stream
 	navigator.mediaDevices.getUserMedia(constraints)
 		.then((stream) => {
@@ -156,28 +164,44 @@ const KaraokeCreate = (props) => {
 				// Avoid using this in new browsers, as it is going away.
 				video.current.src = window.URL.createObjectURL(stream);
 			}
+
 			video.current.onloadedmetadata = (e) => {
 				video.current.play();
 			};
 
 			const track = stream.getVideoTracks()[0];
 
+			// For Flash
 			//Create image capture object and get camera capabilities
-			const imageCapture = new ImageCapture(track)
+			imageCapture = new ImageCapture(track)
 
-			imageCapture.getPhotoCapabilities().then((capabilities) => {
-				setFlash(capabilities.fillLightMode)
+			return imageCapture.getPhotoCapabilities();
+		}).then((photoCapabilities) => {
 
-				// Check if camera has a torch
-				if (capabilities.fillLightMode) {
-					// auto, off, or flash
-					setFlash(capabilities.fillLightMode)
-				}
-			});
+			// Check if camera has a torch
+			if (photoCapabilities.fillLightMode) {
+				// auto, off, or flash
+				setFlash(photoCapabilities.fillLightMode)
+				photoCapabilities.fillLightMode = flash
+			}
 
 		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);
 		});
+
+	// Start Recording
+	const startRecord = () => {
+		// Stop Spining Record
+		spiningRecord.current.style.animationPlayState = "paused"
+		setRecord(true)
+	}
+
+	// Stop Recording
+	const stopRecord = () => {
+		// Start Spining Record
+		spiningRecord.current.style.animationPlayState = "running"
+		setRecord(false)
+	}
 
 	return (
 		<>
@@ -190,7 +214,7 @@ const KaraokeCreate = (props) => {
 						height: window.innerHeight,
 						overflow: "hidden"
 					}}>
-					<video ref={video}></video>
+					<video ref={video} className="karaoke-video-upload"></video>
 					{/* Floating Video Info Top */}
 					<div className="w-100" style={{ position: "absolute", top: 0 }}>
 						<div className="d-flex justify-content-between">
@@ -200,103 +224,119 @@ const KaraokeCreate = (props) => {
 									<CloseSVG />
 								</Link>
 							</div>
-							{/* Flash Light */}
-							<div className="p-2 mr-1">
-								<span to="/" style={{ fontSize: "1.8em" }}>
-									<FlashSVG />
-									<h6>{flash}</h6>
-								</span>
+							<div className="p-2">
+								{/* Vertical Content */}
+								<div className="d-flex flex-column mb-2">
+									{/* Flash Light */}
+									<div className="ml-auto mr-3">
+										<center>
+											<span
+												style={{ fontSize: "1.8em" }}
+												onClick={() => setFlash(flash == "off" ? "flash" : "off")}>
+												<FlashSVG />
+												<h6>Flash {flash}</h6>
+											</span>
+										</center>
+									</div>
+									{/* Flip Camera */}
+									<div className="ml-auto mr-3">
+										<center>
+											<span
+												style={{ fontSize: "2.3em" }}
+												onClick={() => setCamera(camera == "user" ? "environment" : "user")}>
+												<LoopSVG />
+											</span>
+											<h6>Flip</h6>
+										</center>
+									</div>
+									{/* Timer  */}
+									<div className="ml-auto mr-3">
+										<center>
+											<span
+												style={{ fontSize: "2em" }}
+												onClick={() => setTimer(3)}>
+												<TimerSVG />
+											</span>
+											<h6>Timer</h6>
+										</center>
+									</div>
+								</div>
+								{/* Vertical Content End */}
 							</div>
 						</div>
 					</div>
 					{/* Floating Video Info Top End */}
 					{/* Floating Video Info */}
 					<div className="karaoke-overlay w-100">
-						{/* Vertical Content */}
-						<div className="d-flex flex-column mb-2">
-							{/* Flip Camera */}
-							<div className="ml-auto mr-2">
-								<center>
-									<span
-										style={{ fontSize: "2.2em" }}
-										onClick={() => {
-											setCamera(camera == "user" ? "environment" : "user")
-										}}>
-										<LoopSVG />
-									</span>
-									<h6>Flip</h6>
-								</center>
-							</div>
-							{/* Timer  */}
-							<div className="ml-auto mr-2">
-								<center>
-									<span
-										style={{ fontSize: "2em" }}
-										onClick={() => setTimer(3)}>
-										<TimerSVG />
-									</span>
-									<h6>Timer</h6>
-								</center>
-							</div>
-						</div>
-						{/* Vertical Content End */}
 						{/* Horizontal Content */}
 						<div className="d-flex justify-content-between">
-							<div className="p-2 align-self-end">
+							<div className="ml-3 p-2 align-self-end">
 								<center>
 									<span
 										style={{ fontSize: "2em" }}
 										onClick={() => setBottomMenu("menu-open")}>
-										<UploadSVG />
+										<UploadBoxSVG />
 									</span>
 									<h6>Upload</h6>
 								</center>
 							</div>
-							<div className="p-2">
+							<div className="p-2" onClick={record ? stopRecord : startRecord}>
 								<center>
-									<span style={{ fontSize: "4em", color: "#fb3958" }}><RecordFilledSVG /></span>
-									<h6 style={{ color: "#fb3958" }}>Record</h6>
+									{record ?
+										<span style={{ fontSize: "4em", color: "#fb3958" }}>
+											<RecordFilledSVG />
+										</span> :
+										<span style={{ fontSize: "4em" }}>
+											<RecordSVG />
+										</span>}
+									<h6 style={{ color: record ? "#fb3958" : "#fff" }}>Record</h6>
 								</center>
 							</div>
-							<div className="p-2 align-self-end">
+							<div className="mr-3 p-2 align-self-end">
 								<center>
-									<div className="rotate-record">
-										<Link to={`/audio-show/`}>
-											<Img
-												width="50px"
-												height="50px"
-												style={{ animation: "rotation 2s infinite linear" }}
-												alt="current audio" />
-										</Link>
-									</div>
+									<span style={{ fontSize: "2em", color: "#FFD700" }}>
+										<ImageSVG />
+									</span>
+									<h6 style={{ color: "#FFD700" }}>Filters</h6>
 								</center>
 							</div>
 						</div>
-						<h6
-							className="ml-1"
-							style={{
-								width: "20em",
-								whiteSpace: "nowrap",
-								overflow: "hidden",
-								textOverflow: "clip",
-								color: "#FFD700"
-							}}>
-							<span
+						{/* Audio Name */}
+						<div className="d-flex py-2">
+							<div
 								className="mr-2"
-								style={{ fontSize: "1.5em", color: "inherit" }}>
+								style={{ fontSize: "1.5em", color: "#FFD700" }}>
 								<MusicNoteSVG />
-							</span>
-							Kenyan Shrap Gang Type Beat Supreme
-						</h6>
+							</div>
+							<div className="flex-grow-1 align-self-center">
+								<Ticker mode="smooth">
+									{({ index }) => (
+										<span style={{ color: "#FFD700" }}>
+											Kenyan Shrap Gang Type Beat Supreme
+										</span>
+									)}
+								</Ticker>
+							</div>
+							<div
+								ref={spiningRecord}
+								className="rotate-record mx-2">
+								<Link to={`/audio-show/`}>
+									<Img
+										width="50px"
+										height="50px"
+										alt="current audio" />
+								</Link>
+							</div>
+						</div>
 						{/* Horizontal Content End */}
 					</div>
 					{/* Floating Video Info End */}
 				</div>
 				<div className="col-sm-4"></div>
-			</div>
+			</div >
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu}>
+			<div className={bottomMenu} >
 				<div className="bottomMenu">
 					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
 						<div className="dropdown-header text-white">

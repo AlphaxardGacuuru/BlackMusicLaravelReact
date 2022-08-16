@@ -30,7 +30,7 @@ const Karaoke = (props) => {
 	const showDescription = useRef()
 
 	// Id for rotating record
-	const record = useRef()
+	const spiningRecord = useRef()
 
 	useEffect(() => {
 
@@ -93,13 +93,15 @@ const Karaoke = (props) => {
 	// Pause or Play Video
 	const onPause = () => {
 		video.current.pause()
-		record.current.style.animationPlayState = "paused"
+		// Stop Spining Record
+		spiningRecord.current.style.animationPlayState = "paused"
 		setPlay(true)
 	}
 
 	const onPlay = () => {
 		video.current.play()
-		record.current.style.animationPlayState = "running"
+		// Start Spining Record
+		spiningRecord.current.style.animationPlayState = "running"
 		setPlay(false)
 	}
 
@@ -113,9 +115,7 @@ const Karaoke = (props) => {
 	}
 
 	return (
-		<div
-			className="single-karaoke"
-			onClick={play ? onPlay : onPause}>
+		<div className="single-karaoke">
 			<video
 				ref={video}
 				src={`/storage/${props.karaoke.karaoke}`}
@@ -126,7 +126,8 @@ const Karaoke = (props) => {
 				autoPlay
 				muted
 				loop
-				playsInline>
+				playsInline
+				onClick={play ? onPlay : onPause}>
 			</video>
 			{/* Floating Video Info Top */}
 			<div
@@ -144,7 +145,9 @@ const Karaoke = (props) => {
 			{/* Floating Video Info Bottom */}
 			<div className="karaoke-overlay w-100">
 				{/* Floating Video Info Middle */}
-				<div className="d-flex justify-content-center">
+				<div
+					className="d-flex justify-content-center"
+					onClick={play ? onPlay : onPause}>
 					{/* Pause Icon */}
 					<div
 						className="p-2"
@@ -274,7 +277,7 @@ const Karaoke = (props) => {
 							{/* Current Audio */}
 							<div className="ml-auto mr-1">
 								<center>
-									<div ref={record} className="rotate-record">
+									<div ref={spiningRecord} className="rotate-record">
 										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
 											<Img
 												width="50px"
@@ -291,6 +294,7 @@ const Karaoke = (props) => {
 				{/* Horizontal Content End */}
 			</div>
 			{/* Floating Video Info Bottom End */}
+
 			<KaraokeCommentSection
 				{...props}
 				karaokeComments={karaokeComments}

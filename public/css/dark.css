@@ -1735,4 +1735,13 @@ div.hidden-scroll span {
 	}
 }
 /* Rotating Image End */
+
+/* Karaoke Video Upload */
+.karaoke-video-upload
+{
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
+}
+/* Karaoke Video Upload End */
 /* Karaoke End */
