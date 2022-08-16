@@ -55,7 +55,7 @@ const KaraokeCreate = (props) => {
 
 	// Declare states
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("user")
+	const [camera, setCamera] = useState("environment")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
 	const [bottomMenu, setBottomMenu] = useState()
@@ -173,11 +173,11 @@ const KaraokeCreate = (props) => {
 
 			track = stream.getVideoTracks()[0];
 
-			track.applyConstraints({
-				advanced: [{
-					fillLightMode: "flash"
-				}]
-			});
+			// track.applyConstraints({
+			// 	advanced: [{
+			// 		fillLightMode: "flash"
+			// 	}]
+			// });
 
 			// For Flash
 			//Create image capture object and get camera capabilities
