@@ -173,6 +173,10 @@ const KaraokeCreate = (props) => {
 
 			track = stream.getVideoTracks()[0];
 
+			track.applyConstraints({
+				advanced: [{ torch: true }]
+			});
+
 			// For Flash
 			//Create image capture object and get camera capabilities
 			imageCapture = new ImageCapture(track)
@@ -185,10 +189,6 @@ const KaraokeCreate = (props) => {
 				// auto, off, or flash
 				setFlash(photoCapabilities.fillLightMode)
 			}
-
-			track.applyConstraints({
-				advanced: [{ torch: true }]
-			});
 
 		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);
