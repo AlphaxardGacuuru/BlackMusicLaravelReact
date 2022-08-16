@@ -54,7 +54,7 @@ const KaraokeCreate = (props) => {
 	const spiningRecord = useRef()
 
 	// Declare states
-	const [flash, setFlash] = useState("flash")
+	const [flash, setFlash] = useState()
 	const [camera, setCamera] = useState("user")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
@@ -152,7 +152,8 @@ const KaraokeCreate = (props) => {
 		}
 	}
 
-	let imageCapture;
+	let imageCapture
+	var track
 
 	// Get Video stream
 	navigator.mediaDevices.getUserMedia(constraints)
@@ -170,7 +171,7 @@ const KaraokeCreate = (props) => {
 				video.current.play();
 			};
 
-			const track = stream.getVideoTracks()[0];
+			track = stream.getVideoTracks()[0];
 
 			// For Flash
 			//Create image capture object and get camera capabilities
@@ -184,6 +185,10 @@ const KaraokeCreate = (props) => {
 				// auto, off, or flash
 				setFlash(photoCapabilities.fillLightMode)
 			}
+
+			track.applyConstraints({
+				advanced: [{ torch: true }]
+			});
 
 		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);

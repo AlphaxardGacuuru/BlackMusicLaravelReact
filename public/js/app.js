@@ -102910,7 +102910,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
 
   var spiningRecord = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Declare states
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("flash"),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       flash = _useState2[0],
       setFlash = _useState2[1];
@@ -103041,7 +103041,8 @@ var KaraokeCreate = function KaraokeCreate(props) {
       }
     }
   };
-  var imageCapture; // Get Video stream
+  var imageCapture;
+  var track; // Get Video stream
 
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     // Older browsers may not have srcObject
@@ -103057,7 +103058,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
       video.current.play();
     };
 
-    var track = stream.getVideoTracks()[0]; // For Flash
+    track = stream.getVideoTracks()[0]; // For Flash
     //Create image capture object and get camera capabilities
 
     imageCapture = new ImageCapture(track);
@@ -103068,6 +103069,12 @@ var KaraokeCreate = function KaraokeCreate(props) {
       // auto, off, or flash
       setFlash(photoCapabilities.fillLightMode);
     }
+
+    track.applyConstraints({
+      advanced: [{
+        torch: true
+      }]
+    });
   })["catch"](function (err) {
     console.log(err.name + ": " + err.message);
   }); // Start Recording
