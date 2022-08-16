@@ -179,16 +179,16 @@ const KaraokeCreate = (props) => {
 
 			return imageCapture.getPhotoCapabilities();
 		}).then((photoCapabilities) => {
-
+			console.log(track.applyConstraints())
 			// Check if camera has a torch
 			if (photoCapabilities.fillLightMode) {
 				// auto, off, or flash
 				setFlash(photoCapabilities.fillLightMode)
-			}
 
-			track.applyConstraints({
-				advanced: [{ torch: true }]
-			});
+				track.applyConstraints({
+					advanced: [{ torch: true }]
+				});
+			}
 
 		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);
@@ -236,7 +236,7 @@ const KaraokeCreate = (props) => {
 									<div className="ml-auto mr-3">
 										<center>
 											<span style={{ fontSize: "1.8em" }}>
-												{flash == "off" ? <FlashSVG /> : <FlashFilledSVG />}
+												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>{flash}</h6>
 											</span>
 										</center>

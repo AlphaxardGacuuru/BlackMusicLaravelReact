@@ -103064,17 +103064,17 @@ var KaraokeCreate = function KaraokeCreate(props) {
     imageCapture = new ImageCapture(track);
     return imageCapture.getPhotoCapabilities();
   }).then(function (photoCapabilities) {
-    // Check if camera has a torch
+    console.log(track.applyConstraints()); // Check if camera has a torch
+
     if (photoCapabilities.fillLightMode) {
       // auto, off, or flash
       setFlash(photoCapabilities.fillLightMode);
+      track.applyConstraints({
+        advanced: [{
+          torch: true
+        }]
+      });
     }
-
-    track.applyConstraints({
-      advanced: [{
-        torch: true
-      }]
-    });
   })["catch"](function (err) {
     console.log(err.name + ": " + err.message);
   }); // Start Recording
@@ -103131,7 +103131,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     style: {
       fontSize: "1.8em"
     }
-  }, flash == "off" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, !flash == "off" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
