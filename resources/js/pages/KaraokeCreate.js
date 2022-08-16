@@ -176,12 +176,19 @@ const KaraokeCreate = (props) => {
 			track.applyConstraints({
 				advanced: [{
 					fillLightMode: "flash"
-			}]
+				}]
 			});
 
 			// For Flash
 			//Create image capture object and get camera capabilities
 			imageCapture = new ImageCapture(track)
+
+			var imageCaptureConfig = {
+				fillLightMode: "flash",
+				focusMode: "continuous"
+			};
+
+			imageCapture.setOptions(imageCaptureConfig)
 
 			return imageCapture.getPhotoCapabilities();
 		}).then((photoCapabilities) => {
@@ -240,6 +247,7 @@ const KaraokeCreate = (props) => {
 											<span style={{ fontSize: "1.8em" }}>
 												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>Flash</h6>
+												<h6>{flash}</h6>
 											</span>
 										</center>
 									</div>
