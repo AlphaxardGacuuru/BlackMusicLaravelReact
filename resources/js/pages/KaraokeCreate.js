@@ -174,7 +174,9 @@ const KaraokeCreate = (props) => {
 			track = stream.getVideoTracks()[0];
 
 			track.applyConstraints({
-				fillLightMode: "flash"
+				advanced: [{
+					fillLightMode: "flash"
+			}]
 			});
 
 			// For Flash
