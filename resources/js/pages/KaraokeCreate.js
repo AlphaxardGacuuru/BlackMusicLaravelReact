@@ -7,6 +7,7 @@ import Button from '../components/Button'
 
 import CloseSVG from '../svgs/CloseSVG'
 import FlashSVG from '../svgs/FlashSVG'
+import FlashFilledSVG from '../svgs/FlashFilledSVG'
 import LoopSVG from '../svgs/LoopSVG'
 import TimerSVG from '../svgs/TimerSVG'
 import RecordSVG from '../svgs/RecordSVG'
@@ -182,7 +183,6 @@ const KaraokeCreate = (props) => {
 			if (photoCapabilities.fillLightMode) {
 				// auto, off, or flash
 				setFlash(photoCapabilities.fillLightMode)
-				photoCapabilities.fillLightMode = flash
 			}
 
 		}).catch(function (err) {
@@ -230,11 +230,9 @@ const KaraokeCreate = (props) => {
 									{/* Flash Light */}
 									<div className="ml-auto mr-3">
 										<center>
-											<span
-												style={{ fontSize: "1.8em" }}
-												onClick={() => setFlash(flash == "off" ? "flash" : "off")}>
-												<FlashSVG />
-												<h6>Flash {flash}</h6>
+											<span style={{ fontSize: "1.8em" }}>
+												{flash == "off" ? <FlashSVG /> : <FlashFilledSVG />}
+												<h6>{flash}</h6>
 											</span>
 										</center>
 									</div>
