@@ -178,8 +178,7 @@ const KaraokeCreate = (props) => {
 			// Add Click to Flip SVG
 			flipCameraEl.current.addEventListener("click", () => {
 				track.stop()
-				setCamera(camera == "user" ? "environment" : "user")
-				// track.start()
+				track.start()
 			});
 
 			// track.applyConstraints({
@@ -265,7 +264,8 @@ const KaraokeCreate = (props) => {
 										<center>
 											<span
 												ref={flipCameraEl}
-												style={{ fontSize: "2.3em" }}>
+												style={{ fontSize: "2.3em" }}
+												onClick={() => setCamera(camera == "user" ? "environment" : "user")}>
 												<LoopSVG />
 											</span>
 											<h6>Flip</h6>
