@@ -55,7 +55,7 @@ const KaraokeCreate = (props) => {
 
 	// Declare states
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("environment")
+	const [camera, setCamera] = useState("user")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
 	const [bottomMenu, setBottomMenu] = useState()
@@ -65,6 +65,8 @@ const KaraokeCreate = (props) => {
 	const [loadingBtn, setLoadingBtn] = useState()
 
 	const [showForm, setShowForm] = useState()
+
+	const flipCameraEl = useRef()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -173,6 +175,13 @@ const KaraokeCreate = (props) => {
 
 			track = stream.getVideoTracks()[0];
 
+			// Add Click to Flip SVG
+			flipCameraEl.current.addEventListener("click", () => {
+				track.stop()
+				setCamera(camera == "user" ? "environment" : "user")
+				track.start()
+			});
+
 			// track.applyConstraints({
 			// 	advanced: [{
 			// 		fillLightMode: "flash"
@@ -206,17 +215,17 @@ const KaraokeCreate = (props) => {
 	// Start Recording
 	const startRecord = () => {
 		// Stop Spining Record
-		spiningRecord.current.style.animationPlayState = "paused"
+		spiningRecord.current.classList.add("rotate-record")
 		setRecord(true)
 	}
 
 	// Stop Recording
 	const stopRecord = () => {
 		// Start Spining Record
-		spiningRecord.current.style.animationPlayState = "running"
+		spiningRecord.current.classList.remove("rotate-record")
 		setRecord(false)
 	}
-
+	console.log(camera)
 	return (
 		<>
 			<div className="row p-0">
@@ -255,8 +264,8 @@ const KaraokeCreate = (props) => {
 									<div className="ml-auto mr-3">
 										<center>
 											<span
-												style={{ fontSize: "2.3em" }}
-												onClick={() => setCamera(camera == "user" ? "environment" : "user")}>
+												ref={flipCameraEl}
+												style={{ fontSize: "2.3em" }}>
 												<LoopSVG />
 											</span>
 											<h6>Flip</h6>
@@ -332,7 +341,7 @@ const KaraokeCreate = (props) => {
 							</div>
 							<div
 								ref={spiningRecord}
-								className="rotate-record mx-2">
+								className="mx-2">
 								<Link to={`/audio-show/`}>
 									<Img
 										width="50px"

@@ -102953,8 +102953,9 @@ var KaraokeCreate = function KaraokeCreate(props) {
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState18 = _slicedToArray(_useState17, 2),
       showForm = _useState18[0],
-      setShowForm = _useState18[1]; // Get csrf token
+      setShowForm = _useState18[1];
 
+  var flipCameraEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Get csrf token
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
 
@@ -103058,10 +103059,26 @@ var KaraokeCreate = function KaraokeCreate(props) {
       video.current.play();
     };
 
-    track = stream.getVideoTracks()[0]; // For Flash
+    track = stream.getVideoTracks()[0]; // Add Click to Flip SVG
+
+    flipCameraEl.current.addEventListener("click", function () {
+      track.stop();
+      setCamera(camera == "user" ? "environment" : "user");
+      track.stop();
+    }); // track.applyConstraints({
+    // 	advanced: [{
+    // 		fillLightMode: "flash"
+    // 	}]
+    // });
+    // For Flash
     //Create image capture object and get camera capabilities
 
     imageCapture = new ImageCapture(track);
+    var imageCaptureConfig = {
+      fillLightMode: "flash",
+      focusMode: "continuous"
+    };
+    imageCapture.setOptions(imageCaptureConfig);
     return imageCapture.getPhotoCapabilities();
   }).then(function (photoCapabilities) {
     // Check if camera has a torch
@@ -103069,29 +103086,24 @@ var KaraokeCreate = function KaraokeCreate(props) {
       // auto, off, or flash
       setFlash(photoCapabilities.fillLightMode);
     }
-
-    track.applyConstraints({
-      advanced: [{
-        torch: true
-      }]
-    });
   })["catch"](function (err) {
     console.log(err.name + ": " + err.message);
   }); // Start Recording
 
   var startRecord = function startRecord() {
     // Stop Spining Record
-    spiningRecord.current.style.animationPlayState = "paused";
+    spiningRecord.current.classList.add("rotate-record");
     setRecord(true);
   }; // Stop Recording
 
 
   var stopRecord = function stopRecord() {
     // Start Spining Record
-    spiningRecord.current.style.animationPlayState = "running";
+    spiningRecord.current.classList.remove("rotate-record");
     setRecord(false);
   };
 
+  console.log(camera);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103131,14 +103143,12 @@ var KaraokeCreate = function KaraokeCreate(props) {
     style: {
       fontSize: "1.8em"
     }
-  }, !flash == "off" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flash")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, !flash == "off" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    ref: flipCameraEl,
     style: {
       fontSize: "2.3em"
-    },
-    onClick: function onClick() {
-      return setCamera(camera == "user" ? "environment" : "user");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
@@ -103210,7 +103220,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     }, "Kenyan Shrap Gang Type Beat Supreme");
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     ref: spiningRecord,
-    className: "rotate-record mx-2"
+    className: "mx-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audio-show/"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
