@@ -179,7 +179,7 @@ const KaraokeCreate = (props) => {
 			flipCameraEl.current.addEventListener("click", () => {
 				track.stop()
 				setCamera(camera == "user" ? "environment" : "user")
-				track.start()
+				// track.start()
 			});
 
 			// track.applyConstraints({
