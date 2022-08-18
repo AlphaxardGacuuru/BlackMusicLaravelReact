@@ -54,7 +54,7 @@ const KaraokeCreate = (props) => {
 	const [upload, setUpload] = useState()
 	const [record, setRecord] = useState()
 	const [filters, setFilters] = useState()
-	const [filter, setFilter] = useState()
+	const [filter, setFilter] = useState("none")
 	const [bottomMenu, setBottomMenu] = useState()
 
 	const [karaoke, setKaraoke] = useState("")
@@ -448,14 +448,17 @@ const KaraokeCreate = (props) => {
 					{/* Filters */}
 					<div className="hidden-scroll">
 						{filters &&
-							filterClasses.map((filter, key) => (
-								<span key={key} onClick={() => setFilter(filter)}>
+							filterClasses.map((item, key) => (
+								<span
+									key={key}
+									className={filter == item ? "active-filter" : ""}
+									onClick={() => setFilter(item)}>
 									<Img
 										src="/storage/img/slide2.jpg"
-										imgClass={filter}
+										imgClass={item}
 										width="40px"
 										height="auto" />
-									<h6 className="mt-1">{filter}</h6>
+									<h6 className="mt-1">{item}</h6>
 								</span>
 							))}
 					</div>

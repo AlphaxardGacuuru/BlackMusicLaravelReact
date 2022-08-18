@@ -102936,7 +102936,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
       filters = _useState12[0],
       setFilters = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("none"),
       _useState14 = _slicedToArray(_useState13, 2),
       filter = _useState14[0],
       setFilter = _useState14[1];
@@ -103335,20 +103335,21 @@ var KaraokeCreate = function KaraokeCreate(props) {
     loading: loadingBtn
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden-scroll"
-  }, filters && filterClasses.map(function (filter, key) {
+  }, filters && filterClasses.map(function (item, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: key,
+      className: filter == item ? "active-filter" : "",
       onClick: function onClick() {
-        return setFilter(filter);
+        return setFilter(item);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "/storage/img/slide2.jpg",
-      imgClass: filter,
+      imgClass: item,
       width: "40px",
       height: "auto"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "mt-1"
-    }, filter));
+    }, item));
   })))));
 };
 
