@@ -55,7 +55,7 @@ const KaraokeCreate = (props) => {
 
 	// Declare states
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("user")
+	const [camera, setCamera] = useState("environment")
 	const [timer, setTimer] = useState()
 	const [record, setRecord] = useState()
 	const [bottomMenu, setBottomMenu] = useState()
@@ -225,6 +225,7 @@ const KaraokeCreate = (props) => {
 		setRecord(false)
 	}
 	console.log(camera)
+	console.log("k-rendered")
 	return (
 		<>
 			<div className="row p-0">
@@ -252,7 +253,8 @@ const KaraokeCreate = (props) => {
 									{/* Flash Light */}
 									<div className="ml-auto mr-3">
 										<center>
-											<span style={{ fontSize: "1.8em" }}>
+											<span
+												style={{ fontSize: "1.8em" }}>
 												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>Flash</h6>
 												<h6>{flash}</h6>

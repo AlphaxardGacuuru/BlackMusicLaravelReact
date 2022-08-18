@@ -102915,7 +102915,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
       flash = _useState2[0],
       setFlash = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("user"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("environment"),
       _useState4 = _slicedToArray(_useState3, 2),
       camera = _useState4[0],
       setCamera = _useState4[1];
@@ -103063,8 +103063,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
 
     flipCameraEl.current.addEventListener("click", function () {
       track.stop();
-      setCamera(camera == "user" ? "environment" : "user");
-      track.stop();
+      track.start();
     }); // track.applyConstraints({
     // 	advanced: [{
     // 		fillLightMode: "flash"
@@ -103104,6 +103103,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
   };
 
   console.log(camera);
+  console.log("k-rendered");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103149,6 +103149,9 @@ var KaraokeCreate = function KaraokeCreate(props) {
     ref: flipCameraEl,
     style: {
       fontSize: "2.3em"
+    },
+    onClick: function onClick() {
+      return setCamera(camera == "user" ? "environment" : "user");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
