@@ -147,10 +147,7 @@ const KaraokeCreate = (props) => {
 	const constraints = {
 		audio: false,
 		video: {
-			facingMode: { exact: camera },
-			// width: { min: 1280, ideal: 1920, max: 2560 },
-			// height: { min: 720, ideal: 1080, max: 1440 },
-			frameRate: { min: 24 }
+			facingMode: { exact: camera }
 		}
 	}
 
