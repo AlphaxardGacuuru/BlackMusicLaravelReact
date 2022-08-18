@@ -14,15 +14,16 @@ const Carousel = () => {
 			"/storage/img/PSX_20220206_205615.jpg",
 			"/storage/img/PSX_20220206_205133.jpg"
 		]
+
 		var index = 0
 		const bannerSwitch = setInterval(() => {
 			banner.current.src = bannerImages[index++ % bannerImages.length]
 		}, 3000);
 
-		return () => {
-			clearInterval(bannerSwitch)
-		}
+		return () => clearInterval(bannerSwitch)
+
 	}, [])
+	
 	return (
 		<div className="d-flex mt-2">
 			{/* For small screens */}

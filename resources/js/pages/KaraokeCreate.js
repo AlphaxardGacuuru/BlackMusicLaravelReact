@@ -57,7 +57,10 @@ const KaraokeCreate = (props) => {
 	const [flash, setFlash] = useState()
 	const [camera, setCamera] = useState("environment")
 	const [timer, setTimer] = useState()
+	const [upload, setUpload] = useState()
 	const [record, setRecord] = useState()
+	const [filters, setFilters] = useState()
+	const [filter, setFilter] = useState()
 	const [bottomMenu, setBottomMenu] = useState()
 
 	const [karaoke, setKaraoke] = useState("")
@@ -178,11 +181,11 @@ const KaraokeCreate = (props) => {
 				track.start()
 			});
 
-			track.applyConstraints({
-				advanced: [{
-					fillLightMode: "flash"
-				}]
-			});
+			// track.applyConstraints({
+			// advanced: [{
+			// fillLightMode: "flash"
+			// }]
+			// });
 
 			// For Flash
 			//Create image capture object and get camera capabilities
@@ -222,8 +225,22 @@ const KaraokeCreate = (props) => {
 		spiningRecord.current.classList.remove("rotate-record")
 		setRecord(false)
 	}
+
 	console.log(camera)
 	console.log("k-rendered")
+
+	const flipCamera = () => {
+		if (camera == "user") {
+			setCamera("environment")
+			video.current.classList.remove("karaoke-video-upload")
+		} else {
+			setCamera("user")
+			video.current.classList.add("karaoke-video-upload")
+		}
+	}
+
+	const filterClasses = ["blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"]
+
 	return (
 		<>
 			<div className="row p-0">
@@ -235,7 +252,7 @@ const KaraokeCreate = (props) => {
 						height: window.innerHeight,
 						overflow: "hidden"
 					}}>
-					<video ref={video} className="karaoke-video-upload"></video>
+					<video ref={video} className={filter}></video>
 					{/* Floating Video Info Top */}
 					<div className="w-100" style={{ position: "absolute", top: 0 }}>
 						<div className="d-flex justify-content-between">
@@ -265,7 +282,7 @@ const KaraokeCreate = (props) => {
 											<span
 												ref={flipCameraEl}
 												style={{ fontSize: "2.3em" }}
-												onClick={() => setCamera(camera == "user" ? "environment" : "user")}>
+												onClick={flipCamera}>
 												<LoopSVG />
 											</span>
 											<h6>Flip</h6>
@@ -296,7 +313,10 @@ const KaraokeCreate = (props) => {
 								<center>
 									<span
 										style={{ fontSize: "2em" }}
-										onClick={() => setBottomMenu("menu-open")}>
+										onClick={() => {
+											setBottomMenu("menu-open")
+											setUpload(true)
+										}}>
 										<UploadBoxSVG />
 									</span>
 									<h6>Upload</h6>
@@ -316,7 +336,12 @@ const KaraokeCreate = (props) => {
 							</div>
 							<div className="mr-3 p-2 align-self-end">
 								<center>
-									<span style={{ fontSize: "2em", color: "#FFD700" }}>
+									<span
+										style={{ fontSize: "2em", color: "#FFD700" }}
+										onClick={() => {
+											setBottomMenu("menu-open")
+											setFilters(true)
+										}}>
 										<ImageSVG />
 									</span>
 									<h6 style={{ color: "#FFD700" }}>Filters</h6>
@@ -373,7 +398,8 @@ const KaraokeCreate = (props) => {
 						</div>
 					</div>
 
-					{!showForm &&
+					{/* Upload Input */}
+					{!showForm && upload &&
 						<div>
 							<FilePond
 								name="filepond-karaoke"
@@ -405,6 +431,7 @@ const KaraokeCreate = (props) => {
 									btnText="next"
 									onClick={() => setShowForm(true)} />}
 						</div>}
+					{/* Upload Input End */}
 
 					{/* Karaoke Form */}
 					{showForm &&
@@ -428,6 +455,22 @@ const KaraokeCreate = (props) => {
 							</div>
 						</div>}
 					{/* Karaoke Form End */}
+
+					{/* Filters */}
+					<div className="hidden-scroll">
+						{filters &&
+							filterClasses.map((filter, key) => (
+								<span key={key} onClick={() => setFilter(filter)}>
+									<Img
+										src="/storage/img/slide2.jpg"
+										imgClass={filter}
+										width="40px"
+										height="auto" />
+									<h6 className="mt-1">{filter}</h6>
+								</span>
+							))}
+					</div>
+					{/* Filters End */}
 
 				</div>
 			</div>

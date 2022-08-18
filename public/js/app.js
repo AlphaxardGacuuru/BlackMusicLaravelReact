@@ -95171,7 +95171,7 @@ var Carousel = function Carousel() {
       banner.current.src = bannerImages[index++ % bannerImages.length];
     }, 3000);
     return function () {
-      clearInterval(bannerSwitch);
+      return clearInterval(bannerSwitch);
     };
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102927,33 +102927,48 @@ var KaraokeCreate = function KaraokeCreate(props) {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
-      record = _useState8[0],
-      setRecord = _useState8[1];
+      upload = _useState8[0],
+      setUpload = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      bottomMenu = _useState10[0],
-      setBottomMenu = _useState10[1];
+      record = _useState10[0],
+      setRecord = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState12 = _slicedToArray(_useState11, 2),
-      karaoke = _useState12[0],
-      setKaraoke = _useState12[1];
+      filters = _useState12[0],
+      setFilters = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState14 = _slicedToArray(_useState13, 2),
-      description = _useState14[0],
-      setDescription = _useState14[1];
+      filter = _useState14[0],
+      setFilter = _useState14[1];
 
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState16 = _slicedToArray(_useState15, 2),
-      loadingBtn = _useState16[0],
-      setLoadingBtn = _useState16[1];
+      bottomMenu = _useState16[0],
+      setBottomMenu = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState18 = _slicedToArray(_useState17, 2),
-      showForm = _useState18[0],
-      setShowForm = _useState18[1];
+      karaoke = _useState18[0],
+      setKaraoke = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState20 = _slicedToArray(_useState19, 2),
+      description = _useState20[0],
+      setDescription = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState22 = _slicedToArray(_useState21, 2),
+      loadingBtn = _useState22[0],
+      setLoadingBtn = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState24 = _slicedToArray(_useState23, 2),
+      showForm = _useState24[0],
+      setShowForm = _useState24[1];
 
   var flipCameraEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Get csrf token
 
@@ -103059,12 +103074,12 @@ var KaraokeCreate = function KaraokeCreate(props) {
     flipCameraEl.current.addEventListener("click", function () {
       track.stop();
       track.start();
-    });
-    track.applyConstraints({
-      advanced: [{
-        fillLightMode: "flash"
-      }]
-    }); // For Flash
+    }); // track.applyConstraints({
+    // advanced: [{
+    // fillLightMode: "flash"
+    // }]
+    // });
+    // For Flash
     //Create image capture object and get camera capabilities
 
     imageCapture = new ImageCapture(track);
@@ -103099,6 +103114,18 @@ var KaraokeCreate = function KaraokeCreate(props) {
 
   console.log(camera);
   console.log("k-rendered");
+
+  var flipCamera = function flipCamera() {
+    if (camera == "user") {
+      setCamera("environment");
+      video.current.classList.remove("karaoke-video-upload");
+    } else {
+      setCamera("user");
+      video.current.classList.add("karaoke-video-upload");
+    }
+  };
+
+  var filterClasses = ["blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103112,7 +103139,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
     ref: video,
-    className: "karaoke-video-upload"
+    className: filter
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-100",
     style: {
@@ -103145,9 +103172,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     style: {
       fontSize: "2.3em"
     },
-    onClick: function onClick() {
-      return setCamera(camera == "user" ? "environment" : "user");
-    }
+    onClick: flipCamera
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -103168,7 +103193,8 @@ var KaraokeCreate = function KaraokeCreate(props) {
       fontSize: "2em"
     },
     onClick: function onClick() {
-      return setBottomMenu("menu-open");
+      setBottomMenu("menu-open");
+      setUpload(true);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_UploadBoxSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Upload"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
@@ -103192,6 +103218,10 @@ var KaraokeCreate = function KaraokeCreate(props) {
     style: {
       fontSize: "2em",
       color: "#FFD700"
+    },
+    onClick: function onClick() {
+      setBottomMenu("menu-open");
+      setFilters(true);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ImageSVG__WEBPACK_IMPORTED_MODULE_14__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     style: {
@@ -103250,7 +103280,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     onClick: function onClick() {
       return setBottomMenu("");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))), !showForm && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_15__["FilePond"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))), !showForm && upload && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_15__["FilePond"], {
     name: "filepond-karaoke",
     labelIdle: "Drag & Drop your Video or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     acceptedFileTypes: ['video/*'],
@@ -103307,7 +103337,23 @@ var KaraokeCreate = function KaraokeCreate(props) {
     btnClass: "mysonar-btn",
     btnText: "upload video",
     loading: loadingBtn
-  })))))));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden-scroll"
+  }, filters && filterClasses.map(function (filter, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: key,
+      onClick: function onClick() {
+        return setFilter(filter);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      src: "/storage/img/slide2.jpg",
+      imgClass: filter,
+      width: "40px",
+      height: "auto"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+      className: "mt-1"
+    }, filter));
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (KaraokeCreate);
