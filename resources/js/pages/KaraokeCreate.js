@@ -181,20 +181,20 @@ const KaraokeCreate = (props) => {
 				track.start()
 			});
 
-			// track.applyConstraints({
-			// advanced: [{
-			// fillLightMode: "flash"
-			// }]
-			// });
+			track.applyConstraints({
+				advanced: [{
+					fillLightMode: "flash"
+				}]
+			});
 
 			// For Flash
 			//Create image capture object and get camera capabilities
 			imageCapture = new ImageCapture(track)
 
-			var imageCaptureConfig = {
-				fillLightMode: "flash",
-				focusMode: "continuous"
-			};
+			// var imageCaptureConfig = {
+			// fillLightMode: "flash",
+			// focusMode: "continuous"
+			// };
 
 			imageCapture.setOptions(imageCaptureConfig)
 
@@ -239,7 +239,7 @@ const KaraokeCreate = (props) => {
 		}
 	}
 
-	const filterClasses = ["blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"]
+	const filterClasses = ["none", "blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"]
 
 	return (
 		<>

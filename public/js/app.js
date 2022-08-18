@@ -103074,19 +103074,19 @@ var KaraokeCreate = function KaraokeCreate(props) {
     flipCameraEl.current.addEventListener("click", function () {
       track.stop();
       track.start();
-    }); // track.applyConstraints({
-    // advanced: [{
-    // fillLightMode: "flash"
-    // }]
-    // });
-    // For Flash
+    });
+    track.applyConstraints({
+      advanced: [{
+        fillLightMode: "flash"
+      }]
+    }); // For Flash
     //Create image capture object and get camera capabilities
 
-    imageCapture = new ImageCapture(track);
-    var imageCaptureConfig = {
-      fillLightMode: "flash",
-      focusMode: "continuous"
-    };
+    imageCapture = new ImageCapture(track); // var imageCaptureConfig = {
+    // fillLightMode: "flash",
+    // focusMode: "continuous"
+    // };
+
     imageCapture.setOptions(imageCaptureConfig);
     return imageCapture.getPhotoCapabilities();
   }).then(function (photoCapabilities) {
@@ -103125,7 +103125,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     }
   };
 
-  var filterClasses = ["blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"];
+  var filterClasses = ["none", "blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
