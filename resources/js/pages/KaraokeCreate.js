@@ -47,12 +47,6 @@ const KaraokeCreate = (props) => {
 	// Get params
 	const { audio } = useParams()
 
-	// ID for video element
-	const video = useRef(null)
-
-	// Id for rotating record
-	const spiningRecord = useRef()
-
 	// Declare states
 	const [flash, setFlash] = useState()
 	const [camera, setCamera] = useState("environment")
@@ -69,7 +63,14 @@ const KaraokeCreate = (props) => {
 
 	const [showForm, setShowForm] = useState()
 
+	// ID for video element
+	const video = useRef(null)
+
+	// ID for rotating record
+	const spiningRecord = useRef()
+
 	const flipCameraEl = useRef()
+	const flipFlashEl = useRef()
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
@@ -181,32 +182,17 @@ const KaraokeCreate = (props) => {
 				track.start()
 			});
 
-			track.applyConstraints({
-				advanced: [{
-					fillLightMode: "flash"
-				}]
-			});
-
-			// For Flash
-			//Create image capture object and get camera capabilities
-			imageCapture = new ImageCapture(track)
-
-			// var imageCaptureConfig = {
-			// fillLightMode: "flash",
-			// focusMode: "continuous"
-			// };
-
-			imageCapture.setOptions(imageCaptureConfig)
-
-			return imageCapture.getPhotoCapabilities();
+			imageCapture.getPhotoCapabilities().then(() => {
+				// Let there be light!
+				flipFlashEl.current.addEventListener('click', () => {
+					setFlash("some")
+					track.applyConstraints({
+						advanced: [{ torch: true }]
+					});
+				});
+			})
 
 		}).then((photoCapabilities) => {
-
-			// Check if camera has a torch
-			if (photoCapabilities.fillLightMode) {
-				// auto, off, or flash
-				setFlash(photoCapabilities.fillLightMode)
-			}
 
 		}).catch(function (err) {
 			console.log(err.name + ": " + err.message);
@@ -226,7 +212,7 @@ const KaraokeCreate = (props) => {
 		setRecord(false)
 	}
 
-	console.log(camera)
+	console.log(flash)
 	console.log("k-rendered")
 
 	const flipCamera = () => {
@@ -269,6 +255,7 @@ const KaraokeCreate = (props) => {
 									<div className="ml-auto mr-3">
 										<center>
 											<span
+												ref={flipFlashEl}
 												style={{ fontSize: "1.8em" }}>
 												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>Flash</h6>

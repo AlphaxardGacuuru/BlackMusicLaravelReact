@@ -102903,12 +102903,8 @@ Object(react_filepond__WEBPACK_IMPORTED_MODULE_15__["registerPlugin"])(filepond_
 var KaraokeCreate = function KaraokeCreate(props) {
   // Get params
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
-      audio = _useParams.audio; // ID for video element
+      audio = _useParams.audio; // Declare states
 
-
-  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Id for rotating record
-
-  var spiningRecord = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Declare states
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102968,9 +102964,14 @@ var KaraokeCreate = function KaraokeCreate(props) {
   var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState24 = _slicedToArray(_useState23, 2),
       showForm = _useState24[0],
-      setShowForm = _useState24[1];
+      setShowForm = _useState24[1]; // ID for video element
 
-  var flipCameraEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Get csrf token
+
+  var video = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // ID for rotating record
+
+  var spiningRecord = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  var flipCameraEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  var flipFlashEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); // Get csrf token
 
   var token = document.head.querySelector('meta[name="csrf-token"]'); // Get history for page location
 
@@ -103075,27 +103076,18 @@ var KaraokeCreate = function KaraokeCreate(props) {
       track.stop();
       track.start();
     });
-    track.applyConstraints({
-      advanced: [{
-        fillLightMode: "flash"
-      }]
-    }); // For Flash
-    //Create image capture object and get camera capabilities
-
-    imageCapture = new ImageCapture(track); // var imageCaptureConfig = {
-    // fillLightMode: "flash",
-    // focusMode: "continuous"
-    // };
-
-    imageCapture.setOptions(imageCaptureConfig);
-    return imageCapture.getPhotoCapabilities();
-  }).then(function (photoCapabilities) {
-    // Check if camera has a torch
-    if (photoCapabilities.fillLightMode) {
-      // auto, off, or flash
-      setFlash(photoCapabilities.fillLightMode);
-    }
-  })["catch"](function (err) {
+    imageCapture.getPhotoCapabilities().then(function () {
+      // Let there be light!
+      flipFlashEl.current.addEventListener('click', function () {
+        setFlash("some");
+        track.applyConstraints({
+          advanced: [{
+            torch: true
+          }]
+        });
+      });
+    });
+  }).then(function (photoCapabilities) {})["catch"](function (err) {
     console.log(err.name + ": " + err.message);
   }); // Start Recording
 
@@ -103112,7 +103104,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     setRecord(false);
   };
 
-  console.log(camera);
+  console.log(flash);
   console.log("k-rendered");
 
   var flipCamera = function flipCamera() {
@@ -103162,6 +103154,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    ref: flipFlashEl,
     style: {
       fontSize: "1.8em"
     }
