@@ -180,10 +180,10 @@ const KaraokeCreate = (props) => {
 			});
 
 			const imageCapture = new ImageCapture(track)
-			
+
 			imageCapture.getPhotoCapabilities().then(() => {
 				track.applyConstraints({
-					advanced: [{ torch: true }]
+					advanced: [{ torch: flash }]
 				});
 				// Let there be light!
 				flipFlashEl.current.addEventListener('click', () => {
@@ -259,7 +259,7 @@ const KaraokeCreate = (props) => {
 												ref={flipFlashEl}
 												style={{ fontSize: "1.8em" }}
 												onClick={() => setFlash(flash == "off" ? "flash" : "off")}>
-												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
+												{flash ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>Flash</h6>
 												<h6>{flash}</h6>
 											</span>
