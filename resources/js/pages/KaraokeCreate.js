@@ -183,12 +183,13 @@ const KaraokeCreate = (props) => {
 			});
 
 			imageCapture.getPhotoCapabilities().then(() => {
+				track.applyConstraints({
+					advanced: [{ torch: true }]
+				});
 				// Let there be light!
 				flipFlashEl.current.addEventListener('click', () => {
-					setFlash("some")
-					track.applyConstraints({
-						advanced: [{ torch: true }]
-					});
+					track.stop()
+					track.start()
 				});
 			})
 
@@ -215,6 +216,7 @@ const KaraokeCreate = (props) => {
 	console.log(flash)
 	console.log("k-rendered")
 
+	// Flip Camera
 	const flipCamera = () => {
 		if (camera == "user") {
 			setCamera("environment")
@@ -256,7 +258,8 @@ const KaraokeCreate = (props) => {
 										<center>
 											<span
 												ref={flipFlashEl}
-												style={{ fontSize: "1.8em" }}>
+												style={{ fontSize: "1.8em" }}
+												onClick={() => setFlash(flash == "off" ? "flash" : "off")}>
 												{!flash == "off" ? <FlashFilledSVG /> : <FlashSVG />}
 												<h6>Flash</h6>
 												<h6>{flash}</h6>

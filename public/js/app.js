@@ -103077,14 +103077,15 @@ var KaraokeCreate = function KaraokeCreate(props) {
       track.start();
     });
     imageCapture.getPhotoCapabilities().then(function () {
-      // Let there be light!
+      track.applyConstraints({
+        advanced: [{
+          torch: true
+        }]
+      }); // Let there be light!
+
       flipFlashEl.current.addEventListener('click', function () {
-        setFlash("some");
-        track.applyConstraints({
-          advanced: [{
-            torch: true
-          }]
-        });
+        track.stop();
+        track.start();
       });
     });
   }).then(function (photoCapabilities) {})["catch"](function (err) {
@@ -103105,7 +103106,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
   };
 
   console.log(flash);
-  console.log("k-rendered");
+  console.log("k-rendered"); // Flip Camera
 
   var flipCamera = function flipCamera() {
     if (camera == "user") {
@@ -103157,6 +103158,9 @@ var KaraokeCreate = function KaraokeCreate(props) {
     ref: flipFlashEl,
     style: {
       fontSize: "1.8em"
+    },
+    onClick: function onClick() {
+      return setFlash(flash == "off" ? "flash" : "off");
     }
   }, !flash == "off" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_FlashSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flash"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, flash)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
