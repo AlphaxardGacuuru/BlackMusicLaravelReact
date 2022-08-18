@@ -253,7 +253,7 @@ const KaraokeCreate = (props) => {
 								{/* Vertical Content */}
 								<div className="d-flex flex-column mb-2">
 									{/* Flash Light */}
-									{camera == "user" &&
+									{camera == "environment" &&
 										<div className="ml-auto mr-3">
 											<center>
 												<span
