@@ -252,19 +252,6 @@ const KaraokeCreate = (props) => {
 							<div className="p-2">
 								{/* Vertical Content */}
 								<div className="d-flex flex-column mb-2">
-									{/* Flash Light */}
-									{camera == "environment" &&
-										<div className="ml-auto mr-3">
-											<center>
-												<span
-													ref={flipFlashEl}
-													style={{ fontSize: "1.8em" }}
-													onClick={() => setFlash(flash ? false : true)}>
-													{flash ? <FlashFilledSVG /> : <FlashSVG />}
-													<h6>Flash</h6>
-												</span>
-											</center>
-										</div>}
 									{/* Flip Camera */}
 									<div className="ml-auto mr-3">
 										<center>
@@ -288,6 +275,19 @@ const KaraokeCreate = (props) => {
 											<h6>Timer</h6>
 										</center>
 									</div>
+									{/* Flash Light */}
+									{camera == "environment" &&
+										<div className="ml-auto mr-3">
+											<center>
+												<span
+													ref={flipFlashEl}
+													style={{ fontSize: "1.8em" }}
+													onClick={() => setFlash(flash ? false : true)}>
+													{flash ? <FlashFilledSVG /> : <FlashSVG />}
+													<h6>Flash</h6>
+												</span>
+											</center>
+										</div>}
 								</div>
 								{/* Vertical Content End */}
 							</div>
