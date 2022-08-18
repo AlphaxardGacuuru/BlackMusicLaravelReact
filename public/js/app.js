@@ -103059,17 +103059,17 @@ var KaraokeCreate = function KaraokeCreate(props) {
       video.current.play();
     };
 
-    track = stream.getVideoTracks()[0]; // Add Click to Flip SVG
+    track = stream.getVideoTracks()[0]; // Add Click to Start add Stop stream for Changes
 
     flipCameraEl.current.addEventListener("click", function () {
       track.stop();
       track.start();
-    }); // track.applyConstraints({
-    // 	advanced: [{
-    // 		fillLightMode: "flash"
-    // 	}]
-    // });
-    // For Flash
+    });
+    track.applyConstraints({
+      advanced: [{
+        fillLightMode: "flash"
+      }]
+    }); // For Flash
     //Create image capture object and get camera capabilities
 
     imageCapture = new ImageCapture(track);

@@ -175,17 +175,17 @@ const KaraokeCreate = (props) => {
 
 			track = stream.getVideoTracks()[0];
 
-			// Add Click to Flip SVG
+			// Add Click to Start add Stop stream for Changes
 			flipCameraEl.current.addEventListener("click", () => {
 				track.stop()
 				track.start()
 			});
 
-			// track.applyConstraints({
-			// 	advanced: [{
-			// 		fillLightMode: "flash"
-			// 	}]
-			// });
+			track.applyConstraints({
+				advanced: [{
+					fillLightMode: "flash"
+				}]
+			});
 
 			// For Flash
 			//Create image capture object and get camera capabilities
@@ -199,6 +199,7 @@ const KaraokeCreate = (props) => {
 			imageCapture.setOptions(imageCaptureConfig)
 
 			return imageCapture.getPhotoCapabilities();
+
 		}).then((photoCapabilities) => {
 
 			// Check if camera has a torch
