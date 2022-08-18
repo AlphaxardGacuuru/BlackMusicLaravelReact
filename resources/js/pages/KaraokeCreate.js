@@ -253,18 +253,18 @@ const KaraokeCreate = (props) => {
 								{/* Vertical Content */}
 								<div className="d-flex flex-column mb-2">
 									{/* Flash Light */}
-									<div className="ml-auto mr-3">
-										<center>
-											<span
-												ref={flipFlashEl}
-												style={{ fontSize: "1.8em" }}
-												onClick={() => setFlash(flash == "off" ? "flash" : "off")}>
-												{flash ? <FlashFilledSVG /> : <FlashSVG />}
-												<h6>Flash</h6>
-												<h6>{flash}</h6>
-											</span>
-										</center>
-									</div>
+									{camera == "user" &&
+										<div className="ml-auto mr-3">
+											<center>
+												<span
+													ref={flipFlashEl}
+													style={{ fontSize: "1.8em" }}
+													onClick={() => setFlash(flash ? false : true)}>
+													{flash ? <FlashFilledSVG /> : <FlashSVG />}
+													<h6>Flash</h6>
+												</span>
+											</center>
+										</div>}
 									{/* Flip Camera */}
 									<div className="ml-auto mr-3">
 										<center>
