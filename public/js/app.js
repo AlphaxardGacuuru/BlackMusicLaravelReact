@@ -103052,9 +103052,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
         exact: camera
       }
     }
-  };
-  var imageCapture;
-  var track; // Get Video stream
+  }; // Get Video stream
 
   navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
     // Older browsers may not have srcObject
@@ -103070,12 +103068,13 @@ var KaraokeCreate = function KaraokeCreate(props) {
       video.current.play();
     };
 
-    track = stream.getVideoTracks()[0]; // Add Click to Start add Stop stream for Changes
+    var track = stream.getVideoTracks()[0]; // Add Click to Start add Stop stream for Changes
 
     flipCameraEl.current.addEventListener("click", function () {
       track.stop();
       track.start();
     });
+    var imageCapture = new ImageCapture(track);
     imageCapture.getPhotoCapabilities().then(function () {
       track.applyConstraints({
         advanced: [{

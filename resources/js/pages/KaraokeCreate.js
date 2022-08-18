@@ -155,9 +155,6 @@ const KaraokeCreate = (props) => {
 		}
 	}
 
-	let imageCapture
-	var track
-
 	// Get Video stream
 	navigator.mediaDevices.getUserMedia(constraints)
 		.then((stream) => {
@@ -174,7 +171,7 @@ const KaraokeCreate = (props) => {
 				video.current.play();
 			};
 
-			track = stream.getVideoTracks()[0];
+			const track = stream.getVideoTracks()[0];
 
 			// Add Click to Start add Stop stream for Changes
 			flipCameraEl.current.addEventListener("click", () => {
@@ -182,6 +179,8 @@ const KaraokeCreate = (props) => {
 				track.start()
 			});
 
+			const imageCapture = new ImageCapture(track)
+			
 			imageCapture.getPhotoCapabilities().then(() => {
 				track.applyConstraints({
 					advanced: [{ torch: true }]
