@@ -103342,12 +103342,14 @@ var KaraokeCreate = function KaraokeCreate(props) {
       onClick: function onClick() {
         return setFilter(item);
       }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "m-0 p-0"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
       src: "/storage/img/slide2.jpg",
       imgClass: item,
       width: "40px",
       height: "auto"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
       className: "mt-1"
     }, item));
   })))));

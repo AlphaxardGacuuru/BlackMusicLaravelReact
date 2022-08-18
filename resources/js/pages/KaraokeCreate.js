@@ -453,11 +453,13 @@ const KaraokeCreate = (props) => {
 									key={key}
 									className={filter == item ? "active-filter" : ""}
 									onClick={() => setFilter(item)}>
-									<Img
-										src="/storage/img/slide2.jpg"
-										imgClass={item}
-										width="40px"
-										height="auto" />
+									<span className="m-0 p-0">
+										<Img
+											src="/storage/img/slide2.jpg"
+											imgClass={item}
+											width="40px"
+											height="auto" />
+									</span>
 									<h6 className="mt-1">{item}</h6>
 								</span>
 							))}
