@@ -95307,9 +95307,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
 /* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
 /* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
-/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
-/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
-/* harmony import */ var _svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/PlayFilledSVG */ "./resources/js/svgs/PlayFilledSVG.js");
+/* harmony import */ var _svgs_BookmarkSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/BookmarkSVG */ "./resources/js/svgs/BookmarkSVG.js");
+/* harmony import */ var _svgs_BookmarkFilledSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/BookmarkFilledSVG */ "./resources/js/svgs/BookmarkFilledSVG.js");
+/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
+/* harmony import */ var _svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../svgs/MusicNoteSVG */ "./resources/js/svgs/MusicNoteSVG.js");
+/* harmony import */ var _svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../svgs/PlayFilledSVG */ "./resources/js/svgs/PlayFilledSVG.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_15__);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -95323,6 +95327,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -95364,7 +95371,7 @@ var Karaoke = function Karaoke(props) {
   var spiningRecord = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // Fetch Karaoke Comments
-    axios.get("/api/karaoke-comments").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_15___default.a.get("/api/karaoke-comments").then(function (res) {
       setKaraokeComments(res.data);
     })["catch"](function () {
       return props.setErrors(["Failed to fetch karaoke comments"]);
@@ -95384,13 +95391,38 @@ var Karaoke = function Karaoke(props) {
 
     props.setKaraokes(newKaraokes); // Add like to database
 
-    axios.get('sanctum/csrf-cookie').then(function () {
-      axios.post("".concat(props.url, "/api/karaoke-likes"), {
+    axios__WEBPACK_IMPORTED_MODULE_15___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_15___default.a.post("".concat(props.url, "/api/karaoke-likes"), {
         karaoke: id
       }).then(function (res) {
         props.setMessages([res.data]); // Update karaoke
 
-        axios.get("".concat(props.url, "/api/karaokes")).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_15___default.a.get("".concat(props.url, "/api/karaokes")).then(function (res) {
+          return props.setKaraokes(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  }; // Function for saving Karaokes
+
+
+  var saveKaraoke = function saveKaraoke() {
+    axios__WEBPACK_IMPORTED_MODULE_15___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_15___default.a.post('api/saved-karaokes', {
+        id: props.karaoke.id
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update karaoke
+
+        axios__WEBPACK_IMPORTED_MODULE_15___default.a.get("".concat(props.url, "/api/karaokes")).then(function (res) {
           return props.setKaraokes(res.data);
         });
       })["catch"](function (err) {
@@ -95452,8 +95484,8 @@ var Karaoke = function Karaoke(props) {
     width: "100%",
     loading: "lazy",
     preload: "none",
-    autoPlay: true,
     muted: true,
+    autoPlay: true,
     loop: true,
     playsInline: true,
     onClick: play ? onPlay : onPause
@@ -95482,7 +95514,7 @@ var Karaoke = function Karaoke(props) {
       fontSize: "4em",
       color: "rgba(220, 220, 220, 1)"
     }
-  }, play && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, play && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlayFilledSVG__WEBPACK_IMPORTED_MODULE_14__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-1 flex-grow-1 align-self-end"
@@ -95524,7 +95556,7 @@ var Karaoke = function Karaoke(props) {
       fontSize: "1.5em",
       color: "#FFD700"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MusicNoteSVG__WEBPACK_IMPORTED_MODULE_13__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex-grow-1 align-self-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ticker__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mode: "smooth"
@@ -95606,6 +95638,30 @@ var Karaoke = function Karaoke(props) {
       color: "inherit"
     }
   }, props.karaoke.comments))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto mr-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, props.karaoke.hasSaved ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      saveKaraoke();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "2em",
+      color: "#FFD700"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_BookmarkFilledSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      saveKaraoke();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "2em",
+      color: "rgba(220, 220, 220, 1)"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_BookmarkSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-1 mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -95615,7 +95671,7 @@ var Karaoke = function Karaoke(props) {
     onClick: function onClick() {
       return onShare();
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     ref: spiningRecord,
@@ -109244,6 +109300,66 @@ var BellSVG = function BellSVG() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BellSVG);
+
+/***/ }),
+
+/***/ "./resources/js/svgs/BookmarkFilledSVG.js":
+/*!************************************************!*\
+  !*** ./resources/js/svgs/BookmarkFilledSVG.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var BookmarkFilledSVG = function BookmarkFilledSVG() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1em",
+    height: "1em",
+    fill: "currentColor",
+    className: "bi bi-bookmark-fill",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BookmarkFilledSVG);
+
+/***/ }),
+
+/***/ "./resources/js/svgs/BookmarkSVG.js":
+/*!******************************************!*\
+  !*** ./resources/js/svgs/BookmarkSVG.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var BookmarkSVG = function BookmarkSVG() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1em",
+    height: "1em",
+    fill: "currentColor",
+    className: "bi bi-bookmark",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BookmarkSVG);
 
 /***/ }),
 

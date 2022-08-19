@@ -52,6 +52,7 @@ Route::resources([
     'polls' => 'PollsController',
 	'push' => 'PushController',
     'referrals' => 'ReferralsController',
+	'saved-karaokes' => 'SavedKaraokesController',
     'search' => 'SearchController',
     'song-payouts' => 'SongPayoutsController',
     'sms' => 'SMSController',

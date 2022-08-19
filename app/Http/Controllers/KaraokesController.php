@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Audios;
 use App\KaraokeComments;
 use App\KaraokeLikes;
+use App\SavedKaraokes;
 use App\Karaokes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +20,6 @@ class KaraokesController extends Controller
      */
     public function index()
     {
-        // Check if user is logged in
-        if (Auth::check()) {
-            $authUsername = auth()->user()->username;
-        } else {
-            $authUsername = '@guest';
-        }
-
         // Get Karaokes
         $getKaraokes = Karaokes::orderBy('id', 'ASC')->get();
 
@@ -33,8 +27,8 @@ class KaraokesController extends Controller
 
         foreach ($getKaraokes as $key => $karaoke) {
 
-            // Check if user has liked karaoke
-            $hasLiked = KaraokeLikes::where('username', $authUsername)
+            // Check if user has saved karaoke
+            $hasSaved = SavedKaraokes::where('username', auth()->user()->username)
                 ->where('karaoke_id', $karaoke->id)
                 ->exists();
 
@@ -48,7 +42,8 @@ class KaraokesController extends Controller
                 "pp" => $karaoke->users->pp,
                 "decos" => $karaoke->users->decos->count(),
                 "description" => $karaoke->description,
-                "hasLiked" => $hasLiked,
+                "hasLiked" => $karaoke->karaokeLikes->count() > 0 ? true : false,
+                "hasSaved" => $hasSaved,
                 "likes" => $karaoke->karaokeLikes->count(),
                 "comments" => $karaoke->karaokeComments->count(),
                 "created_at" => $karaoke->created_at->format('d M Y'),

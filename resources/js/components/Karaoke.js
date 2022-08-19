@@ -10,9 +10,12 @@ import CommentSVG from '../svgs/CommentSVG'
 import DecoSVG from '../svgs/DecoSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
+import BookmarkSVG from '../svgs/BookmarkSVG'
+import BookmarkFilledSVG from '../svgs/BookmarkFilledSVG'
 import ShareSVG from '../svgs/ShareSVG'
 import MusicNoteSVG from '../svgs/MusicNoteSVG'
 import PlayFilledSVG from '../svgs/PlayFilledSVG'
+import axios from 'axios'
 
 const Karaoke = (props) => {
 
@@ -59,6 +62,28 @@ const Karaoke = (props) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/karaoke-likes`, {
 				karaoke: id
+			}).then((res) => {
+				props.setMessages([res.data])
+				// Update karaoke
+				axios.get(`${props.url}/api/karaokes`)
+					.then((res) => props.setKaraokes(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		})
+	}
+
+	// Function for saving Karaokes
+	const saveKaraoke = () => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post('api/saved-karaokes', {
+				id: props.karaoke.id
 			}).then((res) => {
 				props.setMessages([res.data])
 				// Update karaoke
@@ -123,8 +148,8 @@ const Karaoke = (props) => {
 				width="100%"
 				loading="lazy"
 				preload="none"
-				autoPlay
 				muted
+				autoPlay
 				loop
 				playsInline
 				onClick={play ? onPlay : onPause}>
@@ -262,6 +287,33 @@ const Karaoke = (props) => {
 										<CommentSVG />
 									</span>
 									<h6 style={{ color: "inherit" }}>{props.karaoke.comments}</h6>
+								</center>
+							</div>
+							{/* Save  */}
+							{/* Save Karaoke */}
+							<div className="ml-auto mr-1">
+								<center>
+									{props.karaoke.hasSaved ?
+										<a
+											href="#"
+											onClick={(e) => {
+												e.preventDefault()
+												saveKaraoke()
+											}}>
+											<span style={{ fontSize: "2em", color: "#FFD700" }}>
+												<BookmarkFilledSVG />
+											</span>
+										</a> :
+										<a
+											href="#"
+											onClick={(e) => {
+												e.preventDefault()
+												saveKaraoke()
+											}}>
+											<span style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}>
+												<BookmarkSVG />
+											</span>
+										</a>}
 								</center>
 							</div>
 							{/* Share Karaoke */}
