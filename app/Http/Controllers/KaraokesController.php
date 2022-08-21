@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Audios;
 use App\KaraokeComments;
 use App\KaraokeLikes;
-use App\SavedKaraokes;
 use App\Karaokes;
+use App\SavedKaraokes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +36,8 @@ class KaraokesController extends Controller
                 "id" => $karaoke->id,
                 "karaoke" => $karaoke->karaoke,
                 "audio_id" => $karaoke->audio_id,
-                "audio" => $karaoke->audios->name,
+                "audio_name" => $karaoke->audios->name,
+                "audio_thumbnail" => $karaoke->audios->thumbnail,
                 "name" => $karaoke->users->name,
                 "username" => $karaoke->users->username,
                 "pp" => $karaoke->users->pp,

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import Ticker from 'react-ticker'
 
@@ -12,6 +12,9 @@ import LoopSVG from '../svgs/LoopSVG'
 import TimerSVG from '../svgs/TimerSVG'
 import RecordSVG from '../svgs/RecordSVG'
 import RecordFilledSVG from '../svgs/RecordFilledSVG'
+import StopFilledSVG from '../svgs/StopFilledSVG'
+import PlayFilledSVG from '../svgs/PlayFilledSVG'
+import PauseFilledSVG from '../svgs/PauseFilledSVG'
 import UploadBoxSVG from '../svgs/UploadBoxSVG'
 import MusicNoteSVG from '../svgs/MusicNoteSVG'
 import ImageSVG from '../svgs/ImageSVG'
@@ -47,19 +50,19 @@ const KaraokeCreate = (props) => {
 	// Get params
 	const { audio } = useParams()
 
-	// Declare states
+	// Declare states	
 	const [flash, setFlash] = useState()
-	const [camera, setCamera] = useState("environment")
+	const [camera, setCamera] = useState("user")
 	const [timer, setTimer] = useState()
 	const [upload, setUpload] = useState()
-	const [record, setRecord] = useState()
 	const [filters, setFilters] = useState()
 	const [filter, setFilter] = useState("none")
 	const [bottomMenu, setBottomMenu] = useState()
+	const [loadingBtn, setLoadingBtn] = useState()
 
 	const [karaoke, setKaraoke] = useState("")
+	const [karaokeAudio, setKaraokeAudio] = useState([])
 	const [description, setDescription] = useState()
-	const [loadingBtn, setLoadingBtn] = useState()
 
 	const [showForm, setShowForm] = useState()
 
@@ -67,16 +70,42 @@ const KaraokeCreate = (props) => {
 	const video = useRef(null)
 
 	// ID for rotating record
-	const spiningRecord = useRef()
+	const spiningRecord = useRef(null)
 
-	const flipCameraEl = useRef()
-	const flipFlashEl = useRef()
+	// ID for Vertical Elements
+	const flipCameraEl = useRef(null)
+	const flipFlashEl = useRef(null)
+
+	// ID for Horizontal Elements
+	const uploadEl = useRef(null)
+	const pauseRecordEl = useRef(null)
+	const resumeRecordEl = useRef(null)
+
+	// Record Button
+	const startRecordEl = useRef(null)
+	const stopRecordEl = useRef(null)
+
+	const downloadButton = useRef(null)
 
 	// Get csrf token
 	const token = document.head.querySelector('meta[name="csrf-token"]');
 
 	// Get history for page location
 	const history = useHistory()
+
+	// Fetch Data
+	useEffect(() => {
+		// Fetch Karaoke Audio
+		axios.get(`/api/karaoke-audios/1`)
+			.then((res) => {
+				setKaraokeAudio(res.data)
+			}).catch(() => props.setErrors(["Failed to fetch karaoke audio"]))
+
+		// Remove recording button
+		stopRecordEl.current.style.display = "none"
+		resumeRecordEl.current.style.display = "none"
+		pauseRecordEl.current.style.display = "none"
+	}, [])
 
 	// Declare new FormData object for form data
 	const formData = new FormData();
@@ -121,6 +150,9 @@ const KaraokeCreate = (props) => {
 		})
 	}
 
+	/*
+	*
+	Video Source */
 	// Older browsers might not implement mediaDevices at all, so we set an empty object first
 	if (navigator.mediaDevices === undefined) {
 		navigator.mediaDevices = {};
@@ -155,9 +187,12 @@ const KaraokeCreate = (props) => {
 		}
 	}
 
+	let chunks = [];
+
 	// Get Video stream
 	navigator.mediaDevices.getUserMedia(constraints)
 		.then((stream) => {
+			// Get Video Stream
 			// Older browsers may not have srcObject
 			if ("srcObject" in video.current) {
 				/* use the stream */
@@ -170,63 +205,122 @@ const KaraokeCreate = (props) => {
 			video.current.onloadedmetadata = (e) => {
 				video.current.play();
 			};
+			// Get Video Stream End
 
 			const track = stream.getVideoTracks()[0];
 
+			// For Camera Flip
 			// Add Click to Start add Stop stream for Changes
 			flipCameraEl.current.addEventListener("click", () => {
+				if (camera == "user") {
+					setCamera("environment")
+					video.current.classList.remove("karaoke-video-upload")
+				} else {
+					setCamera("user")
+					video.current.classList.add("karaoke-video-upload")
+				}
+
 				track.stop()
 				track.start()
 			});
+			// For Camera Flip End
 
+			// For Flash
 			const imageCapture = new ImageCapture(track)
 
 			imageCapture.getPhotoCapabilities().then(() => {
 				track.applyConstraints({
 					advanced: [{ torch: flash }]
 				});
-				// Let there be light!
-				flipFlashEl.current.addEventListener('click', () => {
-					track.stop()
-					track.start()
-				});
+			})
+			// For Flash End
+
+			// For Recording
+			const mediaRecorder = new MediaRecorder(stream);
+
+			// visualize(stream);
+
+			startRecordEl.current.addEventListener('click', () => {
+				mediaRecorder.start();
+				console.log(mediaRecorder.state);
+				console.log("recorder started");
+				// Start Spining Record
+				spiningRecord.current.classList.add("rotate-record")
+				startRecordEl.current.style.display = "none"
+				stopRecordEl.current.style.display = "inline"
+				pauseRecordEl.current.style.display = "inline"
+				uploadEl.current.style.display = "none"
 			})
 
-		}).then((photoCapabilities) => {
+			pauseRecordEl.current.addEventListener('click', () => {
+				mediaRecorder.pause();
+				console.log(mediaRecorder.state);
+				console.log("recorder paused");
+				// Stop Spining Record
+				spiningRecord.current.classList.remove("rotate-record")
+				pauseRecordEl.current.style.display = "none"
+				resumeRecordEl.current.style.display = "inline"
+			})
 
-		}).catch(function (err) {
+			resumeRecordEl.current.addEventListener('click', () => {
+				mediaRecorder.resume();
+				console.log(mediaRecorder.state);
+				console.log("recorder resumed");
+				// Start Spining Record
+				spiningRecord.current.classList.add("rotate-record")
+				resumeRecordEl.current.style.display = "none"
+				pauseRecordEl.current.style.display = "inline"
+			})
+
+			stopRecordEl.current.addEventListener('click', () => {
+				mediaRecorder.stop();
+				console.log(mediaRecorder.state);
+				console.log("recorder stopped");
+				// Stop Spining Record
+				spiningRecord.current.classList.remove("rotate-record")
+				stopRecordEl.current.style.display = "none"
+				startRecordEl.current.style.display = "inline"
+				pauseRecordEl.current.style.display = "none"
+				resumeRecordEl.current.style.display = "none"
+				uploadEl.current.style.display = "inline"
+			})
+
+			mediaRecorder.onstop = (e) => {
+				console.log("recorder stopped");
+			}
+
+			mediaRecorder.ondataavailable = (e) => {
+				chunks.push(e.data);
+				console.log(chunks)
+
+				downloadButton.current.href = URL.createObjectURL(chunks[0]);
+				downloadButton.current.download = `RecordedVideo.webm`;
+				// downloadButton.current.click()
+
+				console.log(`Successfully recorded ${chunks[0].size / 1000} Kbs of ${chunks[0].type} media.`);
+			}
+			// For Recording End
+
+		}).catch((err) => {
 			console.log(err.name + ": " + err.message);
 		});
 
-	// Start Recording
-	const startRecord = () => {
-		// Stop Spining Record
-		spiningRecord.current.classList.add("rotate-record")
-		setRecord(true)
-	}
+	// Create FilePond instance
+	// const pond = FilePond.create()
+	// pond.addFile(blob)
 
-	// Stop Recording
-	const stopRecord = () => {
-		// Start Spining Record
-		spiningRecord.current.classList.remove("rotate-record")
-		setRecord(false)
-	}
-
-	console.log(flash)
-	console.log("k-rendered")
-
-	// Flip Camera
-	const flipCamera = () => {
-		if (camera == "user") {
-			setCamera("environment")
-			video.current.classList.remove("karaoke-video-upload")
-		} else {
-			setCamera("user")
-			video.current.classList.add("karaoke-video-upload")
-		}
-	}
-
-	const filterClasses = ["none", "blur", "brightness", "contrast", "grayscale", "huerotate", "invert", "opacity", "saturate", "sepia"]
+	const filterClasses = [
+		"none",
+		"blur",
+		"brightness",
+		"contrast",
+		"grayscale",
+		"huerotate",
+		"invert",
+		"opacity",
+		"saturate",
+		"sepia"
+	]
 
 	return (
 		<>
@@ -239,7 +333,7 @@ const KaraokeCreate = (props) => {
 						height: window.innerHeight,
 						overflow: "hidden"
 					}}>
-					<video ref={video} className={filter}></video>
+					<video ref={video} className={`karaoke-video-upload ${filter}`}></video>
 					{/* Floating Video Info Top */}
 					<div className="w-100" style={{ position: "absolute", top: 0 }}>
 						<div className="d-flex justify-content-between">
@@ -257,8 +351,7 @@ const KaraokeCreate = (props) => {
 										<center>
 											<span
 												ref={flipCameraEl}
-												style={{ fontSize: "2.3em" }}
-												onClick={flipCamera}>
+												style={{ fontSize: "2.3em" }}>
 												<LoopSVG />
 											</span>
 											<h6>Flip</h6>
@@ -288,6 +381,14 @@ const KaraokeCreate = (props) => {
 												</span>
 											</center>
 										</div>}
+									{/* Download */}
+									<div className="ml-auto mr-3">
+										<center>
+											<a ref={downloadButton} className="button">
+												{/* Download */}
+											</a>
+										</center>
+									</div>
 								</div>
 								{/* Vertical Content End */}
 							</div>
@@ -301,26 +402,36 @@ const KaraokeCreate = (props) => {
 							<div className="ml-3 p-2 align-self-end">
 								<center>
 									<span
+										ref={uploadEl}
 										style={{ fontSize: "2em" }}
 										onClick={() => {
 											setBottomMenu("menu-open")
 											setUpload(true)
+											setFilters(false)
 										}}>
 										<UploadBoxSVG />
+										<h6>Upload</h6>
 									</span>
-									<h6>Upload</h6>
+									<span ref={pauseRecordEl} style={{ fontSize: "2em" }}>
+										<PauseFilledSVG />
+										<h6>Pause</h6>
+									</span>
+									<span ref={resumeRecordEl} style={{ fontSize: "2em" }}>
+										<PlayFilledSVG />
+										<h6>Paused</h6>
+									</span>
 								</center>
 							</div>
-							<div className="p-2" onClick={record ? stopRecord : startRecord}>
+							<div className="p-2">
 								<center>
-									{record ?
-										<span style={{ fontSize: "4em", color: "#fb3958" }}>
-											<RecordFilledSVG />
-										</span> :
-										<span style={{ fontSize: "4em" }}>
-											<RecordSVG />
-										</span>}
-									<h6 style={{ color: record ? "#fb3958" : "#fff" }}>Record</h6>
+									<span ref={stopRecordEl} style={{ fontSize: "4em", color: "#fb3958" }}>
+										<StopFilledSVG />
+										<h6 style={{ color: "#fb3958" }}>Recording</h6>
+									</span>
+									<span ref={startRecordEl} style={{ fontSize: "4em" }}>
+										<RecordSVG />
+										<h6 style={{ color: "#fff" }}>Record</h6>
+									</span>
 								</center>
 							</div>
 							<div className="mr-3 p-2 align-self-end">
@@ -330,6 +441,7 @@ const KaraokeCreate = (props) => {
 										onClick={() => {
 											setBottomMenu("menu-open")
 											setFilters(true)
+											setUpload(false)
 										}}>
 										<ImageSVG />
 									</span>
@@ -338,7 +450,7 @@ const KaraokeCreate = (props) => {
 							</div>
 						</div>
 						{/* Audio Name */}
-						<div className="d-flex py-2">
+						<div className="d-flex pb-2 pt-0 mx-2">
 							<div
 								className="mr-2"
 								style={{ fontSize: "1.5em", color: "#FFD700" }}>
@@ -347,8 +459,8 @@ const KaraokeCreate = (props) => {
 							<div className="flex-grow-1 align-self-center">
 								<Ticker mode="smooth">
 									{({ index }) => (
-										<span style={{ color: "#FFD700" }}>
-											Kenyan Shrap Gang Type Beat Supreme
+										<span style={{ color: "#FFD700", whiteSpace: "nowrap" }}>
+											{`${karaokeAudio.audio_name}`}
 										</span>
 									)}
 								</Ticker>
@@ -356,10 +468,12 @@ const KaraokeCreate = (props) => {
 							<div
 								ref={spiningRecord}
 								className="mx-2">
-								<Link to={`/audio-show/`}>
+								<Link to={`/audio-show/${karaokeAudio.audio_id}`}>
 									<Img
+										src={`/storage/${karaokeAudio.audio_thumbnail}`}
 										width="50px"
 										height="50px"
+										imgClass="rounded-circle"
 										alt="current audio" />
 								</Link>
 							</div>

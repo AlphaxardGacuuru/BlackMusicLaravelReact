@@ -140,7 +140,9 @@ const Karaoke = (props) => {
 	}
 
 	return (
-		<div className="single-karaoke">
+		<div
+			id={props.karaoke.id}
+			className="single-karaoke">
 			<video
 				ref={video}
 				src={`/storage/${props.karaoke.karaoke}`}
@@ -228,7 +230,7 @@ const Karaoke = (props) => {
 								<Ticker mode="smooth">
 									{({ index }) => (
 										<span style={{ color: "#FFD700" }}>
-											{props.karaoke.audio}
+											{props.karaoke.audio_name}
 										</span>
 									)}
 								</Ticker>
@@ -239,7 +241,7 @@ const Karaoke = (props) => {
 						{/* Vertical Content */}
 						<div className="d-flex flex-column mb-2">
 							{/* Avatar */}
-							<div className="avatar-thumbnail-xs ml-auto mr-1 mb-3" style={{ borderRadius: "50%" }}>
+							<div className="avatar-thumbnail-xs mb-3" style={{ borderRadius: "50%" }}>
 								<center>
 									<Link to={`/profile/${props.karaoke.username}`}>
 										<Img
@@ -251,7 +253,7 @@ const Karaoke = (props) => {
 								</center>
 							</div>
 							{/* Karaoke Likes  */}
-							<div className="ml-auto mr-1">
+							<div>
 								<center>
 									{props.karaoke.hasLiked ?
 										<a href="#"
@@ -260,10 +262,12 @@ const Karaoke = (props) => {
 												e.preventDefault()
 												onKaraokeLike(props.karaoke.id)
 											}}>
-											<span style={{ color: "inherit", fontSize: "2em" }}>
+											<span
+												className="p-0"
+												style={{ color: "inherit", fontSize: "2em" }}>
 												<HeartFilledSVG />
 											</span>
-											<h6 style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
+											<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
 										</a> :
 										<a
 											href="#"
@@ -272,26 +276,30 @@ const Karaoke = (props) => {
 												e.preventDefault()
 												onKaraokeLike(props.karaoke.id)
 											}}>
-											<span style={{ color: "inherit", fontSize: "2em" }}>
+											<span
+												className="p-0"
+												style={{ color: "inherit", fontSize: "2em" }}>
 												<HeartSVG />
 											</span>
-											<h6 style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
+											<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
 										</a>}
 								</center>
 							</div>
 							{/* Karaoke Comments */}
-							<div className="ml-auto mr-1" style={{ color: "rgba(220, 220, 220, 1)" }}>
+							<div style={{ color: "rgba(220, 220, 220, 1)" }}>
 								<center>
-									<span style={{ fontSize: "2em" }}
+									<span
+										className="p-0"
+										style={{ fontSize: "2em" }}
 										onClick={() => setBottomMenu("menu-open")}>
 										<CommentSVG />
 									</span>
-									<h6 style={{ color: "inherit" }}>{props.karaoke.comments}</h6>
+									<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.comments}</h6>
 								</center>
 							</div>
 							{/* Save  */}
 							{/* Save Karaoke */}
-							<div className="ml-auto mr-1">
+							<div>
 								<center>
 									{props.karaoke.hasSaved ?
 										<a
@@ -300,7 +308,9 @@ const Karaoke = (props) => {
 												e.preventDefault()
 												saveKaraoke()
 											}}>
-											<span style={{ fontSize: "2em", color: "#FFD700" }}>
+											<span
+												className="mb-2 p-0"
+												style={{ fontSize: "2em", color: "#FFD700" }}>
 												<BookmarkFilledSVG />
 											</span>
 										</a> :
@@ -310,28 +320,33 @@ const Karaoke = (props) => {
 												e.preventDefault()
 												saveKaraoke()
 											}}>
-											<span style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}>
+											<span
+												className="mb-2 p-0"
+												style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}>
 												<BookmarkSVG />
 											</span>
 										</a>}
 								</center>
 							</div>
 							{/* Share Karaoke */}
-							<div className="ml-auto mr-1 mb-3">
+							<div>
 								<center>
 									<span
+										className="mb-3 p-0"
 										style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}
-										onClick={() => onShare()}>
+										onClick={onShare}>
 										<ShareSVG />
 									</span>
 								</center>
 							</div>
 							{/* Current Audio */}
-							<div className="ml-auto mr-1">
+							<div>
 								<center>
 									<div ref={spiningRecord} className="rotate-record">
 										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
 											<Img
+												src={`/storage/${props.karaoke.audio_thumbnail}`}
+												imgClass="rounded-circle"
 												width="50px"
 												height="50px"
 												alt="current audio" />

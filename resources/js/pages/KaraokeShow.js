@@ -1,8 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Karaoke from '../components/Karaoke'
 
 const KaraokeShow = (props) => {
+
+	const { id } = useParams()
+
+	const karaokeEl = document.getElementById(id)
+
+	// Scroll Karaoke to current one
+	karaokeEl && karaokeEl.scrollIntoView();
 
 	return (
 		<div className="row p-0">
@@ -14,10 +22,10 @@ const KaraokeShow = (props) => {
 							<Karaoke
 								{...props}
 								key={key}
+								id={karaoke.id}
 								karaoke={karaoke}
 								karaokes={props.karaokes}
-								setKaraokes={props.setKaraokes}
-							/>
+								setKaraokes={props.setKaraokes} />
 						))}
 				</div>
 			</div>

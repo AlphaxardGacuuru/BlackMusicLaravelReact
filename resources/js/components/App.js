@@ -947,7 +947,7 @@ function App() {
 				{/* Karaoke Routes */}
 				<Route path="/karaoke-charts" exact render={(props) => (<KaraokeCharts {...GLOBAL_STATE} />)} />
 				<Route path="/karaoke-create/:audio" exact render={(props) => (<KaraokeCreate {...GLOBAL_STATE} />)} />
-				<Route path="/karaoke-show" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
+				<Route path="/karaoke-show/:id" exact render={(props) => (<KaraokeShow {...GLOBAL_STATE} />)} />
 
 				{/* Video Routes */}
 				<Route path="/video-charts" exact render={(props) => (<VideoCharts {...GLOBAL_STATE} />)} />

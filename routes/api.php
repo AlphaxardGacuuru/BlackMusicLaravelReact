@@ -42,6 +42,7 @@ Route::resources([
 	'karaoke-comments' => 'KaraokeCommentsController',
 	'karaoke-comment-likes' => 'KaraokeCommentLikesController',
 	'karaoke-likes' => 'KaraokeLikesController',
+	'karaoke-audios' => 'KaraokeAudiosController',
     'kopokopo' => 'KopokopoController',
     'kopokopo-recipients' => 'KopokopoRecipientsController',
     'notifications' => 'NotificationsController',

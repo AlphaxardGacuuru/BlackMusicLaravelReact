@@ -8,6 +8,7 @@ import PlusSVG from '../svgs/PlusSVG'
 const KaraokeCharts = (props) => {
 
 	const [karaokes, setKaraokes] = useState([])
+	const [karaokeAudio, setKaraokeAudio] = useState([])
 	const [week, setWeek] = useState(0)
 	const weeks = [0, 1, 2, 3, 4, 5]
 
@@ -20,6 +21,12 @@ const KaraokeCharts = (props) => {
 				setKaraokes(res.data)
 				// props.setLocalStorage("videos", res.data)
 			}).catch(() => props.setErrors(["Failed to fetch karaokes"]))
+
+		// Fetch Karaoke Audio
+		axios.get(`/api/karaoke-audios/1`)
+			.then((res) => {
+				setKaraokeAudio(res.data)
+			}).catch(() => props.setErrors(["Failed to fetch karaoke audio"]))
 	}, [])
 
 	// Random array for dummy loading elements
@@ -34,7 +41,7 @@ const KaraokeCharts = (props) => {
 	return (
 		<>
 			<Link
-				to="karaoke-create/15"
+				to={`karaoke-create/${karaokeAudio.audio_id}`}
 				id="chatFloatBtn"
 				className={`${!checkLocation && "mb-5"}`}>
 				<PlusSVG />
@@ -134,7 +141,7 @@ const KaraokeCharts = (props) => {
 									}}
 									onClick={() => props.setShow(0)}>
 									<div className="w-100">
-										<Link to={`karaoke-show`}>
+										<Link to={`karaoke-show/${karaoke.id}`}>
 											<video
 												src={`/storage/${karaoke.karaoke}`}
 												width="100%"

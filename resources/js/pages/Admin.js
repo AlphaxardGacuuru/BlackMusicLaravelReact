@@ -9,6 +9,7 @@ const Admin = (props) => {
 	const [search, setSearch] = useState()
 	const [admin, setAdmin] = useState(props.getLocalStorage("admin"))
 	const [kopokopoRecipients, setKopokopoRecipients] = useState(props.getLocalStorage("kopokopoRecipients"))
+	const [karaokeAudio, setKaraokeAudio] = useState()
 
 	useEffect(() => {
 		// Fetch Admin
@@ -33,6 +34,26 @@ const Admin = (props) => {
 			}).catch(() => props.setErrors(['Failed to fetch users']))
 	}, [])
 
+	// Set Karaoke Audio
+	const onKaraokeAudio = () => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post('api/karaoke-audios', {
+				audio: karaokeAudio
+			}).then((res) => {
+				props.setMessages([res.data])
+				setKaraokeAudio()
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		})
+	}
+
 	return (
 		<div className="row">
 			<div className="col-sm-2"></div>
@@ -52,7 +73,7 @@ const Admin = (props) => {
 				<br />
 				<br />
 
-				<table className="table table-responsive">
+				<table className="table table-responsive hidden-scroll">
 					<thead>
 						<tr>
 							<th className="border-bottom-0 border-right border-dark">Users</th>
@@ -105,7 +126,7 @@ const Admin = (props) => {
 				<br />
 				<br />
 
-				<table className="table table-responsive">
+				<table className="table table-responsive hidden-scroll">
 					<tbody className="border border-0">
 						<tr className="border border-0">
 							<th className="border-top border-dark">User ID</th>
@@ -165,7 +186,7 @@ const Admin = (props) => {
 
 				{/* Song Payouts */}
 				<h1>Song Payouts</h1>
-				<table className="table table-responsive thead-light">
+				<table className="table table-responsive thead-light hidden-scroll">
 					<tbody className="border border-0">
 						<tr className="border border-0">
 							<th className="border-top border-dark">Name</th>
@@ -197,7 +218,7 @@ const Admin = (props) => {
 
 				{/* Kopokopo Recipients */}
 				<h1>Kopokopo Recipients</h1>
-				<table className="table table-responsive thead-light">
+				<table className="table table-responsive thead-light hidden-scroll">
 					<tbody className="border border-0">
 						<tr className="border border-0">
 							<th className="border-top border-dark">Name</th>
@@ -221,6 +242,35 @@ const Admin = (props) => {
 				</table>
 				<br />
 				<br />
+
+				{/* Karaoke Audio */}
+				<div className="contact-form text-center call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
+					<select
+						name='album'
+						className='form-control'
+						required={true}
+						onChange={(e) => setKaraokeAudio(e.target.value)}>
+						<option defaultValue value="">Select Audio</option>
+						{props.audios
+							.map((audio, key) => (
+								<option
+									key={key}
+									value={audio.id}
+									className="bg-dark text-light">
+									{audio.name}
+								</option>
+							))}
+					</select>
+					<br />
+					<br />
+
+					<Button
+						btnText="set karaoke audio"
+						onClick={onKaraokeAudio} />
+					<br />
+					<br />
+					<br />
+				</div>
 
 				<center>
 					<button className="mysonar-btn" onClick={props.displayNotification}>notify</button>
