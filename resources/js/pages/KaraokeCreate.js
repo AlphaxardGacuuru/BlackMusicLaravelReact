@@ -150,6 +150,17 @@ const KaraokeCreate = (props) => {
 		})
 	}
 
+	// Flip the camera
+	const flipCamera = () => {
+		if (camera == "user") {
+			setCamera("environment")
+			video.current.classList.remove("karaoke-video-upload")
+		} else {
+			setCamera("user")
+			video.current.classList.add("karaoke-video-upload")
+		}
+	}
+
 	/*
 	*
 	Video Source */
@@ -212,16 +223,8 @@ const KaraokeCreate = (props) => {
 			// For Camera Flip
 			// Add Click to Start add Stop stream for Changes
 			flipCameraEl.current.addEventListener("click", () => {
-				if (camera == "user") {
-					setCamera("environment")
-					video.current.classList.remove("karaoke-video-upload")
-				} else {
-					setCamera("user")
-					video.current.classList.add("karaoke-video-upload")
-				}
-
 				track.stop()
-				track.start()
+				// track.start()
 			});
 			// For Camera Flip End
 
@@ -303,7 +306,8 @@ const KaraokeCreate = (props) => {
 
 		}).catch((err) => {
 			console.log(err.name + ": " + err.message);
-		});
+		}
+		)
 
 	// Create FilePond instance
 	// const pond = FilePond.create()
@@ -351,7 +355,8 @@ const KaraokeCreate = (props) => {
 										<center>
 											<span
 												ref={flipCameraEl}
-												style={{ fontSize: "2.3em" }}>
+												style={{ fontSize: "2.3em" }}
+												onClick={flipCamera}>
 												<LoopSVG />
 											</span>
 											<h6>Flip</h6>

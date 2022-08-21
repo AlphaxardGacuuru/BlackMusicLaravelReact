@@ -343,7 +343,15 @@ const Karaoke = (props) => {
 							<div>
 								<center>
 									<div ref={spiningRecord} className="rotate-record">
-										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
+										<Link 
+											to={`/audio-show/${props.karaoke.audio_id}`}
+											onClick={() => {
+												props.setShow(props.karaoke.audio_id)
+												props.setLocalStorage("show", {
+													"id": props.karaoke.audio_id,
+													"time": 0
+												})
+											}}>
 											<Img
 												src={`/storage/${props.karaoke.audio_thumbnail}`}
 												imgClass="rounded-circle"

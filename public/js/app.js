@@ -95676,7 +95676,14 @@ var Karaoke = function Karaoke(props) {
     ref: spiningRecord,
     className: "rotate-record"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/audio-show/".concat(props.karaoke.audio_id)
+    to: "/audio-show/".concat(props.karaoke.audio_id),
+    onClick: function onClick() {
+      props.setShow(props.karaoke.audio_id);
+      props.setLocalStorage("show", {
+        "id": props.karaoke.audio_id,
+        "time": 0
+      });
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: "/storage/".concat(props.karaoke.audio_thumbnail),
     imgClass: "rounded-circle",
@@ -103163,6 +103170,17 @@ var KaraokeCreate = function KaraokeCreate(props) {
         props.setErrors(newError);
       });
     });
+  }; // Flip the camera
+
+
+  var flipCamera = function flipCamera() {
+    if (camera == "user") {
+      setCamera("environment");
+      video.current.classList.remove("karaoke-video-upload");
+    } else {
+      setCamera("user");
+      video.current.classList.add("karaoke-video-upload");
+    }
   };
   /*
   *
@@ -103224,16 +103242,7 @@ var KaraokeCreate = function KaraokeCreate(props) {
     // Add Click to Start add Stop stream for Changes
 
     flipCameraEl.current.addEventListener("click", function () {
-      if (camera == "user") {
-        setCamera("environment");
-        video.current.classList.remove("karaoke-video-upload");
-      } else {
-        setCamera("user");
-        video.current.classList.add("karaoke-video-upload");
-      }
-
-      track.stop();
-      track.start();
+      track.stop(); // track.start()
     }); // For Camera Flip End
     // For Flash
 
@@ -103350,7 +103359,8 @@ var KaraokeCreate = function KaraokeCreate(props) {
     ref: flipCameraEl,
     style: {
       fontSize: "2.3em"
-    }
+    },
+    onClick: flipCamera
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LoopSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Flip"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto mr-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
