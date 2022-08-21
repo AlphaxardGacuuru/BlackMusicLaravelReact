@@ -103474,9 +103474,9 @@ var KaraokeCreate = function KaraokeCreate(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/audio-show/".concat(karaokeAudio.audio_id),
     onClick: function onClick() {
-      props.setShow(karaoke.audio_id);
+      props.setShow(karaokeAudio.audio_id);
       props.setLocalStorage("show", {
-        "id": karaoke.audio_id,
+        "id": karaokeAudio.audio_id,
         "time": 0
       });
     }

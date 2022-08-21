@@ -476,9 +476,9 @@ const KaraokeCreate = (props) => {
 								<Link 
 									to={`/audio-show/${karaokeAudio.audio_id}`}
 											onClick={() => {
-												props.setShow(karaoke.audio_id)
+												props.setShow(karaokeAudio.audio_id)
 												props.setLocalStorage("show", {
-													"id": karaoke.audio_id,
+													"id": karaokeAudio.audio_id,
 													"time": 0
 												})
 											}}>
