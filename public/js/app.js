@@ -103472,7 +103472,14 @@ var KaraokeCreate = function KaraokeCreate(props) {
     ref: spiningRecord,
     className: "mx-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/audio-show/".concat(karaokeAudio.audio_id)
+    to: "/audio-show/".concat(karaokeAudio.audio_id),
+    onClick: function onClick() {
+      props.setShow(karaoke.audio_id);
+      props.setLocalStorage("show", {
+        "id": karaoke.audio_id,
+        "time": 0
+      });
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
     src: "/storage/".concat(karaokeAudio.audio_thumbnail),
     width: "50px",
@@ -103607,6 +103614,8 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 var KaraokeShow = function KaraokeShow(props) {
+  console.log(props.show);
+
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       id = _useParams.id;
 
