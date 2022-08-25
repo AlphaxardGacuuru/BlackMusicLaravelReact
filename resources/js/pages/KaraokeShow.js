@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Karaoke from '../components/Karaoke'
 
 const KaraokeShow = (props) => {
-console.log(props.show)
+	
 	const { id } = useParams()
 
 	const karaokeEl = document.getElementById(id)

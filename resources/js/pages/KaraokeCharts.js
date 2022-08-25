@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import React, { useState, useEffect, Suspense } from 'react'
+import { Link } from 'react-router-dom'
 
 import Carousel from '../components/Carousel'
+import LoadingKaraokeMedia from '../components/LoadingKaraokeMedia'
+
+const KaraokeMedia = React.lazy(() => import('../components/KaraokeMedia'))
 
 import PlusSVG from '../svgs/PlusSVG'
 
@@ -17,26 +20,23 @@ const KaraokeCharts = (props) => {
 	useEffect(() => {
 		// Fetch Karaokes
 		axios.get(`/api/karaokes`)
-			.then((res) => {
-				setKaraokes(res.data)
-				// props.setLocalStorage("videos", res.data)
-			}).catch(() => props.setErrors(["Failed to fetch karaokes"]))
+			.then((res) => setKaraokes(res.data))
+			.catch(() => props.setErrors(["Failed to fetch karaokes"]))
 
 		// Fetch Karaoke Audio
 		axios.get(`/api/karaoke-audios/1`)
-			.then((res) => {
-				setKaraokeAudio(res.data)
-			}).catch(() => props.setErrors(["Failed to fetch karaoke audio"]))
+			.then((res) => setKaraokeAudio(res.data))
+			.catch(() => props.setErrors(["Failed to fetch karaoke audio"]))
 	}, [])
-
-	// Random array for dummy loading elements
-	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	var checkLocation = true
 
 	if (props.show != 0) {
 		checkLocation = location.pathname.match(/audio-show/)
 	}
+
+	// Dummy data for array
+	var dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	return (
 		<>
@@ -95,75 +95,25 @@ const KaraokeCharts = (props) => {
 			<div className="row">
 				<div className="col-sm-4"></div>
 				<div className="col-sm-4">
-					<div className="d-flex justify-content-around flex-wrap">
-						{/* Loading Karaoke items */}
-						{dummyArray
-							.filter(() => karaokes.length < 1)
-							.map((karaoke, key) => (
-								<div key={key}
-									className="m-1"
-									style={{
-										borderRadius: "0px",
-										textAlign: "center",
-										color: "#232323",
-										width: "45%"
-									}}>
-									<div className="karaoke-thumbnail bg-light gradient w-100">
-										<div className="bg-light gradient" style={{ width: "100%" }}></div>
-									</div>
-									<h6 className="m-0 pt-2 px-1 gradient w-75"
-										style={{
-											width: "150px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-											color: "#232323"
-										}}>
-										video
-									</h6>
-									<h6 className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50" style={{ color: "#232323" }}>username</h6>
-								</div>
-							))}
-					</div>
-					{/* Loading Karaoke Items End */}
-
 					{/* Karaoke Items */}
 					<div className="d-flex justify-content-around flex-wrap">
-						{/* Loading Karaoke items */}
+						{/* Loading Karaoke Media */}
+						{dummyArray
+							.filter(() => karaokes.length < 1)
+							.map((item, key) => (<LoadingKaraokeMedia key={key} />))}
+						{/* Loading Karaoke Media End */}
+
 						{karaokes
 							.map((karaoke, key) => (
-								<div key={key}
-									className="m-1"
-									style={{
-										borderRadius: "0px",
-										textAlign: "center",
-										width: "47%"
-									}}
-									onClick={() => props.setShow(0)}>
-									<div className="w-100">
-										<Link to={`karaoke-show/${karaoke.id}`}>
-											<video
-												src={`/storage/${karaoke.karaoke}`}
-												width="100%"
-												preload="none"
-												autoPlay
-												muted
-												loop
-												playsInline>
-											</video>
-										</Link>
-									</div>
-									<h6 className="m-0 pt-2 px-1"
-										style={{
-											width: "150px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-										}}>
-										{karaoke.name}
-									</h6>
-									<h6 className="mt-0 mx-1 mb-2 px-1 py-0">{karaoke.username}</h6>
-								</div>
+								<Suspense key={key} fallback={<LoadingKaraokeMedia />}>
+									<KaraokeMedia
+										key={key}
+										setShow={props.setShow}
+										link={`/karaoke-show/${karaoke.id}`}
+										src={`/storage/${karaoke.karaoke}`}
+										name={karaoke.name}
+										username={karaoke.username} />
+								</Suspense>
 							))}
 					</div>
 					{/* Karaoke Items End */}

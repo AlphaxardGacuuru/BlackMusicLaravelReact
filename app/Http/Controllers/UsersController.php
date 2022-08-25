@@ -80,7 +80,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return User::whereBetween('id', [1, 261])->update(['withdrawal' => 1000]);
+        return User::whereBetween('id', [1, 261])
+            ->update(['withdrawal' => 1000]);
     }
 
     /**

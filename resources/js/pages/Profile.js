@@ -242,7 +242,7 @@ const Profile = (props) => {
 			</div>
 			{/* {{-- End of Profile Area --}} */}
 
-			{/* Tabs for Audios, Posts and Videos */}
+			{/* Tabs for Videos, Posts and Audios */}
 			<div className="d-flex">
 				<div className="p-2 flex-fill anti-hidden">
 					<h4 className={tabClass == "videos" ? "active-scrollmenu" : "p-1"}
@@ -263,6 +263,7 @@ const Profile = (props) => {
 					</h4>
 				</div>
 			</div>
+			{/* Tabs for Videos, Posts and Audios End */}
 
 			<div className="row">
 				<div className="col-sm-1"></div>
@@ -315,8 +316,8 @@ const Profile = (props) => {
 							</div>
 						))}
 					{/* Videos Albums End */}
-
 				</div>
+
 				<div className={tabClass == "posts" ? "col-sm-4" : "col-sm-4 hidden"}>
 					<center className="hidden"><h4>Posts</h4></center>
 					{props.posts

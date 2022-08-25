@@ -29,12 +29,11 @@ class SavedKaraokesController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-        foreach ($getSavedKarokes as $savedKaroke) {
+        $savedKaraokes = [];
 
+        foreach ($getSavedKarokes as $savedKaroke) {
             // Get Karaokes
             $karaoke = Karaokes::where('id', $savedKaroke->karaoke_id)->first();
-
-            $savedKaraokes = [];
 
             // Check if user has liked karaoke
             $hasLiked = KaraokeLikes::where('username', $authUsername)

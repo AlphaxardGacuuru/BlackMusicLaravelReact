@@ -36,7 +36,6 @@ const Karaoke = (props) => {
 	const spiningRecord = useRef()
 
 	useEffect(() => {
-
 		// Fetch Karaoke Comments
 		axios.get(`/api/karaoke-comments`)
 			.then((res) => {
@@ -45,7 +44,7 @@ const Karaoke = (props) => {
 	}, [])
 
 	// Function for liking karaoke
-	const onKaraokeLike = (id) => {
+	const onKaraokeLike = () => {
 		// Show like
 		const newKaraokes = props.karaokes
 			.filter((item) => {
@@ -61,7 +60,7 @@ const Karaoke = (props) => {
 		// Add like to database
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post(`${props.url}/api/karaoke-likes`, {
-				karaoke: id
+				karaoke: props.karaoke.id
 			}).then((res) => {
 				props.setMessages([res.data])
 				// Update karaoke
@@ -80,7 +79,20 @@ const Karaoke = (props) => {
 	}
 
 	// Function for saving Karaokes
-	const saveKaraoke = () => {
+	const onKaraokeSave = () => {
+		// Show Save
+		const newKaraokes = props.karaokes
+			.filter((item) => {
+				// Get the exact karaoke and change save status
+				if (item.id == props.karaoke.id) {
+					item.hasSaved = !item.hasSaved
+				}
+				return true
+			})
+		// Set new karaokes
+		props.setKaraokes(newKaraokes)
+
+		// Save Karaoke
 		axios.get('sanctum/csrf-cookie').then(() => {
 			axios.post('api/saved-karaokes', {
 				id: props.karaoke.id
@@ -255,34 +267,28 @@ const Karaoke = (props) => {
 							{/* Karaoke Likes  */}
 							<div>
 								<center>
-									{props.karaoke.hasLiked ?
-										<a href="#"
-											style={{ color: "#fb3958" }}
-											onClick={(e) => {
-												e.preventDefault()
-												onKaraokeLike(props.karaoke.id)
-											}}>
-											<span
-												className="p-0"
-												style={{ color: "inherit", fontSize: "2em" }}>
+									<span
+										className="p-0"
+										style={{ fontSize: "2em" }}
+										onClick={onKaraokeLike}>
+										{props.karaoke.hasLiked ?
+											<span style={{ color: "#fb3958" }}>
 												<HeartFilledSVG />
-											</span>
-											<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
-										</a> :
-										<a
-											href="#"
-											style={{ color: "rgba(220, 220, 220, 1)" }}
-											onClick={(e) => {
-												e.preventDefault()
-												onKaraokeLike(props.karaoke.id)
-											}}>
-											<span
-												className="p-0"
-												style={{ color: "inherit", fontSize: "2em" }}>
+												<h6
+													className="mb-2"
+													style={{ color: "inherit" }}>
+													{props.karaoke.likes}
+												</h6>
+											</span> :
+											<span style={{ color: "rgba(220, 220, 220, 1)" }}>
 												<HeartSVG />
-											</span>
-											<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.likes}</h6>
-										</a>}
+												<h6
+													className="mb-2"
+													style={{ color: "inherit" }}>
+													{props.karaoke.likes}
+												</h6>
+											</span>}
+									</span>
 								</center>
 							</div>
 							{/* Karaoke Comments */}
@@ -294,38 +300,28 @@ const Karaoke = (props) => {
 										onClick={() => setBottomMenu("menu-open")}>
 										<CommentSVG />
 									</span>
-									<h6 className="mb-2" style={{ color: "inherit" }}>{props.karaoke.comments}</h6>
+									<h6
+										className="mb-2"
+										style={{ color: "inherit" }}>
+										{props.karaoke.comments}
+									</h6>
 								</center>
 							</div>
-							{/* Save  */}
 							{/* Save Karaoke */}
 							<div>
 								<center>
-									{props.karaoke.hasSaved ?
-										<a
-											href="#"
-											onClick={(e) => {
-												e.preventDefault()
-												saveKaraoke()
-											}}>
-											<span
-												className="mb-2 p-0"
-												style={{ fontSize: "2em", color: "#FFD700" }}>
+									<span
+										className="mb-2 p-0"
+										style={{ fontSize: "2em" }}
+										onClick={onKaraokeSave}>
+										{props.karaoke.hasSaved ?
+											<span style={{ color: "#FFD700" }}>
 												<BookmarkFilledSVG />
-											</span>
-										</a> :
-										<a
-											href="#"
-											onClick={(e) => {
-												e.preventDefault()
-												saveKaraoke()
-											}}>
-											<span
-												className="mb-2 p-0"
-												style={{ fontSize: "2em", color: "rgba(220, 220, 220, 1)" }}>
+											</span> :
+											<span style={{ color: "rgba(220, 220, 220, 1)" }}>
 												<BookmarkSVG />
-											</span>
-										</a>}
+											</span>}
+									</span>
 								</center>
 							</div>
 							{/* Share Karaoke */}
@@ -343,7 +339,7 @@ const Karaoke = (props) => {
 							<div>
 								<center>
 									<div ref={spiningRecord} className="rotate-record">
-										<Link 
+										<Link
 											to={`/audio-show/${props.karaoke.audio_id}`}
 											onClick={() => {
 												props.setShow(props.karaoke.audio_id)
