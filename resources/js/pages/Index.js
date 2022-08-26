@@ -1,24 +1,22 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Img from '../components/Img'
-import Button from '../components/Button'
 import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+import LoadingMusiciansHorizontal from '../components/LoadingMusiciansHorizontal'
+import LoadingVideoMediaVertical from '../components/LoadingVideoMediaVertical'
+import LoadingPostsMedia from '../components/LoadingPostsMedia'
+
+const MusiciansHorizontal = React.lazy(() => import('../components/MusiciansHorizontal'))
+const VideoMediaVertical = React.lazy(() => import('../components/VideoMediaVertical'))
+const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
+const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
 
 import CloseSVG from '../svgs/CloseSVG'
-import OptionsSVG from '../svgs/OptionsSVG'
-import CommentSVG from '../svgs/CommentSVG'
-import HeartSVG from '../svgs/HeartSVG'
-import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import PenSVG from '../svgs/PenSVG'
 import ChatSVG from '../svgs/ChatSVG'
 import DecoSVG from '../svgs/DecoSVG'
-import CheckSVG from '../svgs/CheckSVG'
-import CartSVG from '../svgs/CartSVG'
-import ShareSVG from '../svgs/ShareSVG'
-
-const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 
 const Index = (props) => {
 
@@ -28,10 +26,9 @@ const Index = (props) => {
 	const [bottomMenu, setBottomMenu] = useState("")
 	const [userToUnfollow, setUserToUnfollow] = useState()
 	const [postToEdit, setPostToEdit] = useState()
-
-	var editLink = useRef(null)
-	var deleteLink = useRef(null)
-	var unfollowLink = useRef(null)
+	const [editLink, setEditLink] = useState()
+	const [deleteLink, setDeleteLink] = useState()
+	const [unfollowLink, setUnfollowLink] = useState()
 
 	const history = useHistory()
 
@@ -41,90 +38,6 @@ const Index = (props) => {
 		setTimeout(() => history.push('/cart'), 1000)
 	}
 
-	// Function for liking posts
-	const onPostLike = (post) => {
-		// Show like
-		const newPosts = props.posts
-			.filter((item) => {
-				// Get the exact post and change like status
-				if (item.id == post) {
-					item.hasLiked = !item.hasLiked
-				}
-				return true
-			})
-		// Set new posts
-		props.setPosts(newPosts)
-
-		// Add like to database
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/post-likes`, {
-				post: post
-			}).then((res) => {
-				props.setMessages([res.data])
-				// Update posts
-				axios.get(`/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		})
-	}
-
-	// Function for deleting posts
-	const onDeletePost = (id) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`/api/posts/${id}`).then((res) => {
-				props.setMessages([res.data])
-				// Update posts
-				axios.get(`/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		})
-	}
-
-	// Function for voting in poll
-	const onPoll = (post, parameter) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/polls`, {
-				post: post,
-				parameter: parameter
-			}).then((res) => {
-				props.setMessages([res.data])
-				// Update posts
-				axios.get(`/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		})
-	}
-
 	// Function for loading more artists
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollLeft >= (e.target.scrollWidth - (e.target.scrollWidth / 3));
@@ -132,20 +45,6 @@ const Index = (props) => {
 		if (bottom) {
 			setVideoSlice(videoSlice + 10)
 		}
-	}
-
-	// Web Share API for share button
-	// Share must be triggered by "user activation"
-	const onShare = (post) => {
-		// Define share data
-		const shareData = {
-			title: post.text,
-			text: `Check out this post on Black Music\n`,
-			url: `https://music.black.co.ke/#/post-show/${post.id}`
-		}
-		// Check if data is shareble
-		navigator.canShare(shareData) &&
-			navigator.share(shareData)
 	}
 
 	// Random array for dummy loading elements
@@ -242,21 +141,7 @@ const Index = (props) => {
 						{/* Loading Musician items */}
 						{dummyArray
 							.filter(() => props.users.length < 1)
-							.map((item, key) => (
-								<div key={key} className='media p-2'>
-									<div className='media-left'>
-										<div className="rounded-circle" style={{ width: "30px", height: "30px" }}></div>
-									</div>
-									<div className='media-body'>
-										<b className="bg-light gradient" style={{ color: "#232323" }}>namename</b>
-										<small className="bg-light text-light gradient">
-											<i style={{ color: "#232323" }}>usernameusename</i>
-										</small>
-										<button className="btn float-right rounded-0 text-light"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}></button>
-									</div>
-								</div>
-							))}
+							.map((item, key) => (<LoadingMusiciansHorizontal key={key} />))}
 
 						{/* Musicians */}
 						{props.users
@@ -265,140 +150,32 @@ const Index = (props) => {
 								user.username != "@blackmusic")
 							.slice(0, 10)
 							.map((user, key) => (
-								<div key={key} className='d-flex justify-content-between'>
-									<div className='p-2'>
-										<Link to={`/profile/${user.username}`}>
-											<Img
-												src={user.pp}
-												imgClass="rounded-circle"
-												width="30px"
-												height="30px"
-												alt="user" />
-											<b className="ml-2">{user.name}</b>
-											<small><i>{user.username}</i></small>
-										</Link>
-									</div>
-									<div className="p-2">
-
-										{/* Check whether user has bought at least one song from user */}
-										{/* Check whether user has followed user and display appropriate button */}
-										{user.hasBought1 || props.auth.username == "@blackmusic" ?
-											user.hasFollowed ?
-												<button
-													className={'btn float-right rounded-0 text-light'}
-													style={{ backgroundColor: "#232323" }}
-													onClick={() => props.onFollow(user.username)}>
-													Followed
-													<CheckSVG />
-												</button>
-												: <Button btnClass={'mysonar-btn white-btn float-right'}
-													onClick={() => props.onFollow(user.username)}
-													btnText={'follow'} />
-											: <Button btnClass={'mysonar-btn white-btn float-right'}
-												onClick={() =>
-													props.setErrors([`You must have bought atleast one song by ${user.username}`])}
-												btnText={'follow'} />}
-									</div>
-								</div>
+								<Suspense key={key} fallback={<LoadingMusiciansHorizontal />}>
+									<MusiciansHorizontal {...props} user={user} />
+								</Suspense>
 							))}
 					</div>
 				</div>
 				{/* <!-- Musician suggestion area end --> */}
 
+				{/* <!-- ****** Songs Area ****** --> */}
 				<div className="col-sm-4">
-					{/* <!-- ****** Songs Area ****** --> */}
 					<div className="p-2">
 						<h5>Songs for you</h5>
 						<div className="hidden-scroll" onScroll={handleScroll}>
 							{/* Loading Video items */}
 							{dummyArray
 								.filter(() => props.videos.length < 1)
-								.map((item, key) => (
-									<span key={key} className="pt-0 px-0 pb-2">
-										<div className="thumbnail">
-											<div className="gradient" style={{ width: "160em", height: "90em" }}></div>
-										</div>
-										<h6 className="m-0 pt-2 px-1 gradient w-75"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip",
-												color: "#232323"
-											}}>
-											video
-										</h6>
-										<h6
-											className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50"
-											style={{ color: "#232323" }}>
-											username
-										</h6>
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-										<br />
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-									</span>
-								))}
+								.map((item, key) => (<LoadingVideoMediaVertical key={key} />))}
 
 							{/* Real Video items */}
 							{props.videos
 								.filter((video) => !video.hasBoughtVideo)
 								.slice(0, videoSlice)
-								.map((video, index) => (
-									<span key={index} className="mx-1 pt-0 px-0 pb-2">
-										<div className="thumbnail">
-											<Link to={`/video-show/${video.id}`}>
-												<Img src={video.thumbnail.match(/http/) ?
-													video.thumbnail :
-													`storage/${video.thumbnail}`}
-													width="160em"
-													height="90em" />
-											</Link>
-										</div>
-										<Link to={`/video-show/${video.id}`}>
-											<h6 className="m-0 pt-2 px-1"
-												style={{
-													width: "150px",
-													whiteSpace: "nowrap",
-													overflow: "hidden",
-													textOverflow: "clip"
-												}}>
-												{video.name}
-											</h6>
-											<h6 className="mt-0 mx-1 mb-2 px-1 py-0">
-												<small>{video.username} {video.ft}</small>
-											</h6>
-										</Link>
-										{video.inCart ?
-											<button
-												className="btn mb-1 rounded-0 text-light"
-												style={{
-													minWidth: '90px',
-													height: '33px',
-													backgroundColor: "#232323"
-												}}
-												onClick={() => props.onCartVideos(video.id)}>
-												<CartSVG />
-											</button> :
-											<>
-												<button
-													className="mysonar-btn white-btn mb-1"
-													style={{ minWidth: '90px', height: '33px' }}
-													onClick={() => props.onCartVideos(video.id)}>
-													<CartSVG />
-												</button>
-												<br />
-												<Button
-													btnClass={'btn mysonar-btn green-btn btn-2'}
-													btnText={'KES 20'}
-													onClick={() => onBuyVideos(video.id)} />
-											</>}
-									</span>
+								.map((video, key) => (
+									<Suspense key={key} fallback={<LoadingVideoMediaVertical />}>
+										<VideoMediaVertical {...props} video={video} />
+									</Suspense>
 								))}
 							<br />
 							<br />
@@ -411,381 +188,23 @@ const Index = (props) => {
 						{/* Loading Post items */}
 						{dummyArray
 							.filter(() => props.posts.length < 1)
-							.map((item, key) => (
-								<div key={key} className='media p-2'>
-									<div className='media-left'>
-										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}></div>
-									</div>
-									<div className='media-body'>
-										<h6 className="media-heading m-0"
-											style={{
-												width: "100%",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											<b className="gradient" style={{ color: "#232323" }}>post.name</b>
-											<small className="gradient" style={{ color: "#232323" }}>post.username</small>
-											<span className="ml-1 gradient" style={{ color: "#232323" }}>
-												<DecoSVG />
-												<small className="ml-1" style={{ color: "#232323" }}>post.decos</small>
-											</span>
-											<small>
-												<i className="float-right mr-1 gradient" style={{ color: "#232323" }}>post.created_at</i>
-											</small>
-										</h6>
-										<p className="my-2 gradient" style={{ color: "#232323" }}>post.text</p>
-
-										{/* Post likes */}
-										<a href="#" className="gradient" style={{ color: "#232323" }}>
-											<HeartSVG />
-											<small className="ml-1" style={{ color: "#232323" }}>po</small>
-										</a>
-
-										{/* Post comments */}
-										<span className="gradient" style={{ color: "#232323" }}>
-											<CommentSVG />
-											<small className="ml-1" style={{ color: "#232323" }}>post.comments</small>
-										</span>
-									</div>
-								</div>
-							))}
+							.map((item, key) => (<LoadingPostsMedia key={key} />))}
 
 						{/* Posts */}
 						{props.posts
 							.filter((post) => post.hasFollowed)
-							.map((post, index) => (
-								<div key={index} className="d-flex">
-									<div className="p-1">
-										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-											<Link to={`/profile/${post.username}`}>
-												<Img src={post.pp}
-													width="50px"
-													height="50px"
-													alt={'avatar'} />
-											</Link>
-										</div>
-									</div>
-									<div className="p-1 flex-grow-1">
-										<h6 className="m-0"
-											style={{
-												width: "100%",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											<b>{post.name}</b>
-											<small>{post.username}</small>
-											<span className="ml-1" style={{ color: "gold" }}>
-												<DecoSVG />
-												<small className="ml-1" style={{ color: "inherit" }}>{post.decos}</small>
-											</span>
-											<small><b><i className="float-right text-secondary mr-1">{post.created_at}</i></b></small>
-										</h6>
-										<Link to={"post-show/" + post.id}>
-											<p className="mb-0">{post.text}</p>
-										</Link>
-
-										{/* Show media */}
-										<div className="mb-1" style={{ overflow: "hidden" }}>
-											{post.media &&
-												<Img
-													src={`storage/${post.media}`}
-													width="100%"
-													height="auto"
-													alt={'post-media'} />}
-										</div>
-
-										{/* Show poll */}
-										{post.parameter_1 ?
-											post.isWithin24Hrs ?
-												post.hasVoted1 ?
-													<Button
-														btnClass={"mysonar-btn poll-btn btn-2 mb-1"}
-														btnText={post.parameter_1}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_1)} />
-													: <Button
-														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
-														btnText={post.parameter_1}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_1)} />
-												: post.hasVoted1 ?
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage1}%`,
-																backgroundColor: "#232323"
-															}}>
-															{post.parameter_1}
-														</div>
-													</div>
-													: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage1}%`,
-																backgroundColor: "grey"
-															}}>
-															{post.parameter_1}
-														</div>
-													</div>
-											: ""}
-
-										{post.parameter_2 ?
-											post.isWithin24Hrs ?
-												post.hasVoted2 ?
-													<Button
-														btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
-														btnText={post.parameter_2}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_2)} />
-													: <Button
-														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
-														btnText={post.parameter_2}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_2)} />
-												: post.hasVoted2 ?
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage2}%`,
-																backgroundColor: "#232323"
-															}}>
-															{post.parameter_2}
-														</div>
-													</div>
-													: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage2}%`,
-																backgroundColor: "grey"
-															}}>
-															{post.parameter_2}
-														</div>
-													</div>
-											: ""}
-
-										{post.parameter_3 ?
-											post.isWithin24Hrs ?
-												post.hasVoted3 ?
-													<Button
-														btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
-														btnText={post.parameter_3}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_3)} />
-													: <Button
-														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
-														btnText={post.parameter_3}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_3)} />
-												: post.hasVoted3 ?
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage3}%`,
-																backgroundColor: "#232323"
-															}}>
-															{post.parameter_3}
-														</div>
-													</div>
-													: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage3}%`,
-																backgroundColor: "grey"
-															}}>
-															{post.parameter_3}
-														</div>
-													</div>
-											: ""}
-
-										{post.parameter_4 ?
-											post.isWithin24Hrs ?
-												post.hasVoted4 ?
-													<Button
-														btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
-														btnText={post.parameter_4}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_4)} />
-													: <Button
-														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
-														btnText={post.parameter_4}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_4)} />
-												: post.hasVoted4 ?
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage4}%`,
-																backgroundColor: "#232323"
-															}}>
-															{post.parameter_4}
-														</div>
-													</div>
-													: <div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage4}%`,
-																backgroundColor: "grey"
-															}}>
-															{post.parameter_4}
-														</div>
-													</div>
-											: ""}
-
-										{post.parameter_5 ?
-											post.isWithin24Hrs ?
-												post.hasVoted5 ?
-													<Button
-														btnClass={"mysonar-btn poll-btn mb-1 btn-2"}
-														btnText={post.parameter_5}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_5)} />
-													: <Button
-														btnClass={"mysonar-btn poll-btn white-btn mb-1"}
-														btnText={post.parameter_5}
-														btnStyle={{ width: "100%" }}
-														onClick={() => onPoll(post.id, post.parameter_5)} />
-												: post.hasVoted5 ?
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage5}%`,
-																backgroundColor: "#232323"
-															}}>
-															{post.parameter_5}
-														</div>
-													</div> :
-													<div className='progress rounded-0 mb-1' style={{ height: '33px' }}>
-														<div className='progress-bar'
-															style={{
-																width: `${post.percentage5}%`,
-																backgroundColor: "grey"
-															}}>
-															{post.parameter_5}
-														</div>
-													</div>
-											: ""}
-
-										{/* Total votes */}
-										{post.parameter_1 ?
-											post.username == props.auth.username || !post.isWithin24Hrs ?
-												<small style={{ color: "grey" }}>
-													<i>Total votes: {post.totalVotes}</i>
-													<br />
-												</small> : ""
-											: ""}
-
-										{/* Post likes */}
-										{post.hasLiked ?
-											<a href="#"
-												style={{ color: "#fb3958" }}
-												onClick={(e) => {
-													e.preventDefault()
-													onPostLike(post.id)
-												}}>
-												<span style={{ color: "inherit", fontSize: "1.2em" }}><HeartFilledSVG /></span>
-												<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
-											</a> :
-											<a
-												href="#"
-												style={{ color: "rgba(220, 220, 220, 1)" }}
-												onClick={(e) => {
-													e.preventDefault()
-													onPostLike(post.id)
-												}}>
-												<span style={{ color: "inherit", fontSize: "1.2em" }}><HeartSVG /></span>
-												<small className="ml-1" style={{ color: "inherit" }}>{post.likes}</small>
-											</a>}
-
-										{/* Post comments */}
-										<Link to={"post-show/" + post.id} style={{ color: "rgba(220, 220, 220, 1)" }}>
-											<span className="ml-5" style={{ fontSize: "1.2em" }}><CommentSVG /></span>
-											<small className="ml-1" style={{ color: "inherit" }}>{post.comments}</small>
-										</Link>
-
-										{/* Share Post */}
-										<span
-											className="ml-5"
-											style={{ fontSize: "1.3em", color: "rgba(220, 220, 220, 1)" }}
-											onClick={() => onShare(post)}>
-											<ShareSVG />
-										</span>
-
-										{/* <!-- Default dropup button --> */}
-										<div className="dropup float-right hidden">
-											<a href="#"
-												role="button"
-												id="dropdownMenuLink"
-												data-toggle="dropdown"
-												aria-haspopup="true"
-												aria-expanded="false">
-												<OptionsSVG />
-											</a>
-											<div className="dropdown-menu dropdown-menu-right"
-												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
-												{post.username != props.auth.username ?
-													post.username != "@blackmusic" &&
-													<a href="#" className="dropdown-item" onClick={(e) => {
-														e.preventDefault()
-														props.onFollow(post.username)
-													}}>
-														<h6>
-															{post.hasFollowed ?
-																`Unfollow ${post.username}` :
-																`Follow ${post.username}`}
-														</h6>
-													</a> :
-													<span>
-														<Link
-															to={`/post-edit/${post.id}`}
-															className="dropdown-item">
-															<h6>Edit post</h6>
-														</Link>
-														<a
-															href="#"
-															className="dropdown-item"
-															onClick={(e) => {
-																e.preventDefault();
-																onDeletePost(post.id)
-															}}>
-															<h6>Delete post</h6>
-														</a>
-													</span>}
-											</div>
-										</div>
-										{/* For small screens */}
-										<div className="float-right anti-hidden">
-											<span
-												className="text-secondary"
-												onClick={() => {
-													if (post.username != props.auth.username) {
-														if (post.username != "@blackmusic") {
-															setBottomMenu("menu-open")
-															setUserToUnfollow(post.username)
-															// Show and Hide elements
-															unfollowLink.current.className = "d-block"
-															deleteLink.current.className = "d-none"
-															editLink.current.className = "d-none"
-														}
-													} else {
-														setBottomMenu("menu-open")
-														setPostToEdit(post.id)
-														// Show and Hide elements
-														editLink.current.className = "d-block"
-														deleteLink.current.className = "d-block"
-														unfollowLink.current.className = "d-none"
-													}
-												}}>
-												<OptionsSVG />
-											</span>
-										</div>
-										{/* Edited */}
-										<small>
-											<b><i className="d-block text-secondary my-1">{post.hasEdited && "Edited"}</i></b>
-										</small>
-									</div>
-								</div>
+							.map((post, key) => (
+								<Suspense key={key} fallback={<LoadingPostsMedia />}>
+									<PostsMedia
+										{...props}
+										post={post}
+										setBottomMenu={setBottomMenu}
+										setUserToUnfollow={setUserToUnfollow}
+										setPostToEdit={setPostToEdit}
+										setEditLink={setEditLink}
+										setDeleteLink={setDeleteLink}
+										setUnfollowLink={setUnfollowLink} />
+								</Suspense>
 							))}
 					</div>
 				</div>
@@ -800,43 +219,7 @@ const Index = (props) => {
 						{/* Loading Video items */}
 						{dummyArray
 							.filter(() => props.videos.length < 1)
-							.map((item, key) => (
-								<div key={key} className="d-flex p-2 border-bottom">
-									<div className="thumbnail gradient">
-										<div className="w-25 h-25"></div>
-									</div>
-									<div className="ml-2 mr-auto flex-grow-1">
-										<h6 className="mb-0 gradient"
-											style={{
-												width: "8em",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip",
-												color: "#232323"
-											}}>
-											props.name
-										</h6>
-										<h6 className="mb-3 gradient"
-											style={{
-												width: "8em",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											<small style={{ color: "#232323" }}>props.username</small>
-											<small className="ml-1" style={{ color: "#232323" }}>props.ft</small>
-										</h6>
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-										<button
-											className="btn mb-1 rounded-0 float-right"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-									</div>
-								</div>
-							))}
+							.map((item, key) => (<LoadingVideoMediaHorizontal key={key} />))}
 
 						{/* Real Video items */}
 						{props.videos
@@ -882,28 +265,28 @@ const Index = (props) => {
 						</div>
 					</div>
 
-					<div
-						ref={unfollowLink}
-						onClick={() => {
-							setBottomMenu("")
-							props.onFollow(userToUnfollow)
-						}}>
-						<h6 className="pb-2">Unfollow {userToUnfollow}</h6>
-					</div>
-					<Link
-						to={`/post-edit/${postToEdit}`}
-						ref={editLink}
-						onClick={() => setBottomMenu("")}>
-						<h6 className="pb-2">Edit post</h6>
-					</Link>
-					<div
-						ref={deleteLink}
-						onClick={() => {
-							setBottomMenu("")
-							onDeletePost(postToEdit)
-						}}>
-						<h6 className="pb-2">Delete post</h6>
-					</div>
+					{unfollowLink &&
+						<div
+							onClick={() => {
+								setBottomMenu("")
+								props.onFollow(userToUnfollow)
+							}}>
+							<h6 className="pb-2">Unfollow {userToUnfollow}</h6>
+						</div>}
+					{editLink &&
+						<Link
+							to={`/post-edit/${postToEdit}`}
+							onClick={() => setBottomMenu("")}>
+							<h6 className="pb-2">Edit post</h6>
+						</Link>}
+					{deleteLink &&
+						<div
+							onClick={() => {
+								setBottomMenu("")
+								onDeletePost(postToEdit)
+							}}>
+							<h6 className="pb-2">Delete post</h6>
+						</div>}
 				</div>
 			</div>
 			{/* Sliding Bottom Nav  end */}
