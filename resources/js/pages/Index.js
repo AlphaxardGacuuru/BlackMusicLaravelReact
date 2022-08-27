@@ -17,6 +17,7 @@ import CloseSVG from '../svgs/CloseSVG'
 import PenSVG from '../svgs/PenSVG'
 import ChatSVG from '../svgs/ChatSVG'
 import DecoSVG from '../svgs/DecoSVG'
+import PostOptions from '../components/PostOptions'
 
 const Index = (props) => {
 
@@ -31,6 +32,28 @@ const Index = (props) => {
 	const [unfollowLink, setUnfollowLink] = useState()
 
 	const history = useHistory()
+
+	// Function for deleting posts
+	const onDeletePost = (id) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.delete(`/api/posts/${id}`).then((res) => {
+				props.setMessages([res.data])
+				// Update posts
+				axios.get(`/api/posts`)
+					.then((res) => props.setPosts(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				props.setErrors(newError)
+			})
+		})
+	}
 
 	// Buy function
 	const onBuyVideos = (video) => {
@@ -111,19 +134,25 @@ const Index = (props) => {
 							</h6>
 							<span style={{ color: "gold" }} className="pr-1">
 								<DecoSVG />
-								<small className="ml-1" style={{ color: "inherit" }}>{props.auth.decos}</small>
+								<small className="ml-1" style={{ color: "inherit" }}>
+									{props.auth.decos}
+								</small>
 							</span>
 						</div>
 					</div>
 					<div className="d-flex">
 						<div className="p-2 flex-fill">
 							<h6>Posts</h6>
-							<span style={{ color: "rgba(220, 220, 220, 1)" }}>{props.auth.posts}</span>
+							<span style={{ color: "rgba(220, 220, 220, 1)" }}>
+								{props.auth.posts}
+							</span>
 							<br />
 						</div>
 						<div className="p-2 flex-fill">
 							<h6>Fans</h6>
-							<span style={{ color: "rgba(220, 220, 220, 1)" }}>{props.auth.fans}</span>
+							<span style={{ color: "rgba(220, 220, 220, 1)" }}>
+								{props.auth.fans}
+							</span>
 							<br />
 						</div>
 					</div>
@@ -203,6 +232,7 @@ const Index = (props) => {
 										setPostToEdit={setPostToEdit}
 										setEditLink={setEditLink}
 										setDeleteLink={setDeleteLink}
+										onDeletePost={onDeletePost}
 										setUnfollowLink={setUnfollowLink} />
 								</Suspense>
 							))}
@@ -250,46 +280,18 @@ const Index = (props) => {
 			</div>
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu}>
-				<div className="bottomMenu">
-					<div
-						className="d-flex align-items-center justify-content-between border-bottom border-dark mb-3"
-						style={{ height: "3em" }}>
-						<div></div>
-						{/* <!-- Close Icon --> */}
-						<div
-							className="closeIcon p-2 float-right"
-							style={{ fontSize: "1em" }}
-							onClick={() => setBottomMenu("")}>
-							<CloseSVG />
-						</div>
-					</div>
-
-					{unfollowLink &&
-						<div
-							onClick={() => {
-								setBottomMenu("")
-								props.onFollow(userToUnfollow)
-							}}>
-							<h6 className="pb-2">Unfollow {userToUnfollow}</h6>
-						</div>}
-					{editLink &&
-						<Link
-							to={`/post-edit/${postToEdit}`}
-							onClick={() => setBottomMenu("")}>
-							<h6 className="pb-2">Edit post</h6>
-						</Link>}
-					{deleteLink &&
-						<div
-							onClick={() => {
-								setBottomMenu("")
-								onDeletePost(postToEdit)
-							}}>
-							<h6 className="pb-2">Delete post</h6>
-						</div>}
-				</div>
-			</div>
-			{/* Sliding Bottom Nav  end */}
+			<PostOptions
+				{...props}
+				bottomMenu={bottomMenu}
+				setBottomMenu={setBottomMenu}
+				unfollowLink={unfollowLink}
+				userToUnfollow={userToUnfollow}
+				editLink={editLink}
+				postToEdit={postToEdit}
+				deleteLink={deleteLink}
+				onDeletePost={onDeletePost}
+			/>
+			{/* Sliding Bottom Nav end */}
 		</>
 	)
 }

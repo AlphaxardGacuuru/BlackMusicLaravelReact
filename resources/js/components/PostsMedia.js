@@ -50,28 +50,6 @@ const PostsMedia = (props) => {
 		})
 	}
 
-	// Function for deleting posts
-	const onDeletePost = (id) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`/api/posts/${id}`).then((res) => {
-				props.setMessages([res.data])
-				// Update posts
-				axios.get(`/api/posts`)
-					.then((res) => props.setPosts(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				// Get other errors
-				newError.push(err.response.data.message)
-				props.setErrors(newError)
-			})
-		})
-	}
-
 	// Web Share API for share button
 	// Share must be triggered by "user activation"
 	const onShare = (post) => {
@@ -203,7 +181,7 @@ const PostsMedia = (props) => {
 									className="dropdown-item"
 									onClick={(e) => {
 										e.preventDefault();
-										onDeletePost(props.post.id)
+										props.onDeletePost(props.post.id)
 									}}>
 									<h6>Delete post</h6>
 								</a>

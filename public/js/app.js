@@ -96596,6 +96596,590 @@ var Messages = function Messages(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Polls.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/Polls.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
+
+
+
+var Polls = function Polls(props) {
+  // Function for voting in poll
+  var onPoll = function onPoll(post, parameter) {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("/api/polls", {
+        post: post,
+        parameter: parameter
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update posts
+
+        axios.get("/api/posts").then(function (res) {
+          return props.setPosts(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.post.parameter_1 ? props.post.isWithin24Hrs ? props.post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn btn-2 mb-1",
+    btnText: props.post.parameter_1,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_1);
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn white-btn mb-1",
+    btnText: props.post.parameter_1,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_1);
+    }
+  }) : props.post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage1, "%"),
+      backgroundColor: "#232323"
+    }
+  }, props.post.parameter_1)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage1, "%"),
+      backgroundColor: "grey"
+    }
+  }, props.post.parameter_1)) : "", props.post.parameter_2 ? props.post.isWithin24Hrs ? props.post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn mb-1 btn-2",
+    btnText: props.post.parameter_2,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_2);
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn white-btn mb-1",
+    btnText: props.post.parameter_2,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_2);
+    }
+  }) : props.post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage2, "%"),
+      backgroundColor: "#232323"
+    }
+  }, props.post.parameter_2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage2, "%"),
+      backgroundColor: "grey"
+    }
+  }, props.post.parameter_2)) : "", props.post.parameter_3 ? props.post.isWithin24Hrs ? props.post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn mb-1 btn-2",
+    btnText: props.post.parameter_3,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_3);
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn white-btn mb-1",
+    btnText: props.post.parameter_3,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_3);
+    }
+  }) : props.post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage3, "%"),
+      backgroundColor: "#232323"
+    }
+  }, props.post.parameter_3)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage3, "%"),
+      backgroundColor: "grey"
+    }
+  }, props.post.parameter_3)) : "", props.post.parameter_4 ? props.post.isWithin24Hrs ? props.post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn mb-1 btn-2",
+    btnText: props.post.parameter_4,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_4);
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn white-btn mb-1",
+    btnText: props.post.parameter_4,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_4);
+    }
+  }) : props.post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage4, "%"),
+      backgroundColor: "#232323"
+    }
+  }, props.post.parameter_4)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage4, "%"),
+      backgroundColor: "grey"
+    }
+  }, props.post.parameter_4)) : "", props.post.parameter_5 ? props.post.isWithin24Hrs ? props.post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn mb-1 btn-2",
+    btnText: props.post.parameter_5,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_5);
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    btnClass: "mysonar-btn poll-btn white-btn mb-1",
+    btnText: props.post.parameter_5,
+    btnStyle: {
+      width: "100%"
+    },
+    onClick: function onClick() {
+      return onPoll(props.post.id, props.post.parameter_5);
+    }
+  }) : props.post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage5, "%"),
+      backgroundColor: "#232323"
+    }
+  }, props.post.parameter_5)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress rounded-0 mb-1",
+    style: {
+      height: '33px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: "".concat(props.post.percentage5, "%"),
+      backgroundColor: "grey"
+    }
+  }, props.post.parameter_5)) : "", props.post.parameter_1 ? props.post.username == props.auth.username || !props.post.isWithin24Hrs ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    style: {
+      color: "grey"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes: ", props.post.totalVotes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "" : "");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Polls);
+
+/***/ }),
+
+/***/ "./resources/js/components/PostOptions.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/PostOptions.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
+
+
+
+
+var PostOptions = function PostOptions(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: props.bottomMenu
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bottomMenu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between border-bottom border-dark mb-3",
+    style: {
+      height: "3em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "closeIcon p-2 float-right",
+    style: {
+      fontSize: "1em"
+    },
+    onClick: function onClick() {
+      return props.setBottomMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_2__["default"], null))), props.unfollowLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      props.setBottomMenu("");
+      props.onFollow(userToUnfollow);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "pb-2"
+  }, "Unfollow ", props.userToUnfollow)), props.editLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/post-edit/".concat(props.postToEdit),
+    onClick: function onClick() {
+      return props.setBottomMenu("");
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "pb-2"
+  }, "Edit post")), props.deleteLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      props.setBottomMenu("");
+      props.onDeletePost(props.postToEdit);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "pb-2"
+  }, "Delete post"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostOptions);
+
+/***/ }),
+
+/***/ "./resources/js/components/PostsMedia.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/PostsMedia.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _components_Polls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Polls */ "./resources/js/components/Polls.js");
+/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
+/* harmony import */ var _svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/CommentSVG */ "./resources/js/svgs/CommentSVG.js");
+/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
+/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
+/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+
+
+
+
+
+
+var PostsMedia = function PostsMedia(props) {
+  // Function for liking posts
+  var onPostLike = function onPostLike(post) {
+    // Show like
+    var newPosts = props.posts.filter(function (item) {
+      // Get the exact post and change like status
+      if (item.id == post) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new posts
+
+    props.setPosts(newPosts); // Add like to database
+
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios.post("/api/post-likes", {
+        post: post
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update posts
+
+        axios.get("/api/posts").then(function (res) {
+          return props.setPosts(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  }; // Web Share API for share button
+  // Share must be triggered by "user activation"
+
+
+  var onShare = function onShare(post) {
+    // Define share data
+    var shareData = {
+      title: post.text,
+      text: "Check out this post on Black Music\n",
+      url: "https://music.black.co.ke/#/post-show/".concat(post.id)
+    }; // Check if data is shareble
+
+    navigator.canShare(shareData) && navigator.share(shareData);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-thumbnail-xs",
+    style: {
+      borderRadius: "50%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/profile/".concat(props.post.username)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: props.post.pp,
+    width: "50px",
+    height: "50px",
+    alt: 'avatar'
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-1 flex-grow-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "m-0",
+    style: {
+      width: "100%",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.post.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.post.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
+    style: {
+      color: "gold"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.post.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "float-right text-secondary mr-1"
+  }, props.post.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "post-show/" + props.post.id
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "mb-0"
+  }, props.post.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mb-1",
+    style: {
+      overflow: "hidden"
+    }
+  }, props.post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: "storage/".concat(props.post.media),
+    width: "100%",
+    height: "auto",
+    alt: 'post-media'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Polls__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, props, {
+    post: props.post
+  })), props.post.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "#fb3958"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onPostLike(props.post.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "inherit",
+      fontSize: "1.2em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.post.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "rgba(220, 220, 220, 1)"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onPostLike(props.post.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "inherit",
+      fontSize: "1.2em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.post.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/post-show/" + props.post.id,
+    style: {
+      color: "rgba(220, 220, 220, 1)"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-5",
+    style: {
+      fontSize: "1.2em"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.post.comments)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-5",
+    style: {
+      fontSize: "1.3em",
+      color: "rgba(220, 220, 220, 1)"
+    },
+    onClick: function onClick() {
+      return onShare(props.post);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropup float-right hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    role: "button",
+    id: "dropdownMenuLink",
+    "data-toggle": "dropdown",
+    "aria-haspopup": "true",
+    "aria-expanded": "false"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-menu dropdown-menu-right",
+    style: {
+      borderRadius: "0",
+      backgroundColor: "#232323"
+    }
+  }, props.post.username != props.auth.username ? props.post.username != "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "dropdown-item",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      props.onFollow(props.post.username);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.post.hasFollowed ? "Unfollow ".concat(props.post.username) : "Follow ".concat(props.post.username))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/post-edit/".concat(props.post.id),
+    className: "dropdown-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Edit post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "dropdown-item",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      props.onDeletePost(props.post.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete post"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "float-right anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-secondary",
+    onClick: function onClick() {
+      if (props.post.username != props.auth.username) {
+        if (props.post.username != "@blackmusic") {
+          props.setBottomMenu("menu-open");
+          props.setUserToUnfollow(props.post.username); // Show and Hide elements
+
+          props.setUnfollowLink(true);
+          props.setDeleteLink(false);
+          props.setEditLink(false);
+        }
+      } else {
+        props.setBottomMenu("menu-open");
+        props.setPostToEdit(props.post.id); // Show and Hide elements
+
+        props.setEditLink(true);
+        props.setDeleteLink(true);
+        props.setUnfollowLink(false);
+      }
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "d-block text-secondary my-1"
+  }, props.post.hasEdited && "Edited")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostsMedia);
+
+/***/ }),
+
 /***/ "./resources/js/components/ScrollToTop.js":
 /*!************************************************!*\
   !*** ./resources/js/components/ScrollToTop.js ***!
@@ -102072,6 +102656,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_PenSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/PenSVG */ "./resources/js/svgs/PenSVG.js");
 /* harmony import */ var _svgs_ChatSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/ChatSVG */ "./resources/js/svgs/ChatSVG.js");
 /* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _components_PostOptions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/PostOptions */ "./resources/js/components/PostOptions.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -102104,8 +102689,9 @@ var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js"));
 });
 var PostsMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/PostsMedia */ "./resources/js/components/PostsMedia.js"));
+  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/PostsMedia */ "./resources/js/components/PostsMedia.js"));
 });
+
 
 
 
@@ -102149,7 +102735,32 @@ var Index = function Index(props) {
       unfollowLink = _useState14[0],
       setUnfollowLink = _useState14[1];
 
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Buy function
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); // Function for deleting posts
+
+  var onDeletePost = function onDeletePost(id) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/api/posts/".concat(id)).then(function (res) {
+        props.setMessages([res.data]); // Update posts
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/posts").then(function (res) {
+          return props.setPosts(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        } // Get other errors
+
+
+        newError.push(err.response.data.message);
+        props.setErrors(newError);
+      });
+    });
+  }; // Buy function
+
 
   var onBuyVideos = function onBuyVideos(video) {
     props.onCartVideos(video);
@@ -102307,6 +102918,7 @@ var Index = function Index(props) {
       setPostToEdit: setPostToEdit,
       setEditLink: setEditLink,
       setDeleteLink: setDeleteLink,
+      onDeletePost: onDeletePost,
       setUnfollowLink: setUnfollowLink
     })));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102345,45 +102957,16 @@ var Index = function Index(props) {
     }));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: bottomMenu
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bottomMenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between border-bottom border-dark mb-3",
-    style: {
-      height: "3em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
-    style: {
-      fontSize: "1em"
-    },
-    onClick: function onClick() {
-      return setBottomMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null))), unfollowLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onClick: function onClick() {
-      setBottomMenu("");
-      props.onFollow(userToUnfollow);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Unfollow ", userToUnfollow)), editLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/post-edit/".concat(postToEdit),
-    onClick: function onClick() {
-      return setBottomMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Edit post")), deleteLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onClick: function onClick() {
-      setBottomMenu("");
-      onDeletePost(postToEdit);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Delete post")))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostOptions__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
+    bottomMenu: bottomMenu,
+    setBottomMenu: setBottomMenu,
+    unfollowLink: unfollowLink,
+    userToUnfollow: userToUnfollow,
+    editLink: editLink,
+    postToEdit: postToEdit,
+    deleteLink: deleteLink,
+    onDeletePost: onDeletePost
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -103637,7 +104220,7 @@ var PostCreate = function PostCreate(props) {
         return props.setPosts;
       });
       props.setEditing(false);
-    }, 500);
+    }, 100);
   }, []); // Declare states
   // const [preview, setPreview] = useState()
   // Assign id to element
@@ -103791,13 +104374,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/LoadingPostsMedia */ "./resources/js/components/LoadingPostsMedia.js");
-/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
-/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
-/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
-/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
-/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
+/* harmony import */ var _components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/LoadingPostsMedia */ "./resources/js/components/LoadingPostsMedia.js");
+/* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -103816,14 +104394,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var PostsMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/PostsMedia */ "./resources/js/components/PostsMedia.js"));
+  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/PostsMedia */ "./resources/js/components/PostsMedia.js"));
 });
-
-
-
-
+var CommentsMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/CommentsMedia */ "./resources/js/components/CommentsMedia.js"));
+});
 
 
 var PostShow = function PostShow(props) {
@@ -103904,44 +104480,7 @@ var PostShow = function PostShow(props) {
     })["catch"](function () {
       return props.setErrors(['Failed to fetch post comments']);
     });
-  }, []); // Function for liking comments
-
-  var onCommentLike = function onCommentLike(comment) {
-    // Show like
-    var newPostComments = postComments.filter(function (item) {
-      // Get the exact comment and change like status
-      if (item.id == comment) {
-        item.hasLiked = !item.hasLiked;
-      }
-
-      return true;
-    }); // Set new comments
-
-    setPostComments(newPostComments); // Add like to database
-
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-comment-likes"), {
-        comment: comment
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update Post Comments
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
-          return setPostComments(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  }; // Function for deleting comments
-
+  }, []); // Function for deleting comments
 
   var onDeleteComment = function onDeleteComment(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
@@ -103969,6 +104508,7 @@ var PostShow = function PostShow(props) {
     });
   };
 
+  var dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103997,7 +104537,7 @@ var PostShow = function PostShow(props) {
   }).map(function (post, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
-      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_3__["default"], null)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PostsMedia, _extends({}, props, {
       post: post,
       setBottomMenu: setBottomMenu,
@@ -104007,116 +104547,31 @@ var PostShow = function PostShow(props) {
       setDeleteLink: setDeleteLink,
       setUnfollowLink: setUnfollowLink
     })));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    className: "bg-dark"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-0 p-0"
-  }, postComments.filter(function (comment) {
+  }, dummyArray.filter(function () {
+    return postComments.length < 1;
+  }).map(function (item, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key
+    });
+  }), postComments.filter(function (comment) {
     return comment.post_id == id;
-  }).map(function (comment, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: index,
-      className: "d-flex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "avatar-thumbnail-xs",
-      style: {
-        borderRadius: "50%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/home/".concat(comment.user_id)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: comment.pp,
-      width: "50px",
-      height: "50px"
-    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1 flex-grow-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "media-heading m-0",
-      style: {
-        width: "100%",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-1",
-      style: {
-        color: "gold"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "float-right text-secondary mr-1"
-    }, comment.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "mb-0"
-    }, comment.text), comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      style: {
-        color: "#fb3958"
-      },
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onCommentLike(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      style: {
-        color: "rgba(220, 220, 220, 1)"
-      },
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onCommentLike(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, comment.comments), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropup float-right hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      role: "button",
-      id: "dropdownMenuLink",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropdown-menu dropdown-menu-right",
-      style: {
-        borderRadius: "0",
-        backgroundColor: "#232323"
-      }
-    }, comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      className: "dropdown-item",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onDeleteComment(comment.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "float-right anti-hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "text-secondary",
-      onClick: function onClick() {
-        if (comment.username == props.auth.username) {
-          setBottomMenu("menu-open");
-          setPostToEdit(comment.id); // Show and Hide elements
-
-          deleteLink.current.className = "d-block";
-        }
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
+  }).map(function (comment, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+      key: key,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CommentsMedia, _extends({}, props, {
+      comment: comment,
+      postComments: postComments,
+      setPostComments: setPostComments,
+      setBottomMenu: setBottomMenu,
+      setCommentDeleteLink: setCommentDeleteLink,
+      setCommentToEdit: setCommentToEdit,
+      onDeleteComment: onDeleteComment
+    })));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104136,7 +104591,7 @@ var PostShow = function PostShow(props) {
     onClick: function onClick() {
       return setBottomMenu("");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null))), commentDeleteLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null))), commentDeleteLink && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: function onClick() {
       setBottomMenu("");
       onDeleteComment(commentToEdit);
@@ -104224,13 +104679,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_LoadingVideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/LoadingVideoMediaHorizontal */ "./resources/js/components/LoadingVideoMediaHorizontal.js");
 /* harmony import */ var _components_LoadingAudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/LoadingAudioMediaHorizontal */ "./resources/js/components/LoadingAudioMediaHorizontal.js");
 /* harmony import */ var _svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/CloseSVG */ "./resources/js/svgs/CloseSVG.js");
-/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
-/* harmony import */ var _svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/CommentSVG */ "./resources/js/svgs/CommentSVG.js");
-/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
-/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
-/* harmony import */ var _svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/CheckSVG */ "./resources/js/svgs/CheckSVG.js");
-/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
-/* harmony import */ var _svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../svgs/ShareSVG */ "./resources/js/svgs/ShareSVG.js");
+/* harmony import */ var _svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/CheckSVG */ "./resources/js/svgs/CheckSVG.js");
+/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/LoadingPostsMedia */ "./resources/js/components/LoadingPostsMedia.js");
+/* harmony import */ var _components_PostsMedia__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/PostsMedia */ "./resources/js/components/PostsMedia.js");
+/* harmony import */ var _components_PostOptions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/PostOptions */ "./resources/js/components/PostOptions.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -104242,8 +104697,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
 
 
 
@@ -104293,9 +104746,21 @@ var Profile = function Profile(props) {
       postToEdit = _useState8[0],
       setPostToEdit = _useState8[1];
 
-  var editLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var deleteLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var unfollowLink = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // Get profile info
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      editLink = _useState10[0],
+      setEditLink = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      deleteLink = _useState12[0],
+      setDeleteLink = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      unfollowLink = _useState14[0],
+      setUnfollowLink = _useState14[1]; // Get profile info
+
 
   if (props.users.find(function (user) {
     return user.username == username;
@@ -104321,45 +104786,6 @@ var Profile = function Profile(props) {
     setTimeout(function () {
       return history.push('/cart');
     }, 1000);
-  }; // Function for liking posts
-
-
-  var onPostLike = function onPostLike(post) {
-    // Show like
-    var newPosts = props.posts.filter(function (item) {
-      // Get the exact post and change like status
-      if (item.id == post) {
-        item.hasLiked = !item.hasLiked;
-      }
-
-      return true;
-    }); // Set new posts
-
-    props.setPosts(newPosts); // Add like to database
-
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-likes"), {
-        post: post
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update posts
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        } // Get other errors
-
-
-        newError.push(err.response.data.message);
-        props.setErrors(newError);
-      });
-    });
   }; // Function for deleting posts
 
 
@@ -104385,47 +104811,6 @@ var Profile = function Profile(props) {
         props.setErrors(newError);
       });
     });
-  }; // Function for voting in poll
-
-
-  var onPoll = function onPoll(post, parameter) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/polls"), {
-        post: post,
-        parameter: parameter
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update posts
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/posts")).then(function (res) {
-          return props.setPosts(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        } // Get other errors
-
-
-        newError.push(err.response.data.message);
-        props.setErrors(newError);
-      });
-    });
-  }; // Web Share API for share button
-  // Share must be triggered by "user activation"
-
-
-  var onShare = function onShare(post) {
-    // Define share data
-    var shareData = {
-      title: post.text,
-      text: "Check out my post on Black Music\n",
-      url: "https://music.black.co.ke/#/post-show/".concat(post.id)
-    }; // Check if data is shareble
-
-    navigator.canShare(shareData) && navigator.share(shareData);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104477,7 +104862,7 @@ var Profile = function Profile(props) {
     onClick: function onClick() {
       return props.onFollow(username);
     }
-  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)) : profile.hasBought1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)) : profile.hasBought1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: 'mysonar-btn white-btn float-right',
     onClick: function onClick() {
       return props.onFollow(username);
@@ -104494,7 +104879,7 @@ var Profile = function Profile(props) {
       color: "gold"
     },
     className: "pr-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_13__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, profile.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, profile.bio)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-row"
@@ -104596,377 +104981,20 @@ var Profile = function Profile(props) {
     }
   }, username, " does not have any posts")), props.posts.filter(function (post) {
     return post.username == username;
-  }).map(function (post, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: post.id,
-      className: "d-flex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "avatar-thumbnail-xs",
-      style: {
-        borderRadius: "50%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/profile/".concat(post.username)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: post.pp,
-      width: "50px",
-      height: "50px",
-      alt: 'avatar'
-    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "p-1 flex-grow-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-      className: "m-0",
-      style: {
-        width: "100%",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "clip"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, post.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, post.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-1",
-      style: {
-        color: "gold"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_13__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, post.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "float-right mr-1 text-secondary"
-    }, post.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "mb-0"
-    }, post.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "mb-1",
-      style: {
-        borderTopLeftRadius: "10px",
-        borderTopRightRadius: "10px",
-        borderBottomRightRadius: "10px",
-        borderBottomLeftRadius: "10px",
-        overflow: "hidden"
-      }
-    }, post.media && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      src: "storage/".concat(post.media),
-      imgClass: "rounded-circle",
-      width: "100%",
-      height: "auto",
-      alt: 'post-media'
-    })), post.parameter_1 ? post.isWithin24Hrs ? post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
-      btnText: post.parameter_1,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_1);
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn white-btn mb-1",
-      btnText: post.parameter_1,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_1);
-      }
-    }) : post.hasVoted1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage1, "%"),
-        backgroundColor: "#232323"
-      }
-    }, post.parameter_1)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage1, "%"),
-        backgroundColor: "grey"
-      }
-    }, post.parameter_1)) : "", post.parameter_2 ? post.isWithin24Hrs ? post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
-      btnText: post.parameter_2,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_2);
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn white-btn mb-1",
-      btnText: post.parameter_2,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_2);
-      }
-    }) : post.hasVoted2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage2, "%"),
-        backgroundColor: "#232323"
-      }
-    }, post.parameter_2)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage2, "%"),
-        backgroundColor: "grey"
-      }
-    }, post.parameter_2)) : "", post.parameter_3 ? post.isWithin24Hrs ? post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
-      btnText: post.parameter_3,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_3);
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn white-btn mb-1",
-      btnText: post.parameter_3,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_3);
-      }
-    }) : post.hasVoted3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage3, "%"),
-        backgroundColor: "#232323"
-      }
-    }, post.parameter_3)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage3, "%"),
-        backgroundColor: "grey"
-      }
-    }, post.parameter_3)) : "", post.parameter_4 ? post.isWithin24Hrs ? post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
-      btnText: post.parameter_4,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_4);
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn white-btn mb-1",
-      btnText: post.parameter_4,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_4);
-      }
-    }) : post.hasVoted4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage4, "%"),
-        backgroundColor: "#232323"
-      }
-    }, post.parameter_4)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage4, "%"),
-        backgroundColor: "grey"
-      }
-    }, post.parameter_4)) : "", post.parameter_5 ? post.isWithin24Hrs ? post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn mb-1 btn-2",
-      btnText: post.parameter_5,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_5);
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      btnClass: "mysonar-btn poll-btn white-btn mb-1",
-      btnText: post.parameter_5,
-      btnStyle: {
-        width: "100%"
-      },
-      onClick: function onClick() {
-        return onPoll(post.id, post.parameter_5);
-      }
-    }) : post.hasVoted5 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage5, "%"),
-        backgroundColor: "#232323"
-      }
-    }, post.parameter_5)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress rounded-0 mb-1",
-      style: {
-        height: '33px'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "progress-bar",
-      style: {
-        width: "".concat(post.percentage5, "%"),
-        backgroundColor: "grey"
-      }
-    }, post.parameter_5)) : "", post.parameter_1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      style: {
-        color: "grey"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Total votes: ", post.totalVotes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), post.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      style: {
-        color: "#fb3958"
-      },
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onPostLike(post.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      style: {
-        color: "inherit",
-        fontSize: "1.2em"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, post.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onPostLike(post.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      style: {
-        color: "inherit",
-        fontSize: "1.2em"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1",
-      style: {
-        color: "inherit"
-      }
-    }, post.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "post-show/" + post.id,
-      style: {
-        color: "rgba(220, 220, 220, 1)"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-5",
-      style: {
-        fontSize: "1.2em"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CommentSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-      className: "ml-1"
-    }, post.comments)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "ml-5",
-      style: {
-        color: "rgba(220, 220, 220, 1)"
-      },
-      onClick: function onClick() {
-        return onShare(post);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_ShareSVG__WEBPACK_IMPORTED_MODULE_14__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropup float-right hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      role: "button",
-      id: "dropdownMenuLink",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "dropdown-menu dropdown-menu-right",
-      style: {
-        borderRadius: "0",
-        backgroundColor: "#232323"
-      }
-    }, post.username != props.auth.username ? post.username != "@blackmusic" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      className: "dropdown-item",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        props.onFollow(post.username);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, post.hasFollowed ? "Unfollow ".concat(post.username) : "Follow ".concat(post.username))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/post-edit/".concat(post.id),
-      className: "dropdown-item"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Edit post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#",
-      className: "dropdown-item",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        onDeletePost(post.id);
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete post"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "float-right anti-hidden"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "text-secondary",
-      onClick: function onClick() {
-        if (post.username != props.auth.username) {
-          if (post.username != "@blackmusic") {
-            setBottomMenu("menu-open");
-            setUserToUnfollow(post.username); // Show and Hide elements
-
-            unfollowLink.current.className = "d-block";
-            deleteLink.current.className = "d-none";
-            editLink.current.className = "d-none";
-          }
-        } else {
-          setBottomMenu("menu-open");
-          setPostToEdit(post.id); // Show and Hide elements
-
-          editLink.current.className = "d-block";
-          deleteLink.current.className = "d-block";
-          unfollowLink.current.className = "d-none";
-        }
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "d-block text-secondary my-1"
-    }, post.hasEdited && "Edited")))));
+  }).map(function (post, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+      key: key,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingPostsMedia__WEBPACK_IMPORTED_MODULE_10__["default"], null)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostsMedia__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+      post: post,
+      setBottomMenu: setBottomMenu,
+      setUserToUnfollow: setUserToUnfollow,
+      setPostToEdit: setPostToEdit,
+      setEditLink: setEditLink,
+      setDeleteLink: setDeleteLink,
+      onDeletePost: onDeletePost,
+      setUnfollowLink: setUnfollowLink
+    })));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "audios" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
@@ -105023,48 +105051,16 @@ var Profile = function Profile(props) {
     }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: bottomMenu
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bottomMenu"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between",
-    style: {
-      height: "3em"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "closeIcon p-2 float-right",
-    style: {
-      fontSize: "1em"
-    },
-    onClick: function onClick() {
-      return setBottomMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    ref: unfollowLink,
-    onClick: function onClick() {
-      setBottomMenu("");
-      props.onFollow(userToUnfollow);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Unfollow/Follow ", userToUnfollow)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/post-edit/".concat(postToEdit),
-    ref: editLink,
-    onClick: function onClick() {
-      return setBottomMenu("");
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Edit post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    ref: deleteLink,
-    onClick: function onClick() {
-      setBottomMenu("");
-      onDeletePost(postToEdit);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "pb-2"
-  }, "Delete post")))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostOptions__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
+    bottomMenu: bottomMenu,
+    setBottomMenu: setBottomMenu,
+    unfollowLink: unfollowLink,
+    userToUnfollow: userToUnfollow,
+    editLink: editLink,
+    postToEdit: postToEdit,
+    deleteLink: deleteLink,
+    onDeletePost: onDeletePost
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Profile);

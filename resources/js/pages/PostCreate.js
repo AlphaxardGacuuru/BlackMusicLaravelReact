@@ -19,7 +19,7 @@ const PostCreate = (props) => {
 			props.setUrlToDelete(`/posts/${props.media.substr(11)}`)
 			props.setStateToUpdate(() => props.setPosts)
 			props.setEditing(false)
-		}, 500)
+		}, 100)
 	}, [])
 
 	// Declare states

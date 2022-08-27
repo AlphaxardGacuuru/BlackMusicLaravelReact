@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./resources/js/components/VideoMediaVertical.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/VideoMediaVertical.js ***!
-  \*******************************************************/
+/***/ "./resources/js/components/CommentsMedia.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/CommentsMedia.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12,67 +12,167 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Button */ "./resources/js/components/Button.js");
-/* harmony import */ var _svgs_CartSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/CartSVG */ "./resources/js/svgs/CartSVG.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
+/* harmony import */ var _svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../svgs/DecoSVG */ "./resources/js/svgs/DecoSVG.js");
+/* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
+/* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
+/* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
 
 
 
 
 
 
-var VideoMediaVertical = function VideoMediaVertical(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "mx-1 pt-0 px-0 pb-2"
+
+
+
+var CommentsMedia = function CommentsMedia(props) {
+  // Function for liking comments
+  var onCommentLike = function onCommentLike(comment) {
+    // Show like
+    var newPostComments = props.postComments.filter(function (item) {
+      // Get the exact comment and change like status
+      if (item.id == comment) {
+        item.hasLiked = !item.hasLiked;
+      }
+
+      return true;
+    }); // Set new comments
+
+    props.setPostComments(newPostComments); // Add like to database
+
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-comment-likes"), {
+        comment: comment
+      }).then(function (res) {
+        props.setMessages([res.data]); // Update Post Comments
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
+          return props.setPostComments(res.data);
+        });
+      })["catch"](function (err) {
+        var resErrors = err.response.data.errors;
+        var resError;
+        var newError = [];
+
+        for (resError in resErrors) {
+          newError.push(resErrors[resError]);
+        }
+
+        props.setErrors(newError);
+      });
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "thumbnail"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/video-show/".concat(props.video.id)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: props.video.thumbnail.match(/http/) ? props.video.thumbnail : "storage/".concat(props.video.thumbnail),
-    width: "160em",
-    height: "90em"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/video-show/".concat(props.video.id)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "m-0 pt-2 px-1",
+    className: "p-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-thumbnail-xs",
     style: {
-      width: "150px",
+      borderRadius: "50%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/home/".concat(props.comment.user_id)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Img__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    src: props.comment.pp,
+    width: "50px",
+    height: "50px"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-1 flex-grow-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    className: "media-heading m-0",
+    style: {
+      width: "100%",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, props.video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "mt-0 mx-1 mb-2 px-1 py-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username, " ", props.video.ft))), props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn mb-1 rounded-0 text-light",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, props.comment.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "ml-1",
     style: {
-      minWidth: '90px',
-      height: '33px',
+      color: "gold"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DecoSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.comment.decos)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "float-right text-secondary mr-1"
+  }, props.comment.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "mb-0"
+  }, props.comment.text), props.comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "#fb3958"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onCommentLike(props.comment.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    style: {
+      color: "rgba(220, 220, 220, 1)"
+    },
+    onClick: function onClick(e) {
+      e.preventDefault();
+      onCommentLike(props.comment.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1",
+    style: {
+      color: "inherit"
+    }
+  }, props.comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "ml-1"
+  }, props.comment.comments), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropup float-right hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    role: "button",
+    id: "dropdownMenuLink",
+    "data-toggle": "dropdown",
+    "aria-haspopup": "true",
+    "aria-expanded": "false"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "dropdown-menu dropdown-menu-right",
+    style: {
+      borderRadius: "0",
       backgroundColor: "#232323"
-    },
-    onClick: function onClick() {
-      return props.onCartVideos(props.video.id);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CartSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "mysonar-btn white-btn mb-1",
-    style: {
-      minWidth: '90px',
-      height: '33px'
-    },
-    onClick: function onClick() {
-      return props.onCartVideos(props.video.id);
+  }, props.comment.username == props.auth.username && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "dropdown-item",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      props.onDeleteComment(props.comment.id);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CartSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: 'btn mysonar-btn green-btn btn-2',
-    btnText: 'KES 20',
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Delete comment")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "float-right anti-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-secondary",
     onClick: function onClick() {
-      return onBuyVideos(props.video.id);
+      if (props.comment.username == props.auth.username) {
+        props.setBottomMenu("menu-open");
+        props.setCommentToEdit(props.comment.id); // Show and Hide elements
+
+        props.setCommentDeleteLink(true);
+      }
     }
-  })));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (VideoMediaVertical);
+/* harmony default export */ __webpack_exports__["default"] = (CommentsMedia);
 
 /***/ })
 

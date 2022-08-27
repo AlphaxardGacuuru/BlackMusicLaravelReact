@@ -2,16 +2,12 @@ import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import Img from '../components/Img'
 import LoadingPostsMedia from '../components/LoadingPostsMedia'
 
 const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
+const CommentsMedia = React.lazy(() => import('../components/CommentsMedia'))
 
 import CloseSVG from '../svgs/CloseSVG'
-import DecoSVG from '../svgs/DecoSVG'
-import OptionsSVG from '../svgs/OptionsSVG'
-import HeartSVG from '../svgs/HeartSVG'
-import HeartFilledSVG from '../svgs/HeartFilledSVG'
 
 const PostShow = (props) => {
 
@@ -54,41 +50,6 @@ const PostShow = (props) => {
 			}).catch(() => props.setErrors(['Failed to fetch post comments']))
 	}, [])
 
-	// Function for liking comments
-	const onCommentLike = (comment) => {
-		// Show like
-		const newPostComments = postComments
-			.filter((item) => {
-				// Get the exact comment and change like status
-				if (item.id == comment) {
-					item.hasLiked = !item.hasLiked
-				}
-				return true
-			})
-		// Set new comments
-		setPostComments(newPostComments)
-
-		// Add like to database
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/post-comment-likes`, {
-				comment: comment
-			}).then((res) => {
-				props.setMessages([res.data])
-				// Update Post Comments
-				axios.get(`${props.url}/api/post-comments`)
-					.then((res) => setPostComments(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		})
-	}
-
 	// Function for deleting comments
 	const onDeleteComment = (id) => {
 		axios.get('sanctum/csrf-cookie').then(() => {
@@ -112,6 +73,8 @@ const PostShow = (props) => {
 				})
 		})
 	}
+
+	var dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 	return (
 		<>
@@ -148,107 +111,29 @@ const PostShow = (props) => {
 									setUnfollowLink={setUnfollowLink} />
 							</Suspense>
 						))}
+
+					<hr className="bg-dark" />
+
 					<div className="m-0 p-0">
+						{/* Loading Comment items */}
+						{dummyArray
+							.filter(() => postComments.length < 1)
+							.map((item, key) => (<LoadingPostsMedia key={key} />))}
+
 						{postComments
 							.filter((comment) => comment.post_id == id)
-							.map((comment, index) => (
-								<div key={index} className="d-flex">
-									<div className="p-1">
-										<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-											<Link to={`/home/${comment.user_id}`}>
-												<Img
-													src={comment.pp}
-													width="50px"
-													height="50px" />
-											</Link>
-										</div>
-									</div>
-									<div className="p-1 flex-grow-1">
-										<h6 className="media-heading m-0"
-											style={{
-												width: "100%",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											<b>{comment.name}</b>
-											<small>{comment.username}</small>
-											<span className="ml-1" style={{ color: "gold" }}>
-												<DecoSVG />
-												<small className="ml-1" style={{ color: "inherit" }}>{comment.decos}</small>
-											</span>
-											<small>
-												<b><i className="float-right text-secondary mr-1">{comment.created_at}</i></b>
-											</small>
-										</h6>
-										<p className="mb-0">{comment.text}</p>
-
-										{/* Comment likes */}
-										{comment.hasLiked ?
-											<a
-												href="#"
-												style={{ color: "#fb3958" }}
-												onClick={(e) => {
-													e.preventDefault()
-													onCommentLike(comment.id)
-												}}>
-												<HeartFilledSVG />
-												<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
-											</a>
-											: <a
-												href='#'
-												style={{ color: "rgba(220, 220, 220, 1)" }}
-												onClick={(e) => {
-													e.preventDefault()
-													onCommentLike(comment.id)
-												}}>
-												<HeartSVG />
-												<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
-											</a>}
-										<small className="ml-1">{comment.comments}</small>
-
-										{/* <!-- Default dropup button --> */}
-										<div className="dropup float-right hidden">
-											<a
-												href="#"
-												role="button"
-												id="dropdownMenuLink"
-												data-toggle="dropdown"
-												aria-haspopup="true"
-												aria-expanded="false">
-												<OptionsSVG />
-											</a>
-											<div className="dropdown-menu dropdown-menu-right"
-												style={{ borderRadius: "0", backgroundColor: "#232323" }}>
-												{comment.username == props.auth.username &&
-													<a
-														href="#"
-														className="dropdown-item"
-														onClick={(e) => {
-															e.preventDefault();
-															onDeleteComment(comment.id)
-														}}>
-														<h6>Delete comment</h6>
-													</a>}
-											</div>
-										</div>
-										{/* For small screens */}
-										<div className="float-right anti-hidden">
-											<span
-												className="text-secondary"
-												onClick={() => {
-													if (comment.username == props.auth.username) {
-														setBottomMenu("menu-open")
-														setPostToEdit(comment.id)
-														// Show and Hide elements
-														deleteLink.current.className = "d-block"
-													}
-												}}>
-												<OptionsSVG />
-											</span>
-										</div>
-									</div>
-								</div>
+							.map((comment, key) => (
+								<Suspense key={key} fallback={<LoadingPostsMedia />}>
+									<CommentsMedia
+										{...props}
+										comment={comment}
+										postComments={postComments}
+										setPostComments={setPostComments}
+										setBottomMenu={setBottomMenu}
+										setCommentDeleteLink={setCommentDeleteLink}
+										setCommentToEdit={setCommentToEdit}
+										onDeleteComment={onDeleteComment} />
+								</Suspense>
 							))}
 					</div>
 				</div>
