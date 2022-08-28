@@ -11,41 +11,6 @@ import HeartFilledSVG from '../svgs/HeartFilledSVG'
 
 const CommentsMedia = (props) => {
 
-	// Function for liking comments
-	const onCommentLike = (comment) => {
-		// Show like
-		const newPostComments = props.postComments
-			.filter((item) => {
-				// Get the exact comment and change like status
-				if (item.id == comment) {
-					item.hasLiked = !item.hasLiked
-				}
-				return true
-			})
-		// Set new comments
-		props.setPostComments(newPostComments)
-
-		// Add like to database
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.post(`${props.url}/api/post-comment-likes`, {
-				comment: comment
-			}).then((res) => {
-				props.setMessages([res.data])
-				// Update Post Comments
-				axios.get(`${props.url}/api/post-comments`)
-					.then((res) => props.setPostComments(res.data))
-			}).catch((err) => {
-				const resErrors = err.response.data.errors
-				var resError
-				var newError = []
-				for (resError in resErrors) {
-					newError.push(resErrors[resError])
-				}
-				props.setErrors(newError)
-			})
-		})
-	}
-
 	return (
 		<div className="d-flex">
 			<div className="p-1">
@@ -83,35 +48,30 @@ const CommentsMedia = (props) => {
 				<p className="mb-0">{props.comment.text}</p>
 
 				{/* Comment likes */}
-				{props.comment.hasLiked ?
-					<a
-						href="#"
-						style={{ color: "#fb3958" }}
-						onClick={(e) => {
-							e.preventDefault()
-							onCommentLike(props.comment.id)
-						}}>
-						<HeartFilledSVG />
-						<small
-							className="ml-1"
-							style={{ color: "inherit" }}>
-							{props.comment.likes}
-						</small>
-					</a>
-					: <a
-						href='#'
-						style={{ color: "rgba(220, 220, 220, 1)" }}
-						onClick={(e) => {
-							e.preventDefault()
-							onCommentLike(props.comment.id)
-						}}>
-						<HeartSVG />
-						<small
-							className="ml-1"
-							style={{ color: "inherit" }}>
-							{props.comment.likes}
-						</small>
-					</a>}
+				<a
+					href="#"
+					onClick={(e) => {
+						e.preventDefault()
+						props.onCommentLike(props.comment.id)
+					}}>
+					{props.comment.hasLiked ?
+						<span style={{ color: "#fb3958" }}>
+							<HeartFilledSVG />
+							<small
+								className="ml-1"
+								style={{ color: "inherit" }}>
+								{props.comment.likes}
+							</small>
+						</span> :
+						<span style={{ color: "rgba(220, 220, 220, 1)" }}>
+							<HeartSVG />
+							<small
+								className="ml-1"
+								style={{ color: "inherit" }}>
+								{props.comment.likes}
+							</small>
+						</span>}
+				</a>
 				<small className="ml-1">{props.comment.comments}</small>
 
 				{/* <!-- Default dropup button --> */}
@@ -146,6 +106,7 @@ const CommentsMedia = (props) => {
 						onClick={() => {
 							if (props.comment.username == props.auth.username) {
 								props.setBottomMenu("menu-open")
+								// Set Comment to edit so as to delete it as well
 								props.setCommentToEdit(props.comment.id)
 								// Show and Hide elements
 								props.setCommentDeleteLink(true)

@@ -270,8 +270,8 @@ const VideoCharts = (props) => {
 											.filter((video) => video.id == videoArray.key &&
 												video.username != "@blackmusic")
 											.map((video, key) => (
-												<center className="mx-1 mb-2">
-													<Suspense key={video.id} fallback={<LoadingVideoMediaVertical />}>
+												<center key={video.id} className="mx-1 mb-2">
+													<Suspense fallback={<LoadingVideoMediaVertical />}>
 														<VideoMediaVertical
 															{...props}
 															video={video}

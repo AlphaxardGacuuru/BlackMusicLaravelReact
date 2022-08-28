@@ -23,7 +23,7 @@ const PostOptions = (props) => {
 					<div
 						onClick={() => {
 							props.setBottomMenu("")
-							props.onFollow(userToUnfollow)
+							props.onFollow(props.userToUnfollow)
 						}}>
 						<h6 className="pb-2">Unfollow {props.userToUnfollow}</h6>
 					</div>}
@@ -40,6 +40,14 @@ const PostOptions = (props) => {
 							props.onDeletePost(props.postToEdit)
 						}}>
 						<h6 className="pb-2">Delete post</h6>
+					</div>}
+				{props.commentDeleteLink &&
+					<div
+						onClick={() => {
+							props.setBottomMenu("")
+							props.onDeleteComment(props.commentToEdit)
+						}}>
+						<h6 className="pb-2">Delete comment</h6>
 					</div>}
 			</div>
 		</div>

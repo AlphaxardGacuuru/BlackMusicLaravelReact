@@ -21,7 +21,7 @@ const Karaoke = (props) => {
 
 	const [karaokeComments, setKaraokeComments] = useState([])
 	const [play, setPlay] = useState()
-	const [bottomMenu, setBottomMenu] = useState()
+	const [bottomOptionsMenu, setBottomOptionsMenu] = useState()
 
 	// ID for video
 	const video = useRef()
@@ -297,7 +297,7 @@ const Karaoke = (props) => {
 									<span
 										className="p-0"
 										style={{ fontSize: "2em" }}
-										onClick={() => setBottomMenu("menu-open")}>
+										onClick={() => setBottomOptionsMenu("menu-open")}>
 										<CommentSVG />
 									</span>
 									<h6
@@ -370,8 +370,8 @@ const Karaoke = (props) => {
 				{...props}
 				karaokeComments={karaokeComments}
 				setKaraokeComments={setKaraokeComments}
-				bottomMenu={bottomMenu}
-				setBottomMenu={setBottomMenu}
+				bottomOptionsMenu={bottomOptionsMenu}
+				setBottomOptionsMenu={setBottomOptionsMenu}
 				id={props.karaoke.id} />
 		</div>
 	)

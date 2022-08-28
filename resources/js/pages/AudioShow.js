@@ -20,6 +20,9 @@ import CartSVG from '../svgs/CartSVG';
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import DecoSVG from '../svgs/DecoSVG'
+import PostOptions from '../components/PostOptions';
+import LoadingPostsMedia from '../components/LoadingPostsMedia';
+import CommentsMedia from '../components/CommentsMedia';
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -34,14 +37,12 @@ const AudioShow = (props) => {
 	const location = useLocation()
 
 	// Set State
-	const [text, setText] = useState("")
 	const [tabClass, setTabClass] = useState("comments")
 	const [audioComments, setAudioComments] = useState(props.getLocalStorage("audioComments"))
 	const [bottomMenu, setBottomMenu] = useState("")
-	const [postToEdit, setPostToEdit] = useState()
-
-	var deleteLink = useRef(null)
-
+	const [commentToEdit, setCommentToEdit] = useState()
+	const [commentDeleteLink, setCommentDeleteLink] = useState()
+	
 	// Fetch Audio Comments
 	useEffect(() => {
 
@@ -526,101 +527,17 @@ const AudioShow = (props) => {
 								.length > 0 ?
 								audioComments
 									.filter((comment) => comment.audio_id == show)
-									.map((comment, index) => (
-										<div key={index} className='media p-2'>
-											<div className='media-left'>
-												<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-													<Link to={`/profile/${comment.username}`}>
-														<Img src={comment.pp}
-															width="50px"
-															height="50px" />
-													</Link>
-												</div>
-											</div>
-											<div className="media-body ml-2">
-												<h6 className="media-heading m-0"
-													style={{
-														width: "100%",
-														whiteSpace: "nowrap",
-														overflow: "hidden",
-														textOverflow: "clip"
-													}}>
-													<b>{comment.name}</b>
-													<small>{comment.username}</small>
-													<span className="ml-1" style={{ color: "gold" }}>
-														<DecoSVG />
-														<span className="ml-1" style={{ fontSize: "10px" }}>{comment.decos}</span>
-													</span>
-													<small>
-														<b><i className="float-right mr-1 text-secondary">{comment.created_at}</i></b>
-													</small>
-												</h6>
-												<p className="mb-0">{comment.text}</p>
-
-												{/* Comment likes */}
-												{comment.hasLiked ?
-													<a href="#"
-														style={{ color: "#fb3958" }}
-														onClick={(e) => {
-															e.preventDefault()
-															onCommentLike(comment.id)
-														}}>
-														<HeartFilledSVG />
-														<small className="ml-1" style={{ color: "inherit" }}>
-															{comment.likes}
-														</small>
-													</a> :
-													<a href='#' onClick={(e) => {
-														e.preventDefault()
-														onCommentLike(comment.id)
-													}}>
-														<HeartSVG />
-														<small className="ml-1" style={{ color: "inherit" }}>{comment.likes}</small>
-													</a>}
-
-												{/* <!-- Default dropup button --> */}
-												<div className="dropup float-right hidden">
-													<a
-														href="#"
-														role="button"
-														id="dropdownMenuLink"
-														data-toggle="dropdown"
-														aria-haspopup="true"
-														aria-expanded="false">
-														<OptionsSVG />
-													</a>
-													<div
-														className="dropdown-menu dropdown-menu-right p-0"
-														style={{ borderRadius: "0", backgroundColor: "#232323" }}>
-														{comment.username == props.auth.username &&
-															<a
-																href='#'
-																className="dropdown-item"
-																onClick={(e) => {
-																	e.preventDefault();
-																	onDeleteComment(comment.id)
-																}}>
-																<h6>Delete comment</h6>
-															</a>}
-													</div>
-												</div>
-												{/* For small screens */}
-												<div className="float-right anti-hidden">
-													<span
-														className="text-secondary"
-														onClick={() => {
-															if (comment.username == props.auth.username) {
-																setBottomMenu("menu-open")
-																setPostToEdit(comment.id)
-																// Show and Hide elements
-																deleteLink.current.className = "d-block"
-															}
-														}}>
-														<OptionsSVG />
-													</span>
-												</div>
-											</div>
-										</div>
+									.map((comment, key) => (
+										<Suspense key={key} fallback={<LoadingPostsMedia />}>
+											<CommentsMedia
+												{...props}
+												comment={comment}
+												setBottomMenu={setBottomMenu}
+												setCommentDeleteLink={setCommentDeleteLink}
+												setCommentToEdit={setCommentToEdit}
+												onCommentLike={onCommentLike}
+												onDeleteComment={onDeleteComment} />
+										</Suspense>
 									)) :
 								<center className="my-3">
 									<h6 style={{ color: "grey" }}>No comments to show</h6>
@@ -683,29 +600,14 @@ const AudioShow = (props) => {
 			</div>
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu}>
-				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
-						<div></div>
-						{/* <!-- Close Icon --> */}
-						<div
-							className="closeIcon p-2 float-right"
-							style={{ fontSize: "1em" }}
-							onClick={() => setBottomMenu("")}>
-							<CloseSVG />
-						</div>
-					</div>
-					<div
-						ref={deleteLink}
-						onClick={() => {
-							setBottomMenu("")
-							onDeleteComment(postToEdit)
-						}}>
-						<h6 className="pb-2">Delete comment</h6>
-					</div>
-				</div>
-			</div>
-			{/* Sliding Bottom Nav  end */}
+			<PostOptions
+				{...props}
+				bottomMenu={bottomMenu}
+				setBottomMenu={setBottomMenu}
+				commentToEdit={commentToEdit}
+				commentDeleteLink={commentDeleteLink}
+				onDeleteComment={onDeleteComment} />
+			{/* Sliding Bottom Nav end */}
 		</>
 	)
 }

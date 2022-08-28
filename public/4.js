@@ -29,43 +29,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CommentsMedia = function CommentsMedia(props) {
-  // Function for liking comments
-  var onCommentLike = function onCommentLike(comment) {
-    // Show like
-    var newPostComments = props.postComments.filter(function (item) {
-      // Get the exact comment and change like status
-      if (item.id == comment) {
-        item.hasLiked = !item.hasLiked;
-      }
-
-      return true;
-    }); // Set new comments
-
-    props.setPostComments(newPostComments); // Add like to database
-
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('sanctum/csrf-cookie').then(function () {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(props.url, "/api/post-comment-likes"), {
-        comment: comment
-      }).then(function (res) {
-        props.setMessages([res.data]); // Update Post Comments
-
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("".concat(props.url, "/api/post-comments")).then(function (res) {
-          return props.setPostComments(res.data);
-        });
-      })["catch"](function (err) {
-        var resErrors = err.response.data.errors;
-        var resError;
-        var newError = [];
-
-        for (resError in resErrors) {
-          newError.push(resErrors[resError]);
-        }
-
-        props.setErrors(newError);
-      });
-    });
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -105,35 +68,31 @@ var CommentsMedia = function CommentsMedia(props) {
     className: "float-right text-secondary mr-1"
   }, props.comment.created_at)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0"
-  }, props.comment.text), props.comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, props.comment.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
-    style: {
-      color: "#fb3958"
-    },
     onClick: function onClick(e) {
       e.preventDefault();
-      onCommentLike(props.comment.id);
+      props.onCommentLike(props.comment.id);
+    }
+  }, props.comment.hasLiked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      color: "#fb3958"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1",
     style: {
       color: "inherit"
     }
-  }, props.comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
+  }, props.comment.likes)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       color: "rgba(220, 220, 220, 1)"
-    },
-    onClick: function onClick(e) {
-      e.preventDefault();
-      onCommentLike(props.comment.id);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1",
     style: {
       color: "inherit"
     }
-  }, props.comment.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+  }, props.comment.likes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
   }, props.comment.comments), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropup float-right hidden"
@@ -163,7 +122,8 @@ var CommentsMedia = function CommentsMedia(props) {
     className: "text-secondary",
     onClick: function onClick() {
       if (props.comment.username == props.auth.username) {
-        props.setBottomMenu("menu-open");
+        props.setBottomMenu("menu-open"); // Set Comment to edit so as to delete it as well
+
         props.setCommentToEdit(props.comment.id); // Show and Hide elements
 
         props.setCommentDeleteLink(true);

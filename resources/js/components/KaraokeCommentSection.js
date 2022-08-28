@@ -8,16 +8,15 @@ import DecoSVG from '../svgs/DecoSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import OptionsSVG from '../svgs/OptionsSVG'
+import PostOptions from './PostOptions'
 
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
 
 const KaraokeCommentSection = (props) => {
 
-	const [bottomOptionsMenu, setBottomOptionsMenu] = useState()
-	const [postToEdit, setPostToEdit] = useState()
-
-	// ID for delete link
-	var deleteLink = useRef()
+	const [bottomMenu, setBottomMenu] = useState()
+	const [commentToEdit, setCommentToEdit] = useState()
+	const [commentDeleteLink, setCommentDeleteLink] = useState()
 
 	useEffect(() => {
 		// Set states
@@ -74,27 +73,6 @@ const KaraokeCommentSection = (props) => {
 		})
 	}
 
-	// Function for deleting comments
-	const onDeleteComment = (id) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.delete(`${props.url}/api/karaoke-comments/${id}`)
-				.then((res) => {
-					props.setMessages([res.data])
-					// Update karaoke comments
-					axios.get(`${props.url}/api/karaoke-comments`)
-						.then((res) => props.setKaraokeComments(res.data))
-				}).catch((err) => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					props.setErrors(newError)
-				})
-		})
-	}
-
 	// Function for liking comments
 	const onCommentLike = (comment) => {
 		// Show like
@@ -130,10 +108,31 @@ const KaraokeCommentSection = (props) => {
 		})
 	}
 
+	// Function for deleting comments
+	const onDeleteComment = (id) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.delete(`${props.url}/api/karaoke-comments/${id}`)
+				.then((res) => {
+					props.setMessages([res.data])
+					// Update karaoke comments
+					axios.get(`${props.url}/api/karaoke-comments`)
+						.then((res) => props.setKaraokeComments(res.data))
+				}).catch((err) => {
+					const resErrors = err.response.data.errors
+					var resError
+					var newError = []
+					for (resError in resErrors) {
+						newError.push(resErrors[resError])
+					}
+					props.setErrors(newError)
+				})
+		})
+	}
+
 	return (
 		<>
 			{/* Sliding Bottom Nav */}
-			<div className={props.bottomMenu}>
+			<div className={props.bottomOptionsMenu}>
 				<div className="bottomMenu">
 					<div
 						className="d-flex align-items-center justify-content-between border-bottom border-dark"
@@ -145,7 +144,7 @@ const KaraokeCommentSection = (props) => {
 						<div
 							className="closeIcon p-2 float-right"
 							style={{ fontSize: "1em" }}
-							onClick={() => props.setBottomMenu("")}>
+							onClick={() => props.setBottomOptionsMenu("")}>
 							<CloseSVG />
 						</div>
 					</div>
@@ -266,10 +265,10 @@ const KaraokeCommentSection = (props) => {
 														className="text-secondary"
 														onClick={() => {
 															if (comment.username == props.auth.username) {
-																setBottomOptionsMenu("menu-open")
-																setPostToEdit(comment.id)
+																setBottomMenu("menu-open")
+																setCommentToEdit(comment.id)
 																// Show and Hide elements
-																deleteLink.current.className = "d-block"
+																setCommentDeleteLink(true)
 															}
 														}}>
 														<OptionsSVG />
@@ -289,29 +288,14 @@ const KaraokeCommentSection = (props) => {
 			{/* Sliding Bottom Nav End */}
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomOptionsMenu}>
-				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
-						<div></div>
-						{/* <!-- Close Icon --> */}
-						<div
-							className="closeIcon p-2 float-right"
-							style={{ fontSize: "1em" }}
-							onClick={() => setBottomOptionsMenu("")}>
-							<CloseSVG />
-						</div>
-					</div>
-					<div
-						ref={deleteLink}
-						onClick={() => {
-							setBottomOptionsMenu("")
-							onDeleteComment(postToEdit)
-						}}>
-						<h6 className="pb-2">Delete comment</h6>
-					</div>
-				</div>
-			</div>
-			{/* Sliding Bottom Nav  end */}
+			<PostOptions
+				{...props}
+				bottomMenu={bottomMenu}
+				setBottomMenu={setBottomMenu}
+				commentToEdit={commentToEdit}
+				commentDeleteLink={commentDeleteLink}
+				onDeleteComment={onDeleteComment} />
+			{/* Sliding Bottom Nav end */}
 		</>
 	)
 }

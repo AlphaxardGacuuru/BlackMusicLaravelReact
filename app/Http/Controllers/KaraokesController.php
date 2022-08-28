@@ -20,6 +20,13 @@ class KaraokesController extends Controller
      */
     public function index()
     {
+        // Check if user is logged in
+        if (Auth::check()) {
+            $authUsername = auth()->user()->username;
+        } else {
+            $authUsername = '@guest';
+        }
+
         // Get Karaokes
         $getKaraokes = Karaokes::orderBy('id', 'ASC')->get();
 
@@ -28,7 +35,7 @@ class KaraokesController extends Controller
         foreach ($getKaraokes as $key => $karaoke) {
 
             // Check if user has saved karaoke
-            $hasSaved = SavedKaraokes::where('username', auth()->user()->username)
+            $hasSaved = SavedKaraokes::where('username', $authUsername)
                 ->where('karaoke_id', $karaoke->id)
                 ->exists();
 

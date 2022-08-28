@@ -8,6 +8,8 @@ import {
 import axios from 'axios';
 
 import Button from '../components/button'
+import { Link } from 'react-router-dom';
+import CloseSVG from '../svgs/CloseSVG';
 
 const LoginPopUp = (props) => {
 
@@ -69,6 +71,14 @@ const LoginPopUp = (props) => {
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
 							<a href="#">Login</a>
+						</div>
+						{/* <!-- Close Icon --> */}
+						<div
+							className="p-2"
+							style={{ fontSize: "1em" }}>
+							<Link to="/" style={{ color: "#fff" }}>
+								<CloseSVG />
+							</Link>
 						</div>
 					</div>
 					<div className="p-2">

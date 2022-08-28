@@ -8,6 +8,7 @@ const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
 const CommentsMedia = React.lazy(() => import('../components/CommentsMedia'))
 
 import CloseSVG from '../svgs/CloseSVG'
+import PostOptions from '../components/PostOptions'
 
 const PostShow = (props) => {
 
@@ -33,11 +34,11 @@ const PostShow = (props) => {
 
 	const [postComments, setPostComments] = useState(props.getLocalStorage("postComments"))
 	const [bottomMenu, setBottomMenu] = useState("")
-	const [commentToEdit, setCommentToEdit] = useState()
 	const [userToUnfollow, setUserToUnfollow] = useState()
 	const [postToEdit, setPostToEdit] = useState()
 	const [editLink, setEditLink] = useState()
 	const [deleteLink, setDeleteLink] = useState()
+	const [commentToEdit, setCommentToEdit] = useState()
 	const [commentDeleteLink, setCommentDeleteLink] = useState()
 	const [unfollowLink, setUnfollowLink] = useState()
 
@@ -49,6 +50,63 @@ const PostShow = (props) => {
 				props.setLocalStorage("postComments", res.data)
 			}).catch(() => props.setErrors(['Failed to fetch post comments']))
 	}, [])
+
+	// Function for deleting posts
+	const onDeletePost = (id) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.delete(`/api/posts/${id}`).then((res) => {
+				props.setMessages([res.data])
+				// Update posts
+				axios.get(`/api/posts`)
+					.then((res) => props.setPosts(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				props.setErrors(newError)
+			})
+		})
+	}
+
+	// Function for liking comments
+	const onCommentLike = (comment) => {
+		// Show like
+		const newPostComments = postComments
+			.filter((item) => {
+				// Get the exact comment and change like status
+				if (item.id == comment) {
+					item.hasLiked = !item.hasLiked
+				}
+				return true
+			})
+		// Set new comments
+		setPostComments(newPostComments)
+
+		// Add like to database
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`${props.url}/api/post-comment-likes`, {
+				comment: comment
+			}).then((res) => {
+				props.setMessages([res.data])
+				// Update Post Comments
+				axios.get(`${props.url}/api/post-comments`)
+					.then((res) => setPostComments(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				props.setErrors(newError)
+			})
+		})
+	}
 
 	// Function for deleting comments
 	const onDeleteComment = (id) => {
@@ -127,11 +185,10 @@ const PostShow = (props) => {
 									<CommentsMedia
 										{...props}
 										comment={comment}
-										postComments={postComments}
-										setPostComments={setPostComments}
 										setBottomMenu={setBottomMenu}
 										setCommentDeleteLink={setCommentDeleteLink}
 										setCommentToEdit={setCommentToEdit}
+										onCommentLike={onCommentLike}
 										onDeleteComment={onDeleteComment} />
 								</Suspense>
 							))}
@@ -141,29 +198,20 @@ const PostShow = (props) => {
 			</div>
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu}>
-				<div className="bottomMenu">
-					<div className="d-flex align-items-center justify-content-between" style={{ height: "3em" }}>
-						<div></div>
-						{/* <!-- Close Icon --> */}
-						<div
-							className="closeIcon p-2 float-right"
-							style={{ fontSize: "1em" }}
-							onClick={() => setBottomMenu("")}>
-							<CloseSVG />
-						</div>
-					</div>
-					{commentDeleteLink &&
-						<div
-							onClick={() => {
-								setBottomMenu("")
-								onDeleteComment(commentToEdit)
-							}}>
-							<h6 className="pb-2">Delete comment</h6>
-						</div>}
-				</div>
-			</div>
-			{/* Sliding Bottom Nav  end */}
+			<PostOptions
+				{...props}
+				bottomMenu={bottomMenu}
+				setBottomMenu={setBottomMenu}
+				unfollowLink={unfollowLink}
+				userToUnfollow={userToUnfollow}
+				editLink={editLink}
+				postToEdit={postToEdit}
+				deleteLink={deleteLink}
+				onDeletePost={onDeletePost}
+				commentToEdit={commentToEdit}
+				commentDeleteLink={commentDeleteLink}
+				onDeleteComment={onDeleteComment} />
+			{/* Sliding Bottom Nav end */}
 		</>
 	)
 }
