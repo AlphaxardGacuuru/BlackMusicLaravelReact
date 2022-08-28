@@ -17,7 +17,7 @@ const LoadingVideoMediaHorizontal = () => {
 					}}>
 					props.name
 				</h6>
-				<h6 className="mb-3 gradient"
+				<h6 className="mt-1 mb-3 gradient"
 					style={{
 						width: "8em",
 						whiteSpace: "nowrap",

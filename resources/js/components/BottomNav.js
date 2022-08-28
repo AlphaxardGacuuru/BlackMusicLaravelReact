@@ -91,8 +91,10 @@ const Bottomnav = (props) => {
 
 				{/* Audio Player */}
 				<div className="container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark">
-					<div className="pt-2 px-0" style={{ display: checkLocation && "none" }}>
-						{/* <!-- Close Icon --> */}
+					{/* <!-- Close Icon --> */}
+					<div
+						className="px-0 align-self-center"
+						style={{ display: checkLocation && "none" }}>
 						<span
 							onClick={() => {
 								props.setShow(0)
@@ -101,7 +103,8 @@ const Bottomnav = (props) => {
 							<CloseSVG />
 						</span>
 					</div>
-					<div className="p-2 mr-auto" style={{ display: checkLocation && "none" }} >
+					{/* Audio Details */}
+					<div className="p-2 mr-auto align-self-center" style={{ display: checkLocation && "none" }} >
 						<Link to={`/audio-show/${props.show}`}>
 							<h6
 								className="mb-0 pb-0"
@@ -114,14 +117,15 @@ const Bottomnav = (props) => {
 								}}>
 								{props.showAudio.name}
 							</h6>
-							<h6 className="mt-0 pt-0" style={{ color: "white" }}>
+							<h6 className="my-0 pt-0" style={{ color: "white" }}>
 								<small>{props.showAudio.username}</small>
 								<small className="ml-1">{props.showAudio.ft}</small>
 							</h6>
 						</Link>
 					</div>
+					{/* Loader */}
 					{props.audioLoader &&
-						<div style={{ padding: "10px", display: checkLocation && "none" }}>
+						<div className="align-self-center" style={{ padding: "10px", display: checkLocation && "none" }}>
 							<div className="spinner-border text-light"
 								style={{
 									borderTopWidth: "2px",
@@ -132,32 +136,34 @@ const Bottomnav = (props) => {
 								}}>
 							</div>
 						</div>}
+					{/* Previous */}
 					<div
 						style={{
 							cursor: "pointer",
 							display: checkLocation && "none"
 						}}
-						className="p-2">
+						className="p-2 align-self-center">
 						<span onClick={props.prevSong}><PreviousSVG /></span>
 					</div>
+					{/* Play / Pause */}
 					<div
 						style={{
 							cursor: "pointer",
 							display: checkLocation && "none",
 							color: "#FFD700"
 						}}
-						className="p-2">
-						<span
-							onClick={props.playBtn ? props.pauseSong : props.playSong}>
+						className="p-1 align-self-center">
+						<span style={{ fontSize: "2em" }} onClick={props.playBtn ? props.pauseSong : props.playSong}>
 							{props.playBtn ? <PauseSVG /> : <PlaySVG />}
 						</span>
 					</div>
+					{/* Next */}
 					<div
 						style={{
 							cursor: "pointer",
 							display: checkLocation && "none"
 						}}
-						className="p-2">
+						className="p-2 align-self-center">
 						<span onClick={props.nextSong}><NextSVG /></span>
 					</div>
 				</div>

@@ -190,6 +190,8 @@ const AudioShow = (props) => {
 		sessionStorage.setItem("page", location.pathname)
 	}
 
+	const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 	return (
 		<>
 			<div className="row">
@@ -235,14 +237,18 @@ const AudioShow = (props) => {
 					{/* Audio Controls */}
 					<div className="d-flex justify-content-between" style={{ color: "rgba(220,220,220,1)" }}>
 						{/* Timer */}
-						<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.currentTime)}</div>
+						<div
+							style={{ cursor: "pointer" }}
+							className="p-2 align-self-center">
+							{props.fmtMSS(props.currentTime)}
+						</div>
 						{/* Shuffle Button */}
 						<div
 							style={{
 								cursor: "pointer",
 								color: props.shuffle && "#FFD700"
 							}}
-							className="p-2"
+							className="p-2 align-self-center"
 							onClick={() => {
 								props.setShuffle(props.shuffle ? false : true)
 								props.setLoop(props.loop && false)
@@ -250,17 +256,17 @@ const AudioShow = (props) => {
 							<ShuffleSVG />
 						</div>
 						{/* Previous Button */}
-						<div style={{ cursor: "pointer" }} className="p-2">
+						<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
 							<span onClick={props.prevSong}><PreviousSVG /></span>
 						</div>
 						{/* Pause/Play Button */}
-						<div style={{ cursor: "pointer" }} className="p-2">
+						<div style={{ cursor: "pointer", fontSize: "1.5em" }} className="p-2 align-self-center">
 							<span onClick={props.playBtn ? props.pauseSong : props.playSong}>
 								{props.playBtn ? <PauseSVG /> : <PlaySVG />}
 							</span>
 						</div>
 						{/* Next Button */}
-						<div style={{ cursor: "pointer" }} className="p-2">
+						<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
 							<span onClick={props.nextSong}><NextSVG /></span>
 						</div>
 						{/* Loop Button */}
@@ -269,14 +275,18 @@ const AudioShow = (props) => {
 								cursor: "pointer",
 								color: props.loop && "#FFD700"
 							}}
-							className="p-2"
+							className="p-2 align-self-center"
 							onClick={() => {
 								props.setLoop(props.loop ? false : true)
 								props.setShuffle(props.shuffle && false)
 							}}>
 							<LoopSVG />
 						</div>
-						<div style={{ cursor: "pointer" }} className="p-2">{props.fmtMSS(props.dur)}</div>
+						<div
+							style={{ cursor: "pointer" }}
+							className="p-2 align-self-center">
+							{props.fmtMSS(props.dur)}
+						</div>
 					</div>
 
 					<div className="d-flex justify-content-end">
@@ -635,18 +645,11 @@ const AudioShow = (props) => {
 							return boughtAudio.username == props.auth.username &&
 								boughtAudio.audio_id != props.show
 						}).map((boughtAudio, key) => (
-							<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
+							<Suspense key={audio.id} fallback={<LoadingAudioMediaHorizontal />}>
 								<AudioMediaHorizontal
-									key={key}
-									setShow={props.setShow}
-									setLocalStorage={props.setLocalStorage}
-									link={`/audio-show/${boughtAudio.audio_id}`}
-									thumbnail={`/storage/${boughtAudio.thumbnail}`}
-									name={boughtAudio.name}
-									username={boughtAudio.username}
-									ft={boughtAudio.ft}
-									audioId={boughtAudio.audio_id}
-									showCartandBuyButton={false} />
+									{...props}
+									audio={audio}
+									onBuyAudios={onBuyAudios} />
 							</Suspense>
 						))}
 					{/* <!-- End of Up next Area --> */}
@@ -655,6 +658,11 @@ const AudioShow = (props) => {
 					<div className="p-2 mt-5 border-bottom border-dark">
 						<h5>Songs to watch</h5>
 					</div>
+					{/* Loading Audio items */}
+					{dummyArray
+						.filter(() => props.videos.length < 1)
+						.map((item, key) => (<LoadingAudioMediaHorizontal key={key} />))}
+
 					{props.audios
 						.filter((audio) => {
 							return !audio.hasBoughtAudio &&
@@ -662,20 +670,10 @@ const AudioShow = (props) => {
 								audio.id != show
 						}).slice(0, 10)
 						.map((audio, key) => (
-							<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
+							<Suspense key={audio.id} fallback={<LoadingAudioMediaHorizontal />}>
 								<AudioMediaHorizontal
-									key={key}
-									setShow={props.setShow}
-									setLocalStorage={props.setLocalStorage}
-									link={`/audio-show/${audio.id}`}
-									thumbnail={`/storage/${audio.thumbnail}`}
-									name={audio.name}
-									username={audio.username}
-									ft={audio.ft}
-									hasBoughtAudio={!audio.hasBoughtAudio}
-									audioInCart={audio.inCart}
-									audioId={audio.id}
-									onCartAudios={props.onCartAudios}
+									{...props}
+									audio={audio}
 									onBuyAudios={onBuyAudios} />
 							</Suspense>
 						))}

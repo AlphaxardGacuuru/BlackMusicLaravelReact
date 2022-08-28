@@ -11,9 +11,9 @@ const VideoMediaHorizontal = (props) => {
 			<div
 				className="thumbnail"
 				onClick={() => props.setShow(0)}>
-				<Link to={props.link}>
+				<Link to={`/video-show/${props.video.id}`}>
 					<Img
-						src={props.thumbnail}
+						src={props.video.thumbnail}
 						width="160em"
 						height="90em" />
 				</Link>
@@ -21,7 +21,7 @@ const VideoMediaHorizontal = (props) => {
 			<div
 				className="ml-2 mr-auto flex-grow-1"
 				onClick={() => props.setShow(0)}>
-				<Link to={props.link}>
+				<Link to={`/video-show/${props.video.id}`}>
 					<h6 className="mb-0"
 						style={{
 							width: "7em",
@@ -29,7 +29,7 @@ const VideoMediaHorizontal = (props) => {
 							overflow: "hidden",
 							textOverflow: "clip"
 						}}>
-						{props.name}
+						{props.video.name}
 					</h6>
 					<h6 className="mb-3"
 						style={{
@@ -38,51 +38,37 @@ const VideoMediaHorizontal = (props) => {
 							overflow: "hidden",
 							textOverflow: "clip"
 						}}>
-						<small>{props.username}</small>
-						<small className="ml-1">{props.ft}</small>
+						<small>{props.video.username}</small>
+						<small className="ml-1">{props.video.ft}</small>
 					</h6>
 				</Link>
-				{props.showCartandBuyButton ?
-					props.hasBoughtVideo ?
-						props.videoInCart ?
+				{!props.video.hasBoughtVideo ?
+					props.video.inCart ?
+						<button
+							className="btn text-light mb-1 rounded-0"
+							style={{
+								minWidth: "40px",
+								height: "33px",
+								backgroundColor: "#232323"
+							}}
+							onClick={() => props.onCartVideos(props.video.id)}>
+							<CartSVG />
+						</button> :
+						<>
 							<button
-								className="btn text-light mb-1 rounded-0"
-								style={{
-									minWidth: '40px',
-									height: '33px',
-									backgroundColor: "#232323"
-								}}
-								onClick={() => props.onCartVideos(props.videoId)}>
+								className="mysonar-btn white-btn mb-1"
+								style={{ minWidth: "40px", height: "33px" }}
+								onClick={() => props.onCartVideos(props.video.id)}>
 								<CartSVG />
-							</button> :
-							<>
-								<button
-									className="mysonar-btn white-btn mb-1"
-									style={{ minWidth: '40px', height: '33px' }}
-									onClick={() => props.onCartVideos(props.videoId)}>
-									<CartSVG />
-								</button>
-								<Button
-									btnClass={'btn mysonar-btn green-btn btn-2 float-right'}
-									btnText={'KES 20'}
-									onClick={() => props.onBuyVideos(props.videoId)} />
-							</> : ""
-					: ""}
+							</button>
+							<Button
+								btnClass="btn mysonar-btn green-btn btn-2 float-right"
+								btnText="KES 20"
+								onClick={() => props.onBuyVideos(props.video.id)} />
+						</> : ""}
 			</div>
 		</div>
 	)
-}
-
-VideoMediaHorizontal.defaultProps = {
-	link: '/',
-	thumbnail: '/',
-	name: 'name',
-	username: 'username',
-	ft: 'ft',
-	hasBoughtVideo: true,
-	videoInCart: true,
-	videoId: 1,
-	showCartandBuyButton: true,
 }
 
 export default VideoMediaHorizontal

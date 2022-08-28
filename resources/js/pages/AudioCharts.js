@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import Carousel from '../components/Carousel'
-import Img from '../components/Img'
-import Button from '../components/Button'
 import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
+import LoadingAvatarMedia from '../components/LoadingAvatarMedia'
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
+const AvatarMedia = React.lazy(() => import('../components/AvatarMedia'))
 
 const AudioCharts = (props) => {
 
@@ -147,7 +147,8 @@ const AudioCharts = (props) => {
 	// Load more on page bottom
 	window.onscroll = function (ev) {
 		if (location.pathname.match(/audio-charts/)) {
-			const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
+			const bottom = (window.innerHeight + window.scrollY) >=
+				(document.body.offsetHeight - document.body.offsetHeight / 16)
 
 			if (bottom) {
 				setAudioSlice(audioSlice + 8)
@@ -190,7 +191,9 @@ const AudioCharts = (props) => {
 							e.preventDefault()
 							onChart(chartItem)
 						}}>
-							<h5 className={chart == chartItem ? "active-scrollmenu m-0" : "m-0"}>{chartItem}</h5>
+							<h5 className={chart == chartItem ? "active-scrollmenu m-0" : "m-0"}>
+								{chartItem}
+							</h5>
 						</a>
 					</span>
 				))}
@@ -204,7 +207,9 @@ const AudioCharts = (props) => {
 							e.preventDefault()
 							onGenre(genreItem)
 						}}>
-							<h6 className={genre == genreItem ? "active-scrollmenu m-0" : "m-0"}>{genreItem}</h6>
+							<h6 className={genre == genreItem ? "active-scrollmenu m-0" : "m-0"}>
+								{genreItem}
+							</h6>
 						</a>
 					</span>
 				))}
@@ -220,40 +225,7 @@ const AudioCharts = (props) => {
 						{/* Loading animation */}
 						{dummyArray
 							.filter(() => props.users.length < 1)
-							.map((item, key) => (
-								<span key={key} style={{ padding: "5px" }}>
-									<span key={key} className="m-0 p-0">
-										<center>
-											<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
-												<div
-													className="bg-dark gradient"
-													style={{ width: "150px", height: "150px" }}>
-												</div>
-											</div>
-											<h6 className="mt-2 mb-0 bg-light gradient"
-												style={{
-													width: "100px",
-													whiteSpace: "nowrap",
-													overflow: "hidden",
-													textOverflow: "clip",
-													color: "#232323"
-												}}>
-												user.name
-											</h6>
-											<h6 className="gradient"
-												style={{
-													width: "100px",
-													whiteSpace: "nowrap",
-													overflow: "hidden",
-													textOverflow: "clip",
-													color: "#232323"
-												}}>
-												user.username
-											</h6>
-										</center>
-									</span>
-								</span>
-							))}
+							.map((item, key) => (<LoadingAvatarMedia key={key} />))}
 
 						{/*  Echo Artists  */}
 						{artistsArray
@@ -266,34 +238,9 @@ const AudioCharts = (props) => {
 									{props.users
 										.filter((user) => user.username == artistArray.key)
 										.map((user, key) => (
-											<span key={key} className="m-0 p-0">
-												<center>
-													<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
-														<Link to={"/profile/" + user.username}>
-															<Img src={user.pp}
-																width='150px'
-																height='150px' />
-														</Link>
-													</div>
-													<h6 className="mt-2 mb-0"
-														style={{
-															width: "100px",
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}>
-														{user.name}
-													</h6>
-													<h6 style={{
-														width: "100px",
-														whiteSpace: "nowrap",
-														overflow: "hidden",
-														textOverflow: "clip"
-													}}>
-														<small>{user.username}</small>
-													</h6>
-												</center>
-											</span>
+											<Suspense key={key} fallback={<LoadingAvatarMedia />}>
+												<AvatarMedia key={key} user={user} />
+											</Suspense>
 										))}
 								</span>
 							))}
@@ -310,27 +257,24 @@ const AudioCharts = (props) => {
 				<div className="col-sm-1"></div>
 				<div className="col-sm-10">
 					<h5 className="p-2">Songs</h5>
+					{/* Loading Audio items */}
+					{dummyArray
+						.filter(() => props.videos.length < 1)
+						.map((item, key) => (<LoadingAudioMediaHorizontal key={key} />))}
+
+					{/* Audio Items */}
 					{audiosArray
 						.slice(0, audioSlice)
 						.map((audioArray, key) => (
 							<div key={key}>
 								{props.audios
-									.filter((audio) => audio.id == audioArray.key && audio.username != "@blackmusic")
+									.filter((audio) => audio.id == audioArray.key &&
+										audio.username != "@blackmusic")
 									.map((audio, key) => (
-										<Suspense fallback={<LoadingAudioMediaHorizontal />}>
+										<Suspense key={audio.id} fallback={<LoadingAudioMediaHorizontal />}>
 											<AudioMediaHorizontal
-												key={key}
-												setShow={props.setShow}
-												setLocalStorage={props.setLocalStorage}
-												link={`/audio-show/${audio.id}`}
-												thumbnail={`/storage/${audio.thumbnail}`}
-												name={audio.name}
-												username={audio.username}
-												ft={audio.ft}
-												hasBoughtAudio={!audio.hasBoughtAudio}
-												audioInCart={audio.inCart}
-												audioId={audio.id}
-												onCartAudios={props.onCartAudios}
+												{...props}
+												audio={audio}
 												onBuyAudios={onBuyAudios} />
 										</Suspense>
 									))}

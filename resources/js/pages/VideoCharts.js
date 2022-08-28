@@ -2,11 +2,14 @@ import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import Carousel from '../components/Carousel'
-import Img from '../components/Img'
-import Button from '../components/Button'
+import LoadingVideoMediaVertical from '../components/LoadingVideoMediaVertical'
 import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
+import LoadingAvatarMedia from '../components/LoadingAvatarMedia'
+import { divide } from 'lodash'
 
+const VideoMediaVertical = React.lazy(() => import('../components/VideoMediaVertical'))
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
+const AvatarMedia = React.lazy(() => import('../components/AvatarMedia'))
 
 const VideoCharts = (props) => {
 
@@ -188,7 +191,9 @@ const VideoCharts = (props) => {
 							e.preventDefault()
 							onChart(chartItem)
 						}}>
-							<h5 className={chart == chartItem ? "active-scrollmenu m-0" : "m-0"}>{chartItem}</h5>
+							<h5 className={chart == chartItem ? "active-scrollmenu m-0" : "m-0"}>
+								{chartItem}
+							</h5>
 						</a>
 					</span>
 				))}
@@ -202,7 +207,9 @@ const VideoCharts = (props) => {
 							e.preventDefault()
 							onGenre(genreItem)
 						}}>
-							<h6 className={genre == genreItem ? "active-scrollmenu m-0" : "m-0"}>{genreItem}</h6>
+							<h6 className={genre == genreItem ? "active-scrollmenu m-0" : "m-0"}>
+								{genreItem}
+							</h6>
 						</a>
 					</span>
 				))}
@@ -218,40 +225,7 @@ const VideoCharts = (props) => {
 						{/* Loading animation */}
 						{dummyArray
 							.filter(() => props.users.length < 1)
-							.map((item, key) => (
-								<span key={key} style={{ padding: "5px" }}>
-									<span key={key} className="m-0 p-0">
-										<center>
-											<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
-												<div
-													className="bg-dark text-light gradient"
-													style={{ width: "150px", height: "150px" }}>
-												</div>
-											</div>
-											<h6 className="mt-2 mb-0 gradient"
-												style={{
-													width: "100px",
-													whiteSpace: "nowrap",
-													overflow: "hidden",
-													textOverflow: "clip",
-													color: "#232323"
-												}}>
-												user.name
-											</h6>
-											<h6 className="gradient"
-												style={{
-													width: "100px",
-													whiteSpace: "nowrap",
-													overflow: "hidden",
-													textOverflow: "clip",
-													color: "#232323"
-												}}>
-												user.username
-											</h6>
-										</center>
-									</span>
-								</span>
-							))}
+							.map((item, key) => (<LoadingAvatarMedia key={key} />))}
 
 						{/*  Echo Artists  */}
 						{artistsArray
@@ -264,34 +238,9 @@ const VideoCharts = (props) => {
 									{props.users
 										.filter((user) => user.username == artistArray.key)
 										.map((user, key) => (
-											<span key={key} className="m-0 p-0">
-												<center>
-													<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
-														<Link to={"/profile/" + user.username}>
-															<Img src={user.pp}
-																width='150px'
-																height='150px' />
-														</Link>
-													</div>
-													<h6 className="mt-2 mb-0"
-														style={{
-															width: "100px",
-															whiteSpace: "nowrap",
-															overflow: "hidden",
-															textOverflow: "clip"
-														}}>
-														{user.name}
-													</h6>
-													<h6 style={{
-														width: "100px",
-														whiteSpace: "nowrap",
-														overflow: "hidden",
-														textOverflow: "clip"
-													}}>
-														{user.username}
-													</h6>
-												</center>
-											</span>
+											<Suspense key={key} fallback={<LoadingAvatarMedia />}>
+												<AvatarMedia key={key} user={user} />
+											</Suspense>
 										))}
 								</span>
 							))}
@@ -301,121 +250,40 @@ const VideoCharts = (props) => {
 
 					{/* <!-- ****** Songs Area ****** - */}
 					<h5>Songs</h5>
-					<div className="hidden" onScroll={handleScroll}>
-						{/* Loading Video items */}
-						{dummyArray
-							.filter(() => props.videos.length < 1)
-							.map((item, key) => (
-								<span key={key}>
-									<span
-										className="m-1 pb-2"
-										style={{
-											borderRadius: "0px",
-											display: "inline-block",
-											textAlign: "center",
-											color: "#232323"
-										}}>
-										<div className="thumbnail">
-											<div className="bg-light gradient" style={{ width: "160em", height: "90em" }}></div>
-										</div>
-										<h6 className="m-0 pt-2 px-1 gradient w-75"
-											style={{
-												width: "150px",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip",
-												color: "#232323"
-											}}>
-											video
-										</h6>
-										<h6 className="mt-0 mx-1 mb-2 px-1 py-0 gradient w-50" style={{ color: "#232323" }}>username</h6>
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-										<br />
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-									</span>
-								</span>
-							))}
+					<center className="hidden">
+						<div className="d-flex flex-wrap justify-content-center" onScroll={handleScroll}>
+							{/* Loading Video items */}
+							{dummyArray
+								.filter(() => props.videos.length < 1)
+								.map((item, key) => (
+									<center className="mx-1 mb-2">
+										<LoadingVideoMediaVertical key={key} />
+									</center>
+								))}
 
-						{/* Real Video items */}
-						{videosArray
-							.slice(0, videoSlice)
-							.map((videoArray, key) => (
-								<span key={key}>
-									{props.videos
-										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
-										.map((video, key) => (
-											<span key={key}
-												className="m-1 pb-2"
-												style={{
-													borderRadius: "0px",
-													display: "inline-block",
-													textAlign: "center"
-												}}>
-												<div className="thumbnail">
-													<Link to={`/video-show/${video.id}`}>
-														<Img src={video.thumbnail}
-															width="160em"
-															height="90em" />
-													</Link>
-												</div>
-												<h6 className="m-0 pt-2 px-1"
-													style={{
-														width: "150px",
-														whiteSpace: "nowrap",
-														overflow: "hidden",
-														textOverflow: "clip"
-													}}>{video.name}
-												</h6>
-												<h6 className="mt-0 mx-1 mb-2 py-0 px-1">
-													<small>{video.username}</small>
-													<small className="ml-1">{video.ft}</small>
-												</h6>
-												{!video.hasBoughtVideo ?
-													video.inCart ?
-														<button className="btn text-light mb-1 rounded-0"
-															style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}
-															onClick={() => props.onCartVideos(videoArray.key)}>
-															<svg className='bi bi-cart3'
-																width='1em'
-																height='1em'
-																viewBox='0 0 16 16'
-																fill='currentColor'
-																xmlns='http://www.w3.org/2000/svg'>
-																<path fillRule='evenodd'
-																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-															</svg>
-														</button> :
-														<button className="mysonar-btn white-btn mb-1"
-															style={{ minWidth: '90px', height: '33px' }}
-															onClick={() => props.onCartVideos(videoArray.key)}>
-															<svg className='bi bi-cart3'
-																width='1em'
-																height='1em'
-																viewBox='0 0 16 16'
-																fill='currentColor'
-																xmlns='http://www.w3.org/2000/svg'>
-																<path fillRule='evenodd'
-																	d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' />
-															</svg>
-														</button> : ""}
-												<br />
-												{!video.hasBoughtVideo ?
-													!video.inCart &&
-													<Button
-														btnClass={'btn mysonar-btn green-btn btn-2'}
-														btnText={'KES 20'}
-														onClick={() => onBuyVideos(videoArray.key)} /> : ""}
-											</span>
-										))}
-								</span>
-							))}
-					</div>
+							{/* Real Video items */}
+							{videosArray
+								.slice(0, videoSlice)
+								.map((videoArray, key) => (
+									<span key={key} style={{ textAlign: "center" }}>
+										{props.videos
+											.filter((video) => video.id == videoArray.key &&
+												video.username != "@blackmusic")
+											.map((video, key) => (
+												<center className="mx-1 mb-2">
+													<Suspense key={video.id} fallback={<LoadingVideoMediaVertical />}>
+														<VideoMediaVertical
+															{...props}
+															video={video}
+															onBuyVideos={onBuyVideos}
+															onClick={() => props.setShow(0)} />
+													</Suspense>
+												</center>
+											))}
+									</span>
+								))}
+						</div>
+					</center>
 					{/* <!-- ****** Songs Area End ****** - */}
 
 					{/* For mobile */}
@@ -423,44 +291,7 @@ const VideoCharts = (props) => {
 						{/* Loading Video items */}
 						{dummyArray
 							.filter(() => props.videos.length < 1)
-							.map((item, key) => (
-								<div key={key} className="d-flex p-2 border-bottom">
-									<div className="thumbnail gradient">
-										<div className="w-25 h-25"></div>
-									</div>
-									<div className="ml-2 mr-auto flex-grow-1">
-										<h6 className="mb-0 gradient"
-											style={{
-												width: "8em",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip",
-												color: "#232323"
-											}}>
-											props.name
-										</h6>
-										<h6 className="mb-3 gradient"
-											style={{
-												width: "8em",
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip",
-												color: "#232323"
-											}}>
-											<small style={{ color: "#232332" }}>props.username</small>
-											<small style={{ color: "#232332" }} className="ml-1">props.ft</small>
-										</h6>
-										<button
-											className="btn mb-1 rounded-0"
-											style={{ minWidth: '40px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-										<button
-											className="btn mb-1 rounded-0 float-right"
-											style={{ minWidth: '90px', height: '33px', backgroundColor: "#232323" }}>
-										</button>
-									</div>
-								</div>
-							))}
+							.map((item, key) => (<LoadingVideoMediaHorizontal key={key} />))}
 
 						{/* Real Video items */}
 						{videosArray
@@ -468,22 +299,15 @@ const VideoCharts = (props) => {
 							.map((videoArray, key) => (
 								<div key={key}>
 									{props.videos
-										.filter((video) => video.id == videoArray.key && video.username != "@blackmusic")
+										.filter((video) => video.id == videoArray.key &&
+											video.username != "@blackmusic")
 										.map((video, key) => (
 											<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 												<VideoMediaHorizontal
-													onClick={() => props.setShow(0)}
-													setShow={props.setShow}
-													link={`/video-show/${video.id}`}
-													thumbnail={video.thumbnail}
-													name={video.name}
-													username={video.username}
-													ft={video.ft}
-													hasBoughtVideo={!video.hasBoughtVideo}
-													videoInCart={video.inCart}
-													videoId={videoArray.key}
-													onCartVideos={props.onCartVideos}
-													onBuyVideos={onBuyVideos} />
+													{...props}
+													video={video}
+													onBuyVideos={onBuyVideos}
+													onClick={() => props.setShow(0)} />
 											</Suspense>
 										))}
 								</div>

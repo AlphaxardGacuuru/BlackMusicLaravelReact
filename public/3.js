@@ -23,7 +23,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var VideoMediaVertical = function VideoMediaVertical(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "mx-1 pt-0 px-0 pb-2"
+    className: "mx-1 pt-0 px-0 pb-2",
+    style: {
+      display: "inline-block"
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "thumbnail"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -44,11 +47,11 @@ var VideoMediaVertical = function VideoMediaVertical(props) {
     }
   }, props.video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mt-0 mx-1 mb-2 px-1 py-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username, " ", props.video.ft))), props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn mb-1 rounded-0 text-light",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username, " ", props.video.ft))), !props.video.hasBoughtVideo ? props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn text-light mb-1 rounded-0",
     style: {
-      minWidth: '90px',
-      height: '33px',
+      minWidth: "90px",
+      height: "33px",
       backgroundColor: "#232323"
     },
     onClick: function onClick() {
@@ -64,12 +67,12 @@ var VideoMediaVertical = function VideoMediaVertical(props) {
       return props.onCartVideos(props.video.id);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CartSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: 'btn mysonar-btn green-btn btn-2',
-    btnText: 'KES 20',
+    btnClass: "btn mysonar-btn green-btn btn-2",
+    btnText: "KES 20",
     onClick: function onClick() {
-      return onBuyVideos(props.video.id);
+      return props.onBuyVideos(props.video.id);
     }
-  })));
+  })) : "");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VideoMediaVertical);

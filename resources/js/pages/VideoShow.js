@@ -556,21 +556,10 @@ const VideoShow = (props) => {
 						}).map((boughtVideo, key) => (
 							<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 								<VideoMediaHorizontal
-									key={key}
-									onClick={() => props.setShow(0)}
-									// onClick={
-									// 	window.scrollBy({
-									// 		top: -window.innerHeight,
-									// 		right: 0,
-									// 		behavior: "smooth"
-									// 	})}
-									setShow={props.setShow}
-									link={`/video-show/${boughtVideo.video_id}`}
-									thumbnail={boughtVideo.thumbnail}
-									name={boughtVideo.name}
-									username={boughtVideo.username}
-									ft={boughtVideo.ft}
-									showCartandBuyButton={false} />
+									{...props}
+									video={video}
+									onBuyVideos={onBuyVideos}
+									onClick={() => props.setShow(0)} />
 							</Suspense>
 						))}
 					{/* <!-- End of Up next Area --> */}
@@ -586,29 +575,12 @@ const VideoShow = (props) => {
 								video.id != show
 						}).slice(0, 10)
 						.map((video, key) => (
-							<Suspense
-								key={key}
-								fallback={<LoadingVideoMediaHorizontal />}>
+							<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 								<VideoMediaHorizontal
-									key={key}
-									onClick={() => props.setShow(0)}
-									// onClick={
-									// 	window.scrollBy({
-									// 		top: -window.innerHeight,
-									// 		right: 0,
-									// 		behavior: "smooth"
-									// 	})}
-									setShow={props.setShow}
-									link={`/video-show/${video.id}`}
-									thumbnail={video.thumbnail}
-									name={video.name}
-									username={video.username}
-									ft={video.ft}
-									videoInCart={video.inCart}
-									hasBoughtVideo={!video.hasBoughtVideo}
-									videoId={video.id}
-									onCartVideos={props.onCartVideos}
-									onBuyVideos={onBuyVideos} />
+									{...props}
+									video={video}
+									onBuyVideos={onBuyVideos}
+									onClick={() => props.setShow(0)} />
 							</Suspense>
 						))}
 				</div>

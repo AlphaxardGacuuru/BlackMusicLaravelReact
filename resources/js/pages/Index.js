@@ -13,7 +13,6 @@ const VideoMediaVertical = React.lazy(() => import('../components/VideoMediaVert
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
 
-import CloseSVG from '../svgs/CloseSVG'
 import PenSVG from '../svgs/PenSVG'
 import ChatSVG from '../svgs/ChatSVG'
 import DecoSVG from '../svgs/DecoSVG'
@@ -203,7 +202,11 @@ const Index = (props) => {
 								.slice(0, videoSlice)
 								.map((video, key) => (
 									<Suspense key={key} fallback={<LoadingVideoMediaVertical />}>
-										<VideoMediaVertical {...props} video={video} />
+										<VideoMediaVertical
+											{...props}
+											video={video}
+											onBuyVideos={onBuyVideos}
+											onClick={() => props.setShow(0)} />
 									</Suspense>
 								))}
 							<br />
@@ -255,21 +258,13 @@ const Index = (props) => {
 						{props.videos
 							.filter((video) => !video.hasBoughtVideo)
 							.slice(0, 10)
-							.map((video, index) => (
-								<Suspense key={index} fallback={<LoadingVideoMediaHorizontal />}>
+							.map((video, key) => (
+								<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 									<VideoMediaHorizontal
-										onClick={() => props.setShow(0)}
-										setShow={props.setShow}
-										link={`/video-show/${video.id}`}
-										thumbnail={video.thumbnail}
-										name={video.name}
-										username={video.username}
-										ft={video.ft}
-										hasBoughtVideo={!video.hasBoughtVideo}
-										videoInCart={video.inCart}
-										videoId={video.id}
-										onCartVideos={props.onCartVideos}
-										onBuyVideos={onBuyVideos} />
+										{...props}
+										video={video}
+										onBuyVideos={onBuyVideos}
+										onClick={() => props.setShow(0)} />
 								</Suspense>
 							))}
 					</div>
@@ -289,8 +284,7 @@ const Index = (props) => {
 				editLink={editLink}
 				postToEdit={postToEdit}
 				deleteLink={deleteLink}
-				onDeletePost={onDeletePost}
-			/>
+				onDeletePost={onDeletePost} />
 			{/* Sliding Bottom Nav end */}
 		</>
 	)

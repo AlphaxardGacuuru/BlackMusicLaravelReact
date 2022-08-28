@@ -8,7 +8,7 @@ import CartSVG from '../svgs/CartSVG'
 
 const VideoMediaVertical = (props) => {
 	return (
-		<span className="mx-1 pt-0 px-0 pb-2">
+		<span className="mx-1 pt-0 px-0 pb-2" style={{ display: "inline-block" }}>
 			<div className="thumbnail">
 				<Link to={`/video-show/${props.video.id}`}>
 					<Img src={props.video.thumbnail.match(/http/) ?
@@ -32,30 +32,31 @@ const VideoMediaVertical = (props) => {
 					<small>{props.video.username} {props.video.ft}</small>
 				</h6>
 			</Link>
-			{props.video.inCart ?
-				<button
-					className="btn mb-1 rounded-0 text-light"
-					style={{
-						minWidth: '90px',
-						height: '33px',
-						backgroundColor: "#232323"
-					}}
-					onClick={() => props.onCartVideos(props.video.id)}>
-					<CartSVG />
-				</button> :
-				<>
+			{!props.video.hasBoughtVideo ?
+				props.video.inCart ?
 					<button
-						className="mysonar-btn white-btn mb-1"
-						style={{ minWidth: '90px', height: '33px' }}
+						className="btn text-light mb-1 rounded-0"
+						style={{
+							minWidth: "90px",
+							height: "33px",
+							backgroundColor: "#232323"
+						}}
 						onClick={() => props.onCartVideos(props.video.id)}>
 						<CartSVG />
-					</button>
-					<br />
-					<Button
-						btnClass={'btn mysonar-btn green-btn btn-2'}
-						btnText={'KES 20'}
-						onClick={() => onBuyVideos(props.video.id)} />
-				</>}
+					</button> :
+					<>
+						<button
+							className="mysonar-btn white-btn mb-1"
+							style={{ minWidth: '90px', height: '33px' }}
+							onClick={() => props.onCartVideos(props.video.id)}>
+							<CartSVG />
+						</button>
+						<br />
+						<Button
+							btnClass="btn mysonar-btn green-btn btn-2"
+							btnText="KES 20"
+							onClick={() => props.onBuyVideos(props.video.id)} />
+					</> : ""}
 		</span>
 	)
 }

@@ -7,7 +7,6 @@ import Button from '../components/Button'
 import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
 import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
 
-import CloseSVG from '../svgs/CloseSVG'
 import CheckSVG from '../svgs/CheckSVG';
 import DecoSVG from '../svgs/DecoSVG';
 import LoadingPostsMedia from '../components/LoadingPostsMedia';
@@ -219,19 +218,10 @@ const Profile = (props) => {
 									.map((video, index) => (
 										<Suspense key={video.id} fallback={<LoadingVideoMediaHorizontal />}>
 											<VideoMediaHorizontal
-												key={video.id}
-												onClick={() => props.setShow(0)}
-												setShow={props.setShow}
-												link={`/video-show/${video.id}`}
-												thumbnail={video.thumbnail}
-												name={video.name}
-												username={video.username}
-												ft={video.ft}
-												hasBoughtVideo={!video.hasBoughtVideo}
-												videoInCart={video.inCart}
-												videoId={video.id}
-												onCartVideos={props.onCartVideos}
-												onBuyVideos={onBuyVideos} />
+												{...props}
+												video={video}
+												onBuyVideos={onBuyVideos}
+												onClick={() => props.setShow(0)} />
 										</Suspense>
 									))}
 							</div>
@@ -294,22 +284,11 @@ const Profile = (props) => {
 								</div>
 								{props.audios
 									.filter((audio) => audio.album_id == audioAlbum.id)
-									.map((audio, index) => (
+									.map((audio, key) => (
 										<Suspense key={audio.id} fallback={<LoadingAudioMediaHorizontal />}>
 											<AudioMediaHorizontal
-												key={audio.id}
-												onClick={() => props.setShow(0)}
-												setShow={props.setShow}
-												setLocalStorage={props.setLocalStorage}
-												link={`/audio-show/${audio.id}`}
-												thumbnail={`storage/${audio.thumbnail}`}
-												name={audio.name}
-												username={audio.username}
-												ft={audio.ft}
-												hasBoughtAudio={!audio.hasBoughtAudio}
-												audioInCart={audio.inCart}
-												audioId={audio.id}
-												onCartAudios={props.onCartAudios}
+												{...props}
+												audio={audio}
 												onBuyAudios={onBuyAudios} />
 										</Suspense>
 									))}
@@ -330,8 +309,7 @@ const Profile = (props) => {
 				editLink={editLink}
 				postToEdit={postToEdit}
 				deleteLink={deleteLink}
-				onDeletePost={onDeletePost}
-			/>
+				onDeletePost={onDeletePost} />
 			{/* Sliding Bottom Nav end */}
 		</>
 	)

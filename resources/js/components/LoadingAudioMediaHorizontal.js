@@ -23,7 +23,7 @@ const LoadingAudioMediaHorizontal = () => {
 						}}>
 						props.name
 					</h6>
-					<h6 className="mt-0 pt-0 gradient"
+					<h6 className="mt-1 pt-0 gradient"
 						style={{
 							maxWidth: "6em",
 							whiteSpace: "nowrap",
