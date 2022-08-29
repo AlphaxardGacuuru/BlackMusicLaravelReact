@@ -59,7 +59,17 @@ function App() {
 
 	// console.log(process.env.MIX_APP_URL)
 
-	const url = window.location.href.match(/https/) ?
+	// Redirect if URL is not secure
+	var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
+
+	if (unsecureUrl) {
+		 window.location.href = 'https://music.black.co.ke'
+	}
+
+	// Set Global Url
+	var currentUrl = window.location.href.match(/https/)
+
+	const url = currentUrl ?
 		'https://music.black.co.ke' :
 		'http://localhost:3000'
 
