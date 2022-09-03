@@ -227,8 +227,6 @@ function App() {
 				}
 			}).catch(() => setErrors(["Failed to fetch auth"]))
 
-		console.log("effect rendered")
-
 	}, [autoLoggedIn])
 
 	console.log("rendered")

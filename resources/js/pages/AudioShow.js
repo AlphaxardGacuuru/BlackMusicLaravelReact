@@ -21,8 +21,8 @@ import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import DecoSVG from '../svgs/DecoSVG'
 import PostOptions from '../components/PostOptions';
-import LoadingPostsMedia from '../components/LoadingPostsMedia';
-import CommentsMedia from '../components/CommentsMedia';
+import LoadingPostMedia from '../components/LoadingPostMedia';
+import CommentMedia from '../components/CommentMedia';
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -42,7 +42,7 @@ const AudioShow = (props) => {
 	const [bottomMenu, setBottomMenu] = useState("")
 	const [commentToEdit, setCommentToEdit] = useState()
 	const [commentDeleteLink, setCommentDeleteLink] = useState()
-	
+
 	// Fetch Audio Comments
 	useEffect(() => {
 
@@ -528,8 +528,8 @@ const AudioShow = (props) => {
 								audioComments
 									.filter((comment) => comment.audio_id == show)
 									.map((comment, key) => (
-										<Suspense key={key} fallback={<LoadingPostsMedia />}>
-											<CommentsMedia
+										<Suspense key={key} fallback={<LoadingPostMedia />}>
+											<CommentMedia
 												{...props}
 												comment={comment}
 												setBottomMenu={setBottomMenu}

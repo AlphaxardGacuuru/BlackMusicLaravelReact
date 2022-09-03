@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./resources/js/components/CommentsMedia.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/CommentsMedia.js ***!
-  \**************************************************/
+/***/ "./resources/js/components/CommentMedia.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/CommentMedia.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

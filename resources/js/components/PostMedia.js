@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import Img from '../components/Img'
-import Polls from '../components/Polls'
+import Poll from './Poll'
 
 import DecoSVG from '../svgs/DecoSVG'
 import OptionsSVG from '../svgs/OptionsSVG'
@@ -11,7 +11,32 @@ import HeartSVG from '../svgs/HeartSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import ShareSVG from '../svgs/ShareSVG'
 
-const PostsMedia = (props) => {
+const PostMedia = (props) => {
+
+	// Function for voting in poll
+	const onPoll = (post, parameter) => {
+		axios.get('sanctum/csrf-cookie').then(() => {
+			axios.post(`/api/polls`, {
+				post: post,
+				parameter: parameter
+			}).then((res) => {
+				props.setMessages([res.data])
+				// Update posts
+				axios.get(`/api/posts`)
+					.then((res) => props.setPosts(res.data))
+			}).catch((err) => {
+				const resErrors = err.response.data.errors
+				var resError
+				var newError = []
+				for (resError in resErrors) {
+					newError.push(resErrors[resError])
+				}
+				// Get other errors
+				newError.push(err.response.data.message)
+				props.setErrors(newError)
+			})
+		})
+	}
 
 	// Function for liking posts
 	const onPostLike = (post) => {
@@ -107,7 +132,69 @@ const PostsMedia = (props) => {
 				</div>
 
 				{/* Polls */}
-				<Polls {...props} post={props.post} />
+				{/* Parameter 1 */}
+				<Poll
+					{...props}
+					parameter={props.post.parameter_1}
+					hasVoted={props.post.hasVoted1}
+					width={`${props.post.percentage1}%`}
+					bgColor={props.post.parameter_1 == props.post.winner ? "#FFD700" : "#232323"}
+					bgColor2={props.post.parameter_1 == props.post.winner ? "#FFD700" : "grey"}
+					text={`${props.post.parameter_1} - ${props.post.percentage1} %`}
+					onPoll={onPoll} />
+
+				{/* Parameter 2 */}
+				<Poll
+					{...props}
+					parameter={props.post.parameter_2}
+					hasVoted={props.post.hasVoted2}
+					width={`${props.post.percentage2}%`}
+					bgColor={props.post.parameter_2 == props.post.winner ? "#FFD700" : "#232323"}
+					bgColor2={props.post.parameter_2 == props.post.winner ? "#FFD700" : "grey"}
+					text={`${props.post.parameter_2} - ${props.post.percentage2} %`}
+					onPoll={onPoll} />
+
+				{/* Parameter 3 */}
+				<Poll
+					{...props}
+					parameter={props.post.parameter_3}
+					hasVoted={props.post.hasVoted3}
+					width={`${props.post.percentage3}%`}
+					bgColor={props.post.parameter_3 == props.post.winner ? "#FFD700" : "#232323"}
+					bgColor2={props.post.parameter_3 == props.post.winner ? "#FFD700" : "grey"}
+					text={`${props.post.parameter_3} - ${props.post.percentage3} %`}
+					onPoll={onPoll} />
+
+				{/* Parameter 4 */}
+				<Poll
+					{...props}
+					parameter={props.post.parameter_4}
+					hasVoted={props.post.hasVoted4}
+					width={`${props.post.percentage4}%`}
+					bgColor={props.post.parameter_4 == props.post.winner ? "#FFD700" : "#232323"}
+					bgColor2={props.post.parameter_4 == props.post.winner ? "#FFD700" : "grey"}
+					text={`${props.post.parameter_4} - ${props.post.percentage4} %`}
+					onPoll={onPoll} />
+
+				{/* Parameter 5 */}
+				<Poll
+					{...props}
+					parameter={props.post.parameter_5}
+					hasVoted={props.post.hasVoted5}
+					width={`${props.post.percentage5}%`}
+					bgColor={props.post.parameter_4 == props.post.winner ? "#FFD700" : "#232323"}
+					bgColor2={props.post.parameter_4 == props.post.winner ? "#FFD700" : "grey"}
+					text={`${props.post.parameter_5} - ${props.post.percentage5} %`}
+					onPoll={onPoll} />
+
+				{/* Total votes */}
+				{props.post.parameter_1 ?
+					props.post.username == props.auth.username || !props.post.isWithin24Hrs ?
+						<small style={{ color: "grey" }}>
+							<i>Total votes: {props.post.totalVotes}</i>
+							<br />
+						</small> : ""
+					: ""}
 				{/* Polls End */}
 
 				{/* Post likes */}
@@ -223,4 +310,4 @@ const PostsMedia = (props) => {
 	)
 }
 
-export default PostsMedia
+export default PostMedia

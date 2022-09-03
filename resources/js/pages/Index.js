@@ -6,12 +6,12 @@ import Img from '../components/Img'
 import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
 import LoadingMusiciansHorizontal from '../components/LoadingMusiciansHorizontal'
 import LoadingVideoMediaVertical from '../components/LoadingVideoMediaVertical'
-import LoadingPostsMedia from '../components/LoadingPostsMedia'
+import LoadingPostMedia from '../components/LoadingPostMedia'
 
 const MusiciansHorizontal = React.lazy(() => import('../components/MusiciansHorizontal'))
 const VideoMediaVertical = React.lazy(() => import('../components/VideoMediaVertical'))
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
-const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
+const PostMedia = React.lazy(() => import('../components/PostMedia'))
 
 import PenSVG from '../svgs/PenSVG'
 import ChatSVG from '../svgs/ChatSVG'
@@ -220,14 +220,14 @@ const Index = (props) => {
 						{/* Loading Post items */}
 						{dummyArray
 							.filter(() => props.posts.length < 1)
-							.map((item, key) => (<LoadingPostsMedia key={key} />))}
+							.map((item, key) => (<LoadingPostMedia key={key} />))}
 
 						{/* Posts */}
 						{props.posts
 							.filter((post) => post.hasFollowed)
 							.map((post, key) => (
-								<Suspense key={key} fallback={<LoadingPostsMedia />}>
-									<PostsMedia
+								<Suspense key={key} fallback={<LoadingPostMedia />}>
+									<PostMedia
 										{...props}
 										post={post}
 										setBottomMenu={setBottomMenu}

@@ -9,8 +9,8 @@ import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizont
 
 import CheckSVG from '../svgs/CheckSVG';
 import DecoSVG from '../svgs/DecoSVG';
-import LoadingPostsMedia from '../components/LoadingPostsMedia';
-import PostsMedia from '../components/PostsMedia';
+import LoadingPostMedia from '../components/LoadingPostMedia';
+import PostMedia from '../components/PostMedia';
 import PostOptions from '../components/PostOptions';
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
@@ -241,8 +241,8 @@ const Profile = (props) => {
 					{props.posts
 						.filter((post) => post.username == username)
 						.map((post, key) => (
-							<Suspense key={key} fallback={<LoadingPostsMedia />}>
-								<PostsMedia
+							<Suspense key={key} fallback={<LoadingPostMedia />}>
+								<PostMedia
 									{...props}
 									post={post}
 									setBottomMenu={setBottomMenu}

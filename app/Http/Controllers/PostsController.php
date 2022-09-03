@@ -35,7 +35,12 @@ class PostsController extends Controller
 
         $posts = [];
 
-        foreach ($getPosts as $key => $post) {
+        foreach ($getPosts as $post) {
+
+            // Profile Pic
+            $pp = preg_match("/http/", $post->users->pp) ?
+            $post->users->pp :
+            "/storage/" . $post->users->pp;
 
             // Check if user has followed Musician
             $hasFollowed = Follows::where('followed', $post->username)
@@ -52,6 +57,7 @@ class PostsController extends Controller
                 ->where('post_id', $post->id)
                 ->where('parameter', $post->parameter_1)
                 ->exists();
+
             // Check if user has voted for parameter 2
             $hasVoted2 = Polls::where('username', $authUsername)
                 ->where('post_id', $post->id)
@@ -76,64 +82,51 @@ class PostsController extends Controller
                 ->where('parameter', $post->parameter_5)
                 ->exists();
 
-            // Get percentage for parameter 1
-            // Get total polls for parameter 1
-            $totalParameter = Polls::where('post_id', $post->id)
-                ->count();
-
-            // Check if total polls for parameter 1 is not 0
-            if ($totalParameter > 0) {
-                $countParameter1 = Polls::where('post_id', $post->id)
-                    ->where('parameter', $post->parameter_1)
-                    ->count();
-                $percentage1 = $countParameter1 / $totalParameter * 100;
-            } else {
-                $percentage1 = 0;
-            }
-
-            // Check if total polls for parameter 2 is not 0
-            if ($totalParameter > 0) {
-                $countParameter2 = Polls::where('post_id', $post->id)
-                    ->where('parameter', $post->parameter_2)
-                    ->count();
-                $percentage2 = $countParameter2 / $totalParameter * 100;
-            } else {
-                $percentage2 = 0;
-            }
-
-            // Check if total polls for parameter 1 is not 0
-            if ($totalParameter > 0) {
-                $countParameter3 = Polls::where('post_id', $post->id)
-                    ->where('parameter', $post->parameter_3)
-                    ->count();
-                $percentage3 = $countParameter3 / $totalParameter * 100;
-            } else {
-                $percentage3 = 0;
-            }
-
-            // Check if total polls for parameter 1 is not 0
-            if ($totalParameter > 0) {
-                $countParameter4 = Polls::where('post_id', $post->id)
-                    ->where('parameter', $post->parameter_4)
-                    ->count();
-                $percentage4 = $countParameter4 / $totalParameter * 100;
-            } else {
-                $percentage4 = 0;
-            }
-
-            // Check if total polls for parameter 5 is not 0
-            if ($totalParameter > 0) {
-                $countParameter5 = Polls::where('post_id', $post->id)
-                    ->where('parameter', $post->parameter_5)
-                    ->count();
-                $percentage5 = $countParameter5 / $totalParameter * 100;
-            } else {
-                $percentage5 = 0;
-            }
-
             // Get total votes
-            $totalVotes = Polls::where("post_id", $post->id)
+            $totalVotes = $post->polls->count();
+
+            $countParameter1 = $post->polls
+                ->where('parameter', $post->parameter_1)
                 ->count();
+
+            $percentage1 = $countParameter1 > 0 ? $countParameter1 / $totalVotes * 100 : 0;
+
+            $countParameter2 = $post->polls
+                ->where('parameter', $post->parameter_2)
+                ->count();
+
+            $percentage2 = $countParameter2 > 0 ? $countParameter2 / $totalVotes * 100 : 0;
+
+            $countParameter3 = $post->polls
+                ->where('parameter', $post->parameter_3)
+                ->count();
+
+            $percentage3 = $countParameter3 > 0 ? $countParameter3 / $totalVotes * 100 : 0;
+
+            $countParameter4 = $post->polls
+                ->where('parameter', $post->parameter_4)
+                ->count();
+
+            $percentage4 = $countParameter4 > 0 ? $countParameter4 / $totalVotes * 100 : 0;
+
+            $countParameter5 = $post->polls
+                ->where('parameter', $post->parameter_5)
+                ->count();
+
+            $percentage5 = $countParameter5 > 0 ? $countParameter5 / $totalVotes * 100 : 0;
+
+            $pollsPercentages = [
+                $post->parameter_1 => $percentage1,
+                $post->parameter_2 => $percentage2,
+                $post->parameter_3 => $percentage3,
+                $post->parameter_4 => $percentage4,
+                $post->parameter_5 => $percentage5,
+            ];
+
+            // Get parameter with the most votes
+            $winner = array_keys($pollsPercentages, max($pollsPercentages));
+
+			$winner = count($winner) > 1 ? "" : $winner[0];
 
             // Check if poll is within 24Hrs
             $isWithin24Hrs = Posts::where('id', $post->id)
@@ -147,7 +140,7 @@ class PostsController extends Controller
                 "id" => $post->id,
                 "name" => $post->users->name,
                 "username" => $post->users->username,
-                "pp" => preg_match("/http/", $post->users->pp) ? $post->users->pp : "/storage/" . $post->users->pp,
+                "pp" => $pp,
                 "decos" => $post->users->decos->count(),
                 "text" => $post->text,
                 "media" => $post->media,
@@ -166,6 +159,7 @@ class PostsController extends Controller
                 "percentage3" => $percentage3,
                 "percentage4" => $percentage4,
                 "percentage5" => $percentage5,
+                "winner" => $winner,
                 "totalVotes" => $totalVotes,
                 "isWithin24Hrs" => $isWithin24Hrs,
                 "hasFollowed" => $hasFollowed,

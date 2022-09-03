@@ -12,9 +12,9 @@ import CheckSVG from '../svgs/CheckSVG'
 import HeartFilledSVG from '../svgs/HeartFilledSVG'
 import HeartSVG from '../svgs/HeartSVG'
 import DecoSVG from '../svgs/DecoSVG'
-import LoadingPostsMedia from '../components/LoadingPostsMedia';
+import LoadingPostMedia from '../components/LoadingPostMedia';
 import PostOptions from '../components/PostOptions';
-import CommentsMedia from '../components/CommentsMedia';
+import CommentMedia from '../components/CommentMedia';
 
 const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))
@@ -440,8 +440,8 @@ const VideoShow = (props) => {
 								videoComments
 									.filter((comment) => comment.video_id == show)
 									.map((comment, key) => (
-										<Suspense key={key} fallback={<LoadingPostsMedia />}>
-											<CommentsMedia
+										<Suspense key={key} fallback={<LoadingPostMedia />}>
+											<CommentMedia
 												{...props}
 												comment={comment}
 												setBottomMenu={setBottomMenu}

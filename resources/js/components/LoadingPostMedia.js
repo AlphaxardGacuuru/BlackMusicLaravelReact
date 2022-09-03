@@ -4,7 +4,7 @@ import CommentSVG from '../svgs/CommentSVG'
 import DecoSVG from '../svgs/DecoSVG'
 import HeartSVG from '../svgs/HeartSVG'
 
-const LoadingPostsMedia = () => {
+const LoadingPostMedia = () => {
 	return (
 		<div className='media p-2'>
 			<div className='media-left'>
@@ -46,4 +46,4 @@ const LoadingPostsMedia = () => {
 	)
 }
 
-export default LoadingPostsMedia
+export default LoadingPostMedia

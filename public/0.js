@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "./resources/js/components/KaraokeMedia.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/KaraokeMedia.js ***!
-  \*************************************************/
+/***/ "./resources/js/components/AvatarMedia.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/AvatarMedia.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12,46 +12,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Img */ "./resources/js/components/Img.js");
 
 
 
-var KaraokeMedia = function KaraokeMedia(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "m-1",
+
+var AvatarMedia = function AvatarMedia(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "m-0 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "avatar-thumbnail",
     style: {
-      borderRadius: "0px",
-      textAlign: "center",
-      width: "47%"
-    },
-    onClick: function onClick() {
-      return props.setShow(0);
+      borderRadius: "50%"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "w-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: props.link
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-    src: props.src,
-    width: "100%",
-    preload: "none",
-    autoPlay: true,
-    muted: true,
-    loop: true,
-    playsInline: true
+    to: "/profile/" + props.user.username
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    src: props.user.pp,
+    width: "150px",
+    height: "150px"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "m-0 pt-2 px-1",
+    className: "mt-2 mb-0",
     style: {
-      width: "150px",
+      width: "100px",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "clip"
     }
-  }, props.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-    className: "mt-0 mx-1 mb-2 px-1 py-0"
-  }, props.username));
+  }, props.user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+    style: {
+      width: "100px",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "clip"
+    }
+  }, props.user.username)));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (KaraokeMedia);
+/* harmony default export */ __webpack_exports__["default"] = (AvatarMedia);
 
 /***/ })
 

@@ -2,13 +2,12 @@ import React, { useState, useEffect, Suspense } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import LoadingPostsMedia from '../components/LoadingPostsMedia'
-
-const PostsMedia = React.lazy(() => import('../components/PostsMedia'))
-const CommentsMedia = React.lazy(() => import('../components/CommentsMedia'))
-
-import CloseSVG from '../svgs/CloseSVG'
 import PostOptions from '../components/PostOptions'
+import LoadingPostMedia from '../components/LoadingPostMedia'
+
+const PostMedia = React.lazy(() => import('../components/PostMedia'))
+const CommentMedia = React.lazy(() => import('../components/CommentMedia'))
+
 
 const PostShow = (props) => {
 
@@ -157,8 +156,8 @@ const PostShow = (props) => {
 					{props.posts
 						.filter((post) => post.id == id)
 						.map((post, key) => (
-							<Suspense key={key} fallback={<LoadingPostsMedia />}>
-								<PostsMedia
+							<Suspense key={key} fallback={<LoadingPostMedia />}>
+								<PostMedia
 									{...props}
 									post={post}
 									setBottomMenu={setBottomMenu}
@@ -176,13 +175,13 @@ const PostShow = (props) => {
 						{/* Loading Comment items */}
 						{dummyArray
 							.filter(() => postComments.length < 1)
-							.map((item, key) => (<LoadingPostsMedia key={key} />))}
+							.map((item, key) => (<LoadingPostMedia key={key} />))}
 
 						{postComments
 							.filter((comment) => comment.post_id == id)
 							.map((comment, key) => (
-								<Suspense key={key} fallback={<LoadingPostsMedia />}>
-									<CommentsMedia
+								<Suspense key={key} fallback={<LoadingPostMedia />}>
+									<CommentMedia
 										{...props}
 										comment={comment}
 										setBottomMenu={setBottomMenu}
