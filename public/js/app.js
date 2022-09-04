@@ -93680,30 +93680,30 @@ function App() {
       cartVideos = _useState22[0],
       setCartVideos = _useState22[1];
 
-  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("posts")),
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState24 = _slicedToArray(_useState23, 2),
-      posts = _useState24[0],
-      setPosts = _useState24[1];
+      karaokes = _useState24[0],
+      setKaraokes = _useState24[1];
 
-  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("users")),
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("posts")),
       _useState26 = _slicedToArray(_useState25, 2),
-      users = _useState26[0],
-      setUsers = _useState26[1];
+      posts = _useState26[0],
+      setPosts = _useState26[1];
 
-  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
+  var _useState27 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("users")),
       _useState28 = _slicedToArray(_useState27, 2),
-      videos = _useState28[0],
-      setVideos = _useState28[1];
+      users = _useState28[0],
+      setUsers = _useState28[1];
 
-  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
+  var _useState29 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videos")),
       _useState30 = _slicedToArray(_useState29, 2),
-      videoAlbums = _useState30[0],
-      setVideoAlbums = _useState30[1];
+      videos = _useState30[0],
+      setVideos = _useState30[1];
 
-  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState31 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("videoAlbums")),
       _useState32 = _slicedToArray(_useState31, 2),
-      karaokes = _useState32[0],
-      setKaraokes = _useState32[1]; // Reset Messages and Errors to null after 3 seconds
+      videoAlbums = _useState32[0],
+      setVideoAlbums = _useState32[1]; // Reset Messages and Errors to null after 3 seconds
 
 
   if (errors.length > 0 || messages.length > 0) {
@@ -93778,6 +93778,13 @@ function App() {
           setLocalStorage("cartVideos", res.data);
         })["catch"](function () {
           return setErrors(['Failed to fetch cart videos']);
+        }); // Fetch Karaokes
+
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/karaokes").then(function (res) {
+          setKaraokes(res.data);
+          setLocalStorage("karaokes", res.data);
+        })["catch"](function () {
+          return setErrors(["Failed to fetch karaokes"]);
         }); //Fetch Posts
 
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts").then(function (res) {
@@ -94545,6 +94552,8 @@ function App() {
     setCartAudios: setCartAudios,
     cartVideos: cartVideos,
     setCartVideos: setCartVideos,
+    karaokes: karaokes,
+    setKaraokes: setKaraokes,
     posts: posts,
     setPosts: setPosts,
     users: users,
@@ -96445,9 +96454,9 @@ var LoadingKaraokeMedia = function LoadingKaraokeMedia() {
       width: "45%"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "karaoke-thumbnail bg-light gradient w-100"
+    className: "karaoke-thumbnail gradient w-100"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bg-light gradient",
+    className: "gradient",
     style: {
       width: "100%"
     }
@@ -102883,29 +102892,18 @@ var KaraokeMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.laz
 var KaraokeCharts = function KaraokeCharts(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
-      karaokes = _useState2[0],
-      setKaraokes = _useState2[1];
+      karaokeAudio = _useState2[0],
+      setKaraokeAudio = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      karaokeAudio = _useState4[0],
-      setKaraokeAudio = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      week = _useState6[0],
-      setWeek = _useState6[1];
+      week = _useState4[0],
+      setWeek = _useState4[1];
 
   var weeks = [0, 1, 2, 3, 4, 5];
   axios.defaults.baseURL = props.url;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    // Fetch Karaokes
-    axios.get("/api/karaokes").then(function (res) {
-      return setKaraokes(res.data);
-    })["catch"](function () {
-      return props.setErrors(["Failed to fetch karaokes"]);
-    }); // Fetch Karaoke Audio
-
+    // Fetch Karaoke Audio
     axios.get("/api/karaoke-audios/1").then(function (res) {
       return setKaraokeAudio(res.data);
     })["catch"](function () {
@@ -102959,12 +102957,12 @@ var KaraokeCharts = function KaraokeCharts(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-around flex-wrap"
   }, dummyArray.filter(function () {
-    return karaokes.length < 1;
+    return props.karaokes.length < 1;
   }).map(function (item, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingKaraokeMedia__WEBPACK_IMPORTED_MODULE_3__["default"], {
       key: key
     });
-  }), karaokes.map(function (karaoke, key) {
+  }), props.karaokes.map(function (karaoke, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingKaraokeMedia__WEBPACK_IMPORTED_MODULE_3__["default"], null)
@@ -103654,7 +103652,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Karaoke__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Karaoke */ "./resources/js/components/Karaoke.js");
+/* harmony import */ var _components_LoadingKaraokeMedia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/LoadingKaraokeMedia */ "./resources/js/components/LoadingKaraokeMedia.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -103676,13 +103676,15 @@ var KaraokeShow = function KaraokeShow(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "karaokes hidden-scroll"
   }, props.karaokes.map(function (karaoke, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Karaoke__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
+      fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingKaraokeMedia__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Karaoke__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       id: karaoke.id,
       karaoke: karaoke,
       karaokes: props.karaokes,
       setKaraokes: props.setKaraokes
-    }));
+    })));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-4"
   }));

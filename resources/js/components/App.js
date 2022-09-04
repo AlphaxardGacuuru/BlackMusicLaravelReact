@@ -63,7 +63,7 @@ function App() {
 	var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
 
 	if (unsecureUrl) {
-		 window.location.href = 'https://music.black.co.ke'
+		window.location.href = 'https://music.black.co.ke'
 	}
 
 	// Set Global Url
@@ -112,13 +112,13 @@ function App() {
 	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
 	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
 
+	const [karaokes, setKaraokes] = useState([])
+
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
 
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
 	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
-
-	const [karaokes, setKaraokes] = useState([])
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || messages.length > 0) {
@@ -190,6 +190,13 @@ function App() {
 							setCartVideos(res.data)
 							setLocalStorage("cartVideos", res.data)
 						}).catch(() => setErrors(['Failed to fetch cart videos']))
+
+					// Fetch Karaokes
+					axios.get(`/api/karaokes`)
+						.then((res) => {
+							setKaraokes(res.data)
+							setLocalStorage("karaokes", res.data)
+						}).catch(() => setErrors(["Failed to fetch karaokes"]))
 
 					//Fetch Posts
 					axios.get(`/api/posts`)
@@ -815,6 +822,7 @@ function App() {
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
 		cartVideos, setCartVideos,
+		karaokes, setKaraokes,
 		posts, setPosts,
 		users, setUsers,
 		videoAlbums, setVideoAlbums,

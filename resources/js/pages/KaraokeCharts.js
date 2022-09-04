@@ -10,7 +10,6 @@ import PlusSVG from '../svgs/PlusSVG'
 
 const KaraokeCharts = (props) => {
 
-	const [karaokes, setKaraokes] = useState([])
 	const [karaokeAudio, setKaraokeAudio] = useState([])
 	const [week, setWeek] = useState(0)
 	const weeks = [0, 1, 2, 3, 4, 5]
@@ -18,11 +17,6 @@ const KaraokeCharts = (props) => {
 	axios.defaults.baseURL = props.url
 
 	useEffect(() => {
-		// Fetch Karaokes
-		axios.get(`/api/karaokes`)
-			.then((res) => setKaraokes(res.data))
-			.catch(() => props.setErrors(["Failed to fetch karaokes"]))
-
 		// Fetch Karaoke Audio
 		axios.get(`/api/karaoke-audios/1`)
 			.then((res) => setKaraokeAudio(res.data))
@@ -99,11 +93,11 @@ const KaraokeCharts = (props) => {
 					<div className="d-flex justify-content-around flex-wrap">
 						{/* Loading Karaoke Media */}
 						{dummyArray
-							.filter(() => karaokes.length < 1)
+							.filter(() => props.karaokes.length < 1)
 							.map((item, key) => (<LoadingKaraokeMedia key={key} />))}
 						{/* Loading Karaoke Media End */}
 
-						{karaokes
+						{props.karaokes
 							.map((karaoke, key) => (
 								<Suspense key={key} fallback={<LoadingKaraokeMedia />}>
 									<KaraokeMedia

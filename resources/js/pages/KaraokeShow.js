@@ -1,10 +1,11 @@
-import React, { useRef } from 'react'
+import React, { Suspense } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Karaoke from '../components/Karaoke'
+import LoadingKaraokeMedia from '../components/LoadingKaraokeMedia'
 
 const KaraokeShow = (props) => {
-	
+
 	const { id } = useParams()
 
 	const karaokeEl = document.getElementById(id)
@@ -19,13 +20,14 @@ const KaraokeShow = (props) => {
 				<div className="karaokes hidden-scroll">
 					{props.karaokes
 						.map((karaoke, key) => (
-							<Karaoke
-								{...props}
-								key={key}
-								id={karaoke.id}
-								karaoke={karaoke}
-								karaokes={props.karaokes}
-								setKaraokes={props.setKaraokes} />
+							<Suspense key={key} fallback={<LoadingKaraokeMedia />}>
+								<Karaoke
+									{...props}
+									id={karaoke.id}
+									karaoke={karaoke}
+									karaokes={props.karaokes}
+									setKaraokes={props.setKaraokes} />
+							</Suspense>
 						))}
 				</div>
 			</div>
