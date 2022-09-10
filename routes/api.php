@@ -24,7 +24,7 @@ Route::post('login/update', 'Auth\LoginController@update');
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::resources([
-	'admin' => 'AdminController',
+    'admin' => 'AdminController',
     'audios' => 'AudiosController',
     'audio-likes' => 'AudioLikesController',
     'audio-comments' => 'AudioCommentsController',
@@ -34,15 +34,15 @@ Route::resources([
     'bought-videos' => 'BoughtVideosController',
     'cart-audios' => 'CartAudiosController',
     'cart-videos' => 'CartVideosController',
-	'chat' => 'ChatController',
+    'chat' => 'ChatController',
     'decos' => 'DecosController',
-	'email' => 'EmailController',
+    'email' => 'EmailController',
     'follows' => 'FollowsController',
-	'karaokes' => 'KaraokesController',
-	'karaoke-comments' => 'KaraokeCommentsController',
-	'karaoke-comment-likes' => 'KaraokeCommentLikesController',
-	'karaoke-likes' => 'KaraokeLikesController',
-	'karaoke-audios' => 'KaraokeAudiosController',
+    'karaokes' => 'KaraokesController',
+    'karaoke-comments' => 'KaraokeCommentsController',
+    'karaoke-comment-likes' => 'KaraokeCommentLikesController',
+    'karaoke-likes' => 'KaraokeLikesController',
+    'karaoke-audios' => 'KaraokeAudiosController',
     'kopokopo' => 'KopokopoController',
     'kopokopo-recipients' => 'KopokopoRecipientsController',
     'notifications' => 'NotificationsController',
@@ -51,9 +51,9 @@ Route::resources([
     'post-comments' => 'PostCommentsController',
     'post-comment-likes' => 'PostCommentLikesController',
     'polls' => 'PollsController',
-	'push' => 'PushController',
+    'push' => 'PushController',
     'referrals' => 'ReferralsController',
-	'saved-karaokes' => 'SavedKaraokesController',
+    'saved-karaokes' => 'SavedKaraokesController',
     'search' => 'SearchController',
     'song-payouts' => 'SongPayoutsController',
     'sms' => 'SMSController',
@@ -64,6 +64,8 @@ Route::resources([
     'video-comment-likes' => 'VideoCommentLikesController',
     'video-albums' => 'VideoAlbumsController',
 ]);
+
+Route::get('video-charts', 'VideosController@charts');
 
 Route::get('mailable', function () {
 

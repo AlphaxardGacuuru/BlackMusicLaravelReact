@@ -105,6 +105,7 @@ function App() {
 
 	const [audios, setAudios] = useState(getLocalStorage("audios"))
 	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
+	const [audioLikes, setAudioLikes] = useState(getLocalStorage("audioLikes"))
 
 	const [boughtAudios, setBoughtAudios] = useState(getLocalStorage("boughtAudios"))
 	const [boughtVideos, setBoughtVideos] = useState(getLocalStorage("boughtVideos"))
@@ -119,6 +120,7 @@ function App() {
 
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
 	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
+	const [videoLikes, setVideoLikes] = useState(getLocalStorage("videoLikes"))
 
 	// Reset Messages and Errors to null after 3 seconds
 	if (errors.length > 0 || messages.length > 0) {
@@ -162,6 +164,13 @@ function App() {
 							setAudioAlbums(res.data)
 							setLocalStorage("audioAlbums", res.data)
 						}).catch(() => setErrors(["Failed to fetch audio albums"]))
+
+					// Fetch Audio Likes
+					axios.get(`/api/audio-likes`)
+						.then((res) => {
+							setAudioLikes(res.data)
+							setLocalStorage("audioLikes", res.data)
+						}).catch(() => setErrors(["Failed to fetch audio likes"]))
 
 					// Fetch Bought Audios
 					axios.get(`/api/bought-audios`)
@@ -225,6 +234,13 @@ function App() {
 							setVideoAlbums(res.data)
 							setLocalStorage("videoAlbums", res.data)
 						}).catch(() => setErrors(["Failed to fetch video albums"]))
+
+					// Fetch Video Likes
+					axios.get(`/api/video-likes`)
+						.then((res) => {
+							setVideoLikes(res.data)
+							setLocalStorage("videoLikes", res.data)
+						}).catch(() => setErrors(["Failed to fetch video likes"]))
 
 					// Fetch Karaokes
 					axios.get(`/api/karaokes`)
@@ -816,8 +832,9 @@ function App() {
 		auth, setAuth,
 		messages, setMessages,
 		errors, setErrors,
-		audioAlbums, setAudioAlbums,
 		audios, setAudios,
+		audioAlbums, setAudioAlbums,
+		audioLikes, setAudioLikes,
 		boughtAudios, setBoughtAudios,
 		boughtVideos, setBoughtVideos,
 		cartAudios, setCartAudios,
@@ -829,8 +846,9 @@ function App() {
 		videos, setVideos,
 		search, setSearch,
 		users, setUsers,
-		videoAlbums, setVideoAlbums,
 		videos, setVideos,
+		videoAlbums, setVideoAlbums, 
+		videoLikes, setVideoLikes,
 		karaokes, setKaraokes,
 		onFollow,
 		onCartVideos,

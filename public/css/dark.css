@@ -322,6 +322,10 @@ a:focus {
     color: #ffffff;
 }
 
+#menuIcon {
+	font-size: 25px;
+}
+
 @media only screen and (max-width: 767px) {
     .header-area .menu-content-area .header-social-area a {
         padding: 0 5px;
@@ -342,6 +346,12 @@ a:focus {
 @media only screen and (max-width: 767px) {
     .header-area {
         padding: 0px 0;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #menuIcon {
+		font-size: 20px;
     }
 }
 
@@ -367,7 +377,7 @@ a:focus {
 .mainMenu .closeIcon {
     position: absolute;
     right: 50px;
-    top: 50px;
+    top: 55px;
     z-index: 9;
     color: #ffffff;
     font-size: 20px;
@@ -384,7 +394,8 @@ a:focus {
 @media only screen and (max-width: 767px) {
     .mainMenu .closeIcon {
         right: 30px;
-        top: 30px;
+        top: 20px;
+    	font-size: 15px;
     }
 }
 
@@ -1779,3 +1790,9 @@ div.hidden-scroll span {
     scrollbar-width: none;
 }
 /* Table End */
+
+/* Tables */
+table, thead, tr, th, tbody, td {
+	border: 0px;
+}
+/* Tables End */

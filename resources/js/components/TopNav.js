@@ -10,6 +10,7 @@ import DownloadSVG from '../svgs/DownloadSVG'
 import PrivacySVG from '../svgs/PrivacySVG'
 import SettingsSVG from '../svgs/SettingsSVG'
 import StudioSVG from '../svgs/StudioSVG'
+import MenuSVG from '../svgs/MenuSVG'
 
 const TopNav = (props) => {
 
@@ -132,8 +133,9 @@ const TopNav = (props) => {
 										{/* <!-- Header Social Area --> */}
 										<div className="header-social-area d-flex align-items-center">
 											{props.auth.username == "@guest" ?
-												<Link className="display-4"
+												<Link
 													to="#"
+													className="display-4"
 													onClick={() => props.setLogin(true)}>
 													Login
 												</Link> :
@@ -155,23 +157,15 @@ const TopNav = (props) => {
 													onDeleteNotifications={onDeleteNotifications} />}
 										</div>
 										{/* <!-- Menu Icon --> */}
-										<a href="#"
-											className="hidden"
+										<a
+											href="#"
 											id="menuIcon"
+											className={`${props.auth.username != "@blackmusic" && "hidden"}`}
 											onClick={(e) => {
 												e.preventDefault()
 												setMenu("menu-open")
 											}}>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="25"
-												height="25"
-												fill="#fff"
-												className="bi bi-list"
-												viewBox="0 0 16 16">
-												<path fillRule="evenodd"
-													d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-											</svg>
+											<MenuSVG />
 										</a>
 									</div>
 								</div>
@@ -191,19 +185,13 @@ const TopNav = (props) => {
 						<br />
 						<br className="hidden" />
 					</span>}
+
+
 				{/* <!-- ***** Main Menu Area Start ***** --> */}
 				<div className="mainMenu d-flex align-items-center justify-content-between">
 					{/* <!-- Close Icon --> */}
 					<div className="closeIcon" onClick={() => setMenu("")}>
-						<svg xmlns="http://www.w3.org/2000/svg"
-							width="40"
-							height="40"
-							fill="currentColor"
-							className="bi bi-x"
-							viewBox="0 0 16 16">
-							<path
-								d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-						</svg>
+						<CloseSVG />
 					</div>
 					{/* <!-- Logo Area --> */}
 					<div className="logo-area">

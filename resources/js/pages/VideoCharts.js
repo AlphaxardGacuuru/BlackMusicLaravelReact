@@ -148,7 +148,8 @@ const VideoCharts = (props) => {
 	// Load more on page bottom
 	window.onscroll = function (ev) {
 		if (location.pathname.match(/video-charts/)) {
-			const bottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - document.body.offsetHeight / 16)
+			const bottom = (window.innerHeight + window.scrollY) >=
+				(document.body.offsetHeight - document.body.offsetHeight / 16)
 
 			if (bottom) {
 				setVideoSlice(videoSlice + 8)

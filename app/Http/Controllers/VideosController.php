@@ -21,6 +21,16 @@ use Illuminate\Support\Facades\Storage;
 class VideosController extends Controller
 {
     /**
+     * Display a listing of the charts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function charts()
+    {
+		
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -121,7 +131,7 @@ class VideosController extends Controller
             //     ->save('public/video-thumbnails/' . $videoName . '.png');
 
             return $videoShort;
-			
+
         } else {
             // Handle form for video
             $this->validate($request, [
