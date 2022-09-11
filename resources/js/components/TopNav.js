@@ -160,7 +160,7 @@ const TopNav = (props) => {
 										<a
 											href="#"
 											id="menuIcon"
-											className={`${props.auth.username != "@blackmusic" && "hidden"}`}
+											className="hidden"
 											onClick={(e) => {
 												e.preventDefault()
 												setMenu("menu-open")

@@ -12,6 +12,7 @@ use App\VideoLikes;
 use App\Videos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 // FFMpeg
@@ -27,7 +28,11 @@ class VideosController extends Controller
      */
     public function charts()
     {
-		
+        return $videoLikes = DB::table('video_likes')
+            ->select('video_id', DB::raw('count(*) as likes'))
+            ->groupBy('video_id')
+            ->orderBy('likes', 'DESC')
+            ->get();
     }
 
     /**

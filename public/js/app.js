@@ -97901,7 +97901,7 @@ var TopNav = function TopNav(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     id: "menuIcon",
-    className: "".concat(props.auth.username != "@blackmusic" && "hidden"),
+    className: "hidden",
     onClick: function onClick(e) {
       e.preventDefault();
       setMenu("menu-open");
