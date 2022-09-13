@@ -95,7 +95,7 @@ const AudioCharts = (props) => {
 			var getId = audio.artist
 			var getIdTwo = audio.audio_id
 		} else {
-			var getId = props.audios.find((item) => item.id == audio.audio_id).username
+			var getId = props.audios.find((item) => item.audio_id == audio.id).username
 			var getIdTwo = audio.audio_id
 		}
 
