@@ -99396,7 +99396,7 @@ var AudioCharts = function AudioCharts(props) {
       var getIdTwo = audio.audio_id;
     } else {
       var getId = props.audios.find(function (item) {
-        return item.audio_id == audio.audio_id;
+        return item.audio_id == audio.id;
       }).username;
       var getIdTwo = audio.audio_id;
     } // Populate Artists array
