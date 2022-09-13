@@ -95129,7 +95129,7 @@ var Bottomnav = function Bottomnav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       fontSize: "20px",
-      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
+      color: location.pathname == "/karaoke-charts" || location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     },
     className: "nav-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_9__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -97643,6 +97643,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_SettingsSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../svgs/SettingsSVG */ "./resources/js/svgs/SettingsSVG.js");
 /* harmony import */ var _svgs_StudioSVG__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../svgs/StudioSVG */ "./resources/js/svgs/StudioSVG.js");
 /* harmony import */ var _svgs_MenuSVG__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../svgs/MenuSVG */ "./resources/js/svgs/MenuSVG.js");
+/* harmony import */ var _svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../svgs/PersonSVG */ "./resources/js/svgs/PersonSVG.js");
+/* harmony import */ var _svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../svgs/DiscoverSVG */ "./resources/js/svgs/DiscoverSVG.js");
+/* harmony import */ var _svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../svgs/HomeSVG */ "./resources/js/svgs/HomeSVG.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -97656,6 +97659,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -97865,25 +97871,12 @@ var TopNav = function TopNav(props) {
       paddingRight: "20px",
       color: location.pathname == "/" ? "gold" : "white"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "bi bi-house",
-    width: "1em",
-    height: "1em",
-    viewBox: "0 0 16 16",
-    fill: "currentColor",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
-  }))), "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_HomeSVG__WEBPACK_IMPORTED_MODULE_13__["default"], null)), "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/karaoke-charts",
     style: {
-      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
+      color: location.pathname == "/karaoke-charts" || location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     },
     className: "nav-link",
     onClick: function onClick() {
@@ -97893,21 +97886,9 @@ var TopNav = function TopNav(props) {
     style: {
       "float": "left",
       paddingRight: "20px",
-      color: location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
+      color: location.pathname == "/karaoke-charts" || location.pathname == "/video-charts" || location.pathname == "/audio-charts" ? "gold" : "white"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "bi bi-compass",
-    width: "1em",
-    height: "1em",
-    viewBox: "0 0 16 16",
-    fill: "currentColor",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M8 15.016a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zm0 1a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M6 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1zm.94 6.44l4.95-2.83-2.83 4.95-4.95 2.83 2.83-4.95z"
-  }))), "Discover")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DiscoverSVG__WEBPACK_IMPORTED_MODULE_12__["default"], null)), "Discover")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/library",
@@ -97924,17 +97905,7 @@ var TopNav = function TopNav(props) {
       paddingRight: "20px",
       color: location.pathname == "/library" ? "gold" : "white"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "bi bi-person",
-    width: "1em",
-    height: "1em",
-    viewBox: "0 0 16 16",
-    fill: "currentColor",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fillRule: "evenodd",
-    d: "M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-  }))), "Library"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_11__["default"], null)), "Library"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: bottomMenu
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomMenu"
@@ -108478,7 +108449,7 @@ var CartSVG = function CartSVG() {
     width: "1em",
     height: "1em",
     viewBox: "0 0 16 16",
-    fill: "#fff",
+    fill: "currentColor",
     xmlns: "http://www.w3.org/2000/svg"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",
