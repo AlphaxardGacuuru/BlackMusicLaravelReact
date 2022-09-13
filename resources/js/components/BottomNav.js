@@ -211,7 +211,8 @@ const Bottomnav = (props) => {
 							<span
 								style={{
 									fontSize: "20px",
-									color: location.pathname == "/video-charts" ||
+									color: location.pathname == "/karaoke-charts" ||
+										location.pathname == "/video-charts" ||
 										location.pathname == "/audio-charts" ?
 										"gold" : "white"
 								}} className="nav-link">
@@ -250,7 +251,8 @@ const Bottomnav = (props) => {
 								style={{
 									fontSize: "20px",
 									color: location.pathname == "/cart" ? "gold" : "white"
-								}} className="nav-link">
+								}}
+								className="nav-link">
 								<CartSVG />
 							</span>
 							<span className="badge badge-danger rounded-circle"
