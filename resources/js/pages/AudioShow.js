@@ -23,6 +23,7 @@ import DecoSVG from '../svgs/DecoSVG'
 import PostOptions from '../components/PostOptions';
 import LoadingPostMedia from '../components/LoadingPostMedia';
 import CommentMedia from '../components/CommentMedia';
+import CheckSVG from '../svgs/CheckSVG';
 
 const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
 const SocialMediaInput = React.lazy(() => import('../components/SocialMediaInput'))

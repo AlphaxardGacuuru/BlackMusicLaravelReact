@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Img from '../components/Img'
-import axios from '../components/Axios'
 
 const ChatThread = (props) => {
 

@@ -94935,25 +94935,6 @@ var AvatarMedia = function AvatarMedia(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Axios.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Axios.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-var instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: 'http://localhost:3000'
-});
-/* harmony default export */ __webpack_exports__["default"] = (instance);
-
-/***/ }),
-
 /***/ "./resources/js/components/BottomNav.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/BottomNav.js ***!
@@ -100543,6 +100524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostOptions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/PostOptions */ "./resources/js/components/PostOptions.js");
 /* harmony import */ var _components_LoadingPostMedia__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../components/LoadingPostMedia */ "./resources/js/components/LoadingPostMedia.js");
 /* harmony import */ var _components_CommentMedia__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../components/CommentMedia */ "./resources/js/components/CommentMedia.js");
+/* harmony import */ var _svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../svgs/CheckSVG */ "./resources/js/svgs/CheckSVG.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -100556,6 +100538,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -101043,7 +101026,7 @@ var AudioShow = function AudioShow(props) {
     onClick: function onClick() {
       return props.onFollow(props.showArtist.username);
     }
-  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CheckSVG, null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Followed", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CheckSVG__WEBPACK_IMPORTED_MODULE_23__["default"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     btnClass: 'mysonar-btn white-btn float-right',
     onClick: function onClick() {
       return props.onFollow(props.showArtist.username);
@@ -102086,7 +102069,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Img */ "./resources/js/components/Img.js");
-/* harmony import */ var _components_Axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Axios */ "./resources/js/components/Axios.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -102103,9 +102085,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var ChatThread = function ChatThread(props) {
-  _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].defaults.baseURL = props.url;
+  axios.defaults.baseURL = props.url;
 
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       username = _useParams.username;
@@ -102127,14 +102108,14 @@ var ChatThread = function ChatThread(props) {
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // Fetch Chat Threads
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat/1").then(function (res) {
+    axios.get("/api/chat/1").then(function (res) {
       setChatThreads(res.data);
       props.setLocalStorage("chatThreads", res.data);
     })["catch"](function () {
       return props.setErrors(['Failed to fetch chat']);
     }); // Fetch Chat
 
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
+    axios.get("/api/chat").then(function (res) {
       setChat(res.data);
       props.setLocalStorage("chat", res.data);
     })["catch"](function () {
@@ -102166,15 +102147,15 @@ var ChatThread = function ChatThread(props) {
   }, []); // Function for deleting chat
 
   var onDeleteChat = function onDeleteChat(id) {
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('sanctum/csrf-cookie').then(function () {
-      _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
+    axios.get('sanctum/csrf-cookie').then(function () {
+      axios["delete"]("".concat(props.url, "/api/chat/").concat(id)).then(function (res) {
         props.setMessages([res.data]); // Update chat
 
-        _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("".concat(props.url, "/api/chat")).then(function (res) {
+        axios.get("".concat(props.url, "/api/chat")).then(function (res) {
           return setChat(res.data);
         }); // Update chat
 
-        _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("".concat(props.url, "/api/chat/1")).then(function (res) {
+        axios.get("".concat(props.url, "/api/chat/1")).then(function (res) {
           return setChatThreads(res.data);
         });
       })["catch"](function (err) {
@@ -102194,9 +102175,9 @@ var ChatThread = function ChatThread(props) {
   };
 
   var onDeleteNotifications = function onDeleteNotifications(id) {
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/api/notifications/".concat(id)).then(function (res) {
+    axios["delete"]("/api/notifications/".concat(id)).then(function (res) {
       // Update Notifications
-      _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/notifications").then(function (res) {
+      axios.get("/api/notifications").then(function (res) {
         return props.setNotifications(res.data);
       });
     });
@@ -102204,7 +102185,7 @@ var ChatThread = function ChatThread(props) {
 
 
   var checkChat = function checkChat() {
-    _components_Axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/chat").then(function (res) {
+    axios.get("/api/chat").then(function (res) {
       // Get new length of chat
       var currentChatLength = chat.filter(function (chatItem) {
         return chatItem.username == username && chatItem.to == props.auth.username || chatItem.username == props.auth.username && chatItem.to == username;
@@ -102572,10 +102553,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var MusiciansHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/MusiciansHorizontal */ "./resources/js/components/MusiciansHorizontal.js"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/MusiciansHorizontal */ "./resources/js/components/MusiciansHorizontal.js"));
 });
 var VideoMediaVertical = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/VideoMediaVertical */ "./resources/js/components/VideoMediaVertical.js"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/VideoMediaVertical */ "./resources/js/components/VideoMediaVertical.js"));
 });
 var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js"));
@@ -102891,7 +102872,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var KaraokeMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/KaraokeMedia */ "./resources/js/components/KaraokeMedia.js"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/KaraokeMedia */ "./resources/js/components/KaraokeMedia.js"));
 });
 
 
@@ -103740,7 +103721,7 @@ var AudioMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/AudioMediaHorizontal */ "./resources/js/components/AudioMediaHorizontal.js"));
 });
 var KaraokeMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/KaraokeMedia */ "./resources/js/components/KaraokeMedia.js"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/KaraokeMedia */ "./resources/js/components/KaraokeMedia.js"));
 });
 
 var Library = function Library(props) {
@@ -106279,7 +106260,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var VideoMediaVertical = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/VideoMediaVertical */ "./resources/js/components/VideoMediaVertical.js"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/VideoMediaVertical */ "./resources/js/components/VideoMediaVertical.js"));
 });
 var VideoMediaHorizontal = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ../components/VideoMediaHorizontal */ "./resources/js/components/VideoMediaHorizontal.js"));
