@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import Img from '../components/Img'
 import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
 import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
+import AvatarMedia from '../components/AvatarMedia'
 
 const Search = (props) => {
 
@@ -145,38 +146,7 @@ const Search = (props) => {
 					<div className="hidden-scroll">
 						{/*  Echo Artists  */}
 						{userResults.map((artist, key) => (
-							<span
-								key={key}
-								className="pt-0 px-0 pb-2"
-								style={{ borderRadius: "10px" }}
-								onClick={() => onSearch(artist.username)}>
-								<center>
-									<div className="avatar-thumbnail" style={{ borderRadius: "50%" }}>
-										<Link to={"/profile/" + artist.username}>
-											<Img src={artist.pp}
-												width='150px'
-												height='150px' />
-										</Link>
-									</div>
-									<h6 className="mt-2"
-										style={{
-											width: "100px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-										{artist.name}
-									</h6>
-									<h6 style={{
-										width: "100px",
-										whiteSpace: "nowrap",
-										overflow: "hidden",
-										textOverflow: "clip"
-									}}>
-										<small>{artist.username}</small>
-									</h6>
-								</center>
-							</span>
+							<AvatarMedia key={key} user={artist} />
 						))}
 						{/* Echo Artists End */}
 					</div>
@@ -198,19 +168,10 @@ const Search = (props) => {
 						.map((video, key) => (
 							<div key={key} onClick={() => onSearch(video.name)}>
 								<VideoMediaHorizontal
-									key={key}
-									onClick={() => props.setShow(0)}
-									setShow={props.setShow}
-									link={`/video-show/${video.id}`}
-									thumbnail={video.thumbnail}
-									name={video.name}
-									username={video.username}
-									ft={video.ft}
-									videoInCart={video.inCart}
-									hasBoughtVideo={!video.hasBoughtVideo}
-									videoId={video.id}
-									onCartVideos={props.onCartVideos}
-									onBuyVideos={onBuyVideos} />
+									{...props}
+									video={video}
+									onBuyVideos={onBuyVideos}
+									onClick={() => props.setShow(0)} />
 							</div>
 						))}
 					{/* Videos End */}
@@ -227,18 +188,8 @@ const Search = (props) => {
 						.map((audio, key) => (
 							<div key={key} onClick={() => onSearch(audio.name)}>
 								<AudioMediaHorizontal
-									key={key}
-									setShow={props.setShow}
-									setLocalStorage={props.setLocalStorage}
-									link={`/audio-show/${audio.id}`}
-									thumbnail={`/storage/${audio.thumbnail}`}
-									name={audio.name}
-									username={audio.username}
-									ft={audio.ft}
-									hasBoughtAudio={!props.hasBought}
-									audioInCart={audio.inCart}
-									audioId={audio.id}
-									onCartAudios={props.onCartAudios}
+									{...props}
+									audio={audio}
 									onBuyAudios={onBuyAudios} />
 							</div>
 						))}

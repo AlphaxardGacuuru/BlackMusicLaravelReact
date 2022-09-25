@@ -270,9 +270,8 @@ function App() {
 
 		// Add follow
 		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/follows`, {
-				musician: musician
-			}).then((res) => {
+			axios.post(`/api/follows`, { musician: musician })
+			.then((res) => {
 				setMessages([res.data])
 				// Update users
 				axios.get(`/api/users`)
@@ -299,7 +298,7 @@ function App() {
 			})
 		});
 	}
-	// console.log(message)
+	
 	// Function for adding video to cart
 	const onCartVideos = (video) => {
 		// Change cart button
