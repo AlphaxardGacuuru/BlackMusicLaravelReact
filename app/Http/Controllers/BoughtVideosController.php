@@ -40,6 +40,8 @@ class BoughtVideosController extends Controller
                 "thumbnail" => preg_match("/http/", $boughtVideo->videos->thumbnail) ?
                 $boughtVideo->videos->thumbnail :
                 "/storage/" . $boughtVideo->videos->thumbnail,
+				// Fetch Video for use in VideoMedia component
+				"video" => $boughtVideo->videos
             ]);
         }
 

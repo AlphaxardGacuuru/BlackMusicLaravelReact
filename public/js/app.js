@@ -103697,6 +103697,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_LoadingKaraokeMedia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/LoadingKaraokeMedia */ "./resources/js/components/LoadingKaraokeMedia.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -103744,7 +103746,23 @@ var Library = function Library(props) {
     })["catch"](function () {
       return props.setErrors(["Failed to Fetch Saved Karaokes"]);
     });
-  }, []);
+  }, []); // Function for buying video to cart
+
+  var onBuyVideos = function onBuyVideos(video) {
+    props.onCartVideos(video);
+    setTimeout(function () {
+      return history.push('/cart');
+    }, 1000);
+  }; // Function for buying audio to cart
+
+
+  var onBuyAudios = function onBuyAudios(audio) {
+    props.onCartAudios(audio);
+    setTimeout(function () {
+      return history.push('/cart');
+    }, 1000);
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103790,19 +103808,13 @@ var Library = function Library(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingVideoMediaHorizontal__WEBPACK_IMPORTED_MODULE_1__["default"], null)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoMediaHorizontal, {
-      key: key,
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoMediaHorizontal, _extends({}, props, {
+      video: boughtVideo.video,
+      onBuyVideos: onBuyVideos,
       onClick: function onClick() {
         return props.setShow(0);
-      },
-      setShow: props.setShow,
-      link: "/video-show/".concat(boughtVideo.video_id),
-      thumbnail: boughtVideo.thumbnail,
-      name: boughtVideo.name,
-      username: boughtVideo.artist,
-      ft: boughtVideo.ft,
-      showCartandBuyButton: false
-    }));
+      }
+    })));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "audios" ? "col-sm-4" : "col-sm-4 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
@@ -103821,18 +103833,10 @@ var Library = function Library(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
       key: key,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingAudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, {
-      key: key,
-      setShow: props.setShow,
-      setLocalStorage: props.setLocalStorage,
-      link: "/audio-show/".concat(boughtAudio.audio_id),
-      thumbnail: "/storage/".concat(boughtAudio.thumbnail),
-      name: boughtAudio.name,
-      username: boughtAudio.artist,
-      ft: boughtAudio.ft,
-      audioId: boughtAudio.audio_id,
-      showCartandBuyButton: false
-    }));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, _extends({}, props, {
+      audio: boughtAudio,
+      onBuyAudios: onBuyAudios
+    })));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: tabClass == "karaokes" ? "col-sm-3" : "col-sm-3 hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {

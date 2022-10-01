@@ -23,6 +23,17 @@ const Library = (props) => {
 			.catch(() => props.setErrors(["Failed to Fetch Saved Karaokes"]))
 	}, [])
 
+	// Function for buying video to cart
+	const onBuyVideos = (video) => {
+		props.onCartVideos(video)
+		setTimeout(() => history.push('/cart'), 1000)
+	}
+
+	// Function for buying audio to cart
+	const onBuyAudios = (audio) => {
+		props.onCartAudios(audio)
+		setTimeout(() => history.push('/cart'), 1000)
+	}
 
 	return (
 		<>
@@ -68,15 +79,10 @@ const Library = (props) => {
 						.map((boughtVideo, key) => (
 							<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
 								<VideoMediaHorizontal
-									key={key}
-									onClick={() => props.setShow(0)}
-									setShow={props.setShow}
-									link={`/video-show/${boughtVideo.video_id}`}
-									thumbnail={boughtVideo.thumbnail}
-									name={boughtVideo.name}
-									username={boughtVideo.artist}
-									ft={boughtVideo.ft}
-									showCartandBuyButton={false} />
+									{...props}
+									video={boughtVideo.video}
+									onBuyVideos={onBuyVideos}
+									onClick={() => props.setShow(0)} />
 							</Suspense>
 						))}
 				</div>
@@ -97,16 +103,9 @@ const Library = (props) => {
 						.map((boughtAudio, key) => (
 							<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
 								<AudioMediaHorizontal
-									key={key}
-									setShow={props.setShow}
-									setLocalStorage={props.setLocalStorage}
-									link={`/audio-show/${boughtAudio.audio_id}`}
-									thumbnail={`/storage/${boughtAudio.thumbnail}`}
-									name={boughtAudio.name}
-									username={boughtAudio.artist}
-									ft={boughtAudio.ft}
-									audioId={boughtAudio.audio_id}
-									showCartandBuyButton={false} />
+									{...props}
+									audio={boughtAudio}
+									onBuyAudios={onBuyAudios} />
 							</Suspense>
 						))}
 				</div>
