@@ -42,7 +42,7 @@ const VideoMediaHorizontal = (props) => {
 						<small className="ml-1">{props.video.ft}</small>
 					</h6>
 				</Link>
-				{!props.video.hasBoughtVideo ?
+				{!props.video.hasBoughtVideo && !props.hasBoughtVideo ?
 					props.video.inCart ?
 						<button
 							className="btn text-light mb-1 rounded-0"
@@ -69,6 +69,10 @@ const VideoMediaHorizontal = (props) => {
 			</div>
 		</div>
 	)
+}
+
+VideoMediaHorizontal.defaultProps = {
+	hasBoughtVideo: false
 }
 
 export default VideoMediaHorizontal

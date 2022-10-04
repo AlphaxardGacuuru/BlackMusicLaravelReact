@@ -38,6 +38,8 @@ class BoughtAudiosController extends Controller
                 "name" => $boughtAudio->name,
                 "artist" => $boughtAudio->artist,
                 "thumbnail" => $boughtAudio->audios->thumbnail,
+				// Fetch Audio for use in AudioMedia component
+				"audio" => $boughtAudio->audios
             ]);
         }
 

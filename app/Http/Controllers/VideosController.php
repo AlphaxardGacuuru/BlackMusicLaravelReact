@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 // namespace ProtoneMedia\LaravelFFMpeg;
 
 use App\BoughtVideos;
-use App\CartVideos;
 use App\User;
 use App\VideoLikes;
 use App\Videos;
@@ -57,23 +56,19 @@ class VideosController extends Controller
         foreach ($getVideos as $key => $video) {
 
             // Check if user has liked video
-            $hasLiked = VideoLikes::where('username', $authUsername)
-                ->where('video_id', $video->id)
-                ->exists();
+            $hasLiked = $video->likes
+                ->where('username', $authUsername)
+                ->count() > 0 ? true : false;
 
             // Check if video in cart
-            $inCart = CartVideos::where('video_id', $video->id)
+            $inCart = $video->cart
                 ->where('username', $authUsername)
-                ->exists();
+                ->count() > 0 ? true : false;
 
             // Check if user has bought video
-            $hasBoughtVideo = BoughtVideos::where('username', $authUsername)
-                ->where('video_id', $video->id)
-                ->exists();
-
-            // Get downloads
-            $downloads = BoughtVideos::where('video_id', $video->id)
-                ->count();
+            $hasBoughtVideo = $video->bought
+                ->where('username', $authUsername)
+                ->count() > 0 ? true : false;
 
             array_push($videos, [
                 "id" => $video->id,
@@ -88,10 +83,10 @@ class VideosController extends Controller
                 "description" => $video->description,
                 "released" => $video->released,
                 "hasLiked" => $hasLiked,
-                "likes" => $video->videoLikes->count(),
+                "likes" => $video->likes->count(),
                 "inCart" => $inCart,
                 "hasBoughtVideo" => $hasBoughtVideo,
-                "downloads" => $downloads,
+                "downloads" => $video->bought->count(),
                 "created_at" => $video->created_at->format('d M Y'),
             ]);
         }

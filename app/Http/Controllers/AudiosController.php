@@ -66,7 +66,7 @@ class AudiosController extends Controller
                 "description" => $audio->description,
                 "released" => $audio->released,
                 "hasLiked" => $hasLiked,
-                "likes" => $audio->audioLikes->count(),
+                "likes" => $audio->likes->count(),
                 "inCart" => $inCart,
                 "hasBoughtAudio" => $hasBoughtAudio,
                 "downloads" => $downloads,

@@ -82,6 +82,7 @@ const Library = (props) => {
 									{...props}
 									video={boughtVideo.video}
 									onBuyVideos={onBuyVideos}
+									hasBoughtVideo="true"
 									onClick={() => props.setShow(0)} />
 							</Suspense>
 						))}
@@ -104,7 +105,8 @@ const Library = (props) => {
 							<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
 								<AudioMediaHorizontal
 									{...props}
-									audio={boughtAudio}
+									audio={boughtAudio.audio}
+									hasBoughtAudio="true"
 									onBuyAudios={onBuyAudios} />
 							</Suspense>
 						))}

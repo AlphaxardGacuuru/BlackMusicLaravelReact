@@ -61,7 +61,7 @@ const AudioMediaHorizontal = (props) => {
 					</h6>
 				</span>
 			</div>
-			{!props.audio.hasBought ?
+			{!props.audio.hasBought && !props.hasBoughtAudio ?
 				props.audio.inCart ?
 					<div>
 						<button
@@ -93,6 +93,10 @@ const AudioMediaHorizontal = (props) => {
 					</> : ""}
 		</div>
 	)
+}
+
+AudioMediaHorizontal.defaultProps = {
+	hasBoughtAudio: false
 }
 
 export default AudioMediaHorizontal

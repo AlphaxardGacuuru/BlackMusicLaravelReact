@@ -47,7 +47,7 @@ var VideoMediaVertical = function VideoMediaVertical(props) {
     }
   }, props.video.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mt-0 mx-1 mb-2 px-1 py-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username, " ", props.video.ft))), !props.video.hasBoughtVideo ? props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username, " ", props.video.ft))), !props.video.hasBoughtVideo && !props.hasBoughtVideo ? props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn text-light mb-1 rounded-0",
     style: {
       minWidth: "90px",
@@ -75,6 +75,9 @@ var VideoMediaVertical = function VideoMediaVertical(props) {
   })) : "");
 };
 
+VideoMediaVertical.defaultProps = {
+  hasBoughtVideo: false
+};
 /* harmony default export */ __webpack_exports__["default"] = (VideoMediaVertical);
 
 /***/ })

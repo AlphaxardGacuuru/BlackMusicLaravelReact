@@ -32,7 +32,7 @@ const VideoMediaVertical = (props) => {
 					<small>{props.video.username} {props.video.ft}</small>
 				</h6>
 			</Link>
-			{!props.video.hasBoughtVideo ?
+			{!props.video.hasBoughtVideo && !props.hasBoughtVideo ?
 				props.video.inCart ?
 					<button
 						className="btn text-light mb-1 rounded-0"
@@ -59,6 +59,10 @@ const VideoMediaVertical = (props) => {
 					</> : ""}
 		</span>
 	)
+}
+
+VideoMediaVertical.defaultProps = {
+	hasBoughtVideo: false
 }
 
 export default VideoMediaVertical

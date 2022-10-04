@@ -94838,7 +94838,7 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.audio.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
-  }, props.audio.ft)))), !props.audio.hasBought ? props.audio.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, props.audio.ft)))), !props.audio.hasBought && !props.hasBoughtAudio ? props.audio.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn text-light rounded-0",
     style: {
       minWidth: '40px',
@@ -94878,6 +94878,9 @@ var AudioMediaHorizontal = function AudioMediaHorizontal(props) {
   }))) : "");
 };
 
+AudioMediaHorizontal.defaultProps = {
+  hasBoughtAudio: false
+};
 /* harmony default export */ __webpack_exports__["default"] = (AudioMediaHorizontal);
 
 /***/ }),
@@ -98360,7 +98363,7 @@ var VideoMediaHorizontal = function VideoMediaHorizontal(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.video.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "ml-1"
-  }, props.video.ft))), !props.video.hasBoughtVideo ? props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, props.video.ft))), !props.video.hasBoughtVideo && !props.hasBoughtVideo ? props.video.inCart ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn text-light mb-1 rounded-0",
     style: {
       minWidth: "40px",
@@ -98388,6 +98391,9 @@ var VideoMediaHorizontal = function VideoMediaHorizontal(props) {
   })) : ""));
 };
 
+VideoMediaHorizontal.defaultProps = {
+  hasBoughtVideo: false
+};
 /* harmony default export */ __webpack_exports__["default"] = (VideoMediaHorizontal);
 
 /***/ }),
@@ -103811,6 +103817,7 @@ var Library = function Library(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoMediaHorizontal, _extends({}, props, {
       video: boughtVideo.video,
       onBuyVideos: onBuyVideos,
+      hasBoughtVideo: "true",
       onClick: function onClick() {
         return props.setShow(0);
       }
@@ -103834,7 +103841,8 @@ var Library = function Library(props) {
       key: key,
       fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LoadingAudioMediaHorizontal__WEBPACK_IMPORTED_MODULE_2__["default"], null)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AudioMediaHorizontal, _extends({}, props, {
-      audio: boughtAudio,
+      audio: boughtAudio.audio,
+      hasBoughtAudio: "true",
       onBuyAudios: onBuyAudios
     })));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
