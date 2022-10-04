@@ -367,13 +367,9 @@ const AudioCreate = (props) => {
 												<h3>Before you upload</h3>
 												<h6>By uploading you agree that you <b>own</b> this song.</h6>
 												<h6>Audios are sold at
-													<b style={{ color: "green" }}> KES 100</b>, Black Music takes
-													<b style={{ color: "green" }}> 50% (KES 50)</b> and the musician takes
-													<b style={{ color: "green" }}> 50% (KES 50)</b>.</h6>
-												<h6>You will be paid
-													<b> weekly</b>, via Mpesa to
-													<b style={{ color: "dodgerblue" }}> {props.auth.phone}</b>.
-												</h6>
+													<b style={{ color: "green" }}> KES 10</b>, Black Music takes
+													<b style={{ color: "green" }}> 50% (KES 5)</b> and the musician takes
+													<b style={{ color: "green" }}> 50% (KES 5)</b>.</h6>
 												<br />
 												<Button btnText="upload audio" loading={btnLoading} />
 											</div>
