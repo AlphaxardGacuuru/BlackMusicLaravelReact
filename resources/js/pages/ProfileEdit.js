@@ -129,6 +129,7 @@ const ProfileEdit = (props) => {
 						</div>
 
 						<form onSubmit={onSubmit}>
+							{/* Name */}
 							<label htmlFor="" className="float-left text-light">Name</label>
 							<input
 								type="text"
@@ -137,8 +138,20 @@ const ProfileEdit = (props) => {
 								placeholder={props.auth.name}
 								value={name}
 								onChange={(e) => { setName(e.target.value) }} />
+							{/* Name End */}
 							<br />
 
+							{/* Email */}
+							<label htmlFor="" className="float-left text-light">Email</label>
+							<input
+								type="text"
+								name="email"
+								className="form-control"
+								placeholder={props.auth.email} />
+							{/* Email End */}
+							<br />
+
+							{/* Phone */}
 							<label htmlFor="" className="float-left text-light">Phone</label>
 							<input
 								type="text"
@@ -146,10 +159,11 @@ const ProfileEdit = (props) => {
 								className="form-control"
 								placeholder={props.auth.phone}
 								value={phone}
-								onChange={(e) => { setPhone(e.target.value) }}
-							/>
+								onChange={(e) => { setPhone(e.target.value) }} />
+							{/* Phone End */}
 							<br />
 
+							{/* Bio */}
 							<label htmlFor="" className="float-left text-light">Bio</label>
 							<input
 								type="text"
@@ -158,8 +172,10 @@ const ProfileEdit = (props) => {
 								placeholder={props.auth.bio}
 								value={bio}
 								onChange={(e) => { setBio(e.target.value) }} />
+							{/* Bio End */}
 							<br />
 
+							{/* Cash Withdrawal */}
 							<label htmlFor="" className="float-left text-light">Cash Withdrawal</label>
 							<br />
 							<br />
@@ -173,8 +189,8 @@ const ProfileEdit = (props) => {
 								className="form-control"
 								placeholder={`KES ${props.auth.withdrawal}`}
 								value={withdrawal}
-								onChange={(e) => { setWithdrawal(e.target.value) }}
-							/>
+								onChange={(e) => { setWithdrawal(e.target.value) }} />
+							{/* Cash Withdrawal End */}
 							<br />
 							<br />
 

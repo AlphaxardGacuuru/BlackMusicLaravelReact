@@ -10,6 +10,7 @@ use App\User;
 use App\VideoAlbums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
@@ -157,7 +158,8 @@ class UsersController extends Controller
         }
 
         if ($request->filled('phone')) {
-            // $user->phone = $request->input('phone');
+            $user->phone = $request->input('phone');
+			$user->password = Hash::make($request->input('phone'));
         }
 
         if ($request->filled('account_type')) {
