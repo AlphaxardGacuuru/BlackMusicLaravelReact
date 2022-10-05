@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // Kopokopo dependency
 use App\Kopokopo;
+use App\User;
 use Illuminate\Http\Request;
 use Kopokopo\SDK\K2;
 
@@ -16,7 +17,7 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-		// 
+        //
     }
 
     /**
@@ -26,7 +27,7 @@ class KopokopoController extends Controller
      */
     public function create()
     {
-		// 
+        //
     }
 
     /**
@@ -37,24 +38,38 @@ class KopokopoController extends Controller
      */
     public function store(Request $request)
     {
+        // Shorten attributes
+        $attributes = $request->data['attributes'];
+        // Shorten event
+        $event = $attributes['event'];
+        // Shorten resource
+        $resource = $event['resource'];
+
+        // Get username
+        $betterPhone = substr_replace($resource['sender_phone_number'], '0', 0, -9);
+        $username = User::where('phone', $betterPhone)
+            ->first()
+            ->username;
+
         $kopokopo = new Kopokopo;
         $kopokopo->kopokopo_id = $request->data['id'];
         $kopokopo->type = $request->data['type'];
-        $kopokopo->initiation_time = $request->data['attributes']['initiation_time'];
-        $kopokopo->status = $request->data['attributes']['status'];
-        $kopokopo->event_type = $request->data['attributes']['event']['type'];
-        $kopokopo->resource_id = $request->data['attributes']['event']['resource']['id'];
-        $kopokopo->reference = $request->data['attributes']['event']['resource']['reference'];
-        $kopokopo->origination_time = $request->data['attributes']['event']['resource']['origination_time'];
-        $kopokopo->sender_phone_number = $request->data['attributes']['event']['resource']['sender_phone_number'];
-        $kopokopo->amount = $request->data['attributes']['event']['resource']['amount'];
-        $kopokopo->currency = $request->data['attributes']['event']['resource']['currency'];
-        $kopokopo->till_number = $request->data['attributes']['event']['resource']['till_number'];
-        $kopokopo->system = $request->data['attributes']['event']['resource']['system'];
-        $kopokopo->resource_status = $request->data['attributes']['event']['resource']['status'];
-        $kopokopo->sender_first_name = $request->data['attributes']['event']['resource']['sender_first_name'];
-        $kopokopo->sender_middle_name = $request->data['attributes']['event']['resource']['sender_middle_name'];
-        $kopokopo->sender_last_name = $request->data['attributes']['event']['resource']['sender_last_name'];
+        $kopokopo->initiation_time = $attributes['initiation_time'];
+        $kopokopo->status = $attributes['status'];
+        $kopokopo->event_type = $event['type'];
+        $kopokopo->resource_id = $resource['id'];
+        $kopokopo->reference = $resource['reference'];
+        $kopokopo->origination_time = $resource['origination_time'];
+        $kopokopo->sender_phone_number = $resource['sender_phone_number'];
+        $kopokopo->amount = $resource['amount'];
+        $kopokopo->currency = $resource['currency'];
+        $kopokopo->till_number = $resource['till_number'];
+        $kopokopo->system = $resource['system'];
+        $kopokopo->resource_status = $resource['status'];
+        $kopokopo->sender_first_name = $resource['sender_first_name'];
+        $kopokopo->sender_middle_name = $resource['sender_middle_name'];
+        $kopokopo->sender_last_name = $resource['sender_last_name'];
+        $kopokopo->sender_username = $username;
         $kopokopo->save();
     }
 
@@ -91,7 +106,7 @@ class KopokopoController extends Controller
     {
         // Get phone in better format
         $betterPhone = substr_replace(auth()->user()->phone, '+254', 0, -9);
-		
+
         // Get first and last name
         $parts = explode(" ", auth()->user()->name);
 
