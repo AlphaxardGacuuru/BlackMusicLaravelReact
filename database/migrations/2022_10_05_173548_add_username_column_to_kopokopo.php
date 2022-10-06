@@ -14,7 +14,7 @@ class AddUsernameColumnToKopokopo extends Migration
     public function up()
     {
         Schema::table('kopokopo', function (Blueprint $table) {
-            $table->string('username')->unique();
+            $table->string('username')->unique()->after('sender_last_name');
         });
     }
 
