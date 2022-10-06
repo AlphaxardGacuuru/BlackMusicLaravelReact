@@ -14,7 +14,7 @@ class AddUsernameColumnToKopokopo extends Migration
     public function up()
     {
         Schema::table('kopokopo', function (Blueprint $table) {
-            $table->string('sender_username')->unique();
+            $table->string('username')->unique();
         });
     }
 
@@ -26,7 +26,7 @@ class AddUsernameColumnToKopokopo extends Migration
     public function down()
     {
         Schema::table('kopokopo', function (Blueprint $table) {
-            $table->dropColumn('sender_username');
+            $table->dropColumn('username');
         });
     }
 }

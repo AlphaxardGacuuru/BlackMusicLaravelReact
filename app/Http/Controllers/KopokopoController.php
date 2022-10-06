@@ -17,7 +17,17 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-        //
+        $kopo = Kopokopo::all();
+        foreach ($kopo as $key) {
+            $betterPhone = substr_replace($key->sender_phone_number, "0", 0, -9);
+            $username = User::where('phone', $betterPhone)
+                ->first()
+                ->username;
+
+            $new = Kopokopo::find($key->id);
+            $new->username = $username;
+            $new->save();
+        }
     }
 
     /**
