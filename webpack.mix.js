@@ -11,6 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
+//  Add this for JSX config
 mix.react('resources/js/app.js', 'public/js')
 	.sass('resources/sass/app.scss', 'public/css');
 
