@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Chat;
+use App\SongPayout;
 use Illuminate\Http\Request;
 
-class ChatController extends Controller
+class SongPayoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class ChatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chat  $chat
+     * @param  \App\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
-    public function show(Chat $chat)
+    public function show(SongPayout $songPayout)
     {
         //
     }
@@ -43,10 +43,10 @@ class ChatController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chat  $chat
+     * @param  \App\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chat $chat)
+    public function update(Request $request, SongPayout $songPayout)
     {
         //
     }
@@ -54,10 +54,10 @@ class ChatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chat  $chat
+     * @param  \App\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Chat $chat)
+    public function destroy(SongPayout $songPayout)
     {
         //
     }

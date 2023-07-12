@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAudioAlbumsTable extends Migration
+class CreatePollsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('audio_albums', function (Blueprint $table) {
+        Schema::create('polls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('username');
-            $table->string('name');
-            $table->string('cover')->default('audio-album-covers/musical-note.png');
-            $table->timestamp('released')->nullable();
+            $table->string('parameter');
             $table->timestamps();
 
             $table->foreign('username')
@@ -26,6 +28,8 @@ class CreateAudioAlbumsTable extends Migration
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->unique(['post_id', 'username']);
         });
     }
 
@@ -36,6 +40,6 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audio_albums');
+        Schema::dropIfExists('polls');
     }
 }

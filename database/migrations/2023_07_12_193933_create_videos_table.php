@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAudioAlbumsTable extends Migration
+class CreateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,19 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('audio_albums', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('video');
             $table->string('name');
-            $table->string('cover')->default('audio-album-covers/musical-note.png');
+            $table->string('username');
+            $table->string('ft')->nullable();
+            $table->foreignId('video_album_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('genre');
+            $table->string('thumbnail')->nullable();
+            $table->string('description')->nullable();
             $table->timestamp('released')->nullable();
             $table->timestamps();
 
@@ -36,6 +44,6 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audio_albums');
+        Schema::dropIfExists('videos');
     }
 }

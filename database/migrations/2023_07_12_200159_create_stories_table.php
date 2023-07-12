@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAudioAlbumsTable extends Migration
+class CreateStoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('audio_albums', function (Blueprint $table) {
+        Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('name');
-            $table->string('cover')->default('audio-album-covers/musical-note.png');
-            $table->timestamp('released')->nullable();
+            $table->string("username");
+            $table->string("text")->nullable();
+            $table->jsonb("media");
             $table->timestamps();
 
             $table->foreign('username')
@@ -36,6 +35,6 @@ class CreateAudioAlbumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audio_albums');
+        Schema::dropIfExists('stories');
     }
 }

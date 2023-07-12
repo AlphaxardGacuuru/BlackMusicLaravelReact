@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Search;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -14,23 +13,6 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // Check if user is logged in
-        if (Auth::check()) {
-            $authUsername = auth()->user()->username;
-        } else {
-            $authUsername = '@guest';
-        }
-
-        return Search::where('username', $authUsername)->get();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -43,10 +25,7 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
-        $search = new Search;
-        $search->username = auth()->user()->username;
-        $search->keyword = $request->input('keyword');
-        $search->save();
+        //
     }
 
     /**
@@ -56,17 +35,6 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Search $search)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Search  $search
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Search $search)
     {
         //
     }
@@ -89,8 +57,8 @@ class SearchController extends Controller
      * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Search $search)
     {
-        Search::find($id)->delete();
+        //
     }
 }
