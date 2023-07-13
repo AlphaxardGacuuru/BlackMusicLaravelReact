@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Referral;
+use App\Models\Referral;
 use Illuminate\Http\Request;
 
 class ReferralController extends Controller
@@ -31,7 +31,7 @@ class ReferralController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Referral  $referral
+     * @param  \App\Models\Referral  $referral
      * @return \Illuminate\Http\Response
      */
     public function show(Referral $referral)
@@ -43,7 +43,7 @@ class ReferralController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Referral  $referral
+     * @param  \App\Models\Referral  $referral
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Referral $referral)
@@ -54,7 +54,7 @@ class ReferralController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Referral  $referral
+     * @param  \App\Models\Referral  $referral
      * @return \Illuminate\Http\Response
      */
     public function destroy(Referral $referral)

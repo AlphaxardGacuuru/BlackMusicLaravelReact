@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\AudioLike;
+use App\Events\AudioLikedEvent;
+use App\Http\Services\AudioLikeService;
+use App\Models\Audio;
+use App\Models\AudioLike;
 use Illuminate\Http\Request;
 
 class AudioLikeController extends Controller
 {
+    public function __construct(protected AudioLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +33,21 @@ class AudioLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$added, $message] = $this->service->store($request);
+
+        $audio = Audio::find($request->input("audio"));
+
+        AudioLikedEvent::dispatchIf($added, $audio);
+
+        return response([
+            "message" => $message,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\AudioLike  $audioLike
+     * @param  \App\Models\AudioLike  $audioLike
      * @return \Illuminate\Http\Response
      */
     public function show(AudioLike $audioLike)
@@ -43,7 +59,7 @@ class AudioLikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AudioLike  $audioLike
+     * @param  \App\Models\AudioLike  $audioLike
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, AudioLike $audioLike)
@@ -54,7 +70,7 @@ class AudioLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AudioLike  $audioLike
+     * @param  \App\Models\AudioLike  $audioLike
      * @return \Illuminate\Http\Response
      */
     public function destroy(AudioLike $audioLike)

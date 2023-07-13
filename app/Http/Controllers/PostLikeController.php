@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\PostLike;
+use App\Events\PostLikedEvent;
+use App\Models\Post;
+use App\Models\PostLike;
+use App\Http\Services\PostLikeService;
 use Illuminate\Http\Request;
 
 class PostLikeController extends Controller
 {
+    public function __construct(protected PostLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +33,23 @@ class PostLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message] = $this->service->store($request);
+
+        // Dispatch Event
+        // Get post
+        $post = Post::findOrFail($request->input("post"));
+
+        PostLikedEvent::dispatchIf($saved, $post);
+
+        return response([
+            "message" => $message,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PostLike  $postLike
+     * @param  \App\Models\PostLike  $postLike
      * @return \Illuminate\Http\Response
      */
     public function show(PostLike $postLike)
@@ -43,7 +61,7 @@ class PostLikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostLike  $postLike
+     * @param  \App\Models\PostLike  $postLike
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PostLike $postLike)
@@ -54,7 +72,7 @@ class PostLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PostLike  $postLike
+     * @param  \App\Models\PostLike  $postLike
      * @return \Illuminate\Http\Response
      */
     public function destroy(PostLike $postLike)

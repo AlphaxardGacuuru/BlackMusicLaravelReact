@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\BoughtAudio;
+use App\Events\AudioBoughtEvent;
+use App\Models\BoughtAudio;
+use App\Http\Services\BoughtAudioService;
 use Illuminate\Http\Request;
 
 class BoughtAudioController extends Controller
 {
+    public function __construct(protected BoughtAudioService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class BoughtAudioController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,13 +32,19 @@ class BoughtAudioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$boughtAudios, $decoArtists] = $this->service->store($request);
+
+        $hasBought = count($boughtAudios) > 0;
+
+        AudioBoughtEvent::dispatchIf($hasBought, $boughtAudios, $decoArtists);
+
+        return response(["data" => $boughtAudios], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\BoughtAudio  $boughtAudio
+     * @param  \App\Models\BoughtAudio  $boughtAudio
      * @return \Illuminate\Http\Response
      */
     public function show(BoughtAudio $boughtAudio)
@@ -43,7 +56,7 @@ class BoughtAudioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BoughtAudio  $boughtAudio
+     * @param  \App\Models\BoughtAudio  $boughtAudio
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, BoughtAudio $boughtAudio)
@@ -54,11 +67,18 @@ class BoughtAudioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BoughtAudio  $boughtAudio
+     * @param  \App\Models\BoughtAudio  $boughtAudio
      * @return \Illuminate\Http\Response
      */
     public function destroy(BoughtAudio $boughtAudio)
     {
         //
     }
+
+	/*
+	* Artist's Bought Audios */
+	public function artistBoughtAudios($username)
+	{
+		return $this->service->artistBoughtAudios($username);
+	} 
 }

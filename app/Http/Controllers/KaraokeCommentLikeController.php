@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\KaraokeCommentLike;
+use App\Http\Services\KaraokeCommentLikeService;
+use App\Models\KaraokeCommentLike;
 use Illuminate\Http\Request;
 
 class KaraokeCommentLikeController extends Controller
 {
+    public function __construct(protected KaraokeCommentLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +31,17 @@ class KaraokeCommentLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message] = $this->service->store($request);
+
+        return response([
+            "message" => $message,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\KaraokeCommentLike  $karaokeCommentLike
+     * @param  \App\Models\KaraokeCommentLike  $karaokeCommentLike
      * @return \Illuminate\Http\Response
      */
     public function show(KaraokeCommentLike $karaokeCommentLike)
@@ -43,7 +53,7 @@ class KaraokeCommentLikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\KaraokeCommentLike  $karaokeCommentLike
+     * @param  \App\Models\KaraokeCommentLike  $karaokeCommentLike
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, KaraokeCommentLike $karaokeCommentLike)
@@ -54,7 +64,7 @@ class KaraokeCommentLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\KaraokeCommentLike  $karaokeCommentLike
+     * @param  \App\Models\KaraokeCommentLike  $karaokeCommentLike
      * @return \Illuminate\Http\Response
      */
     public function destroy(KaraokeCommentLike $karaokeCommentLike)

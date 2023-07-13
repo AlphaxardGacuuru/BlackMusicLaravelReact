@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\SavedKaraoke;
+use App\Models\SavedKaraoke;
+use App\Http\Services\SavedKaraokeService;
 use Illuminate\Http\Request;
 
 class SavedKaraokeController extends Controller
 {
+    public function __construct(protected SavedKaraokeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class SavedKaraokeController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,13 +31,23 @@ class SavedKaraokeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Handle form for karaoke
+        $this->validate($request, [
+            'id' => 'required|integer',
+        ]);
+
+        [$saved, $message, $savedKaraoke] = $this->service->store($request);
+
+        return response([
+            "message" => $message,
+            "data" => $savedKaraoke,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SavedKaraoke  $savedKaraoke
+     * @param  \App\Models\SavedKaraoke  $savedKaraoke
      * @return \Illuminate\Http\Response
      */
     public function show(SavedKaraoke $savedKaraoke)
@@ -43,7 +59,7 @@ class SavedKaraokeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SavedKaraoke  $savedKaraoke
+     * @param  \App\Models\SavedKaraoke  $savedKaraoke
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SavedKaraoke $savedKaraoke)
@@ -54,7 +70,7 @@ class SavedKaraokeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SavedKaraoke  $savedKaraoke
+     * @param  \App\Models\SavedKaraoke  $savedKaraoke
      * @return \Illuminate\Http\Response
      */
     public function destroy(SavedKaraoke $savedKaraoke)

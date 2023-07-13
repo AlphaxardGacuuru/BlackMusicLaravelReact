@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SongPayout;
+use App\Models\SongPayout;
 use Illuminate\Http\Request;
 
 class SongPayoutController extends Controller
@@ -31,7 +31,7 @@ class SongPayoutController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SongPayout  $songPayout
+     * @param  \App\Models\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
     public function show(SongPayout $songPayout)
@@ -43,7 +43,7 @@ class SongPayoutController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SongPayout  $songPayout
+     * @param  \App\Models\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SongPayout $songPayout)
@@ -54,7 +54,7 @@ class SongPayoutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SongPayout  $songPayout
+     * @param  \App\Models\SongPayout  $songPayout
      * @return \Illuminate\Http\Response
      */
     public function destroy(SongPayout $songPayout)

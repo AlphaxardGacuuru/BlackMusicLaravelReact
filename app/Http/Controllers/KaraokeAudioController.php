@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\KaraokeAudio;
+use App\Models\KaraokeAudio;
+use App\Http\Services\KaraokeAudioService;
 use Illuminate\Http\Request;
 
 class KaraokeAudioController extends Controller
 {
+    public function __construct(protected KaraokeAudioService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class KaraokeAudioController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -31,19 +37,19 @@ class KaraokeAudioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\KaraokeAudio  $karaokeAudio
+     * @param  \App\Models\KaraokeAudio  $karaokeAudio
      * @return \Illuminate\Http\Response
      */
-    public function show(KaraokeAudio $karaokeAudio)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\KaraokeAudio  $karaokeAudio
+     * @param  \App\Models\KaraokeAudio  $karaokeAudio
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, KaraokeAudio $karaokeAudio)
@@ -54,7 +60,7 @@ class KaraokeAudioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\KaraokeAudio  $karaokeAudio
+     * @param  \App\Models\KaraokeAudio  $karaokeAudio
      * @return \Illuminate\Http\Response
      */
     public function destroy(KaraokeAudio $karaokeAudio)

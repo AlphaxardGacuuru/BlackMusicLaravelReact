@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AudioCommentLikedEvent;
+use App\Http\Services\AudioCommentLikeService;
+use App\Audio;
+use App\AudioComment;
 use App\AudioCommentLike;
 use Illuminate\Http\Request;
 
 class AudioCommentLikeController extends Controller
 {
+    public function __construct(protected AudioCommentLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +34,16 @@ class AudioCommentLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $audioCommentLike] = $this->service->store($request);
+
+		$audioComment = AudioComment::find($request->input("comment"));
+
+        AudioCommentLikedEvent::dispatchIf($saved, $audioComment);
+
+        return response([
+            "message" => $message,
+            "data" => $audioCommentLike,
+        ], 200);
     }
 
     /**

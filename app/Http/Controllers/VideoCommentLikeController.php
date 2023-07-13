@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\VideoCommentLike;
+use App\Events\VideoCommentLikedEvent;
+use App\Models\VideoComment;
+use App\Models\VideoCommentLike;
+use App\Http\Services\VideoCommentLikeService;
 use Illuminate\Http\Request;
 
 class VideoCommentLikeController extends Controller
 {
+    public function __construct(protected VideoCommentLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +33,21 @@ class VideoCommentLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message] = $this->service->store($request);
+
+        $comment = VideoComment::find($request->input("comment"));
+
+        VideoCommentLikedEvent::dispatchIf($saved, $comment);
+
+        return response([
+            "message" => $message,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\VideoCommentLike  $videoCommentLike
+     * @param  \App\Models\VideoCommentLike  $videoCommentLike
      * @return \Illuminate\Http\Response
      */
     public function show(VideoCommentLike $videoCommentLike)
@@ -43,7 +59,7 @@ class VideoCommentLikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\VideoCommentLike  $videoCommentLike
+     * @param  \App\Models\VideoCommentLike  $videoCommentLike
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, VideoCommentLike $videoCommentLike)
@@ -54,7 +70,7 @@ class VideoCommentLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\VideoCommentLike  $videoCommentLike
+     * @param  \App\Models\VideoCommentLike  $videoCommentLike
      * @return \Illuminate\Http\Response
      */
     public function destroy(VideoCommentLike $videoCommentLike)

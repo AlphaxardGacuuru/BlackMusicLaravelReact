@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Deco;
+use App\Models\Deco;
 use Illuminate\Http\Request;
 
 class DecoController extends Controller
@@ -31,7 +31,7 @@ class DecoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Deco  $deco
+     * @param  \App\Models\Deco  $deco
      * @return \Illuminate\Http\Response
      */
     public function show(Deco $deco)
@@ -43,7 +43,7 @@ class DecoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Deco  $deco
+     * @param  \App\Models\Deco  $deco
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Deco $deco)
@@ -54,7 +54,7 @@ class DecoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Deco  $deco
+     * @param  \App\Models\Deco  $deco
      * @return \Illuminate\Http\Response
      */
     public function destroy(Deco $deco)

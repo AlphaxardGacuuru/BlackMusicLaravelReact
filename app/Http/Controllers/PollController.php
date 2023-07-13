@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Poll;
+use App\Models\Poll;
+use App\Http\Services\PollService;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
+    public function __construct(protected PollService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +31,17 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $audio] = $this->service->store($request);
+
+        return response([
+            "message" => $message,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Poll  $poll
+     * @param  \App\Models\Poll  $poll
      * @return \Illuminate\Http\Response
      */
     public function show(Poll $poll)
@@ -43,7 +53,7 @@ class PollController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Poll  $poll
+     * @param  \App\Models\Poll  $poll
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Poll $poll)
@@ -54,7 +64,7 @@ class PollController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Poll  $poll
+     * @param  \App\Models\Poll  $poll
      * @return \Illuminate\Http\Response
      */
     public function destroy(Poll $poll)

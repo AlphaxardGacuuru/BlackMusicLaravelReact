@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Kopokopo;
+use App\Models\Kopokopo;
+use App\Http\Services\KopokopoService;
 use Illuminate\Http\Request;
 
 class KopokopoController extends Controller
 {
+    public function __construct(protected KopokopoService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class KopokopoController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,13 +31,13 @@ class KopokopoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->service->store($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Kopokopo  $kopokopo
+     * @param  \App\Models\Kopokopo  $kopokopo
      * @return \Illuminate\Http\Response
      */
     public function show(Kopokopo $kopokopo)
@@ -43,7 +49,7 @@ class KopokopoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kopokopo  $kopokopo
+     * @param  \App\Models\Kopokopo  $kopokopo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Kopokopo $kopokopo)
@@ -54,11 +60,23 @@ class KopokopoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Kopokopo  $kopokopo
+     * @param  \App\Models\Kopokopo  $kopokopo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Kopokopo $kopokopo)
     {
         //
+    }
+
+    /**
+     * Send STK Push to Kopokopo.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Kopokopo  $kopokopo
+     * @return \Illuminate\Http\Response
+     */
+    public function stkPush(Request $request)
+    {
+        return $this->service->stkPush($request);
     }
 }

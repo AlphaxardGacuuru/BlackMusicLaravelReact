@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Search;
+use App\Models\Search;
+use App\Http\Services\SearchService;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    public function __construct(protected SearchService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,13 +31,13 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->service->store($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Search  $search
+     * @param  \App\Models\Search  $search
      * @return \Illuminate\Http\Response
      */
     public function show(Search $search)
@@ -43,7 +49,7 @@ class SearchController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Search  $search
+     * @param  \App\Models\Search  $search
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Search $search)
@@ -54,11 +60,13 @@ class SearchController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Search  $search
+     * @param  \App\Models\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Search $search)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response(["message" => $message], 200);
     }
 }

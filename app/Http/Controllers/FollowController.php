@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Follow;
+use App\Events\FollowedEvent;
+use App\Models\Follow;
+use App\Models\User;
+use App\Http\Services\FollowService;
 use Illuminate\Http\Request;
 
 class FollowController extends Controller
 {
+    public function __construct(protected FollowService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +33,20 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$added, $message] = $this->service->store($request);
+
+        // Dispatch Event
+        $musician = User::where('username', $request->input('musician'))->first();
+
+        FollowedEvent::dispatchIf($added, $musician);
+
+        return response(["message" => $message], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Follow  $follow
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
     public function show(Follow $follow)
@@ -43,7 +58,7 @@ class FollowController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Follow  $follow
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Follow $follow)
@@ -54,7 +69,7 @@ class FollowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Follow  $follow
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
     public function destroy(Follow $follow)

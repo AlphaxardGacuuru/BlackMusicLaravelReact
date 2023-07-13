@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\CartVideo;
+use App\Models\CartVideo;
+use App\Http\Services\CartVideoService;
 use Illuminate\Http\Request;
 
 class CartVideoController extends Controller
 {
+    public function __construct(protected CartVideoService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class CartVideoController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,13 +31,18 @@ class CartVideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $cartVideo] = $this->service->store($request);
+
+        return response([
+            "message" => $message,
+            "data" => $cartVideo,
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\CartVideo  $cartVideo
+     * @param  \App\Models\CartVideo  $cartVideo
      * @return \Illuminate\Http\Response
      */
     public function show(CartVideo $cartVideo)
@@ -43,7 +54,7 @@ class CartVideoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CartVideo  $cartVideo
+     * @param  \App\Models\CartVideo  $cartVideo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CartVideo $cartVideo)
@@ -54,7 +65,7 @@ class CartVideoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CartVideo  $cartVideo
+     * @param  \App\Models\CartVideo  $cartVideo
      * @return \Illuminate\Http\Response
      */
     public function destroy(CartVideo $cartVideo)
