@@ -21,56 +21,138 @@ Route::get('login/{website}/callback', 'Auth\LoginController@handleProviderCallb
 // Update on Login Route
 Route::post('login/update', 'Auth\LoginController@update');
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Authenticated User
+    Route::get('auth', 'UserController@auth');
+});
+
 
 Route::resources([
     'admin' => 'AdminController',
-    'audios' => 'AudiosController',
-    'audio-likes' => 'AudioLikesController',
-    'audio-comments' => 'AudioCommentsController',
-    'audio-comment-likes' => 'AudioCommentLikesController',
-    'audio-albums' => 'AudioAlbumsController',
-    'bought-audios' => 'BoughtAudiosController',
-    'bought-videos' => 'BoughtVideosController',
-    'cart-audios' => 'CartAudiosController',
-    'cart-videos' => 'CartVideosController',
+    'audios' => 'AudioController',
+    'audio-likes' => 'AudioLikeController',
+    'audio-comments' => 'AudioCommentController',
+    'audio-comment-likes' => 'AudioCommentLikeController',
+    'audio-albums' => 'AudioAlbumController',
+    'bought-audios' => 'BoughtAudioController',
+    'bought-videos' => 'BoughtVideoController',
+    'cart-audios' => 'CartAudioController',
+    'cart-videos' => 'CartVideoController',
     'chat' => 'ChatController',
-    'decos' => 'DecosController',
+    'decos' => 'DecoController',
     'email' => 'EmailController',
-    'follows' => 'FollowsController',
-    'karaokes' => 'KaraokesController',
-    'karaoke-comments' => 'KaraokeCommentsController',
-    'karaoke-comment-likes' => 'KaraokeCommentLikesController',
-    'karaoke-likes' => 'KaraokeLikesController',
-    'karaoke-audios' => 'KaraokeAudiosController',
+    'follows' => 'FollowController',
+    'karaokes' => 'KaraokeController',
+    'karaoke-comments' => 'KaraokeCommentController',
+    'karaoke-comment-likes' => 'KaraokeCommentLikeController',
+    'karaoke-likes' => 'KaraokeLikeController',
+    'karaoke-audios' => 'KaraokeAudioController',
     'kopokopo' => 'KopokopoController',
-    'kopokopo-recipients' => 'KopokopoRecipientsController',
-    'notifications' => 'NotificationsController',
-    'posts' => 'PostsController',
-    'post-likes' => 'PostLikesController',
-    'post-comments' => 'PostCommentsController',
-    'post-comment-likes' => 'PostCommentLikesController',
-    'polls' => 'PollsController',
+    'kopokopo-recipients' => 'KopokopoRecipientController',
+    'notifications' => 'NotificationController',
+    'posts' => 'PostController',
+    'post-likes' => 'PostLikeController',
+    'post-comments' => 'PostCommentController',
+    'post-comment-likes' => 'PostCommentLikeController',
+    'polls' => 'PollController',
     'push' => 'PushController',
-    'referrals' => 'ReferralsController',
-    'saved-karaokes' => 'SavedKaraokesController',
+    'referrals' => 'ReferralController',
+    'saved-karaokes' => 'SavedKaraokeController',
     'search' => 'SearchController',
-    'song-payouts' => 'SongPayoutsController',
+    'song-payouts' => 'SongPayoutController',
     'sms' => 'SMSController',
-    'users' => 'UsersController',
-    'videos' => 'VideosController',
-    'video-likes' => 'VideoLikesController',
-    'video-comments' => 'VideoCommentsController',
-    'video-comment-likes' => 'VideoCommentLikesController',
-    'video-albums' => 'VideoAlbumsController',
+    'users' => 'UserController',
+    'videos' => 'VideoController',
+    'video-likes' => 'VideoLikeController',
+    'video-comments' => 'VideoCommentController',
+    'video-comment-likes' => 'VideoCommentLikeController',
+    'video-albums' => 'VideoAlbumController',
 ]);
 
-Route::get('video-charts', 'VideosController@charts');
+/*
+ * Post
+ */
 
-Route::get('mailable', function () {
+// Posts
+Route::get('artist/posts/{username}', 'PostController@artistPosts');
+Route::put('posts/mute/{username}', 'PostController@mute');
 
-    $amount = 100;
-    $phone = '0700364446';
+/*
+ * Video
+ */
 
-    return new App\Mail\SongPayout($amount, $phone);
+// Video Charts
+Route::get('video-charts/newly-released', 'VideoController@newlyReleased');
+Route::get('video-charts/trending', 'VideoController@trending');
+Route::get('video-charts/top-downloaded', 'VideoController@topDownloaded');
+Route::get('video-charts/top-liked', 'VideoController@topLiked');
+Route::get('videos/download', 'VideoController@download');
+Route::get('artist/video-albums/{username}', 'VideoAlbumController@artistVideoAlbums');
+Route::get('artist/videos/{username}', 'VideoController@artistVideos');
+Route::get('artist/bought-videos/{username}', 'BoughtVideoController@artistBoughtVideos');
+
+/*
+ * Audio
+ */
+
+// Audio Charts
+Route::get('audio-charts/newly-released', 'AudioController@newlyReleased');
+Route::get('audio-charts/trending', 'AudioController@trending');
+Route::get('audio-charts/top-downloaded', 'AudioController@topDownloaded');
+Route::get('audio-charts/top-liked', 'AudioController@topLiked');
+Route::get('audios/download', 'AudioController@download');
+Route::get('artist/audio-albums/{username}', 'AudioAlbumController@artistAudioAlbums');
+Route::get('artist/audios/{username}', 'AudioController@artistAudios');
+Route::get('artist/bought-audios/{username}', 'BoughtAudioController@artistBoughtAudios');
+
+/*
+ * Stories
+ */
+
+// Stories
+Route::post('stories/seen/{id}', 'StoryController@seen');
+Route::put('stories/mute/{username}', 'StoryController@mute');
+
+// Filepond Controller
+Route::prefix('filepond')->group(function () {
+        // User
+        Route::post('avatar/{id}', 'FilepondController@updateAvatar');
+
+        // Video
+        Route::post('video-thumbnail', 'FilepondController@storeVideoThumbnail');
+        Route::post('video-thumbnail/{id}', 'FilepondController@updateVideoThumbnail');
+        Route::post('video', 'FilepondController@@storeVideo');
+        Route::post('video/{id}', 'FilepondController@updateVideo');
+        Route::delete('video-thumbnail/{id}', 'FilepondController@destoryVideoThumbnail');
+        Route::delete('video/{id}', 'FilepondController@destoryVideo');
+
+        // Audio
+        Route::post('audio-thumbnail', 'FilepondController@storeAudioThumbnail');
+        Route::post('audio-thumbnail/{id}', 'FilepondController@updateAudioThumbnail');
+        Route::post('audio', 'FilepondController@storeAudio');
+        Route::post('audio/{id}', 'FilepondController@updateAudio');
+        Route::delete('audio-thumbnail/{id}', 'FilepondController@destoryAudioThumbnail');
+        Route::delete('audio/{id}', 'FilepondController@destoryAudio');
+
+        // Post
+        Route::post('posts', 'FilepondController@storePostMedia');
+        Route::delete('posts/{id}', 'FilepondController@destroyPostMedia');
+
+        // Karaoke
+        Route::post('karaokes', 'FilepondController@storeKaraoke');
+        Route::delete('karaokes/{id}', 'FilepondController@destroyKaraoke');
+
+        // Chat
+        Route::post('chats', 'FilepondController@storeChatMedia');
+        Route::delete('chats/{id}', 'FilepondController@deleteChatMedia');
+
+        // Story
+        Route::post('stories', 'FilepondController@storeStory');
+        Route::delete('stories/{id}', 'FilepondController@deleteStory');
 });
+
+// Kopokopo STK Push
+Route::post('stk-push', 'KopokopoController@stkPush');
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
