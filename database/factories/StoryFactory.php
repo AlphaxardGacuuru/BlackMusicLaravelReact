@@ -2,15 +2,16 @@
 
 namespace Database\Factories;
 
-use Faker\Generator as Faker;
 use App\Models\Follow;
 use App\Models\Story;
+use App\Models\User;
+use Faker\Generator as Faker;
 
 $factory->define(Story::class, function (Faker $faker) {
     return [
-        "username" => $faker->name(),
+        "username" => User::all()->random()->username,
         "text" => $faker->realText($maxNbChars = 20, $indexSize = 2),
-        "media" => [["image" => "stories/1.jpg"]],
+        "media" => [["image" => "stories/" . rand(1, 5) . ".jpg"]],
     ];
 });
 

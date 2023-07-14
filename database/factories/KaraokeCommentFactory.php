@@ -7,7 +7,7 @@ use App\Models\KaraokeComment;
 use App\Models\KaraokeCommentLike;
 use App\Models\User;
 
-$factory->define(KaraokeCommentLike::class, function (Faker $faker) {
+$factory->define(KaraokeComment::class, function (Faker $faker) {
     return [
         'text' => $faker->realText($maxNbChars = 20, $indexSize = 2),
     ];
@@ -15,8 +15,7 @@ $factory->define(KaraokeCommentLike::class, function (Faker $faker) {
 
 // User Follows themselves and Black Music after creation
 $factory->afterCreating(KaraokeComment::class, function (KaraokeComment $comment) {
-    factory(KaraokeCommentLike::class)
-        ->count(1)
+    factory(KaraokeCommentLike::class, 1)
         ->create([
             'username' => User::all()->random()->username,
             'karaoke_comment_id' => $comment->id,

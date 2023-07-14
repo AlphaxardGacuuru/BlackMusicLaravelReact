@@ -97,12 +97,9 @@ $factory->afterCreating(User::class, function (User $user) {
                 'muted' => ["posts" => false, "stories" => false],
             ]);
     } else {
-        factory(Follow::class, 2)
-            ->state(new Sequence(
-                ['followed' => $user->username],
-                ['followed' => '@blackmusic']
-            ))
+        factory(Follow::class)
             ->create([
+                'followed' => $user->username,
                 'username' => $user->username,
                 'muted' => ["posts" => false, "stories" => false],
             ]);

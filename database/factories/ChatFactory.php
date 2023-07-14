@@ -11,6 +11,6 @@ $factory->define(Chat::class, function (Faker $faker) {
         "username" => User::all()->random()->username,
         "to" => User::all()->random()->username,
         "text" => $faker->realText($maxNbChars = 20, $indexSize = 2),
-        "media" => "chat-media/1jpg",
+        "media" => "chat-media/" . rand(1, 5) . "jpg"
     ];
 });

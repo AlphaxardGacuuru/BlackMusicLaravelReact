@@ -10,11 +10,12 @@ use App\Models\User;
 $factory->define(AudioComment::class, function (Faker $faker) {
     return [
         'text' => $faker->realText($maxNbChars = 20, $indexSize = 2),
+        'username' => User::all()->random()->username,
     ];
 });
 
 $factory->afterCreating(AudioCommentLike::class, function (AudioComment $comment) {
-    factory(AudioCommentLike::class, 1)
+    factory(AudioCommentLike::class)
         ->create([
             'username' => User::all()->random()->username,
             'audio_comment_id' => $comment->id,

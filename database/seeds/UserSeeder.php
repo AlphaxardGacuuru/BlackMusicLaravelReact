@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kopokopo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,22 +24,25 @@ class UserSeeder extends Seeder
         if ($blackDoesntExist) {
             factory(User::class, 1)
                 ->states('black')
-                // ->hasKopokopos(1)
-                ->create();
+                ->create()
+                ->each(fn($user) => $user
+                        ->kopokopos()
+                        ->save(factory(Kopokopo::class)->make()));
         }
 
         if ($alDoesntExist) {
             factory(User::class, 1)
                 ->states('al')
-                // ->hasKopokopos(1)
-                ->create();
+                ->create()
+                ->each(fn($user) => $user
+                        ->kopokopos()
+                        ->save(factory(Kopokopo::class)->make()));
         }
 
-        // factory(User::class, 10)
-            // ->state(new Sequence(
-                // ['account_type' => 'normal'],
-                // ['account_type' => 'musician']))
-            // ->hasKopokopos(1)
-            // ->create();
+        factory(User::class, 10)
+            ->create()
+            ->each(fn($user) => $user
+                    ->kopokopos()
+                    ->save(factory(Kopokopo::class)->make()));
     }
 }
