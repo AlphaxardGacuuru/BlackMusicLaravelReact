@@ -1,29 +1,30 @@
-import BackSVG from "@/svgs/BackSVG"
-import Link from "next/link"
+import BackSVG from "../svgs/BackSVG";
+import Link from "next/link";
 
 const Privacy = () => {
-	return (
-		<div className="row">
-			<div className="col-sm-1"></div>
-			<div className="col-sm-10">
-				<div className="my-2 ml-2 text-white">
-					<Link href="/">
-						<a>
-							<BackSVG />
-						</a>
-					</Link>
-				</div>
-				<iframe
-					src="https://www.iubenda.com/privacy-policy/38639633"
-					title="privacy policy"
-					frameBorder="0"
-					width="100%"
-					height="800px"
-					scrolling="no"></iframe>
-			</div>
-			<div className="col-sm-1"></div>
-		</div>
-	)
-}
+    return (
+        <div className="row">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10">
+                <div className="my-2 ml-2 text-white">
+                    <Link href="/">
+                        <a>
+                            <BackSVG />
+                        </a>
+                    </Link>
+                </div>
+                <iframe
+                    src="https://www.iubenda.com/privacy-policy/38639633"
+                    title="privacy policy"
+                    frameBorder="0"
+                    width="100%"
+                    height="800px"
+                    scrolling="no"
+                ></iframe>
+            </div>
+            <div className="col-sm-1"></div>
+        </div>
+    );
+};
 
-export default Privacy
+export default Privacy;

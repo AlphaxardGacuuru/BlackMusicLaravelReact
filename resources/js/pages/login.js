@@ -1,101 +1,108 @@
-import Btn from '@/components/Core/Btn'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import Btn from "../components/Core/Btn";
+import Link from "next/link";
+import { useAuth } from "../hooks/auth";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Login = () => {
-	const router = useRouter()
+    const router = useRouter();
 
-	const { login } = useAuth({
-		middleware: 'guest',
-		redirectIfAuthenticated: '/',
-	})
+    const { login } = useAuth({
+        middleware: "guest",
+        redirectIfAuthenticated: "/"
+    });
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [shouldRemember, setShouldRemember] = useState(false)
-	const [errors, setErrors] = useState([])
-	const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [shouldRemember, setShouldRemember] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const [status, setStatus] = useState(null);
 
-	useEffect(() => {
-		if (router.query.reset?.length > 0 && errors.length === 0) {
-			setStatus(atob(router.query.reset))
-		} else {
-			setStatus(null)
-		}
-	})
+    useEffect(() => {
+        if (router.query.reset?.length > 0 && errors.length === 0) {
+            setStatus(atob(router.query.reset));
+        } else {
+            setStatus(null);
+        }
+    });
 
-	const submitForm = async event => {
-		event.preventDefault()
+    const submitForm = async event => {
+        event.preventDefault();
 
-		login({ email, password, remember: shouldRemember, setErrors, setStatus })
-	}
+        login({
+            email,
+            password,
+            remember: shouldRemember,
+            setErrors,
+            setStatus
+        });
+    };
 
-	return (
-		<form onSubmit={submitForm}>
-			{/* Email Address */}
-			<div>
-				<label htmlFor="email">Email</label>
+    return (
+        <form onSubmit={submitForm}>
+            {/* Email Address */}
+            <div>
+                <label htmlFor="email">Email</label>
 
-				<input
-					id="email"
-					type="email"
-					value={email}
-					className="block mt-1 w-full"
-					onChange={event => setEmail(event.target.value)}
-					required
-					autoFocus
-				/>
+                <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    className="block mt-1 w-full"
+                    onChange={event => setEmail(event.target.value)}
+                    required
+                    autoFocus
+                />
+            </div>
 
-			</div>
+            {/* Password */}
+            <div className="mt-4">
+                <label htmlFor="password">Password</label>
 
-			{/* Password */}
-			<div className="mt-4">
-				<label htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    className="block mt-1 w-full"
+                    onChange={event => setPassword(event.target.value)}
+                    required
+                    autoComplete="current-password"
+                />
+            </div>
 
-				<input
-					id="password"
-					type="password"
-					value={password}
-					className="block mt-1 w-full"
-					onChange={event => setPassword(event.target.value)}
-					required
-					autoComplete="current-password"
-				/>
+            {/* Remember Me */}
+            <div className="block mt-4">
+                <label
+                    htmlFor="remember_me"
+                    className="inline-flex items-center"
+                >
+                    <input
+                        id="remember_me"
+                        type="checkbox"
+                        name="remember"
+                        className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        onChange={event =>
+                            setShouldRemember(event.target.checked)
+                        }
+                    />
 
-			</div>
+                    <span className="ml-2 text-sm text-gray-600">
+                        Remember me
+                    </span>
+                </label>
+            </div>
 
-			{/* Remember Me */}
-			<div className="block mt-4">
-				<label
-					htmlFor="remember_me"
-					className="inline-flex items-center">
-					<input
-						id="remember_me"
-						type="checkbox"
-						name="remember"
-						className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						onChange={event => setShouldRemember(event.target.checked)}
-					/>
+            <div className="flex items-center justify-end mt-4">
+                <Link href="/forgot-password">
+                    <a className="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot your password?
+                    </a>
+                </Link>
 
-					<span className="ml-2 text-sm text-gray-600">
-						Remember me
-					</span>
-				</label>
-			</div>
+                <Btn className="ml-3">Login</Btn>
+            </div>
+        </form>
+    );
+};
 
-			<div className="flex items-center justify-end mt-4">
-				<Link href="/forgot-password">
-					<a className="underline text-sm text-gray-600 hover:text-gray-900">
-						Forgot your password?
-					</a>
-				</Link>
-
-				<Btn className="ml-3">Login</Btn>
-			</div>
-		</form>
-	)
-}
-
-export default Login
+export default Login;
