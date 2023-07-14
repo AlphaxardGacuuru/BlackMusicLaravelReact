@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const MusicNoteSVG = () => {
 	return (
@@ -7,7 +7,7 @@ const MusicNoteSVG = () => {
 			width="1em"
 			height="1em"
 			fill="currentColor"
-			className="bi bi-music-note"
+			className="mb-2 bi bi-music-note"
 			viewBox="0 0 16 16">
 			<path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
 			<path fillRule="evenodd" d="M9 3v10H8V3h1z" />

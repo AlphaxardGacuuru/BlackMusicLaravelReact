@@ -1,275 +1,170 @@
-import React, { useState, Suspense } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, Suspense, useEffect } from "react"
+import axios from "@/lib/axios"
+import EchoConfig from "@/lib/echo"
 
-import Img from '../components/Img'
-import Button from '../components/Button'
-import axios from 'axios'
-
-import LoadingVideoMediaHorizontal from '../components/LoadingVideoMediaHorizontal'
-import LoadingAudioMediaHorizontal from '../components/LoadingAudioMediaHorizontal'
-
-const VideoMediaHorizontal = React.lazy(() => import('../components/VideoMediaHorizontal'))
-const AudioMediaHorizontal = React.lazy(() => import('../components/AudioMediaHorizontal'))
+import VideoMedia from "@/components/Video/VideoMedia"
+import AudioMedia from "@/components/Audio/AudioMedia"
+import Btn from "@/components/Core/Btn"
+import CloseSVG from "@/svgs/CloseSVG"
 
 const Cart = (props) => {
-
+	const [messages, setMessages] = useState([])
+	const [cartVideos, setCartVideos] = useState([])
+	const [cartAudios, setCartAudios] = useState([])
 	const [bottomMenu, setBottomMenu] = useState("")
-	const [receipt, setReceipt] = useState()
+	const [receipt, setReceipt] = useState("")
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
 
 	// Calculate totals
-	const videoTotal = props.cartVideos.length
-	const videoTotalCash = props.cartVideos.length * 20
-	const audioTotal = props.cartAudios.length
-	const audioTotalCash = props.cartAudios.length * 10
+	const videoTotal = cartVideos.length
+	const videoTotalCash = cartVideos.length * 20
+	const audioTotal = cartAudios.length
+	const audioTotalCash = cartAudios.length * 10
 	const total = videoTotalCash + audioTotalCash
+
+	useEffect(() => {
+		// Instantiate Echo
+		EchoConfig()
+
+		Echo.private(`kopokopo-received`).listen("KopokopoCreatedEvent", (e) => {
+			setMessages(["Payment received"])
+			buyVideos()
+			buyAudios()
+		})
+
+		props.get("cart-videos", setCartVideos)
+		props.get("cart-audios", setCartAudios)
+	}, [])
 
 	// Send STKPush
 	const STKPush = (amount) => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			axios.put(`${props.url}/api/kopokopo/${amount}`)
-				.then((res) => props.setMessages([res.data]))
-				.catch((err) => {
-					const resErrors = err.response.data.errors
-					var resError
-					var newError = []
-					for (resError in resErrors) {
-						newError.push(resErrors[resError])
-					}
-					newError.push(err.response.data.message)
-					props.setErrors(newError)
-				})
-		})
+		axios
+			.post(`/api/stk-push`, { amount: amount })
+			.then((res) => props.setMessages([res.data.message]))
+			.catch((err) => props.getErrors(err, true))
 	}
 
-	// Function for buying videos
-	const onPay = () => {
-		axios.get('sanctum/csrf-cookie').then(() => {
-			// Check payment after every 2s
-			var intervalId = window.setInterval(() => {
-				// Try and buy videos
-				axios.post(`${props.url}/api/bought-videos`)
-					.then((res) => {
-						// If videos are bought stop checking
-						if (res.data.length > 0) {
-							setReceiptVideos(res.data)
-							setBottomMenu()
-							setReceipt("menu-open")
-							clearInterval(intervalId)
-							// Show message
-							var message
-							// Proper grammar for message
-							if (res.data.length > 1) {
-								message = res.data.length + " Videos bought"
-							} else {
-								message = res.data.length + " Video bought"
-							}
-							props.setMessages([message])
-							// Update Bought Videos
-							axios.get(`${props.url}/api/bought-videos`)
-								.then((res) => props.setBoughtVideos(res.data))
-							// Update Videos
-							axios.get(`${props.url}/api/videos`)
-								.then((res) => props.setVideos(res.data))
-							// Update Cart Videos
-							axios.get(`${props.url}/api/cart-videos`)
-								.then((res) => props.setCartVideos(res.data))
-							// Update Videos Albums
-							axios.get(`${props.url}/api/video-albums`)
-								.then((res) => props.setVideoAlbums(res.data))
-						}
-						// Stop loop after 30s
-						setTimeout(() => {
-							clearInterval(intervalId)
-							setBottomMenu()
-						}, 30000)
+	// Buy Videos
+	const buyVideos = () => {
+		// Try and buy videos if any are in cart
+		cartVideos.length > 0 &&
+			axios
+				.post(`/api/bought-videos`)
+				.then((res) => {
+					// If videos are bought stop checking
+					setReceiptVideos(res.data.data)
+					setBottomMenu()
+					setReceipt("menu-open")
+					// Show message
+					var message = `${res.data.data.length} Video${
+						res.data.data.length > 1 ? "s" : ""
+					} bought`
+					setMessages([...messages, message])
+					// Update state
+					props.get("cart-videos", setCartVideos)
+				})
+				.catch((err) => props.getErrors(err))
+	}
 
-					}).catch((err) => {
-						console.log(err.response.data.errors)
-						const resErrors = err.response.data.errors
-						var resError
-						var newError = []
-						for (resError in resErrors) {
-							newError.push(resErrors[resError])
-						}
-						props.setErrors(newError)
-					})
-
-				// Try and buy audios
-				axios.post(`${props.url}/api/bought-audios`)
-					.then((res) => {
-						// If videos are bought stop checking
-						if (res.data.length > 0) {
-							setReceiptAudios(res.data)
-							setBottomMenu()
-							setReceipt("menu-open")
-							clearInterval(intervalId)
-							// Show message after 10 seconds
-							setTimeout(() => {
-								var message
-								// Proper grammar for message
-								if (res.data.length > 1) {
-									message = res.data.length + " Audios bought"
-								} else {
-									message = res.data.length + " Audio bought"
-								}
-								props.setMessages([message])
-							}, 10000)
-							// Update Bought Audio
-							axios.get(`${props.url}/api/bought-audios`)
-								.then((res) => props.setBoughtAudios(res.data))
-							// Update Audios
-							axios.get(`${props.url}/api/audios`)
-								.then((res) => props.setAudios(res.data))
-							// Update Cart Audios
-							axios.get(`${props.url}/api/cart-audios`)
-								.then((res) => props.setCartAudios(res.data))
-							// Update Audio Albums
-							axios.get(`${props.url}/api/audio-albums`)
-								.then((res) => props.setAudioAlbums(res.data))
-						}
-						// Stop loop after 30s
-						setTimeout(() => {
-							clearInterval(intervalId)
-							setBottomMenu()
-						}, 30000)
-					}).catch((err) => {
-						console.log(err.response.data.message)
-						const resErrors = err.response.data.errors
-						var resError
-						var newError = []
-						for (resError in resErrors) {
-							newError.push(resErrors[resError])
-						}
-						props.setErrors(newError)
-					})
-			}, 2000);
-		});
+	// Buy Audios
+	const buyAudios = () => {
+		// Try and buy audios if any are in cart
+		cartAudios.length > 0 &&
+			axios
+				.post(`/api/bought-audios`)
+				.then((res) => {
+					setReceiptAudios(res.data.data)
+					setBottomMenu()
+					setReceipt("menu-open")
+					var message = `${res.data.data.length} Audio${
+						res.data.data.length > 1 ? "s" : ""
+					} bought`
+					setMessages([...messages, message])
+					// Update states
+					props.get("cart-audios", setCartAudios, "cartAudios")
+				})
+				.catch((err) => props.getErrors(err))
 	}
 
 	return (
 		<div>
 			<div className="row">
+				{messages.map((message, key) => (
+					<center key={key}>
+						<h6
+							id="snackbar-up"
+							style={{ cursor: "pointer" }}
+							className="show"
+							onClick={() => setMessages([])}>
+							<div>{message}</div>
+						</h6>
+					</center>
+				))}
 				<div className="col-sm-12">
-					<center><h1>Cart</h1></center>
+					<center>
+						<h1>Cart</h1>
+					</center>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3">
 					<div className="mb-4">
-						{/* Cart Videos */}
-						{props.cartVideos.length > 0 &&
-							<>
-								<center><h3 className="pt-4 pb-2 border-bottom border-dark">Videos</h3></center>
-								<hr />
-							</>}
-						{props.cartVideos.map((cartVideo, key) => (
-							<div key={key} className="d-flex">
-								<div className="thumbnail">
-									<Link to={`/video-show/${cartVideo.video_id}`}>
-										<Img src={cartVideo.thumbnail}
-											width="160em"
-											height="90em" />
-									</Link>
+						<center>
+							{/* Cart Videos */}
+							{cartVideos.length > 0 && (
+								<>
+									<h3 className="pt-4 pb-2 border-bottom border-dark">
+										Videos
+									</h3>
+									<hr />
+								</>
+							)}
+							{cartVideos.map((cartVideo, key) => (
+								<VideoMedia
+									{...props}
+									key={key}
+									video={cartVideo}
+									setCartVideos={setCartVideos}
+								/>
+							))}
+							{cartVideos.length > 0 && (
+								<div className="d-flex justify-content-between border-top border-dark">
+									<div className="p-2">
+										<h4 className="text-success">Sub Total</h4>
+									</div>
+									<div className="p-2">
+										<h4 className="text-success">{videoTotalCash}</h4>
+									</div>
 								</div>
-								<div className="ml-2 mr-auto flex-grow-1">
-									<h6 className="mb-0"
-										style={{
-											width: "150px",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip"
-										}}>
-										{cartVideo.name}
-									</h6>
-									<h6>
-										<small>{cartVideo.artist} {cartVideo.ft}</small>
-									</h6>
-									<h6 className="text-success">KES 20</h6>
-									<button
-										className="mysonar-btn white-btn mb-1 float-right"
-										onClick={() => props.onCartVideos(cartVideo.video_id)}>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											fill="currentColor"
-											className="bi bi-trash"
-											viewBox="0 0 16 16">
-											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-											<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-										</svg>
-									</button>
-								</div>
-							</div>
-						))}
-						{props.cartVideos.length > 0 &&
-							<div className="d-flex justify-content-between border-top border-dark">
-								<div className="p-2">
-									<h4 className="text-success">Sub Total</h4>
-								</div>
-								<div className="p-2">
-									<h4 className="text-success">{videoTotalCash}</h4>
-								</div>
-							</div>}
-						{/* Cart Videos End */}
+							)}
+							{/* Cart Videos End */}
+						</center>
 					</div>
 				</div>
 				<div className="col-sm-4">
 					<div className="mb-4">
 						{/* Cart Audios */}
-						{props.cartAudios.length > 0 &&
+						{cartAudios.length > 0 && (
 							<>
-								<center><h3 className="pt-4 pb-2 border-bottom border-dark">Audios</h3></center>
+								<center>
+									<h3 className="pt-4 pb-2 border-bottom border-dark">
+										Audios
+									</h3>
+								</center>
 								<hr />
-							</>}
-						{props.cartAudios
-							.map((cartAudio, key) => (
-								<div key={key} className="d-flex">
-									<div
-										className="thumbnail"
-										style={{ width: "50px", height: "50px" }}>
-										<Link to={`/audio-show/${cartAudio.audio_id}`}>
-											<Img src={cartAudio.thumbnail}
-												width="100%"
-												height="50px" />
-										</Link>
-									</div>
-									<div className="ml-2 mr-auto">
-										<h6 className="mb-0 pb-0"
-											style={{
-												whiteSpace: "nowrap",
-												overflow: "hidden",
-												textOverflow: "clip"
-											}}>
-											{cartAudio.name}
-										</h6>
-										<h6 className="mt-0 pt-0">
-											<small>{cartAudio.username}</small>
-										</h6>
-										<h6 className="text-success">KES 10</h6>
-									</div>
-									<div className="ml-2">
-										<button
-											className="mysonar-btn white-btn mb-1 float-right"
-											onClick={() => props.onCartAudios(cartAudio.audio_id)}>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												fill="currentColor"
-												className="bi bi-trash"
-												viewBox="0 0 16 16">
-												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-												<path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-											</svg>
-										</button>
-									</div>
-								</div>
-							))}
-						{props.cartAudios.length > 0 &&
+							</>
+						)}
+						{cartAudios.map((cartAudio, key) => (
+							<AudioMedia
+								{...props}
+								key={key}
+								audio={cartAudio}
+								setCartAudios={setCartAudios}
+							/>
+						))}
+						{cartAudios.length > 0 && (
 							<div className="d-flex justify-content-between border-top border-dark">
 								<div className="p-2">
 									<h4 className="text-success">Sub Total</h4>
@@ -277,7 +172,8 @@ const Cart = (props) => {
 								<div className="p-2">
 									<h4 className="text-success">{audioTotalCash}</h4>
 								</div>
-							</div>}
+							</div>
+						)}
 						{/* Cart Audios End */}
 					</div>
 				</div>
@@ -287,18 +183,20 @@ const Cart = (props) => {
 							<h3 className="pt-4 pb-2 border-bottom border-dark">Total</h3>
 							<hr />
 							<h3 className="text-success"> KES {total}</h3>
-							<h5 className="text-success">Your account balance: KES {props.auth.balance}</h5>
+							<h5 className="text-success">
+								Your account balance: KES {props.auth.balance}
+							</h5>
 							<br />
 
 							{/* {{-- Collapse --}} */}
-							{(videoTotal + audioTotal) > 0 &&
+							{videoTotal + audioTotal > 0 && (
 								<>
 									<button
 										className="mysonar-btn white-btn"
 										style={{ width: "80%" }}
 										type="button"
-										data-toggle="collapse"
-										data-target="#collapseExample"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseExample"
 										aria-expanded="false"
 										aria-controls="collapseExample">
 										next
@@ -306,39 +204,47 @@ const Cart = (props) => {
 									<div className="collapse" id="collapseExample">
 										<div className="">
 											<br />
-											<h5>Once you click the button below a pop up will appear on your phone asking you to pay</h5>
+											<h5>
+												Once you click the button below a pop up will appear on
+												your phone asking you to pay
+											</h5>
 											<h4 className="text-success">KES {total}</h4>
 											<h5>to</h5>
 											<h4 style={{ color: "dodgerblue" }}>Kopokopo</h4>
 											<br />
 
 											{/* Checkout button */}
-											<Button
+											<Btn
 												btnClass="mysonar-btn green-btn btn-2 mb-4"
 												btnText="pay with mpesa"
 												btnStyle={{ width: "80%" }}
 												onClick={(e) => {
 													e.preventDefault()
 													setBottomMenu("menu-open")
-													onPay()
+													// onPay()
 													STKPush(total)
-												}} />
+												}}
+											/>
 										</div>
 									</div>
-								</>}
+								</>
+							)}
 							{/* {{-- Collapse End --}} */}
 							<br />
 							<br />
 
 							{/* Receipt button */}
-							{(receiptVideos.length + receiptAudios.length) > 0 &&
-								<Button btnClass="mysonar-btn mb-4"
+							{receiptVideos.length + receiptAudios.length > 0 && (
+								<Btn
+									btnClass="mysonar-btn mb-4"
 									btnText="receipt"
 									btnStyle={{ width: "80%" }}
 									onClick={(e) => {
 										e.preventDefault()
 										setReceipt("menu-open")
-									}} />}
+									}}
+								/>
+							)}
 						</center>
 					</div>
 				</div>
@@ -356,43 +262,22 @@ const Cart = (props) => {
 
 						{/* <!-- Close Icon --> */}
 						<div
-							className="closeIcon p-2 float-right"
-							onClick={() => {
-								setBottomMenu("")
-							}}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="40"
-								height="40"
-								fill="currentColor"
-								className="bi bi-x"
-								viewBox="0 0 16 16">
-								<path
-									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-							</svg>
+							className="closeIcon p-2 float-right fs-6"
+							onClick={() => setBottomMenu("")}>
+							<CloseSVG />
 						</div>
 					</div>
 
 					<center>
-						<h5>Request was sent to <span style={{ color: "dodgerblue" }}>{props.auth.phone}</span></h5>
+						<h5>
+							Request was sent to{" "}
+							<span style={{ color: "dodgerblue" }}>{props.auth.phone}</span>
+						</h5>
 						<br />
 
 						<h6>Checking payment</h6>
 						<div id="sonar-load" className="mt-4 mb-4"></div>
 					</center>
-
-					{/* {videoTotal > 0 && <h5 className="">Videos {videoTotal}</h5>}
-					{audioTotal > 0 && <h5 className="mb-2">Audios {audioTotal}</h5>}
-
-					<h4 className="text-success mb-2">Total KES {total}</h4>
-					<h5 className="text-success">Mpesa (STK Push) <span>{props.auth.phone}</span></h5>
-					<br />
-
-					<Button
-						btnClass="mysonar-btn green-btn"
-						btnText="pay"
-						btnStyle={{ width: "80%" }}
-						onClick={onPay} /> */}
 
 					<br />
 					<br />
@@ -402,7 +287,7 @@ const Cart = (props) => {
 
 			{/* Sliding Receipt Bottom Nav */}
 			<div className={receipt}>
-				<div className="bottomMenu" style={{ height: "50%" }}>
+				<div className="commentMenu" style={{ height: "50%" }}>
 					<div className="d-flex align-items-center justify-content-between mb-3">
 						{/* <!-- Logo Area --> */}
 						<div className="logo-area p-2">
@@ -410,17 +295,10 @@ const Cart = (props) => {
 						</div>
 
 						{/* <!-- Close Icon --> */}
-						<div className="closeIcon p-2 float-right" onClick={() => setReceipt("")}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="40"
-								height="40"
-								fill="currentColor"
-								className="bi bi-x"
-								viewBox="0 0 16 16">
-								<path
-									d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-							</svg>
+						<div
+							className="closeIcon p-2 float-right fs-6"
+							onClick={() => setReceipt("")}>
+							<CloseSVG />
 						</div>
 					</div>
 
@@ -429,53 +307,34 @@ const Cart = (props) => {
 						style={{
 							height: "100%",
 							overflowY: "scroll",
-							textAlign: "left"
+							textAlign: "left",
 						}}>
 						<center>
 							<h4 className="text-success">Congratulations</h4>
 							<h5 className="text-success">Purchase successful!</h5>
 						</center>
 						{/* Cart Videos */}
-						{receiptVideos.length > 0 && <center><h4>Videos</h4></center>}
-						{receiptVideos
-							.map((receiptVideo, key) => (
-								<Suspense key={key} fallback={<LoadingVideoMediaHorizontal />}>
-									<VideoMediaHorizontal
-										onClick={() => props.setShow(0)}
-										setShow={props.setShow}
-										link={`/video-show/${receiptVideo.id}`}
-										thumbnail={receiptVideo.thumbnail}
-										name={receiptVideo.name}
-										username={receiptVideo.username}
-										ft={receiptVideo.ft}
-										hasBoughtVideo={false}
-										videoInCart={false}
-										videoId={receiptVideo.id}
-										onCartVideos={props.onCartVideos}
-										onBuyVideos={props.onCartVideos} />
-								</Suspense>
+						{receiptVideos.length > 0 && (
+							<center>
+								<h4>Videos</h4>
+							</center>
+						)}
+						<center>
+							{receiptVideos.map((receiptVideo, key) => (
+								<VideoMedia {...props} key={key} video={receiptVideo} />
 							))}
+						</center>
 						{/* Cart Videos End */}
 
 						{/* Cart Audios */}
-						{receiptAudios.length > 0 && <center><h4 className="mt-4">Audios</h4></center>}
-						{receiptAudios
-							.map((receiptAudio, key) => (
-								<Suspense key={key} fallback={<LoadingAudioMediaHorizontal />}>
-									<AudioMediaHorizontal
-										key={key}
-										setShow={props.setShow}
-										setLocalStorage={props.setLocalStorage}
-										link={`/audio-show/${receiptAudio.id}`}
-										thumbnail={`/storage/${receiptAudio.thumbnail}`}
-										name={receiptAudio.name}
-										username={receiptAudio.username}
-										ft={receiptAudio.ft}
-										hasBoughtAudio={false}
-										audioInCart={false}
-										audioId={receiptAudio.id} />
-								</Suspense>
-							))}
+						{receiptAudios.length > 0 && (
+							<center>
+								<h4 className="mt-4">Audios</h4>
+							</center>
+						)}
+						{receiptAudios.map((receiptAudio, key) => (
+							<AudioMedia {...props} key={key} audio={receiptAudio} />
+						))}
 						<br />
 						<br />
 					</div>

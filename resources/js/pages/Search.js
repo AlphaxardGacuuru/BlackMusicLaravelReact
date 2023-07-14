@@ -1,88 +1,84 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from "react"
+import axios from "@/lib/axios"
 
-import Img from '../components/Img'
-import VideoMediaHorizontal from '../components/VideoMediaHorizontal'
-import AudioMediaHorizontal from '../components/AudioMediaHorizontal'
-import AvatarMedia from '../components/AvatarMedia'
+import Img from "@/components/Core/Img"
+import AvatarMedia from "@/components/User/AvatarMedia"
+import VideoMedia from "@/components/Video/VideoMedia"
+import AudioMedia from "@/components/Audio/AudioMedia"
+import CloseSVG from "@/svgs/CloseSVG"
 
 const Search = (props) => {
-
-	axios.defaults.baseURL = props.url
-
-	const history = useHistory()
-	const [searchHistory, setSearchHistory] = useState(props.getLocalStorage("searchHistory"))
+	const [searchHistory, setSearchHistory] = useState(
+		props.getLocalStorage("searchHistory")
+	)
+	const [users, setUsers] = useState(props.getLocalStorage("users"))
+	const [videos, setVideos] = useState(props.getLocalStorage("videos"))
+	const [audios, setAudios] = useState(props.getLocalStorage("audios"))
+	const [videoAlbums, setVideoAlbums] = useState(
+		props.getLocalStorage("videoAlbums")
+	)
+	const [audioAlbums, setAudioAlbums] = useState(
+		props.getLocalStorage("audioAlbums")
+	)
 
 	// Fetch Search History
 	useEffect(() => {
-		axios.get(`/api/search`)
-			.then((res) => {
-				setSearchHistory(res.data)
-				props.setLocalStorage("searchHistory", res.data)
-			})
-			.catch(() => props.setErrors(['Failed to fetch search history']))
+		props.get("search", setSearchHistory, "search", false)
+		props.get("users", setUsers, "users", false)
+		props.get("videos", setVideos, "videos", false)
+		props.get("audios", setAudios, "audios", false)
+		props.get("videoAlbums", setVideoAlbums, "videoAlbums", false)
+		props.get("audioAlbums", setAudioAlbums, "audioAlbums", false)
 	}, [])
 
-	var userResults = props.users
-		.filter((user) => {
-			return user.username != props.auth.username &&
-				user.username != "@blackmusic" &&
-				user.account_type == "musician" &&
-				user.username.match(props.search)
-		})
+	var userResults = users.filter((user) => {
+		return (
+			user.username != props.auth.username &&
+			user.username != "@blackmusic" &&
+			user.accountType == "musician" &&
+			user.username.match(props.search)
+		)
+	})
 
-	var videoResults = props.videos
-		.filter((video) => video.name.match(props.search) &&
-			video.username != props.auth.username)
+	var videoResults = videos.filter(
+		(video) =>
+			video.name.match(props.search) && video.username != props.auth.username
+	)
 
-	var audioResults = props.audios
-		.filter((audio) => audio.name.match(props.search) &&
-			audio.username != props.auth.username)
+	var audioResults = audios.filter(
+		(audio) =>
+			audio.name.match(props.search) && audio.username != props.auth.username
+	)
 
-	var audioAlbumResults = props.audioAlbums
-		.filter((audioAlbum) => {
-			return audioAlbum.name != "Singles" &&
-				audioAlbum.name.match(props.search) &&
-				audioAlbum.username != props.auth.username
-		})
+	var audioAlbumResults = audioAlbums.filter((audioAlbum) => {
+		return (
+			audioAlbum.name != "Singles" &&
+			audioAlbum.name.match(props.search) &&
+			audioAlbum.username != props.auth.username
+		)
+	})
 
-	var videoAlbumResults = props.videoAlbums
-		.filter((videoAlbum) => {
-			return videoAlbum.name != "Singles" &&
-				videoAlbum.name.match(props.search) &&
-				videoAlbum.username != props.auth.username
-		})
-
-	// Function for buying video to cart
-	const onBuyVideos = (video) => {
-		props.onCartVideos(video)
-		setTimeout(() => history.push('/cart'), 1000)
-	}
-
-	// Function for buying audio to cart
-	const onBuyAudios = (audio) => {
-		props.onCartAudios(audio)
-		setTimeout(() => history.push('/cart'), 1000)
-	}
+	var videoAlbumResults = videoAlbums.filter((videoAlbum) => {
+		return (
+			videoAlbum.name != "Singles" &&
+			videoAlbum.name.match(props.search) &&
+			videoAlbum.username != props.auth.username
+		)
+	})
 
 	// Save search
 	const onSearch = (keyword) => {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.post(`/api/search`, { keyword: keyword })
-				.then((res) => props.setMessages([res.data]))
-		})
+		axios
+			.post(`/api/search`, { keyword: keyword })
+			.then((res) => props.setMessages([res.data.message]))
 	}
 
 	// Delete search item
 	const onDeleteSearch = (id) => {
-		axios.get('/sanctum/csrf-cookie').then(() => {
-			axios.delete(`/api/search/${id}`)
-				.then((res) => {
-					// Update search
-					axios.get(`/api/search`)
-						.then((res) => setSearchHistory(res.data))
-				})
-		});
+		axios.delete(`api/search/${id}`).then((res) => {
+			// Update search
+			axios.get(`/api/search`).then((res) => setSearchHistory(res.data.data))
+		})
 	}
 
 	return (
@@ -92,7 +88,9 @@ const Search = (props) => {
 				<div className="col-sm-8">
 					{/* <!-- For mobile --> */}
 					{/* <!-- ***** Header Area Start ***** --> */}
-					<header style={{ backgroundColor: "#232323" }} className="header-area anti-hidden">
+					<header
+						style={{ backgroundColor: "#232323" }}
+						className="header-area anti-hidden">
 						<div className="container-fluid p-0">
 							<div className="row">
 								<div className="col-12 p-0">
@@ -104,9 +102,10 @@ const Search = (props) => {
 											placeholder="Search songs and artists"
 											style={{ color: "white", width: "100%" }}
 											onChange={(e) => {
-												var regex = new RegExp(e.target.value, 'gi');
+												var regex = new RegExp(e.target.value, "gi")
 												props.setSearch(regex)
-											}} />
+											}}
+										/>
 									</div>
 								</div>
 							</div>
@@ -120,22 +119,17 @@ const Search = (props) => {
 						videoAlbumResults.length == 0 &&
 						audioAlbumResults.length == 0 &&
 						searchHistory.map((search, key) => (
-							<div key={key} className="d-flex justify-content-between border-bottom border-dark">
+							<div
+								key={key}
+								className="d-flex justify-content-between border-bottom border-dark">
 								<div className="p-2">
 									<span>{search.keyword}</span>
 								</div>
 								<div className="p-2">
-									<span onClick={() => onDeleteSearch(search.id)}>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="30"
-											height="30"
-											fill="currentColor"
-											className="bi bi-x"
-											viewBox="0 0 16 16">
-											<path
-												d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-										</svg>
+									<span
+										style={{ cursor: "pointer" }}
+										onClick={() => onDeleteSearch(search.id)}>
+										<CloseSVG />
 									</span>
 								</div>
 							</div>
@@ -156,101 +150,112 @@ const Search = (props) => {
 			</div>
 
 			<div className="row">
-				<div className="col-sm-3"></div>
-				<div className="col-sm-3">
+				<div className="col-sm-2"></div>
+				<div className="col-sm-4">
 					{/* Videos */}
-					{videoResults.length > 0 &&
-						<div className="p-2 border-bottom">
+					{videoResults.length > 0 && (
+						<div className="mb-4 p-2 border-bottom">
 							<h4>Videos</h4>
-						</div>}
-					{videoResults
-						.slice(0, 5)
-						.map((video, key) => (
-							<div key={key} onClick={() => onSearch(video.name)}>
-								<VideoMediaHorizontal
-									{...props}
-									video={video}
-									onBuyVideos={onBuyVideos}
-									onClick={() => props.setShow(0)} />
-							</div>
-						))}
+						</div>
+					)}
+					{videoResults.slice(0, 5).map((video, key) => (
+						<div key={key} onClick={() => onSearch(video.name)}>
+							<VideoMedia
+								{...props}
+								video={video}
+								onClick={() => props.setShow(0)}
+							/>
+						</div>
+					))}
 					{/* Videos End */}
 				</div>
 
-				<div className="col-sm-3">
+				<div className="col-sm-4">
 					{/* Audios */}
-					{audioResults.length > 0 &&
-						<div className="p-2 mt-2 border-bottom">
+					{audioResults.length > 0 && (
+						<div className="p-2 mb-2 border-bottom">
 							<h4>Audios</h4>
-						</div>}
-					{audioResults
-						.slice(0, 5)
-						.map((audio, key) => (
-							<div key={key} onClick={() => onSearch(audio.name)}>
-								<AudioMediaHorizontal
-									{...props}
-									audio={audio}
-									onBuyAudios={onBuyAudios} />
-							</div>
-						))}
+						</div>
+					)}
+					{audioResults.slice(0, 5).map((audio, key) => (
+						<div key={key} onClick={() => onSearch(audio.name)}>
+							<AudioMedia {...props} audio={audio} />
+						</div>
+					))}
 					{/* Audios End */}
 				</div>
 				<div className="col-sm-3"></div>
 			</div>
 
 			<div className="row">
-				<div className="col-sm-3"></div>
-				<div className="col-sm-3">
-					{videoAlbumResults.lenth > 0 &&
+				<div className="col-sm-2"></div>
+				<div className="col-sm-4">
+					{videoAlbumResults.length > 0 && (
 						<div className="p-2 mt-5 mb-3 border-bottom">
 							<h4>Video Albums</h4>
-						</div>}
+						</div>
+					)}
 					{/* Video Albums */}
 					{videoAlbumResults.map((videoAlbum, key) => (
-						<div key={key} className="mb-3" onClick={() => onSearch(videoAlbum.name)}>
-							<div className="media">
-								<div className="media-left">
-									<Img src={`/storage/${videoAlbum.cover}`}
-										width="auto"
-										height="100"
-										alt={"album cover"} />
-								</div>
-								<div className="media-body p-2">
-									<small>Video Album</small>
-									<h1>{videoAlbum.name}</h1>
-									<h6>{videoAlbum.created_at}</h6>
-								</div>
+						<div
+							key={key}
+							className="d-flex"
+							onClick={() => onSearch(videoAlbum.name)}>
+							<div className="p-2">
+								{videoAlbum.name != "Singles" ? (
+									<Img
+										src={videoAlbum.cover}
+										width="10em"
+										height="10em"
+										alt="album cover"
+									/>
+								) : (
+									""
+								)}
+							</div>
+							<div className="p-2">
+								<small className="my-0">Video Album</small>
+								<h1 className="my-0">{videoAlbum.name}</h1>
+								<h6>{videoAlbum.createdAt}</h6>
 							</div>
 						</div>
 					))}
 					{/* Videos Albums End */}
 				</div>
 				<div className="col-sm-3">
-					{audioAlbumResults.length > 0 &&
+					{audioAlbumResults.length > 0 && (
 						<div className="p-2 mt-5 mb-3 border-bottom">
 							<h4>Audio Albums</h4>
-						</div>}
+						</div>
+					)}
 					{/* Audio Albums */}
 					{audioAlbumResults.map((audioAlbum, key) => (
-						<div key={key} className="mb-3" onClick={() => onSearch(audioAlbum.name)}>
-							<div className="media">
-								<div className="media-left">
-									<Img src={`/storage/${audioAlbum.cover}`}
-										width="auto"
-										height="100"
-										alt={"album cover"} />
-								</div>
-								<div className="media-body p-2">
-									<small>Audio Album</small>
-									<h1>{audioAlbum.name}</h1>
-									<h6>{audioAlbum.create_at}</h6>
-								</div>
+						<div
+							key={key}
+							className="d-flex"
+							onSearch={() => onSearch(audioAlbum.name)}>
+							<div className="p-2">
+								{audioAlbum.name != "Singles" ? (
+									<Img
+										src={audioAlbum.cover}
+										width="10em"
+										height="10em"
+										alt="album cover"
+									/>
+								) : (
+									""
+								)}
+							</div>
+							<div className="p-2">
+								<small>Audio Album</small>
+								<h1 className="my-0">{audioAlbum.name}</h1>
+								<h6>{audioAlbum.createdAt}</h6>
 							</div>
 						</div>
 					))}
 					{/* Audio Albums End */}
 				</div>
-				<div className="col-sm-3"></div>
+				<div className="col-sm-2"></div>
 			</div>
 		</>
 	)

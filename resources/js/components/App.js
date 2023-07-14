@@ -17,7 +17,7 @@ import Index from '../pages/Index'
 import Search from '../pages/Search'
 import Cart from '../pages/Cart'
 import Library from '../pages/Library'
-import DownloadApp from '../pages/DownloadApp';
+import DownloadApp from '../pages/download-app';
 
 import Profile from '../pages/Profile'
 import ProfileEdit from '../pages/ProfileEdit'
@@ -45,7 +45,7 @@ import AudioEdit from '../pages/AudioEdit'
 import AudioAlbumCreate from '../pages/AudioAlbumCreate'
 import AudioAlbumEdit from '../pages/AudioAlbumEdit'
 
-import Admin from '../pages/Admin'
+import Admin from '../pages/admin'
 import Settings from '../pages/Settings'
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import Chat from '../pages/Chat'
