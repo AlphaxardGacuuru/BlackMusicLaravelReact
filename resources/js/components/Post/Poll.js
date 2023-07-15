@@ -1,3 +1,5 @@
+import React from "react";
+
 import Btn from "@/components/Core/Btn";
 
 const Poll = props => {

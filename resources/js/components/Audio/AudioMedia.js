@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "@/lib/axios";
 import Img from "@/components/Core/Img";
@@ -41,8 +41,7 @@ const AudioMedia = props => {
     return (
         <div className="d-flex p-2">
             <div className="audio-thumbnail">
-                <Link to={`/audio/${props.audio.id}`}>
-                    <a
+                <Link to={`/audio/${props.audio.id}`}
                         onClick={() => {
                             props.audioStates.setShow({
                                 id: props.audio.id,
@@ -59,7 +58,6 @@ const AudioMedia = props => {
                             width="50px"
                             height="50px"
                         />
-                    </a>
                 </Link>
             </div>
             <div className="p-2 me-auto">

@@ -18,10 +18,9 @@ const PostCreate = props => {
                                     <CloseSVG />
                                 </span>
                             ) : (
-                                <Link to="/">
-                                    <a style={{ fontSize: "1.2em" }}>
+                                <Link to="/"
+								 style={{ fontSize: "1.2em" }}>
                                         <CloseSVG />
-                                    </a>
                                 </Link>
                             )}
                         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "@/lib/axios";
 
@@ -316,8 +316,8 @@ const PostMedia = props => {
                     )}
 
                     {/* Post comments */}
-                    <Link to={"/post/" + props.post.id}>
-                        <a style={{ color: "rgba(220, 220, 220, 1)" }}>
+                    <Link to={"/post/" + props.post.id}
+					 style={{ color: "rgba(220, 220, 220, 1)" }}>
                             <span
                                 className="ms-5"
                                 style={{ fontSize: "1.2em" }}
@@ -330,7 +330,6 @@ const PostMedia = props => {
                             >
                                 {props.post.comments}
                             </small>
-                        </a>
                     </Link>
 
                     {/* Share Post */}
@@ -398,10 +397,9 @@ const PostMedia = props => {
                                 )
                             ) : (
                                 <span>
-                                    <Link to={`/post/edit/${props.post.id}`}>
-                                        <a className="dropdown-item">
+                                    <Link to={`/post/edit/${props.post.id}`}
+									 className="dropdown-item">
                                             <h6>Edit post</h6>
-                                        </a>
                                     </Link>
                                     <a
                                         href="#"

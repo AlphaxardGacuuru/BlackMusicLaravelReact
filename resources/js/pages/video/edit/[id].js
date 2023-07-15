@@ -387,10 +387,9 @@ const VideoEdit = props => {
                                         />
                                     </form>
                                     <br />
-                                    <Link to="/video">
-                                        <a className="btn sonar-btn btn-2">
+                                    <Link to="/video"
+									 className="btn sonar-btn btn-2">
                                             studio
-                                        </a>
                                     </Link>
                                 </div>
                             </div>

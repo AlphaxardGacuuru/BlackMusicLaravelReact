@@ -62,8 +62,8 @@ const Audios = props => {
                             Audios
                         </h1>
                         <br />
-                        <Link to="/video">
-                            <a className="btn sonar-btn btn-2">go to videos</a>
+                        <Link to="/video"
+						 className="btn sonar-btn btn-2">go to videos
                         </Link>
                     </center>
                 </div>
@@ -72,15 +72,15 @@ const Audios = props => {
                 <div className="col-sm-4"></div>
                 <div className="col-sm-2">
                     <center>
-                        <Link to="/audio/album/create">
-                            <a className="btn sonar-btn">create audio album</a>
+                        <Link to="/audio/album/create"
+						 className="btn sonar-btn">create audio album
                         </Link>
                     </center>
                 </div>
                 <div className="col-sm-2">
                     <center>
-                        <Link to="/audio/create">
-                            <a className="btn sonar-btn">upload audio</a>
+                        <Link to="/audio/create"
+						 className="btn sonar-btn">upload audio
                         </Link>
                     </center>
                 </div>

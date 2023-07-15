@@ -104,18 +104,16 @@ export default function Home(props) {
 
             {/* Post button */}
             {showPostBtn && (
-                <Link to="post/create">
-                    <a id="floatBtn" className={raise ? "mb-5" : undefined}>
+                <Link to="post/create"
+				 id="floatBtn" className={raise ? "mb-5" : undefined}>
                         <PenSVG />
-                    </a>
                 </Link>
             )}
 
             {/* Chat button */}
-            <Link to="/chat">
-                <a id="chatFloatBtn" className={raise ? "mb-5" : undefined}>
+            <Link to="/chat"
+			 id="chatFloatBtn" className={raise ? "mb-5" : undefined}>
                     <ChatSVG />
-                </a>
             </Link>
 
             {/* <!-- Profile info area --> */}

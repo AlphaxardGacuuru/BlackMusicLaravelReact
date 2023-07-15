@@ -104,9 +104,7 @@ const PostShow = props => {
             <div className="col-sm-4">
                 <div className="d-flex my-2">
                     <Link to="/">
-                        <a>
                             <BackSVG />
-                        </a>
                     </Link>
                     <h1 className="mx-auto">Post</h1>
                     <a className="invisible">

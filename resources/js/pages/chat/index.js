@@ -43,10 +43,9 @@ const Chat = props => {
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
                 {/* Chat button */}
-                <Link to="/chat/new">
-                    <a id="chatFloatBtn" className={raise ? "mb-5" : undefined}>
+                <Link to="/chat/new"
+				 id="chatFloatBtn" className={raise ? "mb-5" : undefined}>
                         <ChatSVG />
-                    </a>
                 </Link>
 
                 {/* Default Thread */}

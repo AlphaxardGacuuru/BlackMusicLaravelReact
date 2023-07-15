@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 
 const StoryProgressBar = (props) => {
 	const [percent, setPercent] = useState("0%")

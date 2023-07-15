@@ -16,10 +16,9 @@ const PostEdit = props => {
                     <div className="d-flex justify-content-between mb-1">
                         {/* Close Icon */}
                         <div className="text-white">
-                            <Link to="/">
-                                <a className="fs-4">
+                            <Link to="/"
+							 className="fs-4">
                                     <CloseSVG />
-                                </a>
                             </Link>
                         </div>
                         {/* Close Icon End */}

@@ -163,10 +163,9 @@ const VideoAlbumCreate = props => {
                                         <br />
                                         <br />
 
-                                        <Link to="/video">
-                                            <a className="btn sonar-btn btn-2">
+                                        <Link to="/video"
+										 className="btn sonar-btn btn-2">
                                                 studio
-                                            </a>
                                         </Link>
                                     </form>
                                 </div>

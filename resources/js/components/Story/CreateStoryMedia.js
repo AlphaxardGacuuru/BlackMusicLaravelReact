@@ -1,5 +1,7 @@
-import Img from "@/components/Core/Img";
+import React from "react";
 import { Link } from "react-router-dom";
+
+import Img from "@/components/Core/Img";
 
 import PlusSVG from "@/svgs/PlusSVG";
 

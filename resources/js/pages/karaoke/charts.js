@@ -51,10 +51,9 @@ const KaraokeCharts = props => {
 
     return (
         <>
-            <Link to={`/karaoke/create`}>
-                <a id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
+            <Link to={`/karaoke/create`}
+			 id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
                     <PlusSVG />
-                </a>
             </Link>
 
             {/* Carousel */}

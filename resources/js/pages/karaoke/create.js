@@ -345,10 +345,9 @@ const KaraokeCreate = props => {
                         <div className="d-flex justify-content-between">
                             {/* Close Icon */}
                             <div className="p-2">
-                                <Link to="/karaoke/charts">
-                                    <a style={{ fontSize: "1.5em" }}>
+                                <Link to="/karaoke/charts"
+								 style={{ fontSize: "1.5em" }}>
                                         <CloseSVG />
-                                    </a>
                                 </Link>
                             </div>
                             <div className="p-2">

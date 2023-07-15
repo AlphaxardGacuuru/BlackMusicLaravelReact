@@ -242,10 +242,9 @@ const Edit = props => {
                         </form>
                         <br />
 
-                        <Link to={`/profile/${props.auth?.username}`}>
-                            <a className="btn sonar-btn btn-2">
+                        <Link to={`/profile/${props.auth?.username}`}
+						 className="btn sonar-btn btn-2">
                                 back to profile
-                            </a>
                         </Link>
 
                         <br />

@@ -129,10 +129,9 @@ const ChatThread = props => {
                                 <div className="menu-area d-flex justify-content-between">
                                     {/* <!-- Logo Area  --> */}
                                     <div className="logo-area">
-                                        <Link to="/chat">
-                                            <a className="fs-6">
+                                        <Link to="/chat"
+										className="fs-6">
                                                 <BackSVG />
-                                            </a>
                                         </Link>
                                     </div>
 

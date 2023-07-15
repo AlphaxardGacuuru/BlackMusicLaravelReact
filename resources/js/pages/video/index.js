@@ -124,8 +124,8 @@ const Videos = props => {
                             Videos
                         </h1>
                         <br />
-                        <Link to="/audio">
-                            <a className="btn sonar-btn btn-2">go to audios</a>
+                        <Link to="/audio"
+						 className="btn sonar-btn btn-2">go to audios
                         </Link>
                     </center>
                 </div>
@@ -134,15 +134,15 @@ const Videos = props => {
                 <div className="col-sm-4"></div>
                 <div className="col-sm-2">
                     <center>
-                        <Link to="/video/album/create">
-                            <a className="btn sonar-btn">create video album</a>
+                        <Link to="/video/album/create"
+						 className="btn sonar-btn">create video album
                         </Link>
                     </center>
                 </div>
                 <div className="col-sm-2">
                     <center>
-                        <Link to="/video/create">
-                            <a className="btn sonar-btn">upload video</a>
+                        <Link to="/video/create"
+						 className="btn sonar-btn">upload video
                         </Link>
                     </center>
                 </div>

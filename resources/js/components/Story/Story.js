@@ -107,10 +107,9 @@ const Story = props => {
                 <div className="d-flex justify-content-between">
                     {/* Close Icon */}
                     <div className="">
-                        <Link to="/">
-                            <a style={{ fontSize: "1.5em" }}>
+                        <Link to="/"
+						 style={{ fontSize: "1.5em" }}>
                                 <CloseSVG />
-                            </a>
                         </Link>
                     </div>
                     {/* Close Icon End */}
@@ -161,10 +160,9 @@ const Story = props => {
                                 style={{ backgroundColor: "#232323" }}
                                 className="dropdown-menu rounded-0 m-0 p-0"
                             >
-                                <Link to={`/profile/${props.story.username}`}>
-                                    <a className="pt-2 dropdown-item border-bottom border-dark">
+                                <Link to={`/profile/${props.story.username}`}
+								 className="pt-2 dropdown-item border-bottom border-dark">
                                         <h6>View profile</h6>
-                                    </a>
                                 </Link>
                                 {/* View Profile End */}
                                 {/* Message */}
@@ -172,10 +170,8 @@ const Story = props => {
                                     props.auth?.username && (
                                     <Link
                                         href={`/chat/${props.story.username}`}
-                                    >
-                                        <a className="dropdown-item border-bottom border-dark">
+                                     className="dropdown-item border-bottom border-dark">
                                             <h6>Message</h6>
-                                        </a>
                                     </Link>
                                 )}
                                 {/* Message End */}

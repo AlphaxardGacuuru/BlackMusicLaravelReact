@@ -39,10 +39,9 @@ const create = props => {
                     <div className="d-flex justify-content-between my-2">
                         {/* <!-- Close Icon --> */}
                         <div className="text-white">
-                            <Link to="/">
-                                <a style={{ fontSize: "1.2em" }}>
+                            <Link to="/"
+							 style={{ fontSize: "1.2em" }}>
                                     <CloseSVG />
-                                </a>
                             </Link>
                         </div>
                         <h1>Create Story</h1>

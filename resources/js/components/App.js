@@ -182,45 +182,6 @@ function App() {
 
     /*
      *
-     * Media Session Controls */
-    if ("mediaSession" in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: showAudio.name,
-            artist: showArtist.username,
-            album: showAudio.album,
-            artwork: [
-                {
-                    src: `/storage/${showAudio.thumbnail}`,
-                    sizes: "512x512",
-                    type: "image/png"
-                }
-            ]
-        });
-
-        let skipTime = 10; // Time to skip in seconds
-
-        navigator.mediaSession.setActionHandler("play", playSong);
-        navigator.mediaSession.setActionHandler("pause", pauseSong);
-        navigator.mediaSession.setActionHandler("seekbackward", function() {
-            // User clicked "Seek Backward" media notification icon.
-            audio.current.currentTime = Math.max(
-                audio.current.currentTime - skipTime,
-                0
-            );
-        });
-        navigator.mediaSession.setActionHandler("seekforward", function() {
-            // User clicked "Seek Forward" media notification icon.
-            audio.current.currentTime = Math.min(
-                audio.current.currentTime + skipTime,
-                audio.current.duration
-            );
-        });
-        navigator.mediaSession.setActionHandler("previoustrack", prevSong);
-        navigator.mediaSession.setActionHandler("nexttrack", nextSong);
-    }
-
-    /*
-     *
      * Register service worker */
     if (window.location.href.match(/https/)) {
         if ("serviceWorker" in navigator) {
@@ -339,7 +300,6 @@ function App() {
 
     // All states
     const GLOBAL_STATE = {
-        baseUrl,
         get,
         getErrors,
         getLocalStorage,
@@ -389,9 +349,6 @@ function App() {
         setVideoLikes,
         karaokes,
         setKaraokes,
-        onFollow,
-        onCartVideos,
-        onCartAudios,
         displayNotification,
         subscribeToPush,
         sendPush,

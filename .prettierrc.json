@@ -1,0 +1,23 @@
+{
+	"pets.settings.prettierEnabled": true,
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"endOfLine": "auto",
+	"htmlWhitespaceSensitivity": "ignore",
+	"insertPragma": false,
+	"singleAttributePerLine": true,
+	"bracketSameLine": true,
+	"jsxBracketSameLine": true,
+	"jsxSingleQuote": false,
+	"printWidth": 80,
+	"proseWrap": "preserve",
+	"quoteProps": "as-needed",
+	"requirePragma": false,
+	"semi": false,
+	"singleQuote": false,
+	"tabWidth": 2,
+	"trailingComma": "es5",
+	"useTabs": true,
+	"vueIndentScriptAndStyle": true,
+	"embeddedLanguageFormatting": "auto"
+}

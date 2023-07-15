@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "@/lib/axios";
 import Ticker from "react-ticker";
@@ -127,10 +127,9 @@ const Karaoke = props => {
                 <div className="d-flex">
                     {/* Close Icon */}
                     <div className="">
-                        <Link to="/karaoke/charts">
-                            <a style={{ fontSize: "1.5em" }}>
+                        <Link to="/karaoke/charts"
+                             style={{ fontSize: "1.5em" }}>
                                 <CloseSVG />
-                            </a>
                         </Link>
                     </div>
                 </div>
