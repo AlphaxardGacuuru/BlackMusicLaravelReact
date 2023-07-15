@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import VideoMedia from "../components/Video/VideoMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
-import KaraokeMedia from "../components/Karaoke/KaraokeMedia";
+import VideoMedia from "@/components/Video/VideoMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
+import KaraokeMedia from "@/components/Karaoke/KaraokeMedia";
 
 const Library = props => {
     const [savedKaraokes, setSavedKaraokes] = useState(

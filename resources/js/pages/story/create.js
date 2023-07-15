@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
-import SocialMediaInput from "../components/Core/SocialMediaInput";
-import CloseSVG from "../svgs/CloseSVG";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
+import CloseSVG from "@/svgs/CloseSVG";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -39,7 +39,7 @@ const create = props => {
                     <div className="d-flex justify-content-between my-2">
                         {/* <!-- Close Icon --> */}
                         <div className="text-white">
-                            <Link href="/">
+                            <Link to="/">
                                 <a style={{ fontSize: "1.2em" }}>
                                     <CloseSVG />
                                 </a>

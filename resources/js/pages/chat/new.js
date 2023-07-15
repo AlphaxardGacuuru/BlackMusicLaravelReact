@@ -1,6 +1,6 @@
-import Img from "../components/Core/Img";
-import ssrAxios from "../lib/ssrAxios";
-import Link from "next/link";
+import Img from "@/components/Core/Img";
+
+import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 
 export default function NewChat(props) {
@@ -59,7 +59,7 @@ export default function NewChat(props) {
                     {userResults.map((user, key) => (
                         <div key={key} className="d-flex">
                             <div className="p-1">
-                                <Link href={`/chat/${user.username}`}>
+                                <Link to={`/chat/${user.username}`}>
                                     <a>
                                         <Img
                                             src={user.avatar}
@@ -74,7 +74,7 @@ export default function NewChat(props) {
                                 className="p-2 flex-grow-1"
                                 style={{ width: "65%" }}
                             >
-                                <Link href={`/chat/${user.username}`}>
+                                <Link to={`/chat/${user.username}`}>
                                     <a>
                                         <h6
                                             className="m-0"
@@ -119,18 +119,4 @@ export default function NewChat(props) {
             <div className="col-sm-4"></div>
         </div>
     );
-}
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    var data = {
-        users: []
-    };
-
-    await ssrAxios
-        .get(`http://localhost:8000/api/users`)
-        .then(res => (data.users = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
 }

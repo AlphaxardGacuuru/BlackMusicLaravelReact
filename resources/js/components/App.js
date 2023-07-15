@@ -1,61 +1,65 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter as Router, Route } from "react-router-dom";
-import axios from "../lib/axios";
+import axios from "@/lib/axios";
 
-
-import Messages from "../components/Core/Messages";
-import TopNav from "../components/Layouts/TopNav";
-import BottomNav from "../components/Layouts/BottomNav";
-import AudioPlayer from "../components/Audio/AudioPlayer";
-import ScrollToTop from "../components/Core/ScrollToTop";
+import LoginPopUp from "@/components/Auth/LoginPopUp";
+import Messages from "@/components/Core/Messages";
+import TopNav from "@/components/Layouts/TopNav";
+import BottomNav from "@/components/Layouts/BottomNav";
+import AudioPlayer from "@/components/Audio/AudioPlayer";
+import ScrollToTop from "@/components/Core/ScrollToTop";
 import onAudioPlayer from "../functions/onAudioPlayer";
 
-import LoginPopUp from "../components/Auth/LoginPopUp";
-import Login from "../components/Auth/Login";
-import Register from "../components/Auth/Register";
-import Referral from "../components/Auth/Referral";
+import Admin from "@/pages/admin";
 
-import Index from "../pages/Index";
-import Search from "../pages/Search";
-import Cart from "../pages/Cart";
-import Library from "../pages/Library";
-import DownloadApp from "../pages/download-app";
+import AudioCharts from "@/pages/audio/charts";
+import AudioShow from "@/pages/audio/[id]";
+import AudioCreate from "@/pages/audio/create";
+import Audios from "@/pages/audio/index";
+import AudioEdit from "@/pages/audio/edit/[id]";
+import AudioAlbumCreate from "@/pages/audio/album/create";
+import AudioAlbumEdit from "@/pages/audio/album/edit/[id]";
 
-import Profile from "../pages/Profile";
-import ProfileEdit from "../pages/ProfileEdit";
-import PostCreate from "../pages/PostCreate";
-import PostShow from "../pages/PostShow";
-import PostEdit from "../pages/PostEdit";
+import Chat from "@/pages/chat/index";
+import ChatThread from "@/pages/chat/[username]";
+import NewChat from "@/pages/chat/new";
 
-import KaraokeCharts from "../pages/KaraokeCharts";
-import KaraokeShow from "../pages/KaraokeShow";
-import KaraokeCreate from "../pages/KaraokeCreate";
+import KaraokeCharts from "@/pages/karaoke/charts";
+import KaraokeShow from "@/pages/karaoke/[id]";
+import KaraokeCreate from "@/pages/karaoke/create";
 
-import VideoCharts from "../pages/VideoCharts";
-import VideoShow from "../pages/VideoShow";
-import Videos from "../pages/Videos";
-import VideoCreate from "../pages/VideoCreate";
-import VideoEdit from "../pages/VideoEdit";
-import VideoAlbumCreate from "../pages/VideoAlbumCreate";
-import VideoAlbumEdit from "../pages/VideoAlbumEdit";
+import PostCreate from "@/pages/post/create";
+import PostShow from "@/pages/post/[id]";
+import PostEdit from "@/pages/post/edit/[id]";
 
-import AudioCharts from "../pages/AudioCharts";
-import AudioShow from "../pages/AudioShow";
-import Audios from "../pages/Audios";
-import AudioCreate from "../pages/AudioCreate";
-import AudioEdit from "../pages/AudioEdit";
-import AudioAlbumCreate from "../pages/AudioAlbumCreate";
-import AudioAlbumEdit from "../pages/AudioAlbumEdit";
+import Profile from "@/pages/profile/[username]";
+import ProfileEdit from "@/pages/profile/edit";
 
-import Admin from "../pages/admin";
-import Settings from "../pages/Settings";
-import PrivacyPolicy from "../pages/PrivacyPolicy";
-import Chat from "../pages/Chat";
-import ChatThread from "../pages/ChatThread";
-import NewChat from "../pages/NewChat";
+import Story from "@/pages/story/[id]";
+import StoryCreate from "@/pages/story/create";
 
-import NotFound from "../pages/NotFound";
+import VideoCharts from "@/pages/video/charts";
+import VideoShow from "@/pages/video/[id]";
+import Videos from "@/pages/video/index";
+import VideoCreate from "@/pages/video/create";
+import VideoEdit from "@/pages/video/edit/[id]";
+import VideoAlbumCreate from "@/pages/video/album/create";
+import VideoAlbumEdit from "@/pages/video/album/edit/[id]";
+
+import NotFound from "@/pages/404";
+import ServerError from "@/pages/500";
+import Cart from "@/pages/Cart";
+import DownloadApp from "@/pages/download-app";
+import Index from "@/pages/index";
+import Library from "@/pages/Library";
+import Login from "@/pages/login";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import Register from "@/pages/register";
+import Referral from "@/pages/referral";
+import Search from "@/pages/Search";
+import Settings from "@/pages/Settings";
+
 import { random } from "lodash";
 
 function App() {

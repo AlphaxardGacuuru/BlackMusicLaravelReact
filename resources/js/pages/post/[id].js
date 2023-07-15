@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import ssrAxios from "../lib/ssrAxios";
-import EchoConfig from "../lib/echo";
+import { Link, useParams, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import CommentMedia from "../components/Core/CommentMedia";
-import PostMedia from "../components/Post/PostMedia";
-import LoadingPostMedia from "../components/Post/LoadingPostMedia";
-import BackSVG from "../svgs/BackSVG";
-import SocialMediaInput from "../components/Core/SocialMediaInput";
+import EchoConfig from "@/lib/echo";
+
+import CommentMedia from "@/components/Core/CommentMedia";
+import PostMedia from "@/components/Post/PostMedia";
+import LoadingPostMedia from "@/components/Post/LoadingPostMedia";
+import BackSVG from "@/svgs/BackSVG";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
 
 const PostShow = props => {
-    const router = useRouter();
+    const router = useHistory();
 
     // Get id from URL
-    const { id } = router.query;
+    const { id } = useParams();
 
     const [post, setPost] = useState(props.post);
     const [postComments, setPostComments] = useState(props.comments);
@@ -104,7 +103,7 @@ const PostShow = props => {
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
                 <div className="d-flex my-2">
-                    <Link href="/">
+                    <Link to="/">
                         <a>
                             <BackSVG />
                         </a>
@@ -169,23 +168,5 @@ const PostShow = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var data = { post: {}, comments: {} };
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/posts/${id}`)
-        .then(res => (data.post = res.data.data));
-    await ssrAxios
-        .get(`/api/post-comments/${id}`)
-        .then(res => (data.comments = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
-}
 
 export default PostShow;

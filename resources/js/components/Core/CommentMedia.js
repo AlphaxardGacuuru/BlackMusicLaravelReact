@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 
-import DecoSVG from "../svgs/DecoSVG";
-import OptionsSVG from "../svgs/OptionsSVG";
-import HeartSVG from "../svgs/HeartSVG";
-import HeartFilledSVG from "../svgs/HeartFilledSVG";
-import CloseSVG from "../svgs/CloseSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+import OptionsSVG from "@/svgs/OptionsSVG";
+import HeartSVG from "@/svgs/HeartSVG";
+import HeartFilledSVG from "@/svgs/HeartFilledSVG";
+import CloseSVG from "@/svgs/CloseSVG";
 
 const CommentMedia = props => {
     const [hasLiked, setHasLiked] = useState(props.comment.hasLiked);
@@ -26,7 +26,7 @@ const CommentMedia = props => {
                         className="avatar-thumbnail-xs"
                         style={{ borderRadius: "50%" }}
                     >
-                        <Link href={`/profile/${props.comment.username}`}>
+                        <Link to={`/profile/${props.comment.username}`}>
                             <a>
                                 <Img
                                     src={props.comment.avatar}

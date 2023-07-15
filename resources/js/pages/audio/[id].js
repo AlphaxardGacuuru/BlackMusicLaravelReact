@@ -1,35 +1,33 @@
 import { useState, useEffect, Suspense } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import ssrAxios from "../lib/ssrAxios";
+import { Link, useParams, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
-import Btn from "../components/Core/Btn";
-import LoadingAudioMedia from "../components/Audio/LoadingAudioMedia";
-import CommentMedia from "../components/Core/CommentMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
-import SocialMediaInput from "../components/Core/SocialMediaInput";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
+import LoadingAudioMedia from "@/components/Audio/LoadingAudioMedia";
+import CommentMedia from "@/components/Core/CommentMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
 
-import ShuffleSVG from "../svgs/ShuffleSVG";
-import PreviousSVG from "../svgs/PreviousSVG";
-import PauseSVG from "../svgs/PauseSVG";
-import PlaySVG from "../svgs/PlaySVG";
-import NextSVG from "../svgs/NextSVG";
-import LoopSVG from "../svgs/LoopSVG";
-import VolumeSVG from "../svgs/VolumeSVG";
-import ShareSVG from "../svgs/ShareSVG";
-import CartSVG from "../svgs/CartSVG";
-import HeartFilledSVG from "../svgs/HeartFilledSVG";
-import HeartSVG from "../svgs/HeartSVG";
-import DecoSVG from "../svgs/DecoSVG";
-import CheckSVG from "../svgs/CheckSVG";
+import ShuffleSVG from "@/svgs/ShuffleSVG";
+import PreviousSVG from "@/svgs/PreviousSVG";
+import PauseSVG from "@/svgs/PauseSVG";
+import PlaySVG from "@/svgs/PlaySVG";
+import NextSVG from "@/svgs/NextSVG";
+import LoopSVG from "@/svgs/LoopSVG";
+import VolumeSVG from "@/svgs/VolumeSVG";
+import ShareSVG from "@/svgs/ShareSVG";
+import CartSVG from "@/svgs/CartSVG";
+import HeartFilledSVG from "@/svgs/HeartFilledSVG";
+import HeartSVG from "@/svgs/HeartSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+import CheckSVG from "@/svgs/CheckSVG";
 
 const AudioShow = props => {
     // let { referer } = router.query
-    const router = useRouter();
+    const router = useHistory();
 
-    let { id } = router.query;
+    let { id } = useParams();
 
     // Set State
     const [audio, setAudio] = useState(props.audio);
@@ -492,7 +490,7 @@ const AudioShow = props => {
                 <div className="border-bottom border-dark">
                     <div className="d-flex">
                         <div className="p-2">
-                            <Link href={`/profile/${audio.username}`}>
+                            <Link to={`/profile/${audio.username}`}>
                                 <a>
                                     <Img
                                         src={audio.avatar}
@@ -509,7 +507,7 @@ const AudioShow = props => {
                             className="p-2 flex-grow-1"
                             style={{ width: "50%" }}
                         >
-                            <Link href={`/profile/${audio.username}`}>
+                            <Link to={`/profile/${audio.username}`}>
                                 <a>
                                     <div
                                         style={{
@@ -751,30 +749,5 @@ const AudioShow = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var data = {
-        audio: {},
-        audioComments: {},
-        audios: {}
-    };
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/audios/${id}`)
-        .then(res => (data.audio = res.data.data));
-    await ssrAxios
-        .get(`/api/audio-comments/${id}`)
-        .then(res => (data.audioComments = res.data.data));
-    await ssrAxios
-        .get(`/api/audios`)
-        .then(res => (data.audios = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
-}
 
 export default AudioShow;

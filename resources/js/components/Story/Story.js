@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import axios from "../lib/axios";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "next/image";
+import Img from "@/components/Core/Img";
 
-import CloseSVG from "../svgs/CloseSVG";
+import CloseSVG from "@/svgs/CloseSVG";
 import StoryProgressBar from "./StoryProgressBar";
 
 const Story = props => {
-    const router = useRouter();
+    const router = useHistory();
 
     const [timer, setTimer] = useState();
     const [sendSeenAt, setSendSeenAt] = useState();
@@ -108,7 +107,7 @@ const Story = props => {
                 <div className="d-flex justify-content-between">
                     {/* Close Icon */}
                     <div className="">
-                        <Link href="/">
+                        <Link to="/">
                             <a style={{ fontSize: "1.5em" }}>
                                 <CloseSVG />
                             </a>
@@ -162,7 +161,7 @@ const Story = props => {
                                 style={{ backgroundColor: "#232323" }}
                                 className="dropdown-menu rounded-0 m-0 p-0"
                             >
-                                <Link href={`/profile/${props.story.username}`}>
+                                <Link to={`/profile/${props.story.username}`}>
                                     <a className="pt-2 dropdown-item border-bottom border-dark">
                                         <h6>View profile</h6>
                                     </a>

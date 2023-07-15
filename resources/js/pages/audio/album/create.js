@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import Btn from "../components/Core/Btn";
-import ImageSVG from "../svgs/ImageSVG";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
+import Btn from "@/components/Core/Btn";
+import ImageSVG from "@/svgs/ImageSVG";
 
 const AudioAlbumCreate = props => {
     // Declare states
@@ -16,7 +15,7 @@ const AudioAlbumCreate = props => {
     const [loadingBtn, setLoadingBtn] = useState();
 
     // Get history for page location
-    const router = useRouter();
+    const router = useHistory();
 
     // Assign id to element
     const mediaInput = React.useRef(null);
@@ -163,7 +162,7 @@ const AudioAlbumCreate = props => {
                                         <br />
                                         <br />
 
-                                        <Link href="/audio">
+                                        <Link to="/audio">
                                             <a className="btn sonar-btn btn-2">
                                                 studio
                                             </a>

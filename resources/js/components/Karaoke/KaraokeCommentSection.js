@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "../lib/axios";
+import axios from "@/lib/axios";
 
-import CommentMedia from "../components/Core/CommentMedia";
+import CommentMedia from "@/components/Core/CommentMedia";
 
-import CloseSVG from "../svgs/CloseSVG";
+import CloseSVG from "@/svgs/CloseSVG";
 import SocialMediaInput from "../Core/SocialMediaInput";
 
 const KaraokeCommentSection = props => {

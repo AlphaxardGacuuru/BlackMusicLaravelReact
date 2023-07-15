@@ -1,11 +1,10 @@
-import Btn from "../components/Core/Btn";
-import Link from "next/link";
-import { useAuth } from "../hooks/auth";
+import { Link, useLocation, useParams } from "react-router-dom";
+// import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Btn from "@/components/Core/Btn";
 
 const Login = () => {
-    const router = useRouter();
+    const router = useLocation();
 
     const { login } = useAuth({
         middleware: "guest",
@@ -93,7 +92,7 @@ const Login = () => {
             </div>
 
             <div className="flex items-center justify-end mt-4">
-                <Link href="/forgot-password">
+                <Link to="/forgot-password">
                     <a className="underline text-sm text-gray-600 hover:text-gray-900">
                         Forgot your password?
                     </a>

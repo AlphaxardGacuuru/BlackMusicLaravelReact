@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
+import Btn from "@/components/Core/Btn";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -50,7 +49,7 @@ const VideoCreate = props => {
     const [loadingBtn, setLoadingBtn] = useState();
 
     // Get history for page location
-    const router = useRouter();
+    const router = useHistory();
 
     useEffect(() => {
         // Get Artist Video Albums
@@ -489,7 +488,7 @@ const VideoCreate = props => {
                                     <br />
                                     <br />
 
-                                    <Link href="/video">
+                                    <Link to="/video">
                                         <a className="btn sonar-btn btn-2">
                                             studio
                                         </a>

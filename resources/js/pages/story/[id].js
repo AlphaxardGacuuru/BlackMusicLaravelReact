@@ -1,13 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import ssrAxios from "../lib/ssrAxios";
-
-import Story from "../components/Story/Story";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react";
+import Story from "@/components/Story/Story";
 
 const StoryShow = props => {
-    const router = useRouter();
-
-    let { id } = router.query;
+    let { id } = useParams();
 
     const storyScroller = useRef();
 
@@ -47,13 +43,5 @@ const StoryShow = props => {
         </div>
     );
 };
-
-export async function getServerSideProps(context) {
-    var stories;
-
-    await ssrAxios.get(`/api/stories`).then(res => (stories = res.data.data));
-
-    return { props: { stories } };
-}
 
 export default StoryShow;

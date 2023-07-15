@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 
 const AvatarMedia = props => {
     return (
@@ -10,7 +10,7 @@ const AvatarMedia = props => {
                     className="avatar-thumbnail"
                     style={{ borderRadius: "50%" }}
                 >
-                    <Link href={"/profile/" + props.user.username}>
+                    <Link to={"/profile/" + props.user.username}>
                         <a>
                             <Img
                                 src={props.user.avatar}

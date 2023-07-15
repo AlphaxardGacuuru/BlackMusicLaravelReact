@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import axios from "../lib/axios";
+import { Link } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
-import Btn from "../components/Core/Btn";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
 
-import CheckSVG from "../../svgs/CheckSVG";
+import CheckSVG from "@/svgs/CheckSVG";
 
 const MusiciansMedia = props => {
     const [hasFollowed, setHasFollowed] = useState(props.user.hasFollowed);
@@ -36,7 +36,7 @@ const MusiciansMedia = props => {
     return (
         <div className="d-flex">
             <div className="p-2">
-                <Link href={`/profile/${props.user.username}`}>
+                <Link to={`/profile/${props.user.username}`}>
                     <a>
                         <Img
                             src={props.user.avatar}
@@ -50,7 +50,7 @@ const MusiciansMedia = props => {
                 </Link>
             </div>
             <div className="p-2" style={{ width: "50%" }}>
-                <Link href={`/profile/${props.user.username}`}>
+                <Link to={`/profile/${props.user.username}`}>
                     <a>
                         <div
                             style={{

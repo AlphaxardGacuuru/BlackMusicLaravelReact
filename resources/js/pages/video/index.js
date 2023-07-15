@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import axios from "../lib/axios";
+import { Link } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
-import Btn from "../components/Core/Btn";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
 
 const Videos = props => {
     const [main, setMain] = useState("none");
@@ -124,7 +124,7 @@ const Videos = props => {
                             Videos
                         </h1>
                         <br />
-                        <Link href="/audio">
+                        <Link to="/audio">
                             <a className="btn sonar-btn btn-2">go to audios</a>
                         </Link>
                     </center>
@@ -134,14 +134,14 @@ const Videos = props => {
                 <div className="col-sm-4"></div>
                 <div className="col-sm-2">
                     <center>
-                        <Link href="/video/album/create">
+                        <Link to="/video/album/create">
                             <a className="btn sonar-btn">create video album</a>
                         </Link>
                     </center>
                 </div>
                 <div className="col-sm-2">
                     <center>
-                        <Link href="/video/create">
+                        <Link to="/video/create">
                             <a className="btn sonar-btn">upload video</a>
                         </Link>
                     </center>

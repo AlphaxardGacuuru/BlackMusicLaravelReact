@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Link, useLocation } from "react-router-dom";
 
-import Carousel from "../components/Core/Carousel";
-import LoadingKaraokeMedia from "../components/Karaoke/LoadingKaraokeMedia";
-import KaraokeMedia from "../components/Karaoke/KaraokeMedia";
+import Carousel from "@/components/Core/Carousel";
+import LoadingKaraokeMedia from "@/components/Karaoke/LoadingKaraokeMedia";
+import KaraokeMedia from "@/components/Karaoke/KaraokeMedia";
 
-import PlusSVG from "../svgs/PlusSVG";
-import ssrAxios from "../lib/ssrAxios";
+import PlusSVG from "@/svgs/PlusSVG";
 
 const KaraokeCharts = props => {
-    const router = useRouter();
+    const router = useLocation();
 
     const [week, setWeek] = useState(0);
     const weeks = [0, 1, 2, 3, 4, 5];
@@ -53,7 +51,7 @@ const KaraokeCharts = props => {
 
     return (
         <>
-            <Link href={`/karaoke/create`}>
+            <Link to={`/karaoke/create`}>
                 <a id="chatFloatBtn" className={`${!checkLocation && "mb-5"}`}>
                     <PlusSVG />
                 </a>
@@ -66,21 +64,21 @@ const KaraokeCharts = props => {
             {/* <!-- Scroll menu - */}
             <div id="chartsMenu" className="hidden-scroll mt-2">
                 <span>
-                    <Link href="/karaoke/charts">
+                    <Link to="/karaoke/charts">
                         <a>
                             <h3 className="active-scrollmenu">Karaoke</h3>
                         </a>
                     </Link>
                 </span>
                 <span>
-                    <Link href="/video/charts">
+                    <Link to="/video/charts">
                         <a>
                             <h3>Videos</h3>
                         </a>
                     </Link>
                 </span>
                 <span>
-                    <Link href="/audio/charts">
+                    <Link to="/audio/charts">
                         <a>
                             <h3>Audios</h3>
                         </a>
@@ -148,19 +146,5 @@ const KaraokeCharts = props => {
         </>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    var data = {
-        karaokes: []
-    };
-
-    // Fetch Newly Released
-    await ssrAxios
-        .get(`/api/karaokes`)
-        .then(res => (data.karaokes = res.data.data));
-
-    return { props: data };
-}
 
 export default KaraokeCharts;

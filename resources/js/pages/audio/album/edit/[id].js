@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import ssrAxios from "../lib/ssrAxios";
+import { Link, useParams } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
-import Img from "../components/Core/Img";
-import ImageSVG from "../svgs/ImageSVG";
+import Btn from "@/components/Core/Btn";
+import Img from "@/components/Core/Img";
+import ImageSVG from "@/svgs/ImageSVG";
 
 const AudioAlbumEdit = props => {
-    const router = useRouter();
-
-    let { id } = router.query;
+    let { id } = useParams();
 
     // Declare states
     const [formData, setFormData] = useState();
@@ -181,7 +177,7 @@ const AudioAlbumEdit = props => {
                                         <br />
                                         <br />
 
-                                        <Link href="/audio">
+                                        <Link to="/audio">
                                             <a className="btn sonar-btn btn-2">
                                                 studio
                                             </a>
@@ -196,20 +192,5 @@ const AudioAlbumEdit = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var album;
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/audio-albums/${id}`)
-        .then(res => (album = res.data.data));
-
-    // Pass data to the page via props
-    return { props: { album } };
-}
 
 export default AudioAlbumEdit;

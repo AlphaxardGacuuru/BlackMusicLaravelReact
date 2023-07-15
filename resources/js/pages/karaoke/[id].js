@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-
-import Karaoke from "../components/Karaoke/Karaoke";
-import ssrAxios from "../lib/ssrAxios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react";
+import Karaoke from "@/components/Karaoke/Karaoke";
 
 const KaraokeShow = props => {
-    const router = useRouter();
-
-    const { id } = router.query;
+    const { id } = useParams();
 
     const [karaokes, setKaraokes] = useState(props.karaokes);
 
@@ -39,19 +35,5 @@ const KaraokeShow = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    var data = {
-        karaokes: []
-    };
-
-    // Fetch Newly Released
-    await ssrAxios
-        .get(`/api/karaokes`)
-        .then(res => (data.karaokes = res.data.data));
-
-    return { props: data };
-}
 
 export default KaraokeShow;

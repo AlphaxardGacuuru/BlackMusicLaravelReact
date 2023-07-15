@@ -1,11 +1,11 @@
 import { useState, Suspense, useEffect } from "react";
-import axios from "../lib/axios";
-import EchoConfig from "../lib/echo";
+import axios from "@/lib/axios";
+import EchoConfig from "@/lib/echo";
 
-import VideoMedia from "../components/Video/VideoMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
-import Btn from "../components/Core/Btn";
-import CloseSVG from "../svgs/CloseSVG";
+import VideoMedia from "@/components/Video/VideoMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
+import Btn from "@/components/Core/Btn";
+import CloseSVG from "@/svgs/CloseSVG";
 
 const Cart = props => {
     const [messages, setMessages] = useState([]);

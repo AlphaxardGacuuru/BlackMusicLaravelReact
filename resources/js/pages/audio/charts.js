@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import ssrAxios from "../lib/ssrAxios";
+import { Link, useHistory } from "react-router-dom";
 
-import Carousel from "../components/Core/Carousel";
-import LoadingAudioMedia from "../components/Audio/LoadingAudioMedia";
-import LoadingAvatarMedia from "../components/User/LoadingAvatarMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
-import AvatarMedia from "../components/User/AvatarMedia";
+import Carousel from "@/components/Core/Carousel";
+import LoadingAudioMedia from "@/components/Audio/LoadingAudioMedia";
+import LoadingAvatarMedia from "@/components/User/LoadingAvatarMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
+import AvatarMedia from "@/components/User/AvatarMedia";
 
 const AudioCharts = props => {
-    const router = useRouter();
+    const location = useLocation();
 
     //Declare States
     const [chart, setChart] = useState("Newly Released");
@@ -43,7 +41,7 @@ const AudioCharts = props => {
     useEffect(() => {
         // Load more on page bottom
         window.onscroll = function(ev) {
-            if (router.pathname.match(/audio-charts/)) {
+            if (location.pathname.match(/audio-charts/)) {
                 const bottom =
                     window.innerHeight + window.scrollY >=
                     document.body.offsetHeight -
@@ -117,21 +115,21 @@ const AudioCharts = props => {
             {/* <!-- Scroll menu - */}
             <div id="chartsMenu" className="hidden-scroll mt-2">
                 <span>
-                    <Link href="/karaoke/charts">
+                    <Link to="/karaoke/charts">
                         <a>
                             <h3>Karaoke</h3>
                         </a>
                     </Link>
                 </span>
                 <span>
-                    <Link href="/video/charts">
+                    <Link to="/video/charts">
                         <a>
                             <h3>Videos</h3>
                         </a>
                     </Link>
                 </span>
                 <span>
-                    <Link href="/audio/charts">
+                    <Link to="/audio/charts">
                         <a>
                             <h3 className="active-scrollmenu">Audios</h3>
                         </a>
@@ -257,35 +255,5 @@ const AudioCharts = props => {
         </>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    var data = {
-        newlyReleased: [],
-        trending: [],
-        topDownloaded: [],
-        topLiked: []
-    };
-
-    // Fetch Newly Released
-    await ssrAxios
-        .get(`/api/audio-charts/newly-released`)
-        .then(res => (data.newlyReleased = res.data.data));
-    // Fetch Trending
-    await ssrAxios
-        .get(`/api/audio-charts/trending`)
-        .then(res => (data.trending = res.data.data));
-    // Fetch Top Downloaded
-    await ssrAxios
-        .get(`/api/audio-charts/top-downloaded`)
-        .then(res => (data.topDownloaded = res.data.data));
-    // Fetch Top Downloaded
-    await ssrAxios
-        .get(`/api/audio-charts/top-liked`)
-        .then(res => (data.topLiked = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
-}
 
 export default AudioCharts;

@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import { useAuth } from "../hooks/auth";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
+// import { useAuth } from "@/hooks/auth";
 
 import TopNavLinks from "./TopNavLinks";
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 
-import CloseSVG from "../svgs/CloseSVG";
-import LogoutSVG from "../svgs/LogoutSVG";
-import DownloadSVG from "../svgs/DownloadSVG";
-import PrivacySVG from "../svgs/PrivacySVG";
-import SettingsSVG from "../svgs/SettingsSVG";
-import StudioSVG from "../svgs/StudioSVG";
-import MenuSVG from "../svgs/MenuSVG";
-import PersonSVG from "../svgs/PersonSVG";
-import DiscoverSVG from "../svgs/DiscoverSVG";
-import HomeSVG from "../svgs/HomeSVG";
-import EchoConfig from "../lib/echo";
+import CloseSVG from "@/svgs/CloseSVG";
+import LogoutSVG from "@/svgs/LogoutSVG";
+import DownloadSVG from "@/svgs/DownloadSVG";
+import PrivacySVG from "@/svgs/PrivacySVG";
+import SettingsSVG from "@/svgs/SettingsSVG";
+import StudioSVG from "@/svgs/StudioSVG";
+import MenuSVG from "@/svgs/MenuSVG";
+import PersonSVG from "@/svgs/PersonSVG";
+import DiscoverSVG from "@/svgs/DiscoverSVG";
+import HomeSVG from "@/svgs/HomeSVG";
+import EchoConfig from "@/lib/echo";
 
 const TopNav = props => {
-    const router = useRouter();
+    const location = useLocation();
+    const router = useHistory();
 
     // const { logout } = useAuth({ setLogin: props.setLogin })
     const [menu, setMenu] = useState("");
@@ -84,20 +84,20 @@ const TopNav = props => {
     var display;
 
     // Hide TopNav from various pages
-    router.pathname.match("/404") ||
-    router.pathname == "/story/[id]" ||
-    router.pathname.match("/story/create") ||
-    router.pathname == "/karaoke/[id]" ||
-    router.pathname.match("/karaoke/create") ||
-    router.pathname.match("/privacy-policy") ||
-    router.pathname.match("/download-app") ||
-    router.pathname.match("/chat/") ||
-    router.pathname.match("/post/edit") ||
-    router.pathname.match("/post/create") ||
-    router.pathname == "/post/[id]" ||
-    router.pathname.match("/referral") ||
-    router.pathname.match("/login") ||
-    router.pathname.match("/register")
+    location.pathname.match("/404") ||
+    location.pathname == "/story/[id]" ||
+    location.pathname.match("/story/create") ||
+    location.pathname == "/karaoke/[id]" ||
+    location.pathname.match("/karaoke/create") ||
+    location.pathname.match("/privacy-policy") ||
+    location.pathname.match("/download-app") ||
+    location.pathname.match("/chat/") ||
+    location.pathname.match("/post/edit") ||
+    location.pathname.match("/post/create") ||
+    location.pathname == "/post/[id]" ||
+    location.pathname.match("/referral") ||
+    location.pathname.match("/login") ||
+    location.pathname.match("/register")
         ? (display = "none")
         : (display = "");
 
@@ -118,7 +118,7 @@ const TopNav = props => {
                                 <div className="menu-area d-flex justify-content-between">
                                     {/* <!-- Logo Area  --> */}
                                     <div className="logo-area">
-                                        <Link href="/">Black Music</Link>
+                                        <Link to="/">Black Music</Link>
                                     </div>
                                     {/* <-- Search Form --> */}
                                     <div className="contact-form hidden">
@@ -147,7 +147,7 @@ const TopNav = props => {
                                         <div className="header-social-area d-flex align-items-center">
                                             {props.auth?.username ==
                                             "@guest" ? (
-                                                <Link href="#">
+                                                <Link to="#">
                                                     <a
                                                         className="display-4"
                                                         onClick={() =>
@@ -211,10 +211,10 @@ const TopNav = props => {
                 <br />
                 <br />
                 {/* Remove for profile page for better background image */}
-                {router.pathname.match(/profile/) ||
-                router.pathname.match(/charts/) ||
-                router.pathname.match(/video-charts/) ||
-                router.pathname.match(/audio-charts/) ? (
+                {location.pathname.match(/profile/) ||
+                location.pathname.match(/charts/) ||
+                location.pathname.match(/video-charts/) ||
+                location.pathname.match(/audio-charts/) ? (
                     <br className="hidden" />
                 ) : (
                     <span>
@@ -231,18 +231,18 @@ const TopNav = props => {
                     </div>
                     {/* <!-- Logo Area --> */}
                     <div className="logo-area">
-                        <Link href="/">Black Music</Link>
+                        <Link to="/">Black Music</Link>
                     </div>
                     {/* <!-- Nav --> */}
                     <div className="sonarNav wow fadeInUp" data-wow-delay="1s">
                         <nav>
                             <ul>
                                 <li className="nav-item active">
-                                    <Link href="/">
+                                    <Link to="/">
                                         <a
                                             style={{
                                                 color:
-                                                    router.pathname == "/"
+                                                    location.pathname == "/"
                                                         ? "gold"
                                                         : "white"
                                             }}
@@ -254,7 +254,7 @@ const TopNav = props => {
                                                     float: "left",
                                                     paddingRight: "20px",
                                                     color:
-                                                        router.pathname == "/"
+                                                        location.pathname == "/"
                                                             ? "gold"
                                                             : "white"
                                                 }}
@@ -266,15 +266,15 @@ const TopNav = props => {
                                     </Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <Link href="/karaoke/charts">
+                                    <Link to="/karaoke/charts">
                                         <a
                                             style={{
                                                 color:
-                                                    router.pathname ==
+                                                    location.pathname ==
                                                         "/karaoke/charts" ||
-                                                    router.pathname ==
+                                                    location.pathname ==
                                                         "/video/charts" ||
-                                                    router.pathname ==
+                                                    location.pathname ==
                                                         "/audio/charts"
                                                         ? "gold"
                                                         : "white"
@@ -287,11 +287,11 @@ const TopNav = props => {
                                                     float: "left",
                                                     paddingRight: "20px",
                                                     color:
-                                                        router.pathname ==
+                                                        location.pathname ==
                                                             "/karaoke/charts" ||
-                                                        router.pathname ==
+                                                        location.pathname ==
                                                             "/video/charts" ||
-                                                        router.pathname ==
+                                                        location.pathname ==
                                                             "/audio/charts"
                                                             ? "gold"
                                                             : "white"
@@ -304,11 +304,11 @@ const TopNav = props => {
                                     </Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <Link href="/library">
+                                    <Link to="/library">
                                         <a
                                             style={{
                                                 color:
-                                                    router.pathname ==
+                                                    location.pathname ==
                                                     "/library"
                                                         ? "gold"
                                                         : "white"
@@ -321,7 +321,7 @@ const TopNav = props => {
                                                     float: "left",
                                                     paddingRight: "20px",
                                                     color:
-                                                        router.pathname ==
+                                                        location.pathname ==
                                                         "/library"
                                                             ? "gold"
                                                             : "white"
@@ -362,7 +362,7 @@ const TopNav = props => {
                         className="m-0 p-0"
                         style={{ display: avatarVisibility }}
                     >
-                        <Link href={`/profile/${props.auth?.username}`}>
+                        <Link to={`/profile/${props.auth?.username}`}>
                             <a
                                 style={{ padding: "0px", margin: "0px" }}
                                 className="border-bottom text-start"
@@ -389,7 +389,7 @@ const TopNav = props => {
                                 </div>
                             </a>
                         </Link>
-                        <Link href="/download-app">
+                        <Link to="/download-app">
                             <a
                                 className="p-3 text-start"
                                 style={{
@@ -408,7 +408,7 @@ const TopNav = props => {
                                 </h6>
                             </a>
                         </Link>
-                        <Link href="/video">
+                        <Link to="/video">
                             <a
                                 className="p-3 text-start"
                                 onClick={() => setBottomMenu("")}
@@ -421,7 +421,7 @@ const TopNav = props => {
                                 </h6>
                             </a>
                         </Link>
-                        <Link href="/settings">
+                        <Link to="/settings">
                             <a
                                 className="p-3 text-start"
                                 onClick={() => setBottomMenu("")}
@@ -434,7 +434,7 @@ const TopNav = props => {
                                 </h6>
                             </a>
                         </Link>
-                        <Link href="/privacy-policy">
+                        <Link to="/privacy-policy">
                             <a
                                 className="p-3 text-start"
                                 onClick={() => setBottomMenu("")}
@@ -448,7 +448,7 @@ const TopNav = props => {
                                 </h6>
                             </a>
                         </Link>
-                        <Link href="#">
+                        <Link to="#">
                             <a
                                 className="p-3 text-start"
                                 onClick={e => {

@@ -1,5 +1,5 @@
-import BackSVG from "../svgs/BackSVG";
-import Link from "next/link";
+import BackSVG from "@/svgs/BackSVG";
+import { Link } from "react-router-dom";
 
 const Privacy = () => {
     return (
@@ -7,7 +7,7 @@ const Privacy = () => {
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
                 <div className="my-2 ml-2 text-white">
-                    <Link href="/">
+                    <Link to="/">
                         <a>
                             <BackSVG />
                         </a>

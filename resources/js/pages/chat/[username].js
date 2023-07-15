@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import EchoConfig from "../lib/echo";
+import { Link, useParams } from "react-router-dom";
+import axios from "@/lib/axios";
+import EchoConfig from "@/lib/echo";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 
-import TrashSVG from "../svgs/TrashSVG";
-import BackSVG from "../svgs/BackSVG";
-import SocialMediaInput from "../components/Core/SocialMediaInput";
+import TrashSVG from "@/svgs/TrashSVG";
+import BackSVG from "@/svgs/BackSVG";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
 
 const ChatThread = props => {
-    const router = useRouter();
-
-    let { username } = router.query;
+    let { username } = useParams();
 
     const [chats, setChats] = useState([]);
     const [user, setUser] = useState({});
@@ -132,7 +129,7 @@ const ChatThread = props => {
                                 <div className="menu-area d-flex justify-content-between">
                                     {/* <!-- Logo Area  --> */}
                                     <div className="logo-area">
-                                        <Link href="/chat">
+                                        <Link to="/chat">
                                             <a className="fs-6">
                                                 <BackSVG />
                                             </a>
@@ -170,7 +167,7 @@ const ChatThread = props => {
 
                                     <div className="menu-content-area d-flex align-items-center">
                                         <div>
-                                            <Link href={`/profile/${username}`}>
+                                            <Link to={`/profile/${username}`}>
                                                 <a>
                                                     <Img
                                                         src={user.avatar}

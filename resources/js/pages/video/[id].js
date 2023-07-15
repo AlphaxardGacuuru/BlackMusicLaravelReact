@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
+import { Link, useParams, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
-import Img from "../components/Core/Img";
-import CommentMedia from "../components/Core/CommentMedia";
-import VideoMedia from "../components/Video/VideoMedia";
-import SocialMediaInput from "../components/Core/SocialMediaInput";
+import Btn from "@/components/Core/Btn";
+import Img from "@/components/Core/Img";
+import CommentMedia from "@/components/Core/CommentMedia";
+import VideoMedia from "@/components/Video/VideoMedia";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
 
-import ShareSVG from "../svgs/ShareSVG";
-import CartSVG from "../svgs/CartSVG";
-import HeartFilledSVG from "../svgs/HeartFilledSVG";
-import HeartSVG from "../svgs/HeartSVG";
-import DecoSVG from "../svgs/DecoSVG";
-import ssrAxios from "../lib/ssrAxios";
-import CheckSVG from "../svgs/CheckSVG";
+import ShareSVG from "@/svgs/ShareSVG";
+import CartSVG from "@/svgs/CartSVG";
+import HeartFilledSVG from "@/svgs/HeartFilledSVG";
+import HeartSVG from "@/svgs/HeartSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+
+import CheckSVG from "@/svgs/CheckSVG";
 
 const VideoShow = props => {
     // let { referer } = router.query
-    const router = useRouter();
+    const router = useHistory();
 
-    let { id } = router.query;
+    let { id } = useParams();
 
     const [video, setVideo] = useState(props.video);
     const [videos, setVideos] = useState(props.videos);
@@ -355,7 +354,7 @@ const VideoShow = props => {
                 <div className="border-bottom border-dark">
                     <div className="d-flex">
                         <div className="p-2">
-                            <Link href={`/profile/${video.username}`}>
+                            <Link to={`/profile/${video.username}`}>
                                 <a>
                                     <Img
                                         src={video.avatar}
@@ -372,7 +371,7 @@ const VideoShow = props => {
                             className="p-2 flex-grow-1"
                             style={{ width: "50%" }}
                         >
-                            <Link href={`/profile/${video.username}`}>
+                            <Link to={`/profile/${video.username}`}>
                                 <a>
                                     <div
                                         style={{
@@ -594,30 +593,5 @@ const VideoShow = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var data = {
-        video: {},
-        videoComments: {},
-        videos: {}
-    };
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/videos/${id}`)
-        .then(res => (data.video = res.data.data));
-    await ssrAxios
-        .get(`/api/video-comments/${id}`)
-        .then(res => (data.videoComments = res.data.data));
-    await ssrAxios
-        .get(`/api/videos`)
-        .then(res => (data.videos = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
-}
 
 export default VideoShow;

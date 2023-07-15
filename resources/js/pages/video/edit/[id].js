@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import ssrAxios from "../lib/ssrAxios";
+import { Link, useParams } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
-import Img from "../components/Core/Img";
+import Btn from "@/components/Core/Btn";
+import Img from "@/components/Core/Img";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -35,10 +33,8 @@ registerPlugin(
 
 const VideoEdit = props => {
     console.log(props);
-    // Get history for page location
-    const router = useRouter();
 
-    let { id } = router.query;
+    let { id } = useParams();
 
     // Get Artist's Video Albums
     const [artistVideoAlbums, setArtistVideoAlbums] = useState(
@@ -391,7 +387,7 @@ const VideoEdit = props => {
                                         />
                                     </form>
                                     <br />
-                                    <Link href="/video">
+                                    <Link to="/video">
                                         <a className="btn sonar-btn btn-2">
                                             studio
                                         </a>
@@ -405,20 +401,5 @@ const VideoEdit = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var video;
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/videos/${id}`)
-        .then(res => (video = res.data.data));
-
-    // Pass data to the page via props
-    return { props: { video } };
-}
 
 export default VideoEdit;

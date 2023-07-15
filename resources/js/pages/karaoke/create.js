@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import Ticker from "react-ticker";
-import axios from "../lib/axios";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
-import Button from "../components/Core/Btn";
+import Img from "@/components/Core/Img";
+import Button from "@/components/Core/Btn";
 
-import CloseSVG from "../svgs/CloseSVG";
-import FlashSVG from "../svgs/FlashSVG";
-import FlashFilledSVG from "../svgs/FlashFilledSVG";
-import LoopSVG from "../svgs/LoopSVG";
-import TimerSVG from "../svgs/TimerSVG";
-import RecordSVG from "../svgs/RecordSVG";
-import RecordFilledSVG from "../svgs/RecordFilledSVG";
-import StopFilledSVG from "../svgs/StopFilledSVG";
-import PlayFilledSVG from "../svgs/PlayFilledSVG";
-import PauseFilledSVG from "../svgs/PauseFilledSVG";
-import UploadBoxSVG from "../svgs/UploadBoxSVG";
-import MusicNoteSVG from "../svgs/MusicNoteSVG";
-import ImageSVG from "../svgs/ImageSVG";
+import CloseSVG from "@/svgs/CloseSVG";
+import FlashSVG from "@/svgs/FlashSVG";
+import FlashFilledSVG from "@/svgs/FlashFilledSVG";
+import LoopSVG from "@/svgs/LoopSVG";
+import TimerSVG from "@/svgs/TimerSVG";
+import RecordSVG from "@/svgs/RecordSVG";
+import RecordFilledSVG from "@/svgs/RecordFilledSVG";
+import StopFilledSVG from "@/svgs/StopFilledSVG";
+import PlayFilledSVG from "@/svgs/PlayFilledSVG";
+import PauseFilledSVG from "@/svgs/PauseFilledSVG";
+import UploadBoxSVG from "@/svgs/UploadBoxSVG";
+import MusicNoteSVG from "@/svgs/MusicNoteSVG";
+import ImageSVG from "@/svgs/ImageSVG";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -345,7 +345,7 @@ const KaraokeCreate = props => {
                         <div className="d-flex justify-content-between">
                             {/* Close Icon */}
                             <div className="p-2">
-                                <Link href="/karaoke/charts">
+                                <Link to="/karaoke/charts">
                                     <a style={{ fontSize: "1.5em" }}>
                                         <CloseSVG />
                                     </a>
@@ -675,19 +675,5 @@ const KaraokeCreate = props => {
         </>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps() {
-    // Fetch data from external API
-    var karaokeAudio;
-
-    // Fetch Karaoke Audios
-    await axios
-        .get(`/api/karaoke-audios/1`)
-        .then(res => (karaokeAudio = res.data.data));
-
-    // Pass data to the page via props
-    return { props: { karaokeAudio } };
-}
 
 export default KaraokeCreate;

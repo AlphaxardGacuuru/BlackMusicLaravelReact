@@ -1,4 +1,4 @@
-import SadEmojiSVG from "../svgs/SadEmojiSVG";
+import SadEmojiSVG from "@/svgs/SadEmojiSVG";
 
 const ServerError = () => {
     return (

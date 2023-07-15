@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import axios from "../lib/axios";
+import { Link } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 import Poll from "./Poll";
 
-import DecoSVG from "../../svgs/DecoSVG";
-import OptionsSVG from "../../svgs/OptionsSVG";
-import CommentSVG from "../../svgs/CommentSVG";
-import HeartSVG from "../../svgs/HeartSVG";
-import HeartFilledSVG from "../../svgs/HeartFilledSVG";
-import ShareSVG from "../../svgs/ShareSVG";
-import CloseSVG from "../svgs/CloseSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+import OptionsSVG from "@/svgs/OptionsSVG";
+import CommentSVG from "@/svgs/CommentSVG";
+import HeartSVG from "@/svgs/HeartSVG";
+import HeartFilledSVG from "@/svgs/HeartFilledSVG";
+import ShareSVG from "@/svgs/ShareSVG";
+import CloseSVG from "@/svgs/CloseSVG";
 
 const PostMedia = props => {
     const [hasLiked, setHasLiked] = useState(props.post.hasLiked);
@@ -102,7 +102,7 @@ const PostMedia = props => {
                         className="avatar-thumbnail-xs"
                         style={{ borderRadius: "50%" }}
                     >
-                        <Link href={`/profile/${props.post.username}`}>
+                        <Link to={`/profile/${props.post.username}`}>
                             <a>
                                 <Img
                                     src={props.post.avatar}
@@ -135,7 +135,7 @@ const PostMedia = props => {
                             </b>
                         </small>
                     </h6>
-                    <Link href={"post/" + props.post.id}>
+                    <Link to={"post/" + props.post.id}>
                         <a>
                             <p className="mb-0">{props.post.text}</p>
                         </a>
@@ -316,7 +316,7 @@ const PostMedia = props => {
                     )}
 
                     {/* Post comments */}
-                    <Link href={"/post/" + props.post.id}>
+                    <Link to={"/post/" + props.post.id}>
                         <a style={{ color: "rgba(220, 220, 220, 1)" }}>
                             <span
                                 className="ms-5"
@@ -398,7 +398,7 @@ const PostMedia = props => {
                                 )
                             ) : (
                                 <span>
-                                    <Link href={`/post/edit/${props.post.id}`}>
+                                    <Link to={`/post/edit/${props.post.id}`}>
                                         <a className="dropdown-item">
                                             <h6>Edit post</h6>
                                         </a>
@@ -472,7 +472,7 @@ const PostMedia = props => {
                         )
                     ) : (
                         <div>
-                            <Link href={`/post/edit/${props.post.id}`}>
+                            <Link to={`/post/edit/${props.post.id}`}>
                                 <a>
                                     <h6 className="pb-2">Edit post</h6>
                                 </a>

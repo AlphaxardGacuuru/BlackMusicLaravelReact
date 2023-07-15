@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import dynamic from "next/dynamic";
+import { React, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
+import Picker from "emoji-picker-react";
 
-import Button from "../components/Core/Btn";
-import Img from "../components/Core/Img";
+import Button from "@/components/Core/Btn";
+import Img from "@/components/Core/Img";
 
-import EmojiSVG from "../svgs/EmojiSVG";
-import ImageSVG from "../svgs/ImageSVG";
-import PollSVG from "../svgs/PollSVG";
+import EmojiSVG from "@/svgs/EmojiSVG";
+import ImageSVG from "@/svgs/ImageSVG";
+import PollSVG from "@/svgs/PollSVG";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -37,7 +37,7 @@ registerPlugin(
 );
 
 const SocialMediaInput = props => {
-    const router = useRouter();
+    const history = useHistory();
 
     const [text, setText] = useState(props.text ? props.text : "");
     const [media, setMedia] = useState("");
@@ -87,13 +87,6 @@ const SocialMediaInput = props => {
             setRevertUrl(parsed[key]);
         }
     };
-
-    const Picker = dynamic(
-        () => {
-            return import("emoji-picker-react");
-        },
-        { ssr: false }
-    );
 
     // Show error on space in username
     useEffect(() => {
@@ -158,7 +151,7 @@ const SocialMediaInput = props => {
                 setShowStoryPicker(false);
                 setShowPollPicker(false);
                 // Redirect
-                props.redirect && router.push(props.redirect);
+                props.redirect && history.push(props.redirect);
             })
             .catch(err => {
                 setLoading(false);

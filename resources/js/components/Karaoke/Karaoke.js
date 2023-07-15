@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import axios from "../lib/axios";
+import { Link } from "react-router-dom";
+import axios from "@/lib/axios";
 import Ticker from "react-ticker";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 import KaraokeCommentSection from "./KaraokeCommentSection";
 
-import CloseSVG from "../svgs/CloseSVG";
-import CommentSVG from "../svgs/CommentSVG";
-import DecoSVG from "../svgs/DecoSVG";
-import HeartFilledSVG from "../svgs/HeartFilledSVG";
-import HeartSVG from "../svgs/HeartSVG";
-import BookmarkSVG from "../svgs/BookmarkSVG";
-import BookmarkFilledSVG from "../svgs/BookmarkFilledSVG";
-import ShareSVG from "../svgs/ShareSVG";
-import MusicNoteSVG from "../svgs/MusicNoteSVG";
-import PlayFilledSVG from "../svgs/PlayFilledSVG";
+import CloseSVG from "@/svgs/CloseSVG";
+import CommentSVG from "@/svgs/CommentSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+import HeartFilledSVG from "@/svgs/HeartFilledSVG";
+import HeartSVG from "@/svgs/HeartSVG";
+import BookmarkSVG from "@/svgs/BookmarkSVG";
+import BookmarkFilledSVG from "@/svgs/BookmarkFilledSVG";
+import ShareSVG from "@/svgs/ShareSVG";
+import MusicNoteSVG from "@/svgs/MusicNoteSVG";
+import PlayFilledSVG from "@/svgs/PlayFilledSVG";
 
 const Karaoke = props => {
     const [play, setPlay] = useState();
@@ -127,7 +127,7 @@ const Karaoke = props => {
                 <div className="d-flex">
                     {/* Close Icon */}
                     <div className="">
-                        <Link href="/karaoke/charts">
+                        <Link to="/karaoke/charts">
                             <a style={{ fontSize: "1.5em" }}>
                                 <CloseSVG />
                             </a>

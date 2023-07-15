@@ -1,5 +1,5 @@
-import Navigation from "../components/Layouts/TopNav";
-import { useAuth } from "../hooks/auth";
+import Navigation from "@/components/Layouts/TopNav";
+import { useAuth } from "@/hooks/auth";
 
 const AppLayout = ({ header, children }) => {
     const { user } = useAuth({ middleware: "auth" });

@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
-// const SocialMediaInput = React.lazy(() => import('../components/core/SocialMediaInput'))
-import SocialMediaInput from "../components/Core/SocialMediaInput";
-import CloseSVG from "../svgs/CloseSVG";
+// const SocialMediaInput = React.lazy(() => import('@/components/core/SocialMediaInput'))
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
+import CloseSVG from "@/svgs/CloseSVG";
 
 const PostCreate = props => {
     return (
@@ -18,7 +18,7 @@ const PostCreate = props => {
                                     <CloseSVG />
                                 </span>
                             ) : (
-                                <Link href="/">
+                                <Link to="/">
                                     <a style={{ fontSize: "1.2em" }}>
                                         <CloseSVG />
                                     </a>

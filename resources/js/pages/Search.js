@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "../lib/axios";
+import axios from "@/lib/axios";
 
-import Img from "../components/Core/Img";
-import AvatarMedia from "../components/User/AvatarMedia";
-import VideoMedia from "../components/Video/VideoMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
-import CloseSVG from "../svgs/CloseSVG";
+import Img from "@/components/Core/Img";
+import AvatarMedia from "@/components/User/AvatarMedia";
+import VideoMedia from "@/components/Video/VideoMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
+import CloseSVG from "@/svgs/CloseSVG";
 
 const Search = props => {
     const [searchHistory, setSearchHistory] = useState(

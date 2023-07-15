@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
+import Btn from "@/components/Core/Btn";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -50,7 +49,7 @@ const AudioCreate = props => {
     const [loadingBtn, setLoadingBtn] = useState();
 
     // Get history for page location
-    const router = useRouter();
+    const router = useHistory();
 
     useEffect(() => {
         props.get(
@@ -486,7 +485,7 @@ const AudioCreate = props => {
                                     <br />
                                     <br />
 
-                                    <Link href="/audio">
+                                    <Link to="/audio">
                                         <a className="btn sonar-btn btn-2">
                                             studio
                                         </a>

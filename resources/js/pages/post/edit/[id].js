@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
-import SocialMediaInput from "../components/Core/SocialMediaInput";
-import ssrAxios from "../lib/ssrAxios";
-import CloseSVG from "../svgs/CloseSVG";
+import SocialMediaInput from "@/components/Core/SocialMediaInput";
+
+import CloseSVG from "@/svgs/CloseSVG";
 
 const PostEdit = props => {
-    const router = useRouter();
-
-    let { id } = router.query;
+    let { id } = useParams();
 
     return (
         <div className="row">
@@ -19,7 +16,7 @@ const PostEdit = props => {
                     <div className="d-flex justify-content-between mb-1">
                         {/* Close Icon */}
                         <div className="text-white">
-                            <Link href="/">
+                            <Link to="/">
                                 <a className="fs-4">
                                     <CloseSVG />
                                 </a>
@@ -50,22 +47,5 @@ const PostEdit = props => {
         </div>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { id } = context.query;
-
-    var data = {
-        post: {}
-    };
-
-    // Fetch Post Comments
-    await ssrAxios
-        .get(`/api/posts/${id}`)
-        .then(res => (data.post = res.data.data));
-
-    // Pass data to the page via props
-    return { props: data };
-}
 
 export default PostEdit;

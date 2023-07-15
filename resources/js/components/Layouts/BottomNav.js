@@ -1,54 +1,53 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Link, useLocation } from "react-router-dom";
 
 // import SocialMediaInput from './SocialMediaInput'
 
-import CloseSVG from "../svgs/CloseSVG";
-import PreviousSVG from "../svgs/PreviousSVG";
-import PauseSVG from "../svgs/PauseSVG";
-import PlaySVG from "../svgs/PlaySVG";
-import NextSVG from "../svgs/NextSVG";
-import HomeSVG from "../svgs/HomeSVG";
-import DiscoverSVG from "../svgs/DiscoverSVG";
-import SearchSVG from "../svgs/SearchSVG";
-import CartSVG from "../svgs/CartSVG";
-import PersonSVG from "../svgs/PersonSVG";
+import CloseSVG from "@/svgs/CloseSVG";
+import PreviousSVG from "@/svgs/PreviousSVG";
+import PauseSVG from "@/svgs/PauseSVG";
+import PlaySVG from "@/svgs/PlaySVG";
+import NextSVG from "@/svgs/NextSVG";
+import HomeSVG from "@/svgs/HomeSVG";
+import DiscoverSVG from "@/svgs/DiscoverSVG";
+import SearchSVG from "@/svgs/SearchSVG";
+import CartSVG from "@/svgs/CartSVG";
+import PersonSVG from "@/svgs/PersonSVG";
 
 const Bottomnav = props => {
-    const router = useRouter();
+    const location = useLocation();
 
     var display;
     var hidePlayer = true;
     var isInKaraoke = false;
 
     // Hide BottomNav from various pages
-    router.pathname.match("/404") ||
-    router.pathname == "/story/[id]" ||
-    router.pathname.match("/story/create") ||
-    router.pathname == "/karaoke/[id]" ||
-    router.pathname.match("/karaoke/create") ||
-    router.pathname.match("/privacy-policy") ||
-    router.pathname.match("/download-app") ||
-    router.pathname.match("/chat/") ||
-    router.pathname == "/post/edit/[id]" ||
-    router.pathname.match("/post/create") ||
-    router.pathname == "/post/[id]" ||
-    router.pathname.match("/referral") ||
-    router.pathname.match("/login") ||
-    router.pathname.match("/register")
+    location.pathname.match("/404") ||
+    location.pathname == "/story/[id]" ||
+    location.pathname.match("/story/create") ||
+    location.pathname == "/karaoke/[id]" ||
+    location.pathname.match("/karaoke/create") ||
+    location.pathname.match("/privacy-policy") ||
+    location.pathname.match("/download-app") ||
+    location.pathname.match("/chat/") ||
+    location.pathname == "/post/edit/[id]" ||
+    location.pathname.match("/post/create") ||
+    location.pathname == "/post/[id]" ||
+    location.pathname.match("/referral") ||
+    location.pathname.match("/login") ||
+    location.pathname.match("/register")
         ? (display = "none")
         : (display = "");
 
     // Check if audio is in queue and location is in audio show
     if (props.audioStates.show.id != 0 && props.audioStates.show != "") {
-        hidePlayer = router.pathname == "/audio/[id]";
+        hidePlayer = location.pathname == "/audio/[id]";
     }
 
     // Check if location is in Karaoke
     isInKaraoke =
-        router.pathname == "/karaoke/[id]" ||
-        router.pathname.match("/karaoke-create");
+        location.pathname == "/karaoke/[id]" ||
+        location.pathname.match("/karaoke-create");
 
     // Get number of items in video cart
     const vidCartItems = props.cartVideos.length;
@@ -118,7 +117,7 @@ const Bottomnav = props => {
                         </div>
                         {/* Audio Details */}
                         <div className="p-2 me-auto align-self-center flex-grow-1">
-                            <Link href={`/audio/${props.audioStates.show.id}`}>
+                            <Link to={`/audio/${props.audioStates.show.id}`}>
                                 <a>
                                     <h6 className="mb-0 pb-0 text-white audio-text">
                                         {props.audioStates.audio?.name}
@@ -201,7 +200,7 @@ const Bottomnav = props => {
                 <div className="anti-hidden" style={{ display: display }}>
                     <div className="container-fluid menu-area d-flex justify-content-between p-2 px-4">
                         {/* Home */}
-                        <Link href="/">
+                        <Link to="/">
                             <a
                                 style={{
                                     textAlign: "center",
@@ -214,7 +213,7 @@ const Bottomnav = props => {
                                         fontSize: "20px",
                                         margin: "0",
                                         color:
-                                            router.pathname == "/"
+                                            location.pathname == "/"
                                                 ? "gold"
                                                 : "white"
                                     }}
@@ -226,7 +225,7 @@ const Bottomnav = props => {
                         </Link>
                         {/* Home End */}
                         {/* Discover */}
-                        <Link href="/karaoke/charts">
+                        <Link to="/karaoke/charts">
                             <a
                                 style={{
                                     textAlign: "center",
@@ -238,11 +237,11 @@ const Bottomnav = props => {
                                     style={{
                                         fontSize: "20px",
                                         color:
-                                            router.pathname ==
+                                            location.pathname ==
                                                 "/karaoke/charts" ||
-                                            router.pathname ==
+                                            location.pathname ==
                                                 "/video/charts" ||
-                                            router.pathname == "/audio/charts"
+                                            location.pathname == "/audio/charts"
                                                 ? "gold"
                                                 : "white"
                                     }}
@@ -254,7 +253,7 @@ const Bottomnav = props => {
                         </Link>
                         {/* Discover End */}
                         {/* Search */}
-                        <Link href="/search">
+                        <Link to="/search">
                             <a
                                 style={{
                                     color: "white",
@@ -268,7 +267,7 @@ const Bottomnav = props => {
                                     style={{
                                         fontSize: "20px",
                                         color:
-                                            router.pathname == "/search"
+                                            location.pathname == "/search"
                                                 ? "gold"
                                                 : "white"
                                     }}
@@ -280,7 +279,7 @@ const Bottomnav = props => {
                         </Link>
                         {/* Search End */}
                         {/* Cart */}
-                        <Link href="/cart">
+                        <Link to="/cart">
                             <a
                                 style={{
                                     textAlign: "center",
@@ -293,7 +292,7 @@ const Bottomnav = props => {
                                     style={{
                                         fontSize: "20px",
                                         color:
-                                            router.pathname == "/cart"
+                                            location.pathname == "/cart"
                                                 ? "gold"
                                                 : "white"
                                     }}
@@ -314,7 +313,7 @@ const Bottomnav = props => {
                         </Link>
                         {/* Cart End */}
                         {/* Library */}
-                        <Link href="/library">
+                        <Link to="/library">
                             <a
                                 style={{
                                     textAlign: "center",
@@ -326,7 +325,7 @@ const Bottomnav = props => {
                                     style={{
                                         fontSize: "23px",
                                         color:
-                                            router.pathname == "/library"
+                                            location.pathname == "/library"
                                                 ? "gold"
                                                 : "white"
                                     }}

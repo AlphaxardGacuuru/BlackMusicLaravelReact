@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "next/image";
-import Btn from "../Core/Btn";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
 
-import CartSVG from "../svgs/CartSVG";
+import CartSVG from "@/svgs/CartSVG";
 import { useEffect, useState } from "react";
 
 const VideoMedia = props => {
-    const router = useRouter();
+    const router = useHistory();
 
     const [inCart, setInCart] = useState(props.video.inCart);
 
@@ -50,7 +50,7 @@ const VideoMedia = props => {
         >
             <div className="video-media">
                 <div className="video-thumbnail">
-                    <Link href={`/video/${props.video.id}`} passHref>
+                    <Link to={`/video/${props.video.id}`} passHref>
                         <a>
                             <Img
                                 src={props.video.thumbnail}
@@ -102,7 +102,7 @@ const VideoMedia = props => {
             {/* User info */}
             <div className="d-flex" style={{ maxWidth: "220em" }}>
                 <div className="py-2" style={{ minWidth: "40px" }}>
-                    <Link href={`/profile/${props.video.username}`}>
+                    <Link to={`/profile/${props.video.username}`}>
                         <a>
                             <Img
                                 src={props.video.avatar}

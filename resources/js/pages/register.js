@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
+import Btn from "@/components/Core/Btn";
 
 const Register = props => {
-    const router = useRouter();
+    const router = useHistory();
 
-    var { name, email, avatar } = router.query;
+    var { name, email, avatar } = useParams;
 
     const [username, setUsername] = useState("");
     const [phone, setPhone] = useState("07");

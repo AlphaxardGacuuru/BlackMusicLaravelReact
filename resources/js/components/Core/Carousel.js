@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-import Img from "../components/Core/Img";
+import Img from "@/components/Core/Img";
 
 const Carousel = () => {
     const [innerHeight, setInnerHeight] = useState(100);

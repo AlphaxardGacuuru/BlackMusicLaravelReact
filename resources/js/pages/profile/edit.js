@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "../lib/axios";
-import Link from "next/link";
+import axios from "@/lib/axios";
+import { Link } from "react-router-dom";
 
-import Img from "../components/Core/Img";
-import Btn from "../components/Core/Btn";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -242,7 +242,7 @@ const Edit = props => {
                         </form>
                         <br />
 
-                        <Link href={`/profile/${props.auth?.username}`}>
+                        <Link to={`/profile/${props.auth?.username}`}>
                             <a className="btn sonar-btn btn-2">
                                 back to profile
                             </a>

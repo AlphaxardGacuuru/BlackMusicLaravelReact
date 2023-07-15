@@ -1,23 +1,22 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Img from "../components/Core/Img";
+import { Link } from "react-router-dom";
+import Img from "@/components/Core/Img";
 
-import PersonSVG from "../svgs/PersonSVG";
-import CartSVG from "../svgs/CartSVG";
-import BellSVG from "../svgs/BellSVG";
-import LogoutSVG from "../svgs/LogoutSVG";
-import DownloadSVG from "../svgs/DownloadSVG";
-import PrivacySVG from "../svgs/PrivacySVG";
-import SettingsSVG from "../svgs/SettingsSVG";
-import StudioSVG from "../svgs/StudioSVG";
+import PersonSVG from "@/svgs/PersonSVG";
+import CartSVG from "@/svgs/CartSVG";
+import BellSVG from "@/svgs/BellSVG";
+import LogoutSVG from "@/svgs/LogoutSVG";
+import DownloadSVG from "@/svgs/DownloadSVG";
+import PrivacySVG from "@/svgs/PrivacySVG";
+import SettingsSVG from "@/svgs/SettingsSVG";
+import StudioSVG from "@/svgs/StudioSVG";
 
 const TopNavLinks = props => {
     return (
         <>
             {/* Admin */}
             {props.auth?.username == "@blackmusic" && (
-                <Link href="/admin">
+                <Link to="/admin">
                     <a className="fs-5">
                         <PersonSVG />
                     </a>
@@ -26,7 +25,7 @@ const TopNavLinks = props => {
 
             {/* Cart */}
             <div className="dropdown mx-3 hidden">
-                <Link href="/cart">
+                <Link to="/cart">
                     <a
                         role="button"
                         id="dropdownMenua"
@@ -53,7 +52,7 @@ const TopNavLinks = props => {
 
             {/* Notification Dropdown */}
             <div className="dropdown-center me-3">
-                <Link href="#">
+                <Link to="#">
                     <a
                         role="button"
                         id="dropdownMenua"
@@ -191,7 +190,7 @@ const TopNavLinks = props => {
                     style={{ backgroundColor: "#232323" }}
                     className="dropdown-menu rounded-0 m-0 p-0"
                 >
-                    <Link href={`/profile/${props.auth?.username}`}>
+                    <Link to={`/profile/${props.auth?.username}`}>
                         <a className="p-3 dropdown-item border-bottom border-dark">
                             <div className="d-flex">
                                 <div className="align-items-center">
@@ -210,7 +209,7 @@ const TopNavLinks = props => {
                             </div>
                         </a>
                     </Link>
-                    <Link href="/download-app">
+                    <Link to="/download-app">
                         <a
                             className="p-3 dropdown-item border-bottom border-dark"
                             style={{
@@ -225,7 +224,7 @@ const TopNavLinks = props => {
                             </h6>
                         </a>
                     </Link>
-                    <Link href="/video">
+                    <Link to="/video">
                         <a className="p-3 dropdown-item border-bottom border-dark">
                             <h6>
                                 <span className="me-2">
@@ -235,7 +234,7 @@ const TopNavLinks = props => {
                             </h6>
                         </a>
                     </Link>
-                    <Link href="/settings">
+                    <Link to="/settings">
                         <a className="p-3 dropdown-item border-bottom border-dark">
                             <h6>
                                 <span className="me-2">
@@ -245,7 +244,7 @@ const TopNavLinks = props => {
                             </h6>
                         </a>
                     </Link>
-                    <Link href="/privacy-policy">
+                    <Link to="/privacy-policy">
                         <a
                             className="p-3 dropdown-item border-bottom border-dark"
                             title="Privacy Policy"
@@ -258,7 +257,7 @@ const TopNavLinks = props => {
                             </h6>
                         </a>
                     </Link>
-                    <Link href="#">
+                    <Link to="#">
                         <a
                             className="p-3 dropdown-item"
                             onClick={e => props.logout(e)}

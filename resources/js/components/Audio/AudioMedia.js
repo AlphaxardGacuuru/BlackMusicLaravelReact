@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import Img from "next/image";
+import { Link, useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
+import Img from "@/components/Core/Img";
 
-import Btn from "../Core/Btn";
+import Btn from "@/components/Core/Btn";
 
-import CartSVG from "../../svgs/CartSVG";
+import CartSVG from "@/svgs/CartSVG";
 
 const AudioMedia = props => {
-    const router = useRouter();
+    const history = useHistory();
 
     const [inCart, setInCart] = useState(props.audio.inCart);
 
@@ -21,7 +20,7 @@ const AudioMedia = props => {
     // Buy function
     const onBuyAudios = () => {
         onCartAudios();
-        setTimeout(() => router.push("/cart"), 500);
+        setTimeout(() => history.push("/cart"), 500);
     };
 
     // Function for adding audio to cart
@@ -42,7 +41,7 @@ const AudioMedia = props => {
     return (
         <div className="d-flex p-2">
             <div className="audio-thumbnail">
-                <Link href={`/audio/${props.audio.id}`}>
+                <Link to={`/audio/${props.audio.id}`}>
                     <a
                         onClick={() => {
                             props.audioStates.setShow({

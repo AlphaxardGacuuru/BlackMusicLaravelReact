@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Img from "../components/Core/Img";
+import { Link } from "react-router-dom";
+import Img from "@/components/Core/Img";
 import { useEffect, useState } from "react";
 
 const Audios = props => {
@@ -62,7 +62,7 @@ const Audios = props => {
                             Audios
                         </h1>
                         <br />
-                        <Link href="/video">
+                        <Link to="/video">
                             <a className="btn sonar-btn btn-2">go to videos</a>
                         </Link>
                     </center>
@@ -72,14 +72,14 @@ const Audios = props => {
                 <div className="col-sm-4"></div>
                 <div className="col-sm-2">
                     <center>
-                        <Link href="/audio/album/create">
+                        <Link to="/audio/album/create">
                             <a className="btn sonar-btn">create audio album</a>
                         </Link>
                     </center>
                 </div>
                 <div className="col-sm-2">
                     <center>
-                        <Link href="/audio/create">
+                        <Link to="/audio/create">
                             <a className="btn sonar-btn">upload audio</a>
                         </Link>
                     </center>

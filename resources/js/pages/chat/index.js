@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Img from "../components/Core/Img";
+import { Link } from "react-router-dom";
+import Img from "@/components/Core/Img";
 
-import ChatSVG from "../svgs/ChatSVG";
-import ImageSVG from "../svgs/ImageSVG";
-import EchoConfig from "../lib/echo";
+import ChatSVG from "@/svgs/ChatSVG";
+import ImageSVG from "@/svgs/ImageSVG";
+import EchoConfig from "@/lib/echo";
 
 const Chat = props => {
     const [blackMusic, setBlackMusic] = useState({});
@@ -43,7 +43,7 @@ const Chat = props => {
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
                 {/* Chat button */}
-                <Link href="/chat/new">
+                <Link to="/chat/new">
                     <a id="chatFloatBtn" className={raise ? "mb-5" : undefined}>
                         <ChatSVG />
                     </a>
@@ -53,7 +53,7 @@ const Chat = props => {
                 {chatThreads.length == 0 && (
                     <div className="d-flex">
                         <div className="p-2">
-                            <Link href="/chat/@blackmusic">
+                            <Link to="/chat/@blackmusic">
                                 <a>
                                     <Img
                                         src={blackMusic.avatar}
@@ -65,7 +65,7 @@ const Chat = props => {
                             </Link>
                         </div>
                         <div className="p-2 flex-grow-1">
-                            <Link href="/chat/@blackmusic">
+                            <Link to="/chat/@blackmusic">
                                 <a>
                                     <h6
                                         className="m-0"
@@ -93,7 +93,7 @@ const Chat = props => {
                 {chatThreads.map((chatThread, key) => (
                     <div key={key} className="d-flex">
                         <div className="pt-2">
-                            <Link href={`/chat/${chatThread.username}`}>
+                            <Link to={`/chat/${chatThread.username}`}>
                                 <a>
                                     <Img
                                         src={chatThread.avatar}
@@ -111,7 +111,7 @@ const Chat = props => {
                                 wordWrap: "break-word"
                             }}
                         >
-                            <Link href={`/chat/${chatThread.username}`}>
+                            <Link to={`/chat/${chatThread.username}`}>
                                 <a>
                                     <h6
                                         className="m-0"

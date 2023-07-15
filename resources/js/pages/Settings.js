@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "../lib/axios";
+import axios from "@/lib/axios";
 
-import Btn from "../components/Core/Btn";
+import Btn from "@/components/Core/Btn";
 
 const Settings = props => {
     const [kopokopoRecipients, setKopokopoRecipients] = useState(

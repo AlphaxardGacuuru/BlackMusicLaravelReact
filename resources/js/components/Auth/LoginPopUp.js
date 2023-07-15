@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import axios from "../lib/axios";
-import { useAuth } from "../hooks/auth";
+import { React, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "@/lib/axios";
+// import { useAuth } from "@/hooks/auth";
 
-import Btn from "../components/Core/Btn";
+import Btn from "@/components/Core/Btn";
 
-import CloseSVG from "../svgs/CloseSVG";
+import CloseSVG from "@/svgs/CloseSVG";
 
 import {
     GoogleLoginButton,
@@ -14,18 +14,8 @@ import {
 } from "react-social-login-buttons";
 
 const LoginPopUp = props => {
-    const { register, authenticated } = useAuth({
-        middleware: "guest",
-        redirectIfAuthenticated: "/"
-    });
 
-    const { login } = useAuth({
-        middleware: "guest",
-        redirectIfAuthenticated: "/",
-        setLogin: props.setLogin
-    });
-
-    const router = useRouter();
+    const history = useHistory();
 
     // const [name, setName] = useState('Alphaxard Gacuuru')
     const [name, setName] = useState("Black Music");
@@ -70,7 +60,7 @@ const LoginPopUp = props => {
                     props.get(`auth`, props.setAuth, "auth", false);
                     props.setMessages(["Logged in"]);
                     // Reload page
-                    setTimeout(() => location.reload(), 1000);
+                    setTimeout(() => window.location.reload(), 1000);
                 })
                 .catch(err => props.getErrors(err, true));
 
@@ -104,7 +94,7 @@ const LoginPopUp = props => {
                             style={{ fontSize: "1em" }}
                             onClick={() => {
                                 props.setLogin(false);
-                                router.push("/");
+                                history.push("/");
                             }}
                         >
                             <CloseSVG />

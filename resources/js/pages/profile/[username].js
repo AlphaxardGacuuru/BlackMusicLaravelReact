@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import axios from "../lib/axios";
+import { Link, useParams } from "react-router-dom";
+import axios from "@/lib/axios";
 
-import Img from "next/image";
-import Btn from "../../components/Core/Btn";
+import Img from "@/components/Core/Img";
+import Btn from "@/components/Core/Btn";
 
-import CheckSVG from "../../svgs/CheckSVG";
-import DecoSVG from "../../svgs/DecoSVG";
-import PostMedia from "../../components/Post/PostMedia";
-import ssrAxios from "../lib/ssrAxios";
+import CheckSVG from "@/svgs/CheckSVG";
+import DecoSVG from "@/svgs/DecoSVG";
+import PostMedia from "@/components/Post/PostMedia";
 
-import VideoMedia from "../components/Video/VideoMedia";
-import AudioMedia from "../components/Audio/AudioMedia";
+import VideoMedia from "@/components/Video/VideoMedia";
+import AudioMedia from "@/components/Audio/AudioMedia";
 
 const Profile = props => {
-    const router = useRouter();
-
-    let { username } = router.query;
+    let { username } = useParams();
 
     const [user, setUser] = useState(props.user);
     const [artistVideoAlbums, setArtistVideoAlbums] = useState(
@@ -121,7 +117,7 @@ const Profile = props => {
                     <br className="anti-hidden" />
                     {/* Edit and Follow button */}
                     {user.username == props.auth?.username ? (
-                        <Link href="/profile/edit">
+                        <Link to="/profile/edit">
                             <a>
                                 <Btn
                                     btnClass="mysonar-btn white-btn float-end"
@@ -376,51 +372,5 @@ const Profile = props => {
         </>
     );
 };
-
-// This gets called on every request
-export async function getServerSideProps(context) {
-    const { username } = context.query;
-
-    var data = {
-        user: {},
-        artistVideoAlbums: {},
-        artistVideos: {},
-        artistPosts: {},
-        artistAudioAlbums: {},
-        artistAudios: {}
-    };
-
-    // Fetch User
-    await ssrAxios
-        .get(`/api/users/${username}`)
-        .then(res => (data.user = res.data.data));
-
-    // Fetch Artist's Video Albums
-    await ssrAxios
-        .get(`/api/artist/video-albums/${username}`)
-        .then(res => (data.artistVideoAlbums = res.data.data));
-
-    // Fetch Artist's Videos
-    await ssrAxios
-        .get(`/api/artist/videos/${username}`)
-        .then(res => (data.artistVideos = res.data.data));
-
-    // Fetch Artist's Posts
-    await ssrAxios
-        .get(`/api/artist/posts/${username}`)
-        .then(res => (data.artistPosts = res.data.data));
-
-    // Fetch Artist's Audio Albums
-    await ssrAxios
-        .get(`/api/artist/audio-albums/${username}`)
-        .then(res => (data.artistAudioAlbums = res.data.data));
-
-    // Fetch Artist's Audios
-    await ssrAxios
-        .get(`/api/artist/audios/${username}`)
-        .then(res => (data.artistAudios = res.data.data));
-
-    return { props: data };
-}
 
 export default Profile;

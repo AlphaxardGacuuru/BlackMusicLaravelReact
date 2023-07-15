@@ -1,7 +1,7 @@
-import Img from "next/image";
-import Link from "next/link";
+import Img from "@/components/Core/Img";
+import { Link } from "react-router-dom";
 
-import PlusSVG from "../svgs/PlusSVG";
+import PlusSVG from "@/svgs/PlusSVG";
 
 const CreateStoryMedia = props => {
     return (
@@ -14,7 +14,7 @@ const CreateStoryMedia = props => {
                     border: "2px solid #232323"
                 }}
             >
-                <Link href="/story/create" passHref>
+                <Link to="/story/create" passHref>
                     <a>
                         <span style={{ fontSize: "8em" }}>
                             <PlusSVG />
@@ -27,7 +27,7 @@ const CreateStoryMedia = props => {
             {/* User info */}
             <div className="d-flex" style={{ maxWidth: "220em" }}>
                 <div className="py-2" style={{ minWidth: "40px" }}>
-                    <Link href={`/profile/${props.auth?.username}`}>
+                    <Link to={`/profile/${props.auth?.username}`}>
                         <a>
                             <Img
                                 src={props.auth?.avatar}
