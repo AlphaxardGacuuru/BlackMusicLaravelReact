@@ -17,14 +17,12 @@ const StoryMedia = props => {
                     }`
                 }}
             >
-                <Link to={`/story/${props.story.id}`} passHref>
-                    <a>
+                <Link to={`/story/${props.story.id}`}>
                         <Img
                             src={`/storage/${props.story.media[0]["image"]}`}
                             width="180em"
                             height="320em"
                         />
-                    </a>
                 </Link>
             </div>
             {/* </div> */}
@@ -33,7 +31,6 @@ const StoryMedia = props => {
             <div className="d-flex" style={{ maxWidth: "220em" }}>
                 <div className="py-2" style={{ minWidth: "40px" }}>
                     <Link to={`/profile/${props.story.username}`}>
-                        <a>
                             <Img
                                 src={props.story.avatar}
                                 className="rounded-circle"
@@ -42,8 +39,7 @@ const StoryMedia = props => {
                                 alt="user"
                                 loading="lazy"
                             />
-                        </a>
-                    </Link>
+                    </Link>								
                 </div>
                 <div className="px-2">
                     <h6

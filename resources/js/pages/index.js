@@ -92,13 +92,11 @@ export default function Home(props) {
         <>
             {/* Story button */}
             {showPostBtn && (
-                <Link to="story/create">
-                    <a
+                <Link to="story/create"
                         id="statusFloatBtn"
                         className={raise ? "mb-5" : undefined}
                     >
                         <CameraSVG />
-                    </a>
                 </Link>
             )}
 
@@ -140,14 +138,12 @@ export default function Home(props) {
                                 style={{ borderRadius: "50%" }}
                             >
                                 <Link to={`/profile/${props.auth?.username}`}>
-                                    <a>
                                         <Img
                                             src={props.auth?.avatar}
                                             width="100px"
                                             height="100px"
                                             alt="avatar"
                                         />
-                                    </a>
                                 </Link>
                             </div>
                         </div>

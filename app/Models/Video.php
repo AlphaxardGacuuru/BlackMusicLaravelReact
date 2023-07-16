@@ -3,45 +3,39 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
     protected $dates = ['released'];
 
-    /**
+    /*
      * Accesors.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function video(): Attribute
+
+    protected function getVideoAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => "/storage/" . $value
-        );
+        return "/storage/" . $value;
     }
 
-    protected function thumbnail(): Attribute
+    protected function getThumbnailAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => preg_match("/http/", $value) ? $value : "/storage/" . $value
-        );
+        return preg_match("/http/", $value) ? $value : "/storage/" . $value;
     }
 
-    protected function released(): Attribute
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    protected function createdAt(): Attribute
+    public function getCreatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
+
+    /*
+     * Relationships
+     */
 
     public function user()
     {

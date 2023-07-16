@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,36 +55,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
+    /*
      * Accesors.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function avatar(): Attribute
+
+	 protected function getAvatarAttribute($value)
+	 {
+		return preg_match("/http/", $value) ? $value : "/storage/" . $value;
+	 }
+
+    protected function getBackdropAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => preg_match("/http/", $value) ? $value : "/storage/" . $value
-        );
+        return "/storage/" . $value;
     }
 
-    protected function backdrop(): Attribute
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => "/storage/" . $value
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    protected function createdAt(): Attribute
+    public function getCreatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    /**
-     * Relationships.
-     *
-     */
+	/*
+	* Relationships
+	*/
 
     public function audios()
     {

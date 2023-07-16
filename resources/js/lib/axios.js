@@ -12,7 +12,7 @@ const getLocalStorage = state => {
 };
 
 const axios = Axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+    baseURL: process.env.MIX_APP_URL,
     headers: {
         "X-Requested-With": "XMLHttpRequest",
         Authorization: `Bearer ${getLocalStorage("sanctumToken")}`

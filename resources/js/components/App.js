@@ -36,7 +36,7 @@ import PostEdit from "@/pages/post/edit/[id]";
 import Profile from "@/pages/profile/[username]";
 import ProfileEdit from "@/pages/profile/edit";
 
-import Story from "@/pages/story/[id]";
+import StoryShow from "@/pages/story/[id]";
 import StoryCreate from "@/pages/story/create";
 
 import VideoCharts from "@/pages/video/charts";
@@ -64,7 +64,7 @@ import { random } from "lodash";
 
 function App() {
     // Function for checking local storage
-    const getLocalStorage = state => {
+    const getLocalStorage = (state) => {
         if (typeof window !== "undefined" && localStorage.getItem(state)) {
             return JSON.parse(localStorage.getItem(state));
         } else {
@@ -73,7 +73,7 @@ function App() {
     };
 
     // Function for checking local storage
-    const getLocalStorageAuth = state => {
+    const getLocalStorageAuth = (state) => {
         if (typeof window !== "undefined" && localStorage.getItem(state)) {
             return JSON.parse(localStorage.getItem(state));
         } else {
@@ -117,6 +117,7 @@ function App() {
     const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"));
     const [karaokes, setKaraokes] = useState([]);
     const [posts, setPosts] = useState(getLocalStorage("posts"));
+	const [stories, setStories] = useState(getLocalStorage("stories"))
     const [users, setUsers] = useState(getLocalStorage("users"));
     const [videos, setVideos] = useState(getLocalStorage("videos"));
     const [videoAlbums, setVideoAlbums] = useState(
@@ -349,6 +350,8 @@ function App() {
         setVideoLikes,
         karaokes,
         setKaraokes,
+		stories,
+		setStories,
         displayNotification,
         subscribeToPush,
         sendPush,
@@ -443,7 +446,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/profile-edit"
+                    path="/profile/edit"
                     exact
                     render={props => (
                         <>
@@ -453,7 +456,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/post-create"
+                    path="/post/create"
                     exact
                     render={props => (
                         <>
@@ -463,7 +466,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/post-show/:id"
+                    path="/post/show/:id"
                     exact
                     render={props => (
                         <>
@@ -473,7 +476,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/post-edit/:id"
+                    path="/post/edit/:id"
                     exact
                     render={props => (
                         <>
@@ -485,34 +488,34 @@ function App() {
 
                 {/* Karaoke Routes */}
                 <Route
-                    path="/karaoke-charts"
+                    path="/karaoke/charts"
                     exact
                     render={props => <KaraokeCharts {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/karaoke-create/:audio"
+                    path="/karaoke/create/:audio"
                     exact
                     render={props => <KaraokeCreate {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/karaoke-show/:id"
+                    path="/karaoke/show/:id"
                     exact
                     render={props => <KaraokeShow {...GLOBAL_STATE} />}
                 />
 
                 {/* Video Routes */}
                 <Route
-                    path="/video-charts"
+                    path="/video/charts"
                     exact
                     render={props => <VideoCharts {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/video-show/:show/:referer?"
+                    path="/video/show/:id/:referer?"
                     exact
                     render={props => <VideoShow {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/videos"
+                    path="/video"
                     exact
                     render={props => (
                         <>
@@ -522,7 +525,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/video-create"
+                    path="/video/create"
                     exact
                     render={props => (
                         <>
@@ -532,7 +535,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/video-edit/:id"
+                    path="/video/edit/:id"
                     exact
                     render={props => (
                         <>
@@ -542,7 +545,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/video-album-create"
+                    path="/video/album/create"
                     exact
                     render={props => (
                         <>
@@ -552,7 +555,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/video-album-edit/:id"
+                    path="/video/album/edit/:id"
                     exact
                     render={props => (
                         <>
@@ -564,17 +567,17 @@ function App() {
 
                 {/* Audio Routes */}
                 <Route
-                    path="/audio-charts"
+                    path="/audio/charts"
                     exact
                     render={props => <AudioCharts {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/audio-show/:show/:referer?"
+                    path="/audio/show/:show/:referer?"
                     exact
                     render={props => <AudioShow {...GLOBAL_STATE} />}
                 />
                 <Route
-                    path="/audios"
+                    path="/audio"
                     exact
                     render={props => (
                         <>
@@ -584,7 +587,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/audio-create"
+                    path="/audio/create"
                     exact
                     render={props => (
                         <>
@@ -594,7 +597,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/audio-edit/:id"
+                    path="/audio/edit/:id"
                     exact
                     render={props => (
                         <>
@@ -604,7 +607,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/audio-album-create"
+                    path="/audio/album/create"
                     exact
                     render={props => (
                         <>
@@ -614,7 +617,7 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/audio-album-edit/:id"
+                    path="/audio/album/edit/:id"
                     exact
                     render={props => (
                         <>
@@ -669,11 +672,31 @@ function App() {
                     )}
                 />
                 <Route
-                    path="/new-chat"
+                    path="/chat/new"
                     exact
                     render={props => (
                         <>
                             <NewChat {...GLOBAL_STATE} />
+                            {showLoginPopUp}
+                        </>
+                    )}
+                />
+                <Route
+                    path="/story/:id"
+                    exact
+                    render={props => (
+                        <>
+                            <Story {...GLOBAL_STATE} />
+                            {showLoginPopUp}
+                        </>
+                    )}
+                />
+                <Route
+                    path="/story/create"
+                    exact
+                    render={props => (
+                        <>
+                            <StoryCreate {...GLOBAL_STATE} />
                             {showLoginPopUp}
                         </>
                     )}

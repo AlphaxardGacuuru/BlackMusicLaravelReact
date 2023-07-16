@@ -25,7 +25,7 @@ class PostService extends Service
 
         $posts = $getPosts
             ->orderBy("posts.id", "DESC")
-            ->cursorPaginate(2);
+            ->paginate(2);
 
         return PostResource::collection($posts);
     }

@@ -50,14 +50,12 @@ const VideoMedia = props => {
         >
             <div className="video-media">
                 <div className="video-thumbnail">
-                    <Link to={`/video/${props.video.id}`} passHref>
-                        <a>
+                    <Link to={`/video/${props.video.id}`}>
                             <Img
                                 src={props.video.thumbnail}
                                 width="320em"
                                 height="180em"
                             />
-                        </a>
                     </Link>
                 </div>
                 {props.video.hasBoughtVideo || props.hasBoughtVideo ? (
@@ -103,7 +101,6 @@ const VideoMedia = props => {
             <div className="d-flex" style={{ maxWidth: "220em" }}>
                 <div className="py-2" style={{ minWidth: "40px" }}>
                     <Link to={`/profile/${props.video.username}`}>
-                        <a>
                             <Img
                                 src={props.video.avatar}
                                 className="rounded-circle"
@@ -112,7 +109,6 @@ const VideoMedia = props => {
                                 alt="user"
                                 loading="lazy"
                             />
-                        </a>
                     </Link>
                 </div>
                 <div className="px-2">

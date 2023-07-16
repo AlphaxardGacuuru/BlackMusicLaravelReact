@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -11,28 +10,25 @@ class Post extends Model
     /**
      * Accesors.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function media(): Attribute
+    protected function getMediaAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => $value ? "/storage/" . $value : $value,
-        );
+        return $value ? "/storage/" . $value : $value;
     }
 
-    protected function updatedAt(): Attribute
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    protected function createdAt(): Attribute
+    public function getCreatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
+
+    /*
+     *    Relationships
+     */
 
     public function user()
     {
@@ -120,6 +116,6 @@ class Post extends Model
         return Follow::where('followed', $post->username)
             ->where('username', $username)
             ->first()
-            ?->muted["posts"];
+        ?->muted["posts"];
     }
 }

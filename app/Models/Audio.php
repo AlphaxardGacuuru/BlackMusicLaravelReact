@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Audio extends Model
@@ -15,35 +14,35 @@ class Audio extends Model
     /**
      * Accesors.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function audio(): Attribute
+    protected function getAudioAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => "/storage/" . $value
-        );
+        return "/storage/" . $value;
     }
 
-    protected function thumbnail(): Attribute
+    protected function getThumbnailAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => "/storage/" . $value,
-        );
+        return "/storage/" . $value;
     }
 
-    protected function released(): Attribute
+    public function getReleasedAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    protected function createdAt(): Attribute
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d M Y');
+    }
+
+	/*
+	*	Relationships
+	*/ 
 
     public function user()
     {

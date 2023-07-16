@@ -103,14 +103,12 @@ const PostMedia = props => {
                         style={{ borderRadius: "50%" }}
                     >
                         <Link to={`/profile/${props.post.username}`}>
-                            <a>
                                 <Img
                                     src={props.post.avatar}
                                     width="50px"
                                     height="50px"
                                     alt={"avatar"}
                                 />
-                            </a>
                         </Link>
                     </div>
                 </div>
@@ -136,9 +134,7 @@ const PostMedia = props => {
                         </small>
                     </h6>
                     <Link to={"post/" + props.post.id}>
-                        <a>
                             <p className="mb-0">{props.post.text}</p>
-                        </a>
                     </Link>
 
                     {/* Show media */}
@@ -471,9 +467,7 @@ const PostMedia = props => {
                     ) : (
                         <div>
                             <Link to={`/post/edit/${props.post.id}`}>
-                                <a>
                                     <h6 className="pb-2">Edit post</h6>
-                                </a>
                             </Link>
                             <div
                                 onClick={() =>

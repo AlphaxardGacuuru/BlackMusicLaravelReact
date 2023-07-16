@@ -60,6 +60,7 @@ Route::resources([
     'saved-karaokes' => 'SavedKaraokeController',
     'search' => 'SearchController',
     'song-payouts' => 'SongPayoutController',
+	'stories' => 'StoryController',
     'sms' => 'SMSController',
     'users' => 'UserController',
     'videos' => 'VideoController',

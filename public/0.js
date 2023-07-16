@@ -1,16 +1,4498 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "./node_modules/emoji-picker-react/dist/index.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/emoji-picker-react/dist/index.js ***!
-  \*******************************************************/
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {/*! For license information please see index.js.LICENSE.txt */
-!function(f,e){ true?module.exports=e(__webpack_require__(/*! react */ "./node_modules/react/index.js")):undefined}(global,(function(f){return function(f){var e={};function n(a){if(e[a])return e[a].exports;var t=e[a]={i:a,l:!1,exports:{}};return f[a].call(t.exports,t,t.exports,n),t.l=!0,t.exports}return n.m=f,n.c=e,n.d=function(f,e,a){n.o(f,e)||Object.defineProperty(f,e,{enumerable:!0,get:a})},n.r=function(f){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(f,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(f,"__esModule",{value:!0})},n.t=function(f,e){if(1&e&&(f=n(f)),8&e)return f;if(4&e&&"object"==typeof f&&f&&f.__esModule)return f;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:f}),2&e&&"string"!=typeof f)for(var t in f)n.d(a,t,function(e){return f[e]}.bind(null,t));return a},n.n=function(f){var e=f&&f.__esModule?function(){return f.default}:function(){return f};return n.d(e,"a",e),e},n.o=function(f,e){return Object.prototype.hasOwnProperty.call(f,e)},n.p="",n(n.s=48)}([function(e,n){e.exports=f},function(f,e,n){f.exports=n(15)()},function(f,e){f.exports={EMOJI_PROPERTY_NAME:"n",EMOJI_PROPERTY_UNIFIED:"u",EMOJI_PROPERTY_SKIN_VARIATIONS:"v",EMOJI_PROPERTY_GROUP:"g",GROUP_NAME_PEOPLE:"smileys_people",GROUP_NAME_NATURE:"animals_nature",GROUP_NAME_FOOD:"food_drink",GROUP_NAME_TRAVEL:"travel_places",GROUP_NAME_ACTIVITIES:"activities",GROUP_NAME_OBJECTS:"objects",GROUP_NAME_SYMBOLS:"symbols",GROUP_NAME_FLAGS:"flags",GROUP_NAME_RECENTLY_USED:"recently_used"}},function(f,e){f.exports=function(f,e,n){return e in f?Object.defineProperty(f,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):f[e]=n,f}},function(f,e,n){var a=n(20),t=n(21),r=n(14),o=n(22);f.exports=function(f,e){return a(f)||t(f,e)||r(f,e)||o()}},function(f,e,n){var a=n(17),t=n(18),r=n(14),o=n(19);f.exports=function(f){return a(f)||t(f)||r(f)||o()}},function(f,e,n){"use strict";var a,t=function(){return void 0===a&&(a=Boolean(window&&document&&document.all&&!window.atob)),a},r=function(){var f={};return function(e){if(void 0===f[e]){var n=document.querySelector(e);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(f){n=null}f[e]=n}return f[e]}}(),o=[];function i(f){for(var e=-1,n=0;n<o.length;n++)if(o[n].identifier===f){e=n;break}return e}function u(f,e){for(var n={},a=[],t=0;t<f.length;t++){var r=f[t],u=e.base?r[0]+e.base:r[0],c=n[u]||0,l="".concat(u," ").concat(c);n[u]=c+1;var d=i(l),s={css:r[1],media:r[2],sourceMap:r[3]};-1!==d?(o[d].references++,o[d].updater(s)):o.push({identifier:l,updater:p(s,e),references:1}),a.push(l)}return a}function c(f){var e=document.createElement("style"),a=f.attributes||{};if(void 0===a.nonce){var t=n.nc;t&&(a.nonce=t)}if(Object.keys(a).forEach((function(f){e.setAttribute(f,a[f])})),"function"==typeof f.insert)f.insert(e);else{var o=r(f.insert||"head");if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");o.appendChild(e)}return e}var l,d=(l=[],function(f,e){return l[f]=e,l.filter(Boolean).join("\n")});function s(f,e,n,a){var t=n?"":a.media?"@media ".concat(a.media," {").concat(a.css,"}"):a.css;if(f.styleSheet)f.styleSheet.cssText=d(e,t);else{var r=document.createTextNode(t),o=f.childNodes;o[e]&&f.removeChild(o[e]),o.length?f.insertBefore(r,o[e]):f.appendChild(r)}}function g(f,e,n){var a=n.css,t=n.media,r=n.sourceMap;if(t?f.setAttribute("media",t):f.removeAttribute("media"),r&&"undefined"!=typeof btoa&&(a+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(r))))," */")),f.styleSheet)f.styleSheet.cssText=a;else{for(;f.firstChild;)f.removeChild(f.firstChild);f.appendChild(document.createTextNode(a))}}var b=null,m=0;function p(f,e){var n,a,t;if(e.singleton){var r=m++;n=b||(b=c(e)),a=s.bind(null,n,r,!1),t=s.bind(null,n,r,!0)}else n=c(e),a=g.bind(null,n,e),t=function(){!function(f){if(null===f.parentNode)return!1;f.parentNode.removeChild(f)}(n)};return a(f),function(e){if(e){if(e.css===f.css&&e.media===f.media&&e.sourceMap===f.sourceMap)return;a(f=e)}else t()}}f.exports=function(f,e){(e=e||{}).singleton||"boolean"==typeof e.singleton||(e.singleton=t());var n=u(f=f||[],e);return function(f){if(f=f||[],"[object Array]"===Object.prototype.toString.call(f)){for(var a=0;a<n.length;a++){var t=i(n[a]);o[t].references--}for(var r=u(f,e),c=0;c<n.length;c++){var l=i(n[c]);0===o[l].references&&(o[l].updater(),o.splice(l,1))}n=r}}}},function(f,e,n){"use strict";f.exports=function(f){var e=[];return e.toString=function(){return this.map((function(e){var n=function(f,e){var n=f[1]||"",a=f[3];if(!a)return n;if(e&&"function"==typeof btoa){var t=(o=a,i=btoa(unescape(encodeURIComponent(JSON.stringify(o)))),u="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(i),"/*# ".concat(u," */")),r=a.sources.map((function(f){return"/*# sourceURL=".concat(a.sourceRoot||"").concat(f," */")}));return[n].concat(r).concat([t]).join("\n")}var o,i,u;return[n].join("\n")}(e,f);return e[2]?"@media ".concat(e[2]," {").concat(n,"}"):n})).join("")},e.i=function(f,n,a){"string"==typeof f&&(f=[[null,f,""]]);var t={};if(a)for(var r=0;r<this.length;r++){var o=this[r][0];null!=o&&(t[o]=!0)}for(var i=0;i<f.length;i++){var u=[].concat(f[i]);a&&t[u[0]]||(n&&(u[2]?u[2]="".concat(n," and ").concat(u[2]):u[2]=n),e.push(u))}},e}},function(f,e,n){var a;!function(){"use strict";var n={}.hasOwnProperty;function t(){for(var f=[],e=0;e<arguments.length;e++){var a=arguments[e];if(a){var r=typeof a;if("string"===r||"number"===r)f.push(a);else if(Array.isArray(a)&&a.length){var o=t.apply(null,a);o&&f.push(o)}else if("object"===r)for(var i in a)n.call(a,i)&&a[i]&&f.push(i)}}return f.join(" ")}f.exports?(t.default=t,f.exports=t):void 0===(a=function(){return t}.apply(e,[]))||(f.exports=a)}()},function(f,e){function n(){return f.exports=n=Object.assign||function(f){for(var e=1;e<arguments.length;e++){var n=arguments[e];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(f[a]=n[a])}return f},n.apply(this,arguments)}f.exports=n},function(f){f.exports=JSON.parse('["smileys_people","animals_nature","food_drink","travel_places","activities","objects","symbols","flags"]')},function(f){f.exports=JSON.parse('["neutral","1f3fb","1f3fc","1f3fd","1f3fe","1f3ff"]')},function(f){f.exports=JSON.parse('{"travel_places":[{"n":["earth globe europe-africa","earth_africa"],"u":"1f30d"},{"n":["earth globe americas","earth_americas"],"u":"1f30e"},{"n":["earth globe asia-australia","earth_asia"],"u":"1f30f"},{"n":["globe with meridians","globe_with_meridians"],"u":"1f310"},{"n":["world_map"],"u":"1f5fa-fe0f"},{"n":["silhouette of japan","japan"],"u":"1f5fe"},{"n":["snow_capped_mountain"],"u":"1f3d4-fe0f"},{"n":["mountain"],"u":"26f0-fe0f"},{"n":["volcano"],"u":"1f30b"},{"n":["mount fuji","mount_fuji"],"u":"1f5fb"},{"n":["camping"],"u":"1f3d5-fe0f"},{"n":["beach_with_umbrella"],"u":"1f3d6-fe0f"},{"n":["desert"],"u":"1f3dc-fe0f"},{"n":["desert_island"],"u":"1f3dd-fe0f"},{"n":["national_park"],"u":"1f3de-fe0f"},{"n":["stadium"],"u":"1f3df-fe0f"},{"n":["classical_building"],"u":"1f3db-fe0f"},{"n":["building_construction"],"u":"1f3d7-fe0f"},{"n":["house_buildings"],"u":"1f3d8-fe0f"},{"n":["cityscape"],"u":"1f3d9-fe0f"},{"n":["derelict_house_building"],"u":"1f3da-fe0f"},{"n":["house building","house"],"u":"1f3e0"},{"n":["house with garden","house_with_garden"],"u":"1f3e1"},{"n":["office building","office"],"u":"1f3e2"},{"n":["japanese post office","post_office"],"u":"1f3e3"},{"n":["european post office","european_post_office"],"u":"1f3e4"},{"n":["hospital"],"u":"1f3e5"},{"n":["bank"],"u":"1f3e6"},{"n":["hotel"],"u":"1f3e8"},{"n":["love hotel","love_hotel"],"u":"1f3e9"},{"n":["convenience store","convenience_store"],"u":"1f3ea"},{"n":["school"],"u":"1f3eb"},{"n":["department store","department_store"],"u":"1f3ec"},{"n":["factory"],"u":"1f3ed"},{"n":["japanese castle","japanese_castle"],"u":"1f3ef"},{"n":["european castle","european_castle"],"u":"1f3f0"},{"n":["wedding"],"u":"1f492"},{"n":["tokyo tower","tokyo_tower"],"u":"1f5fc"},{"n":["statue of liberty","statue_of_liberty"],"u":"1f5fd"},{"n":["church"],"u":"26ea"},{"n":["mosque"],"u":"1f54c"},{"n":["synagogue"],"u":"1f54d"},{"n":["shinto_shrine"],"u":"26e9-fe0f"},{"n":["kaaba"],"u":"1f54b"},{"n":["fountain"],"u":"26f2"},{"n":["tent"],"u":"26fa"},{"n":["foggy"],"u":"1f301"},{"n":["night with stars","night_with_stars"],"u":"1f303"},{"n":["sunrise over mountains","sunrise_over_mountains"],"u":"1f304"},{"n":["sunrise"],"u":"1f305"},{"n":["cityscape at dusk","city_sunset"],"u":"1f306"},{"n":["sunset over buildings","city_sunrise"],"u":"1f307"},{"n":["bridge at night","bridge_at_night"],"u":"1f309"},{"n":["hot springs","hotsprings"],"u":"2668-fe0f"},{"n":["milky way","milky_way"],"u":"1f30c"},{"n":["carousel horse","carousel_horse"],"u":"1f3a0"},{"n":["ferris wheel","ferris_wheel"],"u":"1f3a1"},{"n":["roller coaster","roller_coaster"],"u":"1f3a2"},{"n":["barber pole","barber"],"u":"1f488"},{"n":["circus tent","circus_tent"],"u":"1f3aa"},{"n":["performing arts","performing_arts"],"u":"1f3ad"},{"n":["frame_with_picture"],"u":"1f5bc-fe0f"},{"n":["artist palette","art"],"u":"1f3a8"},{"n":["slot machine","slot_machine"],"u":"1f3b0"},{"n":["steam locomotive","steam_locomotive"],"u":"1f682"},{"n":["railway car","railway_car"],"u":"1f683"},{"n":["high-speed train","bullettrain_side"],"u":"1f684"},{"n":["high-speed train with bullet nose","bullettrain_front"],"u":"1f685"},{"n":["train","train2"],"u":"1f686"},{"n":["metro"],"u":"1f687"},{"n":["light rail","light_rail"],"u":"1f688"},{"n":["station"],"u":"1f689"},{"n":["tram"],"u":"1f68a"},{"n":["monorail"],"u":"1f69d"},{"n":["mountain railway","mountain_railway"],"u":"1f69e"},{"n":["tram car","train"],"u":"1f68b"},{"n":["bus"],"u":"1f68c"},{"n":["oncoming bus","oncoming_bus"],"u":"1f68d"},{"n":["trolleybus"],"u":"1f68e"},{"n":["minibus"],"u":"1f690"},{"n":["ambulance"],"u":"1f691"},{"n":["fire engine","fire_engine"],"u":"1f692"},{"n":["police car","police_car"],"u":"1f693"},{"n":["oncoming police car","oncoming_police_car"],"u":"1f694"},{"n":["taxi"],"u":"1f695"},{"n":["oncoming taxi","oncoming_taxi"],"u":"1f696"},{"n":["automobile","car","red_car"],"u":"1f697"},{"n":["oncoming automobile","oncoming_automobile"],"u":"1f698"},{"n":["recreational vehicle","blue_car"],"u":"1f699"},{"n":["delivery truck","truck"],"u":"1f69a"},{"n":["articulated lorry","articulated_lorry"],"u":"1f69b"},{"n":["tractor"],"u":"1f69c"},{"n":["bicycle","bike"],"u":"1f6b2"},{"n":["scooter"],"u":"1f6f4"},{"n":["motor scooter","motor_scooter"],"u":"1f6f5"},{"n":["bus stop","busstop"],"u":"1f68f"},{"n":["motorway"],"u":"1f6e3-fe0f"},{"n":["railway_track"],"u":"1f6e4-fe0f"},{"n":["fuel pump","fuelpump"],"u":"26fd"},{"n":["police cars revolving light","rotating_light"],"u":"1f6a8"},{"n":["horizontal traffic light","traffic_light"],"u":"1f6a5"},{"n":["vertical traffic light","vertical_traffic_light"],"u":"1f6a6"},{"n":["construction sign","construction"],"u":"1f6a7"},{"n":["octagonal sign","octagonal_sign"],"u":"1f6d1"},{"n":["anchor"],"u":"2693"},{"n":["sailboat","boat"],"u":"26f5"},{"n":["canoe"],"u":"1f6f6"},{"n":["speedboat"],"u":"1f6a4"},{"n":["passenger_ship"],"u":"1f6f3-fe0f"},{"n":["ferry"],"u":"26f4-fe0f"},{"n":["motor_boat"],"u":"1f6e5-fe0f"},{"n":["ship"],"u":"1f6a2"},{"n":["airplane"],"u":"2708-fe0f"},{"n":["small_airplane"],"u":"1f6e9-fe0f"},{"n":["airplane departure","airplane_departure"],"u":"1f6eb"},{"n":["airplane arriving","airplane_arriving"],"u":"1f6ec"},{"n":["seat"],"u":"1f4ba"},{"n":["helicopter"],"u":"1f681"},{"n":["suspension railway","suspension_railway"],"u":"1f69f"},{"n":["mountain cableway","mountain_cableway"],"u":"1f6a0"},{"n":["aerial tramway","aerial_tramway"],"u":"1f6a1"},{"n":["satellite"],"u":"1f6f0-fe0f"},{"n":["rocket"],"u":"1f680"},{"n":["flying saucer","flying_saucer"],"u":"1f6f8"},{"n":["bellhop_bell"],"u":"1f6ce-fe0f"},{"n":["door"],"u":"1f6aa"},{"n":["bed"],"u":"1f6cf-fe0f"},{"n":["couch_and_lamp"],"u":"1f6cb-fe0f"},{"n":["toilet"],"u":"1f6bd"},{"n":["shower"],"u":"1f6bf"},{"n":["bathtub"],"u":"1f6c1"},{"n":["hourglass"],"u":"231b"},{"n":["hourglass with flowing sand","hourglass_flowing_sand"],"u":"23f3"},{"n":["watch"],"u":"231a"},{"n":["alarm clock","alarm_clock"],"u":"23f0"},{"n":["stopwatch"],"u":"23f1-fe0f"},{"n":["timer_clock"],"u":"23f2-fe0f"},{"n":["mantelpiece_clock"],"u":"1f570-fe0f"},{"n":["clock face twelve oclock","clock12"],"u":"1f55b"},{"n":["clock face twelve-thirty","clock1230"],"u":"1f567"},{"n":["clock face one oclock","clock1"],"u":"1f550"},{"n":["clock face one-thirty","clock130"],"u":"1f55c"},{"n":["clock face two oclock","clock2"],"u":"1f551"},{"n":["clock face two-thirty","clock230"],"u":"1f55d"},{"n":["clock face three oclock","clock3"],"u":"1f552"},{"n":["clock face three-thirty","clock330"],"u":"1f55e"},{"n":["clock face four oclock","clock4"],"u":"1f553"},{"n":["clock face four-thirty","clock430"],"u":"1f55f"},{"n":["clock face five oclock","clock5"],"u":"1f554"},{"n":["clock face five-thirty","clock530"],"u":"1f560"},{"n":["clock face six oclock","clock6"],"u":"1f555"},{"n":["clock face six-thirty","clock630"],"u":"1f561"},{"n":["clock face seven oclock","clock7"],"u":"1f556"},{"n":["clock face seven-thirty","clock730"],"u":"1f562"},{"n":["clock face eight oclock","clock8"],"u":"1f557"},{"n":["clock face eight-thirty","clock830"],"u":"1f563"},{"n":["clock face nine oclock","clock9"],"u":"1f558"},{"n":["clock face nine-thirty","clock930"],"u":"1f564"},{"n":["clock face ten oclock","clock10"],"u":"1f559"},{"n":["clock face ten-thirty","clock1030"],"u":"1f565"},{"n":["clock face eleven oclock","clock11"],"u":"1f55a"},{"n":["clock face eleven-thirty","clock1130"],"u":"1f566"},{"n":["new moon symbol","new_moon"],"u":"1f311"},{"n":["waxing crescent moon symbol","waxing_crescent_moon"],"u":"1f312"},{"n":["first quarter moon symbol","first_quarter_moon"],"u":"1f313"},{"n":["waxing gibbous moon symbol","moon","waxing_gibbous_moon"],"u":"1f314"},{"n":["full moon symbol","full_moon"],"u":"1f315"},{"n":["waning gibbous moon symbol","waning_gibbous_moon"],"u":"1f316"},{"n":["last quarter moon symbol","last_quarter_moon"],"u":"1f317"},{"n":["waning crescent moon symbol","waning_crescent_moon"],"u":"1f318"},{"n":["crescent moon","crescent_moon"],"u":"1f319"},{"n":["new moon with face","new_moon_with_face"],"u":"1f31a"},{"n":["first quarter moon with face","first_quarter_moon_with_face"],"u":"1f31b"},{"n":["last quarter moon with face","last_quarter_moon_with_face"],"u":"1f31c"},{"n":["thermometer"],"u":"1f321-fe0f"},{"n":["black sun with rays","sunny"],"u":"2600-fe0f"},{"n":["full moon with face","full_moon_with_face"],"u":"1f31d"},{"n":["sun with face","sun_with_face"],"u":"1f31e"},{"n":["white medium star","star"],"u":"2b50"},{"n":["glowing star","star2"],"u":"1f31f"},{"n":["shooting star","stars"],"u":"1f320"},{"n":["cloud"],"u":"2601-fe0f"},{"n":["sun behind cloud","partly_sunny"],"u":"26c5"},{"n":["thunder_cloud_and_rain"],"u":"26c8-fe0f"},{"n":["mostly_sunny","sun_small_cloud"],"u":"1f324-fe0f"},{"n":["barely_sunny","sun_behind_cloud"],"u":"1f325-fe0f"},{"n":["partly_sunny_rain","sun_behind_rain_cloud"],"u":"1f326-fe0f"},{"n":["rain_cloud"],"u":"1f327-fe0f"},{"n":["snow_cloud"],"u":"1f328-fe0f"},{"n":["lightning","lightning_cloud"],"u":"1f329-fe0f"},{"n":["tornado","tornado_cloud"],"u":"1f32a-fe0f"},{"n":["fog"],"u":"1f32b-fe0f"},{"n":["wind_blowing_face"],"u":"1f32c-fe0f"},{"n":["cyclone"],"u":"1f300"},{"n":["rainbow"],"u":"1f308"},{"n":["closed umbrella","closed_umbrella"],"u":"1f302"},{"n":["umbrella"],"u":"2602-fe0f"},{"n":["umbrella with rain drops","umbrella_with_rain_drops"],"u":"2614"},{"n":["umbrella_on_ground"],"u":"26f1-fe0f"},{"n":["high voltage sign","zap"],"u":"26a1"},{"n":["snowflake"],"u":"2744-fe0f"},{"n":["snowman"],"u":"2603-fe0f"},{"n":["snowman without snow","snowman_without_snow"],"u":"26c4"},{"n":["comet"],"u":"2604-fe0f"},{"n":["fire"],"u":"1f525"},{"n":["droplet"],"u":"1f4a7"},{"n":["water wave","ocean"],"u":"1f30a"}],"food_drink":[{"n":["grapes"],"u":"1f347"},{"n":["melon"],"u":"1f348"},{"n":["watermelon"],"u":"1f349"},{"n":["tangerine"],"u":"1f34a"},{"n":["lemon"],"u":"1f34b"},{"n":["banana"],"u":"1f34c"},{"n":["pineapple"],"u":"1f34d"},{"n":["red apple","apple"],"u":"1f34e"},{"n":["green apple","green_apple"],"u":"1f34f"},{"n":["pear"],"u":"1f350"},{"n":["peach"],"u":"1f351"},{"n":["cherries"],"u":"1f352"},{"n":["strawberry"],"u":"1f353"},{"n":["kiwifruit"],"u":"1f95d"},{"n":["tomato"],"u":"1f345"},{"n":["coconut"],"u":"1f965"},{"n":["avocado"],"u":"1f951"},{"n":["aubergine","eggplant"],"u":"1f346"},{"n":["potato"],"u":"1f954"},{"n":["carrot"],"u":"1f955"},{"n":["ear of maize","corn"],"u":"1f33d"},{"n":["hot_pepper"],"u":"1f336-fe0f"},{"n":["cucumber"],"u":"1f952"},{"n":["broccoli"],"u":"1f966"},{"n":["mushroom"],"u":"1f344"},{"n":["peanuts"],"u":"1f95c"},{"n":["chestnut"],"u":"1f330"},{"n":["bread"],"u":"1f35e"},{"n":["croissant"],"u":"1f950"},{"n":["baguette bread","baguette_bread"],"u":"1f956"},{"n":["pretzel"],"u":"1f968"},{"n":["pancakes"],"u":"1f95e"},{"n":["cheese wedge","cheese_wedge"],"u":"1f9c0"},{"n":["meat on bone","meat_on_bone"],"u":"1f356"},{"n":["poultry leg","poultry_leg"],"u":"1f357"},{"n":["cut of meat","cut_of_meat"],"u":"1f969"},{"n":["bacon"],"u":"1f953"},{"n":["hamburger"],"u":"1f354"},{"n":["french fries","fries"],"u":"1f35f"},{"n":["slice of pizza","pizza"],"u":"1f355"},{"n":["hot dog","hotdog"],"u":"1f32d"},{"n":["sandwich"],"u":"1f96a"},{"n":["taco"],"u":"1f32e"},{"n":["burrito"],"u":"1f32f"},{"n":["stuffed flatbread","stuffed_flatbread"],"u":"1f959"},{"n":["egg"],"u":"1f95a"},{"n":["cooking","fried_egg"],"u":"1f373"},{"n":["shallow pan of food","shallow_pan_of_food"],"u":"1f958"},{"n":["pot of food","stew"],"u":"1f372"},{"n":["bowl with spoon","bowl_with_spoon"],"u":"1f963"},{"n":["green salad","green_salad"],"u":"1f957"},{"n":["popcorn"],"u":"1f37f"},{"n":["canned food","canned_food"],"u":"1f96b"},{"n":["bento box","bento"],"u":"1f371"},{"n":["rice cracker","rice_cracker"],"u":"1f358"},{"n":["rice ball","rice_ball"],"u":"1f359"},{"n":["cooked rice","rice"],"u":"1f35a"},{"n":["curry and rice","curry"],"u":"1f35b"},{"n":["steaming bowl","ramen"],"u":"1f35c"},{"n":["spaghetti"],"u":"1f35d"},{"n":["roasted sweet potato","sweet_potato"],"u":"1f360"},{"n":["oden"],"u":"1f362"},{"n":["sushi"],"u":"1f363"},{"n":["fried shrimp","fried_shrimp"],"u":"1f364"},{"n":["fish cake with swirl design","fish_cake"],"u":"1f365"},{"n":["dango"],"u":"1f361"},{"n":["dumpling"],"u":"1f95f"},{"n":["fortune cookie","fortune_cookie"],"u":"1f960"},{"n":["takeout box","takeout_box"],"u":"1f961"},{"n":["soft ice cream","icecream"],"u":"1f366"},{"n":["shaved ice","shaved_ice"],"u":"1f367"},{"n":["ice cream","ice_cream"],"u":"1f368"},{"n":["doughnut"],"u":"1f369"},{"n":["cookie"],"u":"1f36a"},{"n":["birthday cake","birthday"],"u":"1f382"},{"n":["shortcake","cake"],"u":"1f370"},{"n":["pie"],"u":"1f967"},{"n":["chocolate bar","chocolate_bar"],"u":"1f36b"},{"n":["candy"],"u":"1f36c"},{"n":["lollipop"],"u":"1f36d"},{"n":["custard"],"u":"1f36e"},{"n":["honey pot","honey_pot"],"u":"1f36f"},{"n":["baby bottle","baby_bottle"],"u":"1f37c"},{"n":["glass of milk","glass_of_milk"],"u":"1f95b"},{"n":["hot beverage","coffee"],"u":"2615"},{"n":["teacup without handle","tea"],"u":"1f375"},{"n":["sake bottle and cup","sake"],"u":"1f376"},{"n":["bottle with popping cork","champagne"],"u":"1f37e"},{"n":["wine glass","wine_glass"],"u":"1f377"},{"n":["cocktail glass","cocktail"],"u":"1f378"},{"n":["tropical drink","tropical_drink"],"u":"1f379"},{"n":["beer mug","beer"],"u":"1f37a"},{"n":["clinking beer mugs","beers"],"u":"1f37b"},{"n":["clinking glasses","clinking_glasses"],"u":"1f942"},{"n":["tumbler glass","tumbler_glass"],"u":"1f943"},{"n":["cup with straw","cup_with_straw"],"u":"1f964"},{"n":["chopsticks"],"u":"1f962"},{"n":["knife_fork_plate"],"u":"1f37d-fe0f"},{"n":["fork and knife","fork_and_knife"],"u":"1f374"},{"n":["spoon"],"u":"1f944"},{"n":["hocho","knife"],"u":"1f52a"},{"n":["amphora"],"u":"1f3fa"}],"activities":[{"n":["jack-o-lantern","jack_o_lantern"],"u":"1f383"},{"n":["christmas tree","christmas_tree"],"u":"1f384"},{"n":["fireworks"],"u":"1f386"},{"n":["firework sparkler","sparkler"],"u":"1f387"},{"n":["sparkles"],"u":"2728"},{"n":["balloon"],"u":"1f388"},{"n":["party popper","tada"],"u":"1f389"},{"n":["confetti ball","confetti_ball"],"u":"1f38a"},{"n":["tanabata tree","tanabata_tree"],"u":"1f38b"},{"n":["pine decoration","bamboo"],"u":"1f38d"},{"n":["japanese dolls","dolls"],"u":"1f38e"},{"n":["carp streamer","flags"],"u":"1f38f"},{"n":["wind chime","wind_chime"],"u":"1f390"},{"n":["moon viewing ceremony","rice_scene"],"u":"1f391"},{"n":["ribbon"],"u":"1f380"},{"n":["wrapped present","gift"],"u":"1f381"},{"n":["reminder_ribbon"],"u":"1f397-fe0f"},{"n":["admission_tickets"],"u":"1f39f-fe0f"},{"n":["ticket"],"u":"1f3ab"},{"n":["medal"],"u":"1f396-fe0f"},{"n":["trophy"],"u":"1f3c6"},{"n":["sports medal","sports_medal"],"u":"1f3c5"},{"n":["first place medal","first_place_medal"],"u":"1f947"},{"n":["second place medal","second_place_medal"],"u":"1f948"},{"n":["third place medal","third_place_medal"],"u":"1f949"},{"n":["soccer ball","soccer"],"u":"26bd"},{"n":["baseball"],"u":"26be"},{"n":["basketball and hoop","basketball"],"u":"1f3c0"},{"n":["volleyball"],"u":"1f3d0"},{"n":["american football","football"],"u":"1f3c8"},{"n":["rugby football","rugby_football"],"u":"1f3c9"},{"n":["tennis racquet and ball","tennis"],"u":"1f3be"},{"n":["billiards","8ball"],"u":"1f3b1"},{"n":["bowling"],"u":"1f3b3"},{"n":["cricket bat and ball","cricket_bat_and_ball"],"u":"1f3cf"},{"n":["field hockey stick and ball","field_hockey_stick_and_ball"],"u":"1f3d1"},{"n":["ice hockey stick and puck","ice_hockey_stick_and_puck"],"u":"1f3d2"},{"n":["table tennis paddle and ball","table_tennis_paddle_and_ball"],"u":"1f3d3"},{"n":["badminton racquet and shuttlecock","badminton_racquet_and_shuttlecock"],"u":"1f3f8"},{"n":["boxing glove","boxing_glove"],"u":"1f94a"},{"n":["martial arts uniform","martial_arts_uniform"],"u":"1f94b"},{"n":["goal net","goal_net"],"u":"1f945"},{"n":["direct hit","dart"],"u":"1f3af"},{"n":["flag in hole","golf"],"u":"26f3"},{"n":["ice_skate"],"u":"26f8-fe0f"},{"n":["fishing pole and fish","fishing_pole_and_fish"],"u":"1f3a3"},{"n":["running shirt with sash","running_shirt_with_sash"],"u":"1f3bd"},{"n":["ski and ski boot","ski"],"u":"1f3bf"},{"n":["sled"],"u":"1f6f7"},{"n":["curling stone","curling_stone"],"u":"1f94c"},{"n":["video game","video_game"],"u":"1f3ae"},{"n":["joystick"],"u":"1f579-fe0f"},{"n":["game die","game_die"],"u":"1f3b2"},{"n":["black spade suit","spades"],"u":"2660-fe0f"},{"n":["black heart suit","hearts"],"u":"2665-fe0f"},{"n":["black diamond suit","diamonds"],"u":"2666-fe0f"},{"n":["black club suit","clubs"],"u":"2663-fe0f"},{"n":["playing card black joker","black_joker"],"u":"1f0cf"},{"n":["mahjong tile red dragon","mahjong"],"u":"1f004"},{"n":["flower playing cards","flower_playing_cards"],"u":"1f3b4"}],"flags":[{"n":["chequered flag","checkered_flag"],"u":"1f3c1"},{"n":["triangular flag on post","triangular_flag_on_post"],"u":"1f6a9"},{"n":["crossed flags","crossed_flags"],"u":"1f38c"},{"n":["waving black flag","waving_black_flag"],"u":"1f3f4"},{"n":["waving_white_flag"],"u":"1f3f3-fe0f"},{"n":["rainbow-flag"],"u":"1f3f3-fe0f-200d-1f308"},{"n":["ascension island flag","flag-ac"],"u":"1f1e6-1f1e8"},{"n":["andorra flag","flag-ad"],"u":"1f1e6-1f1e9"},{"n":["united arab emirates flag","flag-ae"],"u":"1f1e6-1f1ea"},{"n":["afghanistan flag","flag-af"],"u":"1f1e6-1f1eb"},{"n":["antigua & barbuda flag","flag-ag"],"u":"1f1e6-1f1ec"},{"n":["anguilla flag","flag-ai"],"u":"1f1e6-1f1ee"},{"n":["albania flag","flag-al"],"u":"1f1e6-1f1f1"},{"n":["armenia flag","flag-am"],"u":"1f1e6-1f1f2"},{"n":["angola flag","flag-ao"],"u":"1f1e6-1f1f4"},{"n":["antarctica flag","flag-aq"],"u":"1f1e6-1f1f6"},{"n":["argentina flag","flag-ar"],"u":"1f1e6-1f1f7"},{"n":["american samoa flag","flag-as"],"u":"1f1e6-1f1f8"},{"n":["austria flag","flag-at"],"u":"1f1e6-1f1f9"},{"n":["australia flag","flag-au"],"u":"1f1e6-1f1fa"},{"n":["aruba flag","flag-aw"],"u":"1f1e6-1f1fc"},{"n":["åland islands flag","flag-ax"],"u":"1f1e6-1f1fd"},{"n":["azerbaijan flag","flag-az"],"u":"1f1e6-1f1ff"},{"n":["bosnia & herzegovina flag","flag-ba"],"u":"1f1e7-1f1e6"},{"n":["barbados flag","flag-bb"],"u":"1f1e7-1f1e7"},{"n":["bangladesh flag","flag-bd"],"u":"1f1e7-1f1e9"},{"n":["belgium flag","flag-be"],"u":"1f1e7-1f1ea"},{"n":["burkina faso flag","flag-bf"],"u":"1f1e7-1f1eb"},{"n":["bulgaria flag","flag-bg"],"u":"1f1e7-1f1ec"},{"n":["bahrain flag","flag-bh"],"u":"1f1e7-1f1ed"},{"n":["burundi flag","flag-bi"],"u":"1f1e7-1f1ee"},{"n":["benin flag","flag-bj"],"u":"1f1e7-1f1ef"},{"n":["st. barthélemy flag","flag-bl"],"u":"1f1e7-1f1f1"},{"n":["bermuda flag","flag-bm"],"u":"1f1e7-1f1f2"},{"n":["brunei flag","flag-bn"],"u":"1f1e7-1f1f3"},{"n":["bolivia flag","flag-bo"],"u":"1f1e7-1f1f4"},{"n":["caribbean netherlands flag","flag-bq"],"u":"1f1e7-1f1f6"},{"n":["brazil flag","flag-br"],"u":"1f1e7-1f1f7"},{"n":["bahamas flag","flag-bs"],"u":"1f1e7-1f1f8"},{"n":["bhutan flag","flag-bt"],"u":"1f1e7-1f1f9"},{"n":["bouvet island flag","flag-bv"],"u":"1f1e7-1f1fb"},{"n":["botswana flag","flag-bw"],"u":"1f1e7-1f1fc"},{"n":["belarus flag","flag-by"],"u":"1f1e7-1f1fe"},{"n":["belize flag","flag-bz"],"u":"1f1e7-1f1ff"},{"n":["canada flag","flag-ca"],"u":"1f1e8-1f1e6"},{"n":["cocos (keeling) islands flag","flag-cc"],"u":"1f1e8-1f1e8"},{"n":["congo - kinshasa flag","flag-cd"],"u":"1f1e8-1f1e9"},{"n":["central african republic flag","flag-cf"],"u":"1f1e8-1f1eb"},{"n":["congo - brazzaville flag","flag-cg"],"u":"1f1e8-1f1ec"},{"n":["switzerland flag","flag-ch"],"u":"1f1e8-1f1ed"},{"n":["côte d’ivoire flag","flag-ci"],"u":"1f1e8-1f1ee"},{"n":["cook islands flag","flag-ck"],"u":"1f1e8-1f1f0"},{"n":["chile flag","flag-cl"],"u":"1f1e8-1f1f1"},{"n":["cameroon flag","flag-cm"],"u":"1f1e8-1f1f2"},{"n":["china flag","cn","flag-cn"],"u":"1f1e8-1f1f3"},{"n":["colombia flag","flag-co"],"u":"1f1e8-1f1f4"},{"n":["clipperton island flag","flag-cp"],"u":"1f1e8-1f1f5"},{"n":["costa rica flag","flag-cr"],"u":"1f1e8-1f1f7"},{"n":["cuba flag","flag-cu"],"u":"1f1e8-1f1fa"},{"n":["cape verde flag","flag-cv"],"u":"1f1e8-1f1fb"},{"n":["curaçao flag","flag-cw"],"u":"1f1e8-1f1fc"},{"n":["christmas island flag","flag-cx"],"u":"1f1e8-1f1fd"},{"n":["cyprus flag","flag-cy"],"u":"1f1e8-1f1fe"},{"n":["czechia flag","flag-cz"],"u":"1f1e8-1f1ff"},{"n":["germany flag","de","flag-de"],"u":"1f1e9-1f1ea"},{"n":["diego garcia flag","flag-dg"],"u":"1f1e9-1f1ec"},{"n":["djibouti flag","flag-dj"],"u":"1f1e9-1f1ef"},{"n":["denmark flag","flag-dk"],"u":"1f1e9-1f1f0"},{"n":["dominica flag","flag-dm"],"u":"1f1e9-1f1f2"},{"n":["dominican republic flag","flag-do"],"u":"1f1e9-1f1f4"},{"n":["algeria flag","flag-dz"],"u":"1f1e9-1f1ff"},{"n":["ceuta & melilla flag","flag-ea"],"u":"1f1ea-1f1e6"},{"n":["ecuador flag","flag-ec"],"u":"1f1ea-1f1e8"},{"n":["estonia flag","flag-ee"],"u":"1f1ea-1f1ea"},{"n":["egypt flag","flag-eg"],"u":"1f1ea-1f1ec"},{"n":["western sahara flag","flag-eh"],"u":"1f1ea-1f1ed"},{"n":["eritrea flag","flag-er"],"u":"1f1ea-1f1f7"},{"n":["spain flag","es","flag-es"],"u":"1f1ea-1f1f8"},{"n":["ethiopia flag","flag-et"],"u":"1f1ea-1f1f9"},{"n":["european union flag","flag-eu"],"u":"1f1ea-1f1fa"},{"n":["finland flag","flag-fi"],"u":"1f1eb-1f1ee"},{"n":["fiji flag","flag-fj"],"u":"1f1eb-1f1ef"},{"n":["falkland islands flag","flag-fk"],"u":"1f1eb-1f1f0"},{"n":["micronesia flag","flag-fm"],"u":"1f1eb-1f1f2"},{"n":["faroe islands flag","flag-fo"],"u":"1f1eb-1f1f4"},{"n":["france flag","fr","flag-fr"],"u":"1f1eb-1f1f7"},{"n":["gabon flag","flag-ga"],"u":"1f1ec-1f1e6"},{"n":["united kingdom flag","gb","uk","flag-gb"],"u":"1f1ec-1f1e7"},{"n":["grenada flag","flag-gd"],"u":"1f1ec-1f1e9"},{"n":["georgia flag","flag-ge"],"u":"1f1ec-1f1ea"},{"n":["french guiana flag","flag-gf"],"u":"1f1ec-1f1eb"},{"n":["guernsey flag","flag-gg"],"u":"1f1ec-1f1ec"},{"n":["ghana flag","flag-gh"],"u":"1f1ec-1f1ed"},{"n":["gibraltar flag","flag-gi"],"u":"1f1ec-1f1ee"},{"n":["greenland flag","flag-gl"],"u":"1f1ec-1f1f1"},{"n":["gambia flag","flag-gm"],"u":"1f1ec-1f1f2"},{"n":["guinea flag","flag-gn"],"u":"1f1ec-1f1f3"},{"n":["guadeloupe flag","flag-gp"],"u":"1f1ec-1f1f5"},{"n":["equatorial guinea flag","flag-gq"],"u":"1f1ec-1f1f6"},{"n":["greece flag","flag-gr"],"u":"1f1ec-1f1f7"},{"n":["south georgia & south sandwich islands flag","flag-gs"],"u":"1f1ec-1f1f8"},{"n":["guatemala flag","flag-gt"],"u":"1f1ec-1f1f9"},{"n":["guam flag","flag-gu"],"u":"1f1ec-1f1fa"},{"n":["guinea-bissau flag","flag-gw"],"u":"1f1ec-1f1fc"},{"n":["guyana flag","flag-gy"],"u":"1f1ec-1f1fe"},{"n":["hong kong sar china flag","flag-hk"],"u":"1f1ed-1f1f0"},{"n":["heard & mcdonald islands flag","flag-hm"],"u":"1f1ed-1f1f2"},{"n":["honduras flag","flag-hn"],"u":"1f1ed-1f1f3"},{"n":["croatia flag","flag-hr"],"u":"1f1ed-1f1f7"},{"n":["haiti flag","flag-ht"],"u":"1f1ed-1f1f9"},{"n":["hungary flag","flag-hu"],"u":"1f1ed-1f1fa"},{"n":["canary islands flag","flag-ic"],"u":"1f1ee-1f1e8"},{"n":["indonesia flag","flag-id"],"u":"1f1ee-1f1e9"},{"n":["ireland flag","flag-ie"],"u":"1f1ee-1f1ea"},{"n":["israel flag","flag-il"],"u":"1f1ee-1f1f1"},{"n":["isle of man flag","flag-im"],"u":"1f1ee-1f1f2"},{"n":["india flag","flag-in"],"u":"1f1ee-1f1f3"},{"n":["british indian ocean territory flag","flag-io"],"u":"1f1ee-1f1f4"},{"n":["iraq flag","flag-iq"],"u":"1f1ee-1f1f6"},{"n":["iran flag","flag-ir"],"u":"1f1ee-1f1f7"},{"n":["iceland flag","flag-is"],"u":"1f1ee-1f1f8"},{"n":["italy flag","it","flag-it"],"u":"1f1ee-1f1f9"},{"n":["jersey flag","flag-je"],"u":"1f1ef-1f1ea"},{"n":["jamaica flag","flag-jm"],"u":"1f1ef-1f1f2"},{"n":["jordan flag","flag-jo"],"u":"1f1ef-1f1f4"},{"n":["japan flag","jp","flag-jp"],"u":"1f1ef-1f1f5"},{"n":["kenya flag","flag-ke"],"u":"1f1f0-1f1ea"},{"n":["kyrgyzstan flag","flag-kg"],"u":"1f1f0-1f1ec"},{"n":["cambodia flag","flag-kh"],"u":"1f1f0-1f1ed"},{"n":["kiribati flag","flag-ki"],"u":"1f1f0-1f1ee"},{"n":["comoros flag","flag-km"],"u":"1f1f0-1f1f2"},{"n":["st. kitts & nevis flag","flag-kn"],"u":"1f1f0-1f1f3"},{"n":["north korea flag","flag-kp"],"u":"1f1f0-1f1f5"},{"n":["south korea flag","kr","flag-kr"],"u":"1f1f0-1f1f7"},{"n":["kuwait flag","flag-kw"],"u":"1f1f0-1f1fc"},{"n":["cayman islands flag","flag-ky"],"u":"1f1f0-1f1fe"},{"n":["kazakhstan flag","flag-kz"],"u":"1f1f0-1f1ff"},{"n":["laos flag","flag-la"],"u":"1f1f1-1f1e6"},{"n":["lebanon flag","flag-lb"],"u":"1f1f1-1f1e7"},{"n":["st. lucia flag","flag-lc"],"u":"1f1f1-1f1e8"},{"n":["liechtenstein flag","flag-li"],"u":"1f1f1-1f1ee"},{"n":["sri lanka flag","flag-lk"],"u":"1f1f1-1f1f0"},{"n":["liberia flag","flag-lr"],"u":"1f1f1-1f1f7"},{"n":["lesotho flag","flag-ls"],"u":"1f1f1-1f1f8"},{"n":["lithuania flag","flag-lt"],"u":"1f1f1-1f1f9"},{"n":["luxembourg flag","flag-lu"],"u":"1f1f1-1f1fa"},{"n":["latvia flag","flag-lv"],"u":"1f1f1-1f1fb"},{"n":["libya flag","flag-ly"],"u":"1f1f1-1f1fe"},{"n":["morocco flag","flag-ma"],"u":"1f1f2-1f1e6"},{"n":["monaco flag","flag-mc"],"u":"1f1f2-1f1e8"},{"n":["moldova flag","flag-md"],"u":"1f1f2-1f1e9"},{"n":["montenegro flag","flag-me"],"u":"1f1f2-1f1ea"},{"n":["st. martin flag","flag-mf"],"u":"1f1f2-1f1eb"},{"n":["madagascar flag","flag-mg"],"u":"1f1f2-1f1ec"},{"n":["marshall islands flag","flag-mh"],"u":"1f1f2-1f1ed"},{"n":["macedonia flag","flag-mk"],"u":"1f1f2-1f1f0"},{"n":["mali flag","flag-ml"],"u":"1f1f2-1f1f1"},{"n":["myanmar (burma) flag","flag-mm"],"u":"1f1f2-1f1f2"},{"n":["mongolia flag","flag-mn"],"u":"1f1f2-1f1f3"},{"n":["macau sar china flag","flag-mo"],"u":"1f1f2-1f1f4"},{"n":["northern mariana islands flag","flag-mp"],"u":"1f1f2-1f1f5"},{"n":["martinique flag","flag-mq"],"u":"1f1f2-1f1f6"},{"n":["mauritania flag","flag-mr"],"u":"1f1f2-1f1f7"},{"n":["montserrat flag","flag-ms"],"u":"1f1f2-1f1f8"},{"n":["malta flag","flag-mt"],"u":"1f1f2-1f1f9"},{"n":["mauritius flag","flag-mu"],"u":"1f1f2-1f1fa"},{"n":["maldives flag","flag-mv"],"u":"1f1f2-1f1fb"},{"n":["malawi flag","flag-mw"],"u":"1f1f2-1f1fc"},{"n":["mexico flag","flag-mx"],"u":"1f1f2-1f1fd"},{"n":["malaysia flag","flag-my"],"u":"1f1f2-1f1fe"},{"n":["mozambique flag","flag-mz"],"u":"1f1f2-1f1ff"},{"n":["namibia flag","flag-na"],"u":"1f1f3-1f1e6"},{"n":["new caledonia flag","flag-nc"],"u":"1f1f3-1f1e8"},{"n":["niger flag","flag-ne"],"u":"1f1f3-1f1ea"},{"n":["norfolk island flag","flag-nf"],"u":"1f1f3-1f1eb"},{"n":["nigeria flag","flag-ng"],"u":"1f1f3-1f1ec"},{"n":["nicaragua flag","flag-ni"],"u":"1f1f3-1f1ee"},{"n":["netherlands flag","flag-nl"],"u":"1f1f3-1f1f1"},{"n":["norway flag","flag-no"],"u":"1f1f3-1f1f4"},{"n":["nepal flag","flag-np"],"u":"1f1f3-1f1f5"},{"n":["nauru flag","flag-nr"],"u":"1f1f3-1f1f7"},{"n":["niue flag","flag-nu"],"u":"1f1f3-1f1fa"},{"n":["new zealand flag","flag-nz"],"u":"1f1f3-1f1ff"},{"n":["oman flag","flag-om"],"u":"1f1f4-1f1f2"},{"n":["panama flag","flag-pa"],"u":"1f1f5-1f1e6"},{"n":["peru flag","flag-pe"],"u":"1f1f5-1f1ea"},{"n":["french polynesia flag","flag-pf"],"u":"1f1f5-1f1eb"},{"n":["papua new guinea flag","flag-pg"],"u":"1f1f5-1f1ec"},{"n":["philippines flag","flag-ph"],"u":"1f1f5-1f1ed"},{"n":["pakistan flag","flag-pk"],"u":"1f1f5-1f1f0"},{"n":["poland flag","flag-pl"],"u":"1f1f5-1f1f1"},{"n":["st. pierre & miquelon flag","flag-pm"],"u":"1f1f5-1f1f2"},{"n":["pitcairn islands flag","flag-pn"],"u":"1f1f5-1f1f3"},{"n":["puerto rico flag","flag-pr"],"u":"1f1f5-1f1f7"},{"n":["palestinian territories flag","flag-ps"],"u":"1f1f5-1f1f8"},{"n":["portugal flag","flag-pt"],"u":"1f1f5-1f1f9"},{"n":["palau flag","flag-pw"],"u":"1f1f5-1f1fc"},{"n":["paraguay flag","flag-py"],"u":"1f1f5-1f1fe"},{"n":["qatar flag","flag-qa"],"u":"1f1f6-1f1e6"},{"n":["réunion flag","flag-re"],"u":"1f1f7-1f1ea"},{"n":["romania flag","flag-ro"],"u":"1f1f7-1f1f4"},{"n":["serbia flag","flag-rs"],"u":"1f1f7-1f1f8"},{"n":["russia flag","ru","flag-ru"],"u":"1f1f7-1f1fa"},{"n":["rwanda flag","flag-rw"],"u":"1f1f7-1f1fc"},{"n":["saudi arabia flag","flag-sa"],"u":"1f1f8-1f1e6"},{"n":["solomon islands flag","flag-sb"],"u":"1f1f8-1f1e7"},{"n":["seychelles flag","flag-sc"],"u":"1f1f8-1f1e8"},{"n":["sudan flag","flag-sd"],"u":"1f1f8-1f1e9"},{"n":["sweden flag","flag-se"],"u":"1f1f8-1f1ea"},{"n":["singapore flag","flag-sg"],"u":"1f1f8-1f1ec"},{"n":["st. helena flag","flag-sh"],"u":"1f1f8-1f1ed"},{"n":["slovenia flag","flag-si"],"u":"1f1f8-1f1ee"},{"n":["svalbard & jan mayen flag","flag-sj"],"u":"1f1f8-1f1ef"},{"n":["slovakia flag","flag-sk"],"u":"1f1f8-1f1f0"},{"n":["sierra leone flag","flag-sl"],"u":"1f1f8-1f1f1"},{"n":["san marino flag","flag-sm"],"u":"1f1f8-1f1f2"},{"n":["senegal flag","flag-sn"],"u":"1f1f8-1f1f3"},{"n":["somalia flag","flag-so"],"u":"1f1f8-1f1f4"},{"n":["suriname flag","flag-sr"],"u":"1f1f8-1f1f7"},{"n":["south sudan flag","flag-ss"],"u":"1f1f8-1f1f8"},{"n":["são tomé & príncipe flag","flag-st"],"u":"1f1f8-1f1f9"},{"n":["el salvador flag","flag-sv"],"u":"1f1f8-1f1fb"},{"n":["sint maarten flag","flag-sx"],"u":"1f1f8-1f1fd"},{"n":["syria flag","flag-sy"],"u":"1f1f8-1f1fe"},{"n":["swaziland flag","flag-sz"],"u":"1f1f8-1f1ff"},{"n":["tristan da cunha flag","flag-ta"],"u":"1f1f9-1f1e6"},{"n":["turks & caicos islands flag","flag-tc"],"u":"1f1f9-1f1e8"},{"n":["chad flag","flag-td"],"u":"1f1f9-1f1e9"},{"n":["french southern territories flag","flag-tf"],"u":"1f1f9-1f1eb"},{"n":["togo flag","flag-tg"],"u":"1f1f9-1f1ec"},{"n":["thailand flag","flag-th"],"u":"1f1f9-1f1ed"},{"n":["tajikistan flag","flag-tj"],"u":"1f1f9-1f1ef"},{"n":["tokelau flag","flag-tk"],"u":"1f1f9-1f1f0"},{"n":["timor-leste flag","flag-tl"],"u":"1f1f9-1f1f1"},{"n":["turkmenistan flag","flag-tm"],"u":"1f1f9-1f1f2"},{"n":["tunisia flag","flag-tn"],"u":"1f1f9-1f1f3"},{"n":["tonga flag","flag-to"],"u":"1f1f9-1f1f4"},{"n":["turkey flag","flag-tr"],"u":"1f1f9-1f1f7"},{"n":["trinidad & tobago flag","flag-tt"],"u":"1f1f9-1f1f9"},{"n":["tuvalu flag","flag-tv"],"u":"1f1f9-1f1fb"},{"n":["taiwan flag","flag-tw"],"u":"1f1f9-1f1fc"},{"n":["tanzania flag","flag-tz"],"u":"1f1f9-1f1ff"},{"n":["ukraine flag","flag-ua"],"u":"1f1fa-1f1e6"},{"n":["uganda flag","flag-ug"],"u":"1f1fa-1f1ec"},{"n":["u.s. outlying islands flag","flag-um"],"u":"1f1fa-1f1f2"},{"n":["united nations flag","flag-un"],"u":"1f1fa-1f1f3"},{"n":["united states flag","us","flag-us"],"u":"1f1fa-1f1f8"},{"n":["uruguay flag","flag-uy"],"u":"1f1fa-1f1fe"},{"n":["uzbekistan flag","flag-uz"],"u":"1f1fa-1f1ff"},{"n":["vatican city flag","flag-va"],"u":"1f1fb-1f1e6"},{"n":["st. vincent & grenadines flag","flag-vc"],"u":"1f1fb-1f1e8"},{"n":["venezuela flag","flag-ve"],"u":"1f1fb-1f1ea"},{"n":["british virgin islands flag","flag-vg"],"u":"1f1fb-1f1ec"},{"n":["u.s. virgin islands flag","flag-vi"],"u":"1f1fb-1f1ee"},{"n":["vietnam flag","flag-vn"],"u":"1f1fb-1f1f3"},{"n":["vanuatu flag","flag-vu"],"u":"1f1fb-1f1fa"},{"n":["wallis & futuna flag","flag-wf"],"u":"1f1fc-1f1eb"},{"n":["samoa flag","flag-ws"],"u":"1f1fc-1f1f8"},{"n":["kosovo flag","flag-xk"],"u":"1f1fd-1f1f0"},{"n":["yemen flag","flag-ye"],"u":"1f1fe-1f1ea"},{"n":["mayotte flag","flag-yt"],"u":"1f1fe-1f1f9"},{"n":["south africa flag","flag-za"],"u":"1f1ff-1f1e6"},{"n":["zambia flag","flag-zm"],"u":"1f1ff-1f1f2"},{"n":["zimbabwe flag","flag-zw"],"u":"1f1ff-1f1fc"},{"n":["england flag","flag-england"],"u":"1f3f4-e0067-e0062-e0065-e006e-e0067-e007f"},{"n":["scotland flag","flag-scotland"],"u":"1f3f4-e0067-e0062-e0073-e0063-e0074-e007f"},{"n":["wales flag","flag-wales"],"u":"1f3f4-e0067-e0062-e0077-e006c-e0073-e007f"}],"symbols":[{"n":["automated teller machine","atm"],"u":"1f3e7"},{"n":["put litter in its place symbol","put_litter_in_its_place"],"u":"1f6ae"},{"n":["potable water symbol","potable_water"],"u":"1f6b0"},{"n":["wheelchair symbol","wheelchair"],"u":"267f"},{"n":["mens symbol","mens"],"u":"1f6b9"},{"n":["womens symbol","womens"],"u":"1f6ba"},{"n":["restroom"],"u":"1f6bb"},{"n":["baby symbol","baby_symbol"],"u":"1f6bc"},{"n":["water closet","wc"],"u":"1f6be"},{"n":["passport control","passport_control"],"u":"1f6c2"},{"n":["customs"],"u":"1f6c3"},{"n":["baggage claim","baggage_claim"],"u":"1f6c4"},{"n":["left luggage","left_luggage"],"u":"1f6c5"},{"n":["warning sign","warning"],"u":"26a0-fe0f"},{"n":["children crossing","children_crossing"],"u":"1f6b8"},{"n":["no entry","no_entry"],"u":"26d4"},{"n":["no entry sign","no_entry_sign"],"u":"1f6ab"},{"n":["no bicycles","no_bicycles"],"u":"1f6b3"},{"n":["no smoking symbol","no_smoking"],"u":"1f6ad"},{"n":["do not litter symbol","do_not_litter"],"u":"1f6af"},{"n":["non-potable water symbol","non-potable_water"],"u":"1f6b1"},{"n":["no pedestrians","no_pedestrians"],"u":"1f6b7"},{"n":["no mobile phones","no_mobile_phones"],"u":"1f4f5"},{"n":["no one under eighteen symbol","underage"],"u":"1f51e"},{"n":["radioactive_sign"],"u":"2622-fe0f"},{"n":["biohazard_sign"],"u":"2623-fe0f"},{"n":["upwards black arrow","arrow_up"],"u":"2b06-fe0f"},{"n":["north east arrow","arrow_upper_right"],"u":"2197-fe0f"},{"n":["black rightwards arrow","arrow_right"],"u":"27a1-fe0f"},{"n":["south east arrow","arrow_lower_right"],"u":"2198-fe0f"},{"n":["downwards black arrow","arrow_down"],"u":"2b07-fe0f"},{"n":["south west arrow","arrow_lower_left"],"u":"2199-fe0f"},{"n":["leftwards black arrow","arrow_left"],"u":"2b05-fe0f"},{"n":["north west arrow","arrow_upper_left"],"u":"2196-fe0f"},{"n":["up down arrow","arrow_up_down"],"u":"2195-fe0f"},{"n":["left right arrow","left_right_arrow"],"u":"2194-fe0f"},{"n":["leftwards arrow with hook","leftwards_arrow_with_hook"],"u":"21a9-fe0f"},{"n":["rightwards arrow with hook","arrow_right_hook"],"u":"21aa-fe0f"},{"n":["arrow pointing rightwards then curving upwards","arrow_heading_up"],"u":"2934-fe0f"},{"n":["arrow pointing rightwards then curving downwards","arrow_heading_down"],"u":"2935-fe0f"},{"n":["clockwise downwards and upwards open circle arrows","arrows_clockwise"],"u":"1f503"},{"n":["anticlockwise downwards and upwards open circle arrows","arrows_counterclockwise"],"u":"1f504"},{"n":["back with leftwards arrow above","back"],"u":"1f519"},{"n":["end with leftwards arrow above","end"],"u":"1f51a"},{"n":["on with exclamation mark with left right arrow above","on"],"u":"1f51b"},{"n":["soon with rightwards arrow above","soon"],"u":"1f51c"},{"n":["top with upwards arrow above","top"],"u":"1f51d"},{"n":["place of worship","place_of_worship"],"u":"1f6d0"},{"n":["atom_symbol"],"u":"269b-fe0f"},{"n":["om_symbol"],"u":"1f549-fe0f"},{"n":["star_of_david"],"u":"2721-fe0f"},{"n":["wheel_of_dharma"],"u":"2638-fe0f"},{"n":["yin_yang"],"u":"262f-fe0f"},{"n":["latin_cross"],"u":"271d-fe0f"},{"n":["orthodox_cross"],"u":"2626-fe0f"},{"n":["star_and_crescent"],"u":"262a-fe0f"},{"n":["peace_symbol"],"u":"262e-fe0f"},{"n":["menorah with nine branches","menorah_with_nine_branches"],"u":"1f54e"},{"n":["six pointed star with middle dot","six_pointed_star"],"u":"1f52f"},{"n":["aries"],"u":"2648"},{"n":["taurus"],"u":"2649"},{"n":["gemini"],"u":"264a"},{"n":["cancer"],"u":"264b"},{"n":["leo"],"u":"264c"},{"n":["virgo"],"u":"264d"},{"n":["libra"],"u":"264e"},{"n":["scorpius"],"u":"264f"},{"n":["sagittarius"],"u":"2650"},{"n":["capricorn"],"u":"2651"},{"n":["aquarius"],"u":"2652"},{"n":["pisces"],"u":"2653"},{"n":["ophiuchus"],"u":"26ce"},{"n":["twisted rightwards arrows","twisted_rightwards_arrows"],"u":"1f500"},{"n":["clockwise rightwards and leftwards open circle arrows","repeat"],"u":"1f501"},{"n":["clockwise rightwards and leftwards open circle arrows with circled one overlay","repeat_one"],"u":"1f502"},{"n":["black right-pointing triangle","arrow_forward"],"u":"25b6-fe0f"},{"n":["black right-pointing double triangle","fast_forward"],"u":"23e9"},{"n":["black_right_pointing_double_triangle_with_vertical_bar"],"u":"23ed-fe0f"},{"n":["black_right_pointing_triangle_with_double_vertical_bar"],"u":"23ef-fe0f"},{"n":["black left-pointing triangle","arrow_backward"],"u":"25c0-fe0f"},{"n":["black left-pointing double triangle","rewind"],"u":"23ea"},{"n":["black_left_pointing_double_triangle_with_vertical_bar"],"u":"23ee-fe0f"},{"n":["up-pointing small red triangle","arrow_up_small"],"u":"1f53c"},{"n":["black up-pointing double triangle","arrow_double_up"],"u":"23eb"},{"n":["down-pointing small red triangle","arrow_down_small"],"u":"1f53d"},{"n":["black down-pointing double triangle","arrow_double_down"],"u":"23ec"},{"n":["double_vertical_bar"],"u":"23f8-fe0f"},{"n":["black_square_for_stop"],"u":"23f9-fe0f"},{"n":["black_circle_for_record"],"u":"23fa-fe0f"},{"n":["eject"],"u":"23cf-fe0f"},{"n":["cinema"],"u":"1f3a6"},{"n":["low brightness symbol","low_brightness"],"u":"1f505"},{"n":["high brightness symbol","high_brightness"],"u":"1f506"},{"n":["antenna with bars","signal_strength"],"u":"1f4f6"},{"n":["vibration mode","vibration_mode"],"u":"1f4f3"},{"n":["mobile phone off","mobile_phone_off"],"u":"1f4f4"},{"n":["female_sign"],"u":"2640-fe0f"},{"n":["male_sign"],"u":"2642-fe0f"},{"n":["medical_symbol","staff_of_aesculapius"],"u":"2695-fe0f"},{"n":["black universal recycling symbol","recycle"],"u":"267b-fe0f"},{"n":["fleur_de_lis"],"u":"269c-fe0f"},{"n":["trident emblem","trident"],"u":"1f531"},{"n":["name badge","name_badge"],"u":"1f4db"},{"n":["japanese symbol for beginner","beginner"],"u":"1f530"},{"n":["heavy large circle","o"],"u":"2b55"},{"n":["white heavy check mark","white_check_mark"],"u":"2705"},{"n":["ballot box with check","ballot_box_with_check"],"u":"2611-fe0f"},{"n":["heavy check mark","heavy_check_mark"],"u":"2714-fe0f"},{"n":["heavy multiplication x","heavy_multiplication_x"],"u":"2716-fe0f"},{"n":["cross mark","x"],"u":"274c"},{"n":["negative squared cross mark","negative_squared_cross_mark"],"u":"274e"},{"n":["heavy plus sign","heavy_plus_sign"],"u":"2795"},{"n":["heavy minus sign","heavy_minus_sign"],"u":"2796"},{"n":["heavy division sign","heavy_division_sign"],"u":"2797"},{"n":["curly loop","curly_loop"],"u":"27b0"},{"n":["double curly loop","loop"],"u":"27bf"},{"n":["part alternation mark","part_alternation_mark"],"u":"303d-fe0f"},{"n":["eight spoked asterisk","eight_spoked_asterisk"],"u":"2733-fe0f"},{"n":["eight pointed black star","eight_pointed_black_star"],"u":"2734-fe0f"},{"n":["sparkle"],"u":"2747-fe0f"},{"n":["double exclamation mark","bangbang"],"u":"203c-fe0f"},{"n":["exclamation question mark","interrobang"],"u":"2049-fe0f"},{"n":["black question mark ornament","question"],"u":"2753"},{"n":["white question mark ornament","grey_question"],"u":"2754"},{"n":["white exclamation mark ornament","grey_exclamation"],"u":"2755"},{"n":["heavy exclamation mark symbol","exclamation","heavy_exclamation_mark"],"u":"2757"},{"n":["wavy dash","wavy_dash"],"u":"3030-fe0f"},{"n":["copyright sign","copyright"],"u":"00a9-fe0f"},{"n":["registered sign","registered"],"u":"00ae-fe0f"},{"n":["trade mark sign","tm"],"u":"2122-fe0f"},{"n":["hash key","hash"],"u":"0023-fe0f-20e3"},{"n":["keycap_star"],"u":"002a-fe0f-20e3"},{"n":["keycap 0","zero"],"u":"0030-fe0f-20e3"},{"n":["keycap 1","one"],"u":"0031-fe0f-20e3"},{"n":["keycap 2","two"],"u":"0032-fe0f-20e3"},{"n":["keycap 3","three"],"u":"0033-fe0f-20e3"},{"n":["keycap 4","four"],"u":"0034-fe0f-20e3"},{"n":["keycap 5","five"],"u":"0035-fe0f-20e3"},{"n":["keycap 6","six"],"u":"0036-fe0f-20e3"},{"n":["keycap 7","seven"],"u":"0037-fe0f-20e3"},{"n":["keycap 8","eight"],"u":"0038-fe0f-20e3"},{"n":["keycap 9","nine"],"u":"0039-fe0f-20e3"},{"n":["keycap ten","keycap_ten"],"u":"1f51f"},{"n":["hundred points symbol","100"],"u":"1f4af"},{"n":["input symbol for latin capital letters","capital_abcd"],"u":"1f520"},{"n":["input symbol for latin small letters","abcd"],"u":"1f521"},{"n":["input symbol for numbers","1234"],"u":"1f522"},{"n":["input symbol for symbols","symbols"],"u":"1f523"},{"n":["input symbol for latin letters","abc"],"u":"1f524"},{"n":["negative squared latin capital letter a","a"],"u":"1f170-fe0f"},{"n":["negative squared ab","ab"],"u":"1f18e"},{"n":["negative squared latin capital letter b","b"],"u":"1f171-fe0f"},{"n":["squared cl","cl"],"u":"1f191"},{"n":["squared cool","cool"],"u":"1f192"},{"n":["squared free","free"],"u":"1f193"},{"n":["information source","information_source"],"u":"2139-fe0f"},{"n":["squared id","id"],"u":"1f194"},{"n":["circled latin capital letter m","m"],"u":"24c2-fe0f"},{"n":["squared new","new"],"u":"1f195"},{"n":["squared ng","ng"],"u":"1f196"},{"n":["negative squared latin capital letter o","o2"],"u":"1f17e-fe0f"},{"n":["squared ok","ok"],"u":"1f197"},{"n":["negative squared latin capital letter p","parking"],"u":"1f17f-fe0f"},{"n":["squared sos","sos"],"u":"1f198"},{"n":["squared up with exclamation mark","up"],"u":"1f199"},{"n":["squared vs","vs"],"u":"1f19a"},{"n":["squared katakana koko","koko"],"u":"1f201"},{"n":["squared katakana sa","sa"],"u":"1f202-fe0f"},{"n":["squared cjk unified ideograph-6708","u6708"],"u":"1f237-fe0f"},{"n":["squared cjk unified ideograph-6709","u6709"],"u":"1f236"},{"n":["squared cjk unified ideograph-6307","u6307"],"u":"1f22f"},{"n":["circled ideograph advantage","ideograph_advantage"],"u":"1f250"},{"n":["squared cjk unified ideograph-5272","u5272"],"u":"1f239"},{"n":["squared cjk unified ideograph-7121","u7121"],"u":"1f21a"},{"n":["squared cjk unified ideograph-7981","u7981"],"u":"1f232"},{"n":["circled ideograph accept","accept"],"u":"1f251"},{"n":["squared cjk unified ideograph-7533","u7533"],"u":"1f238"},{"n":["squared cjk unified ideograph-5408","u5408"],"u":"1f234"},{"n":["squared cjk unified ideograph-7a7a","u7a7a"],"u":"1f233"},{"n":["circled ideograph congratulation","congratulations"],"u":"3297-fe0f"},{"n":["circled ideograph secret","secret"],"u":"3299-fe0f"},{"n":["squared cjk unified ideograph-55b6","u55b6"],"u":"1f23a"},{"n":["squared cjk unified ideograph-6e80","u6e80"],"u":"1f235"},{"n":["black small square","black_small_square"],"u":"25aa-fe0f"},{"n":["white small square","white_small_square"],"u":"25ab-fe0f"},{"n":["white medium square","white_medium_square"],"u":"25fb-fe0f"},{"n":["black medium square","black_medium_square"],"u":"25fc-fe0f"},{"n":["white medium small square","white_medium_small_square"],"u":"25fd"},{"n":["black medium small square","black_medium_small_square"],"u":"25fe"},{"n":["black large square","black_large_square"],"u":"2b1b"},{"n":["white large square","white_large_square"],"u":"2b1c"},{"n":["large orange diamond","large_orange_diamond"],"u":"1f536"},{"n":["large blue diamond","large_blue_diamond"],"u":"1f537"},{"n":["small orange diamond","small_orange_diamond"],"u":"1f538"},{"n":["small blue diamond","small_blue_diamond"],"u":"1f539"},{"n":["up-pointing red triangle","small_red_triangle"],"u":"1f53a"},{"n":["down-pointing red triangle","small_red_triangle_down"],"u":"1f53b"},{"n":["diamond shape with a dot inside","diamond_shape_with_a_dot_inside"],"u":"1f4a0"},{"n":["radio button","radio_button"],"u":"1f518"},{"n":["black square button","black_square_button"],"u":"1f532"},{"n":["white square button","white_square_button"],"u":"1f533"},{"n":["medium white circle","white_circle"],"u":"26aa"},{"n":["medium black circle","black_circle"],"u":"26ab"},{"n":["large red circle","red_circle"],"u":"1f534"},{"n":["large blue circle","large_blue_circle"],"u":"1f535"}],"animals_nature":[{"n":["monkey face","monkey_face"],"u":"1f435"},{"n":["monkey"],"u":"1f412"},{"n":["gorilla"],"u":"1f98d"},{"n":["dog face","dog"],"u":"1f436"},{"n":["dog","dog2"],"u":"1f415"},{"n":["poodle"],"u":"1f429"},{"n":["wolf face","wolf"],"u":"1f43a"},{"n":["fox face","fox_face"],"u":"1f98a"},{"n":["cat face","cat"],"u":"1f431"},{"n":["cat","cat2"],"u":"1f408"},{"n":["lion face","lion_face"],"u":"1f981"},{"n":["tiger face","tiger"],"u":"1f42f"},{"n":["tiger","tiger2"],"u":"1f405"},{"n":["leopard"],"u":"1f406"},{"n":["horse face","horse"],"u":"1f434"},{"n":["horse","racehorse"],"u":"1f40e"},{"n":["unicorn face","unicorn_face"],"u":"1f984"},{"n":["zebra face","zebra_face"],"u":"1f993"},{"n":["deer"],"u":"1f98c"},{"n":["cow face","cow"],"u":"1f42e"},{"n":["ox"],"u":"1f402"},{"n":["water buffalo","water_buffalo"],"u":"1f403"},{"n":["cow","cow2"],"u":"1f404"},{"n":["pig face","pig"],"u":"1f437"},{"n":["pig","pig2"],"u":"1f416"},{"n":["boar"],"u":"1f417"},{"n":["pig nose","pig_nose"],"u":"1f43d"},{"n":["ram"],"u":"1f40f"},{"n":["sheep"],"u":"1f411"},{"n":["goat"],"u":"1f410"},{"n":["dromedary camel","dromedary_camel"],"u":"1f42a"},{"n":["bactrian camel","camel"],"u":"1f42b"},{"n":["giraffe face","giraffe_face"],"u":"1f992"},{"n":["elephant"],"u":"1f418"},{"n":["rhinoceros"],"u":"1f98f"},{"n":["mouse face","mouse"],"u":"1f42d"},{"n":["mouse","mouse2"],"u":"1f401"},{"n":["rat"],"u":"1f400"},{"n":["hamster face","hamster"],"u":"1f439"},{"n":["rabbit face","rabbit"],"u":"1f430"},{"n":["rabbit","rabbit2"],"u":"1f407"},{"n":["chipmunk"],"u":"1f43f-fe0f"},{"n":["hedgehog"],"u":"1f994"},{"n":["bat"],"u":"1f987"},{"n":["bear face","bear"],"u":"1f43b"},{"n":["koala"],"u":"1f428"},{"n":["panda face","panda_face"],"u":"1f43c"},{"n":["paw prints","feet","paw_prints"],"u":"1f43e"},{"n":["turkey"],"u":"1f983"},{"n":["chicken"],"u":"1f414"},{"n":["rooster"],"u":"1f413"},{"n":["hatching chick","hatching_chick"],"u":"1f423"},{"n":["baby chick","baby_chick"],"u":"1f424"},{"n":["front-facing baby chick","hatched_chick"],"u":"1f425"},{"n":["bird"],"u":"1f426"},{"n":["penguin"],"u":"1f427"},{"n":["dove_of_peace"],"u":"1f54a-fe0f"},{"n":["eagle"],"u":"1f985"},{"n":["duck"],"u":"1f986"},{"n":["owl"],"u":"1f989"},{"n":["frog face","frog"],"u":"1f438"},{"n":["crocodile"],"u":"1f40a"},{"n":["turtle"],"u":"1f422"},{"n":["lizard"],"u":"1f98e"},{"n":["snake"],"u":"1f40d"},{"n":["dragon face","dragon_face"],"u":"1f432"},{"n":["dragon"],"u":"1f409"},{"n":["sauropod"],"u":"1f995"},{"n":["t-rex"],"u":"1f996"},{"n":["spouting whale","whale"],"u":"1f433"},{"n":["whale","whale2"],"u":"1f40b"},{"n":["dolphin","flipper"],"u":"1f42c"},{"n":["fish"],"u":"1f41f"},{"n":["tropical fish","tropical_fish"],"u":"1f420"},{"n":["blowfish"],"u":"1f421"},{"n":["shark"],"u":"1f988"},{"n":["octopus"],"u":"1f419"},{"n":["spiral shell","shell"],"u":"1f41a"},{"n":["crab"],"u":"1f980"},{"n":["shrimp"],"u":"1f990"},{"n":["squid"],"u":"1f991"},{"n":["snail"],"u":"1f40c"},{"n":["butterfly"],"u":"1f98b"},{"n":["bug"],"u":"1f41b"},{"n":["ant"],"u":"1f41c"},{"n":["honeybee","bee"],"u":"1f41d"},{"n":["lady beetle","beetle"],"u":"1f41e"},{"n":["cricket"],"u":"1f997"},{"n":["spider"],"u":"1f577-fe0f"},{"n":["spider_web"],"u":"1f578-fe0f"},{"n":["scorpion"],"u":"1f982"},{"n":["bouquet"],"u":"1f490"},{"n":["cherry blossom","cherry_blossom"],"u":"1f338"},{"n":["white flower","white_flower"],"u":"1f4ae"},{"n":["rosette"],"u":"1f3f5-fe0f"},{"n":["rose"],"u":"1f339"},{"n":["wilted flower","wilted_flower"],"u":"1f940"},{"n":["hibiscus"],"u":"1f33a"},{"n":["sunflower"],"u":"1f33b"},{"n":["blossom"],"u":"1f33c"},{"n":["tulip"],"u":"1f337"},{"n":["seedling"],"u":"1f331"},{"n":["evergreen tree","evergreen_tree"],"u":"1f332"},{"n":["deciduous tree","deciduous_tree"],"u":"1f333"},{"n":["palm tree","palm_tree"],"u":"1f334"},{"n":["cactus"],"u":"1f335"},{"n":["ear of rice","ear_of_rice"],"u":"1f33e"},{"n":["herb"],"u":"1f33f"},{"n":["shamrock"],"u":"2618-fe0f"},{"n":["four leaf clover","four_leaf_clover"],"u":"1f340"},{"n":["maple leaf","maple_leaf"],"u":"1f341"},{"n":["fallen leaf","fallen_leaf"],"u":"1f342"},{"n":["leaf fluttering in wind","leaves"],"u":"1f343"}],"objects":[{"n":["speaker with cancellation stroke","mute"],"u":"1f507"},{"n":["speaker"],"u":"1f508"},{"n":["speaker with one sound wave","sound"],"u":"1f509"},{"n":["speaker with three sound waves","loud_sound"],"u":"1f50a"},{"n":["public address loudspeaker","loudspeaker"],"u":"1f4e2"},{"n":["cheering megaphone","mega"],"u":"1f4e3"},{"n":["postal horn","postal_horn"],"u":"1f4ef"},{"n":["bell"],"u":"1f514"},{"n":["bell with cancellation stroke","no_bell"],"u":"1f515"},{"n":["musical score","musical_score"],"u":"1f3bc"},{"n":["musical note","musical_note"],"u":"1f3b5"},{"n":["multiple musical notes","notes"],"u":"1f3b6"},{"n":["studio_microphone"],"u":"1f399-fe0f"},{"n":["level_slider"],"u":"1f39a-fe0f"},{"n":["control_knobs"],"u":"1f39b-fe0f"},{"n":["microphone"],"u":"1f3a4"},{"n":["headphone","headphones"],"u":"1f3a7"},{"n":["radio"],"u":"1f4fb"},{"n":["saxophone"],"u":"1f3b7"},{"n":["guitar"],"u":"1f3b8"},{"n":["musical keyboard","musical_keyboard"],"u":"1f3b9"},{"n":["trumpet"],"u":"1f3ba"},{"n":["violin"],"u":"1f3bb"},{"n":["drum with drumsticks","drum_with_drumsticks"],"u":"1f941"},{"n":["mobile phone","iphone"],"u":"1f4f1"},{"n":["mobile phone with rightwards arrow at left","calling"],"u":"1f4f2"},{"n":["black telephone","phone","telephone"],"u":"260e-fe0f"},{"n":["telephone receiver","telephone_receiver"],"u":"1f4de"},{"n":["pager"],"u":"1f4df"},{"n":["fax machine","fax"],"u":"1f4e0"},{"n":["battery"],"u":"1f50b"},{"n":["electric plug","electric_plug"],"u":"1f50c"},{"n":["personal computer","computer"],"u":"1f4bb"},{"n":["desktop_computer"],"u":"1f5a5-fe0f"},{"n":["printer"],"u":"1f5a8-fe0f"},{"n":["keyboard"],"u":"2328-fe0f"},{"n":["three_button_mouse"],"u":"1f5b1-fe0f"},{"n":["trackball"],"u":"1f5b2-fe0f"},{"n":["minidisc"],"u":"1f4bd"},{"n":["floppy disk","floppy_disk"],"u":"1f4be"},{"n":["optical disc","cd"],"u":"1f4bf"},{"n":["dvd"],"u":"1f4c0"},{"n":["movie camera","movie_camera"],"u":"1f3a5"},{"n":["film_frames"],"u":"1f39e-fe0f"},{"n":["film_projector"],"u":"1f4fd-fe0f"},{"n":["clapper board","clapper"],"u":"1f3ac"},{"n":["television","tv"],"u":"1f4fa"},{"n":["camera"],"u":"1f4f7"},{"n":["camera with flash","camera_with_flash"],"u":"1f4f8"},{"n":["video camera","video_camera"],"u":"1f4f9"},{"n":["videocassette","vhs"],"u":"1f4fc"},{"n":["left-pointing magnifying glass","mag"],"u":"1f50d"},{"n":["right-pointing magnifying glass","mag_right"],"u":"1f50e"},{"n":["microscope"],"u":"1f52c"},{"n":["telescope"],"u":"1f52d"},{"n":["satellite antenna","satellite_antenna"],"u":"1f4e1"},{"n":["candle"],"u":"1f56f-fe0f"},{"n":["electric light bulb","bulb"],"u":"1f4a1"},{"n":["electric torch","flashlight"],"u":"1f526"},{"n":["izakaya lantern","izakaya_lantern","lantern"],"u":"1f3ee"},{"n":["notebook with decorative cover","notebook_with_decorative_cover"],"u":"1f4d4"},{"n":["closed book","closed_book"],"u":"1f4d5"},{"n":["open book","book","open_book"],"u":"1f4d6"},{"n":["green book","green_book"],"u":"1f4d7"},{"n":["blue book","blue_book"],"u":"1f4d8"},{"n":["orange book","orange_book"],"u":"1f4d9"},{"n":["books"],"u":"1f4da"},{"n":["notebook"],"u":"1f4d3"},{"n":["ledger"],"u":"1f4d2"},{"n":["page with curl","page_with_curl"],"u":"1f4c3"},{"n":["scroll"],"u":"1f4dc"},{"n":["page facing up","page_facing_up"],"u":"1f4c4"},{"n":["newspaper"],"u":"1f4f0"},{"n":["rolled_up_newspaper"],"u":"1f5de-fe0f"},{"n":["bookmark tabs","bookmark_tabs"],"u":"1f4d1"},{"n":["bookmark"],"u":"1f516"},{"n":["label"],"u":"1f3f7-fe0f"},{"n":["money bag","moneybag"],"u":"1f4b0"},{"n":["banknote with yen sign","yen"],"u":"1f4b4"},{"n":["banknote with dollar sign","dollar"],"u":"1f4b5"},{"n":["banknote with euro sign","euro"],"u":"1f4b6"},{"n":["banknote with pound sign","pound"],"u":"1f4b7"},{"n":["money with wings","money_with_wings"],"u":"1f4b8"},{"n":["credit card","credit_card"],"u":"1f4b3"},{"n":["chart with upwards trend and yen sign","chart"],"u":"1f4b9"},{"n":["currency exchange","currency_exchange"],"u":"1f4b1"},{"n":["heavy dollar sign","heavy_dollar_sign"],"u":"1f4b2"},{"n":["envelope","email"],"u":"2709-fe0f"},{"n":["e-mail symbol","e-mail"],"u":"1f4e7"},{"n":["incoming envelope","incoming_envelope"],"u":"1f4e8"},{"n":["envelope with downwards arrow above","envelope_with_arrow"],"u":"1f4e9"},{"n":["outbox tray","outbox_tray"],"u":"1f4e4"},{"n":["inbox tray","inbox_tray"],"u":"1f4e5"},{"n":["package"],"u":"1f4e6"},{"n":["closed mailbox with raised flag","mailbox"],"u":"1f4eb"},{"n":["closed mailbox with lowered flag","mailbox_closed"],"u":"1f4ea"},{"n":["open mailbox with raised flag","mailbox_with_mail"],"u":"1f4ec"},{"n":["open mailbox with lowered flag","mailbox_with_no_mail"],"u":"1f4ed"},{"n":["postbox"],"u":"1f4ee"},{"n":["ballot_box_with_ballot"],"u":"1f5f3-fe0f"},{"n":["pencil","pencil2"],"u":"270f-fe0f"},{"n":["black nib","black_nib"],"u":"2712-fe0f"},{"n":["lower_left_fountain_pen"],"u":"1f58b-fe0f"},{"n":["lower_left_ballpoint_pen"],"u":"1f58a-fe0f"},{"n":["lower_left_paintbrush"],"u":"1f58c-fe0f"},{"n":["lower_left_crayon"],"u":"1f58d-fe0f"},{"n":["memo","pencil"],"u":"1f4dd"},{"n":["briefcase"],"u":"1f4bc"},{"n":["file folder","file_folder"],"u":"1f4c1"},{"n":["open file folder","open_file_folder"],"u":"1f4c2"},{"n":["card_index_dividers"],"u":"1f5c2-fe0f"},{"n":["calendar","date"],"u":"1f4c5"},{"n":["tear-off calendar","calendar"],"u":"1f4c6"},{"n":["spiral_note_pad"],"u":"1f5d2-fe0f"},{"n":["spiral_calendar_pad"],"u":"1f5d3-fe0f"},{"n":["card index","card_index"],"u":"1f4c7"},{"n":["chart with upwards trend","chart_with_upwards_trend"],"u":"1f4c8"},{"n":["chart with downwards trend","chart_with_downwards_trend"],"u":"1f4c9"},{"n":["bar chart","bar_chart"],"u":"1f4ca"},{"n":["clipboard"],"u":"1f4cb"},{"n":["pushpin"],"u":"1f4cc"},{"n":["round pushpin","round_pushpin"],"u":"1f4cd"},{"n":["paperclip"],"u":"1f4ce"},{"n":["linked_paperclips"],"u":"1f587-fe0f"},{"n":["straight ruler","straight_ruler"],"u":"1f4cf"},{"n":["triangular ruler","triangular_ruler"],"u":"1f4d0"},{"n":["black scissors","scissors"],"u":"2702-fe0f"},{"n":["card_file_box"],"u":"1f5c3-fe0f"},{"n":["file_cabinet"],"u":"1f5c4-fe0f"},{"n":["wastebasket"],"u":"1f5d1-fe0f"},{"n":["lock"],"u":"1f512"},{"n":["open lock","unlock"],"u":"1f513"},{"n":["lock with ink pen","lock_with_ink_pen"],"u":"1f50f"},{"n":["closed lock with key","closed_lock_with_key"],"u":"1f510"},{"n":["key"],"u":"1f511"},{"n":["old_key"],"u":"1f5dd-fe0f"},{"n":["hammer"],"u":"1f528"},{"n":["pick"],"u":"26cf-fe0f"},{"n":["hammer_and_pick"],"u":"2692-fe0f"},{"n":["hammer_and_wrench"],"u":"1f6e0-fe0f"},{"n":["dagger_knife"],"u":"1f5e1-fe0f"},{"n":["crossed_swords"],"u":"2694-fe0f"},{"n":["pistol","gun"],"u":"1f52b"},{"n":["bow and arrow","bow_and_arrow"],"u":"1f3f9"},{"n":["shield"],"u":"1f6e1-fe0f"},{"n":["wrench"],"u":"1f527"},{"n":["nut and bolt","nut_and_bolt"],"u":"1f529"},{"n":["gear"],"u":"2699-fe0f"},{"n":["compression"],"u":"1f5dc-fe0f"},{"n":["alembic"],"u":"2697-fe0f"},{"n":["scales"],"u":"2696-fe0f"},{"n":["link symbol","link"],"u":"1f517"},{"n":["chains"],"u":"26d3-fe0f"},{"n":["syringe"],"u":"1f489"},{"n":["pill"],"u":"1f48a"},{"n":["smoking symbol","smoking"],"u":"1f6ac"},{"n":["coffin"],"u":"26b0-fe0f"},{"n":["funeral_urn"],"u":"26b1-fe0f"},{"n":["moyai"],"u":"1f5ff"},{"n":["oil_drum"],"u":"1f6e2-fe0f"},{"n":["crystal ball","crystal_ball"],"u":"1f52e"},{"n":["shopping trolley","shopping_trolley"],"u":"1f6d2"}],"smileys_people":[{"n":["grinning face","grinning"],"u":"1f600"},{"n":["grinning face with smiling eyes","grin"],"u":"1f601"},{"n":["face with tears of joy","joy"],"u":"1f602"},{"n":["rolling on the floor laughing","rolling_on_the_floor_laughing"],"u":"1f923"},{"n":["smiling face with open mouth","smiley"],"u":"1f603"},{"n":["smiling face with open mouth and smiling eyes","smile"],"u":"1f604"},{"n":["smiling face with open mouth and cold sweat","sweat_smile"],"u":"1f605"},{"n":["smiling face with open mouth and tightly-closed eyes","laughing","satisfied"],"u":"1f606"},{"n":["winking face","wink"],"u":"1f609"},{"n":["smiling face with smiling eyes","blush"],"u":"1f60a"},{"n":["face savouring delicious food","yum"],"u":"1f60b"},{"n":["smiling face with sunglasses","sunglasses"],"u":"1f60e"},{"n":["smiling face with heart-shaped eyes","heart_eyes"],"u":"1f60d"},{"n":["face throwing a kiss","kissing_heart"],"u":"1f618"},{"n":["kissing face","kissing"],"u":"1f617"},{"n":["kissing face with smiling eyes","kissing_smiling_eyes"],"u":"1f619"},{"n":["kissing face with closed eyes","kissing_closed_eyes"],"u":"1f61a"},{"n":["white smiling face","relaxed"],"u":"263a-fe0f"},{"n":["slightly smiling face","slightly_smiling_face"],"u":"1f642"},{"n":["hugging face","hugging_face"],"u":"1f917"},{"n":["grinning face with star eyes","star-struck","grinning_face_with_star_eyes"],"u":"1f929"},{"n":["thinking face","thinking_face"],"u":"1f914"},{"n":["face with one eyebrow raised","face_with_raised_eyebrow","face_with_one_eyebrow_raised"],"u":"1f928"},{"n":["neutral face","neutral_face"],"u":"1f610"},{"n":["expressionless face","expressionless"],"u":"1f611"},{"n":["face without mouth","no_mouth"],"u":"1f636"},{"n":["face with rolling eyes","face_with_rolling_eyes"],"u":"1f644"},{"n":["smirking face","smirk"],"u":"1f60f"},{"n":["persevering face","persevere"],"u":"1f623"},{"n":["disappointed but relieved face","disappointed_relieved"],"u":"1f625"},{"n":["face with open mouth","open_mouth"],"u":"1f62e"},{"n":["zipper-mouth face","zipper_mouth_face"],"u":"1f910"},{"n":["hushed face","hushed"],"u":"1f62f"},{"n":["sleepy face","sleepy"],"u":"1f62a"},{"n":["tired face","tired_face"],"u":"1f62b"},{"n":["sleeping face","sleeping"],"u":"1f634"},{"n":["relieved face","relieved"],"u":"1f60c"},{"n":["face with stuck-out tongue","stuck_out_tongue"],"u":"1f61b"},{"n":["face with stuck-out tongue and winking eye","stuck_out_tongue_winking_eye"],"u":"1f61c"},{"n":["face with stuck-out tongue and tightly-closed eyes","stuck_out_tongue_closed_eyes"],"u":"1f61d"},{"n":["drooling face","drooling_face"],"u":"1f924"},{"n":["unamused face","unamused"],"u":"1f612"},{"n":["face with cold sweat","sweat"],"u":"1f613"},{"n":["pensive face","pensive"],"u":"1f614"},{"n":["confused face","confused"],"u":"1f615"},{"n":["upside-down face","upside_down_face"],"u":"1f643"},{"n":["money-mouth face","money_mouth_face"],"u":"1f911"},{"n":["astonished face","astonished"],"u":"1f632"},{"n":["white_frowning_face"],"u":"2639-fe0f"},{"n":["slightly frowning face","slightly_frowning_face"],"u":"1f641"},{"n":["confounded face","confounded"],"u":"1f616"},{"n":["disappointed face","disappointed"],"u":"1f61e"},{"n":["worried face","worried"],"u":"1f61f"},{"n":["face with look of triumph","triumph"],"u":"1f624"},{"n":["crying face","cry"],"u":"1f622"},{"n":["loudly crying face","sob"],"u":"1f62d"},{"n":["frowning face with open mouth","frowning"],"u":"1f626"},{"n":["anguished face","anguished"],"u":"1f627"},{"n":["fearful face","fearful"],"u":"1f628"},{"n":["weary face","weary"],"u":"1f629"},{"n":["shocked face with exploding head","exploding_head","shocked_face_with_exploding_head"],"u":"1f92f"},{"n":["grimacing face","grimacing"],"u":"1f62c"},{"n":["face with open mouth and cold sweat","cold_sweat"],"u":"1f630"},{"n":["face screaming in fear","scream"],"u":"1f631"},{"n":["flushed face","flushed"],"u":"1f633"},{"n":["grinning face with one large and one small eye","zany_face","grinning_face_with_one_large_and_one_small_eye"],"u":"1f92a"},{"n":["dizzy face","dizzy_face"],"u":"1f635"},{"n":["pouting face","rage"],"u":"1f621"},{"n":["angry face","angry"],"u":"1f620"},{"n":["serious face with symbols covering mouth","face_with_symbols_on_mouth","serious_face_with_symbols_covering_mouth"],"u":"1f92c"},{"n":["face with medical mask","mask"],"u":"1f637"},{"n":["face with thermometer","face_with_thermometer"],"u":"1f912"},{"n":["face with head-bandage","face_with_head_bandage"],"u":"1f915"},{"n":["nauseated face","nauseated_face"],"u":"1f922"},{"n":["face with open mouth vomiting","face_vomiting","face_with_open_mouth_vomiting"],"u":"1f92e"},{"n":["sneezing face","sneezing_face"],"u":"1f927"},{"n":["smiling face with halo","innocent"],"u":"1f607"},{"n":["face with cowboy hat","face_with_cowboy_hat"],"u":"1f920"},{"n":["clown face","clown_face"],"u":"1f921"},{"n":["lying face","lying_face"],"u":"1f925"},{"n":["face with finger covering closed lips","shushing_face","face_with_finger_covering_closed_lips"],"u":"1f92b"},{"n":["smiling face with smiling eyes and hand covering mouth","face_with_hand_over_mouth","smiling_face_with_smiling_eyes_and_hand_covering_mouth"],"u":"1f92d"},{"n":["face with monocle","face_with_monocle"],"u":"1f9d0"},{"n":["nerd face","nerd_face"],"u":"1f913"},{"n":["smiling face with horns","smiling_imp"],"u":"1f608"},{"n":["imp"],"u":"1f47f"},{"n":["japanese ogre","japanese_ogre"],"u":"1f479"},{"n":["japanese goblin","japanese_goblin"],"u":"1f47a"},{"n":["skull"],"u":"1f480"},{"n":["skull_and_crossbones"],"u":"2620-fe0f"},{"n":["ghost"],"u":"1f47b"},{"n":["extraterrestrial alien","alien"],"u":"1f47d"},{"n":["alien monster","space_invader"],"u":"1f47e"},{"n":["robot face","robot_face"],"u":"1f916"},{"n":["pile of poo","hankey","poop","shit"],"u":"1f4a9"},{"n":["smiling cat face with open mouth","smiley_cat"],"u":"1f63a"},{"n":["grinning cat face with smiling eyes","smile_cat"],"u":"1f638"},{"n":["cat face with tears of joy","joy_cat"],"u":"1f639"},{"n":["smiling cat face with heart-shaped eyes","heart_eyes_cat"],"u":"1f63b"},{"n":["cat face with wry smile","smirk_cat"],"u":"1f63c"},{"n":["kissing cat face with closed eyes","kissing_cat"],"u":"1f63d"},{"n":["weary cat face","scream_cat"],"u":"1f640"},{"n":["crying cat face","crying_cat_face"],"u":"1f63f"},{"n":["pouting cat face","pouting_cat"],"u":"1f63e"},{"n":["see-no-evil monkey","see_no_evil"],"u":"1f648"},{"n":["hear-no-evil monkey","hear_no_evil"],"u":"1f649"},{"n":["speak-no-evil monkey","speak_no_evil"],"u":"1f64a"},{"n":["baby"],"u":"1f476","v":["1f476-1f3fb","1f476-1f3fc","1f476-1f3fd","1f476-1f3fe","1f476-1f3ff"]},{"n":["child"],"u":"1f9d2","v":["1f9d2-1f3fb","1f9d2-1f3fc","1f9d2-1f3fd","1f9d2-1f3fe","1f9d2-1f3ff"]},{"n":["boy"],"u":"1f466","v":["1f466-1f3fb","1f466-1f3fc","1f466-1f3fd","1f466-1f3fe","1f466-1f3ff"]},{"n":["girl"],"u":"1f467","v":["1f467-1f3fb","1f467-1f3fc","1f467-1f3fd","1f467-1f3fe","1f467-1f3ff"]},{"n":["adult"],"u":"1f9d1","v":["1f9d1-1f3fb","1f9d1-1f3fc","1f9d1-1f3fd","1f9d1-1f3fe","1f9d1-1f3ff"]},{"n":["man"],"u":"1f468","v":["1f468-1f3fb","1f468-1f3fc","1f468-1f3fd","1f468-1f3fe","1f468-1f3ff"]},{"n":["woman"],"u":"1f469","v":["1f469-1f3fb","1f469-1f3fc","1f469-1f3fd","1f469-1f3fe","1f469-1f3ff"]},{"n":["older adult","older_adult"],"u":"1f9d3","v":["1f9d3-1f3fb","1f9d3-1f3fc","1f9d3-1f3fd","1f9d3-1f3fe","1f9d3-1f3ff"]},{"n":["older man","older_man"],"u":"1f474","v":["1f474-1f3fb","1f474-1f3fc","1f474-1f3fd","1f474-1f3fe","1f474-1f3ff"]},{"n":["older woman","older_woman"],"u":"1f475","v":["1f475-1f3fb","1f475-1f3fc","1f475-1f3fd","1f475-1f3fe","1f475-1f3ff"]},{"n":["male-doctor"],"u":"1f468-200d-2695-fe0f","v":["1f468-1f3fb-200d-2695-fe0f","1f468-1f3fc-200d-2695-fe0f","1f468-1f3fd-200d-2695-fe0f","1f468-1f3fe-200d-2695-fe0f","1f468-1f3ff-200d-2695-fe0f"]},{"n":["female-doctor"],"u":"1f469-200d-2695-fe0f","v":["1f469-1f3fb-200d-2695-fe0f","1f469-1f3fc-200d-2695-fe0f","1f469-1f3fd-200d-2695-fe0f","1f469-1f3fe-200d-2695-fe0f","1f469-1f3ff-200d-2695-fe0f"]},{"n":["male-student"],"u":"1f468-200d-1f393","v":["1f468-1f3fb-200d-1f393","1f468-1f3fc-200d-1f393","1f468-1f3fd-200d-1f393","1f468-1f3fe-200d-1f393","1f468-1f3ff-200d-1f393"]},{"n":["female-student"],"u":"1f469-200d-1f393","v":["1f469-1f3fb-200d-1f393","1f469-1f3fc-200d-1f393","1f469-1f3fd-200d-1f393","1f469-1f3fe-200d-1f393","1f469-1f3ff-200d-1f393"]},{"n":["male-teacher"],"u":"1f468-200d-1f3eb","v":["1f468-1f3fb-200d-1f3eb","1f468-1f3fc-200d-1f3eb","1f468-1f3fd-200d-1f3eb","1f468-1f3fe-200d-1f3eb","1f468-1f3ff-200d-1f3eb"]},{"n":["female-teacher"],"u":"1f469-200d-1f3eb","v":["1f469-1f3fb-200d-1f3eb","1f469-1f3fc-200d-1f3eb","1f469-1f3fd-200d-1f3eb","1f469-1f3fe-200d-1f3eb","1f469-1f3ff-200d-1f3eb"]},{"n":["male-judge"],"u":"1f468-200d-2696-fe0f","v":["1f468-1f3fb-200d-2696-fe0f","1f468-1f3fc-200d-2696-fe0f","1f468-1f3fd-200d-2696-fe0f","1f468-1f3fe-200d-2696-fe0f","1f468-1f3ff-200d-2696-fe0f"]},{"n":["female-judge"],"u":"1f469-200d-2696-fe0f","v":["1f469-1f3fb-200d-2696-fe0f","1f469-1f3fc-200d-2696-fe0f","1f469-1f3fd-200d-2696-fe0f","1f469-1f3fe-200d-2696-fe0f","1f469-1f3ff-200d-2696-fe0f"]},{"n":["male-farmer"],"u":"1f468-200d-1f33e","v":["1f468-1f3fb-200d-1f33e","1f468-1f3fc-200d-1f33e","1f468-1f3fd-200d-1f33e","1f468-1f3fe-200d-1f33e","1f468-1f3ff-200d-1f33e"]},{"n":["female-farmer"],"u":"1f469-200d-1f33e","v":["1f469-1f3fb-200d-1f33e","1f469-1f3fc-200d-1f33e","1f469-1f3fd-200d-1f33e","1f469-1f3fe-200d-1f33e","1f469-1f3ff-200d-1f33e"]},{"n":["male-cook"],"u":"1f468-200d-1f373","v":["1f468-1f3fb-200d-1f373","1f468-1f3fc-200d-1f373","1f468-1f3fd-200d-1f373","1f468-1f3fe-200d-1f373","1f468-1f3ff-200d-1f373"]},{"n":["female-cook"],"u":"1f469-200d-1f373","v":["1f469-1f3fb-200d-1f373","1f469-1f3fc-200d-1f373","1f469-1f3fd-200d-1f373","1f469-1f3fe-200d-1f373","1f469-1f3ff-200d-1f373"]},{"n":["male-mechanic"],"u":"1f468-200d-1f527","v":["1f468-1f3fb-200d-1f527","1f468-1f3fc-200d-1f527","1f468-1f3fd-200d-1f527","1f468-1f3fe-200d-1f527","1f468-1f3ff-200d-1f527"]},{"n":["female-mechanic"],"u":"1f469-200d-1f527","v":["1f469-1f3fb-200d-1f527","1f469-1f3fc-200d-1f527","1f469-1f3fd-200d-1f527","1f469-1f3fe-200d-1f527","1f469-1f3ff-200d-1f527"]},{"n":["male-factory-worker"],"u":"1f468-200d-1f3ed","v":["1f468-1f3fb-200d-1f3ed","1f468-1f3fc-200d-1f3ed","1f468-1f3fd-200d-1f3ed","1f468-1f3fe-200d-1f3ed","1f468-1f3ff-200d-1f3ed"]},{"n":["female-factory-worker"],"u":"1f469-200d-1f3ed","v":["1f469-1f3fb-200d-1f3ed","1f469-1f3fc-200d-1f3ed","1f469-1f3fd-200d-1f3ed","1f469-1f3fe-200d-1f3ed","1f469-1f3ff-200d-1f3ed"]},{"n":["male-office-worker"],"u":"1f468-200d-1f4bc","v":["1f468-1f3fb-200d-1f4bc","1f468-1f3fc-200d-1f4bc","1f468-1f3fd-200d-1f4bc","1f468-1f3fe-200d-1f4bc","1f468-1f3ff-200d-1f4bc"]},{"n":["female-office-worker"],"u":"1f469-200d-1f4bc","v":["1f469-1f3fb-200d-1f4bc","1f469-1f3fc-200d-1f4bc","1f469-1f3fd-200d-1f4bc","1f469-1f3fe-200d-1f4bc","1f469-1f3ff-200d-1f4bc"]},{"n":["male-scientist"],"u":"1f468-200d-1f52c","v":["1f468-1f3fb-200d-1f52c","1f468-1f3fc-200d-1f52c","1f468-1f3fd-200d-1f52c","1f468-1f3fe-200d-1f52c","1f468-1f3ff-200d-1f52c"]},{"n":["female-scientist"],"u":"1f469-200d-1f52c","v":["1f469-1f3fb-200d-1f52c","1f469-1f3fc-200d-1f52c","1f469-1f3fd-200d-1f52c","1f469-1f3fe-200d-1f52c","1f469-1f3ff-200d-1f52c"]},{"n":["male-technologist"],"u":"1f468-200d-1f4bb","v":["1f468-1f3fb-200d-1f4bb","1f468-1f3fc-200d-1f4bb","1f468-1f3fd-200d-1f4bb","1f468-1f3fe-200d-1f4bb","1f468-1f3ff-200d-1f4bb"]},{"n":["female-technologist"],"u":"1f469-200d-1f4bb","v":["1f469-1f3fb-200d-1f4bb","1f469-1f3fc-200d-1f4bb","1f469-1f3fd-200d-1f4bb","1f469-1f3fe-200d-1f4bb","1f469-1f3ff-200d-1f4bb"]},{"n":["male-singer"],"u":"1f468-200d-1f3a4","v":["1f468-1f3fb-200d-1f3a4","1f468-1f3fc-200d-1f3a4","1f468-1f3fd-200d-1f3a4","1f468-1f3fe-200d-1f3a4","1f468-1f3ff-200d-1f3a4"]},{"n":["female-singer"],"u":"1f469-200d-1f3a4","v":["1f469-1f3fb-200d-1f3a4","1f469-1f3fc-200d-1f3a4","1f469-1f3fd-200d-1f3a4","1f469-1f3fe-200d-1f3a4","1f469-1f3ff-200d-1f3a4"]},{"n":["male-artist"],"u":"1f468-200d-1f3a8","v":["1f468-1f3fb-200d-1f3a8","1f468-1f3fc-200d-1f3a8","1f468-1f3fd-200d-1f3a8","1f468-1f3fe-200d-1f3a8","1f468-1f3ff-200d-1f3a8"]},{"n":["female-artist"],"u":"1f469-200d-1f3a8","v":["1f469-1f3fb-200d-1f3a8","1f469-1f3fc-200d-1f3a8","1f469-1f3fd-200d-1f3a8","1f469-1f3fe-200d-1f3a8","1f469-1f3ff-200d-1f3a8"]},{"n":["male-pilot"],"u":"1f468-200d-2708-fe0f","v":["1f468-1f3fb-200d-2708-fe0f","1f468-1f3fc-200d-2708-fe0f","1f468-1f3fd-200d-2708-fe0f","1f468-1f3fe-200d-2708-fe0f","1f468-1f3ff-200d-2708-fe0f"]},{"n":["female-pilot"],"u":"1f469-200d-2708-fe0f","v":["1f469-1f3fb-200d-2708-fe0f","1f469-1f3fc-200d-2708-fe0f","1f469-1f3fd-200d-2708-fe0f","1f469-1f3fe-200d-2708-fe0f","1f469-1f3ff-200d-2708-fe0f"]},{"n":["male-astronaut"],"u":"1f468-200d-1f680","v":["1f468-1f3fb-200d-1f680","1f468-1f3fc-200d-1f680","1f468-1f3fd-200d-1f680","1f468-1f3fe-200d-1f680","1f468-1f3ff-200d-1f680"]},{"n":["female-astronaut"],"u":"1f469-200d-1f680","v":["1f469-1f3fb-200d-1f680","1f469-1f3fc-200d-1f680","1f469-1f3fd-200d-1f680","1f469-1f3fe-200d-1f680","1f469-1f3ff-200d-1f680"]},{"n":["male-firefighter"],"u":"1f468-200d-1f692","v":["1f468-1f3fb-200d-1f692","1f468-1f3fc-200d-1f692","1f468-1f3fd-200d-1f692","1f468-1f3fe-200d-1f692","1f468-1f3ff-200d-1f692"]},{"n":["female-firefighter"],"u":"1f469-200d-1f692","v":["1f469-1f3fb-200d-1f692","1f469-1f3fc-200d-1f692","1f469-1f3fd-200d-1f692","1f469-1f3fe-200d-1f692","1f469-1f3ff-200d-1f692"]},{"n":["police officer","cop"],"u":"1f46e","v":["1f46e-1f3fb","1f46e-1f3fc","1f46e-1f3fd","1f46e-1f3fe","1f46e-1f3ff"]},{"n":["male-police-officer"],"u":"1f46e-200d-2642-fe0f","v":["1f46e-1f3fb-200d-2642-fe0f","1f46e-1f3fc-200d-2642-fe0f","1f46e-1f3fd-200d-2642-fe0f","1f46e-1f3fe-200d-2642-fe0f","1f46e-1f3ff-200d-2642-fe0f"]},{"n":["female-police-officer"],"u":"1f46e-200d-2640-fe0f","v":["1f46e-1f3fb-200d-2640-fe0f","1f46e-1f3fc-200d-2640-fe0f","1f46e-1f3fd-200d-2640-fe0f","1f46e-1f3fe-200d-2640-fe0f","1f46e-1f3ff-200d-2640-fe0f"]},{"n":["sleuth_or_spy"],"u":"1f575-fe0f","v":["1f575-1f3fb","1f575-1f3fc","1f575-1f3fd","1f575-1f3fe","1f575-1f3ff"]},{"n":["male-detective"],"u":"1f575-fe0f-200d-2642-fe0f","v":["1f575-1f3fb-200d-2642-fe0f","1f575-1f3fc-200d-2642-fe0f","1f575-1f3fd-200d-2642-fe0f","1f575-1f3fe-200d-2642-fe0f","1f575-1f3ff-200d-2642-fe0f"]},{"n":["female-detective"],"u":"1f575-fe0f-200d-2640-fe0f","v":["1f575-1f3fb-200d-2640-fe0f","1f575-1f3fc-200d-2640-fe0f","1f575-1f3fd-200d-2640-fe0f","1f575-1f3fe-200d-2640-fe0f","1f575-1f3ff-200d-2640-fe0f"]},{"n":["guardsman"],"u":"1f482","v":["1f482-1f3fb","1f482-1f3fc","1f482-1f3fd","1f482-1f3fe","1f482-1f3ff"]},{"n":["male-guard"],"u":"1f482-200d-2642-fe0f","v":["1f482-1f3fb-200d-2642-fe0f","1f482-1f3fc-200d-2642-fe0f","1f482-1f3fd-200d-2642-fe0f","1f482-1f3fe-200d-2642-fe0f","1f482-1f3ff-200d-2642-fe0f"]},{"n":["female-guard"],"u":"1f482-200d-2640-fe0f","v":["1f482-1f3fb-200d-2640-fe0f","1f482-1f3fc-200d-2640-fe0f","1f482-1f3fd-200d-2640-fe0f","1f482-1f3fe-200d-2640-fe0f","1f482-1f3ff-200d-2640-fe0f"]},{"n":["construction worker","construction_worker"],"u":"1f477","v":["1f477-1f3fb","1f477-1f3fc","1f477-1f3fd","1f477-1f3fe","1f477-1f3ff"]},{"n":["male-construction-worker"],"u":"1f477-200d-2642-fe0f","v":["1f477-1f3fb-200d-2642-fe0f","1f477-1f3fc-200d-2642-fe0f","1f477-1f3fd-200d-2642-fe0f","1f477-1f3fe-200d-2642-fe0f","1f477-1f3ff-200d-2642-fe0f"]},{"n":["female-construction-worker"],"u":"1f477-200d-2640-fe0f","v":["1f477-1f3fb-200d-2640-fe0f","1f477-1f3fc-200d-2640-fe0f","1f477-1f3fd-200d-2640-fe0f","1f477-1f3fe-200d-2640-fe0f","1f477-1f3ff-200d-2640-fe0f"]},{"n":["prince"],"u":"1f934","v":["1f934-1f3fb","1f934-1f3fc","1f934-1f3fd","1f934-1f3fe","1f934-1f3ff"]},{"n":["princess"],"u":"1f478","v":["1f478-1f3fb","1f478-1f3fc","1f478-1f3fd","1f478-1f3fe","1f478-1f3ff"]},{"n":["man with turban","man_with_turban"],"u":"1f473","v":["1f473-1f3fb","1f473-1f3fc","1f473-1f3fd","1f473-1f3fe","1f473-1f3ff"]},{"n":["man-wearing-turban"],"u":"1f473-200d-2642-fe0f","v":["1f473-1f3fb-200d-2642-fe0f","1f473-1f3fc-200d-2642-fe0f","1f473-1f3fd-200d-2642-fe0f","1f473-1f3fe-200d-2642-fe0f","1f473-1f3ff-200d-2642-fe0f"]},{"n":["woman-wearing-turban"],"u":"1f473-200d-2640-fe0f","v":["1f473-1f3fb-200d-2640-fe0f","1f473-1f3fc-200d-2640-fe0f","1f473-1f3fd-200d-2640-fe0f","1f473-1f3fe-200d-2640-fe0f","1f473-1f3ff-200d-2640-fe0f"]},{"n":["man with gua pi mao","man_with_gua_pi_mao"],"u":"1f472","v":["1f472-1f3fb","1f472-1f3fc","1f472-1f3fd","1f472-1f3fe","1f472-1f3ff"]},{"n":["person with headscarf","person_with_headscarf"],"u":"1f9d5","v":["1f9d5-1f3fb","1f9d5-1f3fc","1f9d5-1f3fd","1f9d5-1f3fe","1f9d5-1f3ff"]},{"n":["bearded person","bearded_person"],"u":"1f9d4","v":["1f9d4-1f3fb","1f9d4-1f3fc","1f9d4-1f3fd","1f9d4-1f3fe","1f9d4-1f3ff"]},{"n":["person with blond hair","person_with_blond_hair"],"u":"1f471","v":["1f471-1f3fb","1f471-1f3fc","1f471-1f3fd","1f471-1f3fe","1f471-1f3ff"]},{"n":["blond-haired-man"],"u":"1f471-200d-2642-fe0f","v":["1f471-1f3fb-200d-2642-fe0f","1f471-1f3fc-200d-2642-fe0f","1f471-1f3fd-200d-2642-fe0f","1f471-1f3fe-200d-2642-fe0f","1f471-1f3ff-200d-2642-fe0f"]},{"n":["blond-haired-woman"],"u":"1f471-200d-2640-fe0f","v":["1f471-1f3fb-200d-2640-fe0f","1f471-1f3fc-200d-2640-fe0f","1f471-1f3fd-200d-2640-fe0f","1f471-1f3fe-200d-2640-fe0f","1f471-1f3ff-200d-2640-fe0f"]},{"n":["man in tuxedo","man_in_tuxedo"],"u":"1f935","v":["1f935-1f3fb","1f935-1f3fc","1f935-1f3fd","1f935-1f3fe","1f935-1f3ff"]},{"n":["bride with veil","bride_with_veil"],"u":"1f470","v":["1f470-1f3fb","1f470-1f3fc","1f470-1f3fd","1f470-1f3fe","1f470-1f3ff"]},{"n":["pregnant woman","pregnant_woman"],"u":"1f930","v":["1f930-1f3fb","1f930-1f3fc","1f930-1f3fd","1f930-1f3fe","1f930-1f3ff"]},{"n":["breast-feeding"],"u":"1f931","v":["1f931-1f3fb","1f931-1f3fc","1f931-1f3fd","1f931-1f3fe","1f931-1f3ff"]},{"n":["baby angel","angel"],"u":"1f47c","v":["1f47c-1f3fb","1f47c-1f3fc","1f47c-1f3fd","1f47c-1f3fe","1f47c-1f3ff"]},{"n":["father christmas","santa"],"u":"1f385","v":["1f385-1f3fb","1f385-1f3fc","1f385-1f3fd","1f385-1f3fe","1f385-1f3ff"]},{"n":["mother christmas","mrs_claus","mother_christmas"],"u":"1f936","v":["1f936-1f3fb","1f936-1f3fc","1f936-1f3fd","1f936-1f3fe","1f936-1f3ff"]},{"n":["mage"],"u":"1f9d9","v":["1f9d9-1f3fb","1f9d9-1f3fc","1f9d9-1f3fd","1f9d9-1f3fe","1f9d9-1f3ff"]},{"n":["female_mage"],"u":"1f9d9-200d-2640-fe0f","v":["1f9d9-1f3fb-200d-2640-fe0f","1f9d9-1f3fc-200d-2640-fe0f","1f9d9-1f3fd-200d-2640-fe0f","1f9d9-1f3fe-200d-2640-fe0f","1f9d9-1f3ff-200d-2640-fe0f"]},{"n":["male_mage"],"u":"1f9d9-200d-2642-fe0f","v":["1f9d9-1f3fb-200d-2642-fe0f","1f9d9-1f3fc-200d-2642-fe0f","1f9d9-1f3fd-200d-2642-fe0f","1f9d9-1f3fe-200d-2642-fe0f","1f9d9-1f3ff-200d-2642-fe0f"]},{"n":["fairy"],"u":"1f9da","v":["1f9da-1f3fb","1f9da-1f3fc","1f9da-1f3fd","1f9da-1f3fe","1f9da-1f3ff"]},{"n":["female_fairy"],"u":"1f9da-200d-2640-fe0f","v":["1f9da-1f3fb-200d-2640-fe0f","1f9da-1f3fc-200d-2640-fe0f","1f9da-1f3fd-200d-2640-fe0f","1f9da-1f3fe-200d-2640-fe0f","1f9da-1f3ff-200d-2640-fe0f"]},{"n":["male_fairy"],"u":"1f9da-200d-2642-fe0f","v":["1f9da-1f3fb-200d-2642-fe0f","1f9da-1f3fc-200d-2642-fe0f","1f9da-1f3fd-200d-2642-fe0f","1f9da-1f3fe-200d-2642-fe0f","1f9da-1f3ff-200d-2642-fe0f"]},{"n":["vampire"],"u":"1f9db","v":["1f9db-1f3fb","1f9db-1f3fc","1f9db-1f3fd","1f9db-1f3fe","1f9db-1f3ff"]},{"n":["female_vampire"],"u":"1f9db-200d-2640-fe0f","v":["1f9db-1f3fb-200d-2640-fe0f","1f9db-1f3fc-200d-2640-fe0f","1f9db-1f3fd-200d-2640-fe0f","1f9db-1f3fe-200d-2640-fe0f","1f9db-1f3ff-200d-2640-fe0f"]},{"n":["male_vampire"],"u":"1f9db-200d-2642-fe0f","v":["1f9db-1f3fb-200d-2642-fe0f","1f9db-1f3fc-200d-2642-fe0f","1f9db-1f3fd-200d-2642-fe0f","1f9db-1f3fe-200d-2642-fe0f","1f9db-1f3ff-200d-2642-fe0f"]},{"n":["merperson"],"u":"1f9dc","v":["1f9dc-1f3fb","1f9dc-1f3fc","1f9dc-1f3fd","1f9dc-1f3fe","1f9dc-1f3ff"]},{"n":["mermaid"],"u":"1f9dc-200d-2640-fe0f","v":["1f9dc-1f3fb-200d-2640-fe0f","1f9dc-1f3fc-200d-2640-fe0f","1f9dc-1f3fd-200d-2640-fe0f","1f9dc-1f3fe-200d-2640-fe0f","1f9dc-1f3ff-200d-2640-fe0f"]},{"n":["merman"],"u":"1f9dc-200d-2642-fe0f","v":["1f9dc-1f3fb-200d-2642-fe0f","1f9dc-1f3fc-200d-2642-fe0f","1f9dc-1f3fd-200d-2642-fe0f","1f9dc-1f3fe-200d-2642-fe0f","1f9dc-1f3ff-200d-2642-fe0f"]},{"n":["elf"],"u":"1f9dd","v":["1f9dd-1f3fb","1f9dd-1f3fc","1f9dd-1f3fd","1f9dd-1f3fe","1f9dd-1f3ff"]},{"n":["female_elf"],"u":"1f9dd-200d-2640-fe0f","v":["1f9dd-1f3fb-200d-2640-fe0f","1f9dd-1f3fc-200d-2640-fe0f","1f9dd-1f3fd-200d-2640-fe0f","1f9dd-1f3fe-200d-2640-fe0f","1f9dd-1f3ff-200d-2640-fe0f"]},{"n":["male_elf"],"u":"1f9dd-200d-2642-fe0f","v":["1f9dd-1f3fb-200d-2642-fe0f","1f9dd-1f3fc-200d-2642-fe0f","1f9dd-1f3fd-200d-2642-fe0f","1f9dd-1f3fe-200d-2642-fe0f","1f9dd-1f3ff-200d-2642-fe0f"]},{"n":["genie"],"u":"1f9de"},{"n":["female_genie"],"u":"1f9de-200d-2640-fe0f"},{"n":["male_genie"],"u":"1f9de-200d-2642-fe0f"},{"n":["zombie"],"u":"1f9df"},{"n":["female_zombie"],"u":"1f9df-200d-2640-fe0f"},{"n":["male_zombie"],"u":"1f9df-200d-2642-fe0f"},{"n":["person frowning","person_frowning"],"u":"1f64d","v":["1f64d-1f3fb","1f64d-1f3fc","1f64d-1f3fd","1f64d-1f3fe","1f64d-1f3ff"]},{"n":["man-frowning"],"u":"1f64d-200d-2642-fe0f","v":["1f64d-1f3fb-200d-2642-fe0f","1f64d-1f3fc-200d-2642-fe0f","1f64d-1f3fd-200d-2642-fe0f","1f64d-1f3fe-200d-2642-fe0f","1f64d-1f3ff-200d-2642-fe0f"]},{"n":["woman-frowning"],"u":"1f64d-200d-2640-fe0f","v":["1f64d-1f3fb-200d-2640-fe0f","1f64d-1f3fc-200d-2640-fe0f","1f64d-1f3fd-200d-2640-fe0f","1f64d-1f3fe-200d-2640-fe0f","1f64d-1f3ff-200d-2640-fe0f"]},{"n":["person with pouting face","person_with_pouting_face"],"u":"1f64e","v":["1f64e-1f3fb","1f64e-1f3fc","1f64e-1f3fd","1f64e-1f3fe","1f64e-1f3ff"]},{"n":["man-pouting"],"u":"1f64e-200d-2642-fe0f","v":["1f64e-1f3fb-200d-2642-fe0f","1f64e-1f3fc-200d-2642-fe0f","1f64e-1f3fd-200d-2642-fe0f","1f64e-1f3fe-200d-2642-fe0f","1f64e-1f3ff-200d-2642-fe0f"]},{"n":["woman-pouting"],"u":"1f64e-200d-2640-fe0f","v":["1f64e-1f3fb-200d-2640-fe0f","1f64e-1f3fc-200d-2640-fe0f","1f64e-1f3fd-200d-2640-fe0f","1f64e-1f3fe-200d-2640-fe0f","1f64e-1f3ff-200d-2640-fe0f"]},{"n":["face with no good gesture","no_good"],"u":"1f645","v":["1f645-1f3fb","1f645-1f3fc","1f645-1f3fd","1f645-1f3fe","1f645-1f3ff"]},{"n":["man-gesturing-no"],"u":"1f645-200d-2642-fe0f","v":["1f645-1f3fb-200d-2642-fe0f","1f645-1f3fc-200d-2642-fe0f","1f645-1f3fd-200d-2642-fe0f","1f645-1f3fe-200d-2642-fe0f","1f645-1f3ff-200d-2642-fe0f"]},{"n":["woman-gesturing-no"],"u":"1f645-200d-2640-fe0f","v":["1f645-1f3fb-200d-2640-fe0f","1f645-1f3fc-200d-2640-fe0f","1f645-1f3fd-200d-2640-fe0f","1f645-1f3fe-200d-2640-fe0f","1f645-1f3ff-200d-2640-fe0f"]},{"n":["face with ok gesture","ok_woman"],"u":"1f646","v":["1f646-1f3fb","1f646-1f3fc","1f646-1f3fd","1f646-1f3fe","1f646-1f3ff"]},{"n":["man-gesturing-ok"],"u":"1f646-200d-2642-fe0f","v":["1f646-1f3fb-200d-2642-fe0f","1f646-1f3fc-200d-2642-fe0f","1f646-1f3fd-200d-2642-fe0f","1f646-1f3fe-200d-2642-fe0f","1f646-1f3ff-200d-2642-fe0f"]},{"n":["woman-gesturing-ok"],"u":"1f646-200d-2640-fe0f","v":["1f646-1f3fb-200d-2640-fe0f","1f646-1f3fc-200d-2640-fe0f","1f646-1f3fd-200d-2640-fe0f","1f646-1f3fe-200d-2640-fe0f","1f646-1f3ff-200d-2640-fe0f"]},{"n":["information desk person","information_desk_person"],"u":"1f481","v":["1f481-1f3fb","1f481-1f3fc","1f481-1f3fd","1f481-1f3fe","1f481-1f3ff"]},{"n":["man-tipping-hand"],"u":"1f481-200d-2642-fe0f","v":["1f481-1f3fb-200d-2642-fe0f","1f481-1f3fc-200d-2642-fe0f","1f481-1f3fd-200d-2642-fe0f","1f481-1f3fe-200d-2642-fe0f","1f481-1f3ff-200d-2642-fe0f"]},{"n":["woman-tipping-hand"],"u":"1f481-200d-2640-fe0f","v":["1f481-1f3fb-200d-2640-fe0f","1f481-1f3fc-200d-2640-fe0f","1f481-1f3fd-200d-2640-fe0f","1f481-1f3fe-200d-2640-fe0f","1f481-1f3ff-200d-2640-fe0f"]},{"n":["happy person raising one hand","raising_hand"],"u":"1f64b","v":["1f64b-1f3fb","1f64b-1f3fc","1f64b-1f3fd","1f64b-1f3fe","1f64b-1f3ff"]},{"n":["man-raising-hand"],"u":"1f64b-200d-2642-fe0f","v":["1f64b-1f3fb-200d-2642-fe0f","1f64b-1f3fc-200d-2642-fe0f","1f64b-1f3fd-200d-2642-fe0f","1f64b-1f3fe-200d-2642-fe0f","1f64b-1f3ff-200d-2642-fe0f"]},{"n":["woman-raising-hand"],"u":"1f64b-200d-2640-fe0f","v":["1f64b-1f3fb-200d-2640-fe0f","1f64b-1f3fc-200d-2640-fe0f","1f64b-1f3fd-200d-2640-fe0f","1f64b-1f3fe-200d-2640-fe0f","1f64b-1f3ff-200d-2640-fe0f"]},{"n":["person bowing deeply","bow"],"u":"1f647","v":["1f647-1f3fb","1f647-1f3fc","1f647-1f3fd","1f647-1f3fe","1f647-1f3ff"]},{"n":["man-bowing"],"u":"1f647-200d-2642-fe0f","v":["1f647-1f3fb-200d-2642-fe0f","1f647-1f3fc-200d-2642-fe0f","1f647-1f3fd-200d-2642-fe0f","1f647-1f3fe-200d-2642-fe0f","1f647-1f3ff-200d-2642-fe0f"]},{"n":["woman-bowing"],"u":"1f647-200d-2640-fe0f","v":["1f647-1f3fb-200d-2640-fe0f","1f647-1f3fc-200d-2640-fe0f","1f647-1f3fd-200d-2640-fe0f","1f647-1f3fe-200d-2640-fe0f","1f647-1f3ff-200d-2640-fe0f"]},{"n":["face palm","face_palm"],"u":"1f926","v":["1f926-1f3fb","1f926-1f3fc","1f926-1f3fd","1f926-1f3fe","1f926-1f3ff"]},{"n":["man-facepalming"],"u":"1f926-200d-2642-fe0f","v":["1f926-1f3fb-200d-2642-fe0f","1f926-1f3fc-200d-2642-fe0f","1f926-1f3fd-200d-2642-fe0f","1f926-1f3fe-200d-2642-fe0f","1f926-1f3ff-200d-2642-fe0f"]},{"n":["woman-facepalming"],"u":"1f926-200d-2640-fe0f","v":["1f926-1f3fb-200d-2640-fe0f","1f926-1f3fc-200d-2640-fe0f","1f926-1f3fd-200d-2640-fe0f","1f926-1f3fe-200d-2640-fe0f","1f926-1f3ff-200d-2640-fe0f"]},{"n":["shrug"],"u":"1f937","v":["1f937-1f3fb","1f937-1f3fc","1f937-1f3fd","1f937-1f3fe","1f937-1f3ff"]},{"n":["man-shrugging"],"u":"1f937-200d-2642-fe0f","v":["1f937-1f3fb-200d-2642-fe0f","1f937-1f3fc-200d-2642-fe0f","1f937-1f3fd-200d-2642-fe0f","1f937-1f3fe-200d-2642-fe0f","1f937-1f3ff-200d-2642-fe0f"]},{"n":["woman-shrugging"],"u":"1f937-200d-2640-fe0f","v":["1f937-1f3fb-200d-2640-fe0f","1f937-1f3fc-200d-2640-fe0f","1f937-1f3fd-200d-2640-fe0f","1f937-1f3fe-200d-2640-fe0f","1f937-1f3ff-200d-2640-fe0f"]},{"n":["face massage","massage"],"u":"1f486","v":["1f486-1f3fb","1f486-1f3fc","1f486-1f3fd","1f486-1f3fe","1f486-1f3ff"]},{"n":["man-getting-massage"],"u":"1f486-200d-2642-fe0f","v":["1f486-1f3fb-200d-2642-fe0f","1f486-1f3fc-200d-2642-fe0f","1f486-1f3fd-200d-2642-fe0f","1f486-1f3fe-200d-2642-fe0f","1f486-1f3ff-200d-2642-fe0f"]},{"n":["woman-getting-massage"],"u":"1f486-200d-2640-fe0f","v":["1f486-1f3fb-200d-2640-fe0f","1f486-1f3fc-200d-2640-fe0f","1f486-1f3fd-200d-2640-fe0f","1f486-1f3fe-200d-2640-fe0f","1f486-1f3ff-200d-2640-fe0f"]},{"n":["haircut"],"u":"1f487","v":["1f487-1f3fb","1f487-1f3fc","1f487-1f3fd","1f487-1f3fe","1f487-1f3ff"]},{"n":["man-getting-haircut"],"u":"1f487-200d-2642-fe0f","v":["1f487-1f3fb-200d-2642-fe0f","1f487-1f3fc-200d-2642-fe0f","1f487-1f3fd-200d-2642-fe0f","1f487-1f3fe-200d-2642-fe0f","1f487-1f3ff-200d-2642-fe0f"]},{"n":["woman-getting-haircut"],"u":"1f487-200d-2640-fe0f","v":["1f487-1f3fb-200d-2640-fe0f","1f487-1f3fc-200d-2640-fe0f","1f487-1f3fd-200d-2640-fe0f","1f487-1f3fe-200d-2640-fe0f","1f487-1f3ff-200d-2640-fe0f"]},{"n":["pedestrian","walking"],"u":"1f6b6","v":["1f6b6-1f3fb","1f6b6-1f3fc","1f6b6-1f3fd","1f6b6-1f3fe","1f6b6-1f3ff"]},{"n":["man-walking"],"u":"1f6b6-200d-2642-fe0f","v":["1f6b6-1f3fb-200d-2642-fe0f","1f6b6-1f3fc-200d-2642-fe0f","1f6b6-1f3fd-200d-2642-fe0f","1f6b6-1f3fe-200d-2642-fe0f","1f6b6-1f3ff-200d-2642-fe0f"]},{"n":["woman-walking"],"u":"1f6b6-200d-2640-fe0f","v":["1f6b6-1f3fb-200d-2640-fe0f","1f6b6-1f3fc-200d-2640-fe0f","1f6b6-1f3fd-200d-2640-fe0f","1f6b6-1f3fe-200d-2640-fe0f","1f6b6-1f3ff-200d-2640-fe0f"]},{"n":["runner","running"],"u":"1f3c3","v":["1f3c3-1f3fb","1f3c3-1f3fc","1f3c3-1f3fd","1f3c3-1f3fe","1f3c3-1f3ff"]},{"n":["man-running"],"u":"1f3c3-200d-2642-fe0f","v":["1f3c3-1f3fb-200d-2642-fe0f","1f3c3-1f3fc-200d-2642-fe0f","1f3c3-1f3fd-200d-2642-fe0f","1f3c3-1f3fe-200d-2642-fe0f","1f3c3-1f3ff-200d-2642-fe0f"]},{"n":["woman-running"],"u":"1f3c3-200d-2640-fe0f","v":["1f3c3-1f3fb-200d-2640-fe0f","1f3c3-1f3fc-200d-2640-fe0f","1f3c3-1f3fd-200d-2640-fe0f","1f3c3-1f3fe-200d-2640-fe0f","1f3c3-1f3ff-200d-2640-fe0f"]},{"n":["dancer"],"u":"1f483","v":["1f483-1f3fb","1f483-1f3fc","1f483-1f3fd","1f483-1f3fe","1f483-1f3ff"]},{"n":["man dancing","man_dancing"],"u":"1f57a","v":["1f57a-1f3fb","1f57a-1f3fc","1f57a-1f3fd","1f57a-1f3fe","1f57a-1f3ff"]},{"n":["woman with bunny ears","dancers"],"u":"1f46f"},{"n":["man-with-bunny-ears-partying"],"u":"1f46f-200d-2642-fe0f"},{"n":["woman-with-bunny-ears-partying"],"u":"1f46f-200d-2640-fe0f"},{"n":["person in steamy room","person_in_steamy_room"],"u":"1f9d6","v":["1f9d6-1f3fb","1f9d6-1f3fc","1f9d6-1f3fd","1f9d6-1f3fe","1f9d6-1f3ff"]},{"n":["woman_in_steamy_room"],"u":"1f9d6-200d-2640-fe0f","v":["1f9d6-1f3fb-200d-2640-fe0f","1f9d6-1f3fc-200d-2640-fe0f","1f9d6-1f3fd-200d-2640-fe0f","1f9d6-1f3fe-200d-2640-fe0f","1f9d6-1f3ff-200d-2640-fe0f"]},{"n":["man_in_steamy_room"],"u":"1f9d6-200d-2642-fe0f","v":["1f9d6-1f3fb-200d-2642-fe0f","1f9d6-1f3fc-200d-2642-fe0f","1f9d6-1f3fd-200d-2642-fe0f","1f9d6-1f3fe-200d-2642-fe0f","1f9d6-1f3ff-200d-2642-fe0f"]},{"n":["person climbing","person_climbing"],"u":"1f9d7","v":["1f9d7-1f3fb","1f9d7-1f3fc","1f9d7-1f3fd","1f9d7-1f3fe","1f9d7-1f3ff"]},{"n":["woman_climbing"],"u":"1f9d7-200d-2640-fe0f","v":["1f9d7-1f3fb-200d-2640-fe0f","1f9d7-1f3fc-200d-2640-fe0f","1f9d7-1f3fd-200d-2640-fe0f","1f9d7-1f3fe-200d-2640-fe0f","1f9d7-1f3ff-200d-2640-fe0f"]},{"n":["man_climbing"],"u":"1f9d7-200d-2642-fe0f","v":["1f9d7-1f3fb-200d-2642-fe0f","1f9d7-1f3fc-200d-2642-fe0f","1f9d7-1f3fd-200d-2642-fe0f","1f9d7-1f3fe-200d-2642-fe0f","1f9d7-1f3ff-200d-2642-fe0f"]},{"n":["person in lotus position","person_in_lotus_position"],"u":"1f9d8","v":["1f9d8-1f3fb","1f9d8-1f3fc","1f9d8-1f3fd","1f9d8-1f3fe","1f9d8-1f3ff"]},{"n":["woman_in_lotus_position"],"u":"1f9d8-200d-2640-fe0f","v":["1f9d8-1f3fb-200d-2640-fe0f","1f9d8-1f3fc-200d-2640-fe0f","1f9d8-1f3fd-200d-2640-fe0f","1f9d8-1f3fe-200d-2640-fe0f","1f9d8-1f3ff-200d-2640-fe0f"]},{"n":["man_in_lotus_position"],"u":"1f9d8-200d-2642-fe0f","v":["1f9d8-1f3fb-200d-2642-fe0f","1f9d8-1f3fc-200d-2642-fe0f","1f9d8-1f3fd-200d-2642-fe0f","1f9d8-1f3fe-200d-2642-fe0f","1f9d8-1f3ff-200d-2642-fe0f"]},{"n":["bath"],"u":"1f6c0","v":["1f6c0-1f3fb","1f6c0-1f3fc","1f6c0-1f3fd","1f6c0-1f3fe","1f6c0-1f3ff"]},{"n":["sleeping accommodation","sleeping_accommodation"],"u":"1f6cc","v":["1f6cc-1f3fb","1f6cc-1f3fc","1f6cc-1f3fd","1f6cc-1f3fe","1f6cc-1f3ff"]},{"n":["man_in_business_suit_levitating"],"u":"1f574-fe0f","v":["1f574-1f3fb","1f574-1f3fc","1f574-1f3fd","1f574-1f3fe","1f574-1f3ff"]},{"n":["speaking_head_in_silhouette"],"u":"1f5e3-fe0f"},{"n":["bust in silhouette","bust_in_silhouette"],"u":"1f464"},{"n":["busts in silhouette","busts_in_silhouette"],"u":"1f465"},{"n":["fencer"],"u":"1f93a"},{"n":["horse racing","horse_racing"],"u":"1f3c7","v":["1f3c7-1f3fb","1f3c7-1f3fc","1f3c7-1f3fd","1f3c7-1f3fe","1f3c7-1f3ff"]},{"n":["skier"],"u":"26f7-fe0f"},{"n":["snowboarder"],"u":"1f3c2","v":["1f3c2-1f3fb","1f3c2-1f3fc","1f3c2-1f3fd","1f3c2-1f3fe","1f3c2-1f3ff"]},{"n":["golfer"],"u":"1f3cc-fe0f","v":["1f3cc-1f3fb","1f3cc-1f3fc","1f3cc-1f3fd","1f3cc-1f3fe","1f3cc-1f3ff"]},{"n":["man-golfing"],"u":"1f3cc-fe0f-200d-2642-fe0f","v":["1f3cc-1f3fb-200d-2642-fe0f","1f3cc-1f3fc-200d-2642-fe0f","1f3cc-1f3fd-200d-2642-fe0f","1f3cc-1f3fe-200d-2642-fe0f","1f3cc-1f3ff-200d-2642-fe0f"]},{"n":["woman-golfing"],"u":"1f3cc-fe0f-200d-2640-fe0f","v":["1f3cc-1f3fb-200d-2640-fe0f","1f3cc-1f3fc-200d-2640-fe0f","1f3cc-1f3fd-200d-2640-fe0f","1f3cc-1f3fe-200d-2640-fe0f","1f3cc-1f3ff-200d-2640-fe0f"]},{"n":["surfer"],"u":"1f3c4","v":["1f3c4-1f3fb","1f3c4-1f3fc","1f3c4-1f3fd","1f3c4-1f3fe","1f3c4-1f3ff"]},{"n":["man-surfing"],"u":"1f3c4-200d-2642-fe0f","v":["1f3c4-1f3fb-200d-2642-fe0f","1f3c4-1f3fc-200d-2642-fe0f","1f3c4-1f3fd-200d-2642-fe0f","1f3c4-1f3fe-200d-2642-fe0f","1f3c4-1f3ff-200d-2642-fe0f"]},{"n":["woman-surfing"],"u":"1f3c4-200d-2640-fe0f","v":["1f3c4-1f3fb-200d-2640-fe0f","1f3c4-1f3fc-200d-2640-fe0f","1f3c4-1f3fd-200d-2640-fe0f","1f3c4-1f3fe-200d-2640-fe0f","1f3c4-1f3ff-200d-2640-fe0f"]},{"n":["rowboat"],"u":"1f6a3","v":["1f6a3-1f3fb","1f6a3-1f3fc","1f6a3-1f3fd","1f6a3-1f3fe","1f6a3-1f3ff"]},{"n":["man-rowing-boat"],"u":"1f6a3-200d-2642-fe0f","v":["1f6a3-1f3fb-200d-2642-fe0f","1f6a3-1f3fc-200d-2642-fe0f","1f6a3-1f3fd-200d-2642-fe0f","1f6a3-1f3fe-200d-2642-fe0f","1f6a3-1f3ff-200d-2642-fe0f"]},{"n":["woman-rowing-boat"],"u":"1f6a3-200d-2640-fe0f","v":["1f6a3-1f3fb-200d-2640-fe0f","1f6a3-1f3fc-200d-2640-fe0f","1f6a3-1f3fd-200d-2640-fe0f","1f6a3-1f3fe-200d-2640-fe0f","1f6a3-1f3ff-200d-2640-fe0f"]},{"n":["swimmer"],"u":"1f3ca","v":["1f3ca-1f3fb","1f3ca-1f3fc","1f3ca-1f3fd","1f3ca-1f3fe","1f3ca-1f3ff"]},{"n":["man-swimming"],"u":"1f3ca-200d-2642-fe0f","v":["1f3ca-1f3fb-200d-2642-fe0f","1f3ca-1f3fc-200d-2642-fe0f","1f3ca-1f3fd-200d-2642-fe0f","1f3ca-1f3fe-200d-2642-fe0f","1f3ca-1f3ff-200d-2642-fe0f"]},{"n":["woman-swimming"],"u":"1f3ca-200d-2640-fe0f","v":["1f3ca-1f3fb-200d-2640-fe0f","1f3ca-1f3fc-200d-2640-fe0f","1f3ca-1f3fd-200d-2640-fe0f","1f3ca-1f3fe-200d-2640-fe0f","1f3ca-1f3ff-200d-2640-fe0f"]},{"n":["person_with_ball"],"u":"26f9-fe0f","v":["26f9-1f3fb","26f9-1f3fc","26f9-1f3fd","26f9-1f3fe","26f9-1f3ff"]},{"n":["man-bouncing-ball"],"u":"26f9-fe0f-200d-2642-fe0f","v":["26f9-1f3fb-200d-2642-fe0f","26f9-1f3fc-200d-2642-fe0f","26f9-1f3fd-200d-2642-fe0f","26f9-1f3fe-200d-2642-fe0f","26f9-1f3ff-200d-2642-fe0f"]},{"n":["woman-bouncing-ball"],"u":"26f9-fe0f-200d-2640-fe0f","v":["26f9-1f3fb-200d-2640-fe0f","26f9-1f3fc-200d-2640-fe0f","26f9-1f3fd-200d-2640-fe0f","26f9-1f3fe-200d-2640-fe0f","26f9-1f3ff-200d-2640-fe0f"]},{"n":["weight_lifter"],"u":"1f3cb-fe0f","v":["1f3cb-1f3fb","1f3cb-1f3fc","1f3cb-1f3fd","1f3cb-1f3fe","1f3cb-1f3ff"]},{"n":["man-lifting-weights"],"u":"1f3cb-fe0f-200d-2642-fe0f","v":["1f3cb-1f3fb-200d-2642-fe0f","1f3cb-1f3fc-200d-2642-fe0f","1f3cb-1f3fd-200d-2642-fe0f","1f3cb-1f3fe-200d-2642-fe0f","1f3cb-1f3ff-200d-2642-fe0f"]},{"n":["woman-lifting-weights"],"u":"1f3cb-fe0f-200d-2640-fe0f","v":["1f3cb-1f3fb-200d-2640-fe0f","1f3cb-1f3fc-200d-2640-fe0f","1f3cb-1f3fd-200d-2640-fe0f","1f3cb-1f3fe-200d-2640-fe0f","1f3cb-1f3ff-200d-2640-fe0f"]},{"n":["bicyclist"],"u":"1f6b4","v":["1f6b4-1f3fb","1f6b4-1f3fc","1f6b4-1f3fd","1f6b4-1f3fe","1f6b4-1f3ff"]},{"n":["man-biking"],"u":"1f6b4-200d-2642-fe0f","v":["1f6b4-1f3fb-200d-2642-fe0f","1f6b4-1f3fc-200d-2642-fe0f","1f6b4-1f3fd-200d-2642-fe0f","1f6b4-1f3fe-200d-2642-fe0f","1f6b4-1f3ff-200d-2642-fe0f"]},{"n":["woman-biking"],"u":"1f6b4-200d-2640-fe0f","v":["1f6b4-1f3fb-200d-2640-fe0f","1f6b4-1f3fc-200d-2640-fe0f","1f6b4-1f3fd-200d-2640-fe0f","1f6b4-1f3fe-200d-2640-fe0f","1f6b4-1f3ff-200d-2640-fe0f"]},{"n":["mountain bicyclist","mountain_bicyclist"],"u":"1f6b5","v":["1f6b5-1f3fb","1f6b5-1f3fc","1f6b5-1f3fd","1f6b5-1f3fe","1f6b5-1f3ff"]},{"n":["man-mountain-biking"],"u":"1f6b5-200d-2642-fe0f","v":["1f6b5-1f3fb-200d-2642-fe0f","1f6b5-1f3fc-200d-2642-fe0f","1f6b5-1f3fd-200d-2642-fe0f","1f6b5-1f3fe-200d-2642-fe0f","1f6b5-1f3ff-200d-2642-fe0f"]},{"n":["woman-mountain-biking"],"u":"1f6b5-200d-2640-fe0f","v":["1f6b5-1f3fb-200d-2640-fe0f","1f6b5-1f3fc-200d-2640-fe0f","1f6b5-1f3fd-200d-2640-fe0f","1f6b5-1f3fe-200d-2640-fe0f","1f6b5-1f3ff-200d-2640-fe0f"]},{"n":["racing_car"],"u":"1f3ce-fe0f"},{"n":["racing_motorcycle"],"u":"1f3cd-fe0f"},{"n":["person doing cartwheel","person_doing_cartwheel"],"u":"1f938","v":["1f938-1f3fb","1f938-1f3fc","1f938-1f3fd","1f938-1f3fe","1f938-1f3ff"]},{"n":["man-cartwheeling"],"u":"1f938-200d-2642-fe0f","v":["1f938-1f3fb-200d-2642-fe0f","1f938-1f3fc-200d-2642-fe0f","1f938-1f3fd-200d-2642-fe0f","1f938-1f3fe-200d-2642-fe0f","1f938-1f3ff-200d-2642-fe0f"]},{"n":["woman-cartwheeling"],"u":"1f938-200d-2640-fe0f","v":["1f938-1f3fb-200d-2640-fe0f","1f938-1f3fc-200d-2640-fe0f","1f938-1f3fd-200d-2640-fe0f","1f938-1f3fe-200d-2640-fe0f","1f938-1f3ff-200d-2640-fe0f"]},{"n":["wrestlers"],"u":"1f93c"},{"n":["man-wrestling"],"u":"1f93c-200d-2642-fe0f"},{"n":["woman-wrestling"],"u":"1f93c-200d-2640-fe0f"},{"n":["water polo","water_polo"],"u":"1f93d","v":["1f93d-1f3fb","1f93d-1f3fc","1f93d-1f3fd","1f93d-1f3fe","1f93d-1f3ff"]},{"n":["man-playing-water-polo"],"u":"1f93d-200d-2642-fe0f","v":["1f93d-1f3fb-200d-2642-fe0f","1f93d-1f3fc-200d-2642-fe0f","1f93d-1f3fd-200d-2642-fe0f","1f93d-1f3fe-200d-2642-fe0f","1f93d-1f3ff-200d-2642-fe0f"]},{"n":["woman-playing-water-polo"],"u":"1f93d-200d-2640-fe0f","v":["1f93d-1f3fb-200d-2640-fe0f","1f93d-1f3fc-200d-2640-fe0f","1f93d-1f3fd-200d-2640-fe0f","1f93d-1f3fe-200d-2640-fe0f","1f93d-1f3ff-200d-2640-fe0f"]},{"n":["handball"],"u":"1f93e","v":["1f93e-1f3fb","1f93e-1f3fc","1f93e-1f3fd","1f93e-1f3fe","1f93e-1f3ff"]},{"n":["man-playing-handball"],"u":"1f93e-200d-2642-fe0f","v":["1f93e-1f3fb-200d-2642-fe0f","1f93e-1f3fc-200d-2642-fe0f","1f93e-1f3fd-200d-2642-fe0f","1f93e-1f3fe-200d-2642-fe0f","1f93e-1f3ff-200d-2642-fe0f"]},{"n":["woman-playing-handball"],"u":"1f93e-200d-2640-fe0f","v":["1f93e-1f3fb-200d-2640-fe0f","1f93e-1f3fc-200d-2640-fe0f","1f93e-1f3fd-200d-2640-fe0f","1f93e-1f3fe-200d-2640-fe0f","1f93e-1f3ff-200d-2640-fe0f"]},{"n":["juggling"],"u":"1f939","v":["1f939-1f3fb","1f939-1f3fc","1f939-1f3fd","1f939-1f3fe","1f939-1f3ff"]},{"n":["man-juggling"],"u":"1f939-200d-2642-fe0f","v":["1f939-1f3fb-200d-2642-fe0f","1f939-1f3fc-200d-2642-fe0f","1f939-1f3fd-200d-2642-fe0f","1f939-1f3fe-200d-2642-fe0f","1f939-1f3ff-200d-2642-fe0f"]},{"n":["woman-juggling"],"u":"1f939-200d-2640-fe0f","v":["1f939-1f3fb-200d-2640-fe0f","1f939-1f3fc-200d-2640-fe0f","1f939-1f3fd-200d-2640-fe0f","1f939-1f3fe-200d-2640-fe0f","1f939-1f3ff-200d-2640-fe0f"]},{"n":["man and woman holding hands","couple","man_and_woman_holding_hands"],"u":"1f46b"},{"n":["two men holding hands","two_men_holding_hands"],"u":"1f46c"},{"n":["two women holding hands","two_women_holding_hands"],"u":"1f46d"},{"n":["kiss","couplekiss"],"u":"1f48f"},{"n":["woman-kiss-man"],"u":"1f469-200d-2764-fe0f-200d-1f48b-200d-1f468"},{"n":["man-kiss-man"],"u":"1f468-200d-2764-fe0f-200d-1f48b-200d-1f468"},{"n":["woman-kiss-woman"],"u":"1f469-200d-2764-fe0f-200d-1f48b-200d-1f469"},{"n":["couple with heart","couple_with_heart"],"u":"1f491"},{"n":["woman-heart-man"],"u":"1f469-200d-2764-fe0f-200d-1f468"},{"n":["man-heart-man"],"u":"1f468-200d-2764-fe0f-200d-1f468"},{"n":["woman-heart-woman"],"u":"1f469-200d-2764-fe0f-200d-1f469"},{"n":["family","man-woman-boy"],"u":"1f46a"},{"n":["man-woman-boy","family"],"u":"1f468-200d-1f469-200d-1f466"},{"n":["man-woman-girl"],"u":"1f468-200d-1f469-200d-1f467"},{"n":["man-woman-girl-boy"],"u":"1f468-200d-1f469-200d-1f467-200d-1f466"},{"n":["man-woman-boy-boy"],"u":"1f468-200d-1f469-200d-1f466-200d-1f466"},{"n":["man-woman-girl-girl"],"u":"1f468-200d-1f469-200d-1f467-200d-1f467"},{"n":["man-man-boy"],"u":"1f468-200d-1f468-200d-1f466"},{"n":["man-man-girl"],"u":"1f468-200d-1f468-200d-1f467"},{"n":["man-man-girl-boy"],"u":"1f468-200d-1f468-200d-1f467-200d-1f466"},{"n":["man-man-boy-boy"],"u":"1f468-200d-1f468-200d-1f466-200d-1f466"},{"n":["man-man-girl-girl"],"u":"1f468-200d-1f468-200d-1f467-200d-1f467"},{"n":["woman-woman-boy"],"u":"1f469-200d-1f469-200d-1f466"},{"n":["woman-woman-girl"],"u":"1f469-200d-1f469-200d-1f467"},{"n":["woman-woman-girl-boy"],"u":"1f469-200d-1f469-200d-1f467-200d-1f466"},{"n":["woman-woman-boy-boy"],"u":"1f469-200d-1f469-200d-1f466-200d-1f466"},{"n":["woman-woman-girl-girl"],"u":"1f469-200d-1f469-200d-1f467-200d-1f467"},{"n":["man-boy"],"u":"1f468-200d-1f466"},{"n":["man-boy-boy"],"u":"1f468-200d-1f466-200d-1f466"},{"n":["man-girl"],"u":"1f468-200d-1f467"},{"n":["man-girl-boy"],"u":"1f468-200d-1f467-200d-1f466"},{"n":["man-girl-girl"],"u":"1f468-200d-1f467-200d-1f467"},{"n":["woman-boy"],"u":"1f469-200d-1f466"},{"n":["woman-boy-boy"],"u":"1f469-200d-1f466-200d-1f466"},{"n":["woman-girl"],"u":"1f469-200d-1f467"},{"n":["woman-girl-boy"],"u":"1f469-200d-1f467-200d-1f466"},{"n":["woman-girl-girl"],"u":"1f469-200d-1f467-200d-1f467"},{"n":["selfie"],"u":"1f933","v":["1f933-1f3fb","1f933-1f3fc","1f933-1f3fd","1f933-1f3fe","1f933-1f3ff"]},{"n":["flexed biceps","muscle"],"u":"1f4aa","v":["1f4aa-1f3fb","1f4aa-1f3fc","1f4aa-1f3fd","1f4aa-1f3fe","1f4aa-1f3ff"]},{"n":["white left pointing backhand index","point_left"],"u":"1f448","v":["1f448-1f3fb","1f448-1f3fc","1f448-1f3fd","1f448-1f3fe","1f448-1f3ff"]},{"n":["white right pointing backhand index","point_right"],"u":"1f449","v":["1f449-1f3fb","1f449-1f3fc","1f449-1f3fd","1f449-1f3fe","1f449-1f3ff"]},{"n":["white up pointing index","point_up"],"u":"261d-fe0f","v":["261d-1f3fb","261d-1f3fc","261d-1f3fd","261d-1f3fe","261d-1f3ff"]},{"n":["white up pointing backhand index","point_up_2"],"u":"1f446","v":["1f446-1f3fb","1f446-1f3fc","1f446-1f3fd","1f446-1f3fe","1f446-1f3ff"]},{"n":["reversed hand with middle finger extended","middle_finger","reversed_hand_with_middle_finger_extended"],"u":"1f595","v":["1f595-1f3fb","1f595-1f3fc","1f595-1f3fd","1f595-1f3fe","1f595-1f3ff"]},{"n":["white down pointing backhand index","point_down"],"u":"1f447","v":["1f447-1f3fb","1f447-1f3fc","1f447-1f3fd","1f447-1f3fe","1f447-1f3ff"]},{"n":["victory hand","v"],"u":"270c-fe0f","v":["270c-1f3fb","270c-1f3fc","270c-1f3fd","270c-1f3fe","270c-1f3ff"]},{"n":["hand with index and middle fingers crossed","crossed_fingers","hand_with_index_and_middle_fingers_crossed"],"u":"1f91e","v":["1f91e-1f3fb","1f91e-1f3fc","1f91e-1f3fd","1f91e-1f3fe","1f91e-1f3ff"]},{"n":["raised hand with part between middle and ring fingers","spock-hand"],"u":"1f596","v":["1f596-1f3fb","1f596-1f3fc","1f596-1f3fd","1f596-1f3fe","1f596-1f3ff"]},{"n":["sign of the horns","the_horns","sign_of_the_horns"],"u":"1f918","v":["1f918-1f3fb","1f918-1f3fc","1f918-1f3fd","1f918-1f3fe","1f918-1f3ff"]},{"n":["call me hand","call_me_hand"],"u":"1f919","v":["1f919-1f3fb","1f919-1f3fc","1f919-1f3fd","1f919-1f3fe","1f919-1f3ff"]},{"n":["raised_hand_with_fingers_splayed"],"u":"1f590-fe0f","v":["1f590-1f3fb","1f590-1f3fc","1f590-1f3fd","1f590-1f3fe","1f590-1f3ff"]},{"n":["raised hand","hand","raised_hand"],"u":"270b","v":["270b-1f3fb","270b-1f3fc","270b-1f3fd","270b-1f3fe","270b-1f3ff"]},{"n":["ok hand sign","ok_hand"],"u":"1f44c","v":["1f44c-1f3fb","1f44c-1f3fc","1f44c-1f3fd","1f44c-1f3fe","1f44c-1f3ff"]},{"n":["thumbs up sign","+1","thumbsup"],"u":"1f44d","v":["1f44d-1f3fb","1f44d-1f3fc","1f44d-1f3fd","1f44d-1f3fe","1f44d-1f3ff"]},{"n":["thumbs down sign","-1","thumbsdown"],"u":"1f44e","v":["1f44e-1f3fb","1f44e-1f3fc","1f44e-1f3fd","1f44e-1f3fe","1f44e-1f3ff"]},{"n":["raised fist","fist"],"u":"270a","v":["270a-1f3fb","270a-1f3fc","270a-1f3fd","270a-1f3fe","270a-1f3ff"]},{"n":["fisted hand sign","facepunch","punch"],"u":"1f44a","v":["1f44a-1f3fb","1f44a-1f3fc","1f44a-1f3fd","1f44a-1f3fe","1f44a-1f3ff"]},{"n":["left-facing fist","left-facing_fist"],"u":"1f91b","v":["1f91b-1f3fb","1f91b-1f3fc","1f91b-1f3fd","1f91b-1f3fe","1f91b-1f3ff"]},{"n":["right-facing fist","right-facing_fist"],"u":"1f91c","v":["1f91c-1f3fb","1f91c-1f3fc","1f91c-1f3fd","1f91c-1f3fe","1f91c-1f3ff"]},{"n":["raised back of hand","raised_back_of_hand"],"u":"1f91a","v":["1f91a-1f3fb","1f91a-1f3fc","1f91a-1f3fd","1f91a-1f3fe","1f91a-1f3ff"]},{"n":["waving hand sign","wave"],"u":"1f44b","v":["1f44b-1f3fb","1f44b-1f3fc","1f44b-1f3fd","1f44b-1f3fe","1f44b-1f3ff"]},{"n":["i love you hand sign","i_love_you_hand_sign"],"u":"1f91f","v":["1f91f-1f3fb","1f91f-1f3fc","1f91f-1f3fd","1f91f-1f3fe","1f91f-1f3ff"]},{"n":["writing_hand"],"u":"270d-fe0f","v":["270d-1f3fb","270d-1f3fc","270d-1f3fd","270d-1f3fe","270d-1f3ff"]},{"n":["clapping hands sign","clap"],"u":"1f44f","v":["1f44f-1f3fb","1f44f-1f3fc","1f44f-1f3fd","1f44f-1f3fe","1f44f-1f3ff"]},{"n":["open hands sign","open_hands"],"u":"1f450","v":["1f450-1f3fb","1f450-1f3fc","1f450-1f3fd","1f450-1f3fe","1f450-1f3ff"]},{"n":["person raising both hands in celebration","raised_hands"],"u":"1f64c","v":["1f64c-1f3fb","1f64c-1f3fc","1f64c-1f3fd","1f64c-1f3fe","1f64c-1f3ff"]},{"n":["palms up together","palms_up_together"],"u":"1f932","v":["1f932-1f3fb","1f932-1f3fc","1f932-1f3fd","1f932-1f3fe","1f932-1f3ff"]},{"n":["person with folded hands","pray"],"u":"1f64f","v":["1f64f-1f3fb","1f64f-1f3fc","1f64f-1f3fd","1f64f-1f3fe","1f64f-1f3ff"]},{"n":["handshake"],"u":"1f91d"},{"n":["nail polish","nail_care"],"u":"1f485","v":["1f485-1f3fb","1f485-1f3fc","1f485-1f3fd","1f485-1f3fe","1f485-1f3ff"]},{"n":["ear"],"u":"1f442","v":["1f442-1f3fb","1f442-1f3fc","1f442-1f3fd","1f442-1f3fe","1f442-1f3ff"]},{"n":["nose"],"u":"1f443","v":["1f443-1f3fb","1f443-1f3fc","1f443-1f3fd","1f443-1f3fe","1f443-1f3ff"]},{"n":["footprints"],"u":"1f463"},{"n":["eyes"],"u":"1f440"},{"n":["eye"],"u":"1f441-fe0f"},{"n":["eye-in-speech-bubble"],"u":"1f441-fe0f-200d-1f5e8-fe0f"},{"n":["brain"],"u":"1f9e0"},{"n":["tongue"],"u":"1f445"},{"n":["mouth","lips"],"u":"1f444"},{"n":["kiss mark","kiss"],"u":"1f48b"},{"n":["heart with arrow","cupid"],"u":"1f498"},{"n":["heavy black heart","heart"],"u":"2764-fe0f"},{"n":["beating heart","heartbeat"],"u":"1f493"},{"n":["broken heart","broken_heart"],"u":"1f494"},{"n":["two hearts","two_hearts"],"u":"1f495"},{"n":["sparkling heart","sparkling_heart"],"u":"1f496"},{"n":["growing heart","heartpulse"],"u":"1f497"},{"n":["blue heart","blue_heart"],"u":"1f499"},{"n":["green heart","green_heart"],"u":"1f49a"},{"n":["yellow heart","yellow_heart"],"u":"1f49b"},{"n":["orange heart","orange_heart"],"u":"1f9e1"},{"n":["purple heart","purple_heart"],"u":"1f49c"},{"n":["black heart","black_heart"],"u":"1f5a4"},{"n":["heart with ribbon","gift_heart"],"u":"1f49d"},{"n":["revolving hearts","revolving_hearts"],"u":"1f49e"},{"n":["heart decoration","heart_decoration"],"u":"1f49f"},{"n":["heavy_heart_exclamation_mark_ornament"],"u":"2763-fe0f"},{"n":["love letter","love_letter"],"u":"1f48c"},{"n":["sleeping symbol","zzz"],"u":"1f4a4"},{"n":["anger symbol","anger"],"u":"1f4a2"},{"n":["bomb"],"u":"1f4a3"},{"n":["collision symbol","boom","collision"],"u":"1f4a5"},{"n":["splashing sweat symbol","sweat_drops"],"u":"1f4a6"},{"n":["dash symbol","dash"],"u":"1f4a8"},{"n":["dizzy symbol","dizzy"],"u":"1f4ab"},{"n":["speech balloon","speech_balloon"],"u":"1f4ac"},{"n":["left_speech_bubble"],"u":"1f5e8-fe0f"},{"n":["right_anger_bubble"],"u":"1f5ef-fe0f"},{"n":["thought balloon","thought_balloon"],"u":"1f4ad"},{"n":["hole"],"u":"1f573-fe0f"},{"n":["eyeglasses"],"u":"1f453"},{"n":["dark_sunglasses"],"u":"1f576-fe0f"},{"n":["necktie"],"u":"1f454"},{"n":["t-shirt","shirt","tshirt"],"u":"1f455"},{"n":["jeans"],"u":"1f456"},{"n":["scarf"],"u":"1f9e3"},{"n":["gloves"],"u":"1f9e4"},{"n":["coat"],"u":"1f9e5"},{"n":["socks"],"u":"1f9e6"},{"n":["dress"],"u":"1f457"},{"n":["kimono"],"u":"1f458"},{"n":["bikini"],"u":"1f459"},{"n":["womans clothes","womans_clothes"],"u":"1f45a"},{"n":["purse"],"u":"1f45b"},{"n":["handbag"],"u":"1f45c"},{"n":["pouch"],"u":"1f45d"},{"n":["shopping_bags"],"u":"1f6cd-fe0f"},{"n":["school satchel","school_satchel"],"u":"1f392"},{"n":["mans shoe","mans_shoe","shoe"],"u":"1f45e"},{"n":["athletic shoe","athletic_shoe"],"u":"1f45f"},{"n":["high-heeled shoe","high_heel"],"u":"1f460"},{"n":["womans sandal","sandal"],"u":"1f461"},{"n":["womans boots","boot"],"u":"1f462"},{"n":["crown"],"u":"1f451"},{"n":["womans hat","womans_hat"],"u":"1f452"},{"n":["top hat","tophat"],"u":"1f3a9"},{"n":["graduation cap","mortar_board"],"u":"1f393"},{"n":["billed cap","billed_cap"],"u":"1f9e2"},{"n":["helmet_with_white_cross"],"u":"26d1-fe0f"},{"n":["prayer beads","prayer_beads"],"u":"1f4ff"},{"n":["lipstick"],"u":"1f484"},{"n":["ring"],"u":"1f48d"},{"n":["gem stone","gem"],"u":"1f48e"}]}')},function(f,e){f.exports=function(f,e){(null==e||e>f.length)&&(e=f.length);for(var n=0,a=new Array(e);n<e;n++)a[n]=f[n];return a}},function(f,e,n){var a=n(13);f.exports=function(f,e){if(f){if("string"==typeof f)return a(f,e);var n=Object.prototype.toString.call(f).slice(8,-1);return"Object"===n&&f.constructor&&(n=f.constructor.name),"Map"===n||"Set"===n?Array.from(f):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?a(f,e):void 0}}},function(f,e,n){"use strict";var a=n(16);function t(){}function r(){}r.resetWarningCache=t,f.exports=function(){function f(f,e,n,t,r,o){if(o!==a){var i=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw i.name="Invariant Violation",i}}function e(){return f}f.isRequired=f;var n={array:f,bool:f,func:f,number:f,object:f,string:f,symbol:f,any:f,arrayOf:e,element:f,elementType:f,instanceOf:e,node:f,objectOf:e,oneOf:e,oneOfType:e,shape:e,exact:e,checkPropTypes:r,resetWarningCache:t};return n.PropTypes=n,n}},function(f,e,n){"use strict";f.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(f,e,n){var a=n(13);f.exports=function(f){if(Array.isArray(f))return a(f)}},function(f,e){f.exports=function(f){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(f))return Array.from(f)}},function(f,e){f.exports=function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}},function(f,e){f.exports=function(f){if(Array.isArray(f))return f}},function(f,e){f.exports=function(f,e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(f)){var n=[],a=!0,t=!1,r=void 0;try{for(var o,i=f[Symbol.iterator]();!(a=(o=i.next()).done)&&(n.push(o.value),!e||n.length!==e);a=!0);}catch(f){t=!0,r=f}finally{try{a||null==i.return||i.return()}finally{if(t)throw r}}return n}}},function(f,e){f.exports=function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}},function(f,e,n){var a=n(6),t=n(24);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react ul.skin-tones-list {\n  padding: 0;\n  margin: 0;\n  list-style-type: none;\n  position: absolute;\n  top: 13px;\n  right: 40px;\n}\n\n.emoji-picker-react ul.skin-tones-list li {\n  background-color: currentColor;\n  position: absolute;\n  padding: 0;\n  border-radius: 2px;\n  overflow: hidden;\n  transition: transform 0.3s ease;\n}\n\n.emoji-picker-react ul.skin-tones-list label {\n  height: 10px;\n  width: 10px;\n  padding: 0;\n  display: block;\n  cursor: pointer;\n}\n\n.emoji-picker-react ul.skin-tones-list input {\n  height: 0;\n  width: 0;\n  opacity: 0;\n  visibility: hidden;\n  display: none;\n}\n\n.emoji-picker-react ul.skin-tones-list li.tneutral {\n  color: #ffd225;\n}\n.emoji-picker-react ul.skin-tones-list li.t1f3fb {\n  color: #ffdfbd;\n}\n.emoji-picker-react ul.skin-tones-list li.t1f3fc {\n  color: #e9c197;\n}\n.emoji-picker-react ul.skin-tones-list li.t1f3fd {\n  color: #c88e62;\n}\n.emoji-picker-react ul.skin-tones-list li.t1f3fe {\n  color: #a86637;\n}\n.emoji-picker-react ul.skin-tones-list li.t1f3ff {\n  color: #60463a;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(26);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react img.emoji-img {\n  height: 25px;\n  width: 25px;\n  margin: 5px;\n}\n\n.emoji-picker-react .native {\n  height: 25px;\n  width: 25px;\n  margin: 5px;\n  font-size: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', Times,\n    Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(28);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react .variation-wrapper {\n  position: relative;\n}\n\n.emoji-picker-react .variation-list {\n  background: #f4f4f4;\n  border-bottom: 1px solid #efefef;\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 10;\n  margin: 0;\n  padding: 0;\n  display: flex;\n  justify-content: space-evenly;\n  list-style-type: none;\n  transition: transform 0.1s;\n  transform: translateY(-100%);\n}\n\n.emoji-picker-react .variation-list.visible {\n  transform: translateY(0);\n}\n\n.emoji-picker-react .variation-list button {\n  display: flex;\n}\n\n.emoji-picker-react .variation-list button {\n  border-radius: 5px;\n  transition: background 0.1s;\n  background: none;\n  padding: 0;\n}\n\n.emoji-picker-react .variation-list button:hover {\n  background-color: #dbdbdb;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(30);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){var a=n(7),t=n(31),r=n(32),o=n(33),i=n(34),u=n(35),c=n(36),l=n(37),d=n(38),s=n(39);e=a(!1);var g=t(r),b=t(o),m=t(i),p=t(u),h=t(c),_=t(l),v=t(d),w=t(s);e.push([f.i,".emoji-picker-react .emoji-categories button {\n  height: 40px;\n  width: 20px;\n  padding: 5px 0;\n  background-repeat: no-repeat;\n  background-size: 20px;\n  background-position: 50% 50%;\n  cursor: pointer;\n  opacity: 0.5;\n  transition: opacity 0.1s;\n}\n\n.emoji-picker-react .active-category-indicator-wrapper {\n  position: relative;\n  width: 100%;\n}\n.emoji-picker-react\n  .active-category-indicator-wrapper\n  .active-category-indicator {\n  background: #99c2f1;\n  height: 3px;\n  width: 5px;\n  position: absolute;\n  bottom: 3px;\n  border-radius: 5px;\n  transition: 0.3s;\n  width: 30px;\n  left: -7px;\n}\n\n.emoji-picker-react .emoji-categories button.icn-activities {\n  background-image: url("+g+");\n}\n.emoji-picker-react .emoji-categories button.icn-animals_nature {\n  background-image: url("+b+");\n}\n.emoji-picker-react .emoji-categories button.icn-flags {\n  background-image: url("+m+");\n}\n.emoji-picker-react .emoji-categories button.icn-food_drink {\n  background-image: url("+p+");\n}\n.emoji-picker-react .emoji-categories button.icn-objects {\n  background-image: url("+h+");\n}\n.emoji-picker-react .emoji-categories button.icn-smileys_people {\n  background-image: url("+_+");\n}\n.emoji-picker-react .emoji-categories button.icn-symbols {\n  background-image: url("+v+");\n}\n.emoji-picker-react .emoji-categories button.icn-travel_places {\n  background-image: url("+w+");\n}\n\n.emoji-picker-react .emoji-categories {\n  padding: 0 15px;\n  display: flex;\n  justify-content: space-between;\n  box-sizing: border-box;\n}\n\n.emoji-picker-react .emoji-categories.inactive button,\n.emoji-picker-react .emoji-categories.inactive button.active,\n.emoji-picker-react .emoji-categories.inactive button:hover {\n  opacity: 0.4;\n  cursor: default;\n}\n\n.emoji-picker-react .emoji-categories button.active {\n  opacity: 1;\n}\n\n.emoji-picker-react .emoji-categories button:hover {\n  opacity: 0.7;\n}\n",""]),f.exports=e},function(f,e,n){"use strict";f.exports=function(f,e){return e||(e={}),"string"!=typeof(f=f&&f.__esModule?f.default:f)?f:(/^['"].*['"]$/.test(f)&&(f=f.slice(1,-1)),e.hash&&(f+=e.hash),/["'() \t\n]/.test(f)||e.needQuotes?'"'.concat(f.replace(/"/g,'\\"').replace(/\n/g,"\\n"),'"'):f)}},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 0C14.355 0 0 14.355 0 32s14.355 32 32 32 32-14.355 32-32S49.645 0 32 0zm29.624 36.731l-3.885-6.439 2.681-7.88a29.867 29.867 0 0 1 1.204 14.319zm-7.558 15.567a.994.994 0 0 0-.408-.02L43.98 53.83a.993.993 0 0 0-.123-.345l-5.502-9.17 8.896-13.7h8.428a.992.992 0 0 0 .105.312l5.236 8.678a29.956 29.956 0 0 1-6.954 12.693zm-10.085 3.557l7.688-1.232a29.958 29.958 0 0 1-11.706 6.296l4.018-5.064zM12.65 9.1a29.858 29.858 0 0 1 18.628-7.082.982.982 0 0 0 .24.376l5.525 5.214-2.185 8.156-14.237 5.465c-.052-.042-.093-.094-.154-.126l-8.87-4.701L12.65 9.1zm25.736-2.976l-4.283-4.042a29.763 29.763 0 0 1 10.989 2.931l-6.706 1.111zM21.93 38.737l-.816-15.554L35.655 17.6l9.803 12.106-8.483 13.063-15.045-4.032zm37.375-19.141c-.031.054-.072.098-.093.159l-3.015 8.86h-9.048L36.882 15.937l2.113-7.887 8.27-1.371a.979.979 0 0 0 .453-.218 30.2 30.2 0 0 1 11.587 13.135zm-48.994-8.289l-.802 5.561-5.349 3.975a30.035 30.035 0 0 1 6.151-9.536zm-7.255 12.82c.044-.023.09-.037.131-.068l7.737-5.751 8.158 4.323.888 16.936c.002.025.013.048.016.073l-7.71 7.629c-.066.065-.105.145-.149.222L4.734 44.32c-.028-.012-.057-.009-.085-.018A29.822 29.822 0 0 1 2 32c0-2.725.372-5.362 1.056-7.873zm3.022 22.945l5.415 2.322 4.141 7.729a30.222 30.222 0 0 1-9.556-10.051zm12.759 11.879c-.019-.064-.025-.131-.058-.192l-5.317-9.924c.076-.043.155-.08.22-.145l8.027-7.942 14.507 3.888 5.927 9.879c.05.083.11.154.178.217l-5.449 6.867c-1.587.26-3.213.401-4.872.401-4.72 0-9.186-1.099-13.163-3.049z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 470'%3E%3Cpath d='M401.17 68.83C356.784 24.444 297.771 0 235 0S113.216 24.444 68.83 68.83 0 172.229 0 235s24.444 121.784 68.83 166.17S172.229 470 235 470s121.784-24.444 166.17-68.83S470 297.771 470 235s-24.444-121.784-68.83-166.17zM235 455c-121.309 0-220-98.691-220-220S113.691 15 235 15s220 98.691 220 220-98.691 220-220 220z'/%3E%3Cpath d='M382.5 173.979c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM322.5 135.459c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM117.5 173.979c3.532 0 6.735 1.824 8.568 4.879a7.499 7.499 0 0 0 12.864 0c1.833-3.055 5.036-4.879 8.568-4.879 4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5c-5.461 0-10.724 1.829-15 5.039-4.276-3.21-9.539-5.039-15-5.039-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5zM436.826 253.173a7.5 7.5 0 0 0-5.443-2.6c-12.664-.4-24.343-7.548-32.041-19.608a7.5 7.5 0 0 0-12.643-.001c-7.974 12.489-20.074 19.652-33.2 19.652-13.089 0-25.177-7.164-33.162-19.656a7.502 7.502 0 0 0-12.635-.004c-8 12.494-20.098 19.66-33.192 19.66-13.098 0-25.189-7.164-33.175-19.656a7.5 7.5 0 0 0-12.64.004c-7.974 12.489-20.069 19.652-33.187 19.652-13.098 0-25.19-7.164-33.176-19.656a7.502 7.502 0 0 0-12.635-.004c-8 12.494-20.098 19.66-33.191 19.66-13.099 0-25.19-7.164-33.175-19.655a7.5 7.5 0 0 0-12.64.004c-7.699 12.061-19.389 19.207-32.07 19.608a7.494 7.494 0 0 0-5.443 2.6 7.497 7.497 0 0 0-1.769 5.767c5.786 49.506 29.545 95.215 66.901 128.706C135.964 421.407 184.509 440 235 440c45.241 0 88.17-14.518 124.145-41.982a7.498 7.498 0 0 0 1.41-10.512 7.496 7.496 0 0 0-10.512-1.41C316.705 411.547 276.924 425 235 425c-93.882 0-173.276-68.424-187.68-160.366 11.265-2.217 21.561-8.215 29.707-17.284 10.49 11.584 24.673 18.267 39.476 18.267 14.808 0 29.002-6.691 39.505-18.291 10.493 11.6 24.685 18.291 39.498 18.291 14.828 0 29.022-6.689 39.511-18.284 10.493 11.595 24.682 18.284 39.491 18.284 14.808 0 29.002-6.691 39.505-18.291 10.493 11.6 24.679 18.291 39.485 18.291 14.826 0 29.018-6.681 39.505-18.264 8.14 9.065 18.422 15.061 29.671 17.278-6.044 38.177-24.008 74.246-51.068 102.269a7.5 7.5 0 1 0 10.791 10.419c31.08-32.185 51.038-74.226 56.198-118.38a7.495 7.495 0 0 0-1.769-5.766z'/%3E%3Cpath d='M289.513 310.616c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-10zM358.49 280.616h-10c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5zM111.503 280.616c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h10c4.143 0 7.5-3.357 7.5-7.5s-3.357-7.5-7.5-7.5h-10zM235 191.25c30.327 0 55-24.673 55-55s-24.673-55-55-55-55 24.673-55 55 24.673 55 55 55zm0-95c22.056 0 40 17.944 40 40s-17.944 40-40 40-40-17.944-40-40 17.944-40 40-40z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 502 502'%3E%3Cpath d='M428.484 73.516C381.076 26.108 318.044 0 251 0S120.924 26.108 73.516 73.516 0 183.956 0 251s26.108 130.076 73.516 177.484S183.956 502 251 502s130.076-26.108 177.484-73.516C475.892 381.076 502 318.044 502 251s-26.108-130.076-73.516-177.484zM283.829 39h58.868c58.354 25.338 104.274 74.079 125.849 134.317h-41.725a21.139 21.139 0 0 0-19.587 13.087 21.139 21.139 0 0 0 4.595 23.104l3.3 3.3c4.638 4.637 4.638 12.184 0 16.821a11.42 11.42 0 0 1-8.13 3.368 11.422 11.422 0 0 1-8.13-3.368l-7.969-7.969c-13.135-13.135-30.599-20.369-49.175-20.369h-6.397v-8.036c0-19.265-7.502-37.376-21.124-50.999l-9.952-9.952c-10.216-10.216-23.799-15.843-38.247-15.843h-19.931c-7.721 0-14.98 3.007-20.439 8.466l-5.17 5.169c-5.459 5.459-8.466 12.718-8.466 20.439a4.736 4.736 0 0 1-4.73 4.73h-8.66v-12.154c0-8.648 3.368-16.78 9.483-22.895l5.849-5.849c5.244-5.243 8.131-12.214 8.131-19.629V92.71c0-.394.32-.713.713-.713H320.5c12.407 0 22.5-10.093 22.5-22.5S332.907 47 320.5 47h-36.671c-2.206 0-4-1.794-4-4s1.794-4 4-4zm74.893 252.437l-5.452 5.484a155.066 155.066 0 0 0-22.913 29.41l-9.918 16.5-12.403 20.492a48.673 48.673 0 0 0-7.036 25.21v.615a.857.857 0 0 1-.856.856h-.004a8.78 8.78 0 0 1-6.247-2.586 8.776 8.776 0 0 1-2.589-6.25c0-12.58-4.899-24.407-13.794-33.303l-4.591-4.591c-6.947-6.947-10.773-16.183-10.773-26.007v-29.475c0-14.806-12.045-26.851-26.852-26.851H231.8c-8.349 0-15.142-6.792-15.142-15.142v-15.343c0-9.034 7.35-16.384 16.384-16.384h79.886l24.099 24.1c6.003 6.003 9.309 13.984 9.309 22.473v11.464c0 8.56 5.082 15.955 12.386 19.328zM20 251c0-9.444.583-18.752 1.69-27.902h30.619c10.153 0 19.698 3.954 26.876 11.133l8.781 8.78c7.527 7.527 17.534 11.672 28.179 11.672 5.65 0 10.962 2.2 14.957 6.195l.193.193c7.233 7.233 11.217 16.851 11.217 27.081v17.886c0 13.63-5.308 26.444-14.945 36.082l-19.15 19.15c-13.442 13.443-21.939 30.512-24.58 49.002C44.303 368.799 20 312.684 20 251zm231 231c-56.288 0-107.93-20.247-148.049-53.827v-5.423c0-17.881 6.963-34.693 19.607-47.337l19.15-19.15c13.415-13.416 20.803-31.252 20.803-50.224v-17.886c0-15.573-6.064-30.213-17.075-41.224l-.193-.192c-7.772-7.772-18.106-12.053-29.099-12.053a19.72 19.72 0 0 1-14.036-5.814l-8.781-8.781c-10.957-10.956-25.524-16.99-41.019-16.99h-27.3C47.126 98.635 140.047 20 251 20c7.743 0 15.396.39 22.946 1.138-8.316 3.774-14.117 12.151-14.117 21.862 0 13.234 10.766 24 24 24H320.5c1.378 0 2.5 1.122 2.5 2.5s-1.122 2.5-2.5 2.5h-97.713c-11.421 0-20.713 9.292-20.713 20.713v2.028a7.706 7.706 0 0 1-2.273 5.486l-5.85 5.85c-9.893 9.893-15.341 23.047-15.341 37.037v13.574c0 10.245 8.334 18.58 18.579 18.58h10.081c13.636 0 24.73-11.094 24.73-24.73 0-2.379.926-4.615 2.608-6.297l5.169-5.169c.203-.203.414-.393.632-.574.167.195.334.389.518.574l19.932 19.932c-3.833 3.911-3.813 10.186.068 14.068 1.953 1.953 4.512 2.929 7.071 2.929s5.119-.976 7.071-2.929l7-7c3.905-3.905 3.905-10.237 0-14.143l-15.45-15.45c8.875.156 17.197 3.677 23.489 9.97l9.953 9.952c9.844 9.844 15.266 22.934 15.266 36.856v.817H233.04c-20.062 0-36.384 16.322-36.384 36.384V245.8c0 19.377 15.765 35.142 35.142 35.142h3.493a6.86 6.86 0 0 1 6.852 6.851v29.475c0 15.167 5.906 29.425 16.63 40.15l4.591 4.591c5.118 5.118 7.937 11.923 7.937 19.161 0 7.705 3.001 14.948 8.451 20.396 5.446 5.443 12.685 8.44 20.384 8.44h.015C311.648 410 321 400.644 321 389.149v-.614a28.68 28.68 0 0 1 4.146-14.854l12.409-20.502a.226.226 0 0 1 .016-.026l9.928-16.517a135.064 135.064 0 0 1 19.955-25.613l11.147-11.213c4.428-4.455 5.731-11.08 3.319-16.879s-8.029-9.546-14.31-9.546a1.274 1.274 0 0 1-1.273-1.273v-11.464c0-13.832-5.386-26.835-15.167-36.616l-2.215-2.215c10.49 1.524 20.173 6.357 27.804 13.988l7.969 7.969c6.141 6.141 14.207 9.211 22.272 9.211s16.132-3.07 22.272-9.211c6.024-6.024 9.341-14.033 9.341-22.553 0-8.519-3.317-16.528-9.341-22.553l-3.3-3.3c-.198-.198-.567-.567-.26-1.308.307-.741.829-.741 1.109-.741h47.888C479.468 211.761 482 231.09 482 251c0 127.374-103.626 231-231 231z'/%3E%3Cpath d='M184 85c5.523 0 10-4.477 10-10V54.494c0-5.523-4.477-10-10-10s-10 4.477-10 10V75c0 5.523 4.477 10 10 10zM450.39 314.63c-5.176-1.93-10.935.702-12.863 5.877C408.652 397.961 333.692 450 251 450c-5.523 0-10 4.477-10 10s4.477 10 10 10c45.543 0 89.207-13.849 126.272-40.048 36.24-25.617 63.556-61.046 78.995-102.458 1.929-5.175-.702-10.934-5.877-12.864zM202.433 444.034a198.232 198.232 0 0 1-28.554-9.526c-5.092-2.144-10.954.249-13.096 5.339-2.142 5.09.249 10.954 5.339 13.096a218.202 218.202 0 0 0 31.445 10.491c.817.205 1.635.303 2.44.303 4.478 0 8.554-3.03 9.692-7.57 1.344-5.358-1.909-10.79-7.266-12.133z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M337.502 61.244c-46.267-19.341-98.094-21.573-145.933-6.282-5.497 1.758-8.528 7.638-6.772 13.134 1.758 5.497 7.64 8.528 13.134 6.772 43.115-13.782 89.819-11.772 131.51 5.657 1.317.55 2.682.811 4.026.811 4.087 0 7.969-2.415 9.644-6.422 2.228-5.324-.284-11.445-5.609-13.67zM368.323 77.252a11.31 11.31 0 0 0-.375-.239c-4.925-3.009-11.356-1.458-14.364 3.467-2.984 4.884-1.483 11.249 3.346 14.29a10.398 10.398 0 0 0 5.587 1.626c3.377 0 6.69-1.633 8.704-4.654 3.201-4.801 1.904-11.289-2.898-14.49zM447.293 161.884c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.349-1.02 7.389-3.06l14.629-14.629c4.081-4.081 4.081-10.698.001-14.778zM83.999 214.617c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.349-1.02 7.39-3.06l14.629-14.629c4.081-4.082 4.081-10.698 0-14.778zM115.508 100.235c-4.081-4.08-10.698-4.08-14.778 0l-14.629 14.629c-4.08 4.081-4.08 10.698 0 14.778 2.04 2.041 4.715 3.06 7.388 3.06s5.348-1.02 7.39-3.06l14.629-14.629c4.081-4.081 4.081-10.698 0-14.778zM386.754 116.24h-20.688c-5.771 0-10.449 4.678-10.449 10.449s4.678 10.449 10.449 10.449h20.688c5.771 0 10.449-4.678 10.449-10.449s-4.678-10.449-10.449-10.449zM151.326 161.908l-14.618-14.618c-4.081-4.08-10.698-4.081-14.778 0s-4.08 10.698 0 14.778l14.618 14.618a10.413 10.413 0 0 0 7.388 3.06c2.674 0 5.349-1.02 7.39-3.06 4.081-4.081 4.081-10.698 0-14.778zM411.753 229.241l-14.618-14.617c-4.08-4.081-10.696-4.08-14.777 0s-4.08 10.697 0 14.777l14.618 14.617c2.041 2.041 4.715 3.06 7.388 3.06s5.348-1.021 7.388-3.06c4.083-4.08 4.082-10.696.001-14.777zM318.326 126.607l-14.617-14.617c-4.081-4.08-10.698-4.081-14.778 0s-4.08 10.698 0 14.778l14.617 14.617a10.414 10.414 0 0 0 7.388 3.061 10.42 10.42 0 0 0 7.39-3.061c4.08-4.081 4.08-10.698 0-14.778zM195.194 97.387c-3.904-4.25-10.515-4.528-14.763-.622l-15.22 13.989c-4.249 3.905-4.527 10.515-.622 14.763a10.42 10.42 0 0 0 7.696 3.378c2.528 0 5.063-.911 7.068-2.756l15.22-13.989c4.248-3.905 4.526-10.515.621-14.763zM256.153 145.241H255.865c-5.762 0-10.437 4.665-10.449 10.429-.011 5.771 4.658 10.457 10.429 10.469H256.134c5.762 0 10.438-4.664 10.449-10.429.01-5.771-4.659-10.458-10.43-10.469z'/%3E%3Cpath d='M437.019 74.981C388.668 26.628 324.38 0 256 0S123.332 26.628 74.981 74.981C26.629 123.333 0 187.62 0 256c0 68.38 26.628 132.668 74.981 181.019C123.333 485.371 187.62 512 256 512c68.38 0 132.668-26.628 181.019-74.981C485.371 388.667 512 324.38 512 256s-26.628-132.668-74.981-181.019zM256 491.102c-94.256 0-175.718-55.763-213.173-136.024 6.781-.56 13.126-3.458 18.112-8.35 5.756-5.647 9.057-13.495 9.057-21.531v-9.364c0-7.449 6.027-13.624 13.435-13.767 3.561-.079 6.976 1.322 9.617 3.913 2.77 2.718 4.359 6.484 4.359 10.332v23.709c0 18.754 15.222 34.302 33.932 34.66.221.004.442.006.664.006 8.973 0 17.47-3.499 23.989-9.895 6.751-6.623 10.623-15.826 10.623-25.25v-18.215c20.172 27.524 52.723 45.432 89.384 45.432 52.209 0 96.09-36.312 107.73-85.007a10.027 10.027 0 0 1 2.18 6.23v25.773c0 19.673 15.968 35.984 35.596 36.361.233.004.464.006.696.006 9.409 0 18.321-3.671 25.161-10.38 7.086-6.951 11.149-16.61 11.149-26.5v-24.856c0-2.83 1.17-5.6 3.21-7.602 1.927-1.889 4.429-2.882 6.986-2.854 5.403.104 9.8 4.612 9.8 10.05v2.721c0 14.409 10.071 26.69 23.526 30.04C453.848 418.996 363.189 491.102 256 491.102zm223.405-200.399v-2.721c0-16.741-13.591-30.624-30.297-30.944-8.235-.159-16.057 2.978-22.022 8.829-6.021 5.906-9.473 14.113-9.473 22.52v24.856c0 4.314-1.782 8.536-4.886 11.582-2.97 2.912-6.846 4.462-10.82 4.397-8.326-.16-15.099-7.098-15.099-15.468v-25.773c0-13.154-8.392-24.538-20.091-28.971.027-1.001.043-2.004.043-3.011 0-46.06-29.007-87.788-72.182-103.836-5.411-2.01-11.425.745-13.434 6.154-2.01 5.409.745 11.424 6.154 13.434 35.027 13.021 58.562 46.877 58.562 84.248 0 49.549-40.312 89.861-89.861 89.861-49.549 0-89.861-40.312-89.861-89.861 0-37.372 23.535-71.228 58.565-84.246 5.409-2.01 8.164-8.026 6.154-13.434s-8.022-8.165-13.434-6.154C174.248 168.21 145.239 209.938 145.239 256a110.22 110.22 0 0 0 7.085 38.971 30.145 30.145 0 0 0-6.607 18.808v25.763c0 3.848-1.589 7.614-4.359 10.332-2.642 2.591-6.036 3.973-9.617 3.913-7.407-.142-13.434-6.317-13.434-13.766v-23.709c0-9.424-3.872-18.627-10.623-25.251-6.681-6.554-15.435-10.081-24.652-9.889-18.71.358-33.932 15.907-33.932 34.66v9.364c0 2.461-1.019 4.871-2.794 6.613-1.668 1.635-3.808 2.506-6.034 2.47-3.374-.065-6.387-2.139-7.733-5.21-7.543-23.011-11.64-47.569-11.64-73.07C20.898 126.365 126.365 20.898 256 20.898S491.102 126.365 491.102 256c0 15.182-1.464 30.026-4.227 44.414-4.281-1.138-7.47-5.083-7.47-9.711z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58.153 58.153'%3E%3Cpath d='M40.076 29.153h-7.142a3.995 3.995 0 0 0-2.858-2.858V16.153a1 1 0 1 0-2 0v10.142c-1.72.447-3 1.999-3 3.858 0 2.206 1.794 4 4 4 1.858 0 3.411-1.28 3.858-3h7.142a1 1 0 1 0 0-2zm-11 3c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z'/%3E%3Cpath d='M50.188 9.764l4.096 4.096a1 1 0 0 0 1.414 0c3.167-3.166 3.167-8.319 0-11.485s-8.319-3.166-11.485 0a.997.997 0 0 0 0 1.414l4.561 4.561-1.699 1.699c-4.78-4.284-11.089-6.896-17.998-6.896s-13.218 2.612-17.998 6.896l-1.7-1.699 4.561-4.561a.997.997 0 0 0 0-1.414c-3.166-3.166-8.318-3.166-11.485 0s-3.167 8.319 0 11.485a1 1 0 0 0 1.414 0l4.096-4.096 1.676 1.676c-4.679 4.857-7.565 11.453-7.565 18.713 0 9.898 5.357 18.564 13.321 23.265l-3.028 3.028a.999.999 0 1 0 1.414 1.414l3.45-3.45c3.578 1.754 7.597 2.743 11.843 2.743s8.265-.989 11.843-2.743l3.45 3.45a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-3.028-3.028c7.964-4.701 13.321-13.367 13.321-23.265 0-7.26-2.886-13.856-7.565-18.713l1.677-1.676zm4.095-5.975c2.146 2.146 2.362 5.502.649 7.893L46.391 3.14a6.13 6.13 0 0 1 7.892.649zM3.22 11.681c-1.713-2.39-1.497-5.746.649-7.892s5.502-2.361 7.892-.649L3.22 11.681zm25.856 43.472c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.214 25-25 25z'/%3E%3Cpath d='M29.076 10.032a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1zM29.076 50.032a1 1 0 0 0-1 1v1a1 1 0 1 0 2 0v-1a1 1 0 0 0-1-1zM50.076 31.032h1a1 1 0 1 0 0-2h-1a1 1 0 1 0 0 2zM8.076 29.032h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2zM43.926 13.768l-.707.707a.999.999 0 1 0 1.414 1.414l.707-.707a.999.999 0 1 0-1.414-1.414zM13.52 44.174l-.707.707a.999.999 0 1 0 1.414 1.414l.707-.707a.999.999 0 1 0-1.414-1.414zM44.633 44.174a.999.999 0 1 0-1.414 1.414l.707.707a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-.707-.707zM14.227 13.768a.999.999 0 1 0-1.414 1.414l.707.707a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414l-.707-.707z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 33 33'%3E%3Cpath d='M16.5 33C7.402 33 0 25.598 0 16.5S7.402 0 16.5 0 33 7.402 33 16.5 25.598 33 16.5 33zm0-32C7.953 1 1 7.953 1 16.5S7.953 32 16.5 32 32 25.047 32 16.5 25.047 1 16.5 1z'/%3E%3Cpath d='M16.5 33a16.38 16.38 0 0 1-9.549-3.06.5.5 0 1 1 .116-.876c4.146-1.535 4.815-2.781 4.815-5.169 0-.631-.142-.838-.398-1.214-.339-.494-.803-1.171-1.129-2.939-.048-.254-.089-.274-.316-.384-.606-.292-1.163-.712-1.309-2.628 0-.928.32-1.441.585-1.708-.058-.33-.153-.899-.242-1.519-.453-2.777-.473-6.178 3.433-7.759 3.404-1.38 6.121-.626 6.974.273.604.019 2.162.177 3.246 1.438 1.668 1.94 1.137 6.363.955 7.562.266.261.589.767.589 1.675-.146 1.954-.703 2.375-1.31 2.666-.228.11-.269.129-.316.384-.326 1.768-.789 2.445-1.128 2.939-.257.375-.398.583-.398 1.214 0 2.388.669 3.634 4.815 5.169a.498.498 0 0 1 .116.876A16.38 16.38 0 0 1 16.5 33zm-8.183-3.349C10.779 31.191 13.589 32 16.5 32s5.721-.809 8.183-2.349c-3.474-1.426-4.565-2.864-4.565-5.755 0-.941.278-1.348.573-1.779.304-.444.682-.996.971-2.556.139-.754.576-.964.865-1.103.311-.149.631-.303.744-1.803-.001-.764-.344-.972-.358-.98a.533.533 0 0 1-.264-.537c.248-1.329.656-5.474-.681-7.031-.913-1.062-2.352-1.091-2.626-1.08-.046-.004-.091-.005-.134-.016-.13-.033-.35-.146-.417-.262-.272-.466-2.641-1.403-5.91-.08-3.231 1.308-3.238 4.112-2.819 6.682.138.957.289 1.784.29 1.788a.5.5 0 0 1-.283.544c.003 0-.339.209-.339 1.008.112 1.461.433 1.616.743 1.765.289.139.727.349.866 1.103.288 1.56.666 2.112.97 2.556.296.431.574.838.574 1.779 0 2.894-1.091 4.332-4.566 5.757z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 490.4 490.4'%3E%3Cpath d='M229 381.2c4.4 4.4 10.1 6.8 16.3 6.8 6.2 0 12-2.4 16.3-6.8l96.3-96.3c15.7-15.7 24.4-36.6 24.4-58.7 0-22.2-8.6-43.1-24.3-58.8-15.7-15.7-36.6-24.3-58.7-24.3-20 0-38.9 7-54 19.9-15.1-13-34.1-20-54.1-20-22.2 0-43 8.6-58.7 24.3s-24.3 36.6-24.3 58.8 8.7 43 24.4 58.7l96.4 96.4zm-79.3-196.7c11.1-11.1 25.7-17.1 41.4-17.1s30.4 6.1 41.5 17.2l4 4c4.8 4.8 12.5 4.8 17.3 0l3.9-3.9c11.1-11.1 25.8-17.2 41.5-17.2 15.6 0 30.3 6.1 41.4 17.2 11.1 11.1 17.2 25.8 17.1 41.4 0 15.7-6.1 30.4-17.2 41.5l-95.3 95.3-95.5-95.5c-11.1-11.1-17.2-25.8-17.2-41.4 0-15.7 6.1-30.4 17.1-41.5z'/%3E%3Cpath d='M245.2 490.4c135.2 0 245.2-110 245.2-245.2S380.4 0 245.2 0 0 110 0 245.2s110 245.2 245.2 245.2zm0-465.9c121.7 0 220.7 99 220.7 220.7s-99 220.7-220.7 220.7-220.7-99-220.7-220.7 99-220.7 220.7-220.7z'/%3E%3C/svg%3E"},function(f,e){f.exports="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 470 470'%3E%3Cpath d='M401.17 68.83C356.784 24.444 297.771 0 235 0S113.216 24.444 68.83 68.83C24.444 113.215 0 172.229 0 235s24.444 121.785 68.83 166.17C113.216 445.556 172.229 470 235 470s121.784-24.444 166.17-68.83C445.556 356.785 470 297.771 470 235s-24.444-121.785-68.83-166.17zM235 455c-121.309 0-220-98.691-220-220S113.691 15 235 15s220 98.691 220 220-98.691 220-220 220z'/%3E%3Ccircle cx='235' cy='97.5' r='7.5'/%3E%3Cpath d='M437.56 242.365a7.501 7.501 0 0 0-5.467-2.365h-26.046v-22.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5V240H372.5v-52.5a7.5 7.5 0 0 0-3.525-6.36L292.5 133.343V97.5A7.5 7.5 0 0 0 285 90h-13.253C268.262 72.905 253.109 60 235 60s-33.262 12.905-36.747 30H185a7.5 7.5 0 0 0-7.5 7.5V130h-25v-22.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5V130H105a7.5 7.5 0 0 0-7.5 7.5v102.499l-59.593-.01a7.504 7.504 0 0 0-7.487 7.969c3.523 56.171 29.666 105.984 69.187 140.798.281.291.587.556.911.799 23.389 20.362 51.39 35.496 82.128 43.638.307.102.622.184.946.246A204.258 204.258 0 0 0 235 440c17.409 0 34.679-2.229 51.386-6.558a7.297 7.297 0 0 0 1.002-.262 203.842 203.842 0 0 0 50.574-20.966c30.222-17.629 55.631-42.86 73.479-72.965a7.5 7.5 0 0 0-12.902-7.65 189.49 189.49 0 0 1-26.039 34.299V255h51.438a188.457 188.457 0 0 1-12.616 50.728 7.499 7.499 0 0 0 4.156 9.758 7.498 7.498 0 0 0 9.758-4.157 203.511 203.511 0 0 0 14.342-63.359 7.499 7.499 0 0 0-2.018-5.605zM192.5 175h85v215h-85V175zm0-70H205a7.5 7.5 0 0 0 7.5-7.5c0-12.407 10.094-22.5 22.5-22.5s22.5 10.093 22.5 22.5a7.5 7.5 0 0 0 7.5 7.5h12.5v55h-85v-55zM46.059 254.99l51.441.009V307.5c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5V145h65v245H175c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h2.5v11.078c-24.056-7.668-46.091-20.018-65-35.997V337.5c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v28.458c-28.127-29.492-46.937-68.033-51.441-110.968zM192.5 420.179V405h85v15.106A187.644 187.644 0 0 1 235 425a189.427 189.427 0 0 1-42.5-4.821zm100-4.235V405h2.5c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-2.5V151.032l65 40.625v188.307a191.989 191.989 0 0 1-65 35.98z'/%3E%3Cpath d='M325 320a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 280a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 240a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM325 200a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM145 345a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 305a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 265a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 185a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM145 225a7.5 7.5 0 0 0 7.5-7.5v-10c0-4.142-3.357-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v10a7.5 7.5 0 0 0 7.5 7.5zM235 350a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 310a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 270a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 230a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM235 190a7.5 7.5 0 0 0-7.5 7.5v10c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-10a7.5 7.5 0 0 0-7.5-7.5zM215 145h40c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-40c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5z'/%3E%3C/svg%3E"},function(f,e,n){var a=n(6),t=n(41);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react .emoji {\n  position: relative;\n}\n\n.emoji-picker-react .emoji.has-skin-variation button:before {\n  content: '';\n  display: block;\n  width: 0;\n  height: 0;\n  right: -2px;\n  bottom: 0px;\n  position: absolute;\n  border-left: 4px solid transparent;\n  border-right: 4px solid transparent;\n  border-bottom: 4px solid rgba(0, 0, 0, 0.1);\n  transform: rotate(135deg);\n  z-index: 1;\n}\n\n.emoji-picker-react .emoji.has-skin-variation button:hover:before,\n.emoji-picker-react .emoji.has-skin-variation button:focus-visible:before {\n  border-bottom: 4px solid rgba(0, 0, 0, 0.4);\n}\n\n.emoji-picker-react .emoji button {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: inherit;\n  border-radius: 5px;\n  transition: 0.1s background;\n  padding: 0;\n  margin: 0;\n}\n\n.emoji-picker-react .emoji button:hover,\n.emoji-picker-react .emoji button:focus-visible {\n  background-color: currentColor;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(43);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react .emoji-group {\n  clear: both;\n  padding: 0 15px;\n  list-style: none;\n  margin: 0;\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n\n.emoji-picker-react .emoji-group:before {\n  content: attr(data-display-name);\n  color: #aaa;\n  font-size: 14px;\n  position: sticky;\n  background: rgba(255, 255, 255, 0.95);\n  width: 100%;\n  z-index: 1;\n  top: 0;\n  text-transform: uppercase;\n  line-height: 45px;\n  font-weight: 700;\n}\n\n.emoji-picker-react .emoji-group:after {\n  content: '';\n  flex: 1000;\n  order: 99999;\n  flex-basis: 25px;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(45);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,".emoji-picker-react input.emoji-search {\n  width: calc(100% - 30px);\n  margin-left: 15px;\n  outline: none;\n  box-shadow: none;\n  padding: 10px;\n  box-sizing: border-box;\n  border: 1px solid #efefef;\n  border-radius: 3px;\n  transition: border 0.1s;\n}\n\n.emoji-picker-react input.emoji-search:focus {\n  border: 1px solid #d6d6d6;\n}\n",""]),f.exports=e},function(f,e,n){var a=n(6),t=n(47);"string"==typeof(t=t.__esModule?t.default:t)&&(t=[[f.i,t,""]]);var r={insert:"head",singleton:!1};a(t,r);f.exports=t.locals||{}},function(f,e,n){(e=n(7)(!1)).push([f.i,"aside.emoji-picker-react {\n  background: #fff;\n  display: flex;\n  flex-direction: column;\n  height: 320px;\n  width: 280px;\n  font-family: sans-serif;\n  border: 1px solid #efefef;\n  border-radius: 5px;\n  box-sizing: border-box;\n  box-shadow: 0 5px 10px #efefef;\n  overflow: hidden;\n  position: relative;\n}\n\naside.emoji-picker-react .content-wrapper {\n  flex: 1;\n  overflow-y: hidden;\n  position: relative;\n}\n\n.emoji-picker-react .emoji-scroll-wrapper {\n  overflow-y: scroll;\n  position: relative;\n  height: 100%;\n  box-sizing: border-box;\n}\n\naside.emoji-picker-react .content-wrapper:before {\n  content: attr(data-name);\n  color: #aaa;\n  font-size: 11px;\n  display: block;\n  position: absolute;\n  right: 15px;\n  z-index: 10;\n  line-height: 45px;\n  max-height: 45px;\n  overflow: hidden;\n  max-width: 100px;\n  text-overflow: ellipsis;\n  text-align: right;\n}\n\naside.emoji-picker-react button {\n  border: none;\n  cursor: pointer;\n  outline: none;\n  background: none;\n}\n",""]),f.exports=e},function(f,e,n){"use strict";n.r(e),n.d(e,"SKIN_TONE_NEUTRAL",(function(){return E})),n.d(e,"SKIN_TONE_LIGHT",(function(){return M})),n.d(e,"SKIN_TONE_MEDIUM_LIGHT",(function(){return P})),n.d(e,"SKIN_TONE_MEDIUM",(function(){return S})),n.d(e,"SKIN_TONE_MEDIUM_DARK",(function(){return z})),n.d(e,"SKIN_TONE_DARK",(function(){return R}));var a,t,r=n(3),o=n.n(r),i=n(0),u=n.n(i),c=n(1),l=n.n(c),d=n(2),s=(a={},o()(a,d.GROUP_NAME_PEOPLE,"smileys & people"),o()(a,d.GROUP_NAME_NATURE,"animals & nature"),o()(a,d.GROUP_NAME_FOOD,"food & drink"),o()(a,d.GROUP_NAME_TRAVEL,"travel & places"),o()(a,d.GROUP_NAME_OBJECTS,d.GROUP_NAME_OBJECTS),o()(a,d.GROUP_NAME_ACTIVITIES,d.GROUP_NAME_ACTIVITIES),o()(a,d.GROUP_NAME_SYMBOLS,d.GROUP_NAME_SYMBOLS),o()(a,d.GROUP_NAME_FLAGS,d.GROUP_NAME_FLAGS),o()(a,d.GROUP_NAME_RECENTLY_USED,"Recently Used"),a),g=n(5),b=n.n(g);try{t=window}catch(f){t={}}var m=t;function p(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}function h(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?p(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):p(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}var _,v=function(){try{if(!m.localStorage)return[];var f=m.localStorage.getItem("epr_ru");return f?JSON.parse(f):[]}catch(f){return[]}},w=function(f){var e=f.unified,n=f.originalUnified;try{if(!m.localStorage)return;var a=e.split("-"),t="";e!==n&&a.length>1&&(t=a[1]);var r=[h(o()({},d.EMOJI_PROPERTY_UNIFIED,n),t&&o()({},d.EMOJI_PROPERTY_SKIN_VARIATIONS,t))].concat(b()(v().filter((function(f){return f[d.EMOJI_PROPERTY_UNIFIED]!==n})))).splice(0,14);m.localStorage.setItem("epr_ru",JSON.stringify(r))}catch(f){return}},y=function(f,e,n){var a=arguments.length>3&&void 0!==arguments[3]?arguments[3]:{};return Object.assign({unified:f,emoji:f.split("-").map((function(f){return parseInt(f,16)})).map((function(f){return String.fromCodePoint(f)})).join(""),originalUnified:e[d.EMOJI_PROPERTY_UNIFIED],names:e[d.EMOJI_PROPERTY_NAME],activeSkinTone:n},a)},k=function(){var f=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return function(e,n,a,t){var r=y(n,a,t);return w(r),f.current&&f.current(e,r)}},j=n(4),O=n.n(j),x=n(11),E="neutral",M="1f3fb",P="1f3fc",S="1f3fe",z="1f3ff",R="1f3fd",C=(n(23),function(){var f,e=(f=O()(Object(i.useContext)(D).skinToneSpreadState,2)[1],function(){return f((function(f){return!f}))}),n=W(),a=function(){var f=O()(Object(i.useContext)(D).activeSkinToneState,2)[1];return function(e){f(e)}}(),t=X(),r=function(){e()};return u.a.createElement("ul",{className:"skin-tones-list"},x.map((function(f,e){var o=f===t;return u.a.createElement("li",{key:f,className:"t".concat(f),style:{transform:"translateX(-".concat(n?20*e:0,"px) scale(").concat(o?"1.5":1,")"),zIndex:o?2:1}},u.a.createElement("input",{type:"radio",onChange:function(f){var e=f.target.value;return a(e)},name:"skin-tone",value:f,id:"tone_".concat(f)}),u.a.createElement("label",{htmlFor:"tone_".concat(f),"data-name":"tones",onClick:r}))})))});function T(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}var N=l.a.shape((_={},o()(_,d.EMOJI_PROPERTY_NAME,l.a.arrayOf(l.a.string)),o()(_,d.EMOJI_PROPERTY_UNIFIED,l.a.string),o()(_,d.EMOJI_PROPERTY_SKIN_VARIATIONS,l.a.arrayOf(l.a.string)),o()(_,d.EMOJI_PROPERTY_GROUP,l.a.string),_)),I=l.a.shape({smileys_people:l.a.string,animals_nature:l.a.string,food_drink:l.a.string,travel_places:l.a.string,activities:l.a.string,objects:l.a.string,symbols:l.a.string,flags:l.a.string,recently_used:l.a.string}),A=l.a.shape(function(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?T(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):T(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}({},q)),q={emojiUrl:l.a.string,preload:l.a.bool,skinTone:l.a.string,groupNames:I,native:l.a.bool,groupVisibility:l.a.objectOf(l.a.bool),disableAutoFocus:l.a.bool,disableSearchBar:l.a.bool,disableSkinTonePicker:l.a.bool};function U(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}function L(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?U(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):U(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}var D=Object(i.createContext)({});function V(f){var e=f.children,n=f.config,a=f.recentlyUsed,t=f.onEmojiClick,r=Object(i.useState)(null),u=Object(i.useState)([]),c=Object(i.useState)(null),l=Object(i.useState)(o()({},d.GROUP_NAME_PEOPLE,!0)),s=Object(i.useState)({}),g=Object(i.useState)(null),b=Object(i.useState)(!1),m=Object(i.useState)(n.skinTone);return i.createElement(D.Provider,{value:{activeCategoryState:r,filterState:u,filterResult:c,seenGroupsState:l,missingEmojiState:s,variationMenuState:g,skinToneSpreadState:b,activeSkinToneState:m,config:n,recentlyUsed:a,onEmojiClick:t}},e)}function Y(){return Object(i.useContext)(D).activeCategoryState}function J(){return O()(Object(i.useContext)(D).filterState,1)[0]}function G(){return O()(Object(i.useContext)(D).filterResult,1)[0]}function F(){var f=O()(Object(i.useContext)(D).seenGroupsState,2)[1];return function(e){f((function(){var f=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return f[e]?f:L(L({},f),{},o()({},e,!0))}))}}function B(){return O()(Object(i.useContext)(D).missingEmojiState,1)[0]}function K(){return O()(Object(i.useContext)(D).variationMenuState,1)[0]}function H(){var f,e=O()(Object(i.useContext)(D).variationMenuState,2)[1],n=W(),a=(f=O()(Object(i.useContext)(D).skinToneSpreadState,2)[1],function(){return f(!1)});return function(f){var t=f.target;e((function(f){if(f)return null})),n&&"tones"!==t.getAttribute("data-name")&&a()}}function W(){return O()(Object(i.useContext)(D).skinToneSpreadState,1)[0]}function X(){return O()(Object(i.useContext)(D).activeSkinToneState,1)[0]}function $(){return Object(i.useContext)(D).config}function Q(){return Object(i.useContext)(D).onEmojiClick}V.propTypes={children:l.a.node},V.propTypes={children:l.a.node,config:A,recentlyUsed:l.a.arrayOf(l.a.object),onEmojiClick:l.a.func};var Z=n(8),ff=n.n(Z),ef=n(9),nf=n.n(ef),af=function(f){var e=$();return f?"".concat(e.emojiUrl,"/").concat(f,".png"):e.emojiUrl},tf=function(f){return{src:af(f)}},rf=(n(25),function(f){var e=f.unified,n=f.shouldLoad,a=void 0===n||n,t=f.native;return void 0!==t&&t?u.a.createElement("div",{className:"native"},e.split("-").map((function(f){return parseInt(f,16)})).map((function(f){return String.fromCodePoint(f)})).join("")):u.a.createElement(of,{shouldLoad:a,unified:e})});function of(f){var e=f.unified,n=f.shouldLoad,a=function(){var f=O()(Object(i.useContext)(D).missingEmojiState,2)[1];return function(e){f((function(f){return L(L({},f),{},o()({},e,!0))}))}}(),t=tf(e);return u.a.createElement("img",nf()({className:"emoji-img",onError:function(){return a(e)}},n&&t))}var uf=rf;of.propTypes={unified:l.a.string,shouldLoad:l.a.bool},rf.propTypes={unified:l.a.string,shouldLoad:l.a.bool,native:l.a.bool};n(27);var cf=function(){var f=Object(i.useState)(!1),e=O()(f,2),n=e[0],a=e[1],t=H(),r=K(),o=X(),c=Q(),l=$();if(Object(i.useEffect)((function(){return r&&!n&&a(!0),function(){a(!1)}}),[r]),!r)return null;var s=ff()("variation-list",{visible:n});return u.a.createElement("div",{className:"variations-wrapper"},u.a.createElement("ul",{className:s},x.map((function(f){var e=r[d.EMOJI_PROPERTY_SKIN_VARIATIONS].find((function(e){return e.includes(f)}))||r[d.EMOJI_PROPERTY_UNIFIED];return u.a.createElement("li",{key:e},u.a.createElement("button",{onClick:function(f){return t(f),c(f,e,r,o)},onMouseDown:function(f){return f.stopPropagation()}},u.a.createElement(uf,{native:l.native,unified:e})))}))))},lf=cf;cf.propTypes={closeVariations:l.a.func};var df=n(10);n(29);function sf(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}function gf(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?sf(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):sf(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}var bf=function(f){var e=f.emojiListRef,n=Object(i.useRef)(null),a=F(),t=J(),r=$().groupVisibility,o=Y(),c=O()(o,2),l=c[0],d=c[1],s=!1;t&&t.length&&(s=!0);var g,b=0,m=0,p="0";return n&&n.current&&((g=n.current.querySelector("[".concat("data-name",'="').concat(l,'"]')))?(b=g&&g.offsetLeft||n.current.firstChild.offsetLeft,p="1"):(b=n.current.firstChild.offsetLeft,p="0")),u.a.createElement(u.a.Fragment,null,u.a.createElement("nav",{onClick:function(f){var n=f.target;if(!s){var t=n.getAttribute("data-name");if(e&&e.current&&t){d(t),a(t);var r=e.current,o=r.querySelector("[".concat("data-name",'="').concat(t,'"]'));r.scrollTop=o.offsetTop}}},className:ff()("emoji-categories",{inactive:s}),ref:n},df.map((function(f,e){if(!1===r[f])return null;var n=l===f;return n&&(m=e),u.a.createElement("button",{key:f,type:"button",className:ff()("icn-".concat(f),{active:n}),"data-name":f})}))),u.a.createElement("div",{className:"active-category-indicator-wrapper"},u.a.createElement("div",{className:"active-category-indicator",style:gf({transform:"translateX(".concat(Math.max(b+m/2,b),"px)"),opacity:p},s&&{display:"none",opacity:"0",transform:"translateX(0)"})})))},mf=bf;bf.propTypes={emojiListRef:l.a.shape({current:l.a.instanceOf(Element)})};var pf=n(12),hf=function(f){var e={groups:{},emojis:{}},n=function(n){f[n].reduce((function(f,e){var a=e[d.EMOJI_PROPERTY_UNIFIED];return e[d.EMOJI_PROPERTY_GROUP]=n,f.emojis[a]=e,f.groups[n]=f.groups[n]||[],f.groups[n].push(a),f}),e)};for(var a in f)n(a);return e}(pf),_f=function(f,e,n,a){var t=Object(i.useRef)(null),r=Y(),o=O()(r,2)[1],u=F();Object(i.useEffect)((function(){var r=e.current;if(void 0===m.IntersectionObserver||!f.current||n.current||a||(t.current=new IntersectionObserver((function(f){f.forEach((function(f){var e=f.target.getAttribute("data-name");0!==f.intersectionRatio&&(u(e),r||o(e))}))}),{root:f.current.parentElement})),t.current)return b()(f.current.querySelectorAll(".emoji-group")).forEach((function(f){t.current.observe(f,{threshold:1})})),function(){t.current.disconnect()}}),[f.current,a])},vf=function(f,e){var n=Object(i.useRef)();return Object(i.useEffect)((function(){e&&e.current&&(e.current.scrollTop=0),n.current=f}),[f]),n.current},wf=function(){var f=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",e=arguments.length>1?arguments[1]:void 0,n=".content-wrapper",a=e&&e.current?e.current.closest("".concat(n)):document.querySelector(".emoji-picker-react ".concat(n));a.setAttribute("data-name",f)};n(40);function yf(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}function kf(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?yf(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):yf(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}var jf=["#aeeff0","#ffe0e0","#d6f8b8","#c6cfff","#f1f0d1"],Of=null,xf=function(){return clearTimeout(Of)},Ef=function(f){var e,n,a=f.emoji,t=f.shouldLoad,r=f.hidden,o=f.activeSkinTone,i=f.openVariationMenu,c=f.variationMenuOpenRef,l=f.handleMouseEnter,s=f.handleMouseLeave,g=f.onEmojiClick,b=f.index,m=f.native,p=void 0!==m&&m,h=a[d.EMOJI_PROPERTY_SKIN_VARIATIONS],_=kf(kf({},r&&{display:"none"}),{},{color:(n=b,jf[n%jf.length])});h&&a[d.EMOJI_PROPERTY_SKIN_VARIATIONS]&&(e=a[d.EMOJI_PROPERTY_SKIN_VARIATIONS].find((function(f){return f.indexOf(o)>=0}))),e||(e=a[d.EMOJI_PROPERTY_UNIFIED]);return u.a.createElement("li",{style:_,className:ff()("emoji",{"has-skin-variation":h&&i})},u.a.createElement("button",{onMouseDown:function(){h&&i&&(Of=setTimeout((function(){i(a)}),500))},onMouseEnter:l,onMouseLeave:s,onMouseUp:xf,type:"button",onClick:function(f){c&&c.current||g(f,e,a,o)}},u.a.createElement(uf,{unified:e,shouldLoad:t,native:p})))},Mf=Ef;Ef.propTypes={emoji:N,shouldLoad:l.a.bool,hidden:l.a.bool,activeSkinTone:l.a.string,openVariationMenu:l.a.func,variationMenuOpenRef:l.a.shape({current:l.a.bool}),handleMouseEnter:l.a.func,handleMouseLeave:l.a.func,onEmojiClick:l.a.func,index:l.a.number,native:l.a.bool};n(42);function Pf(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}var Sf=function(f,e){var n,a=e.emojiListRef,t=e.searchTerm,r=G(),o=B(),c=(n=O()(Object(i.useContext)(D).variationMenuState,2)[1],function(f){n((function(e){return e===f?e:f}))}),l=K(),s=X(),g=Q(),b=$(),p=O()(Object(i.useContext)(D).seenGroupsState,1)[0],h=Object(i.useRef)(!!l),_=Object(i.useCallback)((function(){return wf("",a)}));Object(i.useEffect)((function(){h.current=!!l}),[l]);var v=b.preload||!(!p[f]&&!r&&"function"==typeof m.IntersectionObserver);return Object(i.useMemo)((function(){var e=r?Object.keys(r[f]||{}):hf.groups[f];return e.reduce((function(f,n,t){if(o&&o[n])return f;var r=hf.emojis[n],i=!e.length;return f.shown||i||(f.shown=!0),f.list.push(u.a.createElement(Mf,{emoji:r,openVariationMenu:c,activeSkinTone:s,handleMouseLeave:_,variationMenuOpenRef:h,handleMouseEnter:function(){return wf(r[d.EMOJI_PROPERTY_NAME][0],a)},hidden:i,shouldLoad:v,onEmojiClick:g,index:t,key:r[d.EMOJI_PROPERTY_UNIFIED],native:b.native})),f}),{list:[],shown:!1})}),[s,t,v,o,b.native])},zf=function(f){var e=f.emojiListRef,n=Y(),a=O()(n,1)[0],t=$().groupNames,r=G(),o=J(),c=Object(i.useRef)(a),l=Object(i.useRef)(r),d=Object(i.useState)(!0),s=O()(d,2),g=s[0],b=s[1],m=o&&o.length?o[o.length-1].value:"";Object(i.useEffect)((function(){m||requestAnimationFrame((function(){b(!0)}))}),[m]),Object(i.useEffect)((function(){g&&requestAnimationFrame((function(){b(!1)}))}),[g]),_f(e,c,l,g),vf(r,e);var p={emojiListRef:e,searchTerm:m,groupNames:t};return u.a.createElement(u.a.Fragment,null,u.a.createElement(Rf,nf()({name:df[0]},p)),!g&&df.slice(1).map((function(f){return u.a.createElement(Rf,nf()({key:f,name:f},p))})))},Rf=u.a.memo((function(f){var e=f.name,n=f.searchTerm,a=f.emojiListRef,t=f.groupNames;if(!1===$().groupVisibility[e])return null;var r=Sf(e,{searchTerm:n,emojiListRef:a}),i=r.list,c=function(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?Pf(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):Pf(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}({},!r.shown&&{display:"none"});return u.a.createElement("ul",{className:"emoji-group","data-name":e,"data-display-name":t[e],key:e,style:c},i)})),Cf=zf;zf.propTypes={emojiListRef:l.a.shape({current:l.a.instanceOf(Element)}),unsetEmojiName:l.a.func},Rf.propTypes={name:l.a.string,searchTerm:l.a.string,emojiListRef:l.a.shape({current:l.a.instanceOf(Element)}),groupNames:I};var Tf,Nf,If=function(f,e,n){var a=arguments.length>3&&void 0!==arguments[3]?arguments[3]:100,t=n;return new Promise((function(n){var r=0;!function o(){for(var i=r;i<r+a&&i<f.length;i++)t=e(t,f[i],i,f);if(!((r+=a)<f.length))return n(t);setTimeout((function(){o()}))}()}))},Af=Array.prototype.concat.apply([],Object.values(pf));If(Af,(function(f,e){return e?e[d.EMOJI_PROPERTY_NAME].reduce((function(f,e){return[].concat(b()(f),b()((e||"").split(/[- _]/))).filter(Boolean)}),[]).reduce((function(f,n){var a=n.toLowerCase();return f[a]=f[a]||[],f[a].push(e[d.EMOJI_PROPERTY_UNIFIED]),f}),f):f}),{}).then((function(f){return If(Object.keys(f),(function(f,e){return e?(e.split("").filter(Boolean)||[]).reduce((function(f,n){return f[n]=f[n]||[],f[n].includes(e)||f[n].push(e),f}),f):f}),{}).then((function(e){return{searchTerms:f,mappedSearchTerms:e}}))})).then((function(f){Tf=f.searchTerms,Nf=f.mappedSearchTerms}));var qf=function(){var f,e,n=J(),a=(f=O()(Object(i.useContext)(D).filterState,2)[1],e=O()(Object(i.useContext)(D).filterResult,2)[1],function(n){var a=n.filter,t=n.filterResult;f(a),e(t)});return function(f){var e,t=f.target.value,r=n[n.length-1];if(t=t.trim().toLowerCase(),!r||r.value!==t){if(1===t.length)e=[{value:t,terms:Nf[t]||[]}];else if(r&&t.length>r.value.length&&t.includes(r.value))e=[].concat(b()(n),[{value:t,terms:r.terms.filter((function(f){return f.includes(t)}))}]);else if(r&&t.length<r.value.length&&r.value.includes(t)){for(var o=0,i=n.length;i>0;i--)if(t.includes(n[i-1].value)){o=i;break}n.length=o,e=b()(n)}else 0!==n.length&&t.includes(r.value)||(e=[{value:t,terms:(Nf[t[0]]||[]).filter((function(f){return f.includes(t)}))}]);var u=e&&e[e.length-1];!(!u||!u.value)?If(u&&u.terms||[],(function(f,e){return Tf[e]?(Tf[e]||[]).reduce((function(f,e){var n=hf.emojis[e][d.EMOJI_PROPERTY_GROUP];return f[n]=f[n]||{},f[n][e]=!0,f}),f):f}),{}).then((function(f){a({filter:e,filterResult:f})})):a({filter:e,filterResult:null})}}};n(44);var Uf=function(){var f=$(),e=qf();return f.disableSearchBar?null:u.a.createElement("div",{style:{position:"relative"}},u.a.createElement("input",{className:"emoji-search",onChange:e,autoFocus:!f.disableAutoFocus}),f.disableSkinTonePicker?null:u.a.createElement(C,null))},Lf=function(f){var e=f.emojiListRef,n=G(),a=B(),t=Q(),r=$(),o=Object(i.useContext)(D).recentlyUsed,c=Object(i.useCallback)((function(){return wf("",e)}));return!o.length||n||!1===r.groupVisibility[d.GROUP_NAME_RECENTLY_USED]?null:u.a.createElement("ul",{className:"emoji-group","data-display-name":r.groupNames[d.GROUP_NAME_RECENTLY_USED],"data-name":d.GROUP_NAME_RECENTLY_USED},o.map((function(f,n){var o=f[d.EMOJI_PROPERTY_UNIFIED],i=hf.emojis[o];return a[o]||!i?null:u.a.createElement(Mf,nf()({key:n,emoji:i},f[d.EMOJI_PROPERTY_SKIN_VARIATIONS]&&{activeSkinTone:f[d.EMOJI_PROPERTY_SKIN_VARIATIONS]},{index:n,native:r.native,handleMouseLeave:c,onEmojiClick:t,handleMouseEnter:function(){return wf(i[d.EMOJI_PROPERTY_NAME][0],e)},shouldLoad:!0}))})))},Df=Lf;Lf.propTypes={unsetEmojiName:l.a.func,emojiListRef:l.a.shape({current:l.a.instanceOf(Element)})};n(46);function Vf(f,e){var n=Object.keys(f);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(f);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(f,e).enumerable}))),n.push.apply(n,a)}return n}var Yf=function(f){var e=f.emojiUrl,n=void 0===e?"https://cdn.jsdelivr.net/npm/emoji-datasource-apple@6.0.1/img/apple/64":e,a=f.onEmojiClick,t=f.preload,r=void 0!==t&&t,o=f.native,c=void 0!==o&&o,l=f.skinTone,d=void 0===l?E:l,g=f.disableAutoFocus,b=void 0!==g&&g,m=f.disableSearchBar,p=void 0!==m&&m,h=f.disableSkinTonePicker,_=void 0!==h&&h,w=f.groupNames,y=void 0===w?{}:w,j=f.pickerStyle,O=void 0===j?{}:j,x=f.groupVisibility,M=void 0===x?{}:x,P=Object(i.useRef)(null),S=Object(i.useRef)(!0),z=Object(i.useRef)(a);return z.current=a,Object(i.useEffect)((function(){return function(){S.current=!1}}),[]),u.a.createElement(V,{config:{skinTone:d,emojiUrl:n,preload:r,native:c,groupNames:Object.assign(s,y),groupVisibility:M,disableSearchBar:p,disableAutoFocus:b,disableSkinTonePicker:_},recentlyUsed:v(),onEmojiClick:k(z)},u.a.createElement(Jf,{pickerStyle:O},u.a.createElement(mf,{emojiListRef:P}),u.a.createElement(Uf,null),u.a.createElement("div",{className:"content-wrapper"},u.a.createElement(lf,null),u.a.createElement("section",{className:"emoji-scroll-wrapper",ref:P},u.a.createElement(Df,{emojiListRef:P}),u.a.createElement(Cf,{emojiListRef:P})))))};function Jf(f){var e=f.children,n=f.pickerStyle,a=H();return u.a.createElement("aside",{className:"emoji-picker-react",style:n,onScroll:a,onMouseDown:a},e)}e.default=Yf;Jf.propTypes={children:l.a.node,pickerStyle:l.a.object},Yf.propTypes=function(f){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?Vf(Object(n),!0).forEach((function(e){o()(f,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(f,Object.getOwnPropertyDescriptors(n)):Vf(Object(n)).forEach((function(e){Object.defineProperty(f,e,Object.getOwnPropertyDescriptor(n,e))}))}return f}({onEmojiClick:l.a.func,pickerStyle:l.a.objectOf(l.a.string)},q)}])}));
-//# sourceMappingURL=index.js.map
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+/*!
+  * Bootstrap v5.3.0 (https://getbootstrap.com/)
+  * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+(function (global, factory) {
+   true ? module.exports = factory(__webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js")) :
+  undefined;
+})(this, (function (Popper) { 'use strict';
+
+  function _interopNamespaceDefault(e) {
+    const n = Object.create(null, { [Symbol.toStringTag]: { value: 'Module' } });
+    if (e) {
+      for (const k in e) {
+        if (k !== 'default') {
+          const d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: () => e[k]
+          });
+        }
+      }
+    }
+    n.default = e;
+    return Object.freeze(n);
+  }
+
+  const Popper__namespace = /*#__PURE__*/_interopNamespaceDefault(Popper);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap dom/data.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  /**
+   * Constants
+   */
+
+  const elementMap = new Map();
+  const Data = {
+    set(element, key, instance) {
+      if (!elementMap.has(element)) {
+        elementMap.set(element, new Map());
+      }
+      const instanceMap = elementMap.get(element);
+
+      // make it clear we only want one instance per element
+      // can be removed later when multiple key/instances are fine to be used
+      if (!instanceMap.has(key) && instanceMap.size !== 0) {
+        // eslint-disable-next-line no-console
+        console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+        return;
+      }
+      instanceMap.set(key, instance);
+    },
+    get(element, key) {
+      if (elementMap.has(element)) {
+        return elementMap.get(element).get(key) || null;
+      }
+      return null;
+    },
+    remove(element, key) {
+      if (!elementMap.has(element)) {
+        return;
+      }
+      const instanceMap = elementMap.get(element);
+      instanceMap.delete(key);
+
+      // free up element references if there are no instances left for an element
+      if (instanceMap.size === 0) {
+        elementMap.delete(element);
+      }
+    }
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  const MAX_UID = 1000000;
+  const MILLISECONDS_MULTIPLIER = 1000;
+  const TRANSITION_END = 'transitionend';
+
+  /**
+   * Properly escape IDs selectors to handle weird IDs
+   * @param {string} selector
+   * @returns {string}
+   */
+  const parseSelector = selector => {
+    if (selector && window.CSS && window.CSS.escape) {
+      // document.querySelector needs escaping to handle IDs (html5+) containing for instance /
+      selector = selector.replace(/#([^\s"#']+)/g, (match, id) => `#${CSS.escape(id)}`);
+    }
+    return selector;
+  };
+
+  // Shout-out Angus Croll (https://goo.gl/pxwQGp)
+  const toType = object => {
+    if (object === null || object === undefined) {
+      return `${object}`;
+    }
+    return Object.prototype.toString.call(object).match(/\s([a-z]+)/i)[1].toLowerCase();
+  };
+
+  /**
+   * Public Util API
+   */
+
+  const getUID = prefix => {
+    do {
+      prefix += Math.floor(Math.random() * MAX_UID);
+    } while (document.getElementById(prefix));
+    return prefix;
+  };
+  const getTransitionDurationFromElement = element => {
+    if (!element) {
+      return 0;
+    }
+
+    // Get transition-duration of the element
+    let {
+      transitionDuration,
+      transitionDelay
+    } = window.getComputedStyle(element);
+    const floatTransitionDuration = Number.parseFloat(transitionDuration);
+    const floatTransitionDelay = Number.parseFloat(transitionDelay);
+
+    // Return 0 if element or transition duration is not found
+    if (!floatTransitionDuration && !floatTransitionDelay) {
+      return 0;
+    }
+
+    // If multiple durations are defined, take the first
+    transitionDuration = transitionDuration.split(',')[0];
+    transitionDelay = transitionDelay.split(',')[0];
+    return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+  };
+  const triggerTransitionEnd = element => {
+    element.dispatchEvent(new Event(TRANSITION_END));
+  };
+  const isElement = object => {
+    if (!object || typeof object !== 'object') {
+      return false;
+    }
+    if (typeof object.jquery !== 'undefined') {
+      object = object[0];
+    }
+    return typeof object.nodeType !== 'undefined';
+  };
+  const getElement = object => {
+    // it's a jQuery object or a node element
+    if (isElement(object)) {
+      return object.jquery ? object[0] : object;
+    }
+    if (typeof object === 'string' && object.length > 0) {
+      return document.querySelector(parseSelector(object));
+    }
+    return null;
+  };
+  const isVisible = element => {
+    if (!isElement(element) || element.getClientRects().length === 0) {
+      return false;
+    }
+    const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+    // Handle `details` element as its content may falsie appear visible when it is closed
+    const closedDetails = element.closest('details:not([open])');
+    if (!closedDetails) {
+      return elementIsVisible;
+    }
+    if (closedDetails !== element) {
+      const summary = element.closest('summary');
+      if (summary && summary.parentNode !== closedDetails) {
+        return false;
+      }
+      if (summary === null) {
+        return false;
+      }
+    }
+    return elementIsVisible;
+  };
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+  };
+  const findShadowRoot = element => {
+    if (!document.documentElement.attachShadow) {
+      return null;
+    }
+
+    // Can find the shadow root otherwise it'll return the document
+    if (typeof element.getRootNode === 'function') {
+      const root = element.getRootNode();
+      return root instanceof ShadowRoot ? root : null;
+    }
+    if (element instanceof ShadowRoot) {
+      return element;
+    }
+
+    // when we don't find a shadow root
+    if (!element.parentNode) {
+      return null;
+    }
+    return findShadowRoot(element.parentNode);
+  };
+  const noop = () => {};
+
+  /**
+   * Trick to restart an element's animation
+   *
+   * @param {HTMLElement} element
+   * @return void
+   *
+   * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+   */
+  const reflow = element => {
+    element.offsetHeight; // eslint-disable-line no-unused-expressions
+  };
+
+  const getjQuery = () => {
+    if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+      return window.jQuery;
+    }
+    return null;
+  };
+  const DOMContentLoadedCallbacks = [];
+  const onDOMContentLoaded = callback => {
+    if (document.readyState === 'loading') {
+      // add listener on the first call when the document is in loading state
+      if (!DOMContentLoadedCallbacks.length) {
+        document.addEventListener('DOMContentLoaded', () => {
+          for (const callback of DOMContentLoadedCallbacks) {
+            callback();
+          }
+        });
+      }
+      DOMContentLoadedCallbacks.push(callback);
+    } else {
+      callback();
+    }
+  };
+  const isRTL = () => document.documentElement.dir === 'rtl';
+  const defineJQueryPlugin = plugin => {
+    onDOMContentLoaded(() => {
+      const $ = getjQuery();
+      /* istanbul ignore if */
+      if ($) {
+        const name = plugin.NAME;
+        const JQUERY_NO_CONFLICT = $.fn[name];
+        $.fn[name] = plugin.jQueryInterface;
+        $.fn[name].Constructor = plugin;
+        $.fn[name].noConflict = () => {
+          $.fn[name] = JQUERY_NO_CONFLICT;
+          return plugin.jQueryInterface;
+        };
+      }
+    });
+  };
+  const execute = (possibleCallback, args = [], defaultValue = possibleCallback) => {
+    return typeof possibleCallback === 'function' ? possibleCallback(...args) : defaultValue;
+  };
+  const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+    if (!waitForTransition) {
+      execute(callback);
+      return;
+    }
+    const durationPadding = 5;
+    const emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
+    let called = false;
+    const handler = ({
+      target
+    }) => {
+      if (target !== transitionElement) {
+        return;
+      }
+      called = true;
+      transitionElement.removeEventListener(TRANSITION_END, handler);
+      execute(callback);
+    };
+    transitionElement.addEventListener(TRANSITION_END, handler);
+    setTimeout(() => {
+      if (!called) {
+        triggerTransitionEnd(transitionElement);
+      }
+    }, emulatedDuration);
+  };
+
+  /**
+   * Return the previous/next element of a list.
+   *
+   * @param {array} list    The list of elements
+   * @param activeElement   The active element
+   * @param shouldGetNext   Choose to get next or previous element
+   * @param isCycleAllowed
+   * @return {Element|elem} The proper element
+   */
+  const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed) => {
+    const listLength = list.length;
+    let index = list.indexOf(activeElement);
+
+    // if the element does not exist in the list return an element
+    // depending on the direction and if cycle is allowed
+    if (index === -1) {
+      return !shouldGetNext && isCycleAllowed ? list[listLength - 1] : list[0];
+    }
+    index += shouldGetNext ? 1 : -1;
+    if (isCycleAllowed) {
+      index = (index + listLength) % listLength;
+    }
+    return list[Math.max(0, Math.min(index, listLength - 1))];
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap dom/event-handler.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
+  const stripNameRegex = /\..*/;
+  const stripUidRegex = /::\d+$/;
+  const eventRegistry = {}; // Events storage
+  let uidEvent = 1;
+  const customEvents = {
+    mouseenter: 'mouseover',
+    mouseleave: 'mouseout'
+  };
+  const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+
+  /**
+   * Private methods
+   */
+
+  function makeEventUid(element, uid) {
+    return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
+  }
+  function getElementEvents(element) {
+    const uid = makeEventUid(element);
+    element.uidEvent = uid;
+    eventRegistry[uid] = eventRegistry[uid] || {};
+    return eventRegistry[uid];
+  }
+  function bootstrapHandler(element, fn) {
+    return function handler(event) {
+      hydrateObj(event, {
+        delegateTarget: element
+      });
+      if (handler.oneOff) {
+        EventHandler.off(element, event.type, fn);
+      }
+      return fn.apply(element, [event]);
+    };
+  }
+  function bootstrapDelegationHandler(element, selector, fn) {
+    return function handler(event) {
+      const domElements = element.querySelectorAll(selector);
+      for (let {
+        target
+      } = event; target && target !== this; target = target.parentNode) {
+        for (const domElement of domElements) {
+          if (domElement !== target) {
+            continue;
+          }
+          hydrateObj(event, {
+            delegateTarget: target
+          });
+          if (handler.oneOff) {
+            EventHandler.off(element, event.type, selector, fn);
+          }
+          return fn.apply(target, [event]);
+        }
+      }
+    };
+  }
+  function findHandler(events, callable, delegationSelector = null) {
+    return Object.values(events).find(event => event.callable === callable && event.delegationSelector === delegationSelector);
+  }
+  function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
+    const isDelegated = typeof handler === 'string';
+    // TODO: tooltip passes `false` instead of selector, so we need to check
+    const callable = isDelegated ? delegationFunction : handler || delegationFunction;
+    let typeEvent = getTypeEvent(originalTypeEvent);
+    if (!nativeEvents.has(typeEvent)) {
+      typeEvent = originalTypeEvent;
+    }
+    return [isDelegated, callable, typeEvent];
+  }
+  function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
+    if (typeof originalTypeEvent !== 'string' || !element) {
+      return;
+    }
+    let [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction);
+
+    // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
+    // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+    if (originalTypeEvent in customEvents) {
+      const wrapFunction = fn => {
+        return function (event) {
+          if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
+            return fn.call(this, event);
+          }
+        };
+      };
+      callable = wrapFunction(callable);
+    }
+    const events = getElementEvents(element);
+    const handlers = events[typeEvent] || (events[typeEvent] = {});
+    const previousFunction = findHandler(handlers, callable, isDelegated ? handler : null);
+    if (previousFunction) {
+      previousFunction.oneOff = previousFunction.oneOff && oneOff;
+      return;
+    }
+    const uid = makeEventUid(callable, originalTypeEvent.replace(namespaceRegex, ''));
+    const fn = isDelegated ? bootstrapDelegationHandler(element, handler, callable) : bootstrapHandler(element, callable);
+    fn.delegationSelector = isDelegated ? handler : null;
+    fn.callable = callable;
+    fn.oneOff = oneOff;
+    fn.uidEvent = uid;
+    handlers[uid] = fn;
+    element.addEventListener(typeEvent, fn, isDelegated);
+  }
+  function removeHandler(element, events, typeEvent, handler, delegationSelector) {
+    const fn = findHandler(events[typeEvent], handler, delegationSelector);
+    if (!fn) {
+      return;
+    }
+    element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
+    delete events[typeEvent][fn.uidEvent];
+  }
+  function removeNamespacedHandlers(element, events, typeEvent, namespace) {
+    const storeElementEvent = events[typeEvent] || {};
+    for (const [handlerKey, event] of Object.entries(storeElementEvent)) {
+      if (handlerKey.includes(namespace)) {
+        removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+      }
+    }
+  }
+  function getTypeEvent(event) {
+    // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+    event = event.replace(stripNameRegex, '');
+    return customEvents[event] || event;
+  }
+  const EventHandler = {
+    on(element, event, handler, delegationFunction) {
+      addHandler(element, event, handler, delegationFunction, false);
+    },
+    one(element, event, handler, delegationFunction) {
+      addHandler(element, event, handler, delegationFunction, true);
+    },
+    off(element, originalTypeEvent, handler, delegationFunction) {
+      if (typeof originalTypeEvent !== 'string' || !element) {
+        return;
+      }
+      const [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction);
+      const inNamespace = typeEvent !== originalTypeEvent;
+      const events = getElementEvents(element);
+      const storeElementEvent = events[typeEvent] || {};
+      const isNamespace = originalTypeEvent.startsWith('.');
+      if (typeof callable !== 'undefined') {
+        // Simplest case: handler is passed, remove that listener ONLY.
+        if (!Object.keys(storeElementEvent).length) {
+          return;
+        }
+        removeHandler(element, events, typeEvent, callable, isDelegated ? handler : null);
+        return;
+      }
+      if (isNamespace) {
+        for (const elementEvent of Object.keys(events)) {
+          removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
+        }
+      }
+      for (const [keyHandlers, event] of Object.entries(storeElementEvent)) {
+        const handlerKey = keyHandlers.replace(stripUidRegex, '');
+        if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
+          removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+        }
+      }
+    },
+    trigger(element, event, args) {
+      if (typeof event !== 'string' || !element) {
+        return null;
+      }
+      const $ = getjQuery();
+      const typeEvent = getTypeEvent(event);
+      const inNamespace = event !== typeEvent;
+      let jQueryEvent = null;
+      let bubbles = true;
+      let nativeDispatch = true;
+      let defaultPrevented = false;
+      if (inNamespace && $) {
+        jQueryEvent = $.Event(event, args);
+        $(element).trigger(jQueryEvent);
+        bubbles = !jQueryEvent.isPropagationStopped();
+        nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
+        defaultPrevented = jQueryEvent.isDefaultPrevented();
+      }
+      const evt = hydrateObj(new Event(event, {
+        bubbles,
+        cancelable: true
+      }), args);
+      if (defaultPrevented) {
+        evt.preventDefault();
+      }
+      if (nativeDispatch) {
+        element.dispatchEvent(evt);
+      }
+      if (evt.defaultPrevented && jQueryEvent) {
+        jQueryEvent.preventDefault();
+      }
+      return evt;
+    }
+  };
+  function hydrateObj(obj, meta = {}) {
+    for (const [key, value] of Object.entries(meta)) {
+      try {
+        obj[key] = value;
+      } catch (_unused) {
+        Object.defineProperty(obj, key, {
+          configurable: true,
+          get() {
+            return value;
+          }
+        });
+      }
+    }
+    return obj;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap dom/manipulator.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  function normalizeData(value) {
+    if (value === 'true') {
+      return true;
+    }
+    if (value === 'false') {
+      return false;
+    }
+    if (value === Number(value).toString()) {
+      return Number(value);
+    }
+    if (value === '' || value === 'null') {
+      return null;
+    }
+    if (typeof value !== 'string') {
+      return value;
+    }
+    try {
+      return JSON.parse(decodeURIComponent(value));
+    } catch (_unused) {
+      return value;
+    }
+  }
+  function normalizeDataKey(key) {
+    return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
+  }
+  const Manipulator = {
+    setDataAttribute(element, key, value) {
+      element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value);
+    },
+    removeDataAttribute(element, key) {
+      element.removeAttribute(`data-bs-${normalizeDataKey(key)}`);
+    },
+    getDataAttributes(element) {
+      if (!element) {
+        return {};
+      }
+      const attributes = {};
+      const bsKeys = Object.keys(element.dataset).filter(key => key.startsWith('bs') && !key.startsWith('bsConfig'));
+      for (const key of bsKeys) {
+        let pureKey = key.replace(/^bs/, '');
+        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+        attributes[pureKey] = normalizeData(element.dataset[key]);
+      }
+      return attributes;
+    },
+    getDataAttribute(element, key) {
+      return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`));
+    }
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/config.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Class definition
+   */
+
+  class Config {
+    // Getters
+    static get Default() {
+      return {};
+    }
+    static get DefaultType() {
+      return {};
+    }
+    static get NAME() {
+      throw new Error('You have to implement the static method "NAME", for each component!');
+    }
+    _getConfig(config) {
+      config = this._mergeConfigObj(config);
+      config = this._configAfterMerge(config);
+      this._typeCheckConfig(config);
+      return config;
+    }
+    _configAfterMerge(config) {
+      return config;
+    }
+    _mergeConfigObj(config, element) {
+      const jsonConfig = isElement(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
+
+      return {
+        ...this.constructor.Default,
+        ...(typeof jsonConfig === 'object' ? jsonConfig : {}),
+        ...(isElement(element) ? Manipulator.getDataAttributes(element) : {}),
+        ...(typeof config === 'object' ? config : {})
+      };
+    }
+    _typeCheckConfig(config, configTypes = this.constructor.DefaultType) {
+      for (const [property, expectedTypes] of Object.entries(configTypes)) {
+        const value = config[property];
+        const valueType = isElement(value) ? 'element' : toType(value);
+        if (!new RegExp(expectedTypes).test(valueType)) {
+          throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
+        }
+      }
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap base-component.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const VERSION = '5.3.0';
+
+  /**
+   * Class definition
+   */
+
+  class BaseComponent extends Config {
+    constructor(element, config) {
+      super();
+      element = getElement(element);
+      if (!element) {
+        return;
+      }
+      this._element = element;
+      this._config = this._getConfig(config);
+      Data.set(this._element, this.constructor.DATA_KEY, this);
+    }
+
+    // Public
+    dispose() {
+      Data.remove(this._element, this.constructor.DATA_KEY);
+      EventHandler.off(this._element, this.constructor.EVENT_KEY);
+      for (const propertyName of Object.getOwnPropertyNames(this)) {
+        this[propertyName] = null;
+      }
+    }
+    _queueCallback(callback, element, isAnimated = true) {
+      executeAfterTransition(callback, element, isAnimated);
+    }
+    _getConfig(config) {
+      config = this._mergeConfigObj(config, this._element);
+      config = this._configAfterMerge(config);
+      this._typeCheckConfig(config);
+      return config;
+    }
+
+    // Static
+    static getInstance(element) {
+      return Data.get(getElement(element), this.DATA_KEY);
+    }
+    static getOrCreateInstance(element, config = {}) {
+      return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+    }
+    static get VERSION() {
+      return VERSION;
+    }
+    static get DATA_KEY() {
+      return `bs.${this.NAME}`;
+    }
+    static get EVENT_KEY() {
+      return `.${this.DATA_KEY}`;
+    }
+    static eventName(name) {
+      return `${name}${this.EVENT_KEY}`;
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap dom/selector-engine.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  const getSelector = element => {
+    let selector = element.getAttribute('data-bs-target');
+    if (!selector || selector === '#') {
+      let hrefAttribute = element.getAttribute('href');
+
+      // The only valid content that could double as a selector are IDs or classes,
+      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
+      // `document.querySelector` will rightfully complain it is invalid.
+      // See https://github.com/twbs/bootstrap/issues/32273
+      if (!hrefAttribute || !hrefAttribute.includes('#') && !hrefAttribute.startsWith('.')) {
+        return null;
+      }
+
+      // Just in case some CMS puts out a full URL with the anchor appended
+      if (hrefAttribute.includes('#') && !hrefAttribute.startsWith('#')) {
+        hrefAttribute = `#${hrefAttribute.split('#')[1]}`;
+      }
+      selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null;
+    }
+    return parseSelector(selector);
+  };
+  const SelectorEngine = {
+    find(selector, element = document.documentElement) {
+      return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
+    },
+    findOne(selector, element = document.documentElement) {
+      return Element.prototype.querySelector.call(element, selector);
+    },
+    children(element, selector) {
+      return [].concat(...element.children).filter(child => child.matches(selector));
+    },
+    parents(element, selector) {
+      const parents = [];
+      let ancestor = element.parentNode.closest(selector);
+      while (ancestor) {
+        parents.push(ancestor);
+        ancestor = ancestor.parentNode.closest(selector);
+      }
+      return parents;
+    },
+    prev(element, selector) {
+      let previous = element.previousElementSibling;
+      while (previous) {
+        if (previous.matches(selector)) {
+          return [previous];
+        }
+        previous = previous.previousElementSibling;
+      }
+      return [];
+    },
+    // TODO: this is now unused; remove later along with prev()
+    next(element, selector) {
+      let next = element.nextElementSibling;
+      while (next) {
+        if (next.matches(selector)) {
+          return [next];
+        }
+        next = next.nextElementSibling;
+      }
+      return [];
+    },
+    focusableChildren(element) {
+      const focusables = ['a', 'button', 'input', 'textarea', 'select', 'details', '[tabindex]', '[contenteditable="true"]'].map(selector => `${selector}:not([tabindex^="-"])`).join(',');
+      return this.find(focusables, element).filter(el => !isDisabled(el) && isVisible(el));
+    },
+    getSelectorFromElement(element) {
+      const selector = getSelector(element);
+      if (selector) {
+        return SelectorEngine.findOne(selector) ? selector : null;
+      }
+      return null;
+    },
+    getElementFromSelector(element) {
+      const selector = getSelector(element);
+      return selector ? SelectorEngine.findOne(selector) : null;
+    },
+    getMultipleElementsFromSelector(element) {
+      const selector = getSelector(element);
+      return selector ? SelectorEngine.find(selector) : [];
+    }
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/component-functions.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  const enableDismissTrigger = (component, method = 'hide') => {
+    const clickEvent = `click.dismiss${component.EVENT_KEY}`;
+    const name = component.NAME;
+    EventHandler.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function (event) {
+      if (['A', 'AREA'].includes(this.tagName)) {
+        event.preventDefault();
+      }
+      if (isDisabled(this)) {
+        return;
+      }
+      const target = SelectorEngine.getElementFromSelector(this) || this.closest(`.${name}`);
+      const instance = component.getOrCreateInstance(target);
+
+      // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
+      instance[method]();
+    });
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap alert.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$f = 'alert';
+  const DATA_KEY$a = 'bs.alert';
+  const EVENT_KEY$b = `.${DATA_KEY$a}`;
+  const EVENT_CLOSE = `close${EVENT_KEY$b}`;
+  const EVENT_CLOSED = `closed${EVENT_KEY$b}`;
+  const CLASS_NAME_FADE$5 = 'fade';
+  const CLASS_NAME_SHOW$8 = 'show';
+
+  /**
+   * Class definition
+   */
+
+  class Alert extends BaseComponent {
+    // Getters
+    static get NAME() {
+      return NAME$f;
+    }
+
+    // Public
+    close() {
+      const closeEvent = EventHandler.trigger(this._element, EVENT_CLOSE);
+      if (closeEvent.defaultPrevented) {
+        return;
+      }
+      this._element.classList.remove(CLASS_NAME_SHOW$8);
+      const isAnimated = this._element.classList.contains(CLASS_NAME_FADE$5);
+      this._queueCallback(() => this._destroyElement(), this._element, isAnimated);
+    }
+
+    // Private
+    _destroyElement() {
+      this._element.remove();
+      EventHandler.trigger(this._element, EVENT_CLOSED);
+      this.dispose();
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Alert.getOrCreateInstance(this);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config](this);
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  enableDismissTrigger(Alert, 'close');
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Alert);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap button.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$e = 'button';
+  const DATA_KEY$9 = 'bs.button';
+  const EVENT_KEY$a = `.${DATA_KEY$9}`;
+  const DATA_API_KEY$6 = '.data-api';
+  const CLASS_NAME_ACTIVE$3 = 'active';
+  const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
+  const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$6}`;
+
+  /**
+   * Class definition
+   */
+
+  class Button extends BaseComponent {
+    // Getters
+    static get NAME() {
+      return NAME$e;
+    }
+
+    // Public
+    toggle() {
+      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
+      this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Button.getOrCreateInstance(this);
+        if (config === 'toggle') {
+          data[config]();
+        }
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, event => {
+    event.preventDefault();
+    const button = event.target.closest(SELECTOR_DATA_TOGGLE$5);
+    const data = Button.getOrCreateInstance(button);
+    data.toggle();
+  });
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Button);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/swipe.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$d = 'swipe';
+  const EVENT_KEY$9 = '.bs.swipe';
+  const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
+  const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
+  const EVENT_TOUCHEND = `touchend${EVENT_KEY$9}`;
+  const EVENT_POINTERDOWN = `pointerdown${EVENT_KEY$9}`;
+  const EVENT_POINTERUP = `pointerup${EVENT_KEY$9}`;
+  const POINTER_TYPE_TOUCH = 'touch';
+  const POINTER_TYPE_PEN = 'pen';
+  const CLASS_NAME_POINTER_EVENT = 'pointer-event';
+  const SWIPE_THRESHOLD = 40;
+  const Default$c = {
+    endCallback: null,
+    leftCallback: null,
+    rightCallback: null
+  };
+  const DefaultType$c = {
+    endCallback: '(function|null)',
+    leftCallback: '(function|null)',
+    rightCallback: '(function|null)'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Swipe extends Config {
+    constructor(element, config) {
+      super();
+      this._element = element;
+      if (!element || !Swipe.isSupported()) {
+        return;
+      }
+      this._config = this._getConfig(config);
+      this._deltaX = 0;
+      this._supportPointerEvents = Boolean(window.PointerEvent);
+      this._initEvents();
+    }
+
+    // Getters
+    static get Default() {
+      return Default$c;
+    }
+    static get DefaultType() {
+      return DefaultType$c;
+    }
+    static get NAME() {
+      return NAME$d;
+    }
+
+    // Public
+    dispose() {
+      EventHandler.off(this._element, EVENT_KEY$9);
+    }
+
+    // Private
+    _start(event) {
+      if (!this._supportPointerEvents) {
+        this._deltaX = event.touches[0].clientX;
+        return;
+      }
+      if (this._eventIsPointerPenTouch(event)) {
+        this._deltaX = event.clientX;
+      }
+    }
+    _end(event) {
+      if (this._eventIsPointerPenTouch(event)) {
+        this._deltaX = event.clientX - this._deltaX;
+      }
+      this._handleSwipe();
+      execute(this._config.endCallback);
+    }
+    _move(event) {
+      this._deltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this._deltaX;
+    }
+    _handleSwipe() {
+      const absDeltaX = Math.abs(this._deltaX);
+      if (absDeltaX <= SWIPE_THRESHOLD) {
+        return;
+      }
+      const direction = absDeltaX / this._deltaX;
+      this._deltaX = 0;
+      if (!direction) {
+        return;
+      }
+      execute(direction > 0 ? this._config.rightCallback : this._config.leftCallback);
+    }
+    _initEvents() {
+      if (this._supportPointerEvents) {
+        EventHandler.on(this._element, EVENT_POINTERDOWN, event => this._start(event));
+        EventHandler.on(this._element, EVENT_POINTERUP, event => this._end(event));
+        this._element.classList.add(CLASS_NAME_POINTER_EVENT);
+      } else {
+        EventHandler.on(this._element, EVENT_TOUCHSTART, event => this._start(event));
+        EventHandler.on(this._element, EVENT_TOUCHMOVE, event => this._move(event));
+        EventHandler.on(this._element, EVENT_TOUCHEND, event => this._end(event));
+      }
+    }
+    _eventIsPointerPenTouch(event) {
+      return this._supportPointerEvents && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH);
+    }
+
+    // Static
+    static isSupported() {
+      return 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap carousel.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$c = 'carousel';
+  const DATA_KEY$8 = 'bs.carousel';
+  const EVENT_KEY$8 = `.${DATA_KEY$8}`;
+  const DATA_API_KEY$5 = '.data-api';
+  const ARROW_LEFT_KEY$1 = 'ArrowLeft';
+  const ARROW_RIGHT_KEY$1 = 'ArrowRight';
+  const TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
+
+  const ORDER_NEXT = 'next';
+  const ORDER_PREV = 'prev';
+  const DIRECTION_LEFT = 'left';
+  const DIRECTION_RIGHT = 'right';
+  const EVENT_SLIDE = `slide${EVENT_KEY$8}`;
+  const EVENT_SLID = `slid${EVENT_KEY$8}`;
+  const EVENT_KEYDOWN$1 = `keydown${EVENT_KEY$8}`;
+  const EVENT_MOUSEENTER$1 = `mouseenter${EVENT_KEY$8}`;
+  const EVENT_MOUSELEAVE$1 = `mouseleave${EVENT_KEY$8}`;
+  const EVENT_DRAG_START = `dragstart${EVENT_KEY$8}`;
+  const EVENT_LOAD_DATA_API$3 = `load${EVENT_KEY$8}${DATA_API_KEY$5}`;
+  const EVENT_CLICK_DATA_API$5 = `click${EVENT_KEY$8}${DATA_API_KEY$5}`;
+  const CLASS_NAME_CAROUSEL = 'carousel';
+  const CLASS_NAME_ACTIVE$2 = 'active';
+  const CLASS_NAME_SLIDE = 'slide';
+  const CLASS_NAME_END = 'carousel-item-end';
+  const CLASS_NAME_START = 'carousel-item-start';
+  const CLASS_NAME_NEXT = 'carousel-item-next';
+  const CLASS_NAME_PREV = 'carousel-item-prev';
+  const SELECTOR_ACTIVE = '.active';
+  const SELECTOR_ITEM = '.carousel-item';
+  const SELECTOR_ACTIVE_ITEM = SELECTOR_ACTIVE + SELECTOR_ITEM;
+  const SELECTOR_ITEM_IMG = '.carousel-item img';
+  const SELECTOR_INDICATORS = '.carousel-indicators';
+  const SELECTOR_DATA_SLIDE = '[data-bs-slide], [data-bs-slide-to]';
+  const SELECTOR_DATA_RIDE = '[data-bs-ride="carousel"]';
+  const KEY_TO_DIRECTION = {
+    [ARROW_LEFT_KEY$1]: DIRECTION_RIGHT,
+    [ARROW_RIGHT_KEY$1]: DIRECTION_LEFT
+  };
+  const Default$b = {
+    interval: 5000,
+    keyboard: true,
+    pause: 'hover',
+    ride: false,
+    touch: true,
+    wrap: true
+  };
+  const DefaultType$b = {
+    interval: '(number|boolean)',
+    // TODO:v6 remove boolean support
+    keyboard: 'boolean',
+    pause: '(string|boolean)',
+    ride: '(boolean|string)',
+    touch: 'boolean',
+    wrap: 'boolean'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Carousel extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._interval = null;
+      this._activeElement = null;
+      this._isSliding = false;
+      this.touchTimeout = null;
+      this._swipeHelper = null;
+      this._indicatorsElement = SelectorEngine.findOne(SELECTOR_INDICATORS, this._element);
+      this._addEventListeners();
+      if (this._config.ride === CLASS_NAME_CAROUSEL) {
+        this.cycle();
+      }
+    }
+
+    // Getters
+    static get Default() {
+      return Default$b;
+    }
+    static get DefaultType() {
+      return DefaultType$b;
+    }
+    static get NAME() {
+      return NAME$c;
+    }
+
+    // Public
+    next() {
+      this._slide(ORDER_NEXT);
+    }
+    nextWhenVisible() {
+      // FIXME TODO use `document.visibilityState`
+      // Don't call next when the page isn't visible
+      // or the carousel or its parent isn't visible
+      if (!document.hidden && isVisible(this._element)) {
+        this.next();
+      }
+    }
+    prev() {
+      this._slide(ORDER_PREV);
+    }
+    pause() {
+      if (this._isSliding) {
+        triggerTransitionEnd(this._element);
+      }
+      this._clearInterval();
+    }
+    cycle() {
+      this._clearInterval();
+      this._updateInterval();
+      this._interval = setInterval(() => this.nextWhenVisible(), this._config.interval);
+    }
+    _maybeEnableCycle() {
+      if (!this._config.ride) {
+        return;
+      }
+      if (this._isSliding) {
+        EventHandler.one(this._element, EVENT_SLID, () => this.cycle());
+        return;
+      }
+      this.cycle();
+    }
+    to(index) {
+      const items = this._getItems();
+      if (index > items.length - 1 || index < 0) {
+        return;
+      }
+      if (this._isSliding) {
+        EventHandler.one(this._element, EVENT_SLID, () => this.to(index));
+        return;
+      }
+      const activeIndex = this._getItemIndex(this._getActive());
+      if (activeIndex === index) {
+        return;
+      }
+      const order = index > activeIndex ? ORDER_NEXT : ORDER_PREV;
+      this._slide(order, items[index]);
+    }
+    dispose() {
+      if (this._swipeHelper) {
+        this._swipeHelper.dispose();
+      }
+      super.dispose();
+    }
+
+    // Private
+    _configAfterMerge(config) {
+      config.defaultInterval = config.interval;
+      return config;
+    }
+    _addEventListeners() {
+      if (this._config.keyboard) {
+        EventHandler.on(this._element, EVENT_KEYDOWN$1, event => this._keydown(event));
+      }
+      if (this._config.pause === 'hover') {
+        EventHandler.on(this._element, EVENT_MOUSEENTER$1, () => this.pause());
+        EventHandler.on(this._element, EVENT_MOUSELEAVE$1, () => this._maybeEnableCycle());
+      }
+      if (this._config.touch && Swipe.isSupported()) {
+        this._addTouchEventListeners();
+      }
+    }
+    _addTouchEventListeners() {
+      for (const img of SelectorEngine.find(SELECTOR_ITEM_IMG, this._element)) {
+        EventHandler.on(img, EVENT_DRAG_START, event => event.preventDefault());
+      }
+      const endCallBack = () => {
+        if (this._config.pause !== 'hover') {
+          return;
+        }
+
+        // If it's a touch-enabled device, mouseenter/leave are fired as
+        // part of the mouse compatibility events on first tap - the carousel
+        // would stop cycling until user tapped out of it;
+        // here, we listen for touchend, explicitly pause the carousel
+        // (as if it's the second time we tap on it, mouseenter compat event
+        // is NOT fired) and after a timeout (to allow for mouse compatibility
+        // events to fire) we explicitly restart cycling
+
+        this.pause();
+        if (this.touchTimeout) {
+          clearTimeout(this.touchTimeout);
+        }
+        this.touchTimeout = setTimeout(() => this._maybeEnableCycle(), TOUCHEVENT_COMPAT_WAIT + this._config.interval);
+      };
+      const swipeConfig = {
+        leftCallback: () => this._slide(this._directionToOrder(DIRECTION_LEFT)),
+        rightCallback: () => this._slide(this._directionToOrder(DIRECTION_RIGHT)),
+        endCallback: endCallBack
+      };
+      this._swipeHelper = new Swipe(this._element, swipeConfig);
+    }
+    _keydown(event) {
+      if (/input|textarea/i.test(event.target.tagName)) {
+        return;
+      }
+      const direction = KEY_TO_DIRECTION[event.key];
+      if (direction) {
+        event.preventDefault();
+        this._slide(this._directionToOrder(direction));
+      }
+    }
+    _getItemIndex(element) {
+      return this._getItems().indexOf(element);
+    }
+    _setActiveIndicatorElement(index) {
+      if (!this._indicatorsElement) {
+        return;
+      }
+      const activeIndicator = SelectorEngine.findOne(SELECTOR_ACTIVE, this._indicatorsElement);
+      activeIndicator.classList.remove(CLASS_NAME_ACTIVE$2);
+      activeIndicator.removeAttribute('aria-current');
+      const newActiveIndicator = SelectorEngine.findOne(`[data-bs-slide-to="${index}"]`, this._indicatorsElement);
+      if (newActiveIndicator) {
+        newActiveIndicator.classList.add(CLASS_NAME_ACTIVE$2);
+        newActiveIndicator.setAttribute('aria-current', 'true');
+      }
+    }
+    _updateInterval() {
+      const element = this._activeElement || this._getActive();
+      if (!element) {
+        return;
+      }
+      const elementInterval = Number.parseInt(element.getAttribute('data-bs-interval'), 10);
+      this._config.interval = elementInterval || this._config.defaultInterval;
+    }
+    _slide(order, element = null) {
+      if (this._isSliding) {
+        return;
+      }
+      const activeElement = this._getActive();
+      const isNext = order === ORDER_NEXT;
+      const nextElement = element || getNextActiveElement(this._getItems(), activeElement, isNext, this._config.wrap);
+      if (nextElement === activeElement) {
+        return;
+      }
+      const nextElementIndex = this._getItemIndex(nextElement);
+      const triggerEvent = eventName => {
+        return EventHandler.trigger(this._element, eventName, {
+          relatedTarget: nextElement,
+          direction: this._orderToDirection(order),
+          from: this._getItemIndex(activeElement),
+          to: nextElementIndex
+        });
+      };
+      const slideEvent = triggerEvent(EVENT_SLIDE);
+      if (slideEvent.defaultPrevented) {
+        return;
+      }
+      if (!activeElement || !nextElement) {
+        // Some weirdness is happening, so we bail
+        // TODO: change tests that use empty divs to avoid this check
+        return;
+      }
+      const isCycling = Boolean(this._interval);
+      this.pause();
+      this._isSliding = true;
+      this._setActiveIndicatorElement(nextElementIndex);
+      this._activeElement = nextElement;
+      const directionalClassName = isNext ? CLASS_NAME_START : CLASS_NAME_END;
+      const orderClassName = isNext ? CLASS_NAME_NEXT : CLASS_NAME_PREV;
+      nextElement.classList.add(orderClassName);
+      reflow(nextElement);
+      activeElement.classList.add(directionalClassName);
+      nextElement.classList.add(directionalClassName);
+      const completeCallBack = () => {
+        nextElement.classList.remove(directionalClassName, orderClassName);
+        nextElement.classList.add(CLASS_NAME_ACTIVE$2);
+        activeElement.classList.remove(CLASS_NAME_ACTIVE$2, orderClassName, directionalClassName);
+        this._isSliding = false;
+        triggerEvent(EVENT_SLID);
+      };
+      this._queueCallback(completeCallBack, activeElement, this._isAnimated());
+      if (isCycling) {
+        this.cycle();
+      }
+    }
+    _isAnimated() {
+      return this._element.classList.contains(CLASS_NAME_SLIDE);
+    }
+    _getActive() {
+      return SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element);
+    }
+    _getItems() {
+      return SelectorEngine.find(SELECTOR_ITEM, this._element);
+    }
+    _clearInterval() {
+      if (this._interval) {
+        clearInterval(this._interval);
+        this._interval = null;
+      }
+    }
+    _directionToOrder(direction) {
+      if (isRTL()) {
+        return direction === DIRECTION_LEFT ? ORDER_PREV : ORDER_NEXT;
+      }
+      return direction === DIRECTION_LEFT ? ORDER_NEXT : ORDER_PREV;
+    }
+    _orderToDirection(order) {
+      if (isRTL()) {
+        return order === ORDER_PREV ? DIRECTION_LEFT : DIRECTION_RIGHT;
+      }
+      return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Carousel.getOrCreateInstance(this, config);
+        if (typeof config === 'number') {
+          data.to(config);
+          return;
+        }
+        if (typeof config === 'string') {
+          if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+            throw new TypeError(`No method named "${config}"`);
+          }
+          data[config]();
+        }
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API$5, SELECTOR_DATA_SLIDE, function (event) {
+    const target = SelectorEngine.getElementFromSelector(this);
+    if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) {
+      return;
+    }
+    event.preventDefault();
+    const carousel = Carousel.getOrCreateInstance(target);
+    const slideIndex = this.getAttribute('data-bs-slide-to');
+    if (slideIndex) {
+      carousel.to(slideIndex);
+      carousel._maybeEnableCycle();
+      return;
+    }
+    if (Manipulator.getDataAttribute(this, 'slide') === 'next') {
+      carousel.next();
+      carousel._maybeEnableCycle();
+      return;
+    }
+    carousel.prev();
+    carousel._maybeEnableCycle();
+  });
+  EventHandler.on(window, EVENT_LOAD_DATA_API$3, () => {
+    const carousels = SelectorEngine.find(SELECTOR_DATA_RIDE);
+    for (const carousel of carousels) {
+      Carousel.getOrCreateInstance(carousel);
+    }
+  });
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Carousel);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap collapse.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$b = 'collapse';
+  const DATA_KEY$7 = 'bs.collapse';
+  const EVENT_KEY$7 = `.${DATA_KEY$7}`;
+  const DATA_API_KEY$4 = '.data-api';
+  const EVENT_SHOW$6 = `show${EVENT_KEY$7}`;
+  const EVENT_SHOWN$6 = `shown${EVENT_KEY$7}`;
+  const EVENT_HIDE$6 = `hide${EVENT_KEY$7}`;
+  const EVENT_HIDDEN$6 = `hidden${EVENT_KEY$7}`;
+  const EVENT_CLICK_DATA_API$4 = `click${EVENT_KEY$7}${DATA_API_KEY$4}`;
+  const CLASS_NAME_SHOW$7 = 'show';
+  const CLASS_NAME_COLLAPSE = 'collapse';
+  const CLASS_NAME_COLLAPSING = 'collapsing';
+  const CLASS_NAME_COLLAPSED = 'collapsed';
+  const CLASS_NAME_DEEPER_CHILDREN = `:scope .${CLASS_NAME_COLLAPSE} .${CLASS_NAME_COLLAPSE}`;
+  const CLASS_NAME_HORIZONTAL = 'collapse-horizontal';
+  const WIDTH = 'width';
+  const HEIGHT = 'height';
+  const SELECTOR_ACTIVES = '.collapse.show, .collapse.collapsing';
+  const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
+  const Default$a = {
+    parent: null,
+    toggle: true
+  };
+  const DefaultType$a = {
+    parent: '(null|element)',
+    toggle: 'boolean'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Collapse extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._isTransitioning = false;
+      this._triggerArray = [];
+      const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$4);
+      for (const elem of toggleList) {
+        const selector = SelectorEngine.getSelectorFromElement(elem);
+        const filterElement = SelectorEngine.find(selector).filter(foundElement => foundElement === this._element);
+        if (selector !== null && filterElement.length) {
+          this._triggerArray.push(elem);
+        }
+      }
+      this._initializeChildren();
+      if (!this._config.parent) {
+        this._addAriaAndCollapsedClass(this._triggerArray, this._isShown());
+      }
+      if (this._config.toggle) {
+        this.toggle();
+      }
+    }
+
+    // Getters
+    static get Default() {
+      return Default$a;
+    }
+    static get DefaultType() {
+      return DefaultType$a;
+    }
+    static get NAME() {
+      return NAME$b;
+    }
+
+    // Public
+    toggle() {
+      if (this._isShown()) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    }
+    show() {
+      if (this._isTransitioning || this._isShown()) {
+        return;
+      }
+      let activeChildren = [];
+
+      // find active children
+      if (this._config.parent) {
+        activeChildren = this._getFirstLevelChildren(SELECTOR_ACTIVES).filter(element => element !== this._element).map(element => Collapse.getOrCreateInstance(element, {
+          toggle: false
+        }));
+      }
+      if (activeChildren.length && activeChildren[0]._isTransitioning) {
+        return;
+      }
+      const startEvent = EventHandler.trigger(this._element, EVENT_SHOW$6);
+      if (startEvent.defaultPrevented) {
+        return;
+      }
+      for (const activeInstance of activeChildren) {
+        activeInstance.hide();
+      }
+      const dimension = this._getDimension();
+      this._element.classList.remove(CLASS_NAME_COLLAPSE);
+      this._element.classList.add(CLASS_NAME_COLLAPSING);
+      this._element.style[dimension] = 0;
+      this._addAriaAndCollapsedClass(this._triggerArray, true);
+      this._isTransitioning = true;
+      const complete = () => {
+        this._isTransitioning = false;
+        this._element.classList.remove(CLASS_NAME_COLLAPSING);
+        this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
+        this._element.style[dimension] = '';
+        EventHandler.trigger(this._element, EVENT_SHOWN$6);
+      };
+      const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
+      const scrollSize = `scroll${capitalizedDimension}`;
+      this._queueCallback(complete, this._element, true);
+      this._element.style[dimension] = `${this._element[scrollSize]}px`;
+    }
+    hide() {
+      if (this._isTransitioning || !this._isShown()) {
+        return;
+      }
+      const startEvent = EventHandler.trigger(this._element, EVENT_HIDE$6);
+      if (startEvent.defaultPrevented) {
+        return;
+      }
+      const dimension = this._getDimension();
+      this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
+      reflow(this._element);
+      this._element.classList.add(CLASS_NAME_COLLAPSING);
+      this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
+      for (const trigger of this._triggerArray) {
+        const element = SelectorEngine.getElementFromSelector(trigger);
+        if (element && !this._isShown(element)) {
+          this._addAriaAndCollapsedClass([trigger], false);
+        }
+      }
+      this._isTransitioning = true;
+      const complete = () => {
+        this._isTransitioning = false;
+        this._element.classList.remove(CLASS_NAME_COLLAPSING);
+        this._element.classList.add(CLASS_NAME_COLLAPSE);
+        EventHandler.trigger(this._element, EVENT_HIDDEN$6);
+      };
+      this._element.style[dimension] = '';
+      this._queueCallback(complete, this._element, true);
+    }
+    _isShown(element = this._element) {
+      return element.classList.contains(CLASS_NAME_SHOW$7);
+    }
+
+    // Private
+    _configAfterMerge(config) {
+      config.toggle = Boolean(config.toggle); // Coerce string values
+      config.parent = getElement(config.parent);
+      return config;
+    }
+    _getDimension() {
+      return this._element.classList.contains(CLASS_NAME_HORIZONTAL) ? WIDTH : HEIGHT;
+    }
+    _initializeChildren() {
+      if (!this._config.parent) {
+        return;
+      }
+      const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE$4);
+      for (const element of children) {
+        const selected = SelectorEngine.getElementFromSelector(element);
+        if (selected) {
+          this._addAriaAndCollapsedClass([element], this._isShown(selected));
+        }
+      }
+    }
+    _getFirstLevelChildren(selector) {
+      const children = SelectorEngine.find(CLASS_NAME_DEEPER_CHILDREN, this._config.parent);
+      // remove children if greater depth
+      return SelectorEngine.find(selector, this._config.parent).filter(element => !children.includes(element));
+    }
+    _addAriaAndCollapsedClass(triggerArray, isOpen) {
+      if (!triggerArray.length) {
+        return;
+      }
+      for (const element of triggerArray) {
+        element.classList.toggle(CLASS_NAME_COLLAPSED, !isOpen);
+        element.setAttribute('aria-expanded', isOpen);
+      }
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      const _config = {};
+      if (typeof config === 'string' && /show|hide/.test(config)) {
+        _config.toggle = false;
+      }
+      return this.each(function () {
+        const data = Collapse.getOrCreateInstance(this, _config);
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError(`No method named "${config}"`);
+          }
+          data[config]();
+        }
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
+    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+    if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
+      event.preventDefault();
+    }
+    for (const element of SelectorEngine.getMultipleElementsFromSelector(this)) {
+      Collapse.getOrCreateInstance(element, {
+        toggle: false
+      }).toggle();
+    }
+  });
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Collapse);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap dropdown.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$a = 'dropdown';
+  const DATA_KEY$6 = 'bs.dropdown';
+  const EVENT_KEY$6 = `.${DATA_KEY$6}`;
+  const DATA_API_KEY$3 = '.data-api';
+  const ESCAPE_KEY$2 = 'Escape';
+  const TAB_KEY$1 = 'Tab';
+  const ARROW_UP_KEY$1 = 'ArrowUp';
+  const ARROW_DOWN_KEY$1 = 'ArrowDown';
+  const RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
+
+  const EVENT_HIDE$5 = `hide${EVENT_KEY$6}`;
+  const EVENT_HIDDEN$5 = `hidden${EVENT_KEY$6}`;
+  const EVENT_SHOW$5 = `show${EVENT_KEY$6}`;
+  const EVENT_SHOWN$5 = `shown${EVENT_KEY$6}`;
+  const EVENT_CLICK_DATA_API$3 = `click${EVENT_KEY$6}${DATA_API_KEY$3}`;
+  const EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY$6}${DATA_API_KEY$3}`;
+  const EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY$6}${DATA_API_KEY$3}`;
+  const CLASS_NAME_SHOW$6 = 'show';
+  const CLASS_NAME_DROPUP = 'dropup';
+  const CLASS_NAME_DROPEND = 'dropend';
+  const CLASS_NAME_DROPSTART = 'dropstart';
+  const CLASS_NAME_DROPUP_CENTER = 'dropup-center';
+  const CLASS_NAME_DROPDOWN_CENTER = 'dropdown-center';
+  const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
+  const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE$3}.${CLASS_NAME_SHOW$6}`;
+  const SELECTOR_MENU = '.dropdown-menu';
+  const SELECTOR_NAVBAR = '.navbar';
+  const SELECTOR_NAVBAR_NAV = '.navbar-nav';
+  const SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
+  const PLACEMENT_TOP = isRTL() ? 'top-end' : 'top-start';
+  const PLACEMENT_TOPEND = isRTL() ? 'top-start' : 'top-end';
+  const PLACEMENT_BOTTOM = isRTL() ? 'bottom-end' : 'bottom-start';
+  const PLACEMENT_BOTTOMEND = isRTL() ? 'bottom-start' : 'bottom-end';
+  const PLACEMENT_RIGHT = isRTL() ? 'left-start' : 'right-start';
+  const PLACEMENT_LEFT = isRTL() ? 'right-start' : 'left-start';
+  const PLACEMENT_TOPCENTER = 'top';
+  const PLACEMENT_BOTTOMCENTER = 'bottom';
+  const Default$9 = {
+    autoClose: true,
+    boundary: 'clippingParents',
+    display: 'dynamic',
+    offset: [0, 2],
+    popperConfig: null,
+    reference: 'toggle'
+  };
+  const DefaultType$9 = {
+    autoClose: '(boolean|string)',
+    boundary: '(string|element)',
+    display: 'string',
+    offset: '(array|string|function)',
+    popperConfig: '(null|object|function)',
+    reference: '(string|element|object)'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Dropdown extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._popper = null;
+      this._parent = this._element.parentNode; // dropdown wrapper
+      // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
+      this._menu = SelectorEngine.next(this._element, SELECTOR_MENU)[0] || SelectorEngine.prev(this._element, SELECTOR_MENU)[0] || SelectorEngine.findOne(SELECTOR_MENU, this._parent);
+      this._inNavbar = this._detectNavbar();
+    }
+
+    // Getters
+    static get Default() {
+      return Default$9;
+    }
+    static get DefaultType() {
+      return DefaultType$9;
+    }
+    static get NAME() {
+      return NAME$a;
+    }
+
+    // Public
+    toggle() {
+      return this._isShown() ? this.hide() : this.show();
+    }
+    show() {
+      if (isDisabled(this._element) || this._isShown()) {
+        return;
+      }
+      const relatedTarget = {
+        relatedTarget: this._element
+      };
+      const showEvent = EventHandler.trigger(this._element, EVENT_SHOW$5, relatedTarget);
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+      this._createPopper();
+
+      // If this is a touch-enabled device we add extra
+      // empty mouseover listeners to the body's immediate children;
+      // only needed because of broken event delegation on iOS
+      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+      if ('ontouchstart' in document.documentElement && !this._parent.closest(SELECTOR_NAVBAR_NAV)) {
+        for (const element of [].concat(...document.body.children)) {
+          EventHandler.on(element, 'mouseover', noop);
+        }
+      }
+      this._element.focus();
+      this._element.setAttribute('aria-expanded', true);
+      this._menu.classList.add(CLASS_NAME_SHOW$6);
+      this._element.classList.add(CLASS_NAME_SHOW$6);
+      EventHandler.trigger(this._element, EVENT_SHOWN$5, relatedTarget);
+    }
+    hide() {
+      if (isDisabled(this._element) || !this._isShown()) {
+        return;
+      }
+      const relatedTarget = {
+        relatedTarget: this._element
+      };
+      this._completeHide(relatedTarget);
+    }
+    dispose() {
+      if (this._popper) {
+        this._popper.destroy();
+      }
+      super.dispose();
+    }
+    update() {
+      this._inNavbar = this._detectNavbar();
+      if (this._popper) {
+        this._popper.update();
+      }
+    }
+
+    // Private
+    _completeHide(relatedTarget) {
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$5, relatedTarget);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+
+      // If this is a touch-enabled device we remove the extra
+      // empty mouseover listeners we added for iOS support
+      if ('ontouchstart' in document.documentElement) {
+        for (const element of [].concat(...document.body.children)) {
+          EventHandler.off(element, 'mouseover', noop);
+        }
+      }
+      if (this._popper) {
+        this._popper.destroy();
+      }
+      this._menu.classList.remove(CLASS_NAME_SHOW$6);
+      this._element.classList.remove(CLASS_NAME_SHOW$6);
+      this._element.setAttribute('aria-expanded', 'false');
+      Manipulator.removeDataAttribute(this._menu, 'popper');
+      EventHandler.trigger(this._element, EVENT_HIDDEN$5, relatedTarget);
+    }
+    _getConfig(config) {
+      config = super._getConfig(config);
+      if (typeof config.reference === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
+        // Popper virtual elements require a getBoundingClientRect method
+        throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+      }
+      return config;
+    }
+    _createPopper() {
+      if (typeof Popper__namespace === 'undefined') {
+        throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
+      }
+      let referenceElement = this._element;
+      if (this._config.reference === 'parent') {
+        referenceElement = this._parent;
+      } else if (isElement(this._config.reference)) {
+        referenceElement = getElement(this._config.reference);
+      } else if (typeof this._config.reference === 'object') {
+        referenceElement = this._config.reference;
+      }
+      const popperConfig = this._getPopperConfig();
+      this._popper = Popper__namespace.createPopper(referenceElement, this._menu, popperConfig);
+    }
+    _isShown() {
+      return this._menu.classList.contains(CLASS_NAME_SHOW$6);
+    }
+    _getPlacement() {
+      const parentDropdown = this._parent;
+      if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) {
+        return PLACEMENT_RIGHT;
+      }
+      if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) {
+        return PLACEMENT_LEFT;
+      }
+      if (parentDropdown.classList.contains(CLASS_NAME_DROPUP_CENTER)) {
+        return PLACEMENT_TOPCENTER;
+      }
+      if (parentDropdown.classList.contains(CLASS_NAME_DROPDOWN_CENTER)) {
+        return PLACEMENT_BOTTOMCENTER;
+      }
+
+      // We need to trim the value because custom properties can also include spaces
+      const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
+      if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
+        return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
+      }
+      return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
+    }
+    _detectNavbar() {
+      return this._element.closest(SELECTOR_NAVBAR) !== null;
+    }
+    _getOffset() {
+      const {
+        offset
+      } = this._config;
+      if (typeof offset === 'string') {
+        return offset.split(',').map(value => Number.parseInt(value, 10));
+      }
+      if (typeof offset === 'function') {
+        return popperData => offset(popperData, this._element);
+      }
+      return offset;
+    }
+    _getPopperConfig() {
+      const defaultBsPopperConfig = {
+        placement: this._getPlacement(),
+        modifiers: [{
+          name: 'preventOverflow',
+          options: {
+            boundary: this._config.boundary
+          }
+        }, {
+          name: 'offset',
+          options: {
+            offset: this._getOffset()
+          }
+        }]
+      };
+
+      // Disable Popper if we have a static display or Dropdown is in Navbar
+      if (this._inNavbar || this._config.display === 'static') {
+        Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // TODO: v6 remove
+        defaultBsPopperConfig.modifiers = [{
+          name: 'applyStyles',
+          enabled: false
+        }];
+      }
+      return {
+        ...defaultBsPopperConfig,
+        ...execute(this._config.popperConfig, [defaultBsPopperConfig])
+      };
+    }
+    _selectMenuItem({
+      key,
+      target
+    }) {
+      const items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, this._menu).filter(element => isVisible(element));
+      if (!items.length) {
+        return;
+      }
+
+      // if target isn't included in items (e.g. when expanding the dropdown)
+      // allow cycling to get the last item in case key equals ARROW_UP_KEY
+      getNextActiveElement(items, target, key === ARROW_DOWN_KEY$1, !items.includes(target)).focus();
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Dropdown.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+    static clearMenus(event) {
+      if (event.button === RIGHT_MOUSE_BUTTON || event.type === 'keyup' && event.key !== TAB_KEY$1) {
+        return;
+      }
+      const openToggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE_SHOWN);
+      for (const toggle of openToggles) {
+        const context = Dropdown.getInstance(toggle);
+        if (!context || context._config.autoClose === false) {
+          continue;
+        }
+        const composedPath = event.composedPath();
+        const isMenuTarget = composedPath.includes(context._menu);
+        if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+          continue;
+        }
+
+        // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
+        if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
+          continue;
+        }
+        const relatedTarget = {
+          relatedTarget: context._element
+        };
+        if (event.type === 'click') {
+          relatedTarget.clickEvent = event;
+        }
+        context._completeHide(relatedTarget);
+      }
+    }
+    static dataApiKeydownHandler(event) {
+      // If not an UP | DOWN | ESCAPE key => not a dropdown command
+      // If input/textarea && if key is other than ESCAPE => not a dropdown command
+
+      const isInput = /input|textarea/i.test(event.target.tagName);
+      const isEscapeEvent = event.key === ESCAPE_KEY$2;
+      const isUpOrDownEvent = [ARROW_UP_KEY$1, ARROW_DOWN_KEY$1].includes(event.key);
+      if (!isUpOrDownEvent && !isEscapeEvent) {
+        return;
+      }
+      if (isInput && !isEscapeEvent) {
+        return;
+      }
+      event.preventDefault();
+
+      // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
+      const getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$3) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.next(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.findOne(SELECTOR_DATA_TOGGLE$3, event.delegateTarget.parentNode);
+      const instance = Dropdown.getOrCreateInstance(getToggleButton);
+      if (isUpOrDownEvent) {
+        event.stopPropagation();
+        instance.show();
+        instance._selectMenuItem(event);
+        return;
+      }
+      if (instance._isShown()) {
+        // else is escape and we check if it is shown
+        event.stopPropagation();
+        instance.hide();
+        getToggleButton.focus();
+      }
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
+  EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
+  EventHandler.on(document, EVENT_CLICK_DATA_API$3, Dropdown.clearMenus);
+  EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus);
+  EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
+    event.preventDefault();
+    Dropdown.getOrCreateInstance(this).toggle();
+  });
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Dropdown);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/backdrop.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$9 = 'backdrop';
+  const CLASS_NAME_FADE$4 = 'fade';
+  const CLASS_NAME_SHOW$5 = 'show';
+  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
+  const Default$8 = {
+    className: 'modal-backdrop',
+    clickCallback: null,
+    isAnimated: false,
+    isVisible: true,
+    // if false, we use the backdrop helper without adding any element to the dom
+    rootElement: 'body' // give the choice to place backdrop under different elements
+  };
+
+  const DefaultType$8 = {
+    className: 'string',
+    clickCallback: '(function|null)',
+    isAnimated: 'boolean',
+    isVisible: 'boolean',
+    rootElement: '(element|string)'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Backdrop extends Config {
+    constructor(config) {
+      super();
+      this._config = this._getConfig(config);
+      this._isAppended = false;
+      this._element = null;
+    }
+
+    // Getters
+    static get Default() {
+      return Default$8;
+    }
+    static get DefaultType() {
+      return DefaultType$8;
+    }
+    static get NAME() {
+      return NAME$9;
+    }
+
+    // Public
+    show(callback) {
+      if (!this._config.isVisible) {
+        execute(callback);
+        return;
+      }
+      this._append();
+      const element = this._getElement();
+      if (this._config.isAnimated) {
+        reflow(element);
+      }
+      element.classList.add(CLASS_NAME_SHOW$5);
+      this._emulateAnimation(() => {
+        execute(callback);
+      });
+    }
+    hide(callback) {
+      if (!this._config.isVisible) {
+        execute(callback);
+        return;
+      }
+      this._getElement().classList.remove(CLASS_NAME_SHOW$5);
+      this._emulateAnimation(() => {
+        this.dispose();
+        execute(callback);
+      });
+    }
+    dispose() {
+      if (!this._isAppended) {
+        return;
+      }
+      EventHandler.off(this._element, EVENT_MOUSEDOWN);
+      this._element.remove();
+      this._isAppended = false;
+    }
+
+    // Private
+    _getElement() {
+      if (!this._element) {
+        const backdrop = document.createElement('div');
+        backdrop.className = this._config.className;
+        if (this._config.isAnimated) {
+          backdrop.classList.add(CLASS_NAME_FADE$4);
+        }
+        this._element = backdrop;
+      }
+      return this._element;
+    }
+    _configAfterMerge(config) {
+      // use getElement() with the default "body" to get a fresh Element on each instantiation
+      config.rootElement = getElement(config.rootElement);
+      return config;
+    }
+    _append() {
+      if (this._isAppended) {
+        return;
+      }
+      const element = this._getElement();
+      this._config.rootElement.append(element);
+      EventHandler.on(element, EVENT_MOUSEDOWN, () => {
+        execute(this._config.clickCallback);
+      });
+      this._isAppended = true;
+    }
+    _emulateAnimation(callback) {
+      executeAfterTransition(callback, this._getElement(), this._config.isAnimated);
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/focustrap.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$8 = 'focustrap';
+  const DATA_KEY$5 = 'bs.focustrap';
+  const EVENT_KEY$5 = `.${DATA_KEY$5}`;
+  const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
+  const EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY$5}`;
+  const TAB_KEY = 'Tab';
+  const TAB_NAV_FORWARD = 'forward';
+  const TAB_NAV_BACKWARD = 'backward';
+  const Default$7 = {
+    autofocus: true,
+    trapElement: null // The element to trap focus inside of
+  };
+
+  const DefaultType$7 = {
+    autofocus: 'boolean',
+    trapElement: 'element'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class FocusTrap extends Config {
+    constructor(config) {
+      super();
+      this._config = this._getConfig(config);
+      this._isActive = false;
+      this._lastTabNavDirection = null;
+    }
+
+    // Getters
+    static get Default() {
+      return Default$7;
+    }
+    static get DefaultType() {
+      return DefaultType$7;
+    }
+    static get NAME() {
+      return NAME$8;
+    }
+
+    // Public
+    activate() {
+      if (this._isActive) {
+        return;
+      }
+      if (this._config.autofocus) {
+        this._config.trapElement.focus();
+      }
+      EventHandler.off(document, EVENT_KEY$5); // guard against infinite focus loop
+      EventHandler.on(document, EVENT_FOCUSIN$2, event => this._handleFocusin(event));
+      EventHandler.on(document, EVENT_KEYDOWN_TAB, event => this._handleKeydown(event));
+      this._isActive = true;
+    }
+    deactivate() {
+      if (!this._isActive) {
+        return;
+      }
+      this._isActive = false;
+      EventHandler.off(document, EVENT_KEY$5);
+    }
+
+    // Private
+    _handleFocusin(event) {
+      const {
+        trapElement
+      } = this._config;
+      if (event.target === document || event.target === trapElement || trapElement.contains(event.target)) {
+        return;
+      }
+      const elements = SelectorEngine.focusableChildren(trapElement);
+      if (elements.length === 0) {
+        trapElement.focus();
+      } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
+        elements[elements.length - 1].focus();
+      } else {
+        elements[0].focus();
+      }
+    }
+    _handleKeydown(event) {
+      if (event.key !== TAB_KEY) {
+        return;
+      }
+      this._lastTabNavDirection = event.shiftKey ? TAB_NAV_BACKWARD : TAB_NAV_FORWARD;
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/scrollBar.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
+  const SELECTOR_STICKY_CONTENT = '.sticky-top';
+  const PROPERTY_PADDING = 'padding-right';
+  const PROPERTY_MARGIN = 'margin-right';
+
+  /**
+   * Class definition
+   */
+
+  class ScrollBarHelper {
+    constructor() {
+      this._element = document.body;
+    }
+
+    // Public
+    getWidth() {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+      const documentWidth = document.documentElement.clientWidth;
+      return Math.abs(window.innerWidth - documentWidth);
+    }
+    hide() {
+      const width = this.getWidth();
+      this._disableOverFlow();
+      // give padding to element to balance the hidden scrollbar width
+      this._setElementAttributes(this._element, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
+      this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, calculatedValue => calculatedValue - width);
+    }
+    reset() {
+      this._resetElementAttributes(this._element, 'overflow');
+      this._resetElementAttributes(this._element, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
+    }
+    isOverflowing() {
+      return this.getWidth() > 0;
+    }
+
+    // Private
+    _disableOverFlow() {
+      this._saveInitialAttribute(this._element, 'overflow');
+      this._element.style.overflow = 'hidden';
+    }
+    _setElementAttributes(selector, styleProperty, callback) {
+      const scrollbarWidth = this.getWidth();
+      const manipulationCallBack = element => {
+        if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
+          return;
+        }
+        this._saveInitialAttribute(element, styleProperty);
+        const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
+        element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _saveInitialAttribute(element, styleProperty) {
+      const actualValue = element.style.getPropertyValue(styleProperty);
+      if (actualValue) {
+        Manipulator.setDataAttribute(element, styleProperty, actualValue);
+      }
+    }
+    _resetElementAttributes(selector, styleProperty) {
+      const manipulationCallBack = element => {
+        const value = Manipulator.getDataAttribute(element, styleProperty);
+        // We only want to remove the property if the value is `null`; the value can also be zero
+        if (value === null) {
+          element.style.removeProperty(styleProperty);
+          return;
+        }
+        Manipulator.removeDataAttribute(element, styleProperty);
+        element.style.setProperty(styleProperty, value);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _applyManipulationCallback(selector, callBack) {
+      if (isElement(selector)) {
+        callBack(selector);
+        return;
+      }
+      for (const sel of SelectorEngine.find(selector, this._element)) {
+        callBack(sel);
+      }
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap modal.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$7 = 'modal';
+  const DATA_KEY$4 = 'bs.modal';
+  const EVENT_KEY$4 = `.${DATA_KEY$4}`;
+  const DATA_API_KEY$2 = '.data-api';
+  const ESCAPE_KEY$1 = 'Escape';
+  const EVENT_HIDE$4 = `hide${EVENT_KEY$4}`;
+  const EVENT_HIDE_PREVENTED$1 = `hidePrevented${EVENT_KEY$4}`;
+  const EVENT_HIDDEN$4 = `hidden${EVENT_KEY$4}`;
+  const EVENT_SHOW$4 = `show${EVENT_KEY$4}`;
+  const EVENT_SHOWN$4 = `shown${EVENT_KEY$4}`;
+  const EVENT_RESIZE$1 = `resize${EVENT_KEY$4}`;
+  const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY$4}`;
+  const EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY$4}`;
+  const EVENT_KEYDOWN_DISMISS$1 = `keydown.dismiss${EVENT_KEY$4}`;
+  const EVENT_CLICK_DATA_API$2 = `click${EVENT_KEY$4}${DATA_API_KEY$2}`;
+  const CLASS_NAME_OPEN = 'modal-open';
+  const CLASS_NAME_FADE$3 = 'fade';
+  const CLASS_NAME_SHOW$4 = 'show';
+  const CLASS_NAME_STATIC = 'modal-static';
+  const OPEN_SELECTOR$1 = '.modal.show';
+  const SELECTOR_DIALOG = '.modal-dialog';
+  const SELECTOR_MODAL_BODY = '.modal-body';
+  const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
+  const Default$6 = {
+    backdrop: true,
+    focus: true,
+    keyboard: true
+  };
+  const DefaultType$6 = {
+    backdrop: '(boolean|string)',
+    focus: 'boolean',
+    keyboard: 'boolean'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Modal extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._dialog = SelectorEngine.findOne(SELECTOR_DIALOG, this._element);
+      this._backdrop = this._initializeBackDrop();
+      this._focustrap = this._initializeFocusTrap();
+      this._isShown = false;
+      this._isTransitioning = false;
+      this._scrollBar = new ScrollBarHelper();
+      this._addEventListeners();
+    }
+
+    // Getters
+    static get Default() {
+      return Default$6;
+    }
+    static get DefaultType() {
+      return DefaultType$6;
+    }
+    static get NAME() {
+      return NAME$7;
+    }
+
+    // Public
+    toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    }
+    show(relatedTarget) {
+      if (this._isShown || this._isTransitioning) {
+        return;
+      }
+      const showEvent = EventHandler.trigger(this._element, EVENT_SHOW$4, {
+        relatedTarget
+      });
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+      this._isShown = true;
+      this._isTransitioning = true;
+      this._scrollBar.hide();
+      document.body.classList.add(CLASS_NAME_OPEN);
+      this._adjustDialog();
+      this._backdrop.show(() => this._showElement(relatedTarget));
+    }
+    hide() {
+      if (!this._isShown || this._isTransitioning) {
+        return;
+      }
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$4);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      this._isShown = false;
+      this._isTransitioning = true;
+      this._focustrap.deactivate();
+      this._element.classList.remove(CLASS_NAME_SHOW$4);
+      this._queueCallback(() => this._hideModal(), this._element, this._isAnimated());
+    }
+    dispose() {
+      EventHandler.off(window, EVENT_KEY$4);
+      EventHandler.off(this._dialog, EVENT_KEY$4);
+      this._backdrop.dispose();
+      this._focustrap.deactivate();
+      super.dispose();
+    }
+    handleUpdate() {
+      this._adjustDialog();
+    }
+
+    // Private
+    _initializeBackDrop() {
+      return new Backdrop({
+        isVisible: Boolean(this._config.backdrop),
+        // 'static' option will be translated to true, and booleans will keep their value,
+        isAnimated: this._isAnimated()
+      });
+    }
+    _initializeFocusTrap() {
+      return new FocusTrap({
+        trapElement: this._element
+      });
+    }
+    _showElement(relatedTarget) {
+      // try to append dynamic modal
+      if (!document.body.contains(this._element)) {
+        document.body.append(this._element);
+      }
+      this._element.style.display = 'block';
+      this._element.removeAttribute('aria-hidden');
+      this._element.setAttribute('aria-modal', true);
+      this._element.setAttribute('role', 'dialog');
+      this._element.scrollTop = 0;
+      const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
+      if (modalBody) {
+        modalBody.scrollTop = 0;
+      }
+      reflow(this._element);
+      this._element.classList.add(CLASS_NAME_SHOW$4);
+      const transitionComplete = () => {
+        if (this._config.focus) {
+          this._focustrap.activate();
+        }
+        this._isTransitioning = false;
+        EventHandler.trigger(this._element, EVENT_SHOWN$4, {
+          relatedTarget
+        });
+      };
+      this._queueCallback(transitionComplete, this._dialog, this._isAnimated());
+    }
+    _addEventListeners() {
+      EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS$1, event => {
+        if (event.key !== ESCAPE_KEY$1) {
+          return;
+        }
+        if (this._config.keyboard) {
+          this.hide();
+          return;
+        }
+        this._triggerBackdropTransition();
+      });
+      EventHandler.on(window, EVENT_RESIZE$1, () => {
+        if (this._isShown && !this._isTransitioning) {
+          this._adjustDialog();
+        }
+      });
+      EventHandler.on(this._element, EVENT_MOUSEDOWN_DISMISS, event => {
+        // a bad trick to segregate clicks that may start inside dialog but end outside, and avoid listen to scrollbar clicks
+        EventHandler.one(this._element, EVENT_CLICK_DISMISS, event2 => {
+          if (this._element !== event.target || this._element !== event2.target) {
+            return;
+          }
+          if (this._config.backdrop === 'static') {
+            this._triggerBackdropTransition();
+            return;
+          }
+          if (this._config.backdrop) {
+            this.hide();
+          }
+        });
+      });
+    }
+    _hideModal() {
+      this._element.style.display = 'none';
+      this._element.setAttribute('aria-hidden', true);
+      this._element.removeAttribute('aria-modal');
+      this._element.removeAttribute('role');
+      this._isTransitioning = false;
+      this._backdrop.hide(() => {
+        document.body.classList.remove(CLASS_NAME_OPEN);
+        this._resetAdjustments();
+        this._scrollBar.reset();
+        EventHandler.trigger(this._element, EVENT_HIDDEN$4);
+      });
+    }
+    _isAnimated() {
+      return this._element.classList.contains(CLASS_NAME_FADE$3);
+    }
+    _triggerBackdropTransition() {
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED$1);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+      const initialOverflowY = this._element.style.overflowY;
+      // return if the following background transition hasn't yet completed
+      if (initialOverflowY === 'hidden' || this._element.classList.contains(CLASS_NAME_STATIC)) {
+        return;
+      }
+      if (!isModalOverflowing) {
+        this._element.style.overflowY = 'hidden';
+      }
+      this._element.classList.add(CLASS_NAME_STATIC);
+      this._queueCallback(() => {
+        this._element.classList.remove(CLASS_NAME_STATIC);
+        this._queueCallback(() => {
+          this._element.style.overflowY = initialOverflowY;
+        }, this._dialog);
+      }, this._dialog);
+      this._element.focus();
+    }
+
+    /**
+     * The following methods are used to handle overflowing modals
+     */
+
+    _adjustDialog() {
+      const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+      const scrollbarWidth = this._scrollBar.getWidth();
+      const isBodyOverflowing = scrollbarWidth > 0;
+      if (isBodyOverflowing && !isModalOverflowing) {
+        const property = isRTL() ? 'paddingLeft' : 'paddingRight';
+        this._element.style[property] = `${scrollbarWidth}px`;
+      }
+      if (!isBodyOverflowing && isModalOverflowing) {
+        const property = isRTL() ? 'paddingRight' : 'paddingLeft';
+        this._element.style[property] = `${scrollbarWidth}px`;
+      }
+    }
+    _resetAdjustments() {
+      this._element.style.paddingLeft = '';
+      this._element.style.paddingRight = '';
+    }
+
+    // Static
+    static jQueryInterface(config, relatedTarget) {
+      return this.each(function () {
+        const data = Modal.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config](relatedTarget);
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function (event) {
+    const target = SelectorEngine.getElementFromSelector(this);
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+    EventHandler.one(target, EVENT_SHOW$4, showEvent => {
+      if (showEvent.defaultPrevented) {
+        // only register focus restorer if modal will actually get shown
+        return;
+      }
+      EventHandler.one(target, EVENT_HIDDEN$4, () => {
+        if (isVisible(this)) {
+          this.focus();
+        }
+      });
+    });
+
+    // avoid conflict when clicking modal toggler while another one is open
+    const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR$1);
+    if (alreadyOpen) {
+      Modal.getInstance(alreadyOpen).hide();
+    }
+    const data = Modal.getOrCreateInstance(target);
+    data.toggle(this);
+  });
+  enableDismissTrigger(Modal);
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Modal);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap offcanvas.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$6 = 'offcanvas';
+  const DATA_KEY$3 = 'bs.offcanvas';
+  const EVENT_KEY$3 = `.${DATA_KEY$3}`;
+  const DATA_API_KEY$1 = '.data-api';
+  const EVENT_LOAD_DATA_API$2 = `load${EVENT_KEY$3}${DATA_API_KEY$1}`;
+  const ESCAPE_KEY = 'Escape';
+  const CLASS_NAME_SHOW$3 = 'show';
+  const CLASS_NAME_SHOWING$1 = 'showing';
+  const CLASS_NAME_HIDING = 'hiding';
+  const CLASS_NAME_BACKDROP = 'offcanvas-backdrop';
+  const OPEN_SELECTOR = '.offcanvas.show';
+  const EVENT_SHOW$3 = `show${EVENT_KEY$3}`;
+  const EVENT_SHOWN$3 = `shown${EVENT_KEY$3}`;
+  const EVENT_HIDE$3 = `hide${EVENT_KEY$3}`;
+  const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY$3}`;
+  const EVENT_HIDDEN$3 = `hidden${EVENT_KEY$3}`;
+  const EVENT_RESIZE = `resize${EVENT_KEY$3}`;
+  const EVENT_CLICK_DATA_API$1 = `click${EVENT_KEY$3}${DATA_API_KEY$1}`;
+  const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY$3}`;
+  const SELECTOR_DATA_TOGGLE$1 = '[data-bs-toggle="offcanvas"]';
+  const Default$5 = {
+    backdrop: true,
+    keyboard: true,
+    scroll: false
+  };
+  const DefaultType$5 = {
+    backdrop: '(boolean|string)',
+    keyboard: 'boolean',
+    scroll: 'boolean'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Offcanvas extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._isShown = false;
+      this._backdrop = this._initializeBackDrop();
+      this._focustrap = this._initializeFocusTrap();
+      this._addEventListeners();
+    }
+
+    // Getters
+    static get Default() {
+      return Default$5;
+    }
+    static get DefaultType() {
+      return DefaultType$5;
+    }
+    static get NAME() {
+      return NAME$6;
+    }
+
+    // Public
+    toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    }
+    show(relatedTarget) {
+      if (this._isShown) {
+        return;
+      }
+      const showEvent = EventHandler.trigger(this._element, EVENT_SHOW$3, {
+        relatedTarget
+      });
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+      this._isShown = true;
+      this._backdrop.show();
+      if (!this._config.scroll) {
+        new ScrollBarHelper().hide();
+      }
+      this._element.setAttribute('aria-modal', true);
+      this._element.setAttribute('role', 'dialog');
+      this._element.classList.add(CLASS_NAME_SHOWING$1);
+      const completeCallBack = () => {
+        if (!this._config.scroll || this._config.backdrop) {
+          this._focustrap.activate();
+        }
+        this._element.classList.add(CLASS_NAME_SHOW$3);
+        this._element.classList.remove(CLASS_NAME_SHOWING$1);
+        EventHandler.trigger(this._element, EVENT_SHOWN$3, {
+          relatedTarget
+        });
+      };
+      this._queueCallback(completeCallBack, this._element, true);
+    }
+    hide() {
+      if (!this._isShown) {
+        return;
+      }
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE$3);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      this._focustrap.deactivate();
+      this._element.blur();
+      this._isShown = false;
+      this._element.classList.add(CLASS_NAME_HIDING);
+      this._backdrop.hide();
+      const completeCallback = () => {
+        this._element.classList.remove(CLASS_NAME_SHOW$3, CLASS_NAME_HIDING);
+        this._element.removeAttribute('aria-modal');
+        this._element.removeAttribute('role');
+        if (!this._config.scroll) {
+          new ScrollBarHelper().reset();
+        }
+        EventHandler.trigger(this._element, EVENT_HIDDEN$3);
+      };
+      this._queueCallback(completeCallback, this._element, true);
+    }
+    dispose() {
+      this._backdrop.dispose();
+      this._focustrap.deactivate();
+      super.dispose();
+    }
+
+    // Private
+    _initializeBackDrop() {
+      const clickCallback = () => {
+        if (this._config.backdrop === 'static') {
+          EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+          return;
+        }
+        this.hide();
+      };
+
+      // 'static' option will be translated to true, and booleans will keep their value
+      const isVisible = Boolean(this._config.backdrop);
+      return new Backdrop({
+        className: CLASS_NAME_BACKDROP,
+        isVisible,
+        isAnimated: true,
+        rootElement: this._element.parentNode,
+        clickCallback: isVisible ? clickCallback : null
+      });
+    }
+    _initializeFocusTrap() {
+      return new FocusTrap({
+        trapElement: this._element
+      });
+    }
+    _addEventListeners() {
+      EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, event => {
+        if (event.key !== ESCAPE_KEY) {
+          return;
+        }
+        if (this._config.keyboard) {
+          this.hide();
+          return;
+        }
+        EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+      });
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Offcanvas.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config](this);
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function (event) {
+    const target = SelectorEngine.getElementFromSelector(this);
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+    if (isDisabled(this)) {
+      return;
+    }
+    EventHandler.one(target, EVENT_HIDDEN$3, () => {
+      // focus on trigger when it is closed
+      if (isVisible(this)) {
+        this.focus();
+      }
+    });
+
+    // avoid conflict when clicking a toggler of an offcanvas, while another is open
+    const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
+    if (alreadyOpen && alreadyOpen !== target) {
+      Offcanvas.getInstance(alreadyOpen).hide();
+    }
+    const data = Offcanvas.getOrCreateInstance(target);
+    data.toggle(this);
+  });
+  EventHandler.on(window, EVENT_LOAD_DATA_API$2, () => {
+    for (const selector of SelectorEngine.find(OPEN_SELECTOR)) {
+      Offcanvas.getOrCreateInstance(selector).show();
+    }
+  });
+  EventHandler.on(window, EVENT_RESIZE, () => {
+    for (const element of SelectorEngine.find('[aria-modal][class*=show][class*=offcanvas-]')) {
+      if (getComputedStyle(element).position !== 'fixed') {
+        Offcanvas.getOrCreateInstance(element).hide();
+      }
+    }
+  });
+  enableDismissTrigger(Offcanvas);
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Offcanvas);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/sanitizer.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  // js-docs-start allow-list
+  const ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
+  const DefaultAllowlist = {
+    // Global attributes allowed on any supplied element below.
+    '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
+    a: ['target', 'href', 'title', 'rel'],
+    area: [],
+    b: [],
+    br: [],
+    col: [],
+    code: [],
+    div: [],
+    em: [],
+    hr: [],
+    h1: [],
+    h2: [],
+    h3: [],
+    h4: [],
+    h5: [],
+    h6: [],
+    i: [],
+    img: ['src', 'srcset', 'alt', 'title', 'width', 'height'],
+    li: [],
+    ol: [],
+    p: [],
+    pre: [],
+    s: [],
+    small: [],
+    span: [],
+    sub: [],
+    sup: [],
+    strong: [],
+    u: [],
+    ul: []
+  };
+  // js-docs-end allow-list
+
+  const uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
+
+  /**
+   * A pattern that recognizes URLs that are safe wrt. XSS in URL navigation
+   * contexts.
+   *
+   * Shout-out to Angular https://github.com/angular/angular/blob/15.2.8/packages/core/src/sanitization/url_sanitizer.ts#L38
+   */
+  // eslint-disable-next-line unicorn/better-regex
+  const SAFE_URL_PATTERN = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i;
+  const allowedAttribute = (attribute, allowedAttributeList) => {
+    const attributeName = attribute.nodeName.toLowerCase();
+    if (allowedAttributeList.includes(attributeName)) {
+      if (uriAttributes.has(attributeName)) {
+        return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue));
+      }
+      return true;
+    }
+
+    // Check if a regular expression validates the attribute.
+    return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
+  };
+  function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
+    if (!unsafeHtml.length) {
+      return unsafeHtml;
+    }
+    if (sanitizeFunction && typeof sanitizeFunction === 'function') {
+      return sanitizeFunction(unsafeHtml);
+    }
+    const domParser = new window.DOMParser();
+    const createdDocument = domParser.parseFromString(unsafeHtml, 'text/html');
+    const elements = [].concat(...createdDocument.body.querySelectorAll('*'));
+    for (const element of elements) {
+      const elementName = element.nodeName.toLowerCase();
+      if (!Object.keys(allowList).includes(elementName)) {
+        element.remove();
+        continue;
+      }
+      const attributeList = [].concat(...element.attributes);
+      const allowedAttributes = [].concat(allowList['*'] || [], allowList[elementName] || []);
+      for (const attribute of attributeList) {
+        if (!allowedAttribute(attribute, allowedAttributes)) {
+          element.removeAttribute(attribute.nodeName);
+        }
+      }
+    }
+    return createdDocument.body.innerHTML;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap util/template-factory.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$5 = 'TemplateFactory';
+  const Default$4 = {
+    allowList: DefaultAllowlist,
+    content: {},
+    // { selector : text ,  selector2 : text2 , }
+    extraClass: '',
+    html: false,
+    sanitize: true,
+    sanitizeFn: null,
+    template: '<div></div>'
+  };
+  const DefaultType$4 = {
+    allowList: 'object',
+    content: 'object',
+    extraClass: '(string|function)',
+    html: 'boolean',
+    sanitize: 'boolean',
+    sanitizeFn: '(null|function)',
+    template: 'string'
+  };
+  const DefaultContentType = {
+    entry: '(string|element|function|null)',
+    selector: '(string|element)'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class TemplateFactory extends Config {
+    constructor(config) {
+      super();
+      this._config = this._getConfig(config);
+    }
+
+    // Getters
+    static get Default() {
+      return Default$4;
+    }
+    static get DefaultType() {
+      return DefaultType$4;
+    }
+    static get NAME() {
+      return NAME$5;
+    }
+
+    // Public
+    getContent() {
+      return Object.values(this._config.content).map(config => this._resolvePossibleFunction(config)).filter(Boolean);
+    }
+    hasContent() {
+      return this.getContent().length > 0;
+    }
+    changeContent(content) {
+      this._checkContent(content);
+      this._config.content = {
+        ...this._config.content,
+        ...content
+      };
+      return this;
+    }
+    toHtml() {
+      const templateWrapper = document.createElement('div');
+      templateWrapper.innerHTML = this._maybeSanitize(this._config.template);
+      for (const [selector, text] of Object.entries(this._config.content)) {
+        this._setContent(templateWrapper, text, selector);
+      }
+      const template = templateWrapper.children[0];
+      const extraClass = this._resolvePossibleFunction(this._config.extraClass);
+      if (extraClass) {
+        template.classList.add(...extraClass.split(' '));
+      }
+      return template;
+    }
+
+    // Private
+    _typeCheckConfig(config) {
+      super._typeCheckConfig(config);
+      this._checkContent(config.content);
+    }
+    _checkContent(arg) {
+      for (const [selector, content] of Object.entries(arg)) {
+        super._typeCheckConfig({
+          selector,
+          entry: content
+        }, DefaultContentType);
+      }
+    }
+    _setContent(template, content, selector) {
+      const templateElement = SelectorEngine.findOne(selector, template);
+      if (!templateElement) {
+        return;
+      }
+      content = this._resolvePossibleFunction(content);
+      if (!content) {
+        templateElement.remove();
+        return;
+      }
+      if (isElement(content)) {
+        this._putElementInTemplate(getElement(content), templateElement);
+        return;
+      }
+      if (this._config.html) {
+        templateElement.innerHTML = this._maybeSanitize(content);
+        return;
+      }
+      templateElement.textContent = content;
+    }
+    _maybeSanitize(arg) {
+      return this._config.sanitize ? sanitizeHtml(arg, this._config.allowList, this._config.sanitizeFn) : arg;
+    }
+    _resolvePossibleFunction(arg) {
+      return execute(arg, [this]);
+    }
+    _putElementInTemplate(element, templateElement) {
+      if (this._config.html) {
+        templateElement.innerHTML = '';
+        templateElement.append(element);
+        return;
+      }
+      templateElement.textContent = element.textContent;
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap tooltip.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$4 = 'tooltip';
+  const DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
+  const CLASS_NAME_FADE$2 = 'fade';
+  const CLASS_NAME_MODAL = 'modal';
+  const CLASS_NAME_SHOW$2 = 'show';
+  const SELECTOR_TOOLTIP_INNER = '.tooltip-inner';
+  const SELECTOR_MODAL = `.${CLASS_NAME_MODAL}`;
+  const EVENT_MODAL_HIDE = 'hide.bs.modal';
+  const TRIGGER_HOVER = 'hover';
+  const TRIGGER_FOCUS = 'focus';
+  const TRIGGER_CLICK = 'click';
+  const TRIGGER_MANUAL = 'manual';
+  const EVENT_HIDE$2 = 'hide';
+  const EVENT_HIDDEN$2 = 'hidden';
+  const EVENT_SHOW$2 = 'show';
+  const EVENT_SHOWN$2 = 'shown';
+  const EVENT_INSERTED = 'inserted';
+  const EVENT_CLICK$1 = 'click';
+  const EVENT_FOCUSIN$1 = 'focusin';
+  const EVENT_FOCUSOUT$1 = 'focusout';
+  const EVENT_MOUSEENTER = 'mouseenter';
+  const EVENT_MOUSELEAVE = 'mouseleave';
+  const AttachmentMap = {
+    AUTO: 'auto',
+    TOP: 'top',
+    RIGHT: isRTL() ? 'left' : 'right',
+    BOTTOM: 'bottom',
+    LEFT: isRTL() ? 'right' : 'left'
+  };
+  const Default$3 = {
+    allowList: DefaultAllowlist,
+    animation: true,
+    boundary: 'clippingParents',
+    container: false,
+    customClass: '',
+    delay: 0,
+    fallbackPlacements: ['top', 'right', 'bottom', 'left'],
+    html: false,
+    offset: [0, 6],
+    placement: 'top',
+    popperConfig: null,
+    sanitize: true,
+    sanitizeFn: null,
+    selector: false,
+    template: '<div class="tooltip" role="tooltip">' + '<div class="tooltip-arrow"></div>' + '<div class="tooltip-inner"></div>' + '</div>',
+    title: '',
+    trigger: 'hover focus'
+  };
+  const DefaultType$3 = {
+    allowList: 'object',
+    animation: 'boolean',
+    boundary: '(string|element)',
+    container: '(string|element|boolean)',
+    customClass: '(string|function)',
+    delay: '(number|object)',
+    fallbackPlacements: 'array',
+    html: 'boolean',
+    offset: '(array|string|function)',
+    placement: '(string|function)',
+    popperConfig: '(null|object|function)',
+    sanitize: 'boolean',
+    sanitizeFn: '(null|function)',
+    selector: '(string|boolean)',
+    template: 'string',
+    title: '(string|element|function)',
+    trigger: 'string'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Tooltip extends BaseComponent {
+    constructor(element, config) {
+      if (typeof Popper__namespace === 'undefined') {
+        throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
+      }
+      super(element, config);
+
+      // Private
+      this._isEnabled = true;
+      this._timeout = 0;
+      this._isHovered = null;
+      this._activeTrigger = {};
+      this._popper = null;
+      this._templateFactory = null;
+      this._newContent = null;
+
+      // Protected
+      this.tip = null;
+      this._setListeners();
+      if (!this._config.selector) {
+        this._fixTitle();
+      }
+    }
+
+    // Getters
+    static get Default() {
+      return Default$3;
+    }
+    static get DefaultType() {
+      return DefaultType$3;
+    }
+    static get NAME() {
+      return NAME$4;
+    }
+
+    // Public
+    enable() {
+      this._isEnabled = true;
+    }
+    disable() {
+      this._isEnabled = false;
+    }
+    toggleEnabled() {
+      this._isEnabled = !this._isEnabled;
+    }
+    toggle() {
+      if (!this._isEnabled) {
+        return;
+      }
+      this._activeTrigger.click = !this._activeTrigger.click;
+      if (this._isShown()) {
+        this._leave();
+        return;
+      }
+      this._enter();
+    }
+    dispose() {
+      clearTimeout(this._timeout);
+      EventHandler.off(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
+      if (this._element.getAttribute('data-bs-original-title')) {
+        this._element.setAttribute('title', this._element.getAttribute('data-bs-original-title'));
+      }
+      this._disposePopper();
+      super.dispose();
+    }
+    show() {
+      if (this._element.style.display === 'none') {
+        throw new Error('Please use show on visible elements');
+      }
+      if (!(this._isWithContent() && this._isEnabled)) {
+        return;
+      }
+      const showEvent = EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOW$2));
+      const shadowRoot = findShadowRoot(this._element);
+      const isInTheDom = (shadowRoot || this._element.ownerDocument.documentElement).contains(this._element);
+      if (showEvent.defaultPrevented || !isInTheDom) {
+        return;
+      }
+
+      // TODO: v6 remove this or make it optional
+      this._disposePopper();
+      const tip = this._getTipElement();
+      this._element.setAttribute('aria-describedby', tip.getAttribute('id'));
+      const {
+        container
+      } = this._config;
+      if (!this._element.ownerDocument.documentElement.contains(this.tip)) {
+        container.append(tip);
+        EventHandler.trigger(this._element, this.constructor.eventName(EVENT_INSERTED));
+      }
+      this._popper = this._createPopper(tip);
+      tip.classList.add(CLASS_NAME_SHOW$2);
+
+      // If this is a touch-enabled device we add extra
+      // empty mouseover listeners to the body's immediate children;
+      // only needed because of broken event delegation on iOS
+      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+      if ('ontouchstart' in document.documentElement) {
+        for (const element of [].concat(...document.body.children)) {
+          EventHandler.on(element, 'mouseover', noop);
+        }
+      }
+      const complete = () => {
+        EventHandler.trigger(this._element, this.constructor.eventName(EVENT_SHOWN$2));
+        if (this._isHovered === false) {
+          this._leave();
+        }
+        this._isHovered = false;
+      };
+      this._queueCallback(complete, this.tip, this._isAnimated());
+    }
+    hide() {
+      if (!this._isShown()) {
+        return;
+      }
+      const hideEvent = EventHandler.trigger(this._element, this.constructor.eventName(EVENT_HIDE$2));
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      const tip = this._getTipElement();
+      tip.classList.remove(CLASS_NAME_SHOW$2);
+
+      // If this is a touch-enabled device we remove the extra
+      // empty mouseover listeners we added for iOS support
+      if ('ontouchstart' in document.documentElement) {
+        for (const element of [].concat(...document.body.children)) {
+          EventHandler.off(element, 'mouseover', noop);
+        }
+      }
+      this._activeTrigger[TRIGGER_CLICK] = false;
+      this._activeTrigger[TRIGGER_FOCUS] = false;
+      this._activeTrigger[TRIGGER_HOVER] = false;
+      this._isHovered = null; // it is a trick to support manual triggering
+
+      const complete = () => {
+        if (this._isWithActiveTrigger()) {
+          return;
+        }
+        if (!this._isHovered) {
+          this._disposePopper();
+        }
+        this._element.removeAttribute('aria-describedby');
+        EventHandler.trigger(this._element, this.constructor.eventName(EVENT_HIDDEN$2));
+      };
+      this._queueCallback(complete, this.tip, this._isAnimated());
+    }
+    update() {
+      if (this._popper) {
+        this._popper.update();
+      }
+    }
+
+    // Protected
+    _isWithContent() {
+      return Boolean(this._getTitle());
+    }
+    _getTipElement() {
+      if (!this.tip) {
+        this.tip = this._createTipElement(this._newContent || this._getContentForTemplate());
+      }
+      return this.tip;
+    }
+    _createTipElement(content) {
+      const tip = this._getTemplateFactory(content).toHtml();
+
+      // TODO: remove this check in v6
+      if (!tip) {
+        return null;
+      }
+      tip.classList.remove(CLASS_NAME_FADE$2, CLASS_NAME_SHOW$2);
+      // TODO: v6 the following can be achieved with CSS only
+      tip.classList.add(`bs-${this.constructor.NAME}-auto`);
+      const tipId = getUID(this.constructor.NAME).toString();
+      tip.setAttribute('id', tipId);
+      if (this._isAnimated()) {
+        tip.classList.add(CLASS_NAME_FADE$2);
+      }
+      return tip;
+    }
+    setContent(content) {
+      this._newContent = content;
+      if (this._isShown()) {
+        this._disposePopper();
+        this.show();
+      }
+    }
+    _getTemplateFactory(content) {
+      if (this._templateFactory) {
+        this._templateFactory.changeContent(content);
+      } else {
+        this._templateFactory = new TemplateFactory({
+          ...this._config,
+          // the `content` var has to be after `this._config`
+          // to override config.content in case of popover
+          content,
+          extraClass: this._resolvePossibleFunction(this._config.customClass)
+        });
+      }
+      return this._templateFactory;
+    }
+    _getContentForTemplate() {
+      return {
+        [SELECTOR_TOOLTIP_INNER]: this._getTitle()
+      };
+    }
+    _getTitle() {
+      return this._resolvePossibleFunction(this._config.title) || this._element.getAttribute('data-bs-original-title');
+    }
+
+    // Private
+    _initializeOnDelegatedTarget(event) {
+      return this.constructor.getOrCreateInstance(event.delegateTarget, this._getDelegateConfig());
+    }
+    _isAnimated() {
+      return this._config.animation || this.tip && this.tip.classList.contains(CLASS_NAME_FADE$2);
+    }
+    _isShown() {
+      return this.tip && this.tip.classList.contains(CLASS_NAME_SHOW$2);
+    }
+    _createPopper(tip) {
+      const placement = execute(this._config.placement, [this, tip, this._element]);
+      const attachment = AttachmentMap[placement.toUpperCase()];
+      return Popper__namespace.createPopper(this._element, tip, this._getPopperConfig(attachment));
+    }
+    _getOffset() {
+      const {
+        offset
+      } = this._config;
+      if (typeof offset === 'string') {
+        return offset.split(',').map(value => Number.parseInt(value, 10));
+      }
+      if (typeof offset === 'function') {
+        return popperData => offset(popperData, this._element);
+      }
+      return offset;
+    }
+    _resolvePossibleFunction(arg) {
+      return execute(arg, [this._element]);
+    }
+    _getPopperConfig(attachment) {
+      const defaultBsPopperConfig = {
+        placement: attachment,
+        modifiers: [{
+          name: 'flip',
+          options: {
+            fallbackPlacements: this._config.fallbackPlacements
+          }
+        }, {
+          name: 'offset',
+          options: {
+            offset: this._getOffset()
+          }
+        }, {
+          name: 'preventOverflow',
+          options: {
+            boundary: this._config.boundary
+          }
+        }, {
+          name: 'arrow',
+          options: {
+            element: `.${this.constructor.NAME}-arrow`
+          }
+        }, {
+          name: 'preSetPlacement',
+          enabled: true,
+          phase: 'beforeMain',
+          fn: data => {
+            // Pre-set Popper's placement attribute in order to read the arrow sizes properly.
+            // Otherwise, Popper mixes up the width and height dimensions since the initial arrow style is for top placement
+            this._getTipElement().setAttribute('data-popper-placement', data.state.placement);
+          }
+        }]
+      };
+      return {
+        ...defaultBsPopperConfig,
+        ...execute(this._config.popperConfig, [defaultBsPopperConfig])
+      };
+    }
+    _setListeners() {
+      const triggers = this._config.trigger.split(' ');
+      for (const trigger of triggers) {
+        if (trigger === 'click') {
+          EventHandler.on(this._element, this.constructor.eventName(EVENT_CLICK$1), this._config.selector, event => {
+            const context = this._initializeOnDelegatedTarget(event);
+            context.toggle();
+          });
+        } else if (trigger !== TRIGGER_MANUAL) {
+          const eventIn = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSEENTER) : this.constructor.eventName(EVENT_FOCUSIN$1);
+          const eventOut = trigger === TRIGGER_HOVER ? this.constructor.eventName(EVENT_MOUSELEAVE) : this.constructor.eventName(EVENT_FOCUSOUT$1);
+          EventHandler.on(this._element, eventIn, this._config.selector, event => {
+            const context = this._initializeOnDelegatedTarget(event);
+            context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
+            context._enter();
+          });
+          EventHandler.on(this._element, eventOut, this._config.selector, event => {
+            const context = this._initializeOnDelegatedTarget(event);
+            context._activeTrigger[event.type === 'focusout' ? TRIGGER_FOCUS : TRIGGER_HOVER] = context._element.contains(event.relatedTarget);
+            context._leave();
+          });
+        }
+      }
+      this._hideModalHandler = () => {
+        if (this._element) {
+          this.hide();
+        }
+      };
+      EventHandler.on(this._element.closest(SELECTOR_MODAL), EVENT_MODAL_HIDE, this._hideModalHandler);
+    }
+    _fixTitle() {
+      const title = this._element.getAttribute('title');
+      if (!title) {
+        return;
+      }
+      if (!this._element.getAttribute('aria-label') && !this._element.textContent.trim()) {
+        this._element.setAttribute('aria-label', title);
+      }
+      this._element.setAttribute('data-bs-original-title', title); // DO NOT USE IT. Is only for backwards compatibility
+      this._element.removeAttribute('title');
+    }
+    _enter() {
+      if (this._isShown() || this._isHovered) {
+        this._isHovered = true;
+        return;
+      }
+      this._isHovered = true;
+      this._setTimeout(() => {
+        if (this._isHovered) {
+          this.show();
+        }
+      }, this._config.delay.show);
+    }
+    _leave() {
+      if (this._isWithActiveTrigger()) {
+        return;
+      }
+      this._isHovered = false;
+      this._setTimeout(() => {
+        if (!this._isHovered) {
+          this.hide();
+        }
+      }, this._config.delay.hide);
+    }
+    _setTimeout(handler, timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = setTimeout(handler, timeout);
+    }
+    _isWithActiveTrigger() {
+      return Object.values(this._activeTrigger).includes(true);
+    }
+    _getConfig(config) {
+      const dataAttributes = Manipulator.getDataAttributes(this._element);
+      for (const dataAttribute of Object.keys(dataAttributes)) {
+        if (DISALLOWED_ATTRIBUTES.has(dataAttribute)) {
+          delete dataAttributes[dataAttribute];
+        }
+      }
+      config = {
+        ...dataAttributes,
+        ...(typeof config === 'object' && config ? config : {})
+      };
+      config = this._mergeConfigObj(config);
+      config = this._configAfterMerge(config);
+      this._typeCheckConfig(config);
+      return config;
+    }
+    _configAfterMerge(config) {
+      config.container = config.container === false ? document.body : getElement(config.container);
+      if (typeof config.delay === 'number') {
+        config.delay = {
+          show: config.delay,
+          hide: config.delay
+        };
+      }
+      if (typeof config.title === 'number') {
+        config.title = config.title.toString();
+      }
+      if (typeof config.content === 'number') {
+        config.content = config.content.toString();
+      }
+      return config;
+    }
+    _getDelegateConfig() {
+      const config = {};
+      for (const [key, value] of Object.entries(this._config)) {
+        if (this.constructor.Default[key] !== value) {
+          config[key] = value;
+        }
+      }
+      config.selector = false;
+      config.trigger = 'manual';
+
+      // In the future can be replaced with:
+      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
+      // `Object.fromEntries(keysWithDifferentValues)`
+      return config;
+    }
+    _disposePopper() {
+      if (this._popper) {
+        this._popper.destroy();
+        this._popper = null;
+      }
+      if (this.tip) {
+        this.tip.remove();
+        this.tip = null;
+      }
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Tooltip.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+  }
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Tooltip);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap popover.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$3 = 'popover';
+  const SELECTOR_TITLE = '.popover-header';
+  const SELECTOR_CONTENT = '.popover-body';
+  const Default$2 = {
+    ...Tooltip.Default,
+    content: '',
+    offset: [0, 8],
+    placement: 'right',
+    template: '<div class="popover" role="tooltip">' + '<div class="popover-arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>',
+    trigger: 'click'
+  };
+  const DefaultType$2 = {
+    ...Tooltip.DefaultType,
+    content: '(null|string|element|function)'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Popover extends Tooltip {
+    // Getters
+    static get Default() {
+      return Default$2;
+    }
+    static get DefaultType() {
+      return DefaultType$2;
+    }
+    static get NAME() {
+      return NAME$3;
+    }
+
+    // Overrides
+    _isWithContent() {
+      return this._getTitle() || this._getContent();
+    }
+
+    // Private
+    _getContentForTemplate() {
+      return {
+        [SELECTOR_TITLE]: this._getTitle(),
+        [SELECTOR_CONTENT]: this._getContent()
+      };
+    }
+    _getContent() {
+      return this._resolvePossibleFunction(this._config.content);
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Popover.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+  }
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Popover);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap scrollspy.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$2 = 'scrollspy';
+  const DATA_KEY$2 = 'bs.scrollspy';
+  const EVENT_KEY$2 = `.${DATA_KEY$2}`;
+  const DATA_API_KEY = '.data-api';
+  const EVENT_ACTIVATE = `activate${EVENT_KEY$2}`;
+  const EVENT_CLICK = `click${EVENT_KEY$2}`;
+  const EVENT_LOAD_DATA_API$1 = `load${EVENT_KEY$2}${DATA_API_KEY}`;
+  const CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
+  const CLASS_NAME_ACTIVE$1 = 'active';
+  const SELECTOR_DATA_SPY = '[data-bs-spy="scroll"]';
+  const SELECTOR_TARGET_LINKS = '[href]';
+  const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
+  const SELECTOR_NAV_LINKS = '.nav-link';
+  const SELECTOR_NAV_ITEMS = '.nav-item';
+  const SELECTOR_LIST_ITEMS = '.list-group-item';
+  const SELECTOR_LINK_ITEMS = `${SELECTOR_NAV_LINKS}, ${SELECTOR_NAV_ITEMS} > ${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`;
+  const SELECTOR_DROPDOWN = '.dropdown';
+  const SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
+  const Default$1 = {
+    offset: null,
+    // TODO: v6 @deprecated, keep it for backwards compatibility reasons
+    rootMargin: '0px 0px -25%',
+    smoothScroll: false,
+    target: null,
+    threshold: [0.1, 0.5, 1]
+  };
+  const DefaultType$1 = {
+    offset: '(number|null)',
+    // TODO v6 @deprecated, keep it for backwards compatibility reasons
+    rootMargin: 'string',
+    smoothScroll: 'boolean',
+    target: 'element',
+    threshold: 'array'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class ScrollSpy extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+
+      // this._element is the observablesContainer and config.target the menu links wrapper
+      this._targetLinks = new Map();
+      this._observableSections = new Map();
+      this._rootElement = getComputedStyle(this._element).overflowY === 'visible' ? null : this._element;
+      this._activeTarget = null;
+      this._observer = null;
+      this._previousScrollData = {
+        visibleEntryTop: 0,
+        parentScrollTop: 0
+      };
+      this.refresh(); // initialize
+    }
+
+    // Getters
+    static get Default() {
+      return Default$1;
+    }
+    static get DefaultType() {
+      return DefaultType$1;
+    }
+    static get NAME() {
+      return NAME$2;
+    }
+
+    // Public
+    refresh() {
+      this._initializeTargetsAndObservables();
+      this._maybeEnableSmoothScroll();
+      if (this._observer) {
+        this._observer.disconnect();
+      } else {
+        this._observer = this._getNewObserver();
+      }
+      for (const section of this._observableSections.values()) {
+        this._observer.observe(section);
+      }
+    }
+    dispose() {
+      this._observer.disconnect();
+      super.dispose();
+    }
+
+    // Private
+    _configAfterMerge(config) {
+      // TODO: on v6 target should be given explicitly & remove the {target: 'ss-target'} case
+      config.target = getElement(config.target) || document.body;
+
+      // TODO: v6 Only for backwards compatibility reasons. Use rootMargin only
+      config.rootMargin = config.offset ? `${config.offset}px 0px -30%` : config.rootMargin;
+      if (typeof config.threshold === 'string') {
+        config.threshold = config.threshold.split(',').map(value => Number.parseFloat(value));
+      }
+      return config;
+    }
+    _maybeEnableSmoothScroll() {
+      if (!this._config.smoothScroll) {
+        return;
+      }
+
+      // unregister any previous listeners
+      EventHandler.off(this._config.target, EVENT_CLICK);
+      EventHandler.on(this._config.target, EVENT_CLICK, SELECTOR_TARGET_LINKS, event => {
+        const observableSection = this._observableSections.get(event.target.hash);
+        if (observableSection) {
+          event.preventDefault();
+          const root = this._rootElement || window;
+          const height = observableSection.offsetTop - this._element.offsetTop;
+          if (root.scrollTo) {
+            root.scrollTo({
+              top: height,
+              behavior: 'smooth'
+            });
+            return;
+          }
+
+          // Chrome 60 doesn't support `scrollTo`
+          root.scrollTop = height;
+        }
+      });
+    }
+    _getNewObserver() {
+      const options = {
+        root: this._rootElement,
+        threshold: this._config.threshold,
+        rootMargin: this._config.rootMargin
+      };
+      return new IntersectionObserver(entries => this._observerCallback(entries), options);
+    }
+
+    // The logic of selection
+    _observerCallback(entries) {
+      const targetElement = entry => this._targetLinks.get(`#${entry.target.id}`);
+      const activate = entry => {
+        this._previousScrollData.visibleEntryTop = entry.target.offsetTop;
+        this._process(targetElement(entry));
+      };
+      const parentScrollTop = (this._rootElement || document.documentElement).scrollTop;
+      const userScrollsDown = parentScrollTop >= this._previousScrollData.parentScrollTop;
+      this._previousScrollData.parentScrollTop = parentScrollTop;
+      for (const entry of entries) {
+        if (!entry.isIntersecting) {
+          this._activeTarget = null;
+          this._clearActiveClass(targetElement(entry));
+          continue;
+        }
+        const entryIsLowerThanPrevious = entry.target.offsetTop >= this._previousScrollData.visibleEntryTop;
+        // if we are scrolling down, pick the bigger offsetTop
+        if (userScrollsDown && entryIsLowerThanPrevious) {
+          activate(entry);
+          // if parent isn't scrolled, let's keep the first visible item, breaking the iteration
+          if (!parentScrollTop) {
+            return;
+          }
+          continue;
+        }
+
+        // if we are scrolling up, pick the smallest offsetTop
+        if (!userScrollsDown && !entryIsLowerThanPrevious) {
+          activate(entry);
+        }
+      }
+    }
+    _initializeTargetsAndObservables() {
+      this._targetLinks = new Map();
+      this._observableSections = new Map();
+      const targetLinks = SelectorEngine.find(SELECTOR_TARGET_LINKS, this._config.target);
+      for (const anchor of targetLinks) {
+        // ensure that the anchor has an id and is not disabled
+        if (!anchor.hash || isDisabled(anchor)) {
+          continue;
+        }
+        const observableSection = SelectorEngine.findOne(decodeURI(anchor.hash), this._element);
+
+        // ensure that the observableSection exists & is visible
+        if (isVisible(observableSection)) {
+          this._targetLinks.set(decodeURI(anchor.hash), anchor);
+          this._observableSections.set(anchor.hash, observableSection);
+        }
+      }
+    }
+    _process(target) {
+      if (this._activeTarget === target) {
+        return;
+      }
+      this._clearActiveClass(this._config.target);
+      this._activeTarget = target;
+      target.classList.add(CLASS_NAME_ACTIVE$1);
+      this._activateParents(target);
+      EventHandler.trigger(this._element, EVENT_ACTIVATE, {
+        relatedTarget: target
+      });
+    }
+    _activateParents(target) {
+      // Activate dropdown parents
+      if (target.classList.contains(CLASS_NAME_DROPDOWN_ITEM)) {
+        SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, target.closest(SELECTOR_DROPDOWN)).classList.add(CLASS_NAME_ACTIVE$1);
+        return;
+      }
+      for (const listGroup of SelectorEngine.parents(target, SELECTOR_NAV_LIST_GROUP)) {
+        // Set triggered links parents as active
+        // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
+        for (const item of SelectorEngine.prev(listGroup, SELECTOR_LINK_ITEMS)) {
+          item.classList.add(CLASS_NAME_ACTIVE$1);
+        }
+      }
+    }
+    _clearActiveClass(parent) {
+      parent.classList.remove(CLASS_NAME_ACTIVE$1);
+      const activeNodes = SelectorEngine.find(`${SELECTOR_TARGET_LINKS}.${CLASS_NAME_ACTIVE$1}`, parent);
+      for (const node of activeNodes) {
+        node.classList.remove(CLASS_NAME_ACTIVE$1);
+      }
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = ScrollSpy.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(window, EVENT_LOAD_DATA_API$1, () => {
+    for (const spy of SelectorEngine.find(SELECTOR_DATA_SPY)) {
+      ScrollSpy.getOrCreateInstance(spy);
+    }
+  });
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(ScrollSpy);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap tab.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME$1 = 'tab';
+  const DATA_KEY$1 = 'bs.tab';
+  const EVENT_KEY$1 = `.${DATA_KEY$1}`;
+  const EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
+  const EVENT_HIDDEN$1 = `hidden${EVENT_KEY$1}`;
+  const EVENT_SHOW$1 = `show${EVENT_KEY$1}`;
+  const EVENT_SHOWN$1 = `shown${EVENT_KEY$1}`;
+  const EVENT_CLICK_DATA_API = `click${EVENT_KEY$1}`;
+  const EVENT_KEYDOWN = `keydown${EVENT_KEY$1}`;
+  const EVENT_LOAD_DATA_API = `load${EVENT_KEY$1}`;
+  const ARROW_LEFT_KEY = 'ArrowLeft';
+  const ARROW_RIGHT_KEY = 'ArrowRight';
+  const ARROW_UP_KEY = 'ArrowUp';
+  const ARROW_DOWN_KEY = 'ArrowDown';
+  const CLASS_NAME_ACTIVE = 'active';
+  const CLASS_NAME_FADE$1 = 'fade';
+  const CLASS_NAME_SHOW$1 = 'show';
+  const CLASS_DROPDOWN = 'dropdown';
+  const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
+  const SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
+  const NOT_SELECTOR_DROPDOWN_TOGGLE = ':not(.dropdown-toggle)';
+  const SELECTOR_TAB_PANEL = '.list-group, .nav, [role="tablist"]';
+  const SELECTOR_OUTER = '.nav-item, .list-group-item';
+  const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
+  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]'; // TODO: could only be `tab` in v6
+  const SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
+  const SELECTOR_DATA_TOGGLE_ACTIVE = `.${CLASS_NAME_ACTIVE}[data-bs-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="list"]`;
+
+  /**
+   * Class definition
+   */
+
+  class Tab extends BaseComponent {
+    constructor(element) {
+      super(element);
+      this._parent = this._element.closest(SELECTOR_TAB_PANEL);
+      if (!this._parent) {
+        return;
+        // TODO: should throw exception in v6
+        // throw new TypeError(`${element.outerHTML} has not a valid parent ${SELECTOR_INNER_ELEM}`)
+      }
+
+      // Set up initial aria attributes
+      this._setInitialAttributes(this._parent, this._getChildren());
+      EventHandler.on(this._element, EVENT_KEYDOWN, event => this._keydown(event));
+    }
+
+    // Getters
+    static get NAME() {
+      return NAME$1;
+    }
+
+    // Public
+    show() {
+      // Shows this elem and deactivate the active sibling if exists
+      const innerElem = this._element;
+      if (this._elemIsActive(innerElem)) {
+        return;
+      }
+
+      // Search for active tab on same parent to deactivate it
+      const active = this._getActiveElem();
+      const hideEvent = active ? EventHandler.trigger(active, EVENT_HIDE$1, {
+        relatedTarget: innerElem
+      }) : null;
+      const showEvent = EventHandler.trigger(innerElem, EVENT_SHOW$1, {
+        relatedTarget: active
+      });
+      if (showEvent.defaultPrevented || hideEvent && hideEvent.defaultPrevented) {
+        return;
+      }
+      this._deactivate(active, innerElem);
+      this._activate(innerElem, active);
+    }
+
+    // Private
+    _activate(element, relatedElem) {
+      if (!element) {
+        return;
+      }
+      element.classList.add(CLASS_NAME_ACTIVE);
+      this._activate(SelectorEngine.getElementFromSelector(element)); // Search and activate/show the proper section
+
+      const complete = () => {
+        if (element.getAttribute('role') !== 'tab') {
+          element.classList.add(CLASS_NAME_SHOW$1);
+          return;
+        }
+        element.removeAttribute('tabindex');
+        element.setAttribute('aria-selected', true);
+        this._toggleDropDown(element, true);
+        EventHandler.trigger(element, EVENT_SHOWN$1, {
+          relatedTarget: relatedElem
+        });
+      };
+      this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
+    }
+    _deactivate(element, relatedElem) {
+      if (!element) {
+        return;
+      }
+      element.classList.remove(CLASS_NAME_ACTIVE);
+      element.blur();
+      this._deactivate(SelectorEngine.getElementFromSelector(element)); // Search and deactivate the shown section too
+
+      const complete = () => {
+        if (element.getAttribute('role') !== 'tab') {
+          element.classList.remove(CLASS_NAME_SHOW$1);
+          return;
+        }
+        element.setAttribute('aria-selected', false);
+        element.setAttribute('tabindex', '-1');
+        this._toggleDropDown(element, false);
+        EventHandler.trigger(element, EVENT_HIDDEN$1, {
+          relatedTarget: relatedElem
+        });
+      };
+      this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
+    }
+    _keydown(event) {
+      if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY].includes(event.key)) {
+        return;
+      }
+      event.stopPropagation(); // stopPropagation/preventDefault both added to support up/down keys without scrolling the page
+      event.preventDefault();
+      const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
+      const nextActiveElement = getNextActiveElement(this._getChildren().filter(element => !isDisabled(element)), event.target, isNext, true);
+      if (nextActiveElement) {
+        nextActiveElement.focus({
+          preventScroll: true
+        });
+        Tab.getOrCreateInstance(nextActiveElement).show();
+      }
+    }
+    _getChildren() {
+      // collection of inner elements
+      return SelectorEngine.find(SELECTOR_INNER_ELEM, this._parent);
+    }
+    _getActiveElem() {
+      return this._getChildren().find(child => this._elemIsActive(child)) || null;
+    }
+    _setInitialAttributes(parent, children) {
+      this._setAttributeIfNotExists(parent, 'role', 'tablist');
+      for (const child of children) {
+        this._setInitialAttributesOnChild(child);
+      }
+    }
+    _setInitialAttributesOnChild(child) {
+      child = this._getInnerElement(child);
+      const isActive = this._elemIsActive(child);
+      const outerElem = this._getOuterElement(child);
+      child.setAttribute('aria-selected', isActive);
+      if (outerElem !== child) {
+        this._setAttributeIfNotExists(outerElem, 'role', 'presentation');
+      }
+      if (!isActive) {
+        child.setAttribute('tabindex', '-1');
+      }
+      this._setAttributeIfNotExists(child, 'role', 'tab');
+
+      // set attributes to the related panel too
+      this._setInitialAttributesOnTargetPanel(child);
+    }
+    _setInitialAttributesOnTargetPanel(child) {
+      const target = SelectorEngine.getElementFromSelector(child);
+      if (!target) {
+        return;
+      }
+      this._setAttributeIfNotExists(target, 'role', 'tabpanel');
+      if (child.id) {
+        this._setAttributeIfNotExists(target, 'aria-labelledby', `${child.id}`);
+      }
+    }
+    _toggleDropDown(element, open) {
+      const outerElem = this._getOuterElement(element);
+      if (!outerElem.classList.contains(CLASS_DROPDOWN)) {
+        return;
+      }
+      const toggle = (selector, className) => {
+        const element = SelectorEngine.findOne(selector, outerElem);
+        if (element) {
+          element.classList.toggle(className, open);
+        }
+      };
+      toggle(SELECTOR_DROPDOWN_TOGGLE, CLASS_NAME_ACTIVE);
+      toggle(SELECTOR_DROPDOWN_MENU, CLASS_NAME_SHOW$1);
+      outerElem.setAttribute('aria-expanded', open);
+    }
+    _setAttributeIfNotExists(element, attribute, value) {
+      if (!element.hasAttribute(attribute)) {
+        element.setAttribute(attribute, value);
+      }
+    }
+    _elemIsActive(elem) {
+      return elem.classList.contains(CLASS_NAME_ACTIVE);
+    }
+
+    // Try to get the inner element (usually the .nav-link)
+    _getInnerElement(elem) {
+      return elem.matches(SELECTOR_INNER_ELEM) ? elem : SelectorEngine.findOne(SELECTOR_INNER_ELEM, elem);
+    }
+
+    // Try to get the outer element (usually the .nav-item)
+    _getOuterElement(elem) {
+      return elem.closest(SELECTOR_OUTER) || elem;
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Tab.getOrCreateInstance(this);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+    if (isDisabled(this)) {
+      return;
+    }
+    Tab.getOrCreateInstance(this).show();
+  });
+
+  /**
+   * Initialize on focus
+   */
+  EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
+    for (const element of SelectorEngine.find(SELECTOR_DATA_TOGGLE_ACTIVE)) {
+      Tab.getOrCreateInstance(element);
+    }
+  });
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Tab);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap toast.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME = 'toast';
+  const DATA_KEY = 'bs.toast';
+  const EVENT_KEY = `.${DATA_KEY}`;
+  const EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
+  const EVENT_MOUSEOUT = `mouseout${EVENT_KEY}`;
+  const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
+  const EVENT_FOCUSOUT = `focusout${EVENT_KEY}`;
+  const EVENT_HIDE = `hide${EVENT_KEY}`;
+  const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+  const EVENT_SHOW = `show${EVENT_KEY}`;
+  const EVENT_SHOWN = `shown${EVENT_KEY}`;
+  const CLASS_NAME_FADE = 'fade';
+  const CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
+  const CLASS_NAME_SHOW = 'show';
+  const CLASS_NAME_SHOWING = 'showing';
+  const DefaultType = {
+    animation: 'boolean',
+    autohide: 'boolean',
+    delay: 'number'
+  };
+  const Default = {
+    animation: true,
+    autohide: true,
+    delay: 5000
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Toast extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._timeout = null;
+      this._hasMouseInteraction = false;
+      this._hasKeyboardInteraction = false;
+      this._setListeners();
+    }
+
+    // Getters
+    static get Default() {
+      return Default;
+    }
+    static get DefaultType() {
+      return DefaultType;
+    }
+    static get NAME() {
+      return NAME;
+    }
+
+    // Public
+    show() {
+      const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+      this._clearTimeout();
+      if (this._config.animation) {
+        this._element.classList.add(CLASS_NAME_FADE);
+      }
+      const complete = () => {
+        this._element.classList.remove(CLASS_NAME_SHOWING);
+        EventHandler.trigger(this._element, EVENT_SHOWN);
+        this._maybeScheduleHide();
+      };
+      this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
+      reflow(this._element);
+      this._element.classList.add(CLASS_NAME_SHOW, CLASS_NAME_SHOWING);
+      this._queueCallback(complete, this._element, this._config.animation);
+    }
+    hide() {
+      if (!this.isShown()) {
+        return;
+      }
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      const complete = () => {
+        this._element.classList.add(CLASS_NAME_HIDE); // @deprecated
+        this._element.classList.remove(CLASS_NAME_SHOWING, CLASS_NAME_SHOW);
+        EventHandler.trigger(this._element, EVENT_HIDDEN);
+      };
+      this._element.classList.add(CLASS_NAME_SHOWING);
+      this._queueCallback(complete, this._element, this._config.animation);
+    }
+    dispose() {
+      this._clearTimeout();
+      if (this.isShown()) {
+        this._element.classList.remove(CLASS_NAME_SHOW);
+      }
+      super.dispose();
+    }
+    isShown() {
+      return this._element.classList.contains(CLASS_NAME_SHOW);
+    }
+
+    // Private
+
+    _maybeScheduleHide() {
+      if (!this._config.autohide) {
+        return;
+      }
+      if (this._hasMouseInteraction || this._hasKeyboardInteraction) {
+        return;
+      }
+      this._timeout = setTimeout(() => {
+        this.hide();
+      }, this._config.delay);
+    }
+    _onInteraction(event, isInteracting) {
+      switch (event.type) {
+        case 'mouseover':
+        case 'mouseout':
+          {
+            this._hasMouseInteraction = isInteracting;
+            break;
+          }
+        case 'focusin':
+        case 'focusout':
+          {
+            this._hasKeyboardInteraction = isInteracting;
+            break;
+          }
+      }
+      if (isInteracting) {
+        this._clearTimeout();
+        return;
+      }
+      const nextElement = event.relatedTarget;
+      if (this._element === nextElement || this._element.contains(nextElement)) {
+        return;
+      }
+      this._maybeScheduleHide();
+    }
+    _setListeners() {
+      EventHandler.on(this._element, EVENT_MOUSEOVER, event => this._onInteraction(event, true));
+      EventHandler.on(this._element, EVENT_MOUSEOUT, event => this._onInteraction(event, false));
+      EventHandler.on(this._element, EVENT_FOCUSIN, event => this._onInteraction(event, true));
+      EventHandler.on(this._element, EVENT_FOCUSOUT, event => this._onInteraction(event, false));
+    }
+    _clearTimeout() {
+      clearTimeout(this._timeout);
+      this._timeout = null;
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = Toast.getOrCreateInstance(this, config);
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError(`No method named "${config}"`);
+          }
+          data[config](this);
+        }
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  enableDismissTrigger(Toast);
+
+  /**
+   * jQuery
+   */
+
+  defineJQueryPlugin(Toast);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap index.umd.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  const index_umd = {
+    Alert,
+    Button,
+    Carousel,
+    Collapse,
+    Dropdown,
+    Modal,
+    Offcanvas,
+    Popover,
+    ScrollSpy,
+    Tab,
+    Toast,
+    Tooltip
+  };
+
+  return index_umd;
+
+}));
+//# sourceMappingURL=bootstrap.js.map
+
 
 /***/ })
 

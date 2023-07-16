@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
@@ -11,30 +10,24 @@ class Story extends Model
 	protected $casts = [
 		"media" => "array"
 	];
-
-    /**
+    /*
      * Accesors.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function media(): Attribute
+
+    public function getUpdatedAtAttribute($value)
     {
-        return Attribute::make(
-            // get:fn($value) => $value ? "/storage/" . $value : $value,
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    protected function createdAt(): Attribute
+    public function getCreatedAtAttribute($value)
     {
-        return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
+        return Carbon::parse($value)->format('d M Y');
     }
 
-    /**
-     * Relationships.
-     *
-     */
+	/*
+	* Relationships
+	*/
+	
     public function user()
     {
         return $this->belongsTo(User::class, "username", "username");
