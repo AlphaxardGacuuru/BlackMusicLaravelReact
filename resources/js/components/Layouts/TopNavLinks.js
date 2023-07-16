@@ -109,11 +109,12 @@ const TopNavLinks = (props) => {
 					<div style={{ maxHeight: "500px", overflowY: "scroll" }}>
 						{/* Get Notifications */}
 						{props.notifications.map((notification, key) => (
-							<Link key={key} href={notification.url}
-							
-									className="p-2 dropdown-item border-bottom text-dark border-dark text-wrap"
-									onClick={() => props.onDeleteNotifications(notification.id)}>
-									<small>{notification.message}</small>
+							<Link
+								key={key}
+								href={notification.url}
+								className="p-2 dropdown-item border-bottom text-dark border-dark text-wrap"
+								onClick={() => props.onDeleteNotifications(notification.id)}>
+								<small>{notification.message}</small>
 							</Link>
 						))}
 					</div>
@@ -130,7 +131,7 @@ const TopNavLinks = (props) => {
 			{/* Notification Dropdown End */}
 
 			{/* Avatar Dropdown */}
-			<div className="dropdown-center">
+			<div className="dropdown-center pb-2">
 				<a
 					href="#"
 					role="button"
@@ -140,8 +141,8 @@ const TopNavLinks = (props) => {
 					<Img
 						src={props.auth?.avatar}
 						className="rounded-circle"
-						width="25px"
-						height="25px"
+						width="20px"
+						height="20px"
 						alt="Avatar"
 					/>
 				</a>
@@ -157,8 +158,8 @@ const TopNavLinks = (props) => {
 					<Img
 						src={props.auth?.avatar}
 						imgClass="rounded-circle anti-hidden"
-						width="25px"
-						height="25px"
+						width="20px"
+						height="20px"
 						alt="Avatar"
 					/>
 				</span>

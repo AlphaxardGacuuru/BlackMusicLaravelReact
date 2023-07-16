@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "@/lib/axios";
 import EchoConfig from "@/lib/echo";
@@ -167,14 +167,12 @@ const ChatThread = props => {
                                     <div className="menu-content-area d-flex align-items-center">
                                         <div>
                                             <Link to={`/profile/${username}`}>
-                                                <a>
                                                     <Img
                                                         src={user.avatar}
                                                         imgClass="rounded-circle"
                                                         width="40px"
                                                         height="40px"
                                                     />
-                                                </a>
                                             </Link>
                                         </div>
                                     </div>

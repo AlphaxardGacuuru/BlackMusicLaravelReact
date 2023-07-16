@@ -104,8 +104,8 @@ const VideoMedia = props => {
                             <Img
                                 src={props.video.avatar}
                                 className="rounded-circle"
-                                width="40px"
-                                height="40px"
+                                width="30px"
+                                height="30px"
                                 alt="user"
                                 loading="lazy"
                             />

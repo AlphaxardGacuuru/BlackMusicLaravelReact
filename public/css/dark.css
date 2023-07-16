@@ -1385,7 +1385,7 @@ div.hidden-scroll span {
 .bottomNav {
 	position: fixed;
 	z-index: 995;
-	bottom: 0;
+	bottom: -1px;
 	left: 0;
 	width: 100%;
 	height: auto;
@@ -1648,8 +1648,8 @@ div.hidden-scroll span {
 }
 
 .story-thumbnail {
-	height: 240px;
-	width: 135px;
+	width: 144px;
+	height: 256px;
 	/* border-top-left-radius: 20px; */
 	/* border-top-right-radius: 20px; */
 	/* border-bottom-left-radius: 20px; */
