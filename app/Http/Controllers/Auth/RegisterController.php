@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Follows;
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -51,6 +48,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
             'username' => [
                 'required',
                 'string',
@@ -68,6 +66,18 @@ class RegisterController extends Controller
                 'max:10',
                 'unique:users',
             ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+            ],
+            'password' => [
+                'required',
+                'confirmed',
+                Rules\Password::defaults(),
+            ],
         ]);
     }
 
@@ -79,32 +89,48 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Notify User
-        Mail::to($data['email'])
-            ->send(new WelcomeMail($data['username']));
+        DB::transaction(function () use ($data) {
+            $user = User::create([
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['phone']),
+                'phone' => $data['phone'],
+                'avatar' => $data['avatar'],
+                'withdrawal' => '1000',
+            ]);
 
-        /* User should follow themselves */
-        $follow = new Follows;
-        $follow->followed = $data['username'];
-        $follow->username = $data['username'];
-        $follow->muted = "show";
-        $follow->save();
+            /* User should follow themselves */
+            $follow = new Follow;
+            $follow->followed = $data['username'];
+            $follow->username = $data['username'];
+            $follow->muted = ["posts" => false, "stories" => false];
+            $follow->save();
 
-        /* User should follow @blackmusic */
-        $follow = new Follows;
-        $follow->followed = '@blackmusic';
-        $follow->username = $data['username'];
-        $follow->muted = "show";
-        $follow->save();
+            /* User should follow @blackmusic */
+            $follow = new Follow;
+            $follow->followed = '@blackmusic';
+            $follow->username = $data['username'];
+            $follow->muted = ["posts" => false, "stories" => false];
+            $follow->save();
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'username' => $data['username'],
-            // 'remember_token' => $data['remember_token'],
-            'phone' => $data['phone'],
-            'pp' => $data['avatar'],
-            'withdrawal' => '1000',
-        ]);
+            event(new Registered($user));
+
+            Auth::login($user, $remember = true);
+        });
+
+        // return response()->noContent();
+
+        /*
+         * Create Token */
+        $user = User::where('email', $data['email'])->first();
+
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        return $user->createToken($data['device_name'])->plainTextToken;
     }
 }

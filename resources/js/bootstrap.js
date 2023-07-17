@@ -1,4 +1,4 @@
-window._ = require('lodash');
+window._ = require("lodash")
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -7,10 +7,10 @@ window._ = require('lodash');
  */
 
 try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
+	window.Popper = require("popper.js").default
+	window.$ = window.jQuery = require("jquery")
 
-    require('bootstrap');
+	require("bootstrap")
 } catch (e) {}
 
 /**
@@ -19,11 +19,26 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+// Function for checking local storage
+const getLocalStorage = (state) => {
+	if (typeof window !== "undefined" && localStorage.getItem(state)) {
+		return JSON.parse(localStorage.getItem(state))
+	} else {
+		return []
+	}
+}
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.Axios = require("axios")
 
-axios.defaults.withCredentials = true;
+window.Axios.defaults.baseURL = process.env.MIX_APP_URL
+
+window.Axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
+
+window.Axios.defaults.headers.common[
+	"Authorization"
+] = `Bearer ${getLocalStorage("sanctumToken")}`
+
+Axios.defaults.withCredentials = true
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -31,13 +46,29 @@ axios.defaults.withCredentials = true;
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+import Echo from "laravel-echo"
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require("pusher-js")
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+window.Echo = new Echo({
+	broadcaster: "pusher",
+	key: process.env.MIX_PUSHER_APP_KEY,
+	cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+	wsHost: window.location.hostname,
+	wsPort: 6001,
+	forceTLS: true,
+	disableStats: true,
+	authorizer: (channel, options) => {
+		return {
+			authorize: (socketId, callback) => {
+				Axios
+					.post("/api/broadcasting/auth", {
+						socket_id: socketId,
+						channel_name: channel.name,
+					})
+					.then((response) => callback(null, response.data))
+					.catch((error) => callback(error))
+			},
+		}
+	},
+})

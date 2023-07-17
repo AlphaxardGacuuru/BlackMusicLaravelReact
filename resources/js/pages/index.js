@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import axios from "@/lib/axios"
-import EchoConfig from "@/lib/echo"
+// import Axios from "axios"
+// import Echo from "Echo"
 
 import Img from "@/components/Core/Img"
 import LoadingMusicianMedia from "@/components/User/LoadingMusicianMedia"
@@ -31,9 +31,6 @@ export default function Home(props) {
 	const [deletedIds, setDeletedIds] = useState([])
 
 	useEffect(() => {
-		// Instantiate Echo
-		EchoConfig()
-
 		Echo.private(`post-created`).listen("PostedEvent", (e) => {
 			setNewPosts(e.post)
 		})
@@ -64,8 +61,7 @@ export default function Home(props) {
 		// Remove deleted post
 		setDeletedIds([...deletedIds, id])
 
-		axios
-			.delete(`/api/posts/${id}`)
+		Axios.delete(`/api/posts/${id}`)
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err, true))
 	}

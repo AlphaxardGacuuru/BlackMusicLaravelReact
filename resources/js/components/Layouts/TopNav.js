@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
-import axios from "@/lib/axios"
+// import Axios from "axios"
+// import Echo from "Echo"
 // import { useAuth } from "@/hooks/auth";
 
 import TopNavLinks from "./TopNavLinks"
@@ -16,7 +17,6 @@ import MenuSVG from "@/svgs/MenuSVG"
 import PersonSVG from "@/svgs/PersonSVG"
 import DiscoverSVG from "@/svgs/DiscoverSVG"
 import HomeSVG from "@/svgs/HomeSVG"
-import EchoConfig from "@/lib/echo"
 
 const TopNav = (props) => {
 	const location = useLocation()
@@ -35,8 +35,6 @@ const TopNav = (props) => {
 	const cartItems = vidCartItems + audCartItems
 
 	useEffect(() => {
-		EchoConfig()
-
 		// Listen to Notifications
 		Echo.private(
 			`App.Models.User.${props.auth.id}`
@@ -55,7 +53,7 @@ const TopNav = (props) => {
 	const logout = (e) => {
 		e.preventDefault()
 
-		axios.post(`/logout`).then((res) => {
+		Axios.post(`/logout`).then((res) => {
 			// Remove phone from localStorage
 			localStorage.clear()
 			props.setMessages(["Logged out"])
@@ -65,7 +63,7 @@ const TopNav = (props) => {
 	}
 
 	const onNotification = () => {
-		axios.put(`/api/notifications/update`).then((res) => {
+		Axios.put(`/api/notifications/update`).then((res) => {
 			// Update notifications
 			props.get("notifications", setNotifications)
 		})
@@ -75,7 +73,7 @@ const TopNav = (props) => {
 		// Clear the notifications array
 		setNotifications([])
 
-		axios.delete(`/api/notifications/${id}`).then((res) => {
+		Axios.delete(`/api/notifications/${id}`).then((res) => {
 			// Update Notifications
 			props.get("notifications", setNotifications)
 		})

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import axios from "@/lib/axios"
+// import Axios from "axios"
 
 import Img from "@/components/Core/Img"
 import Poll from "./Poll"
@@ -26,8 +26,7 @@ const PostMedia = (props) => {
 
 	// Function for voting in poll
 	const onPoll = (post, parameter) => {
-		axios
-			.post(`/api/polls`, { post: post, parameter: parameter })
+		Axios.post(`/api/polls`, { post: post, parameter: parameter })
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err, true))
 	}
@@ -37,8 +36,7 @@ const PostMedia = (props) => {
 		setHasLiked(!hasLiked)
 
 		// Add like to database
-		axios
-			.post(`/api/post-likes`, { post: post })
+		Axios.post(`/api/post-likes`, { post: post })
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update state
@@ -66,8 +64,7 @@ const PostMedia = (props) => {
 		// Change state
 		setHasMuted(!hasMuted)
 
-		axios
-			.post(`/api/posts/mute/${props.post.username}`, { _method: "PUT" })
+		Axios.post(`/api/posts/mute/${props.post.username}`, { _method: "PUT" })
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update state
@@ -82,8 +79,7 @@ const PostMedia = (props) => {
 		// Change state
 		setHasFollowed(!hasFollowed)
 
-		axios
-			.post(`/api/follows`, { musician: props.post.username })
+		Axios.post(`/api/follows`, { musician: props.post.username })
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update posts

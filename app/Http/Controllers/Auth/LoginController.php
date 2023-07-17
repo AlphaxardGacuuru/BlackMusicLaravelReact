@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -36,7 +33,7 @@ class LoginController extends Controller
     // Change identifier to phone
     public function username()
     {
-        return 'phone';
+        return 'username';
     }
 
     /**
@@ -65,57 +62,21 @@ class LoginController extends Controller
     {
         $user = Socialite::driver($website)->user();
 
-        if ($user->getName()) {
-            $name = $user->getName();
-        } else {
-            $name = " ";
-        }
-
-        if ($user->getEmail()) {
-            $email = $user->getEmail();
-        } else {
-            return redirect('/');
-        }
-
-        if ($user->getAvatar()) {
-            $avatar = $user->getAvatar();
-        } else {
-            $avatar = "profile-pics/male_avatar.png";
-        }
+        $name = $user->getName() ? $user->getName : " ";
+        $email = $user->getEmail();
+        $avatar = $user->getAvatar() ? $user->getAvatar() : "profile-pics/male-avatar.png";
+        // Remove forward slashes
+        $avatar = str_replace("/", " ", $avatar);
 
         // Get Database User
-        $dbUser = User::where('email', $user->getEmail());
+        $dbUser = User::where('email', $user->getEmail())->first();
 
         // Check if user exists
-        if ($dbUser->exists()) {
-            if ($dbUser->first()->username && $dbUser->first()->phone) {
+        if ($dbUser && $dbUser->username && $dbUser->phone) {
+            $token = $user->createToken("device_name")->plainTextToken;
 
-                Auth::login($dbUser->first(), true);
-
-                // Auth::loginUsingId($dbUser->first()->id, true);
-
-                // Auth::attempt([
-                //     'phone' => $dbUser->first()->phone,
-                //     'password' => $dbUser->first()->phone
-                // ], true);
-
-                return redirect()->intended();
-            } else {
-                $name = $user->getName();
-                $email = $user->getEmail();
-                $avatar = $user->getAvatar();
-                // Remove forward slashes
-                $avatar = str_replace("/", " ", $avatar);
-
-                return redirect('/#/register/' . $name . '/' . $email . '/' . $avatar);
-            }
+            return $token;
         } else {
-            $name = $user->getName();
-            $email = $user->getEmail();
-            $avatar = $user->getAvatar();
-            // Remove forward slashes
-            $avatar = str_replace("/", " ", $avatar);
-
             return redirect('/#/register/' . $name . '/' . $email . '/' . $avatar);
         }
     }
@@ -124,8 +85,21 @@ class LoginController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'username' => ['required', 'string', 'startsWith:@', 'min:2', 'max:15', 'regex:/^\S+$/'],
-            'phone' => ['required', 'string', 'startsWith:07', 'min:10', 'max:10'],
+            'username' => [
+                'required',
+                'string',
+                'startsWith:@',
+                'min:2',
+                'max:15',
+                'regex:/^\S+$/',
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'startsWith:07',
+                'min:10',
+                'max:10',
+            ],
         ]);
 
         $user = User::find($request->input('id'));
@@ -136,17 +110,18 @@ class LoginController extends Controller
         $user->phone = $request->input('phone');
         $user->save();
 
-        // Notify User
-        Mail::to($request->input('email'))
-            ->send(new WelcomeMail($request->input('username')));
+        $token = $user->createToken($request->device_name)->plainTextToken;
 
-        Auth::login($user, true);
+        return $token;
 
         return redirect('/');
     }
 
     public function logout(Request $request)
     {
-        return Auth::logout();
+        // Delete Current Access Token
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->noContent();
     }
 }

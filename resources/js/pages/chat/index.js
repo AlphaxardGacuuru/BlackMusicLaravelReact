@@ -4,7 +4,7 @@ import Img from "@/components/Core/Img"
 
 import ChatSVG from "@/svgs/ChatSVG"
 import ImageSVG from "@/svgs/ImageSVG"
-import EchoConfig from "@/lib/echo"
+// import Echo from "Echo"
 
 const Chat = (props) => {
 	const [blackMusic, setBlackMusic] = useState({})
@@ -12,9 +12,6 @@ const Chat = (props) => {
 
 	// Fetch Help Threads
 	useEffect(() => {
-		// Instantiate Echo
-		EchoConfig()
-
 		// Listen to New Chats
 		Echo.private(`chat-created`).listen("NewChatEvent", (e) => {
 			props.get("chats", setChatThreads, "chatThreads")
