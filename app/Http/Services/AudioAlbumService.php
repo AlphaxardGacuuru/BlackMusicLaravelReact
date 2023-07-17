@@ -112,13 +112,7 @@ class AudioAlbumService extends Service
     public function artistAudioAlbums($username)
     {
         $getArtistAudioAlbums = AudioAlbum::where("username", $username)->get();
-
-        $artistAudioAlbums = [];
-
-        foreach ($getArtistAudioAlbums as $audioAlbum) {
-            array_push($artistAudioAlbums, $this->structure($audioAlbum));
-        }
-
-        return $artistAudioAlbums;
+		
+		return AudioAlbumResource::collection($getArtistAudioAlbums);
     }
 }

@@ -30,7 +30,7 @@ const getLocalStorage = (state) => {
 
 window.Axios = require("axios")
 
-window.Axios.defaults.baseURL = process.env.MIX_APP_URL
+// window.Axios.defaults.baseURL = process.env.MIX_APP_URL
 
 window.Axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 

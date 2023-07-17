@@ -33,7 +33,7 @@ class LoginController extends Controller
     // Change identifier to phone
     public function username()
     {
-        return 'username';
+        return 'phone';
     }
 
     /**

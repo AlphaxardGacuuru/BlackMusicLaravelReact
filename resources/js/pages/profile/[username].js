@@ -15,16 +15,12 @@ import AudioMedia from "@/components/Audio/AudioMedia"
 const Profile = (props) => {
 	let { username } = useParams()
 
-	const [user, setUser] = useState(props.user)
-	const [artistVideoAlbums, setArtistVideoAlbums] = useState(
-		props.artistVideoAlbums
-	)
-	const [artistVideos, setVideos] = useState(props.artistVideos)
-	const [artistPosts, setArtistPosts] = useState(props.artistPosts)
-	const [artistAudioAlbums, setArtistAudioAlbums] = useState(
-		props.artistAudioAlbums
-	)
-	const [artistAudios, setAudios] = useState(props.artistAudios)
+	const [user, setUser] = useState({})
+	const [artistVideoAlbums, setArtistVideoAlbums] = useState([])
+	const [artistVideos, setVideos] = useState([])
+	const [artistPosts, setArtistPosts] = useState([])
+	const [artistAudioAlbums, setArtistAudioAlbums] = useState([])
+	const [artistAudios, setAudios] = useState([])
 
 	const [tabClass, setTabClass] = useState("videos")
 
@@ -253,8 +249,7 @@ const Profile = (props) => {
 					<center className="hidden">
 						<h2>Posts</h2>
 					</center>
-					{artistPosts.filter((post) => post.username == username).length ==
-						0 && (
+					{artistPosts.length == 0 && (
 						<center>
 							<h6 style={{ color: "grey" }}>
 								{username} does not have any posts
