@@ -247,143 +247,157 @@ const PostMedia = (props) => {
 					)}
 					{/* Polls End */}
 
-					{/* Post likes */}
-					{hasLiked ? (
-						<a
-							href="#"
-							style={{ color: "#fb3958" }}
-							onClick={(e) => {
-								e.preventDefault()
-								onPostLike(props.post.id)
-							}}>
-							<span style={{ color: "inherit", fontSize: "1.2em" }}>
-								<HeartFilledSVG />
-							</span>
-							<small
-								className="ms-1"
-								style={{ color: "inherit", fontWeight: "100" }}>
-								{props.post.likes}
-							</small>
-						</a>
-					) : (
-						<a
-							href="#"
-							style={{ color: "rgba(220, 220, 220, 1)" }}
-							onClick={(e) => {
-								e.preventDefault()
-								onPostLike(props.post.id)
-							}}>
-							<span style={{ color: "inherit", fontSize: "1.2em" }}>
-								<HeartSVG />
-							</span>
-							<small
-								className="ms-1"
-								style={{ color: "inherit", fontWeight: "100" }}>
-								{props.post.likes}
-							</small>
-						</a>
-					)}
-
-					{/* Post comments */}
-					<Link
-						to={"/post/" + props.post.id}
-						style={{ color: "rgba(220, 220, 220, 1)" }}>
-						<span className="ms-5" style={{ fontSize: "1.2em" }}>
-							<CommentSVG />
-						</span>
-						<small
-							className="ms-1"
-							style={{ color: "inherit", fontWeight: "100" }}>
-							{props.post.comments}
-						</small>
-					</Link>
-
-					{/* Share Post */}
-					<span
-						className="ms-5"
-						style={{
-							fontSize: "1.3em",
-							color: "rgba(220, 220, 220, 1)",
-							cursor: "pointer",
-						}}
-						onClick={() => onShare(props.post)}>
-						<ShareSVG />
-					</span>
-
-					{/* <!-- Default dropup button --> */}
-					<div className="dropup-center dropup hidden float-end">
-						<a
-							href="#"
-							role="button"
-							data-bs-toggle="dropdown"
-							aria-expanded="false">
-							<OptionsSVG />
-						</a>
-						<div
-							className="dropdown-menu dropdown-menu-right"
-							style={{
-								borderRadius: "0",
-								backgroundColor: "#232323",
-							}}>
-							{props.post.username != props.auth?.username ? (
-								props.post.username != "@blackmusic" && (
-									<span>
-										<a
-											href="#"
-											className="dropdown-item"
-											onClick={(e) => {
-												e.preventDefault()
-												onMute()
-											}}>
-											<h6>
-												{hasMuted
-													? `Unmute ${props.post.username}`
-													: `Mute ${props.post.username}`}
-											</h6>
-										</a>
-										<a
-											href="#"
-											className="dropdown-item"
-											onClick={(e) => {
-												e.preventDefault()
-												onFollow()
-											}}>
-											<h6>
-												{hasFollowed
-													? `Unfollow ${props.post.username}`
-													: `Follow ${props.post.username}`}
-											</h6>
-										</a>
+					<div className="d-flex">
+						<div>
+							{/* Post likes */}
+							{hasLiked ? (
+								<a
+									href="#"
+									style={{ color: "#fb3958" }}
+									onClick={(e) => {
+										e.preventDefault()
+										onPostLike(props.post.id)
+									}}>
+									<span style={{ color: "inherit", fontSize: "1.2em" }}>
+										<HeartFilledSVG />
 									</span>
-								)
+									<small
+										className="ms-1"
+										style={{ color: "inherit", fontWeight: "100" }}>
+										{props.post.likes}
+									</small>
+								</a>
 							) : (
-								<span>
-									<Link
-										to={`/post/edit/${props.post.id}`}
-										className="dropdown-item">
-										<h6>Edit post</h6>
-									</Link>
-									<a
-										href="#"
-										className="dropdown-item"
-										onClick={(e) => {
-											e.preventDefault()
-											props.onDeletePost(props.post.id)
-										}}>
-										<h6>Delete post</h6>
-									</a>
-								</span>
+								<a
+									href="#"
+									style={{ color: "rgba(220, 220, 220, 1)" }}
+									onClick={(e) => {
+										e.preventDefault()
+										onPostLike(props.post.id)
+									}}>
+									<span style={{ color: "inherit", fontSize: "1.2em" }}>
+										<HeartSVG />
+									</span>
+									<small
+										className="ms-1"
+										style={{ color: "inherit", fontWeight: "100" }}>
+										{props.post.likes}
+									</small>
+								</a>
 							)}
 						</div>
+						{/* Post likes End */}
+
+						{/* Post comments */}
+						<div>
+							<Link
+								to={"/post/" + props.post.id}
+								style={{ color: "rgba(220, 220, 220, 1)" }}>
+								<span className="ms-5" style={{ fontSize: "1.2em" }}>
+									<CommentSVG />
+								</span>
+								<small
+									className="ms-1"
+									style={{ color: "inherit", fontWeight: "100" }}>
+									{props.post.comments}
+								</small>
+							</Link>
+						</div>
+						{/* Post comments End */}
+
+						{/* Share Post */}
+						<div className="flex-grow-1">
+							<span
+								className="ms-5 position-relative"
+								style={{
+									fontSize: "1.5em",
+									color: "rgba(220, 220, 220, 1)",
+									cursor: "pointer",
+									top: -5
+								}}
+								onClick={() => onShare(props.post)}>
+								<ShareSVG />
+							</span>
+						</div>
+						{/* Share Post End */}
+
+						{/* Options */}
+						<div className="dropup-center dropup hidden mt-1">
+							<a
+								href="#"
+								role="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false">
+								<OptionsSVG />
+							</a>
+							<div
+								className="dropdown-menu dropdown-menu-right"
+								style={{
+									borderRadius: "0",
+									backgroundColor: "#232323",
+								}}>
+								{props.post.username != props.auth?.username ? (
+									props.post.username != "@blackmusic" && (
+										<span>
+											<a
+												href="#"
+												className="dropdown-item"
+												onClick={(e) => {
+													e.preventDefault()
+													onMute()
+												}}>
+												<h6>
+													{hasMuted
+														? `Unmute ${props.post.username}`
+														: `Mute ${props.post.username}`}
+												</h6>
+											</a>
+											<a
+												href="#"
+												className="dropdown-item"
+												onClick={(e) => {
+													e.preventDefault()
+													onFollow()
+												}}>
+												<h6>
+													{hasFollowed
+														? `Unfollow ${props.post.username}`
+														: `Follow ${props.post.username}`}
+												</h6>
+											</a>
+										</span>
+									)
+								) : (
+									<span>
+										<Link
+											to={`/post/edit/${props.post.id}`}
+											className="dropdown-item">
+											<h6>Edit post</h6>
+										</Link>
+										<a
+											href="#"
+											className="dropdown-item"
+											onClick={(e) => {
+												e.preventDefault()
+												props.onDeletePost(props.post.id)
+											}}>
+											<h6>Delete post</h6>
+										</a>
+									</span>
+								)}
+							</div>
+						</div>
+						{/* For small screens */}
+						<div className="anti-hidden mt-1">
+							<span
+								className="text-secondary"
+								onClick={() => setBottomMenu("menu-open")}>
+								<OptionsSVG />
+							</span>
+						</div>
+						{/* Options End */}
 					</div>
-					{/* For small screens */}
-					<div className="float-end anti-hidden">
-						<span
-							className="text-secondary"
-							onClick={() => setBottomMenu("menu-open")}>
-							<OptionsSVG />
-						</span>
-					</div>
+
 					{/* Edited */}
 					<small>
 						<b>
@@ -392,6 +406,7 @@ const PostMedia = (props) => {
 							</i>
 						</b>
 					</small>
+					{/* Edited End */}
 				</div>
 			</div>
 

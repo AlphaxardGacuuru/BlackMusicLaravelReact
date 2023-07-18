@@ -37,7 +37,7 @@ const Profile = (props) => {
 	 * Function for following Musicans */
 	const onFollow = () => {
 		// Add follow
-		Axios.post(`/api/follows`, { musician: user.username })
+		Axios.post(`/api/follows`, { musician: username })
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update User info
@@ -81,13 +81,16 @@ const Profile = (props) => {
 								left: "10px",
 							}}>
 							<Img
-								style={{
-									position: "absolute",
-									zIndex: "99",
-								}}
-								className="avatar hover-img"
 								src={user.avatar}
-								layout="fill"
+								className="avatar hover-img"
+								width="120px"
+								height="120px"
+								style={
+									{
+										// position: "absolute",
+										// zIndex: "99",
+									}
+								}
 							/>
 						</div>
 					</div>
@@ -119,7 +122,7 @@ const Profile = (props) => {
 								<Btn
 									btnClass="mysonar-btn btn-2 float-end"
 									btnStyle={{ lineHeight: "20px" }}
-									onClick={() => onFollow(props, props.user.username)}
+									onClick={() => onFollow(props, username)}
 									btnText={
 										<span>
 											Followed
@@ -160,13 +163,13 @@ const Profile = (props) => {
 						</h5>
 						<h6>{user.bio}</h6>
 					</div>
-					<div className="d-flex flex-row">
-						<div className="p-2">
+					<div className="d-flex">
+						<div className="py-2 pe-4">
 							<span>Following</span>
 							<br />
 							<span>{user.following}</span>
 						</div>
-						<div className="p-2">
+						<div className="py-2">
 							<span>Fans</span>
 							<br />
 							<span>{user.fans}</span>

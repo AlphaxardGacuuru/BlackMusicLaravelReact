@@ -150,8 +150,6 @@ function App() {
 
 	// Fetch data on page load
 	useEffect(() => {
-		// Import Js for Bootstrap
-		import("bootstrap/dist/js/bootstrap")
 
 		// Redirect if URL is not secure
 		var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)

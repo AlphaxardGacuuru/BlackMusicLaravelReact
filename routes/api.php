@@ -26,7 +26,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('auth', 'UserController@auth');
 });
 
-
 Route::resources([
     'admin' => 'AdminController',
     'audios' => 'AudioController',
@@ -38,7 +37,7 @@ Route::resources([
     'bought-videos' => 'BoughtVideoController',
     'cart-audios' => 'CartAudioController',
     'cart-videos' => 'CartVideoController',
-    'chat' => 'ChatController',
+    'chats' => 'ChatController',
     'decos' => 'DecoController',
     'follows' => 'FollowController',
     'karaokes' => 'KaraokeController',
@@ -58,7 +57,7 @@ Route::resources([
     'saved-karaokes' => 'SavedKaraokeController',
     'search' => 'SearchController',
     'song-payouts' => 'SongPayoutController',
-	'stories' => 'StoryController',
+    'stories' => 'StoryController',
     'users' => 'UserController',
     'videos' => 'VideoController',
     'video-likes' => 'VideoLikeController',
@@ -113,44 +112,43 @@ Route::put('stories/mute/{username}', 'StoryController@mute');
 
 // Filepond Controller
 Route::prefix('filepond')->group(function () {
-        // User
-        Route::post('avatar/{id}', 'FilepondController@updateAvatar');
+    // User
+    Route::post('avatar/{id}', 'FilepondController@updateAvatar');
 
-        // Video
-        Route::post('video-thumbnail', 'FilepondController@storeVideoThumbnail');
-        Route::post('video-thumbnail/{id}', 'FilepondController@updateVideoThumbnail');
-        Route::post('video', 'FilepondController@@storeVideo');
-        Route::post('video/{id}', 'FilepondController@updateVideo');
-        Route::delete('video-thumbnail/{id}', 'FilepondController@destoryVideoThumbnail');
-        Route::delete('video/{id}', 'FilepondController@destoryVideo');
+    // Video
+    Route::post('video-thumbnail', 'FilepondController@storeVideoThumbnail');
+    Route::post('video-thumbnail/{id}', 'FilepondController@updateVideoThumbnail');
+    Route::post('video', 'FilepondController@@storeVideo');
+    Route::post('video/{id}', 'FilepondController@updateVideo');
+    Route::delete('video-thumbnail/{id}', 'FilepondController@destoryVideoThumbnail');
+    Route::delete('video/{id}', 'FilepondController@destoryVideo');
 
-        // Audio
-        Route::post('audio-thumbnail', 'FilepondController@storeAudioThumbnail');
-        Route::post('audio-thumbnail/{id}', 'FilepondController@updateAudioThumbnail');
-        Route::post('audio', 'FilepondController@storeAudio');
-        Route::post('audio/{id}', 'FilepondController@updateAudio');
-        Route::delete('audio-thumbnail/{id}', 'FilepondController@destoryAudioThumbnail');
-        Route::delete('audio/{id}', 'FilepondController@destoryAudio');
+    // Audio
+    Route::post('audio-thumbnail', 'FilepondController@storeAudioThumbnail');
+    Route::post('audio-thumbnail/{id}', 'FilepondController@updateAudioThumbnail');
+    Route::post('audio', 'FilepondController@storeAudio');
+    Route::post('audio/{id}', 'FilepondController@updateAudio');
+    Route::delete('audio-thumbnail/{id}', 'FilepondController@destoryAudioThumbnail');
+    Route::delete('audio/{id}', 'FilepondController@destoryAudio');
 
-        // Post
-        Route::post('posts', 'FilepondController@storePostMedia');
-        Route::delete('posts/{id}', 'FilepondController@destroyPostMedia');
+    // Post
+    Route::post('posts', 'FilepondController@storePostMedia');
+    Route::delete('posts/{id}', 'FilepondController@destroyPostMedia');
 
-        // Karaoke
-        Route::post('karaokes', 'FilepondController@storeKaraoke');
-        Route::delete('karaokes/{id}', 'FilepondController@destroyKaraoke');
+    // Karaoke
+    Route::post('karaokes', 'FilepondController@storeKaraoke');
+    Route::delete('karaokes/{id}', 'FilepondController@destroyKaraoke');
 
-        // Chat
-        Route::post('chats', 'FilepondController@storeChatMedia');
-        Route::delete('chats/{id}', 'FilepondController@deleteChatMedia');
+    // Chat
+    Route::post('chats', 'FilepondController@storeChatMedia');
+    Route::delete('chats/{id}', 'FilepondController@deleteChatMedia');
 
-        // Story
-        Route::post('stories', 'FilepondController@storeStory');
-        Route::delete('stories/{id}', 'FilepondController@deleteStory');
+    // Story
+    Route::post('stories', 'FilepondController@storeStory');
+    Route::delete('stories/{id}', 'FilepondController@deleteStory');
 });
 
 // Kopokopo STK Push
 Route::post('stk-push', 'KopokopoController@stkPush');
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
-

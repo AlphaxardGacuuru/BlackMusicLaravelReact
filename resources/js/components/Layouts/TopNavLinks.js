@@ -132,6 +132,7 @@ const TopNavLinks = (props) => {
 
 			{/* Avatar Dropdown */}
 			<div className="dropdown-center pb-2">
+				{/* Avatar */}
 				<a
 					href="#"
 					role="button"
@@ -163,12 +164,13 @@ const TopNavLinks = (props) => {
 						alt="Avatar"
 					/>
 				</span>
+				{/* Avatar End */}
 				<div
 					style={{ backgroundColor: "#232323" }}
 					className="dropdown-menu rounded-0 m-0 p-0">
 					<Link
 						to={`/profile/${props.auth?.username}`}
-						className="p-3 dropdown-item border-bottom border-dark">
+						className="p-2 px-3 pt-3 dropdown-item border-bottom border-dark">
 						<div className="d-flex">
 							<div className="align-items-center">
 								<Img
@@ -187,7 +189,7 @@ const TopNavLinks = (props) => {
 					</Link>
 					<Link
 						to="/download-app"
-						className="p-3 dropdown-item border-bottom border-dark"
+						className="p-2 px-3 dropdown-item border-bottom border-dark"
 						style={{
 							display: props.downloadLink ? "block" : "none",
 						}}>
@@ -200,7 +202,7 @@ const TopNavLinks = (props) => {
 					</Link>
 					<Link
 						to="/video"
-						className="p-3 dropdown-item border-bottom border-dark">
+						className="p-2 px-3 dropdown-item border-bottom border-dark">
 						<h6>
 							<span className="me-2">
 								<StudioSVG />
@@ -210,7 +212,7 @@ const TopNavLinks = (props) => {
 					</Link>
 					<Link
 						to="/settings"
-						className="p-3 dropdown-item border-bottom border-dark">
+						className="p-2 px-3 dropdown-item border-bottom border-dark">
 						<h6>
 							<span className="me-2">
 								<SettingsSVG />
@@ -220,7 +222,7 @@ const TopNavLinks = (props) => {
 					</Link>
 					<Link
 						to="/privacy-policy"
-						className="p-3 dropdown-item border-bottom border-dark"
+						className="p-2 px-3 dropdown-item border-bottom border-dark"
 						title="Privacy Policy">
 						<h6>
 							<span className="me-2">
@@ -231,7 +233,7 @@ const TopNavLinks = (props) => {
 					</Link>
 					<Link
 						to="#"
-						className="p-3 dropdown-item"
+						className="p-2 px-3 dropdown-item"
 						onClick={(e) => props.logout(e)}>
 						<h6>
 							<span className="me-2">

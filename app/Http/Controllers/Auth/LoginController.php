@@ -120,8 +120,17 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         // Delete Current Access Token
-        $request->user()->currentAccessToken()->delete();
+        $hasLoggedOut = auth("sanctum")
+            ->user()
+            ->currentAccessToken()
+            ->delete();
 
-        return response()->noContent();
+        if ($hasLoggedOut) {
+            $message = "Logged Out";
+        } else {
+            $message = "Failed to log out";
+        }
+
+        return response(["message" => $message], 200);
     }
 }

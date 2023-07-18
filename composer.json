@@ -20,7 +20,8 @@
 		"laravel/socialite": "^5.2",
 		"laravel/tinker": "^2.5",
 		"laravel/ui": "^2.4",
-		"pbmedia/laravel-ffmpeg": "^7.5"
+		"pbmedia/laravel-ffmpeg": "^7.5",
+		"pusher/pusher-php-server": "*"
 	},
 	"require-dev": {
 		"facade/ignition": "^2.0",

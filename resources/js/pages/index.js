@@ -38,10 +38,10 @@ export default function Home(props) {
 		props.auth?.accountType == "musician" && setShowPostBtn(true)
 
 		// Fetch data
-		props.get("posts", setPosts, "posts")
-		props.get("videos", setVideos, "videos")
-		props.get("users", setUsers, "users")
-		props.get("stories", setStories, "stories")
+		props.get("posts", props.setPosts, "posts")
+		props.get("videos", props.setVideos, "videos")
+		props.get("users", props.setUsers, "users")
+		props.get("stories", props.setStories, "stories")
 	}, [props.auth])
 
 	/*
@@ -173,7 +173,9 @@ export default function Home(props) {
 						</div>
 						{/* Name End */}
 					</div>
+
 					<hr className="border border-light" />
+
 					{/* Profile Info */}
 					<div className="d-flex p-4" style={{ backgroundColor: "#232323" }}>
 						<div className="flex-fill">
@@ -192,12 +194,11 @@ export default function Home(props) {
 						</div>
 					</div>
 					{/* Profile Info End */}
-					{/* <!-- Profile info area End --> */}
 
-					<br />
+					<hr className="border border-light" />
 
 					{/* <!-- Musicians suggestions area --> */}
-					<div className="border-top border-dark">
+					<div className="">
 						<div className="p-2">
 							<h2>Musicians to follow</h2>
 						</div>

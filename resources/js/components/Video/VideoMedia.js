@@ -105,7 +105,7 @@ const VideoMedia = (props) => {
 						/>
 					</Link>
 				</div>
-				<div className="px-2">
+				<div>
 					<h6
 						className="m-0 pt-2 px-1"
 						style={{

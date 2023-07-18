@@ -19,7 +19,7 @@ import DiscoverSVG from "@/svgs/DiscoverSVG"
 import HomeSVG from "@/svgs/HomeSVG"
 
 const TopNav = (props) => {
-	const location = useLocation()
+	// const location = useLocation()
 	const router = useHistory()
 
 	// const { logout } = useAuth({ setLogin: props.setLogin })
@@ -56,7 +56,7 @@ const TopNav = (props) => {
 		Axios.post(`/logout`).then((res) => {
 			// Remove phone from localStorage
 			localStorage.clear()
-			props.setMessages(["Logged out"])
+			props.setMessages([res.data.message])
 			// Reload
 			location.reload()
 		})

@@ -1229,7 +1229,7 @@ div.scrollmenu a:hover {
 
 /*CSS for hovering edit button on profile pic*/
 .avatar-container {
-	background-color: white;
+	/* background-color: white; */
 	border-radius: 50%;
 	position: relative;
 	width: 150px;
