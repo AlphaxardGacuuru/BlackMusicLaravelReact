@@ -22,7 +22,8 @@ tbody,
 th,
 td,
 tr {
-	color: rgba(220, 220, 220, 1);
+	background-color: #000;
+	/* color: rgba(220, 220, 220, 1); */
 	/* border: 0px; */
 }
 

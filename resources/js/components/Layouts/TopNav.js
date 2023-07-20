@@ -327,7 +327,7 @@ const TopNav = (props) => {
 							</div>
 						</Link>
 						<Link
-							to="/download-app"
+							to="/download"
 							className="p-3 text-start"
 							style={{
 								display: props.downloadLink ? "inline" : "none",
@@ -364,7 +364,7 @@ const TopNav = (props) => {
 							</h6>
 						</Link>
 						<Link
-							to="/privacy-policy"
+							to="/privacy"
 							className="p-3 text-start"
 							onClick={() => setBottomMenu("")}
 							title="Privacy Policy">
