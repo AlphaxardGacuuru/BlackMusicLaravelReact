@@ -9,7 +9,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^7.2.5|^8.0",
-		"beyondcode/laravel-websockets": "^1.14",
+		"beyondcode/laravel-websockets": "^1.4.0",
 		"fideloper/proxy": "^4.4",
 		"fruitcake/laravel-cors": "^2.0",
 		"guzzlehttp/guzzle": "^6.3",
@@ -21,7 +21,8 @@
 		"laravel/tinker": "^2.5",
 		"laravel/ui": "^2.4",
 		"pbmedia/laravel-ffmpeg": "^7.5",
-		"pusher/pusher-php-server": "*"
+		"pusher/pusher-php-server": "~4.0",
+		"thecodingmachine/safe": "^2.5"
 	},
 	"require-dev": {
 		"facade/ignition": "^2.0",

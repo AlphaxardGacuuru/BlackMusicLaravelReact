@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import { HashRouter as Router, Route } from "react-router-dom"
 // import Axios from "axios"
 
+import MyRoute from "@/components/Core/MyRoute"
 import LoginPopUp from "@/components/Auth/LoginPopUp"
 import Messages from "@/components/Core/Messages"
 import TopNav from "@/components/Layouts/TopNav"
@@ -150,7 +151,6 @@ function App() {
 
 	// Fetch data on page load
 	useEffect(() => {
-
 		// Redirect if URL is not secure
 		var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
 
@@ -365,31 +365,22 @@ function App() {
 		<>
 			<Router>
 				<ScrollToTop />
+
 				{login && <LoginPopUp {...GLOBAL_STATE} />}
 
 				<TopNav {...GLOBAL_STATE} />
-				<Route
-					path="/download"
-					exact
-					render={(props) => <DownloadApp {...GLOBAL_STATE} />}
-				/>
 
-				<Route
-					path="/login"
-					exact
-					render={(props) => <Login {...GLOBAL_STATE} />}
-				/>
-				<Route
+				<MyRoute path="/download" page={<DownloadApp {...GLOBAL_STATE} />} />
+				<MyRoute path="/login" page={<Login {...GLOBAL_STATE} />} />
+				<MyRoute
 					path="/register/:name/:email/:avatar"
-					exact
-					render={(props) => <Register {...GLOBAL_STATE} />}
+					page={<Register {...GLOBAL_STATE} />}
 				/>
-				<Route
+				<MyRoute
 					path="/referral/:referer"
-					exact
-					render={(props) => <Referral {...GLOBAL_STATE} />}
+					page={<Referral {...GLOBAL_STATE} />}
 				/>
-				<Route path="/" exact render={(props) => <Index {...GLOBAL_STATE} />} />
+				<MyRoute path="/" page={<Index {...GLOBAL_STATE} />} />
 				<Route
 					path="/search"
 					exact
@@ -420,6 +411,8 @@ function App() {
 						</>
 					)}
 				/>
+
+				{/* Profile Routes */}
 				<Route
 					path="/profile/:username"
 					exact
@@ -440,6 +433,9 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Profile Routes End */}
+
+				{/* Post Routes */}
 				<Route
 					path="/post/create"
 					exact
@@ -470,34 +466,36 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Post Routes End */}
 
 				{/* Karaoke Routes */}
-				<Route
+				<MyRoute
 					path="/karaoke/charts"
-					exact
-					render={(props) => <KaraokeCharts {...GLOBAL_STATE} />}
+					page={<KaraokeCharts {...GLOBAL_STATE} />}
 				/>
-				<Route
+				<MyRoute
 					path="/karaoke/create/:audio"
-					exact
-					render={(props) => <KaraokeCreate {...GLOBAL_STATE} />}
+					page={<KaraokeCreate {...GLOBAL_STATE} />}
 				/>
-				<Route
+				<MyRoute path="/login" page={<Login {...GLOBAL_STATE} />} />
+				<MyRoute
+					path="/karaoke/create/:audio"
+					page={<KaraokeCreate {...GLOBAL_STATE} />}
+				/>
+				<MyRoute
 					path="/karaoke/show/:id"
-					exact
-					render={(props) => <KaraokeShow {...GLOBAL_STATE} />}
+					page={<KaraokeShow {...GLOBAL_STATE} />}
 				/>
+				{/* Karaoke Routes End */}
 
 				{/* Video Routes */}
-				<Route
+				<MyRoute
 					path="/video/charts"
-					exact
-					render={(props) => <VideoCharts {...GLOBAL_STATE} />}
+					page={<VideoCharts {...GLOBAL_STATE} />}
 				/>
-				<Route
+				<MyRoute
 					path="/video/show/:id/:referer?"
-					exact
-					render={(props) => <VideoShow {...GLOBAL_STATE} />}
+					page={<VideoShow {...GLOBAL_STATE} />}
 				/>
 				<Route
 					path="/video"
@@ -549,17 +547,16 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Video Routes End */}
 
 				{/* Audio Routes */}
-				<Route
+				<MyRoute
 					path="/audio/charts"
-					exact
-					render={(props) => <AudioCharts {...GLOBAL_STATE} />}
+					page={<AudioCharts {...GLOBAL_STATE} />}
 				/>
-				<Route
+				<MyRoute
 					path="/audio/show/:show/:referer?"
-					exact
-					render={(props) => <AudioShow {...GLOBAL_STATE} />}
+					page={<AudioShow {...GLOBAL_STATE} />}
 				/>
 				<Route
 					path="/audio"
@@ -611,6 +608,8 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Audio Routes End */}
+
 				<Route
 					path="/admin"
 					exact
@@ -632,6 +631,8 @@ function App() {
 					)}
 				/>
 				<Route path="/privacy-policy" exact render={() => <PrivacyPolicy />} />
+
+				{/* Chat Routes */}
 				<Route
 					path="/chat"
 					exact
@@ -653,7 +654,7 @@ function App() {
 					)}
 				/>
 				<Route
-					path="/chat/new"
+					path="/chat-new"
 					exact
 					render={(props) => (
 						<>
@@ -662,6 +663,9 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Chat Routes End */}
+
+				{/* Story Routes */}
 				<Route
 					path="/story/:id"
 					exact
@@ -682,6 +686,7 @@ function App() {
 						</>
 					)}
 				/>
+				{/* Story Routes */}
 
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />

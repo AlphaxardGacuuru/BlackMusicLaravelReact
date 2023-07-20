@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import Img from "@/components/Core/Img"
 
 export default function NewChat(props) {
+	console.log("chat/new")
+
 	const [search, setSearch] = useState("!@#$%^&")
 
 	const searchInput = useRef(null)
