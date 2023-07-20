@@ -13,7 +13,7 @@ const Register = (props) => {
 	const [phone, setPhone] = useState("07")
 	const [loading, setLoading] = useState(false)
 
-	var referer
+	var referrer
 	var page
 
 	// Remove all spaces from avatar
@@ -21,8 +21,8 @@ const Register = (props) => {
 
 	// Show error on space in username
 	useEffect(() => {
-		// Get referer
-		referer = sessionStorage.getItem("referer")
+		// Get referrer
+		referrer = sessionStorage.getItem("referrer")
 		page = sessionStorage.getItem("page")
 
 		username.indexOf(" ") > -1 &&
@@ -68,10 +68,10 @@ const Register = (props) => {
 		})
 			.then((res) => {
 				props.setLocalStorage("sanctumToken", res.data)
-				// Add referer if there's one
-				referer &&
+				// Add referrer if there's one
+				referrer &&
 					Axios.post(`${props.url}/api/referrals`, {
-						referer: referer,
+						referrer: referrer,
 						username: username,
 					})
 
@@ -79,7 +79,7 @@ const Register = (props) => {
 				// Redirect user
 				setTimeout(() => (location.href = page ? page : "/"), 500)
 				// Clear sessionStorage
-				sessionStorage.clear("referer")
+				sessionStorage.clear("referrer")
 				sessionStorage.clear("page")
 				// Removing loading
 				setLoading(false)

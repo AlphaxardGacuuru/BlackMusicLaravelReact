@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { HashRouter as Router, Route } from "react-router-dom"
 // import Axios from "axios"
 
-import MyRoute from "@/components/Core/MyRoute"
+import R from "@/components/Core/R"
 import LoginPopUp from "@/components/Auth/LoginPopUp"
 import Messages from "@/components/Core/Messages"
 import TopNav from "@/components/Layouts/TopNav"
@@ -17,7 +17,7 @@ import Admin from "@/pages/admin"
 import AudioCharts from "@/pages/audio/charts"
 import AudioShow from "@/pages/audio/[id]"
 import AudioCreate from "@/pages/audio/create"
-import Audios from "@/pages/audio/index"
+import Audio from "@/pages/audio/index"
 import AudioEdit from "@/pages/audio/edit/[id]"
 import AudioAlbumCreate from "@/pages/audio/album/create"
 import AudioAlbumEdit from "@/pages/audio/album/edit/[id]"
@@ -34,7 +34,7 @@ import PostCreate from "@/pages/post/create"
 import PostShow from "@/pages/post/[id]"
 import PostEdit from "@/pages/post/edit/[id]"
 
-import Profile from "@/pages/profile/[username]"
+import ProfileShow from "@/pages/profile/[username]"
 import ProfileEdit from "@/pages/profile/edit"
 
 import StoryShow from "@/pages/story/[id]"
@@ -42,7 +42,7 @@ import StoryCreate from "@/pages/story/create"
 
 import VideoCharts from "@/pages/video/charts"
 import VideoShow from "@/pages/video/[id]"
-import Videos from "@/pages/video/index"
+import Video from "@/pages/video/index"
 import VideoCreate from "@/pages/video/create"
 import VideoEdit from "@/pages/video/edit/[id]"
 import VideoAlbumCreate from "@/pages/video/album/create"
@@ -50,16 +50,16 @@ import VideoAlbumEdit from "@/pages/video/album/edit/[id]"
 
 import NotFound from "@/pages/404"
 import ServerError from "@/pages/500"
-import Cart from "@/pages/Cart"
-import DownloadApp from "@/pages/download-app"
+import Cart from "@/pages/cart"
+import Download from "@/pages/download"
 import Index from "@/pages/index"
-import Library from "@/pages/Library"
+import Library from "@/pages/library"
 import Login from "@/pages/login"
-import PrivacyPolicy from "@/pages/privacy-policy"
+import Privacy from "@/pages/privacy"
 import Register from "@/pages/register"
 import Referral from "@/pages/referral"
-import Search from "@/pages/Search"
-import Settings from "@/pages/Settings"
+import Search from "@/pages/search"
+import Settings from "@/pages/settings"
 
 import { random } from "lodash"
 
@@ -258,7 +258,7 @@ function App() {
 					// send sub.toJSON() to server
 					const parsed = JSON.parse(JSON.stringify(sub))
 
-					Axiosget("sanctum/csrf-cookie").then(() => {
+					Axios.get("sanctum/csrf-cookie").then(() => {
 						Axios.post(`/api/push`, {
 							endpoint: parsed.endpoint,
 							auth: parsed.keys.auth,
@@ -370,323 +370,69 @@ function App() {
 
 				<TopNav {...GLOBAL_STATE} />
 
-				<MyRoute path="/download" page={<DownloadApp {...GLOBAL_STATE} />} />
-				<MyRoute path="/login" page={<Login {...GLOBAL_STATE} />} />
-				<MyRoute
-					path="/register/:name/:email/:avatar"
-					page={<Register {...GLOBAL_STATE} />}
+				<R p="/login" c={<Login {...GLOBAL_STATE} />} />
+				<R
+					p="/register/:name/:email/:avatar"
+					c={<Register {...GLOBAL_STATE} />}
 				/>
-				<MyRoute
-					path="/referral/:referer"
-					page={<Referral {...GLOBAL_STATE} />}
-				/>
-				<MyRoute path="/" page={<Index {...GLOBAL_STATE} />} />
-				<Route
-					path="/search"
-					exact
-					render={(props) => (
-						<>
-							<Search {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/cart"
-					exact
-					render={(props) => (
-						<>
-							<Cart {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/library"
-					exact
-					render={(props) => (
-						<>
-							<Library {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
+				<R p="/referral/:referrer" c={<Referral {...GLOBAL_STATE} />} />
+				<R p="/" c={<Index {...GLOBAL_STATE} />} />
+				<R p="/search" c={<Search {...GLOBAL_STATE} />} />
+				<R p="/cart" c={<Cart {...GLOBAL_STATE} />} />
+				<R p="/library" c={<Library {...GLOBAL_STATE} />} />
 
-				{/* Profile Routes */}
-				<Route
-					path="/profile/:username"
-					exact
-					render={(props) => (
-						<>
-							<Profile {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/profile/edit"
-					exact
-					render={(props) => (
-						<>
-							<ProfileEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				{/* Profile Routes End */}
-
-				{/* Post Routes */}
-				<Route
-					path="/post/create"
-					exact
-					render={(props) => (
-						<>
-							<PostCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/post/show/:id"
-					exact
-					render={(props) => (
-						<>
-							<PostShow {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/post/edit/:id"
-					exact
-					render={(props) => (
-						<>
-							<PostEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				{/* Post Routes End */}
-
-				{/* Karaoke Routes */}
-				<MyRoute
-					path="/karaoke/charts"
-					page={<KaraokeCharts {...GLOBAL_STATE} />}
-				/>
-				<MyRoute
-					path="/karaoke/create/:audio"
-					page={<KaraokeCreate {...GLOBAL_STATE} />}
-				/>
-				<MyRoute path="/login" page={<Login {...GLOBAL_STATE} />} />
-				<MyRoute
-					path="/karaoke/create/:audio"
-					page={<KaraokeCreate {...GLOBAL_STATE} />}
-				/>
-				<MyRoute
-					path="/karaoke/show/:id"
-					page={<KaraokeShow {...GLOBAL_STATE} />}
-				/>
-				{/* Karaoke Routes End */}
-
-				{/* Video Routes */}
-				<MyRoute
-					path="/video/charts"
-					page={<VideoCharts {...GLOBAL_STATE} />}
-				/>
-				<MyRoute
-					path="/video/show/:id/:referer?"
-					page={<VideoShow {...GLOBAL_STATE} />}
-				/>
-				<Route
-					path="/video"
-					exact
-					render={(props) => (
-						<>
-							<Videos {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/video/create"
-					exact
-					render={(props) => (
-						<>
-							<VideoCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/video/edit/:id"
-					exact
-					render={(props) => (
-						<>
-							<VideoEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/video/album/create"
-					exact
-					render={(props) => (
-						<>
-							<VideoAlbumCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/video/album/edit/:id"
-					exact
-					render={(props) => (
-						<>
-							<VideoAlbumEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				{/* Video Routes End */}
+				<R p="/admin" c={<Admin {...GLOBAL_STATE} />} />
+				<R p="/download" c={<Download {...GLOBAL_STATE} />} />
+				<R p="/settings" c={<Settings {...GLOBAL_STATE} />} />
+				<R p="/privacy" c={<Privacy />} />
 
 				{/* Audio Routes */}
-				<MyRoute
-					path="/audio/charts"
-					page={<AudioCharts {...GLOBAL_STATE} />}
-				/>
-				<MyRoute
-					path="/audio/show/:show/:referer?"
-					page={<AudioShow {...GLOBAL_STATE} />}
-				/>
-				<Route
-					path="/audio"
-					exact
-					render={(props) => (
-						<>
-							<Audios {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/audio/create"
-					exact
-					render={(props) => (
-						<>
-							<AudioCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/audio/edit/:id"
-					exact
-					render={(props) => (
-						<>
-							<AudioEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/audio/album/create"
-					exact
-					render={(props) => (
-						<>
-							<AudioAlbumCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/audio/album/edit/:id"
-					exact
-					render={(props) => (
-						<>
-							<AudioAlbumEdit {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
+				<R p="/audio/charts" c={<AudioCharts {...GLOBAL_STATE} />} />
+				<R p="/audio/show/:id/:referrer?" c={<AudioShow {...GLOBAL_STATE} />} />
+				<R p="/audio" c={<Audio {...GLOBAL_STATE} />} />
+				<R p="/audio/create" c={<AudioCreate {...GLOBAL_STATE} />} />
+				<R p="/audio/edit/:id" c={<AudioEdit {...GLOBAL_STATE} />} />
+				<R p="/audio/album/create" c={<AudioAlbumCreate {...GLOBAL_STATE} />} />
+				<R p="/audio/album/edit/:id" c={<AudioAlbumEdit {...GLOBAL_STATE} />} />
 				{/* Audio Routes End */}
 
-				<Route
-					path="/admin"
-					exact
-					render={(props) => (
-						<>
-							<Admin {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/settings"
-					exact
-					render={(props) => (
-						<>
-							<Settings {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route path="/privacy-policy" exact render={() => <PrivacyPolicy />} />
-
 				{/* Chat Routes */}
-				<Route
-					path="/chat"
-					exact
-					render={(props) => (
-						<>
-							<Chat {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/chat/:username"
-					exact
-					render={(props) => (
-						<>
-							<ChatThread {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/chat-new"
-					exact
-					render={(props) => (
-						<>
-							<NewChat {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
+				<R p="/chat" c={<Chat {...GLOBAL_STATE} />} />
+				<R p="/chat/show/:username" c={<ChatThread {...GLOBAL_STATE} />} />
+				<R p="/chat/new" c={<NewChat {...GLOBAL_STATE} />} />
 				{/* Chat Routes End */}
 
+				{/* Karaoke Routes */}
+				<R p="/karaoke/charts" c={<KaraokeCharts {...GLOBAL_STATE} />} />
+				<R p="/karaoke/create/:audio" c={<KaraokeCreate {...GLOBAL_STATE} />} />
+				<R p="/karaoke/show/:id" c={<KaraokeShow {...GLOBAL_STATE} />} />
+				{/* Karaoke Routes End */}
+
+				{/* Post Routes */}
+				<R p="/post/create" c={<PostCreate {...GLOBAL_STATE} />} />
+				<R p="/post/show/:id" c={<PostShow {...GLOBAL_STATE} />} />
+				<R p="/post/edit/:id" c={<PostEdit {...GLOBAL_STATE} />} />
+				{/* Post Routes End */}
+
+				{/* Profile Routes */}
+				<R p="/profile/show/:username" c={<ProfileShow {...GLOBAL_STATE} />} />
+				<R p="/profile/edit" c={<ProfileEdit {...GLOBAL_STATE} />} />
+				{/* Profile Routes End */}
+
 				{/* Story Routes */}
-				<Route
-					path="/story/:id"
-					exact
-					render={(props) => (
-						<>
-							<Story {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				<Route
-					path="/story/create"
-					exact
-					render={(props) => (
-						<>
-							<StoryCreate {...GLOBAL_STATE} />
-							{showLoginPopUp}
-						</>
-					)}
-				/>
-				{/* Story Routes */}
+				<R p="/story/:id" c={<StoryShow {...GLOBAL_STATE} />} />
+				<R p="/story/create" c={<StoryCreate {...GLOBAL_STATE} />} />
+				{/* Story Routes End */}
+
+				{/* Video Routes */}
+				<R p="/video/charts" c={<VideoCharts {...GLOBAL_STATE} />} />
+				<R p="/video/show/:id/:referrer?" c={<VideoShow {...GLOBAL_STATE} />} />
+				<R p="/video" c={<Video {...GLOBAL_STATE} />} />
+				<R p="/video/create" c={<VideoCreate {...GLOBAL_STATE} />} />
+				<R p="/video/edit/:id" c={<VideoEdit {...GLOBAL_STATE} />} />
+				<R p="/video/album/create" c={<VideoAlbumCreate {...GLOBAL_STATE} />} />
+				<R p="/video/album/edit/:id" c={<VideoAlbumEdit {...GLOBAL_STATE} />} />
+				{/* Video Routes End */}
 
 				<Messages {...GLOBAL_STATE} />
 				<BottomNav {...GLOBAL_STATE} />

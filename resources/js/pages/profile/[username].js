@@ -12,7 +12,7 @@ import PostMedia from "@/components/Post/PostMedia"
 import VideoMedia from "@/components/Video/VideoMedia"
 import AudioMedia from "@/components/Audio/AudioMedia"
 
-const Profile = (props) => {
+const ProfileShow = (props) => {
 	let { username } = useParams()
 
 	const [user, setUser] = useState({})
@@ -320,4 +320,4 @@ const Profile = (props) => {
 	)
 }
 
-export default Profile
+export default ProfileShow

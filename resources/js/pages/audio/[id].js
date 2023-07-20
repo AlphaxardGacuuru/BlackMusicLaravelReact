@@ -24,7 +24,7 @@ import DecoSVG from "@/svgs/DecoSVG"
 import CheckSVG from "@/svgs/CheckSVG"
 
 const AudioShow = (props) => {
-	// let { referer } = router.query
+	// let { referrer } = router.query
 	const router = useHistory()
 
 	let { id } = useParams()
@@ -159,7 +159,7 @@ const AudioShow = (props) => {
 
 	// const onGuestBuy = () => {
 	// 	props.setLogin(true)
-	// 	sessionStorage.setItem("referer", referer)
+	// 	sessionStorage.setItem("referrer", referrer)
 	// 	sessionStorage.setItem("page", location.pathname)
 	// }
 
