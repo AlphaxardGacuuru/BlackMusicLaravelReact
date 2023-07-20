@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react";
+import React, { useEffect, useRef, useState, useParams } from "react";
+
 import Story from "@/components/Story/Story";
 
 const StoryShow = props => {

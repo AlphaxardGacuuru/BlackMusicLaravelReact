@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from "react"
+import React, { useState, Suspense, useEffect } from "react"
 // import Axios from "axios"
 // import Echo from "Echo"
 

@@ -1,5 +1,7 @@
-import BackSVG from "@/svgs/BackSVG";
+import React from "react"
 import { Link } from "react-router-dom";
+
+import BackSVG from "@/svgs/BackSVG";
 
 const Privacy = () => {
     return (

@@ -1,5 +1,4 @@
-import React from "react"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 // import Axios from "axios"
 import Btn from "@/components/Core/Btn"

@@ -1,3 +1,5 @@
+import React from "react";
+
 import SadEmojiSVG from "@/svgs/SadEmojiSVG";
 
 const ServerError = () => {
