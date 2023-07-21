@@ -303,7 +303,7 @@ function App() {
 	}
 
 	return (
-		<>
+		<React.Fragment>
 			<RouteList GLOBAL_STATE={GLOBAL_STATE} />
 			<AudioPlayer {...GLOBAL_STATE} />
 
@@ -311,7 +311,7 @@ function App() {
 			<button ref={btnAdd} style={{ display: "none" }}>
 				test
 			</button>
-		</>
+		</React.Fragment>
 	)
 }
 

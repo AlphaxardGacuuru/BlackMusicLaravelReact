@@ -479,7 +479,7 @@ const KaraokeCreate = (props) => {
 								</Ticker>
 							</div>
 							<div ref={spiningRecord} className="mx-2">
-								<Link href={`/audio-show/${props.karaokeAudio.audioId}`}>
+								<Link to={`/audio-show/${props.karaokeAudio.audioId}`}>
 									<a
 										onClick={() => {
 											props.setShow(props.karaokeAudio.audioId)

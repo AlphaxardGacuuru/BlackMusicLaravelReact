@@ -110,7 +110,7 @@ const Edit = (props) => {
 								stylePanelAspectRatio="1:1"
 								allowRevert={false}
 								server={{
-									url: `${props.baseUrl}/api/filepond`,
+									url: `${props.url}/api/filepond`,
 									headers: { "X-CSRF-TOKEN": token },
 									process: {
 										url: `/avatar/${props.auth?.id}`,

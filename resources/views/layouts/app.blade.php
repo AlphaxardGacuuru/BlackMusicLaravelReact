@@ -38,14 +38,8 @@
 		  href="manifest.webmanifest">
 
 	<!-- Styles -->
-	<link href="{{ asset('css/app.css') }}"
-		  rel="stylesheet">
-	{{--
-	<link href='{{ asset('
-		  css/custom.css')
-		  }}'
-		  rel='stylesheet'> --}}
-	<link href='{{ asset('css/dark.css')}}' rel='stylesheet'>
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href='{{ asset('css/dark.css') }}' rel='stylesheet'>
 
 	{{-- Script for conditionally showing css based on user prefered theme --}}
 	{{-- <script>

@@ -23,6 +23,11 @@ class Video extends Model
         return preg_match("/http/", $value) ? $value : "/storage/" . $value;
     }
 
+    public function getReleasedAttribute($value)
+    {
+        return Carbon::parse($value)->format('d M Y');
+    }
+
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d M Y');

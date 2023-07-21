@@ -146,77 +146,69 @@ const Videos = (props) => {
 				<div className="col-sm-4"></div>
 			</div>
 			<br />
+
+			{/* Stats */}
 			<div className="row" style={{ display: main }}>
 				<div className="col-sm-2">
-					<h1>Stats</h1>
-					<table className="table">
-						<tbody>
+					<table className="table table-dark table-hover">
+						<thead>
 							<tr>
-								<th>
-									<h5>Videos</h5>
+								<th colSpan="2" className="display-6">
+									Stats
 								</th>
-								<th>
-									<h5>{videos}</h5>
-								</th>
+							</tr>
+						</thead>
+						<tbody className="table-group-divider">
+							<tr>
+								<td>Videos</td>
+								<td>{videos}</td>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<th>
-									<h5>Video Albums</h5>
-								</th>
-								<th>
-									<h5>{videoAlbums}</h5>
-								</th>
+								<td>Video Albums</td>
+								<td>{videoAlbums}</td>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<td>
-									<h5>Downloads</h5>
-								</td>
-								<td>
-									<h5>{videoDownloads}</h5>
-								</td>
+								<td>Downloads</td>
+								<td>{videoDownloads}</td>
 							</tr>
 						</tbody>
 						<tbody>
 							<tr>
-								<td>
-									<h5>Revenue</h5>
-								</td>
-								<td>
-									<h5 className="text-success">
-										KES
-										<span className="ms-1 text-success">{videoRevenue}</span>
-									</h5>
+								<td>Revenue</td>
+								<td className="text-success">
+									KES
+									<span className="ms-1 text-success">{videoRevenue}</span>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				{/* Stats End */}
 
 				<div className="col-sm-9">
+					{/* Album */}
 					{artistVideoAlbums.map((videoAlbum, key) => (
 						<div key={key}>
 							<div className="d-flex">
 								<div className="p-2">
 									{videoAlbum.name != "Singles" ? (
-										<Link href={`/video/album/edit/${videoAlbum.id}`}>
-											<a>
-												<Img
-													src={videoAlbum.cover}
-													width="10em"
-													height="10em"
-													alt="album cover"
-												/>
-											</a>
+										<Link to={`/video/album/edit/${videoAlbum.id}`}>
+											<Img
+												src={videoAlbum.cover}
+												width="100em"
+												height="100em"
+												alt="album cover"
+											/>
 										</Link>
 									) : (
 										<Img
 											src={videoAlbum.cover}
-											width="10em"
-											height="10em"
+											width="100em"
+											height="100em"
 											alt="album cover"
 										/>
 									)}
@@ -228,60 +220,41 @@ const Videos = (props) => {
 								</div>
 							</div>
 							<br />
+							{/* Album End */}
+
+							{/* Videos table */}
 							<div className="table-responsive">
-								<table className="table table-borderless">
-									<tbody className="table-group-divider">
+								<table className="table table-dark table-hover">
+									<tbody>
 										<tr>
-											<th>
-												<h5>Thumbnail</h5>
-											</th>
-											<th>
-												<h5>Video Name</h5>
-											</th>
-											<th>
-												<h5>ft</h5>
-											</th>
-											<th>
-												<h5>Genre</h5>
-											</th>
-											<th>
-												<h5>Description</h5>
-											</th>
-											<th>
-												<h5>Downloads</h5>
-											</th>
-											<th>
-												<h5 className="text-success">Revenue</h5>
-											</th>
-											<th>
-												<h5>Likes</h5>
-											</th>
-											<th>
-												<h5>Released</h5>
-											</th>
-											<th>
-												<h5>Uploaded</h5>
-											</th>
-											<th>
-												<h5></h5>
-											</th>
+											<th>#</th>
+											<th>Thumbnail</th>
+											<th>Video Name</th>
+											<th>ft</th>
+											<th>Genre</th>
+											<th>Description</th>
+											<th>Downloads</th>
+											<th className="text-success">Revenue</th>
+											<th>Likes</th>
+											<th>Released</th>
+											<th>Uploaded</th>
+											<th></th>
 										</tr>
 									</tbody>
-									{artistVideos
-										.filter((video) => video.videoAlbumId == videoAlbum.id)
-										.map((albumItem, key) => (
-											<tbody key={key}>
-												<tr>
+									<tbody className="table-group-divider">
+										{artistVideos
+											.filter((video) => video.videoAlbumId == videoAlbum.id)
+											.map((albumItem, key) => (
+												<tr key={key}>
+													<td></td>
 													<td>
-														<Link href={`/video/edit/${albumItem.id}`}>
-															<a>
-																<Img
-																	src={albumItem.thumbnail}
-																	width="8em"
-																	height="4em"
-																	alt="thumbnail"
-																/>
-															</a>
+														<Link to={`/video/edit/${albumItem.id}`}>
+															<Img
+																src={albumItem.thumbnail}
+																width="160px"
+																height="90px"
+																alt="thumbnail"
+															/>
 														</Link>
 													</td>
 													<td>{albumItem.name}</td>
@@ -299,17 +272,18 @@ const Videos = (props) => {
 													<td>{albumItem.released}</td>
 													<td>{albumItem.createdAt}</td>
 													<td>
-														<Link href={`/video/edit/${albumItem.id}`}>
+														<Link to={`/video/edit/${albumItem.id}`}>
 															<button className="mysonar-btn white-btn">
 																edit
 															</button>
 														</Link>
 													</td>
 												</tr>
-											</tbody>
-										))}
+											))}
+									</tbody>
 								</table>
 							</div>
+							{/* Videos table End */}
 							<br />
 							<br />
 						</div>

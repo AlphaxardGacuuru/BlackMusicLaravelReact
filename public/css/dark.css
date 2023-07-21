@@ -17,20 +17,20 @@ h6 {
 	font-weight: 300;
 }
 
+table,
 thead,
 tbody,
 th,
 td,
 tr {
-	background-color: #000;
-	/* color: rgba(220, 220, 220, 1); */
+	font-weight: 300;
 	/* border: 0px; */
 }
 
-tr,
-th {
-	border-top: 1px solid #232323;
-}
+/* tr, */
+/* th { */
+	/* border-top: 1px solid #232323; */
+/* } */
 
 a,
 span,
@@ -557,6 +557,12 @@ a:focus {
 	font-style: italic;
 	color: rgba(220, 220, 220, 1);
 	background-color: transparent;
+}
+
+::placeholder {
+	color: red;
+	opacity: 1;
+	/* Firefox */
 }
 
 .contact-form .form-control:focus,
@@ -1230,7 +1236,7 @@ div.scrollmenu a:hover {
 
 /*CSS for hovering edit button on profile pic*/
 .avatar-container {
-	/* background-color: white; */
+	background-color: white;
 	border-radius: 50%;
 	position: relative;
 	width: 150px;
@@ -1386,7 +1392,7 @@ div.hidden-scroll span {
 .bottomNav {
 	position: fixed;
 	z-index: 995;
-	bottom: -1px;
+	bottom: 0;
 	left: 0;
 	width: 100%;
 	height: auto;
@@ -1649,8 +1655,8 @@ div.hidden-scroll span {
 }
 
 .story-thumbnail {
-	width: 144px;
-	height: 256px;
+	height: 240px;
+	width: 135px;
 	/* border-top-left-radius: 20px; */
 	/* border-top-right-radius: 20px; */
 	/* border-bottom-left-radius: 20px; */

@@ -279,7 +279,7 @@ const VideoCreate = (props) => {
 											stylePanelAspectRatio="16:9"
 											allowRevert={true}
 											server={{
-												url: `${props.baseUrl}/api/filepond`,
+												url: `${props.url}/api/filepond`,
 												process: {
 													url: "/video-thumbnail",
 													onload: (res) => setThumbnail(res),
@@ -309,7 +309,7 @@ const VideoCreate = (props) => {
 											maxFileSize="200000000"
 											allowRevert={true}
 											server={{
-												url: `${props.baseUrl}/api/filepond`,
+												url: `/api/filepond`,
 												process: {
 													url: "/video",
 													onload: (res) => setVideo(res),
@@ -345,30 +345,11 @@ const VideoCreate = (props) => {
 												</h6>
 												<h6>
 													Videos are sold at
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														KES 20
-													</b>
-													, Black Music takes
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														50% (KES 10)
-													</b>{" "}
+													<b style={{ color: "green" }}>KES 20</b>, Black Music
+													takes
+													<b style={{ color: "green" }}>50% (KES 10)</b>
 													and the musician takes
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														50% (KES 10)
-													</b>
-													.
+													<b style={{ color: "green" }}>50% (KES 10)</b>.
 												</h6>
 												<br />
 												<Btn btnText="upload video" loading={loadingBtn} />

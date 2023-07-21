@@ -276,7 +276,7 @@ const AudioCreate = (props) => {
 											stylePanelAspectRatio="16:9"
 											allowRevert={true}
 											server={{
-												url: `${props.baseUrl}/api/filepond`,
+												url: `${props.url}/api/filepond`,
 												process: {
 													url: "/audio-thumbnail",
 													onload: (res) => setThumbnail(res),
@@ -306,7 +306,7 @@ const AudioCreate = (props) => {
 											maxFileSize="200000000"
 											allowRevert={true}
 											server={{
-												url: `${props.baseUrl}/api/filepond`,
+												url: `${props.url}/api/filepond`,
 												process: {
 													url: "/audio",
 													onload: (res) => setAudio(res),

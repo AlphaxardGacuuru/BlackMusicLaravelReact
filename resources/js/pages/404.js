@@ -6,12 +6,12 @@ const NotFoundPage = () => {
     return (
         <div
             style={{
-                backgroundColor: "#232323",
+                // backgroundColor: "#232323",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                minHeight: "100vh"
+                minHeight: "60vh"
             }}
         >
             <center>

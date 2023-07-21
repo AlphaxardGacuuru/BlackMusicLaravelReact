@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 // import Axios from "axios"
 
 import Btn from "@/components/Core/Btn"
@@ -7,7 +7,7 @@ import Btn from "@/components/Core/Btn"
 const Register = (props) => {
 	const router = useHistory()
 
-	var { name, email, avatar } = useParams
+	var { name, email, avatar } = useParams()
 
 	const [username, setUsername] = useState("")
 	const [phone, setPhone] = useState("07")

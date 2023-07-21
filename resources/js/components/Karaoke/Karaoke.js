@@ -218,7 +218,7 @@ const Karaoke = (props) => {
 								className="avatar-thumbnail-xs mb-3"
 								style={{ borderRadius: "50%" }}>
 								<center>
-									<Link href={`/profile/${props.karaoke.username}`}>
+									<Link to={`/profile/${props.karaoke.username}`}>
 										<a>
 											<Img
 												src={props.karaoke.avatar}
@@ -316,7 +316,7 @@ const Karaoke = (props) => {
 							<div>
 								<center>
 									<div ref={spiningRecord} className="rotate-record">
-										<Link href={`/audio-show/${props.karaoke.audio_id}`}>
+										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
 											<a
 												onClick={() => {
 													props.setShow(props.karaoke.audio_id)
