@@ -31,7 +31,12 @@ class KaraokeAudioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $karaokeAudio] = $this->service->store($request);
+
+        return response([
+            "message" => $message,
+            "data" => $karaokeAudio,
+        ], 200);
     }
 
     /**

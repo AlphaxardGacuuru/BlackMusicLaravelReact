@@ -38,6 +38,10 @@ class UserResource extends JsonResource
             "hasBought1" => $this->hasBought1($username),
             "decos" => $this->decos->count(),
             "balance" => $this->balance(),
+            "videos" => $this->videos->count(),
+            "boughtVideos" => $this->boughtVideos->count(),
+            "audios" => $this->audios->count(),
+            "boughtAudios" => $this->boughtAudios->count(),
             "createdAt" => $this->created_at,
         ];
     }

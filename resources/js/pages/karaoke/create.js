@@ -564,14 +564,14 @@ const KaraokeCreate = (props) => {
 					{/* Karaoke Form */}
 					{showForm && (
 						<div
-							className="contact-form text-center call-to-action-content wow fadeInUp"
+							className="mycontact-form text-center call-to-action-content wow fadeInUp"
 							data-wow-delay="0.5s">
 							<div className="form-group">
 								<form onSubmit={onSubmit}>
 									<input
 										type="text"
 										name="description"
-										className="form-control"
+										className="my-form"
 										placeholder="Karaoke description"
 										required={true}
 										onChange={(e) => {

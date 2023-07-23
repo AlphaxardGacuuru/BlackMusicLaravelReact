@@ -95,10 +95,10 @@ const Search = (props) => {
 							<div className="row">
 								<div className="col-12 p-0">
 									{/* <!-- Contact form --> */}
-									<div className="contact-form">
+									<div className="mycontact-form">
 										<input
 											ref={props.searchInput}
-											className="form-control"
+											className="my-form"
 											placeholder="Search songs and artists"
 											style={{
 												color: "white",

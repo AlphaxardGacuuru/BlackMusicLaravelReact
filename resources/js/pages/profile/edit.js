@@ -93,7 +93,7 @@ const Edit = (props) => {
 			<div className="col-sm-4">
 				{/* {{-- Profile Pic Form --}} */}
 				<br />
-				<div className="contact-form form-group">
+				<div className="mycontact-form form-group">
 					<center>
 						<h1>EDIT PROFILE</h1>
 						<br />
@@ -133,7 +133,7 @@ const Edit = (props) => {
 							<input
 								type="text"
 								name="name"
-								className="form-control"
+								className="my-form"
 								placeholder={props.auth?.name}
 								value={name}
 								onChange={(e) => setName(e.target.value)}
@@ -148,7 +148,7 @@ const Edit = (props) => {
 							<input
 								type="text"
 								name="email"
-								className="form-control"
+								className="my-form"
 								placeholder={props.auth?.email}
 							/>
 							{/* Email End */}
@@ -161,7 +161,7 @@ const Edit = (props) => {
 							<input
 								type="text"
 								name="phone"
-								className="form-control"
+								className="my-form"
 								placeholder={props.auth?.phone}
 								value={phone}
 								onChange={(e) => setPhone(e.target.value)}
@@ -176,7 +176,7 @@ const Edit = (props) => {
 							<input
 								type="text"
 								name="bio"
-								className="form-control"
+								className="my-form"
 								placeholder={props.auth?.bio}
 								value={bio}
 								onChange={(e) => setBio(e.target.value)}
@@ -200,7 +200,7 @@ const Edit = (props) => {
 							<input
 								type="number"
 								name="withdrawal"
-								className="form-control"
+								className="my-form"
 								placeholder={`KES ${props.auth?.withdrawal}`}
 								value={withdrawal}
 								onChange={(e) => setWithdrawal(e.target.value)}

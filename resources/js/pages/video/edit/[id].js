@@ -149,7 +149,7 @@ const VideoEdit = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div
-								className="contact-form text-center call-to-action-content wow fadeInUp"
+								className="mycontact-form text-center call-to-action-content wow fadeInUp"
 								data-wow-delay="0.5s">
 								<h2>Edit Video</h2>
 								<div className="d-flex text-start">
@@ -175,7 +175,7 @@ const VideoEdit = (props) => {
 										<input
 											type="text"
 											name="name"
-											className="form-control"
+											className="my-form"
 											placeholder={props.video?.name}
 											onChange={(e) => setName(e.target.value)}
 										/>
@@ -189,7 +189,7 @@ const VideoEdit = (props) => {
 										<input
 											type="text"
 											name="ft"
-											className="form-control"
+											className="my-form"
 											placeholder={props.video?.ft}
 											onChange={(e) => setFt(e.target.value)}
 										/>
@@ -198,7 +198,7 @@ const VideoEdit = (props) => {
 
 										<select
 											name="album"
-											className="form-control"
+											className="my-form"
 											onChange={(e) => setVideoAlbumId(e.target.value)}>
 											{artistVideoAlbums.map((videoAlbum, key) => (
 												<option
@@ -219,7 +219,7 @@ const VideoEdit = (props) => {
 
 										<select
 											name="genre"
-											className="form-control"
+											className="my-form"
 											placeholder="Select video genre"
 											onChange={(e) => {
 												setGenre(e.target.value)
@@ -242,7 +242,7 @@ const VideoEdit = (props) => {
 										<input
 											type="date"
 											name="released"
-											className="form-control"
+											className="my-form"
 											style={{ colorScheme: "dark" }}
 											placeholder={props.video?.released}
 											onChange={(e) => setReleased(e.target.value)}
@@ -253,7 +253,7 @@ const VideoEdit = (props) => {
 										<textarea
 											type="text"
 											name="description"
-											className="form-control"
+											className="my-form"
 											placeholder={props.video?.description}
 											cols="30"
 											rows="10"

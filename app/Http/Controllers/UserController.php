@@ -10,8 +10,8 @@ class UserController extends Controller
 {
     public function __construct(protected UserService $service)
     {
-        //
-    }
+		// 
+	}
 
     /**
      * Display a listing of the resource.

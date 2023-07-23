@@ -146,7 +146,7 @@ const AudioEdit = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div
-								className="contact-form text-center call-to-action-content wow fadeInUp"
+								className="mycontact-form text-center call-to-action-content wow fadeInUp"
 								data-wow-delay="0.5s">
 								<h2>Edit Audio</h2>
 								{props.audio && (
@@ -176,7 +176,7 @@ const AudioEdit = (props) => {
 										<input
 											type="text"
 											name="name"
-											className="form-control"
+											className="my-form"
 											placeholder={props.audio?.name}
 											onChange={(e) => setName(e.target.value)}
 										/>
@@ -190,7 +190,7 @@ const AudioEdit = (props) => {
 										<input
 											type="text"
 											name="ft"
-											className="form-control"
+											className="my-form"
 											placeholder={props.audio?.ft}
 											onChange={(e) => setFt(e.target.value)}
 										/>
@@ -199,7 +199,7 @@ const AudioEdit = (props) => {
 
 										<select
 											name="album"
-											className="form-control"
+											className="my-form"
 											onChange={(e) => setAudioAlbumId(e.target.value)}>
 											{artistAudioAlbums.map((audioAlbum, key) => (
 												<option
@@ -220,7 +220,7 @@ const AudioEdit = (props) => {
 
 										<select
 											name="genre"
-											className="form-control"
+											className="my-form"
 											placeholder="Select audio genre"
 											onChange={(e) => {
 												setGenre(e.target.value)
@@ -243,7 +243,7 @@ const AudioEdit = (props) => {
 										<input
 											type="date"
 											name="released"
-											className="form-control"
+											className="my-form"
 											style={{ colorScheme: "dark" }}
 											placeholder={props.audio?.released}
 											onChange={(e) => setReleased(e.target.value)}
@@ -254,7 +254,7 @@ const AudioEdit = (props) => {
 										<textarea
 											type="text"
 											name="description"
-											className="form-control"
+											className="my-form"
 											placeholder={props.audio?.description}
 											cols="30"
 											rows="10"

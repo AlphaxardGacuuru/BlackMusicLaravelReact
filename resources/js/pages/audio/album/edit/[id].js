@@ -76,7 +76,7 @@ const AudioAlbumEdit = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div
-								className="contact-form text-center call-to-action-content wow fadeInUp"
+								className="mycontact-form text-center call-to-action-content wow fadeInUp"
 								data-wow-delay="0.5s">
 								<h2>Edit Audio Album</h2>
 								<div className="d-flex text-start">
@@ -99,7 +99,7 @@ const AudioAlbumEdit = (props) => {
 										<input
 											type="text"
 											name="name"
-											className="form-control"
+											className="my-form"
 											placeholder="Name"
 											onChange={(e) => {
 												setName(e.target.value)
@@ -112,7 +112,7 @@ const AudioAlbumEdit = (props) => {
 										<input
 											type="date"
 											name="released"
-											className="form-control"
+											className="my-form"
 											placeholder="Released"
 											onChange={(e) => {
 												setReleased(e.target.value)

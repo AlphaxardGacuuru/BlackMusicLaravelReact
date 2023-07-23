@@ -161,7 +161,7 @@ const SocialMediaInput = (props) => {
 	return (
 		<form
 			onSubmit={onSubmit}
-			className="contact-form bg-white"
+			className="mycontact-form bg-white"
 			autoComplete="off">
 			<center style={{ backgroundColor: "#232323" }}>
 				<div
@@ -182,7 +182,7 @@ const SocialMediaInput = (props) => {
 					<div className="flex-grow-1">
 						<textarea
 							name="post-text"
-							className="form-control m-0 p-2"
+							className="my-form m-0 p-2"
 							style={{
 								border: "none",
 								outline: "none",
@@ -418,7 +418,7 @@ const SocialMediaInput = (props) => {
 						{/* Poll inputs */}
 						<input
 							type="text"
-							className="form-control border-dark"
+							className="my-form border-dark"
 							placeholder="Parameter 1"
 							onChange={(e) => {
 								setDisplay2("inline")
@@ -428,7 +428,7 @@ const SocialMediaInput = (props) => {
 						<input
 							type="text"
 							style={{ display: display2 }}
-							className="form-control border-dark"
+							className="my-form border-dark"
 							placeholder="Parameter 2"
 							onChange={(e) => {
 								setDisplay3("inline")
@@ -438,7 +438,7 @@ const SocialMediaInput = (props) => {
 						<input
 							type="text"
 							style={{ display: display3 }}
-							className="form-control border-dark"
+							className="my-form border-dark"
 							placeholder="Parameter 3"
 							onChange={(e) => {
 								setDisplay4("inline")
@@ -448,7 +448,7 @@ const SocialMediaInput = (props) => {
 						<input
 							type="text"
 							style={{ display: display4 }}
-							className="form-control border-dark"
+							className="my-form border-dark"
 							placeholder="Parameter 4"
 							onChange={(e) => {
 								setDisplay5("inline")
@@ -458,7 +458,7 @@ const SocialMediaInput = (props) => {
 						<input
 							type="text"
 							style={{ display: display5 }}
-							className="form-control border-dark"
+							className="my-form border-dark"
 							placeholder="Parameter 5"
 							onChange={(e) => setPara5(e.target.value)}
 						/>

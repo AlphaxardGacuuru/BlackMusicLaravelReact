@@ -118,10 +118,10 @@ const TopNav = (props) => {
 										<Link to="/">Black Music</Link>
 									</div>
 									{/* <-- Search Form --> */}
-									<div className="contact-form hidden">
+									<div className="mycontact-form hidden">
 										<input
 											name="search"
-											className="form-control"
+											className="my-form"
 											placeholder="Search songs and artists"
 											style={{
 												textColor: "white",

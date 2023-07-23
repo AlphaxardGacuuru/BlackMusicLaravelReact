@@ -29,10 +29,10 @@ export default function NewChat(props) {
 						<div className="row">
 							<div className="col-12 p-0">
 								{/* <!-- Contact form --> */}
-								<div className="contact-form">
+								<div className="mycontact-form">
 									<input
 										ref={searchInput}
-										className="form-control"
+										className="my-form"
 										placeholder="Select user"
 										style={{ width: "100%" }}
 										onChange={(e) => {

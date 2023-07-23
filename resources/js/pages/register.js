@@ -126,7 +126,7 @@ const Register = (props) => {
 								Register
 							</h2>
 
-							<div className="card-body contact-form">
+							<div className="card-body mycontact-form">
 								<form method="POST" action="" onSubmit={onSubmit}>
 									<div className="form-group row">
 										<label
@@ -141,7 +141,7 @@ const Register = (props) => {
 											<input
 												id="username"
 												type="text"
-												className="form-control"
+												className="my-form"
 												style={{
 													color: "#FFD700",
 													borderColor: "#FFD700",
@@ -168,7 +168,7 @@ const Register = (props) => {
 											<input
 												id="phone"
 												type="text"
-												className="form-control"
+												className="my-form"
 												style={{
 													color: "#FFD700",
 													borderColor: "#FFD700",

@@ -124,7 +124,7 @@ const VideoCreate = (props) => {
 					<div className="row">
 						<div className="col-12">
 							<div
-								className="contact-form text-center call-to-action-content wow fadeInUp"
+								className="mycontact-form text-center call-to-action-content wow fadeInUp"
 								data-wow-delay="0.5s">
 								<h2>Upload your video</h2>
 								<h5>It's free</h5>
@@ -134,7 +134,7 @@ const VideoCreate = (props) => {
 										<input
 											type="text"
 											name="name"
-											className="form-control"
+											className="my-form"
 											placeholder="Video name"
 											required={true}
 											onChange={(e) => setName(e.target.value)}
@@ -149,7 +149,7 @@ const VideoCreate = (props) => {
 										<input
 											type="text"
 											name="ft"
-											className="form-control"
+											className="my-form"
 											placeholder="Featuring Artist e.g. @JohnDoe"
 											onChange={(e) => setFt(e.target.value)}
 										/>
@@ -158,17 +158,14 @@ const VideoCreate = (props) => {
 
 										<select
 											name="album"
-											className="form-control"
+											className="my-form"
 											required={true}
 											onChange={(e) => setVideoAlbumId(e.target.value)}>
 											<option defaultValue value="">
 												Select Album
 											</option>
 											{artistVideoAlbums.map((videoAlbum, key) => (
-												<option
-													key={key}
-													value={videoAlbum.id}
-													className="bg-dark text-light">
+												<option key={key} value={videoAlbum.id}>
 													{videoAlbum.name}
 												</option>
 											))}
@@ -178,66 +175,32 @@ const VideoCreate = (props) => {
 
 										<select
 											name="genre"
-											className="form-control"
+											className="my-form"
 											placeholder="Select video genre"
 											required={true}
 											onChange={(e) => setGenre(e.target.value)}>
 											<option defaultValue value="">
 												Select Genre
 											</option>
-											<option value="Afro" className="bg-dark text-light">
+											<option value="Afro" text-light>
 												Afro
 											</option>
-											<option value="Benga" className="bg-dark text-light">
-												Benga
-											</option>
-											<option value="Blues" className="bg-dark text-light">
-												Blues
-											</option>
-											<option value="Boomba" className="bg-dark text-light">
-												Boomba
-											</option>
-											<option value="Country" className="bg-dark text-light">
-												Country
-											</option>
-											<option value="Cultural" className="bg-dark text-light">
-												Cultural
-											</option>
-											<option value="EDM" className="bg-dark text-light">
-												EDM
-											</option>
-											<option value="Genge" className="bg-dark text-light">
-												Genge
-											</option>
-											<option value="Gospel" className="bg-dark text-light">
-												Gospel
-											</option>
-											<option value="Hiphop" className="bg-dark text-light">
-												Hiphop
-											</option>
-											<option value="Jazz" className="bg-dark text-light">
-												Jazz
-											</option>
-											<option
-												value="Music of Kenya"
-												className="bg-dark text-light">
-												Music of Kenya
-											</option>
-											<option value="Pop" className="bg-dark text-light">
-												Pop
-											</option>
-											<option value="R&B" className="bg-dark text-light">
-												R&B
-											</option>
-											<option value="Rock" className="bg-dark text-light">
-												Rock
-											</option>
-											<option value="Sesube" className="bg-dark text-light">
-												Sesube
-											</option>
-											<option value="Taarab" className="bg-dark text-light">
-												Taarab
-											</option>
+											<option value="Benga">Benga</option>
+											<option value="Blues">Blues</option>
+											<option value="Boomba">Boomba</option>
+											<option value="Country">Country</option>
+											<option value="Cultural">Cultural</option>
+											<option value="EDM">EDM</option>
+											<option value="Genge">Genge</option>
+											<option value="Gospel">Gospel</option>
+											<option value="Hiphop">Hiphop</option>
+											<option value="Jazz">Jazz</option>
+											<option value="Music of Kenya">Music of Kenya</option>
+											<option value="Pop">Pop</option>
+											<option value="R&B">R&B</option>
+											<option value="Rock">Rock</option>
+											<option value="Sesube">Sesube</option>
+											<option value="Taarab">Taarab</option>
 										</select>
 										<br />
 										<br />
@@ -247,7 +210,7 @@ const VideoCreate = (props) => {
 										<input
 											type="date"
 											name="released"
-											className="form-control"
+											className="my-form"
 											placeholder="Released"
 											required={true}
 											onChange={(e) => setReleased(e.target.value)}
@@ -258,7 +221,7 @@ const VideoCreate = (props) => {
 										<textarea
 											type="text"
 											name="description"
-											className="form-control"
+											className="my-form"
 											placeholder="Say something about your song"
 											cols="30"
 											rows="10"

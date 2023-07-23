@@ -96,12 +96,12 @@ const LoginPopUp = (props) => {
 					<div className="p-2">
 						{phoneLogin ? (
 							<center>
-								<div className="contact-form">
+								<div className="mycontact-form">
 									<form method="POST" action="" onSubmit={onSubmit}>
 										<input
 											id="phone"
 											type="text"
-											className="form-control"
+											className="my-form"
 											name="phone"
 											value={phone}
 											onChange={(e) => setPhone(e.target.value)}

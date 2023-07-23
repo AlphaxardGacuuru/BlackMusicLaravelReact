@@ -28,6 +28,19 @@ class KaraokeAudioService extends Service
     {
         $getKaraokeAudio = KaraokeAudio::find($id);
 
-		return KaraokeAudioResource::collection($getKaraokeAudio);
+        return KaraokeAudioResource::collection($getKaraokeAudio);
+    }
+
+    /*
+     * Store Karaoke Audio
+     */
+    public function store($request)
+    {
+        $karaokeAudio = new KaraokeAudio;
+        $karaokeAudio->audio_id = $request->input("audio_id");
+        $karaokeAudio->username = $this->username;
+        $saved = $karaokeAudio->save();
+
+        return [$saved, "Audio saved", $karaokeAudio];
     }
 }

@@ -27,7 +27,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::resources([
-    'admin' => 'AdminController',
     'audios' => 'AudioController',
     'audio-likes' => 'AudioLikeController',
     'audio-comments' => 'AudioCommentController',
@@ -152,3 +151,15 @@ Route::prefix('filepond')->group(function () {
 Route::post('stk-push', 'KopokopoController@stkPush');
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
+/*
+ * Admin
+ */
+Route::prefix('admin')->group(function () {
+    Route::get('admin', 'AdminController@admin');
+    Route::get('users', 'AdminController@users');
+    Route::get('videos', 'AdminController@videos');
+    Route::get('audios', 'AdminController@audios');
+    Route::get('kopokopo-recipients', 'AdminController@kopokopoRecipients');
+    Route::get('song-payouts', 'AdminController@songPayouts');
+});

@@ -112,7 +112,7 @@ const Videos = (props) => {
 			</center>
 			{/* Become musician button End */}
 
-			{/* <!-- ***** Call to Action Area Start ***** - */}
+			{/* Navigation */}
 			<div className="backEnd-content">
 				<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Studio</h2>
 			</div>
@@ -145,6 +145,8 @@ const Videos = (props) => {
 				</div>
 				<div className="col-sm-4"></div>
 			</div>
+			{/* Navigation End */}
+
 			<br />
 
 			{/* Stats */}
@@ -153,7 +155,7 @@ const Videos = (props) => {
 					<table className="table table-dark table-hover">
 						<thead>
 							<tr>
-								<th colSpan="2" className="display-6">
+								<th colSpan="2" className="display-">
 									Stats
 								</th>
 							</tr>
