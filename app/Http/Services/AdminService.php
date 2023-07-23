@@ -20,20 +20,21 @@ class AdminService extends Service
      */
     public function admin()
     {
-        $totalUsers = User::count();
-        $totalMusicians = User::where("account_type", "musician")->count();
-        $totalVideos = Video::count();
-        $totalBoughtVideos = BoughtVideo::count();
-        $totalAudios = Audio::count();
-        $totalBoughtAudios = BoughtAudio::count();
+        $normal = User::where("account_type", "normal")->count();
+        $musicians = User::where("account_type", "musician")->count();
+        $videos = Video::count();
+        $boughtVideos = BoughtVideo::count();
+        $audios = Audio::count();
+        $boughtAudios = BoughtAudio::count();
 
         return ["data" => [
-            "totalUsers" => $totalUsers,
-            "totalMusicians" => $totalMusicians,
-            "totalVideos" => $totalVideos,
-            "totalBoughtVideos" => $totalBoughtVideos,
-            "totalAudios" => $totalAudios,
-            "totalBoughtAudios" => $totalBoughtAudios,
+            "normal" => $normal,
+            "musicians" => $musicians,
+            "users" => $normal + $musicians,
+            "videos" => $videos,
+            "boughtVideos" => $boughtVideos,
+            "audios" => $audios,
+            "boughtAudios" => $boughtAudios,
         ]];
     }
 

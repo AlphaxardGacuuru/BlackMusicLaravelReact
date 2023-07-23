@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 import Btn from "@/components/Core/Btn"
 import PersonSVG from "@/svgs/PersonSVG"
+
+import Doughnut from "@/components/Charts/Doughnut"
 
 const Admin = (props) => {
 	const [admin, setAdmin] = useState({})
@@ -47,45 +49,110 @@ const Admin = (props) => {
 	return (
 		<>
 			<div className="row">
+				<div className="col-sm-2"></div>
 				{/* Users */}
-				<div className="col-sm-2">
+				<div className="col-sm-4 mb-2">
 					<div
 						className="d-flex justify-content-between"
 						style={{ backgroundColor: "#232323" }}>
 						<div className="p-3">
-							<h2 className="text-light">{admin.totalUsers}</h2>
+							<h2 className="text-light">{admin.users}</h2>
 							<h5 className="text-light">Users</h5>
+							<h2 className="text-light">{admin.normal}</h2>
+							<h5 className="text-light">Normal</h5>
+							<h2 className="text-light">{admin.musicians}</h2>
+							<h5 className="text-light">Musicians</h5>
 						</div>
 						<div className="p-2">
-							<span
-								className="text-light"
-								style={{ fontSize: "4em", opacity: "1" }}>
-								<PersonSVG />
-							</span>
+							{users.length && (
+								<Doughnut
+									labels={["Normal", "Musicians"]}
+									data={[admin.normal, admin.musicians]}
+									backgroundColor={["#FB3958", "#FFD700"]}
+								/>
+							)}
 						</div>
 					</div>
 				</div>
 				{/* Users End */}
-				<div className="col-sm-2">
+				{/* Videos and Audios */}
+				<div className="col-sm-4 mb-2">
 					<div
 						className="d-flex justify-content-between"
 						style={{ backgroundColor: "#232323" }}>
 						<div className="p-3">
-							<h2 className="text-light">{admin.totalMusicians}</h2>
-							<h5 className="text-light">Musicians</h5>
+							<h2 className="text-light">{admin.videos}</h2>
+							<h5 className="text-light">Videos</h5>
+							<h2 className="text-light">{admin.audios}</h2>
+							<h5 className="text-light">Audios</h5>
 						</div>
 						<div className="p-2">
-							<span
-								className="text-light"
-								style={{ fontSize: "4em", opacity: "1" }}>
-								<PersonSVG />
-							</span>
+							{users.length && (
+								<Doughnut
+									labels={["Videos", "Audios"]}
+									data={[admin.videos, admin.audios]}
+									backgroundColor={["#0D6EFD", "#006F3E"]}
+								/>
+							)}
 						</div>
 					</div>
 				</div>
+				{/* Videos and Audios End */}
 				<div className="col-sm-2"></div>
+			</div>
+
+			<div className="row">
 				<div className="col-sm-2"></div>
-				<div className="col-sm-2"></div>
+				{/* Videos */}
+				<div className="col-sm-4 mb-2">
+					<div
+						className="d-flex justify-content-between"
+						style={{ backgroundColor: "#232323" }}>
+						<div className="p-3">
+							<h2 className="text-light">{admin.boughtVideos}</h2>
+							<h5 className="text-light">Bought Videos</h5>
+							<h2 className="text-light">{admin.boughtVideos * 20}</h2>
+							<h5 className="text-light">Revenue</h5>
+							<h2 className="text-light">{admin.boughtVideos * 10}</h2>
+							<h5 className="text-light">Profit</h5>
+						</div>
+						<div className="p-2">
+							{users.length && (
+								<Doughnut
+									labels={["Profit", "Expense"]}
+									data={[admin.boughtVideos]}
+									backgroundColor={["#FB3958", "#FFD700"]}
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+				{/* Videos End */}
+				{/* Audios */}
+				<div className="col-sm-4 mb-2">
+					<div
+						className="d-flex justify-content-between"
+						style={{ backgroundColor: "#232323" }}>
+						<div className="p-3">
+							<h2 className="text-light">{admin.boughtAudios}</h2>
+							<h5 className="text-light">Bought Audios</h5>
+							<h2 className="text-light">{admin.boughtAudios * 10}</h2>
+							<h5 className="text-light">Revenue</h5>
+							<h2 className="text-light">{admin.boughtAudios * 5}</h2>
+							<h5 className="text-light">Profit</h5>
+						</div>
+						<div className="p-2">
+							{users.length && (
+								<Doughnut
+									labels={["Profit", "Expense"]}
+									data={[admin.boughtVideos]}
+									backgroundColor={["#FB3958", "#FFD700"]}
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+				{/* Audios End */}
 				<div className="col-sm-2"></div>
 			</div>
 
@@ -95,51 +162,6 @@ const Admin = (props) => {
 			<div className="row">
 				<div className="col-sm-2"></div>
 				<div className="col-sm-8">
-					{/* Aggregated Data */}
-					<div className="table-responsive hidden-scroll">
-						<table className="table table-dark table-hover">
-							<thead>
-								<tr>
-									<th>Users</th>
-									<th>Musicians</th>
-									<th>Videos</th>
-									<th>Audios</th>
-									<th>Videos Bought</th>
-									<th>Audios Bought</th>
-									<th className="text-success">Video Revenue</th>
-									<th className="text-success">Audio Revenue</th>
-									<th className="text-success">Video Profit</th>
-									<th className="text-success">Audio Profit</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{users.length}</td>
-									<td>{admin.totalMusicians}</td>
-									<td>{admin.totalVideos}</td>
-									<td>{admin.totalAudios}</td>
-									<td>{admin.totalBoughtVideos}</td>
-									<td>{admin.totalBoughtAudios}</td>
-									<td className="text-success">
-										KES {admin.totalBoughtVideos * 20}
-									</td>
-									<td className="text-success">
-										KES {admin.totalBoughtAudios * 10}
-									</td>
-									<td className="text-success">
-										KES {admin.totalBoughtVideos * 10}
-									</td>
-									<td className="text-success">
-										KES {admin.totalBoughtAudios * 5}
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					{/* Aggregated Data End */}
-					<br />
-					<br />
-
 					{/* Users */}
 					<h1>Users</h1>
 					<div className="table-responsive hidden-scroll">
@@ -280,11 +302,15 @@ const Admin = (props) => {
 							className="my-form"
 							required={true}
 							onChange={(e) => setKaraokeAudio(e.target.value)}>
-							<option defaultValue value="">
+							<option
+								defaultValue
+								value="">
 								Select Audio
 							</option>
 							{audios.map((audio, key) => (
-								<option key={key} value={audio.id}>
+								<option
+									key={key}
+									value={audio.id}>
 									{audio.name}
 								</option>
 							))}
@@ -303,17 +329,23 @@ const Admin = (props) => {
 					</div>
 
 					<center>
-						<button className="mysonar-btn" onClick={props.displayNotification}>
+						<button
+							className="mysonar-btn"
+							onClick={props.displayNotification}>
 							notify
 						</button>
 						<br />
 						<br />
-						<button className="mysonar-btn" onClick={props.subscribeToPush}>
+						<button
+							className="mysonar-btn"
+							onClick={props.subscribeToPush}>
 							subscribe to push
 						</button>
 						<br />
 						<br />
-						<button className="mysonar-btn" onClick={props.sendPush}>
+						<button
+							className="mysonar-btn"
+							onClick={props.sendPush}>
 							send push
 						</button>
 					</center>

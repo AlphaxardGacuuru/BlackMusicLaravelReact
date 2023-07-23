@@ -39,7 +39,7 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href='{{ asset('css/dark.css') }}' rel='stylesheet'>
+	<link href="{{ asset('css/dark.css') }}" rel="stylesheet">
 
 	{{-- Script for conditionally showing css based on user prefered theme --}}
 	{{-- <script>
@@ -89,8 +89,10 @@
 	<div id="app"></div>
 
 	<!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}"
-			defer></script>
+	<script src="{{ asset('js/app.js') }}" defer></script>
+
+	{{-- Chat.js --}}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	@auth
 	<script src="{{ asset('/enable-push.js') }}"
