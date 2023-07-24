@@ -41,7 +41,7 @@ const AudioMedia = (props) => {
 		<div className="d-flex p-2">
 			<div className="audio-thumbnail">
 				<Link
-					to={`/audio/${props.audio.id}`}
+					to={`/audio/show/${props.audio.id}`}
 					onClick={() => {
 						props.audioStates.setShow({
 							id: props.audio.id,

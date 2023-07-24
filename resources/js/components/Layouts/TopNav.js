@@ -19,7 +19,7 @@ import DiscoverSVG from "@/svgs/DiscoverSVG"
 import HomeSVG from "@/svgs/HomeSVG"
 
 const TopNav = (props) => {
-	// const location = useLocation()
+	const location = useLocation()
 	const router = useHistory()
 
 	// const { logout } = useAuth({ setLogin: props.setLogin })
@@ -83,16 +83,16 @@ const TopNav = (props) => {
 
 	// Hide TopNav from various pages
 	location.pathname.match("/404") ||
-	location.pathname == "/story/[id]" ||
+	location.pathname == "/story/show/[id]" ||
 	location.pathname.match("/story/create") ||
-	location.pathname == "/karaoke/[id]" ||
+	location.pathname == "/karaoke/show/[id]" ||
 	location.pathname.match("/karaoke/create") ||
-	location.pathname.match("/privacy-policy") ||
-	location.pathname.match("/download-app") ||
+	location.pathname.match("/privacy") ||
+	location.pathname.match("/download") ||
 	location.pathname.match("/chat/") ||
 	location.pathname.match("/post/edit") ||
 	location.pathname.match("/post/create") ||
-	location.pathname == "/post/[id]" ||
+	location.pathname == "/post/show/[id]" ||
 	location.pathname.match("/referral") ||
 	location.pathname.match("/login") ||
 	location.pathname.match("/register")
@@ -305,7 +305,7 @@ const TopNav = (props) => {
 					{/* Avatar Bottom */}
 					<div className="m-0 p-0" style={{ display: avatarVisibility }}>
 						<Link
-							to={`/profile/${props.auth?.username}`}
+							to={`/profile/show/${props.auth?.username}`}
 							style={{ padding: "0px", margin: "0px" }}
 							className="border-bottom text-start"
 							onClick={() => setBottomMenu("")}>

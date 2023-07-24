@@ -24,8 +24,8 @@ const MusiciansMedia = (props) => {
 		Axios.post(`/api/follows`, { musician: props.user.username })
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update users
-				props.get("users", props.setUsers, "users")
+				// Update artists
+				props.get("artists", props.setArtists, "artists")
 				// Update posts
 				props.get("posts", props.setPosts, "posts")
 			})
@@ -35,35 +35,33 @@ const MusiciansMedia = (props) => {
 	return (
 		<div className="d-flex">
 			<div className="p-2">
-				<Link to={`/profile/${props.user.username}`}>
-					<a>
-						<Img
-							src={props.user.avatar}
-							className="rounded-circle"
-							width="30px"
-							height="30px"
-							alt="user"
-							loading="lazy"
-						/>
-					</a>
+				<Link to={`/profile/show/${props.user.username}`}>
+					<Img
+						src={props.user.avatar}
+						className="rounded-circle"
+						width="30px"
+						height="30px"
+						alt="user"
+						loading="lazy"
+					/>
 				</Link>
 			</div>
-			<div className="p-2" style={{ width: "50%" }}>
-				<Link to={`/profile/${props.user.username}`}>
-					<a>
-						<div
-							style={{
-								// width: "50%",
-								// whiteSpace: "nowrap",
-								overflow: "hidden",
-								textOverflow: "clip",
-							}}>
-							<b className="ml-2">{props.user.name}</b>
-							<small>
-								<i>{props.user.username}</i>
-							</small>
-						</div>
-					</a>
+			<div
+				className="p-2"
+				style={{ width: "50%" }}>
+				<Link to={`/profile/show/${props.user.username}`}>
+					<div
+						style={{
+							// width: "50%",
+							// whiteSpace: "nowrap",
+							overflow: "hidden",
+							textOverflow: "clip",
+						}}>
+						<b className="ml-2">{props.user.name}</b>
+						<small>
+							<i>{props.user.username}</i>
+						</small>
+					</div>
 				</Link>
 			</div>
 			<div className="p-2 text-end flex-grow-1">
@@ -81,7 +79,9 @@ const MusiciansMedia = (props) => {
 							btnText={
 								<span>
 									Followed
-									<span className="fs-6" style={{ lineHeight: "10px" }}>
+									<span
+										className="fs-6"
+										style={{ lineHeight: "10px" }}>
 										<CheckSVG />
 									</span>
 								</span>

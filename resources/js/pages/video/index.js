@@ -225,7 +225,7 @@ const Videos = (props) => {
 							{/* Album End */}
 
 							{/* Videos table */}
-							<div className="table-responsive">
+							<div className="table-responsive hidden-scroll">
 								<table className="table table-dark table-hover">
 									<tbody>
 										<tr>

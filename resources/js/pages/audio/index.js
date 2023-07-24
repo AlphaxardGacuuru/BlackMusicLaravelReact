@@ -61,7 +61,9 @@ const Audios = (props) => {
 					<center>
 						<h1 style={{ fontSize: "5em", fontWeight: "100" }}>Audios</h1>
 						<br />
-						<Link to="/video" className="btn sonar-btn btn-2">
+						<Link
+							to="/video"
+							className="btn sonar-btn btn-2">
 							go to videos
 						</Link>
 					</center>
@@ -71,14 +73,18 @@ const Audios = (props) => {
 				<div className="col-sm-4"></div>
 				<div className="col-sm-2">
 					<center>
-						<Link to="/audio/album/create" className="btn sonar-btn">
+						<Link
+							to="/audio/album/create"
+							className="btn sonar-btn">
 							create audio album
 						</Link>
 					</center>
 				</div>
 				<div className="col-sm-2">
 					<center>
-						<Link to="/audio/create" className="btn sonar-btn">
+						<Link
+							to="/audio/create"
+							className="btn sonar-btn">
 							upload audio
 						</Link>
 					</center>
@@ -92,7 +98,9 @@ const Audios = (props) => {
 					<table className="table table-dark table-hover table-borderles mb-5">
 						<thead>
 							<tr>
-								<th colSpan="2" className="display-6">
+								<th
+									colSpan="2"
+									className="display-6">
 									Stats
 								</th>
 							</tr>
@@ -153,7 +161,7 @@ const Audios = (props) => {
 							{/* Album End */}
 
 							{/* Audios table */}
-							<div className="table-responsive">
+							<div className="table-responsive hidden-scroll">
 								<table className="table table-dark table-hover">
 									<tbody>
 										<tr>
@@ -171,15 +179,17 @@ const Audios = (props) => {
 											<th></th>
 										</tr>
 									</tbody>
-									<tbody key={key} className="table-group-divider">
+									<tbody
+										key={key}
+										className="table-group-divider">
 										{artistAudios
 											.filter((audio) => audio.audioAlbumId == audioAlbum.id)
 											.map((albumItem, key) => (
-												<tr>
+												<tr key={key}>
 													<td></td>
 													<td>
 														<Link
-															href={`/audio/edit/${albumItem.id}`}
+															to={`/audio/edit/${albumItem.id}`}
 															onClick={() => {
 																props.setShow(albumItem.id)
 																props.setLocalStorage("show", {

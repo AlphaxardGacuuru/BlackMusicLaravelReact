@@ -66,6 +66,13 @@ Route::resources([
 ]);
 
 /*
+* User
+*/ 
+
+// Musicians
+Route::get('artists', 'UserController@artists');
+
+/*
  * Post
  */
 
@@ -96,7 +103,7 @@ Route::get('audio-charts/newly-released', 'AudioController@newlyReleased');
 Route::get('audio-charts/trending', 'AudioController@trending');
 Route::get('audio-charts/top-downloaded', 'AudioController@topDownloaded');
 Route::get('audio-charts/top-liked', 'AudioController@topLiked');
-Route::get('audios/download', 'AudioController@download');
+Route::get('audios/download/{id}', 'AudioController@download');
 Route::get('artist/audio-albums/{username}', 'AudioAlbumController@artistAudioAlbums');
 Route::get('artist/audios/{username}', 'AudioController@artistAudios');
 Route::get('artist/bought-audios/{username}', 'BoughtAudioController@artistBoughtAudios');

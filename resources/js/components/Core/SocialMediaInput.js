@@ -186,7 +186,7 @@ const SocialMediaInput = (props) => {
 							style={{
 								border: "none",
 								outline: "none",
-								height: "50px",
+								height: "40px",
 								resize: "none",
 							}}
 							placeholder={props.placeholder}

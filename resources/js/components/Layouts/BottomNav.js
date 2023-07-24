@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 
-// import SocialMediaInput from './SocialMediaInput'
-
 import CloseSVG from "@/svgs/CloseSVG"
 import PreviousSVG from "@/svgs/PreviousSVG"
 import PauseSVG from "@/svgs/PauseSVG"
@@ -25,14 +23,14 @@ const Bottomnav = (props) => {
 	location.pathname.match("/404") ||
 	location.pathname == "/story/[id]" ||
 	location.pathname.match("/story/create") ||
-	location.pathname == "/karaoke/[id]" ||
+	location.pathname == "/karaoke/show/[id]" ||
 	location.pathname.match("/karaoke/create") ||
-	location.pathname.match("/privacy-policy") ||
-	location.pathname.match("/download-app") ||
+	location.pathname.match("/privacy") ||
+	location.pathname.match("/download") ||
 	location.pathname.match("/chat/") ||
 	location.pathname == "/post/edit/[id]" ||
 	location.pathname.match("/post/create") ||
-	location.pathname == "/post/[id]" ||
+	location.pathname == "/post/show/[id]" ||
 	location.pathname.match("/referral") ||
 	location.pathname.match("/login") ||
 	location.pathname.match("/register")
@@ -41,13 +39,13 @@ const Bottomnav = (props) => {
 
 	// Check if audio is in queue and location is in audio show
 	if (props.audioStates.show.id != 0 && props.audioStates.show != "") {
-		hidePlayer = location.pathname == "/audio/[id]"
+		hidePlayer = location.pathname.match("/audio/show/")
 	}
 
 	// Check if location is in Karaoke
 	isInKaraoke =
-		location.pathname == "/karaoke/[id]" ||
-		location.pathname.match("/karaoke-create")
+		location.pathname == "/karaoke/show/[id]" ||
+		location.pathname.match("/karaoke/create")
 
 	// Get number of items in video cart
 	const vidCartItems = props.cartVideos.length
@@ -60,8 +58,14 @@ const Bottomnav = (props) => {
 			<br style={{ display: props.audioStates.hidePlayer && "none" }} />
 			<br style={{ display: props.audioStates.hidePlayer && "none" }} />
 			<br style={{ display: props.audioStates.hidePlayer && "none" }} />
-			<br style={{ display: isInKaraoke && "none" }} className="anti-hidden" />
-			<br style={{ display: isInKaraoke && "none" }} className="anti-hidden" />
+			<br
+				style={{ display: isInKaraoke && "none" }}
+				className="anti-hidden"
+			/>
+			<br
+				style={{ display: isInKaraoke && "none" }}
+				className="anti-hidden"
+			/>
 
 			<div className="bottomNav menu-content-area header-social-area">
 				{/* <!-- Progress Container --> */}
@@ -119,7 +123,9 @@ const Bottomnav = (props) => {
 						</div>
 						{/* Loader */}
 						{props.audioStates.audioLoader && (
-							<div className="align-self-center" style={{ padding: "10px" }}>
+							<div
+								className="align-self-center"
+								style={{ padding: "10px" }}>
 								<div
 									className="spinner-border text-light"
 									style={{
@@ -169,7 +175,9 @@ const Bottomnav = (props) => {
 				{/* Audio Player End */}
 
 				{/* Bottom Nav */}
-				<div className="anti-hidden" style={{ display: display }}>
+				<div
+					className="anti-hidden"
+					style={{ display: display }}>
 					<div className="container-fluid menu-area d-flex justify-content-between p-2 px-4">
 						{/* Home */}
 						<Link

@@ -49,7 +49,11 @@ const VideoMedia = (props) => {
 			<div className="video-media">
 				<div className="video-thumbnail">
 					<Link to={`/video/${props.video.id}`}>
-						<Img src={props.video.thumbnail} width="320em" height="180em" />
+						<Img
+							src={props.video.thumbnail}
+							width="320em"
+							height="180em"
+						/>
 					</Link>
 				</div>
 				{props.video.hasBoughtVideo || props.hasBoughtVideo ? (
@@ -92,9 +96,13 @@ const VideoMedia = (props) => {
 				)}
 			</div>
 			{/* User info */}
-			<div className="d-flex" style={{ maxWidth: "220em" }}>
-				<div className="py-2" style={{ minWidth: "40px" }}>
-					<Link to={`/profile/${props.video.username}`}>
+			<div
+				className="d-flex"
+				style={{ maxWidth: "220em" }}>
+				<div
+					className="py-2"
+					style={{ minWidth: "40px" }}>
+					<Link to={`/profile/show/${props.video.username}`}>
 						<Img
 							src={props.video.avatar}
 							className="rounded-circle"

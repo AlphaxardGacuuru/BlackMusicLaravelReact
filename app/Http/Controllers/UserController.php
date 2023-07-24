@@ -91,4 +91,11 @@ class UserController extends Controller
     {
         return $this->service->auth();
     }
+
+    /*
+     * Artists */
+    public function artists()
+    {
+        return $this->service->artists();
+    }
 }

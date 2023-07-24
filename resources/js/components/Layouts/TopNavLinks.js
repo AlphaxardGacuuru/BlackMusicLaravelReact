@@ -169,7 +169,7 @@ const TopNavLinks = (props) => {
 					style={{ backgroundColor: "#232323" }}
 					className="dropdown-menu rounded-0 m-0 p-0">
 					<Link
-						to={`/profile/${props.auth?.username}`}
+						to={`/profile/show/${props.auth?.username}`}
 						className="p-2 px-3 pt-3 dropdown-item border-bottom border-dark">
 						<div className="d-flex">
 							<div className="align-items-center">

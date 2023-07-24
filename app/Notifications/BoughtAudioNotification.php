@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -12,7 +11,7 @@ class BoughtAudioNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-	public $audio;
+    public $audio;
 
     /**
      * Create a new notification instance.
@@ -43,7 +42,7 @@ class BoughtAudioNotification extends Notification implements ShouldBroadcast
      */
     public function toMail($notifiable)
     {
-		// 
+        //
     }
 
     /**
@@ -55,10 +54,10 @@ class BoughtAudioNotification extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-			'url' => '/profile/' . auth('sanctum')->user()->username,
-			'from' => auth('sanctum')->user()->username,
-			'id' => $this->audio->username,
-			'message' => auth('sanctum')->user()->username . ' bought ' . $this->audio->name,
+            'url' => '/profile/show/' . auth('sanctum')->user()->username,
+            'from' => auth('sanctum')->user()->username,
+            'id' => $this->audio->username,
+            'message' => auth('sanctum')->user()->username . ' bought ' . $this->audio->name,
         ];
     }
 }

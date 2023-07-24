@@ -20,8 +20,8 @@ class UserService extends Service
     public function index()
     {
         $getUsers = User::all();
-		
-		return UserResource::collection($getUsers);
+
+        return UserResource::collection($getUsers);
     }
 
     /**
@@ -34,7 +34,7 @@ class UserService extends Service
     {
         $getUser = User::where("username", $username)->first();
 
-		return new UserResource($getUser);
+        return new UserResource($getUser);
     }
 
     /**
@@ -93,7 +93,7 @@ class UserService extends Service
 
         $saved = $user->save();
 
-		return [$saved, "Account updated", $user];
+        return [$saved, "Account updated", $user];
     }
 
     /**
@@ -106,6 +106,18 @@ class UserService extends Service
     {
         $auth = auth('sanctum')->user();
 
-		return new UserResource($auth);
+        return new UserResource($auth);
+    }
+
+    /*
+     * Artists */
+    public function artists()
+    {
+        $getArtists = User::where("account_type", "musician")
+            ->where("username", "!=", $this->username)
+            ->where("username", "!=", "@blackmusic")
+            ->get();
+
+        return UserResource::collection($getArtists);
     }
 }

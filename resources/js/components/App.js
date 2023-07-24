@@ -63,6 +63,7 @@ function App() {
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
 	const [stories, setStories] = useState(getLocalStorage("stories"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
+	const [artists, setArtists] = useState(getLocalStorage("artists"))
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
 	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
 	const [videoLikes, setVideoLikes] = useState(getLocalStorage("videoLikes"))
@@ -268,24 +269,17 @@ function App() {
 		setPosts,
 		users,
 		setUsers,
+		artists,
+		setArtists,
 		videoAlbums,
 		setVideoAlbums,
 		videos,
 		setVideos,
 		search,
 		setSearch,
-		users,
-		setUsers,
-		videos,
-		setVideos,
-		videoAlbums,
-		setVideoAlbums,
-		videoLikes,
-		setVideoLikes,
-		karaokes,
-		setKaraokes,
 		stories,
 		setStories,
+		// Notifications
 		displayNotification,
 		subscribeToPush,
 		sendPush,

@@ -97,7 +97,9 @@ const Edit = (props) => {
 					<center>
 						<h1>EDIT PROFILE</h1>
 						<br />
-						<label htmlFor="" className="text-light">
+						<label
+							htmlFor=""
+							className="text-light">
 							Profile Pic
 						</label>
 						<div className="avatar-container">
@@ -127,7 +129,9 @@ const Edit = (props) => {
 
 						<form onSubmit={onSubmit}>
 							{/* Name */}
-							<label htmlFor="" className="float-start text-light">
+							<label
+								htmlFor=""
+								className="float-start text-light">
 								Name
 							</label>
 							<input
@@ -142,7 +146,9 @@ const Edit = (props) => {
 							<br />
 
 							{/* Email */}
-							<label htmlFor="" className="float-start text-light">
+							<label
+								htmlFor=""
+								className="float-start text-light">
 								Email
 							</label>
 							<input
@@ -155,7 +161,9 @@ const Edit = (props) => {
 							<br />
 
 							{/* Phone */}
-							<label htmlFor="" className="float-start text-light">
+							<label
+								htmlFor=""
+								className="float-start text-light">
 								Phone
 							</label>
 							<input
@@ -170,7 +178,9 @@ const Edit = (props) => {
 							<br />
 
 							{/* Bio */}
-							<label htmlFor="" className="float-start text-light">
+							<label
+								htmlFor=""
+								className="float-start text-light">
 								Bio
 							</label>
 							<input
@@ -185,7 +195,9 @@ const Edit = (props) => {
 							<br />
 
 							{/* Cash Withdrawal */}
-							<label htmlFor="" className="float-start text-light">
+							<label
+								htmlFor=""
+								className="float-start text-light">
 								Cash Withdrawal
 							</label>
 							<br />
@@ -219,7 +231,7 @@ const Edit = (props) => {
 						<br />
 
 						<Link
-							to={`/profile/${props.auth?.username}`}
+							to={`/profile/show/${props.auth?.username}`}
 							className="btn sonar-btn btn-2">
 							back to profile
 						</Link>

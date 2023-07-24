@@ -324,7 +324,9 @@ const VideoShow = (props) => {
 						aria-controls="collapseExample">
 						read more
 					</button>
-					<div className="collapse" id="collapseExample">
+					<div
+						className="collapse"
+						id="collapseExample">
 						<div className="p-2 text-white">{video.description}</div>
 					</div>
 				</div>
@@ -334,7 +336,7 @@ const VideoShow = (props) => {
 				<div className="border-bottom border-dark">
 					<div className="d-flex">
 						<div className="p-2">
-							<Link to={`/profile/${video.username}`}>
+							<Link to={`/profile/show/${video.username}`}>
 								<a>
 									<Img
 										src={video.avatar}
@@ -347,8 +349,10 @@ const VideoShow = (props) => {
 								</a>
 							</Link>
 						</div>
-						<div className="p-2 flex-grow-1" style={{ width: "50%" }}>
-							<Link to={`/profile/${video.username}`}>
+						<div
+							className="p-2 flex-grow-1"
+							style={{ width: "50%" }}>
+							<Link to={`/profile/show/${video.username}`}>
 								<a>
 									<div
 										style={{
@@ -361,9 +365,13 @@ const VideoShow = (props) => {
 										<small>
 											<i>{video.username}</i>
 										</small>
-										<span className="ms-1" style={{ color: "gold" }}>
+										<span
+											className="ms-1"
+											style={{ color: "gold" }}>
 											<DecoSVG />
-											<small className="ms-1" style={{ color: "inherit" }}>
+											<small
+												className="ms-1"
+												style={{ color: "inherit" }}>
 												{video.artistDecos}
 											</small>
 										</span>

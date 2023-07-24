@@ -107,7 +107,7 @@ const ProfileShow = (props) => {
 					<br className="anti-hidden" />
 					{/* Edit and Follow button */}
 					{user.username == props.auth?.username ? (
-						<Link to="/profile/edit">
+						<Link to="/profile/show/edit">
 							<a>
 								<Btn
 									btnClass="mysonar-btn white-btn float-end"
@@ -126,7 +126,9 @@ const ProfileShow = (props) => {
 									btnText={
 										<span>
 											Followed
-											<span className="fs-6" style={{ lineHeight: "10px" }}>
+											<span
+												className="fs-6"
+												style={{ lineHeight: "10px" }}>
 												<CheckSVG />
 											</span>
 										</span>
@@ -156,7 +158,9 @@ const ProfileShow = (props) => {
 						<h3>{user.name}</h3>
 						<h5>
 							{user.username}
-							<span style={{ color: "gold" }} className="ms-2">
+							<span
+								style={{ color: "gold" }}
+								className="ms-2">
 								<DecoSVG />
 								<small className="ms-1">{user.decos}</small>
 							</span>
@@ -222,7 +226,9 @@ const ProfileShow = (props) => {
 
 					{/* Video Albums */}
 					{artistVideoAlbums.map((videoAlbum, key) => (
-						<div key={videoAlbum.id} className="mb-5">
+						<div
+							key={videoAlbum.id}
+							className="mb-5">
 							<div className="d-flex">
 								<div className="p-2">
 									<Img
@@ -241,7 +247,11 @@ const ProfileShow = (props) => {
 							{artistVideos
 								.filter((video) => video.videoAlbumId == videoAlbum.id)
 								.map((video, index) => (
-									<VideoMedia {...props} key={key} video={video} />
+									<VideoMedia
+										{...props}
+										key={key}
+										video={video}
+									/>
 								))}
 						</div>
 					))}
@@ -289,7 +299,9 @@ const ProfileShow = (props) => {
 
 					{/* Audio Albums */}
 					{artistAudioAlbums.map((audioAlbum, key) => (
-						<div key={audioAlbum.id} className="mb-5">
+						<div
+							key={audioAlbum.id}
+							className="mb-5">
 							<div className="d-flex">
 								<div className="p-2">
 									<Img
@@ -308,7 +320,11 @@ const ProfileShow = (props) => {
 							{artistAudios
 								.filter((audio) => audio.audioAlbumId == audioAlbum.id)
 								.map((audio, key) => (
-									<AudioMedia {...props} key={key} audio={audio} />
+									<AudioMedia
+										{...props}
+										key={key}
+										audio={audio}
+									/>
 								))}
 						</div>
 					))}

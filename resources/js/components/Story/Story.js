@@ -65,8 +65,12 @@ const Story = (props) => {
 
 	console.log("render")
 	return (
-		<span id={props.story.id} className="single-story">
-			<div style={{ height: "100vh", width: "auto" }} onClick={onFreeze}>
+		<span
+			id={props.story.id}
+			className="single-story">
+			<div
+				style={{ height: "100vh", width: "auto" }}
+				onClick={onFreeze}>
 				{Object.keys(props.story.media[segment]) == "image" ? (
 					<Img
 						src={`/storage/${props.story.media[segment]["image"]}`}
@@ -102,7 +106,9 @@ const Story = (props) => {
 				<div className="d-flex justify-content-between">
 					{/* Close Icon */}
 					<div className="">
-						<Link to="/" style={{ fontSize: "1.5em" }}>
+						<Link
+							to="/"
+							style={{ fontSize: "1.5em" }}>
 							<CloseSVG />
 						</Link>
 					</div>
@@ -126,7 +132,9 @@ const Story = (props) => {
 					{/* Name End */}
 					{/* Options */}
 					{/* Avatar */}
-					<div className="py-2 me-3" style={{ minWidth: "40px" }}>
+					<div
+						className="py-2 me-3"
+						style={{ minWidth: "40px" }}>
 						<div className="dropdown-center">
 							<a
 								href="#"
@@ -152,7 +160,7 @@ const Story = (props) => {
 								style={{ backgroundColor: "#232323" }}
 								className="dropdown-menu rounded-0 m-0 p-0">
 								<Link
-									to={`/profile/${props.story.username}`}
+									to={`/profile/show/${props.story.username}`}
 									className="pt-2 dropdown-item border-bottom border-dark">
 									<h6>View profile</h6>
 								</Link>
@@ -202,7 +210,10 @@ const Story = (props) => {
 						}}>
 						<span className="invisible">left</span>
 					</div>
-					<div className="p-3" style={{ minHeight: "90vh" }} onClick={onFreeze}>
+					<div
+						className="p-3"
+						style={{ minHeight: "90vh" }}
+						onClick={onFreeze}>
 						<span className="invisible">center center</span>
 					</div>
 					<div

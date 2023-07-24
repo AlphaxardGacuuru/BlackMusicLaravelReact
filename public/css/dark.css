@@ -1585,7 +1585,7 @@ div.hidden-scroll span {
 }
 
 .audio-text {
-	max-width: 8em;
+	max-width: 30em;
 	cursor: pointer;
 	white-space: nowrap;
 	overflow: hidden;

@@ -122,11 +122,11 @@ class AudioService extends Service
         // Get file extesion
         $ext = substr($audio->audio, -3);
 
-        $src = 'storage/' . $audio->audio;
+        $src = $audio->audio;
 
         $name = $audio->name . '.' . $ext;
 
-        return response()->download($src, $name);
+        return [$src, $name];
     }
 
     /**

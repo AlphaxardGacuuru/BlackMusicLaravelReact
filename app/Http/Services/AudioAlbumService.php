@@ -104,7 +104,7 @@ class AudioAlbumService extends Service
 		// Message
 		$message = $aAlbum->name . " updated";
 
-		return [$saved, $message];
+		return [$saved, $message, $aAlbum];
     }
 
     /*

@@ -17,7 +17,7 @@ class Audio extends Model
      */
     protected function getAudioAttribute($value)
     {
-        return "/storage/" . $value;
+        return "storage/" . $value;
     }
 
     protected function getThumbnailAttribute($value)

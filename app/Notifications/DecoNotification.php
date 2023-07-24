@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Mail\DecoMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -13,7 +12,7 @@ class DecoNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-	public $artist;
+    public $artist;
 
     /**
      * Create a new notification instance.
@@ -45,7 +44,7 @@ class DecoNotification extends Notification implements ShouldBroadcast
     public function toMail($notifiable)
     {
         return (new DecoMail($notifiable->username, $this->artist))
-                    ->to($notifiable->email);
+            ->to($notifiable->email);
     }
 
     /**
@@ -63,7 +62,7 @@ class DecoNotification extends Notification implements ShouldBroadcast
         //         $artists = $value;
         //     } elseif ($key == count($this->artists) - 1) {
         //         $artists = $artists . " & " . $value;
-		// 	} else {
+        //     } else {
         //         $artists = $artists . ", " . $value;
         //     }
         // }
@@ -71,9 +70,9 @@ class DecoNotification extends Notification implements ShouldBroadcast
         $message = "Congratulations! " . $this->artist . " decorated you.";
 
         return [
-			'url' => '/profile/' . $this->artist,
-			'from' => $this->artist,
-			'message' => $message,
+            'url' => '/profile/show/' . $this->artist,
+            'from' => $this->artist,
+            'message' => $message,
         ];
     }
 }

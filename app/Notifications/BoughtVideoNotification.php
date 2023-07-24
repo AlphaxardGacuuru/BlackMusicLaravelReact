@@ -2,11 +2,9 @@
 
 namespace App\Notifications;
 
-use App\Mail\VideoReceiptMail;
 use App\Models\Video;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -45,7 +43,7 @@ class BoughtVideoNotification extends Notification implements ShouldBroadcast
      */
     public function toMail($notifiable)
     {
-		// 
+        //
     }
 
     /**
@@ -57,7 +55,7 @@ class BoughtVideoNotification extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-            'url' => '/profile/' . auth('sanctum')->user()->username,
+            'url' => '/profile/show/' . auth('sanctum')->user()->username,
             'from' => auth('sanctum')->user()->username,
             'id' => $this->video->username,
             'message' => auth('sanctum')->user()->username . ' bought ' . $this->video->name,

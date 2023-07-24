@@ -30,15 +30,13 @@ const AudioShow = (props) => {
 	let { id } = useParams()
 
 	// Set State
-	const [audio, setAudio] = useState(props.audio)
-	const [audios, setAudios] = useState(props.audios)
-	const [audioComments, setAudioComments] = useState(props.audioComments)
-	const [boughtAudios, setBoughtAudios] = useState(
-		props.getLocalStorage("boughtAudios")
-	)
-	const [inCart, setInCart] = useState(props.audio.inCart)
-	const [hasLiked, setHasLiked] = useState(props.audio.hasLiked)
-	const [hasFollowed, setHasFollowed] = useState(props.audio.hasFollowed)
+	const [audio, setAudio] = useState({})
+	const [audios, setAudios] = useState([])
+	const [audioComments, setAudioComments] = useState([])
+	const [boughtAudios, setBoughtAudios] = useState([])
+	const [inCart, setInCart] = useState(false)
+	const [hasLiked, setHasLiked] = useState(false)
+	const [hasFollowed, setHasFollowed] = useState(false)
 	const [tabClass, setTabClass] = useState("comments")
 	const [deletedIds, setDeletedIds] = useState([])
 
@@ -53,7 +51,12 @@ const AudioShow = (props) => {
 
 		if (id) {
 			Axios.get(`/api/audios/${id}`)
-				.then((res) => setAudio(res.data.data))
+				.then((res) => {
+					setAudio(res.data.data)
+					setHasLiked(res.data.data.hasLiked)
+					setInCart(res.data.data.inCart)
+					setHasFollowed(res.data.data.hasFollowed)
+				})
 				.catch(() => props.setErrors([`Failed to fetch audio`]))
 
 			props.get(`audio-comments/${id}`, setAudioComments)
@@ -95,7 +98,7 @@ const AudioShow = (props) => {
 		// Show in cart
 		setInCart(!inCart)
 		// Add Audio to Cart
-		Axios.post(`/api/cart-audios`, { audio: props.audio.id })
+		Axios.post(`/api/cart-audios`, { audio: id })
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err, true))
 	}
@@ -179,12 +182,14 @@ const AudioShow = (props) => {
 					}}>
 					<center>
 						{props.audioLoader ? (
-							<div id="sonar-load" className="mt-5 mb-5"></div>
+							<div
+								id="sonar-load"
+								className="mt-5 mb-5"></div>
 						) : (
 							<Img
 								src={audio.thumbnail}
-								width="100vw"
-								height="100vh"
+								width="500em"
+								height="500em"
 								alt="music-cover"
 							/>
 						)}
@@ -213,7 +218,9 @@ const AudioShow = (props) => {
 					className="d-flex justify-content-between"
 					style={{ color: "rgba(220,220,220,1)" }}>
 					{/* Timer */}
-					<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
+					<div
+						style={{ cursor: "pointer" }}
+						className="p-2 align-self-center">
 						{props.audioStates.fmtMSS(props.audioStates.currentTime)}
 					</div>
 					{/* Shuffle Button */}
@@ -232,7 +239,9 @@ const AudioShow = (props) => {
 						<ShuffleSVG />
 					</div>
 					{/* Previous Button */}
-					<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
+					<div
+						style={{ cursor: "pointer" }}
+						className="p-2 align-self-center">
 						<span onClick={props.audioStates.prevSong}>
 							<PreviousSVG />
 						</span>
@@ -251,7 +260,9 @@ const AudioShow = (props) => {
 						</span>
 					</div>
 					{/* Next Button */}
-					<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
+					<div
+						style={{ cursor: "pointer" }}
+						className="p-2 align-self-center">
 						<span onClick={props.audioStates.nextSong}>
 							<NextSVG />
 						</span>
@@ -269,7 +280,9 @@ const AudioShow = (props) => {
 						}}>
 						<LoopSVG />
 					</div>
-					<div style={{ cursor: "pointer" }} className="p-2 align-self-center">
+					<div
+						style={{ cursor: "pointer" }}
+						className="p-2 align-self-center">
 						{props.audioStates.fmtMSS(props.audioStates.dur)}
 					</div>
 				</div>
@@ -318,7 +331,9 @@ const AudioShow = (props) => {
 									onAudioLike()
 								}}>
 								<HeartFilledSVG />
-								<small className="ms-1" style={{ color: "inherit" }}>
+								<small
+									className="ms-1"
+									style={{ color: "inherit" }}>
 									{audio.likes}
 								</small>
 							</a>
@@ -331,7 +346,9 @@ const AudioShow = (props) => {
 									onAudioLike()
 								}}>
 								<HeartSVG />
-								<small className="ms-1" style={{ color: "inherit" }}>
+								<small
+									className="ms-1"
+									style={{ color: "inherit" }}>
 									{audio.likes}
 								</small>
 							</a>
@@ -354,7 +371,7 @@ const AudioShow = (props) => {
 					</div>
 
 					{/* Download/Buy button */}
-					{audio.hasBoughtAudio || props.auth?.username == "@blackmusic" ? (
+					{audio.hasBoughtAudio ? (
 						// Ensure audio is downloadable
 						<div className="p-2">
 							<Btn
@@ -421,7 +438,9 @@ const AudioShow = (props) => {
 						aria-controls="collapseExample">
 						read more
 					</button>
-					<div className="collapse" id="collapseExample">
+					<div
+						className="collapse"
+						id="collapseExample">
 						<div className="p-2 text-white">{audio.description}</div>
 					</div>
 				</div>
@@ -431,41 +450,43 @@ const AudioShow = (props) => {
 				<div className="border-bottom border-dark">
 					<div className="d-flex">
 						<div className="p-2">
-							<Link to={`/profile/${audio.username}`}>
-								<a>
-									<Img
-										src={audio.avatar}
-										className="rounded-circle"
-										width="30px"
-										height="30px"
-										alt="user"
-										loading="lazy"
-									/>
-								</a>
+							<Link to={`/profile/show/${audio.username}`}>
+								<Img
+									src={audio.avatar}
+									className="rounded-circle"
+									width="30px"
+									height="30px"
+									alt="user"
+									loading="lazy"
+								/>
 							</Link>
 						</div>
-						<div className="p-2 flex-grow-1" style={{ width: "50%" }}>
-							<Link to={`/profile/${audio.username}`}>
-								<a>
-									<div
-										style={{
-											// width: "50%",
-											// whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-										}}>
-										<b className="ml-2">{audio.artistName}</b>
-										<small>
-											<i>{audio.username}</i>
+						<div
+							className="p-2 flex-grow-1"
+							style={{ width: "50%" }}>
+							<Link to={`/profile/show/${audio.username}`}>
+								<div
+									style={{
+										// width: "50%",
+										// whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip",
+									}}>
+									<b className="ml-2">{audio.artistName}</b>
+									<small>
+										<i>{audio.username}</i>
+									</small>
+									<span
+										className="ms-1"
+										style={{ color: "gold" }}>
+										<DecoSVG />
+										<small
+											className="ms-1"
+											style={{ color: "inherit" }}>
+											{audio.artistDecos}
 										</small>
-										<span className="ms-1" style={{ color: "gold" }}>
-											<DecoSVG />
-											<small className="ms-1" style={{ color: "inherit" }}>
-												{audio.artistDecos}
-											</small>
-										</span>
-									</div>
-								</a>
+									</span>
+								</div>
 							</Link>
 						</div>
 						<div className="p-2">
@@ -475,15 +496,21 @@ const AudioShow = (props) => {
 							props.auth?.username == "@blackmusic" ||
 							props.auth?.username != audio.username ? (
 								hasFollowed ? (
-									<button
-										className={"btn float-right rounded-0 text-light"}
-										style={{ backgroundColor: "#232323" }}
-										onClick={onFollow}>
-										<div>
-											Followed
-											<CheckSVG />
-										</div>
-									</button>
+									<Btn
+										btnClass="mysonar-btn btn-2"
+										btnStyle={{ lineHeight: "20px" }}
+										onClick={onFollow}
+										btnText={
+											<span>
+												Followed
+												<span
+													className="fs-6"
+													style={{ lineHeight: "10px" }}>
+													<CheckSVG />
+												</span>
+											</span>
+										}
+									/>
 								) : (
 									<Btn
 										btnClass="mysonar-btn white-btn float-right"
@@ -537,7 +564,9 @@ const AudioShow = (props) => {
 						<Suspense
 							fallback={
 								<center>
-									<div id="sonar-load" className="mt-5 mb-5"></div>
+									<div
+										id="sonar-load"
+										className="mt-5 mb-5"></div>
 								</center>
 							}>
 							<SocialMediaInput
@@ -557,6 +586,8 @@ const AudioShow = (props) => {
 						""
 					)}
 					{/* <!-- End of Comment Form --> */}
+
+					<br />
 
 					{/* <!-- Comment Section --> */}
 					{audio.username == props.auth.username ||
@@ -597,7 +628,9 @@ const AudioShow = (props) => {
 					(boughtAudio) => boughtAudio.username == props.auth.username
 				) && (
 					<center>
-						<h6 className="mt-4" style={{ color: "grey" }}>
+						<h6
+							className="mt-4"
+							style={{ color: "grey" }}>
 							You haven't bought any audios
 						</h6>
 					</center>
@@ -611,7 +644,11 @@ const AudioShow = (props) => {
 						)
 					})
 					.map((boughtAudio, key) => (
-						<AudioMedia {...props} audio={audio} onBuyAudios={onBuyAudios} />
+						<AudioMedia
+							{...props}
+							audio={audio}
+							onBuyAudios={onBuyAudios}
+						/>
 					))}
 				{/* <!-- End of Up next Area --> */}
 

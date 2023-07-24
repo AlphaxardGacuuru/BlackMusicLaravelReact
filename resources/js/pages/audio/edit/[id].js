@@ -69,11 +69,10 @@ const AudioEdit = (props) => {
 	const [btnLoading, setBtnLoading] = useState()
 
 	// Get Artist's Audio Albums
-	const [artistAudioAlbums, setArtistAudioAlbums] = useState(
-		props.getLocalStorage("artistAudioAlbums")
-	)
+	const [artistAudioAlbums, setArtistAudioAlbums] = useState([])
 
 	useEffect(() => {
+		props.get(`/audios/${id}`, setAudio)
 		props.get(
 			`artist/audio-albums/${props.auth?.username}`,
 			setArtistAudioAlbums,
@@ -83,7 +82,7 @@ const AudioEdit = (props) => {
 
 		// Declare new FormData object for form data
 		setFormData(new FormData())
-	}, [props.auth])
+	}, [])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -109,7 +108,7 @@ const AudioEdit = (props) => {
 				.then((res) => {
 					props.setMessages([res.data.message])
 					// Update Audios
-					props.get("audios", props.setAudios, "audios")
+					props.get(`/audios/${id}`, setAudio)
 					// Remove loader for button
 					setBtnLoading(false)
 				})
@@ -149,27 +148,23 @@ const AudioEdit = (props) => {
 								className="mycontact-form text-center call-to-action-content wow fadeInUp"
 								data-wow-delay="0.5s">
 								<h2>Edit Audio</h2>
-								{props.audio && (
-									<div className="d-flex text-start">
-										<div className="thumbnail">
-											<Img
-												src={props.audio.thumbnail}
-												width="10em"
-												height="10em"
-											/>
-										</div>
-										<div className="px-2">
-											<h1 className="my-0">{props.audio.name}</h1>
-											<h6 className="my-0">
-												<small>{props.audio.username}</small>
-												<small className="ms-1">{props.audio.ft}</small>
-											</h6>
-											<small className="float-start">
-												{props.audio.released}
-											</small>
-										</div>
+								<div className="d-flex text-start">
+									<div className="thumbnail">
+										<Img
+											src={audio.thumbnail}
+											width="80em"
+											height="80em"
+										/>
 									</div>
-								)}
+									<div className="px-2">
+										<h1 className="my-0">{audio.name}</h1>
+										<h6 className="my-0">
+											<small>{audio.username}</small>
+											<small className="ms-1">{audio.ft}</small>
+										</h6>
+										<small className="float-start">{audio.released}</small>
+									</div>
+								</div>
 								<br />
 								<div className="form-group">
 									<form onSubmit={onSubmit}>
@@ -177,13 +172,15 @@ const AudioEdit = (props) => {
 											type="text"
 											name="name"
 											className="my-form"
-											placeholder={props.audio?.name}
+											placeholder={audio?.name}
 											onChange={(e) => setName(e.target.value)}
 										/>
 										<br />
 										<br />
 
-										<label htmlFor="" className="text-light">
+										<label
+											htmlFor=""
+											className="text-light">
 											Featuring Artist
 											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
 										</label>
@@ -191,7 +188,7 @@ const AudioEdit = (props) => {
 											type="text"
 											name="ft"
 											className="my-form"
-											placeholder={props.audio?.ft}
+											placeholder={audio?.ft}
 											onChange={(e) => setFt(e.target.value)}
 										/>
 										<br />
@@ -207,9 +204,7 @@ const AudioEdit = (props) => {
 													value={audioAlbum.id}
 													className="bg-dark text-light"
 													selected={
-														props.audio?.audioAlbumId == audioAlbum.id
-															? true
-															: false
+														audio?.audioAlbumId == audioAlbum.id ? true : false
 													}>
 													{audioAlbum.name}
 												</option>
@@ -230,7 +225,7 @@ const AudioEdit = (props) => {
 													key={key}
 													value={genre}
 													className="bg-dark text-light"
-													selected={genre == props.audio?.genre ? true : false}>
+													selected={genre == audio?.genre ? true : false}>
 													{genre}
 												</option>
 											))}
@@ -245,7 +240,7 @@ const AudioEdit = (props) => {
 											name="released"
 											className="my-form"
 											style={{ colorScheme: "dark" }}
-											placeholder={props.audio?.released}
+											placeholder={audio?.released}
 											onChange={(e) => setReleased(e.target.value)}
 										/>
 										<br />
@@ -255,7 +250,7 @@ const AudioEdit = (props) => {
 											type="text"
 											name="description"
 											className="my-form"
-											placeholder={props.audio?.description}
+											placeholder={audio?.description}
 											cols="30"
 											rows="10"
 											onChange={(e) =>
@@ -278,7 +273,7 @@ const AudioEdit = (props) => {
 											server={{
 												url: `${props.url}/api/filepond`,
 												process: {
-													url: `/audio-thumbnail/${props.audio?.id}`,
+													url: `/audio-thumbnail/${audio?.id}`,
 													onerror: (err) => console.log(err.response.data),
 												},
 												revert: {
@@ -307,7 +302,7 @@ const AudioEdit = (props) => {
 											server={{
 												url: `${props.url}/api/filepond`,
 												process: {
-													url: `/audio/${props.audio?.id}`,
+													url: `/audio/${audio?.id}`,
 													onerror: (err) => console.log(err.response.data),
 												},
 												revert: {
@@ -321,10 +316,15 @@ const AudioEdit = (props) => {
 										<br />
 										<br />
 
-										<Btn btnText="edit audio" loading={btnLoading} />
+										<Btn
+											btnText="edit audio"
+											loading={btnLoading}
+										/>
 									</form>
 									<br />
-									<Link to="/audio" className="btn sonar-btn btn-2">
+									<Link
+										to="/audio"
+										className="btn sonar-btn btn-2">
 										studio
 									</Link>
 								</div>

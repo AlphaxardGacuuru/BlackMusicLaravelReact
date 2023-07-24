@@ -105,7 +105,9 @@ const Karaoke = (props) => {
 	}
 
 	return (
-		<div id={props.karaoke.id} className="single-karaoke">
+		<div
+			id={props.karaoke.id}
+			className="single-karaoke">
 			<video
 				ref={video}
 				src={props.karaoke.karaoke}
@@ -123,7 +125,9 @@ const Karaoke = (props) => {
 				<div className="d-flex">
 					{/* Close Icon */}
 					<div className="">
-						<Link to="/karaoke/charts" style={{ fontSize: "1.5em" }}>
+						<Link
+							to="/karaoke/charts"
+							style={{ fontSize: "1.5em" }}>
 							<CloseSVG />
 						</Link>
 					</div>
@@ -160,9 +164,13 @@ const Karaoke = (props) => {
 							}}>
 							<b>{props.karaoke.name}</b>
 							<small>{props.karaoke.username}</small>
-							<span className="ms-1" style={{ color: "gold" }}>
+							<span
+								className="ms-1"
+								style={{ color: "gold" }}>
 								<DecoSVG />
-								<small className="ms-1" style={{ color: "inherit" }}>
+								<small
+									className="ms-1"
+									style={{ color: "inherit" }}>
 									{props.karaoke.decos}
 								</small>
 							</span>
@@ -218,7 +226,7 @@ const Karaoke = (props) => {
 								className="avatar-thumbnail-xs mb-3"
 								style={{ borderRadius: "50%" }}>
 								<center>
-									<Link to={`/profile/${props.karaoke.username}`}>
+									<Link to={`/profile/show/${props.karaoke.username}`}>
 										<a>
 											<Img
 												src={props.karaoke.avatar}
@@ -240,7 +248,9 @@ const Karaoke = (props) => {
 										{hasLiked ? (
 											<span style={{ color: "#fb3958" }}>
 												<HeartFilledSVG />
-												<h6 className="mb-2" style={{ color: "inherit" }}>
+												<h6
+													className="mb-2"
+													style={{ color: "inherit" }}>
 													{props.karaoke.likes}
 												</h6>
 											</span>
@@ -250,7 +260,9 @@ const Karaoke = (props) => {
 													color: "rgba(220, 220, 220, 1)",
 												}}>
 												<HeartSVG />
-												<h6 className="mb-2" style={{ color: "inherit" }}>
+												<h6
+													className="mb-2"
+													style={{ color: "inherit" }}>
 													{props.karaoke.likes}
 												</h6>
 											</span>
@@ -271,7 +283,9 @@ const Karaoke = (props) => {
 										onClick={() => setShowComments("menu-open-comment")}>
 										<CommentSVG />
 									</span>
-									<h6 className="mb-2" style={{ color: "inherit" }}>
+									<h6
+										className="mb-2"
+										style={{ color: "inherit" }}>
 										{props.karaoke.comments}
 									</h6>
 								</center>
@@ -299,7 +313,9 @@ const Karaoke = (props) => {
 								</center>
 							</div>
 							{/* Share Karaoke */}
-							<div className="mb-3" style={{ cursor: "pointer" }}>
+							<div
+								className="mb-3"
+								style={{ cursor: "pointer" }}>
 								<center>
 									<span
 										className="p-0"
@@ -315,7 +331,9 @@ const Karaoke = (props) => {
 							{/* Current Audio */}
 							<div>
 								<center>
-									<div ref={spiningRecord} className="rotate-record">
+									<div
+										ref={spiningRecord}
+										className="rotate-record">
 										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
 											<a
 												onClick={() => {

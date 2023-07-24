@@ -94,8 +94,10 @@ const PostMedia = (props) => {
 		<div>
 			<div className="d-flex">
 				<div className="p-1">
-					<div className="avatar-thumbnail-xs" style={{ borderRadius: "50%" }}>
-						<Link to={`/profile/${props.post.username}`}>
+					<div
+						className="avatar-thumbnail-xs"
+						style={{ borderRadius: "50%" }}>
+						<Link to={`/profile/show/${props.post.username}`}>
 							<Img
 								src={props.post.avatar}
 								width="50px"
@@ -109,9 +111,13 @@ const PostMedia = (props) => {
 					<h6 className="m-0 clip-name">
 						<b>{props.post.name}</b>
 						<small>{props.post.username}</small>
-						<span className="ms-1" style={{ color: "gold" }}>
+						<span
+							className="ms-1"
+							style={{ color: "gold" }}>
 							<DecoSVG />
-							<small className="ms-1 fw-lighter" style={{ color: "inherit" }}>
+							<small
+								className="ms-1 fw-lighter"
+								style={{ color: "inherit" }}>
 								{props.post.decos}
 							</small>
 						</span>
@@ -128,7 +134,9 @@ const PostMedia = (props) => {
 					</Link>
 
 					{/* Media */}
-					<div className="mb-1" style={{ overflow: "hidden" }}>
+					<div
+						className="mb-1"
+						style={{ overflow: "hidden" }}>
 						{props.post.media && (
 							<Img
 								src={props.post.media}
@@ -293,7 +301,9 @@ const PostMedia = (props) => {
 							<Link
 								to={"/post/" + props.post.id}
 								style={{ color: "rgba(220, 220, 220, 1)" }}>
-								<span className="ms-5" style={{ fontSize: "1.2em" }}>
+								<span
+									className="ms-5"
+									style={{ fontSize: "1.2em" }}>
 									<CommentSVG />
 								</span>
 								<small
@@ -313,7 +323,7 @@ const PostMedia = (props) => {
 									fontSize: "1.5em",
 									color: "rgba(220, 220, 220, 1)",
 									cursor: "pointer",
-									top: -5
+									top: -5,
 								}}
 								onClick={() => onShare(props.post)}>
 								<ShareSVG />
@@ -411,8 +421,12 @@ const PostMedia = (props) => {
 			</div>
 
 			{/* Sliding Bottom Nav */}
-			<div className={bottomMenu} onClick={() => setBottomMenu("")}>
-				<div className="bottomMenu" style={{ margin: "5% 3%" }}>
+			<div
+				className={bottomMenu}
+				onClick={() => setBottomMenu("")}>
+				<div
+					className="bottomMenu"
+					style={{ margin: "5% 3%" }}>
 					<div className="d-flex align-items-center justify-content-between border-bottom border-dark">
 						<div></div>
 						{/* <!-- Close Icon --> */}

@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Mail\WelcomeMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -13,7 +12,7 @@ class RegisteredNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
-	public $user;
+    public $user;
 
     /**
      * Create a new notification instance.
@@ -45,7 +44,7 @@ class RegisteredNotification extends Notification implements ShouldBroadcast
     public function toMail($notifiable)
     {
         return (new WelcomeMail($notifiable->username))
-		->to($notifiable->email);
+            ->to($notifiable->email);
     }
 
     /**
@@ -57,9 +56,9 @@ class RegisteredNotification extends Notification implements ShouldBroadcast
     public function toArray($notifiable)
     {
         return [
-			'url' => '/profile/@blackmusic',
-			'from' => '@blackmusic',
-			'message' => 'Welcome ' . $this->user->username . ' to Black Music.',
+            'url' => '/profile/show/@blackmusic',
+            'from' => '@blackmusic',
+            'message' => 'Welcome ' . $this->user->username . ' to Black Music.',
         ];
     }
 }

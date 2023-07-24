@@ -114,14 +114,20 @@ const ChatThread = (props) => {
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				{/* <!-- ***** Header Area Start ***** --> */}
-				<header style={{ backgroundColor: "#232323" }} className="header-area">
+				<header
+					style={{ backgroundColor: "#232323" }}
+					className="header-area">
 					<div className="container-fluid p-0">
 						<div className="row">
-							<div className="col-12" style={{ padding: "0" }}>
+							<div
+								className="col-12"
+								style={{ padding: "0" }}>
 								<div className="menu-area d-flex justify-content-between">
 									{/* <!-- Logo Area  --> */}
 									<div className="logo-area">
-										<Link to="/chat" className="fs-6">
+										<Link
+											to="/chat"
+											className="fs-6">
 											<BackSVG />
 										</Link>
 									</div>
@@ -154,7 +160,7 @@ const ChatThread = (props) => {
 
 									<div className="menu-content-area d-flex align-items-center">
 										<div>
-											<Link to={`/profile/${username}`}>
+											<Link to={`/profile/show/${username}`}>
 												<Img
 													src={user.avatar}
 													imgClass="rounded-circle"
@@ -178,7 +184,9 @@ const ChatThread = (props) => {
 				{/* <!-- ***** Chats ***** --> */}
 				<div className="sonar-call-to-action-area section-padding-0-100">
 					<div className="backEnd-content">
-						<h2 className="p-2" style={{ color: "rgba(255,255,255,0.1)" }}>
+						<h2
+							className="p-2"
+							style={{ color: "rgba(255,255,255,0.1)" }}>
 							Chat
 						</h2>
 					</div>
@@ -232,7 +240,9 @@ const ChatThread = (props) => {
 									{chatItem.text}
 
 									{/* Media */}
-									<div className="mb-1" style={{ overflow: "hidden" }}>
+									<div
+										className="mb-1"
+										style={{ overflow: "hidden" }}>
 										{chatItem.media && (
 											<Img
 												src={chatItem.media}

@@ -25,9 +25,13 @@ const StoryMedia = (props) => {
 			{/* </div> */}
 			{/* Story Media End */}
 			{/* User info */}
-			<div className="d-flex" style={{ maxWidth: "220em" }}>
-				<div className="py-2" style={{ minWidth: "40px" }}>
-					<Link to={`/profile/${props.story.username}`}>
+			<div
+				className="d-flex"
+				style={{ maxWidth: "220em" }}>
+				<div
+					className="py-2"
+					style={{ minWidth: "40px" }}>
+					<Link to={`/profile/show/${props.story.username}`}>
 						<Img
 							src={props.story.avatar}
 							className="rounded-circle"
