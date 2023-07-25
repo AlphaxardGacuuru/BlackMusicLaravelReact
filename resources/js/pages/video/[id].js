@@ -17,27 +17,33 @@ import DecoSVG from "@/svgs/DecoSVG"
 import CheckSVG from "@/svgs/CheckSVG"
 
 const VideoShow = (props) => {
-	// let { referrer } = router.query
 	const router = useHistory()
 
 	let { id } = useParams()
 
-	const [video, setVideo] = useState(props.video)
-	const [videos, setVideos] = useState(props.videos)
-	const [videoComments, setVideoComments] = useState(props.videoComments)
-	const [boughtVideos, setBoughtVideos] = useState(
-		props.getLocalStorage("boughtVideos")
-	)
-	const [inCart, setInCart] = useState(props.video.inCart)
-	const [hasLiked, setHasLiked] = useState(props.video.hasLiked)
-	const [hasFollowed, setHasFollowed] = useState(props.video.hasFollowed)
+	const [video, setVideo] = useState({})
+	const [videos, setVideos] = useState([])
+	const [videoComments, setVideoComments] = useState([])
+	const [boughtVideos, setBoughtVideos] = useState([])
+	const [inCart, setInCart] = useState(false)
+	const [hasLiked, setHasLiked] = useState(false)
+	const [hasFollowed, setHasFollowed] = useState(false)
 	const [tabClass, setTabClass] = useState("comments")
 	const [deletedIds, setDeletedIds] = useState([])
+	const [isLink, setIsLink] = useState(false)
 
 	useEffect(() => {
 		if (id) {
 			Axios.get(`/api/videos/${id}`)
-				.then((res) => setVideo(res.data.data))
+				.then((res) => {
+					const data = res.data.data
+
+					setVideo(data)
+					setHasLiked(data.hasLiked)
+					setInCart(data.inCart)
+					setHasFollowed(data.hasFollowed)
+					setIsLink(data.video.match(/https/) ? true : false)
+				})
 				.catch(() => props.setErrors([`Failed to fetch video`]))
 
 			props.get(`video-comments/${id}`, setVideoComments)
@@ -80,7 +86,7 @@ const VideoShow = (props) => {
 		// Show in cart
 		setInCart(!inCart)
 		// Add Video to Cart
-		Axios.post(`/api/cart-videos`, { video: props.video.id })
+		Axios.post(`/api/cart-videos`, { video: id })
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err, true))
 	}
@@ -152,46 +158,42 @@ const VideoShow = (props) => {
 		<div className="row">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-7">
-				{video.video ? (
-					video.video.match(/https/) ? (
-						<div className="resp-container">
-							<iframe
-								className="resp-iframe"
-								width="880px"
-								height="495px"
+				{isLink ? (
+					<div className="resp-container">
+						<iframe
+							className="resp-iframe"
+							width="880px"
+							height="495px"
+							src={
+								video.hasBoughtVideo
+									? `${video.video}/?autoplay=1`
+									: `${video.video}?autoplay=1&end=10&controls=0`
+							}
+							allow="accelerometer"
+							encrypted-media="true"
+							gyroscope="true"
+							picture-in-picture="true"
+							allowFullScreen></iframe>
+					</div>
+				) : (
+					<div className="resp-container">
+						<video
+							className="resp-iframe"
+							width="880px"
+							height="495px"
+							controls={video.hasBoughtVideo && true}
+							controlsList="nodownload"
+							autoPlay>
+							<source
 								src={
 									video.hasBoughtVideo
-										? `${video.video}/?autoplay=1`
-										: `${video.video}?autoplay=1&end=10&controls=0`
+										? `${video.video}`
+										: `${video.video}#t=1,10`
 								}
-								allow="accelerometer"
-								encrypted-media="true"
-								gyroscope="true"
-								picture-in-picture="true"
-								allowFullScreen></iframe>
-						</div>
-					) : (
-						<div className="resp-container">
-							<video
-								className="resp-iframe"
-								width="880px"
-								height="495px"
-								controls={video.hasBoughtVideo && true}
-								controlsList="nodownload"
-								autoPlay>
-								<source
-									src={
-										video.hasBoughtVideo
-											? `${video.video}`
-											: `${video.video}#t=1,10`
-									}
-									type="video/mp4"
-								/>
-							</video>
-						</div>
-					)
-				) : (
-					""
+								type="video/mp4"
+							/>
+						</video>
+					</div>
 				)}
 
 				{/* Video Info Area */}
@@ -257,7 +259,7 @@ const VideoShow = (props) => {
 					{/* Download/Buy button */}
 					{video.hasBoughtVideo || props.auth?.username == "@blackmusic" ? (
 						// Ensure video is downloadable
-						!video.video.match(/https/) && (
+						!isLink && (
 							<div className="p-2">
 								<Btn
 									btnClass="mysonar-btn white-btn"
@@ -337,46 +339,42 @@ const VideoShow = (props) => {
 					<div className="d-flex">
 						<div className="p-2">
 							<Link to={`/profile/show/${video.username}`}>
-								<a>
-									<Img
-										src={video.avatar}
-										className="rounded-circle"
-										width="30px"
-										height="30px"
-										alt="user"
-										loading="lazy"
-									/>
-								</a>
+								<Img
+									src={video.avatar}
+									className="rounded-circle"
+									width="30px"
+									height="30px"
+									alt="user"
+									loading="lazy"
+								/>
 							</Link>
 						</div>
 						<div
 							className="p-2 flex-grow-1"
 							style={{ width: "50%" }}>
 							<Link to={`/profile/show/${video.username}`}>
-								<a>
-									<div
-										style={{
-											// width: "50%",
-											// whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-										}}>
-										<b className="ml-2">{video.artistName}</b>
-										<small>
-											<i>{video.username}</i>
-										</small>
-										<span
+								<div
+									style={{
+										// width: "50%",
+										// whiteSpace: "nowrap",
+										overflow: "hidden",
+										textOverflow: "clip",
+									}}>
+									<b className="ml-2">{video.artistName}</b>
+									<small>
+										<i>{video.username}</i>
+									</small>
+									<span
+										className="ms-1"
+										style={{ color: "gold" }}>
+										<DecoSVG />
+										<small
 											className="ms-1"
-											style={{ color: "gold" }}>
-											<DecoSVG />
-											<small
-												className="ms-1"
-												style={{ color: "inherit" }}>
-												{video.artistDecos}
-											</small>
-										</span>
-									</div>
-								</a>
+											style={{ color: "inherit" }}>
+											{video.artistDecos}
+										</small>
+									</span>
+								</div>
 							</Link>
 						</div>
 						<div className="p-2">

@@ -10,6 +10,8 @@ const VideoAlbumEdit = (props) => {
 	let { id } = useParams()
 
 	// Declare states
+	const [album, setAlbum] = useState({})
+
 	const [formData, setFormData] = useState()
 	const [name, setName] = useState("")
 	const [released, setReleased] = useState("")
@@ -21,6 +23,8 @@ const VideoAlbumEdit = (props) => {
 	const mediaInput = React.useRef(null)
 
 	useEffect(() => {
+		props.get(`video-albums/${id}`, setAlbum)
+
 		// Declare new FormData object for form data
 		setFormData(new FormData())
 	}, [])
@@ -51,6 +55,9 @@ const VideoAlbumEdit = (props) => {
 		Axios.post(`/api/video-albums/${id}`, formData)
 			.then((res) => {
 				props.setMessages([res.data.message])
+				// Update Video Album
+				props.get(`video-albums/${id}`, setAlbum)
+				// Reset preview photo
 				setPreview()
 				// Remove loader for button
 				setBtnLoading(false)
@@ -80,15 +87,15 @@ const VideoAlbumEdit = (props) => {
 								<div className="d-flex text-start">
 									<div className="p-2">
 										<Img
-											src={props.album.cover}
-											width="10em"
-											height="10em"
+											src={album.cover}
+											width="80em"
+											height="40em"
 											alt="album cover"
 										/>
 									</div>
 									<div className="p-2">
-										<h1 className="my-0">{props.album.name}</h1>
-										<h6 className="my-0">{props.album.released}</h6>
+										<h1 className="my-0">{album.name}</h1>
+										<h6 className="my-0">{album.released}</h6>
 									</div>
 								</div>
 								<br />
@@ -116,8 +123,14 @@ const VideoAlbumEdit = (props) => {
 										<br />
 
 										<label className="text-light">Upload Album Cover</label>
-										<div className="mb-2" style={{ overflow: "hidden" }}>
-											<img src={preview} width="100%" height="auto" />
+										<div
+											className="mb-2"
+											style={{ overflow: "hidden" }}>
+											<img
+												src={preview}
+												width="100%"
+												height="auto"
+											/>
 										</div>
 
 										{/* Hidden file input */}
@@ -149,7 +162,9 @@ const VideoAlbumEdit = (props) => {
 										<br />
 										<br />
 
-										<Link to="/video" className="btn sonar-btn btn-2">
+										<Link
+											to="/video"
+											className="btn sonar-btn btn-2">
 											studio
 										</Link>
 									</form>

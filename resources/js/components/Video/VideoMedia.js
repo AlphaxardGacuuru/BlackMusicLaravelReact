@@ -48,7 +48,7 @@ const VideoMedia = (props) => {
 			}}>
 			<div className="video-media">
 				<div className="video-thumbnail">
-					<Link to={`/video/${props.video.id}`}>
+					<Link to={`/video/show/${props.video.id}`}>
 						<Img
 							src={props.video.thumbnail}
 							width="320em"

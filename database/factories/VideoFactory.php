@@ -16,7 +16,7 @@ $factory->define(Video::class, function (Faker $faker) {
     $genres = ["Afro", "Benga", "Blues", "Boomba", "Country"];
 
     return [
-        'video' => 'videos/' . rand(1, 5) . '.mp3',
+        'video' => 'videos/' . rand(1, 5) . '.mp4',
         'name' => $faker->catchPhrase(),
         'video_album_id' => $album->id,
         'genre' => $genres[rand(0, 4)],

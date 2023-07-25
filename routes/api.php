@@ -89,7 +89,7 @@ Route::get('video-charts/newly-released', 'VideoController@newlyReleased');
 Route::get('video-charts/trending', 'VideoController@trending');
 Route::get('video-charts/top-downloaded', 'VideoController@topDownloaded');
 Route::get('video-charts/top-liked', 'VideoController@topLiked');
-Route::get('videos/download', 'VideoController@download');
+Route::get('videos/download/{id}', 'VideoController@download');
 Route::get('artist/video-albums/{username}', 'VideoAlbumController@artistVideoAlbums');
 Route::get('artist/videos/{username}', 'VideoController@artistVideos');
 Route::get('artist/bought-videos/{username}', 'BoughtVideoController@artistBoughtVideos');
@@ -124,7 +124,7 @@ Route::prefix('filepond')->group(function () {
     // Video
     Route::post('video-thumbnail', 'FilepondController@storeVideoThumbnail');
     Route::post('video-thumbnail/{id}', 'FilepondController@updateVideoThumbnail');
-    Route::post('video', 'FilepondController@@storeVideo');
+    Route::post('video', 'FilepondController@storeVideo');
     Route::post('video/{id}', 'FilepondController@updateVideo');
     Route::delete('video-thumbnail/{id}', 'FilepondController@destoryVideoThumbnail');
     Route::delete('video/{id}', 'FilepondController@destoryVideo');

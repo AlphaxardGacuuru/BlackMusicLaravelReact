@@ -15,7 +15,7 @@ class Video extends Model
 
     protected function getVideoAttribute($value)
     {
-        return "/storage/" . $value;
+        return "storage/" . $value;
     }
 
     protected function getThumbnailAttribute($value)

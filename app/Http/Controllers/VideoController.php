@@ -95,6 +95,16 @@ class VideoController extends Controller
     }
 
     /*
+     * Download Audio
+     */
+    public function download($id)
+    {
+        [$src, $name] = $this->service->download($id);
+
+		return response()->download($src, $name);
+    }
+
+    /*
      * Display a listing of the charts.
      *
      */

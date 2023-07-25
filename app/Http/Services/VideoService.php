@@ -116,20 +116,20 @@ class VideoService extends Service
     }
 
     /**
-     * Download Video.
+     * Download Audio.
      *
      */
-    public function download($video, $id)
+    public function download($id)
     {
         $video = Video::find($id);
         // Get file extesion
         $ext = substr($video->video, -3);
 
-        $src = 'storage/' . $video->video;
+        $src = $video->video;
 
         $name = $video->name . '.' . $ext;
 
-        return response()->download($src, $name);
+        return [$src, $name];
     }
 
     /**

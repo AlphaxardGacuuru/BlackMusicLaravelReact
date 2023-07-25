@@ -55,7 +55,7 @@ const AudioAlbumEdit = (props) => {
 			Axios.post(`/api/audio-albums/${id}`, formData)
 				.then((res) => {
 					props.setMessages([res.data.message])
-					// Fetch Album
+					// Update Album
 					props.get(`/audio-albums/${id}`, setAlbum)
 					// Reset preview photo
 					setPreview()

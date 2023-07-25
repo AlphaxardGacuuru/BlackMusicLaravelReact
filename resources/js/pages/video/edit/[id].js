@@ -32,16 +32,25 @@ registerPlugin(
 )
 
 const VideoEdit = (props) => {
-	console.log(props)
-
 	let { id } = useParams()
 
-	// Get Artist's Video Albums
-	const [artistVideoAlbums, setArtistVideoAlbums] = useState(
-		props.getLocalStorage("artistVideoAlbums")
-	)
+	// Declare states
+	const [artistVideoAlbums, setArtistVideoAlbums] = useState([])
+
+	const [formData, setFormData] = useState()
+	const [name, setName] = useState("")
+	const [ft, setFt] = useState("")
+	const [videoAlbumId, setVideoAlbumId] = useState("")
+	const [genre, setGenre] = useState("")
+	const [released, setReleased] = useState("")
+	const [description, setDescription] = useState("")
+	const [thumbnail, setThumbnail] = useState("")
+	const [video, setVideo] = useState("")
+	const [btnLoading, setBtnLoading] = useState()
 
 	useEffect(() => {
+		// Get Video
+		props.get(`videos/${id}`, setVideo)
 		// Get Artist Video Albums
 		props.get(
 			`artist/video-albums/${props.auth?.username}`,
@@ -73,18 +82,6 @@ const VideoEdit = (props) => {
 		"Taarab",
 	]
 
-	// Declare states
-	const [formData, setFormData] = useState()
-	const [name, setName] = useState("")
-	const [ft, setFt] = useState("")
-	const [videoAlbumId, setVideoAlbumId] = useState("")
-	const [genre, setGenre] = useState("")
-	const [released, setReleased] = useState("")
-	const [description, setDescription] = useState("")
-	const [thumbnail, setThumbnail] = useState("")
-	const [video, setVideo] = useState("")
-	const [btnLoading, setBtnLoading] = useState()
-
 	useEffect(() => {
 		// Declare new FormData object for form data
 		setFormData(new FormData())
@@ -113,7 +110,7 @@ const VideoEdit = (props) => {
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update Videos
-				props.get("videos", props.setVideos, "videos")
+				props.get(`videos/${id}`, setVideo)
 				// Remove loader for button
 				setBtnLoading(false)
 			})
@@ -155,18 +152,18 @@ const VideoEdit = (props) => {
 								<div className="d-flex text-start">
 									<div className="thumbnail">
 										<Img
-											src={props.video?.thumbnail}
-											width="8em"
-											height="4em"
+											src={video?.thumbnail}
+											width="80em"
+											height="40em"
 										/>
 									</div>
 									<div className="px-2">
-										<h1 className="my-0">{props.video.name}</h1>
+										<h1 className="my-0">{video.name}</h1>
 										<h6 className="my-0">
-											<small>{props.video.username}</small>
-											<small className="ml-1">{props.video.ft}</small>
+											<small>{video.username}</small>
+											<small className="ml-1">{video.ft}</small>
 										</h6>
-										<small className="ml-1">{props.video.released}</small>
+										<small className="ml-1">{video.released}</small>
 									</div>
 								</div>
 								<br />
@@ -176,13 +173,15 @@ const VideoEdit = (props) => {
 											type="text"
 											name="name"
 											className="my-form"
-											placeholder={props.video?.name}
+											placeholder={video?.name}
 											onChange={(e) => setName(e.target.value)}
 										/>
 										<br />
 										<br />
 
-										<label htmlFor="" className="text-light">
+										<label
+											htmlFor=""
+											className="text-light">
 											Featuring Artist
 											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
 										</label>
@@ -190,7 +189,7 @@ const VideoEdit = (props) => {
 											type="text"
 											name="ft"
 											className="my-form"
-											placeholder={props.video?.ft}
+											placeholder={video?.ft}
 											onChange={(e) => setFt(e.target.value)}
 										/>
 										<br />
@@ -206,9 +205,7 @@ const VideoEdit = (props) => {
 													value={videoAlbum.id}
 													className="bg-dark text-light"
 													selected={
-														props.video?.videoAlbumId == videoAlbum.id
-															? true
-															: false
+														video?.videoAlbumId == videoAlbum.id ? true : false
 													}>
 													{videoAlbum.name}
 												</option>
@@ -229,7 +226,7 @@ const VideoEdit = (props) => {
 													key={key}
 													value={genre}
 													className="bg-dark text-light"
-													selected={genre == props.video?.genre ? true : false}>
+													selected={genre == video?.genre ? true : false}>
 													{genre}
 												</option>
 											))}
@@ -244,7 +241,7 @@ const VideoEdit = (props) => {
 											name="released"
 											className="my-form"
 											style={{ colorScheme: "dark" }}
-											placeholder={props.video?.released}
+											placeholder={video?.released}
 											onChange={(e) => setReleased(e.target.value)}
 										/>
 										<br />
@@ -254,7 +251,7 @@ const VideoEdit = (props) => {
 											type="text"
 											name="description"
 											className="my-form"
-											placeholder={props.video?.description}
+											placeholder={video?.description}
 											cols="30"
 											rows="10"
 											onChange={(e) =>
@@ -277,7 +274,7 @@ const VideoEdit = (props) => {
 											server={{
 												url: `${props.url}/api/filepond`,
 												process: {
-													url: `/video-thumbnail/${props.video?.id}`,
+													url: `/video-thumbnail/${video?.id}`,
 													onerror: (err) => console.log(err.response.data),
 												},
 												revert: {
@@ -306,7 +303,7 @@ const VideoEdit = (props) => {
 											server={{
 												url: `${props.url}/api/filepond`,
 												process: {
-													url: `/video/${props.video?.id}`,
+													url: `/video/${video?.id}`,
 													onerror: (err) => console.log(err.response.data),
 												},
 												revert: {
@@ -320,10 +317,15 @@ const VideoEdit = (props) => {
 										<br />
 										<br />
 
-										<Btn btnText="edit video" loading={btnLoading} />
+										<Btn
+											btnText="edit video"
+											loading={btnLoading}
+										/>
 									</form>
 									<br />
-									<Link to="/video" className="btn sonar-btn btn-2">
+									<Link
+										to="/video"
+										className="btn sonar-btn btn-2">
 										studio
 									</Link>
 								</div>
