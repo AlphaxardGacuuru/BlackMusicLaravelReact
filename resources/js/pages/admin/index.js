@@ -119,9 +119,9 @@ const Admin = (props) => {
 						<div className="p-2">
 							{users.length && (
 								<Doughnut
-									labels={["Profit", "Expense"]}
-									data={[admin.boughtVideos]}
-									backgroundColor={["#FB3958", "#FFD700"]}
+									labels={["Profit", "Expenses"]}
+									data={[admin.boughtVideos * 10, admin.boughtVideos * 10]}
+									backgroundColor={["#006F3E", "#FB3958"]}
 								/>
 							)}
 						</div>
@@ -144,9 +144,9 @@ const Admin = (props) => {
 						<div className="p-2">
 							{users.length && (
 								<Doughnut
-									labels={["Profit", "Expense"]}
-									data={[admin.boughtVideos]}
-									backgroundColor={["#FB3958", "#FFD700"]}
+									labels={["Profit", "Expenses"]}
+									data={[admin.boughtAudios * 5, admin.boughtAudios * 5]}
+									backgroundColor={["#006F3E", "#FB3958"]}
 								/>
 							)}
 						</div>

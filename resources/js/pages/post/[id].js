@@ -16,8 +16,8 @@ const PostShow = (props) => {
 	// Get id from URL
 	const { id } = useParams()
 
-	const [post, setPost] = useState(props.post)
-	const [postComments, setPostComments] = useState(props.comments)
+	const [post, setPost] = useState({})
+	const [postComments, setPostComments] = useState([])
 	const [newPostComments, setNewPostComments] = useState()
 	const [deletedIds, setDeletedIds] = useState([])
 
@@ -27,9 +27,9 @@ const PostShow = (props) => {
 		})
 
 		// Fetch Post
-		id && props.get(`posts/${id}`, setPost)
+		props.get(`posts/${id}`, setPost)
 		// Fetch Post Comments
-		id && props.get(`post-comments/${id}`, setPostComments)
+		props.get(`post-comments/${id}`, setPostComments)
 	}, [id])
 
 	/*

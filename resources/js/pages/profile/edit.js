@@ -143,6 +143,8 @@ const Edit = (props) => {
 								onChange={(e) => setName(e.target.value)}
 							/>
 							{/* Name End */}
+
+							<br />
 							<br />
 
 							{/* Email */}
@@ -158,6 +160,8 @@ const Edit = (props) => {
 								placeholder={props.auth?.email}
 							/>
 							{/* Email End */}
+
+							<br />
 							<br />
 
 							{/* Phone */}
@@ -175,6 +179,8 @@ const Edit = (props) => {
 								onChange={(e) => setPhone(e.target.value)}
 							/>
 							{/* Phone End */}
+
+							<br />
 							<br />
 
 							{/* Bio */}
@@ -192,6 +198,8 @@ const Edit = (props) => {
 								onChange={(e) => setBio(e.target.value)}
 							/>
 							{/* Bio End */}
+
+							<br />
 							<br />
 
 							{/* Cash Withdrawal */}

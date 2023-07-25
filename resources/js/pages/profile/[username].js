@@ -107,13 +107,11 @@ const ProfileShow = (props) => {
 					<br className="anti-hidden" />
 					{/* Edit and Follow button */}
 					{user.username == props.auth?.username ? (
-						<Link to="/profile/show/edit">
-							<a>
-								<Btn
-									btnClass="mysonar-btn white-btn float-end"
-									btnText="edit profile"
-								/>
-							</a>
+						<Link to="/profile/edit">
+							<Btn
+								btnClass="mysonar-btn white-btn float-end"
+								btnText="edit profile"
+							/>
 						</Link>
 					) : (
 						user.username != "@blackmusic" &&

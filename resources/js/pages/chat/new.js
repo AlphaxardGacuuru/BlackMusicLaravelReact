@@ -1,23 +1,24 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
 
 export default function NewChat(props) {
-	console.log("chat/new")
-
-	const [search, setSearch] = useState("!@#$%^&")
+	const [users, setUsers] = useState([])
+	const [search, setSearch] = useState("")
 
 	const searchInput = useRef(null)
 
 	setTimeout(() => searchInput.current.focus(), 100)
 
+	useEffect(() => {
+		props.get("users", setUsers)
+	}, [])
+
 	// Get user results
-	var userResults = props.users
+	var userResults = users
 		.filter((user) => user.username != props.auth.username)
-		.filter((user) => {
-			return user.username.match(search) || user.name.match(search)
-		})
+		.filter((user) => user.username.match(search) || user.name.match(search))
 
 	return (
 		<div className="row">
@@ -71,7 +72,7 @@ export default function NewChat(props) {
 							<div
 								className="p-2 flex-grow-1"
 								style={{ width: "65%" }}>
-								<Link to={`/chat/${user.username}`}>
+								<Link to={`/chat/show/${user.username}`}>
 									<h6
 										className="m-0"
 										style={{

@@ -50,7 +50,7 @@ const Chat = (props) => {
 				{chatThreads.length == 0 && (
 					<div className="d-flex">
 						<div className="p-2">
-							<Link to="/chat/@blackmusic">
+							<Link to="/chat/show/@blackmusic">
 								<Img
 									src={blackMusic.avatar}
 									className="rounded-circle"
@@ -60,7 +60,7 @@ const Chat = (props) => {
 							</Link>
 						</div>
 						<div className="p-2 flex-grow-1">
-							<Link to="/chat/@blackmusic">
+							<Link to="/chat/show/@blackmusic">
 								<h6
 									className="m-0"
 									style={{
@@ -85,7 +85,7 @@ const Chat = (props) => {
 						key={key}
 						className="d-flex">
 						<div className="pt-2">
-							<Link to={`/chat/${chatThread.username}`}>
+							<Link to={`/chat/show/${chatThread.username}`}>
 								<Img
 									src={chatThread.avatar}
 									className="rounded-circle"
@@ -100,7 +100,7 @@ const Chat = (props) => {
 								maxWidth: "75%",
 								wordWrap: "break-word",
 							}}>
-							<Link to={`/chat/${chatThread.username}`}>
+							<Link to={`/chat/show/${chatThread.username}`}>
 								<h6
 									className="m-0"
 									style={{

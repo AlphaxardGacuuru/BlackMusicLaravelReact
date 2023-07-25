@@ -129,7 +129,7 @@ const PostMedia = (props) => {
 							</b>
 						</small>
 					</h6>
-					<Link to={"post/" + props.post.id}>
+					<Link to={`post/show/${props.post.id}`}>
 						<p className="mb-0">{props.post.text}</p>
 					</Link>
 

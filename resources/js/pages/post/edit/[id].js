@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
@@ -8,6 +8,14 @@ import CloseSVG from "@/svgs/CloseSVG"
 const PostEdit = (props) => {
 	let { id } = useParams()
 
+	const [post, setPost] = useState()
+
+	useEffect(() => {
+		// Fetch Post to Edit
+		props.get(`posts/${id}`, setPost)
+	}, [])
+
+	console.log("post rerendered")
 	return (
 		<div className="row">
 			<div className="col-sm-4"></div>
@@ -16,7 +24,9 @@ const PostEdit = (props) => {
 					<div className="d-flex justify-content-between mb-1">
 						{/* Close Icon */}
 						<div className="text-white">
-							<Link to="/" className="fs-4">
+							<Link
+								to="/"
+								className="fs-4">
 								<CloseSVG />
 							</Link>
 						</div>
@@ -30,15 +40,17 @@ const PostEdit = (props) => {
 					</div>
 
 					{/* Social Input */}
-					<SocialMediaInput
-						{...props}
-						placeholder="What's on your mind"
-						text={props.post.text}
-						showImage={false}
-						showPoll={false}
-						urlTo={`posts/${id}`}
-						editing={true}
-					/>
+					{post && (
+						<SocialMediaInput
+							{...props}
+							placeholder="What's on your mind"
+							text={post.text}
+							showImage={false}
+							showPoll={false}
+							urlTo={`posts/${id}`}
+							editing={true}
+						/>
+					)}
 				</div>
 			</div>
 			<div className="col-sm-4"></div>

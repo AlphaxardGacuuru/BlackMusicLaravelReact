@@ -10,7 +10,6 @@ import BackSVG from "@/svgs/BackSVG"
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
 
 const ChatThread = (props) => {
-	console.log("chat/username")
 	let { username } = useParams()
 
 	const [chats, setChats] = useState([])

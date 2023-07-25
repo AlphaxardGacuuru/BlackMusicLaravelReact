@@ -14,7 +14,7 @@ const StoryMedia = (props) => {
 					display: "inline-block",
 					border: `2px solid ${props.story.hasSeen ? "#232323" : "#FFD700"}`,
 				}}>
-				<Link to={`/story/${props.story.id}`}>
+				<Link to={`/story/show/${props.story.id}`}>
 					<Img
 						src={`/storage/${props.story.media[0]["image"]}`}
 						width="162px"

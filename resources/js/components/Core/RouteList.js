@@ -185,14 +185,14 @@ const RouteList = ({ GLOBAL_STATE }) => {
 					c={<ProfileShow {...GLOBAL_STATE} />}
 				/>
 				<R
-					p="/profile/show/edit"
+					p="/profile/edit"
 					c={<ProfileEdit {...GLOBAL_STATE} />}
 				/>
 				{/* Profile Routes End */}
 
 				{/* Story Routes */}
 				<R
-					p="/story/:id"
+					p="/story/show/:id"
 					c={<StoryShow {...GLOBAL_STATE} />}
 				/>
 				<R

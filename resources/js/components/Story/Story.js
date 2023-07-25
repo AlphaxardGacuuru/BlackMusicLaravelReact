@@ -74,7 +74,7 @@ const Story = (props) => {
 				{Object.keys(props.story.media[segment]) == "image" ? (
 					<Img
 						src={`/storage/${props.story.media[segment]["image"]}`}
-						layout="fill"
+						style={{ height: "100vh", width: "100vw" }}
 					/>
 				) : (
 					<video
@@ -168,7 +168,7 @@ const Story = (props) => {
 								{/* Message */}
 								{props.story.username != props.auth?.username && (
 									<Link
-										href={`/chat/${props.story.username}`}
+										to={`/chat/${props.story.username}`}
 										className="dropdown-item border-bottom border-dark">
 										<h6>Message</h6>
 									</Link>

@@ -26,9 +26,11 @@ class PostCommentService extends Service
      */
     public function show($id)
     {
-        $getComments = PostComment::where("post_id", $id)->orderby('id', 'DESC')->get();
+        $getComments = PostComment::where("post_id", $id)
+            ->orderby('id', 'DESC')
+            ->get();
 
-        return PostComment::collection($getComments);
+        return PostCommentResource::collection($getComments);
     }
 
     /**
@@ -60,7 +62,7 @@ class PostCommentService extends Service
     public function destroy($id)
     {
         $deleted = PostComment::find($id)->delete();
-		
-		return [$deleted, "Comment deleted"];
+
+        return [$deleted, "Comment deleted"];
     }
 }
