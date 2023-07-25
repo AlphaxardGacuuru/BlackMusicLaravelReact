@@ -21,16 +21,16 @@ const Bottomnav = (props) => {
 
 	// Hide BottomNav from various pages
 	location.pathname.match("/404") ||
-	location.pathname == "/story/[id]" ||
+	location.pathname.match("/story/show") ||
 	location.pathname.match("/story/create") ||
-	location.pathname == "/karaoke/show/[id]" ||
+	location.pathname.match("/karaoke/show") ||
 	location.pathname.match("/karaoke/create") ||
 	location.pathname.match("/privacy") ||
 	location.pathname.match("/download") ||
 	location.pathname.match("/chat/") ||
-	location.pathname == "/post/edit/[id]" ||
+	location.pathname.match("/post/edit") ||
 	location.pathname.match("/post/create") ||
-	location.pathname == "/post/show/[id]" ||
+	location.pathname.match("/post/show/") ||
 	location.pathname.match("/referral") ||
 	location.pathname.match("/login") ||
 	location.pathname.match("/register")

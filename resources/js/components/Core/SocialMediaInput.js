@@ -171,7 +171,7 @@ const SocialMediaInput = (props) => {
 					<div className="p-2">
 						<Img
 							src={props.auth.avatar}
-							imgClass="rounded-circle"
+							className="rounded-circle"
 							width="25px"
 							height="25px"
 							alt="Avatar"
@@ -225,7 +225,9 @@ const SocialMediaInput = (props) => {
 									setShowPollPicker(true && false)
 								}
 							}}>
-							<div className="fs-5" style={{ cursor: "pointer" }}>
+							<div
+								className="fs-5"
+								style={{ cursor: "pointer" }}>
 								<ImageSVG />
 							</div>
 						</div>
@@ -243,7 +245,9 @@ const SocialMediaInput = (props) => {
 									setShowPollPicker(true && false)
 								}
 							}}>
-							<div className="fs-5" style={{ cursor: "pointer" }}>
+							<div
+								className="fs-5"
+								style={{ cursor: "pointer" }}>
 								<ImageSVG />
 							</div>
 						</div>
@@ -261,7 +265,9 @@ const SocialMediaInput = (props) => {
 									setShowStoryPicker(true && false)
 								}
 							}}>
-							<div className="fs-5" style={{ cursor: "pointer" }}>
+							<div
+								className="fs-5"
+								style={{ cursor: "pointer" }}>
 								<PollSVG />
 							</div>
 						</div>
@@ -383,7 +389,7 @@ const SocialMediaInput = (props) => {
 										<div className="p-2">
 											<Img
 												src={user.avatar}
-												imgClass="rounded-circle"
+												className="rounded-circle"
 												width="30px"
 												height="30px"
 											/>

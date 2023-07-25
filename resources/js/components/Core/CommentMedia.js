@@ -26,7 +26,7 @@ const CommentMedia = (props) => {
 						<Link to={`/profile/show/${props.comment.username}`}>
 							<Img
 								src={props.comment.avatar}
-								imgClass="rounded-circle"
+								className="rounded-circle"
 								width="40em"
 								height="40em"
 							/>

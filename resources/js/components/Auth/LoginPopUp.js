@@ -29,6 +29,7 @@ const LoginPopUp = (props) => {
 	const [shouldRemember, setShouldRemember] = useState()
 	const [status, setStatus] = useState()
 	const [errors, setErrors] = useState([])
+	const [loading, setLoading] = useState(false)
 
 	const onSocial = (website) => {
 		// window.location.href = `${props.url}/api/login/${website}`
@@ -42,6 +43,7 @@ const LoginPopUp = (props) => {
 	const [phoneLogin, setPhoneLogin] = useState(false)
 
 	const onSubmit = (e) => {
+		setLoading(true)
 		e.preventDefault()
 
 		Axios.get("/sanctum/csrf-cookie").then(() => {
@@ -52,15 +54,23 @@ const LoginPopUp = (props) => {
 				remember: "checked",
 			})
 				.then((res) => {
+					props.setMessages([res.data.message])
+					// Remove loader
+					setLoading(false)
+					// Hide Login Pop Up
 					props.setLogin(false)
-					props.setLocalStorage("sanctumToken", res.data)
+					// Save Sanctum Token to Local Storage
+					props.setLocalStorage("sanctumToken", res.data.data)
 					// Update Logged in user
 					props.get(`auth`, props.setAuth, "auth", false)
-					props.setMessages(["Logged in"])
 					// Reload page
 					setTimeout(() => window.location.reload(), 1000)
 				})
-				.catch((err) => props.getErrors(err, true))
+				.catch((err) => {
+					// Remove loader
+					setLoading(false)
+					props.getErrors(err, true)
+				})
 
 			setPhone("07")
 		})
@@ -68,7 +78,9 @@ const LoginPopUp = (props) => {
 
 	return (
 		<>
-			<div id="preloader" style={{ display: props.login ? "block" : "none" }}>
+			<div
+				id="preloader"
+				style={{ display: props.login ? "block" : "none" }}>
 				<div className="preload-content">
 					{/* <div id="sonar-load"></div> */}
 				</div>
@@ -97,7 +109,10 @@ const LoginPopUp = (props) => {
 						{phoneLogin ? (
 							<center>
 								<div className="mycontact-form">
-									<form method="POST" action="" onSubmit={onSubmit}>
+									<form
+										method="POST"
+										action=""
+										onSubmit={onSubmit}>
 										<input
 											id="phone"
 											type="text"
@@ -106,21 +121,22 @@ const LoginPopUp = (props) => {
 											value={phone}
 											onChange={(e) => setPhone(e.target.value)}
 											required={true}
-											autoComplete="phone"
 											autoFocus
 										/>
+										<br />
 										<br />
 
 										<Btn
 											type="submit"
-											btnClass="mysonar-btn float-right"
+											btnClass="mysonar-btn white-btn float-right"
 											btnText="Login"
+											loading={loading}
 										/>
 									</form>
 									<br />
 
 									<Btn
-										btnClass="mysonar-btn"
+										btnClass="mysonar-btn white-btn"
 										btnText="back"
 										onClick={() => setPhoneLogin(false)}
 									/>
@@ -143,7 +159,7 @@ const LoginPopUp = (props) => {
 								<br />
 
 								<Btn
-									btnClass="mysonar-btn"
+									btnClass="mysonar-btn white-btn"
 									btnText="login with number"
 									onClick={() => setPhoneLogin(true)}
 								/>

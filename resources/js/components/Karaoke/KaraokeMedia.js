@@ -11,32 +11,28 @@ const KaraokeMedia = (props) => {
 				props.audioStates.setShow({ id: 0, time: 0 })
 			}}>
 			<div>
-				<Link to={`/karaoke/${props.karaoke.id}`}>
-					<a>
-						<video
-							src={props.karaoke.karaoke}
-							width="100%"
-							preload="none"
-							autoPlay
-							muted
-							loop
-							playsInline></video>
-					</a>
+				<Link to={`/karaoke/show/${props.karaoke.id}`}>
+					<video
+						src={props.karaoke.karaoke}
+						width="100%"
+						preload="none"
+						autoPlay
+						muted
+						loop
+						playsInline></video>
 				</Link>
 			</div>
 			<div className="d-flex">
 				<div>
 					<Link to={`/profile/show/${props.karaoke.username}`}>
-						<a>
-							<Img
-								src={props.karaoke.avatar}
-								className="rounded-circle"
-								width="40em"
-								height="40em"
-								alt="user"
-								loading="lazy"
-							/>
-						</a>
+						<Img
+							src={props.karaoke.avatar}
+							className="rounded-circle"
+							width="40em"
+							height="40em"
+							alt="user"
+							loading="lazy"
+						/>
 					</Link>
 				</div>
 				<div

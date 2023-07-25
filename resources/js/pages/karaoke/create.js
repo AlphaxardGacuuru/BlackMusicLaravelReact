@@ -171,7 +171,7 @@ const KaraokeCreate = (props) => {
 				}
 
 				// Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-				return new Promise(function(resolve, reject) {
+				return new Promise(function (resolve, reject) {
 					getUserMedia.call(navigator, constraints, resolve, reject)
 				})
 			}
@@ -332,11 +332,15 @@ const KaraokeCreate = (props) => {
 						ref={video}
 						className={`karaoke-video-upload ${filter}`}></video>
 					{/* Floating Video Info Top */}
-					<div className="w-100" style={{ position: "absolute", top: 0 }}>
+					<div
+						className="w-100"
+						style={{ position: "absolute", top: 0 }}>
 						<div className="d-flex justify-content-between">
 							{/* Close Icon */}
 							<div className="p-2">
-								<Link to="/karaoke/charts" style={{ fontSize: "1.5em" }}>
+								<Link
+									to="/karaoke/charts"
+									style={{ fontSize: "1.5em" }}>
 									<CloseSVG />
 								</Link>
 							</div>
@@ -385,7 +389,9 @@ const KaraokeCreate = (props) => {
 									{/* Download */}
 									<div className="ms-auto me-3">
 										<center>
-											<a ref={downloadButton} className="button">
+											<a
+												ref={downloadButton}
+												className="button">
 												{/* Download */}
 											</a>
 										</center>
@@ -413,11 +419,15 @@ const KaraokeCreate = (props) => {
 										<UploadBoxSVG />
 										<h6>Upload</h6>
 									</span>
-									<span ref={pauseRecordEl} style={{ fontSize: "2em" }}>
+									<span
+										ref={pauseRecordEl}
+										style={{ fontSize: "2em" }}>
 										<PauseFilledSVG />
 										<h6>Pause</h6>
 									</span>
-									<span ref={resumeRecordEl} style={{ fontSize: "2em" }}>
+									<span
+										ref={resumeRecordEl}
+										style={{ fontSize: "2em" }}>
 										<PlayFilledSVG />
 										<h6>Paused</h6>
 									</span>
@@ -434,7 +444,9 @@ const KaraokeCreate = (props) => {
 										<StopFilledSVG />
 										<h6 style={{ color: "#fb3958" }}>Recording</h6>
 									</span>
-									<span ref={startRecordEl} style={{ fontSize: "4em" }}>
+									<span
+										ref={startRecordEl}
+										style={{ fontSize: "4em" }}>
 										<RecordSVG />
 										<h6 style={{ color: "#fff" }}>Record</h6>
 									</span>
@@ -478,7 +490,9 @@ const KaraokeCreate = (props) => {
 									)}
 								</Ticker>
 							</div>
-							<div ref={spiningRecord} className="mx-2">
+							<div
+								ref={spiningRecord}
+								className="mx-2">
 								<Link to={`/audio-show/${props.karaokeAudio.audioId}`}>
 									<a
 										onClick={() => {
@@ -492,7 +506,7 @@ const KaraokeCreate = (props) => {
 											src={props.karaokeAudio.thumbnail}
 											width="50px"
 											height="50px"
-											imgClass="rounded-circle"
+											className="rounded-circle"
 											alt="current audio"
 										/>
 									</a>
@@ -602,7 +616,7 @@ const KaraokeCreate = (props) => {
 									<span className="m-0 p-0">
 										<Img
 											src="/storage/img/slide2.jpg"
-											imgClass={item}
+											className={item}
 											width="40px"
 											height="80px"
 										/>

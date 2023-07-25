@@ -163,7 +163,7 @@ const ChatThread = (props) => {
 											<Link to={`/profile/show/${username}`}>
 												<Img
 													src={user.avatar}
-													imgClass="rounded-circle"
+													className="rounded-circle"
 													width="40px"
 													height="40px"
 												/>

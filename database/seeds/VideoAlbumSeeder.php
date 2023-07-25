@@ -12,9 +12,8 @@ class VideoAlbumSeeder extends Seeder
      */
     public function run()
     {
-        factory(VideoAlbum::class, 10)
-            ->create([
-                // 'username' => '@blackmusic'
-            ]);
+        factory(VideoAlbum::class)->create(['username' => '@blackmusic']);
+		
+        factory(VideoAlbum::class, 10)->create();
     }
 }

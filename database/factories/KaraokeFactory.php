@@ -11,7 +11,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Karaoke::class, function (Faker $faker) {
     return [
-        'karaoke' => 'karaokes/' . rand(1, 5) . '.mp4',
+        'karaoke' => 'karaokes/' . rand(1, 4) . '.mp4',
         'username' => User::all()->random()->username,
         'audio_id' => Audio::all()->random()->id,
         'description' => $faker->realText($maxNbChars = 20, $indexSize = 2),

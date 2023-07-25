@@ -13,8 +13,7 @@ class PostSeeder extends Seeder
     public function run()
     {
         // Create one post for @blackmusic
-        factory(Post::class)
-            ->create(['username' => "@blackmusic"]);
+        factory(Post::class)->create(['username' => "@blackmusic"]);
 
         factory(Post::class, 10)->create();
     }

@@ -24,7 +24,9 @@ export default function NewChat(props) {
 			<div className="col-sm-4"></div>
 			<div className="col-sm-4">
 				{/* <!-- ***** Header Area Start ***** --> */}
-				<header style={{ backgroundColor: "#232323" }} className="header-area">
+				<header
+					style={{ backgroundColor: "#232323" }}
+					className="header-area">
 					<div className="container-fluid p-0">
 						<div className="row">
 							<div className="col-12 p-0">
@@ -53,18 +55,22 @@ export default function NewChat(props) {
 				{/* <!-- ****** Artists Area Start ****** --> */}
 				<div className="hidden-scroll">
 					{userResults.map((user, key) => (
-						<div key={key} className="d-flex">
+						<div
+							key={key}
+							className="d-flex">
 							<div className="p-1">
 								<Link to={`/chat/${user.username}`}>
 									<Img
 										src={user.avatar}
-										imgClass="rounded-circle"
+										className="rounded-circle"
 										width="50px"
 										height="50px"
 									/>
 								</Link>
 							</div>
-							<div className="p-2 flex-grow-1" style={{ width: "65%" }}>
+							<div
+								className="p-2 flex-grow-1"
+								style={{ width: "65%" }}>
 								<Link to={`/chat/${user.username}`}>
 									<h6
 										className="m-0"

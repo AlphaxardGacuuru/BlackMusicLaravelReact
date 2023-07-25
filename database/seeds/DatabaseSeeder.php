@@ -12,16 +12,23 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-			// Must be ran in this order since there are some dependancies
+            // Must be ran in this order since there are some dependancies
             UserSeeder::class,
+
             PostSeeder::class,
             PollSeeder::class,
+
             VideoAlbumSeeder::class,
-            AudioAlbumSeeder::class,
             VideoSeeder::class,
+            BoughtVideoSeeder::class,
+
+            AudioAlbumSeeder::class,
             AudioSeeder::class,
+            BoughtAudioSeeder::class,
+
             KaraokeSeeder::class,
-			StorySeeder::class
-		]);
+			
+            StorySeeder::class,
+        ]);
     }
 }

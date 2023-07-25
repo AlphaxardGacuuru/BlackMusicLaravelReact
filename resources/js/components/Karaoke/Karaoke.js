@@ -227,14 +227,12 @@ const Karaoke = (props) => {
 								style={{ borderRadius: "50%" }}>
 								<center>
 									<Link to={`/profile/show/${props.karaoke.username}`}>
-										<a>
-											<Img
-												src={props.karaoke.avatar}
-												width="50px"
-												height="50px"
-												alt="avatar"
-											/>
-										</a>
+										<Img
+											src={props.karaoke.avatar}
+											width="50px"
+											height="50px"
+											alt="avatar"
+										/>
 									</Link>
 								</center>
 							</div>
@@ -334,23 +332,22 @@ const Karaoke = (props) => {
 									<div
 										ref={spiningRecord}
 										className="rotate-record">
-										<Link to={`/audio-show/${props.karaoke.audio_id}`}>
-											<a
-												onClick={() => {
-													props.setShow(props.karaoke.audio_id)
-													props.setLocalStorage("show", {
-														id: props.karaoke.audio_id,
-														time: 0,
-													})
-												}}>
-												<Img
-													src={props.karaoke.audioThumbnail}
-													imgClass="rounded-circle"
-													width="50px"
-													height="50px"
-													alt="current audio"
-												/>
-											</a>
+										<Link
+											to={`/audio-show/${props.karaoke.audio_id}`}
+											onClick={() => {
+												props.setShow(props.karaoke.audio_id)
+												props.setLocalStorage("show", {
+													id: props.karaoke.audio_id,
+													time: 0,
+												})
+											}}>
+											<Img
+												src={props.karaoke.audioThumbnail}
+												className="rounded-circle"
+												width="50px"
+												height="50px"
+												alt="current audio"
+											/>
 										</Link>
 									</div>
 								</center>

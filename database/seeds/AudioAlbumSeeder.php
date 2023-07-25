@@ -12,9 +12,8 @@ class AudioAlbumSeeder extends Seeder
      */
     public function run()
     {
-        factory(AudioAlbum::class, 10)
-            ->create([
-                // 'username' => '@blackmusic'
-            ]);
+        factory(AudioAlbum::class)->create(['username' => '@blackmusic']);
+		
+        factory(AudioAlbum::class, 10)->create();
     }
 }

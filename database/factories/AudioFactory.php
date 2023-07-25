@@ -16,7 +16,7 @@ $factory->define(Audio::class, function (Faker $faker) {
     $genres = ["Afro", "Benga", "Blues", "Boomba", "Country"];
 
     return [
-        'audio' => 'audios/' . rand(1, 5) . '.mp3',
+        'audio' => 'audios/' . rand(1, 4) . '.mp3',
         'name' => $faker->catchPhrase(),
         'audio_album_id' => $album->id,
         'genre' => $genres[rand(0, 4)],

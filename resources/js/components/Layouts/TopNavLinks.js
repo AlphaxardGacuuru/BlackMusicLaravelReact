@@ -158,7 +158,7 @@ const TopNavLinks = (props) => {
 					}}>
 					<Img
 						src={props.auth?.avatar}
-						imgClass="rounded-circle anti-hidden"
+						className="rounded-circle anti-hidden"
 						width="20px"
 						height="20px"
 						alt="Avatar"
@@ -175,7 +175,7 @@ const TopNavLinks = (props) => {
 							<div className="align-items-center">
 								<Img
 									src={props.auth?.avatar}
-									imgClass="rounded-circle"
+									className="rounded-circle"
 									width="25px"
 									height="25px"
 									alt="Avatar"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -117,6 +118,41 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    /*
+     * Token Based Login
+     */
+    public function login(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+            'password' => 'required',
+            'device_name' => 'required',
+        ]);
+
+        $user = User::where('phone', $request->phone)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'phone' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        // Give @blackmusic all abilities
+        if ($user->username == '@blackmusic') {
+            $token = $user->createToken($request->device_name, ['*'])->plainTextToken;
+        } else {
+            $token = $user->createToken($request->device_name)->plainTextToken;
+        }
+
+        return response([
+            "message" => "Logged in",
+            "data" => $token,
+        ], 200);
+    }
+
+    /*
+     * Logout
+     */
     public function logout(Request $request)
     {
         // Delete Current Access Token

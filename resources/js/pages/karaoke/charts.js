@@ -10,13 +10,16 @@ import PlusSVG from "@/svgs/PlusSVG"
 const KaraokeCharts = (props) => {
 	const router = useLocation()
 
+	const [karaokes, setKaraokes] = useState([])
 	const [week, setWeek] = useState(0)
 	const weeks = [0, 1, 2, 3, 4, 5]
 
 	useEffect(() => {
+		// Fetch Karaokes
+		props.get("karaokes", setKaraokes, "karaokes")
 		// Load more on page bottom
 		window.onscroll = function(ev) {
-			if (location.pathname.match(/karaoke-charts/)) {
+			if (location.pathname.match(/karaoke\/charts/)) {
 				const bottom =
 					window.innerHeight + window.scrollY >=
 					document.body.offsetHeight - document.body.offsetHeight / 16
@@ -28,11 +31,8 @@ const KaraokeCharts = (props) => {
 		}
 	}, [])
 
-	var checkLocation = true
-
-	if (props.show != 0) {
-		checkLocation = router.pathname.match(/audio-show/)
-	}
+	var raise =
+		props.audioStates.show.id != 0 && props.audioStates.show.id != undefined
 
 	// Function for loading more artists
 	const handleScroll = (e) => {
@@ -52,7 +52,7 @@ const KaraokeCharts = (props) => {
 			<Link
 				to={`/karaoke/create`}
 				id="chatFloatBtn"
-				className={`${!checkLocation && "mb-5"}`}>
+				className={`${raise && "mb-5"}`}>
 				<PlusSVG />
 			</Link>
 
@@ -111,13 +111,13 @@ const KaraokeCharts = (props) => {
 						onScroll={handleScroll}>
 						{/* Loading Karaoke Media */}
 						{dummyArray
-							.filter(() => props.karaokes.length < 1)
+							.filter(() => karaokes.length < 1)
 							.map((item, key) => (
 								<LoadingKaraokeMedia key={key} />
 							))}
 						{/* Loading Karaoke Media End */}
 
-						{props.karaokes.map((karaoke, key) => (
+						{karaokes.map((karaoke, key) => (
 							<KaraokeMedia
 								{...props}
 								key={key}

@@ -53,7 +53,7 @@ const Chat = (props) => {
 							<Link to="/chat/@blackmusic">
 								<Img
 									src={blackMusic.avatar}
-									imgClass="rounded-circle"
+									className="rounded-circle"
 									width="50px"
 									height="50px"
 								/>
@@ -81,12 +81,14 @@ const Chat = (props) => {
 
 				{/* Threads Start */}
 				{chatThreads.map((chatThread, key) => (
-					<div key={key} className="d-flex">
+					<div
+						key={key}
+						className="d-flex">
 						<div className="pt-2">
 							<Link to={`/chat/${chatThread.username}`}>
 								<Img
 									src={chatThread.avatar}
-									imgClass="rounded-circle"
+									className="rounded-circle"
 									width="50px"
 									height="50px"
 								/>
@@ -120,7 +122,9 @@ const Chat = (props) => {
 									}}>
 									{chatThread.text}
 									{chatThread.hasMedia && (
-										<span className="ms-1" style={{ cursor: "pointer" }}>
+										<span
+											className="ms-1"
+											style={{ cursor: "pointer" }}>
 											<ImageSVG />
 										</span>
 									)}

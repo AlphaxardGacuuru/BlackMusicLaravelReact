@@ -36,10 +36,8 @@ const TopNav = (props) => {
 
 	useEffect(() => {
 		// Listen to Notifications
-		Echo.private(
-			`App.Models.User.${props.auth.id}`
-		).notification((notification) =>
-			props.get("notifications", setNotifications)
+		Echo.private(`App.Models.User.${props.auth.id}`).notification(
+			(notification) => props.get("notifications", setNotifications)
 		)
 
 		// Fetch Notifications
@@ -50,15 +48,13 @@ const TopNav = (props) => {
 		}
 	}, [])
 
-	const logout = (e) => {
-		e.preventDefault()
-
+	const logout = () => {
 		Axios.post(`/logout`).then((res) => {
+			props.setMessages([res.data.message])
 			// Remove phone from localStorage
 			localStorage.clear()
-			props.setMessages([res.data.message])
 			// Reload
-			location.reload()
+			window.location.reload()
 		})
 	}
 
@@ -83,16 +79,16 @@ const TopNav = (props) => {
 
 	// Hide TopNav from various pages
 	location.pathname.match("/404") ||
-	location.pathname == "/story/show/[id]" ||
+	location.pathname.match("/story/show/") ||
 	location.pathname.match("/story/create") ||
-	location.pathname == "/karaoke/show/[id]" ||
+	location.pathname.match("/karaoke/show") ||
 	location.pathname.match("/karaoke/create") ||
 	location.pathname.match("/privacy") ||
 	location.pathname.match("/download") ||
 	location.pathname.match("/chat/") ||
 	location.pathname.match("/post/edit") ||
 	location.pathname.match("/post/create") ||
-	location.pathname == "/post/show/[id]" ||
+	location.pathname.match("/post/show/") ||
 	location.pathname.match("/referral") ||
 	location.pathname.match("/login") ||
 	location.pathname.match("/register")
@@ -101,7 +97,10 @@ const TopNav = (props) => {
 
 	return (
 		<>
-			<div id="MyElement" style={{ display: display }} className={menu}>
+			<div
+				id="MyElement"
+				style={{ display: display }}
+				className={menu}>
 				{/* <!-- ***** Header Area Start ***** --> */}
 				<header
 					style={{
@@ -111,7 +110,9 @@ const TopNav = (props) => {
 					className="header-area">
 					<div className="container-fluid p-0">
 						<div className="row">
-							<div className="col-12" style={{ padding: "0" }}>
+							<div
+								className="col-12"
+								style={{ padding: "0" }}>
 								<div className="menu-area d-flex justify-content-between">
 									{/* <!-- Logo Area  --> */}
 									<div className="logo-area">
@@ -200,7 +201,9 @@ const TopNav = (props) => {
 				{/* <!-- ***** Side Menu Area Start ***** --> */}
 				<div className="mainMenu d-flex align-items-center justify-content-between">
 					{/* <!-- Close Icon --> */}
-					<div className="closeIcon" onClick={() => setMenu("")}>
+					<div
+						className="closeIcon"
+						onClick={() => setMenu("")}>
 						<CloseSVG />
 					</div>
 					{/* <!-- Logo Area --> */}
@@ -208,7 +211,9 @@ const TopNav = (props) => {
 						<Link to="/">Black Music</Link>
 					</div>
 					{/* <!-- Nav --> */}
-					<div className="sonarNav wow fadeInUp" data-wow-delay="1s">
+					<div
+						className="sonarNav wow fadeInUp"
+						data-wow-delay="1s">
 						<nav>
 							<ul>
 								<li className="nav-item active">
@@ -303,7 +308,9 @@ const TopNav = (props) => {
 					<br />
 
 					{/* Avatar Bottom */}
-					<div className="m-0 p-0" style={{ display: avatarVisibility }}>
+					<div
+						className="m-0 p-0"
+						style={{ display: avatarVisibility }}>
 						<Link
 							to={`/profile/show/${props.auth?.username}`}
 							style={{ padding: "0px", margin: "0px" }}
@@ -313,7 +320,7 @@ const TopNav = (props) => {
 								<div className="ms-3 me-3">
 									<Img
 										src={props.auth?.avatar}
-										imgClass="rounded-circle"
+										className="rounded-circle"
 										width="25px"
 										height="25px"
 										alt="Avatar"
@@ -379,8 +386,9 @@ const TopNav = (props) => {
 							to="#"
 							className="p-3 text-start"
 							onClick={(e) => {
+								e.preventDefault()
 								setBottomMenu("")
-								logout(e)
+								logout()
 							}}>
 							<h6>
 								<span className="ms-3 me-4">

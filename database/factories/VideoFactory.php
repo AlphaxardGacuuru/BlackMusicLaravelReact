@@ -20,7 +20,7 @@ $factory->define(Video::class, function (Faker $faker) {
         'name' => $faker->catchPhrase(),
         'video_album_id' => $album->id,
         'genre' => $genres[rand(0, 4)],
-        "thumbnail" => 'video-thumbnails/' . rand(1, 5) . '.jpg',
+        "thumbnail" => 'video-thumbnails/' . rand(1, 4) . '.jpg',
         'description' => $faker->realText($maxNbChars = 20, $indexSize = 2),
         'released' => $faker->dateTime(),
         'username' => $album->username,

@@ -13,8 +13,7 @@ class StorySeeder extends Seeder
     public function run()
     {
         // Create one post for @blackmusic
-        factory(Story::class)
-            ->create(["username" => "@blackmusic"]);
+        factory(Story::class)->create(["username" => "@blackmusic"]);
 
         factory(Story::class, 10)->create();
     }

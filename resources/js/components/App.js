@@ -50,7 +50,6 @@ function App() {
 
 	const [audios, setAudios] = useState(getLocalStorage("audios"))
 	const [audioAlbums, setAudioAlbums] = useState(getLocalStorage("audioAlbums"))
-	const [audioLikes, setAudioLikes] = useState(getLocalStorage("audioLikes"))
 	const [boughtAudios, setBoughtAudios] = useState(
 		getLocalStorage("boughtAudios")
 	)
@@ -66,7 +65,6 @@ function App() {
 	const [artists, setArtists] = useState(getLocalStorage("artists"))
 	const [videos, setVideos] = useState(getLocalStorage("videos"))
 	const [videoAlbums, setVideoAlbums] = useState(getLocalStorage("videoAlbums"))
-	const [videoLikes, setVideoLikes] = useState(getLocalStorage("videoLikes"))
 
 	// Search State
 	const [search, setSearch] = useState("!@#$%^&")
@@ -253,8 +251,6 @@ function App() {
 		setAudios,
 		audioAlbums,
 		setAudioAlbums,
-		audioLikes,
-		setAudioLikes,
 		boughtAudios,
 		setBoughtAudios,
 		boughtVideos,
