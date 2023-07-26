@@ -69,7 +69,8 @@ const Story = (props) => {
 			id={props.story.id}
 			className="single-story">
 			<div
-				style={{ height: "100vh", width: "auto" }}
+				className="m-0 p-0"
+				style={{ height: "100%", width: "100%" }}
 				onClick={onFreeze}>
 				{Object.keys(props.story.media[segment]) == "image" ? (
 					<Img

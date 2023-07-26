@@ -16,8 +16,8 @@ const StoryShow = (props) => {
 		// Scroll Karaoke to current one
 		var storyEl = document.getElementById(id)
 
-		storyEl && storyEl.scrollIntoView({ behavior: "smooth", block: "center" })
-	}, [stories])
+		storyEl.scrollIntoView({ behavior: "smooth", block: "center" })
+	}, [])
 
 	return (
 		<div className="row p-0">

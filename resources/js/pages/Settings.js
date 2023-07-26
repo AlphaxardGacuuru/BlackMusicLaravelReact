@@ -4,13 +4,9 @@ import React, { useState, useEffect } from "react"
 import Btn from "@/components/Core/Btn"
 
 const Settings = (props) => {
-	const [kopokopoRecipients, setKopokopoRecipients] = useState(
-		props.getLocalStorage("kopokopoRecipients")
-	)
-	const [referrals, setReferrals] = useState(props.getLocalStorage("referrals"))
-	const [songPayouts, setSongPayouts] = useState(
-		props.getLocalStorage("songPayouts")
-	)
+	const [kopokopoRecipients, setKopokopoRecipients] = useState([])
+	const [referrals, setReferrals] = useState([])
+	const [songPayouts, setSongPayouts] = useState([])
 	const [loadingBtn, setLoadingBtn] = useState(false)
 
 	// Fetch Kopokopo Recipients
@@ -85,32 +81,34 @@ const Settings = (props) => {
 			<div className="col-sm-8">
 				<center>
 					<h1>Song Payouts</h1>
-					<table className="table table-responsive table-hover">
-						<thead className="border-0">
-							<tr className="border-0">
-								<th className="border-top border-dark">Amount</th>
-								<th className="border-top border-dark">Date Sent</th>
-							</tr>
-						</thead>
-						<tbody className="border-0">
-							{/* Show Video Payouts */}
-							{/* Level 1 */}
-							{songPayouts.songPayouts &&
-								songPayouts.songPayouts.map((videoPayout, key) => (
-									<tr key={key} className="border-0">
-										<td className="text-success">KES {videoPayout.amount}</td>
-										<td className="border-0">{videoPayout.created_at}</td>
-									</tr>
-								))}
-							{/* Show Referrals End */}
-						</tbody>
-					</table>
+					<div className="table-responsive">
+						<table className="table table-dark table-hover">
+							<thead>
+								<tr>
+									<th>Amount</th>
+									<th>Date Sent</th>
+								</tr>
+							</thead>
+							<tbody>
+								{/* Show Video Payouts */}
+								{/* Level 1 */}
+								{songPayouts.songPayouts &&
+									songPayouts.songPayouts.map((videoPayout, key) => (
+										<tr key={key}>
+											<td className="text-success">KES {videoPayout.amount}</td>
+											<td>{videoPayout.created_at}</td>
+										</tr>
+									))}
+								{/* Show Referrals End */}
+							</tbody>
+						</table>
+					</div>
 
 					<h4>Outstanding cash</h4>
 					<h5 className="text-success">KES {songPayouts.balance}</h5>
 
-					<p className="text-muted">
-						By withdrawing less than{" "}
+					<p>
+						By withdrawing less than
 						<span className="text-success">KES 1000</span> you will incur
 						additional withdrawal charges of{" "}
 						<span className="text-success">KES 50</span> from our provider.
@@ -217,58 +215,62 @@ const Settings = (props) => {
 				<br />
 
 				<h1 style={{ textAlign: "center" }}>Your Invites</h1>
-				<table className="table table-responsive table-hover">
-					<thead className="border-0">
-						<tr className="border-0">
-							<th className="border-top border-dark">Level</th>
-							<th className="border-top border-dark">Username</th>
-							<th className="border-top border-dark">Videos</th>
-							<th className="border-top border-dark">Audios</th>
-							<th className="border-top border-dark">Revenue</th>
-						</tr>
-					</thead>
-					<tbody className="border-0">
-						{/* Show Referrals */}
-						{/* Level 1 */}
-						{referrals.referrals &&
-							referrals.referrals.map((referral, key) => (
-								<tr key={key} className="border-0">
-									<td className="border-0">{referral.level}</td>
-									<td className="border-0">{referral.referee}</td>
-									<td className="border-0">{referral.boughtVideos}</td>
-									<td className="border-0">{referral.boughtAudios}</td>
-									<td className="text-success border-0">
-										KES {referral.revenue}
-									</td>
-								</tr>
-							))}
-						{/* Show Referrals End */}
-					</tbody>
-				</table>
+				<div className="table-responsive">
+					<table className="table table-dark table-hover">
+						<thead>
+							<tr>
+								<th>Level</th>
+								<th>Username</th>
+								<th>Videos</th>
+								<th>Audios</th>
+								<th>Revenue</th>
+							</tr>
+						</thead>
+						<tbody>
+							{/* Show Referrals */}
+							{/* Level 1 */}
+							{referrals.referrals &&
+								referrals.referrals.map((referral, key) => (
+									<tr key={key}>
+										<td>{referral.level}</td>
+										<td>{referral.referee}</td>
+										<td>{referral.boughtVideos}</td>
+										<td>{referral.boughtAudios}</td>
+										<td className="text-success border-0">
+											KES {referral.revenue}
+										</td>
+									</tr>
+								))}
+							{/* Show Referrals End */}
+						</tbody>
+					</table>
+				</div>
 				<br />
 				<br />
 
 				<h2 style={{ textAlign: "center" }}>Total Revenues</h2>
-				<table className="table table-responsive table-hover">
-					<thead>
-						<tr className="border-0">
-							<th className="border-top border-dark">Level 1</th>
-							<th className="border-top border-dark">Level 2</th>
-							<th className="border-top border-dark">Level 3</th>
-							<th className="border-top border-dark">Level 4</th>
-							<th className="border-top border-dark">Total</th>
-						</tr>
-					</thead>
-					<tbody className="border-0">
-						<tr className="text-success">
-							<td className="border-0">KES {referrals.level1Revenue}</td>
-							<td className="border-0">KES {referrals.level2Revenue}</td>
-							<td className="border-0">KES {referrals.level3Revenue}</td>
-							<td className="border-0">KES {referrals.level4Revenue}</td>
-							<td className="border-0">KES {referrals.totalRevenue}</td>
-						</tr>
-					</tbody>
-				</table>
+				<div className="table-responsive">
+					<table className="table table-dark table-hover">
+						<thead>
+							<tr>
+								<th>Level 1</th>
+								<th>Level 2</th>
+								<th>Level 3</th>
+								<th>Level 4</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr className="text-success">
+								<td>KES {referrals.level1Revenue}</td>
+								<td>KES {referrals.level2Revenue}</td>
+								<td>KES {referrals.level3Revenue}</td>
+								<td>KES {referrals.level4Revenue}</td>
+								<td>KES {referrals.totalRevenue}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div className="col-sm-2"></div>
 		</div>

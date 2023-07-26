@@ -153,8 +153,8 @@ const VideoEdit = (props) => {
 									<div className="thumbnail">
 										<Img
 											src={video?.thumbnail}
-											width="80em"
-											height="40em"
+											width="160em"
+											height="80em"
 										/>
 									</div>
 									<div className="px-2">

@@ -182,7 +182,7 @@ const VideoCreate = (props) => {
 											<option defaultValue value="">
 												Select Genre
 											</option>
-											<option value="Afro" text-light>
+											<option value="Afro">
 												Afro
 											</option>
 											<option value="Benga">Benga</option>

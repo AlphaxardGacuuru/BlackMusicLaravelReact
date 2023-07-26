@@ -11,46 +11,32 @@ const Search = (props) => {
 	const [searchHistory, setSearchHistory] = useState(
 		props.getLocalStorage("searchHistory")
 	)
-	const [users, setUsers] = useState(props.getLocalStorage("users"))
-	const [videos, setVideos] = useState(props.getLocalStorage("videos"))
-	const [audios, setAudios] = useState(props.getLocalStorage("audios"))
-	const [videoAlbums, setVideoAlbums] = useState(
-		props.getLocalStorage("videoAlbums")
-	)
-	const [audioAlbums, setAudioAlbums] = useState(
-		props.getLocalStorage("audioAlbums")
-	)
 
 	// Fetch Search History
 	useEffect(() => {
-		props.get("search", setSearchHistory, "search", false)
-		props.get("users", setUsers, "users", false)
-		props.get("videos", setVideos, "videos", false)
-		props.get("audios", setAudios, "audios", false)
-		props.get("videoAlbums", setVideoAlbums, "videoAlbums", false)
-		props.get("audioAlbums", setAudioAlbums, "audioAlbums", false)
+		props.get("search", props.setSearchHistory, "search", false)
+		props.get("artists", props.setArtists, "artists", false)
+		props.get("videos", props.setVideos, "videos", false)
+		props.get("audios", props.setAudios, "audios", false)
+		props.get("video-albums", props.setVideoAlbums, "videoAlbums", false)
+		props.get("audio-albums", props.setAudioAlbums, "audioAlbums", false)
 	}, [])
 
-	var userResults = users.filter((user) => {
-		return (
-			user.username != props.auth.username &&
-			user.username != "@blackmusic" &&
-			user.accountType == "musician" &&
-			user.username.match(props.search)
-		)
+	var userResults = props.artists.filter((user) => {
+		return user.name.match(props.search) || user.username.match(props.search)
 	})
 
-	var videoResults = videos.filter(
+	var videoResults = props.videos.filter(
 		(video) =>
 			video.name.match(props.search) && video.username != props.auth.username
 	)
 
-	var audioResults = audios.filter(
+	var audioResults = props.audios.filter(
 		(audio) =>
 			audio.name.match(props.search) && audio.username != props.auth.username
 	)
 
-	var audioAlbumResults = audioAlbums.filter((audioAlbum) => {
+	var audioAlbumResults = props.audioAlbums.filter((audioAlbum) => {
 		return (
 			audioAlbum.name != "Singles" &&
 			audioAlbum.name.match(props.search) &&
@@ -58,7 +44,7 @@ const Search = (props) => {
 		)
 	})
 
-	var videoAlbumResults = videoAlbums.filter((videoAlbum) => {
+	var videoAlbumResults = props.videoAlbums.filter((videoAlbum) => {
 		return (
 			videoAlbum.name != "Singles" &&
 			videoAlbum.name.match(props.search) &&
@@ -143,7 +129,10 @@ const Search = (props) => {
 					<div className="hidden-scroll">
 						{/*  Echo Artists  */}
 						{userResults.map((artist, key) => (
-							<AvatarMedia key={key} user={artist} />
+							<AvatarMedia
+								key={key}
+								user={artist}
+							/>
 						))}
 						{/* Echo Artists End */}
 					</div>
@@ -162,7 +151,9 @@ const Search = (props) => {
 						</div>
 					)}
 					{videoResults.slice(0, 5).map((video, key) => (
-						<div key={key} onClick={() => onSearch(video.name)}>
+						<div
+							key={key}
+							onClick={() => onSearch(video.name)}>
 							<VideoMedia
 								{...props}
 								video={video}
@@ -181,8 +172,13 @@ const Search = (props) => {
 						</div>
 					)}
 					{audioResults.slice(0, 5).map((audio, key) => (
-						<div key={key} onClick={() => onSearch(audio.name)}>
-							<AudioMedia {...props} audio={audio} />
+						<div
+							key={key}
+							onClick={() => onSearch(audio.name)}>
+							<AudioMedia
+								{...props}
+								audio={audio}
+							/>
 						</div>
 					))}
 					{/* Audios End */}
@@ -208,8 +204,8 @@ const Search = (props) => {
 								{videoAlbum.name != "Singles" ? (
 									<Img
 										src={videoAlbum.cover}
-										width="10em"
-										height="10em"
+										width="100em"
+										height="100em"
 										alt="album cover"
 									/>
 								) : (
@@ -241,8 +237,8 @@ const Search = (props) => {
 								{audioAlbum.name != "Singles" ? (
 									<Img
 										src={audioAlbum.cover}
-										width="10em"
-										height="10em"
+										width="100em"
+										height="100em"
 										alt="album cover"
 									/>
 								) : (

@@ -58,8 +58,11 @@ function App() {
 	)
 	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
 	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
-	const [karaokes, setKaraokes] = useState([])
+	const [karaokes, setKaraokes] = useState(getLocalStorage("karaokes"))
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
+	const [savedKaraokes, setSavedKaraokes] = useState(
+		getLocalStorage("savedKaraokes")
+	)
 	const [stories, setStories] = useState(getLocalStorage("stories"))
 	const [users, setUsers] = useState(getLocalStorage("users"))
 	const [artists, setArtists] = useState(getLocalStorage("artists"))
@@ -275,6 +278,8 @@ function App() {
 		setSearch,
 		stories,
 		setStories,
+		savedKaraokes,
+		setSavedKaraokes,
 		// Notifications
 		displayNotification,
 		subscribeToPush,
@@ -298,7 +303,9 @@ function App() {
 			<AudioPlayer {...GLOBAL_STATE} />
 
 			{/* Install button */}
-			<button ref={btnAdd} style={{ display: "none" }}>
+			<button
+				ref={btnAdd}
+				style={{ display: "none" }}>
 				test
 			</button>
 		</React.Fragment>
