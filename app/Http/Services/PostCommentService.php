@@ -28,7 +28,7 @@ class PostCommentService extends Service
     {
         $getComments = PostComment::where("post_id", $id)
             ->orderby('id', 'DESC')
-            ->get();
+            ->paginate(10);
 
         return PostCommentResource::collection($getComments);
     }

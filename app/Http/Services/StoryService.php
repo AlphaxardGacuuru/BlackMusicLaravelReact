@@ -26,7 +26,7 @@ class StoryService extends Service
             })
             ->where("follows.muted->stories", false)
             ->orderBy("stories.id", "DESC")
-            ->get();
+            ->paginate(10);
 
         return StoryResource::collection($getStories);
     }
@@ -81,9 +81,9 @@ class StoryService extends Service
     {
         $story = Story::find($id);
         // Delete media
-		foreach ($story->media as $media) {
-			Storage::delete('public/' . $media["image"]);
-		}
+        foreach ($story->media as $media) {
+            Storage::delete('public/' . $media["image"]);
+        }
 
         $deleted = $story->delete();
 

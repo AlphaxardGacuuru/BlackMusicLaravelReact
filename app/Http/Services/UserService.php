@@ -116,7 +116,7 @@ class UserService extends Service
         $getArtists = User::where("account_type", "musician")
             ->where("username", "!=", $this->username)
             ->where("username", "!=", "@blackmusic")
-            ->get();
+            ->paginate(10);
 
         return UserResource::collection($getArtists);
     }

@@ -77,7 +77,8 @@ class ChatService extends Service
             ->where("to", $username)
             ->orWhere("username", $username)
             ->where("to", $this->username)
-            ->orderBy('id', 'ASC')->get();
+            ->orderBy('id', 'ASC')
+            ->paginate(10);
 
         return ChatResource::collection($getChat);
     }

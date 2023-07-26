@@ -21,10 +21,6 @@ import CreateStoryMedia from "@/components/Story/CreateStoryMedia"
 
 export default function Home(props) {
 	const [newPosts, setNewPosts] = useState()
-	const [posts, setPosts] = useState(props.posts)
-	const [videos, setVideos] = useState(props.videos)
-	const [artists, setArtists] = useState(props.artists)
-	const [stories, setStories] = useState(props.stories)
 	const [videoSlice, setVideoSlice] = useState(10)
 	const [storySlice, setStorySlice] = useState(10)
 	const [showPostBtn, setShowPostBtn] = useState()
@@ -47,7 +43,7 @@ export default function Home(props) {
 	/*
 	 * Function for deleting posts */
 	const onNewPosts = () => {
-		props.get("posts", setPosts, "posts")
+		props.get("posts", props.setPosts, "posts")
 		// Smooth scroll to top
 		window.scrollTo({
 			top: 0,
@@ -179,11 +175,9 @@ export default function Home(props) {
 						{/* Name End */}
 					</div>
 
-					<hr className="border border-light" />
-
 					{/* Profile Info */}
 					<div
-						className="d-flex p-4"
+						className="d-flex px-4 pb-4"
 						style={{ backgroundColor: "#232323" }}>
 						<div className="flex-fill">
 							<h6>Posts</h6>
@@ -202,10 +196,10 @@ export default function Home(props) {
 					</div>
 					{/* Profile Info End */}
 
-					<hr className="border border-light" />
+					<br />
 
 					{/* <!-- Musicians suggestions area --> */}
-					<div className="">
+					<div className="border-top border-dark">
 						<div className="p-2">
 							<h2>Musicians to follow</h2>
 						</div>
@@ -213,19 +207,21 @@ export default function Home(props) {
 
 						{/* Loading Musician items */}
 						{dummyArray
-							.filter(() => artists.filter((user) => user.accountType).length < 1)
+							.filter(
+								() => props.artists.filter((user) => user.accountType).length < 1
+							)
 							.map((item, key) => (
 								<LoadingMusicianMedia key={key} />
 							))}
 
 						{/* Musicians */}
-						{artists.map((user, key) => (
+						{props.artists.map((user, key) => (
 							<MusicianMedia
 								{...props}
 								key={key}
 								user={user}
-								setArtists={setArtists}
-								setPosts={setPosts}
+								setArtists={props.setArtists}
+								setPosts={props.setPosts}
 							/>
 						))}
 					</div>
@@ -245,13 +241,13 @@ export default function Home(props) {
 
 							{/* Loading Story items */}
 							{dummyArray
-								.filter(() => stories.length < 1)
+								.filter(() => props.stories.length < 1)
 								.map((item, key) => (
 									<LoadingStoryMedia key={key} />
 								))}
 
 							{/* Real Story items */}
-							{stories.slice(0, storySlice).map((story, key) => (
+							{props.stories.slice(0, storySlice).map((story, key) => (
 								<StoryMedia
 									{...props}
 									key={key}
@@ -266,13 +262,13 @@ export default function Home(props) {
 					<div className="m-0 p-0">
 						{/* Loading Post items */}
 						{dummyArray
-							.filter(() => posts.length < 1)
+							.filter(() => props.posts.length < 1)
 							.map((item, key) => (
 								<LoadingPostMedia key={key} />
 							))}
 
 						{/* Posts */}
-						{posts
+						{props.posts
 							.filter((post) => !deletedIds.includes(post.id))
 							.map((post, key) => (
 								<PostMedia
@@ -281,8 +277,8 @@ export default function Home(props) {
 									post={post}
 									onDeletePost={onDeletePost}
 									stateToUpdate={() => {
-										props.get("artists", setArtists, "artists")
-										props.get("posts", setPosts, "posts")
+										props.get("artists", props.setArtists, "artists")
+										props.get("posts", props.setPosts, "posts")
 									}}
 								/>
 							))}
@@ -298,13 +294,13 @@ export default function Home(props) {
 					<div className=" m-0 p-0">
 						{/* Loading Video items */}
 						{dummyArray
-							.filter(() => videos.length < 1)
+							.filter(() => props.videos.length < 1)
 							.map((item, key) => (
 								<LoadingVideoMedia key={key} />
 							))}
 
 						{/* Real Video items */}
-						{videos
+						{props.videos
 							.filter((video) => !video.hasBoughtVideo)
 							.slice(0, 10)
 							.map((video, key) => (

@@ -16,8 +16,8 @@ class KaraokeCommentService extends Service
     public function index()
     {
         $getKaraokeComments = KaraokeComment::orderBy('id', 'DESC')->get();
-		
-		return KaraokeCommentResource::collection($getKaraokeComments);
+
+        return KaraokeCommentResource::collection($getKaraokeComments);
     }
 
     /**
@@ -28,9 +28,11 @@ class KaraokeCommentService extends Service
      */
     public function show($id)
     {
-        $getKaraokeComments = KaraokeComment::where("karaoke_id", $id)->orderBy("id", "DESC")->get();
-		
-		return KaraokeCommentResource::collection($getKaraokeComments);
+        $getKaraokeComments = KaraokeComment::where("karaoke_id", $id)
+            ->orderBy("id", "DESC")
+            ->paginate(10);
+
+        return KaraokeCommentResource::collection($getKaraokeComments);
     }
 
     /**
@@ -53,7 +55,7 @@ class KaraokeCommentService extends Service
         // $karaoke->users->username != auth()->user()->username &&
         // $karaoke->users->notify(new KaraokeCommentNotifications($karaoke->name));
 
-		return [$saved, "Comment posted", $karaokeComment];
+        return [$saved, "Comment posted", $karaokeComment];
     }
 
     /**
@@ -65,7 +67,7 @@ class KaraokeCommentService extends Service
     public function destroy($id)
     {
         $deleted = KaraokeComment::find($id)->delete();
-		
-		return [$deleted, "Comment deleted"];
+
+        return [$deleted, "Comment deleted"];
     }
 }

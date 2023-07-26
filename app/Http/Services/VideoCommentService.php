@@ -15,8 +15,8 @@ class VideoCommentService extends Service
     public function index()
     {
         $getVideoComments = VideoComment::orderBy('id', 'DESC')->get();
-		
-		return VideoCommentResource::collection($getVideoComments);
+
+        return VideoCommentResource::collection($getVideoComments);
     }
 
     /**
@@ -29,9 +29,9 @@ class VideoCommentService extends Service
     {
         $getVideoComments = VideoComment::where("video_id", $id)
             ->orderBy('id', 'DESC')
-            ->get();
-			
-			return VideoCommentResource::collection($getVideoComments);
+            ->paginate(10);
+
+        return VideoCommentResource::collection($getVideoComments);
     }
 
     /**
@@ -50,7 +50,7 @@ class VideoCommentService extends Service
 
         $saved = $videoComment->save();
 
-		return [$saved, "Comment posted", $videoComment];
+        return [$saved, "Comment posted", $videoComment];
     }
 
     /**
@@ -62,7 +62,7 @@ class VideoCommentService extends Service
     public function destroy($id)
     {
         $deleted = VideoComment::find($id)->delete();
-		
-		return [$deleted, "Comment deleted"];
+
+        return [$deleted, "Comment deleted"];
     }
 }

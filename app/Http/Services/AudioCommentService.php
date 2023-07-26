@@ -29,7 +29,7 @@ class AudioCommentService extends Service
     {
         $getAudioComments = AudioComment::where("audio_id", $id)
             ->orderBy('id', 'DESC')
-            ->get();
+            ->paginate(10);
 
         return AudioCommentResource::collection($getAudioComments);
     }
