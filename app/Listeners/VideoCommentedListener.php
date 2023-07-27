@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\VideoCommentedEvent;
 use App\Notifications\VideoCommentedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class VideoCommentedListener implements ShouldQueue
 {
@@ -27,8 +26,9 @@ class VideoCommentedListener implements ShouldQueue
      */
     public function handle(VideoCommentedEvent $event)
     {
-        if ($event->video->username != auth("sanctum")->user()->username) {
-			$event->video->user->notify(new VideoCommentedNotification($event->video));
-		}
+        $event
+            ->video
+            ->user
+            ->notify(new VideoCommentedNotification($event->video, $event->username));
     }
 }

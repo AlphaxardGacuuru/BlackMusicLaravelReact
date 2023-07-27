@@ -49,8 +49,12 @@ class VideoCommentService extends Service
         $videoComment->text = $request->input('text');
 
         $saved = $videoComment->save();
+		// Check if commenter is owner of videos
+		$notCurrentUser = $videoComment->video->username != $this->username;
+		// Dispatch if comment is saved successfully and commenter is not owner of audio
+		$canDispatch = $notCurrentUser && $saved;
 
-        return [$saved, "Comment posted", $videoComment];
+        return [$canDispatch, "Comment posted", $videoComment];
     }
 
     /**

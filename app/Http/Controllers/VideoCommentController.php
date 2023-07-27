@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\VideoCommentedEvent;
+use App\Http\Services\VideoCommentService;
 use App\Models\Video;
 use App\Models\VideoComment;
-use App\Http\Services\VideoCommentService;
 use Illuminate\Http\Request;
 
 class VideoCommentController extends Controller
@@ -37,11 +37,13 @@ class VideoCommentController extends Controller
             'text' => 'required',
         ]);
 
-        [$saved, $message, $videoComment] = $this->service->store($request);
+        [$canDispatch, $message, $videoComment] = $this->service->store($request);
 
-        $video = Video::find($request->input("id"));
-
-        VideoCommentedEvent::dispatchIf($saved, $video);
+        VideoCommentedEvent::dispatchIf(
+            $canDispatch,
+            $videoComment->video,
+            $videoComment->username
+        );
 
         return response([
             "message" => $message,

@@ -49,8 +49,12 @@ class AudioCommentService extends Service
         $audioComment->text = $request->input('text');
 
         $saved = $audioComment->save();
+        // Check if commenter is owner of videos
+        $notCurrentUser = $audioComment->audio->username != $this->username;
+        // Dispatch if comment is saved successfully and commenter is not owner of audio
+        $canDispatch = $notCurrentUser && $saved;
 
-        return [$saved, "Comment posted", $audioComment];
+        return [$canDispatch, "Comment posted", $audioComment];
     }
 
     /**
@@ -63,6 +67,6 @@ class AudioCommentService extends Service
     {
         $deleted = AudioComment::find($id)->delete();
 
-		return [$deleted, "Comment deleted"];
+        return [$deleted, "Comment deleted"];
     }
 }

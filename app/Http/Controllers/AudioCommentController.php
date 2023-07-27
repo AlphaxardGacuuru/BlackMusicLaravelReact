@@ -37,11 +37,13 @@ class AudioCommentController extends Controller
             'text' => 'required',
         ]);
 
-        [$saved, $message, $audioComment] = $this->service->store($request);
+        [$canDispatch, $message, $audioComment] = $this->service->store($request);
 
-        $audio = Audio::find($request->input("id"));
-
-        AudioCommentedEvent::dispatchIf($saved, $audio);
+        AudioCommentedEvent::dispatchIf(
+			$canDispatch, 
+			$audioComment->audio, 
+			$audioComment->username
+		);
 
         return response([
             "message" => $message,
