@@ -71,7 +71,7 @@ const Audios = (props) => {
 			</div>
 			<div className="row">
 				<div className="col-sm-4"></div>
-				<div className="col-sm-2">
+				<div className="col-sm-2 mb-3">
 					<center>
 						<Link
 							to="/audio/album/create"
@@ -95,7 +95,7 @@ const Audios = (props) => {
 			<div className="row">
 				<div className="col-sm-2">
 					{/* Stats */}
-					<table className="table table-dark table-hover table-borderles mb-5">
+					<table>
 						<thead>
 							<tr>
 								<th
@@ -105,7 +105,7 @@ const Audios = (props) => {
 								</th>
 							</tr>
 						</thead>
-						<tbody className="table-group-divider">
+						<tbody>
 							<tr>
 								<td>Audios</td>
 								<td>{audios}</td>
@@ -161,9 +161,9 @@ const Audios = (props) => {
 							{/* Album End */}
 
 							{/* Audios table */}
-							<div className="table-responsive hidden-scroll">
-								<table className="table table-dark table-hover">
-									<tbody>
+							<div className="hidden-scroll">
+								<table>
+									<thead>
 										<tr>
 											<th>#</th>
 											<th>Thumbnail</th>
@@ -178,10 +178,8 @@ const Audios = (props) => {
 											<th>Uploaded</th>
 											<th></th>
 										</tr>
-									</tbody>
-									<tbody
-										key={key}
-										className="table-group-divider">
+									</thead>
+									<tbody key={key}>
 										{artistAudios
 											.filter((audio) => audio.audioAlbumId == audioAlbum.id)
 											.map((albumItem, key) => (
@@ -216,10 +214,10 @@ const Audios = (props) => {
 													<td>{audioAlbum.released}</td>
 													<td>{audioAlbum.createdAt}</td>
 													<td>
-														<Link to={`/audio/edit/${albumItem.id}`}>
-															<button className="mysonar-btn btn-2">
-																edit
-															</button>
+														<Link
+															to={`/audio/edit/${albumItem.id}`}
+															className="btn mysonar-btn btn-2">
+															edit
 														</Link>
 													</td>
 												</tr>

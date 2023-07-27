@@ -164,8 +164,8 @@ const Admin = (props) => {
 				<div className="col-sm-8">
 					{/* Users */}
 					<h1>Users</h1>
-					<div className="table-responsive hidden-scroll">
-						<table className="table table-dark table-hover">
+					<div className="hidden-scroll">
+						<table>
 							<thead>
 								<tr>
 									<th colSpan="14">
@@ -235,9 +235,9 @@ const Admin = (props) => {
 
 					{/* Song Payouts */}
 					<h1>Song Payouts</h1>
-					<div className="table-responsive hidden-scroll">
-						<table className="table table-dark table-hover">
-							<tbody>
+					<div className="hidden-scroll">
+						<table>
+							<thead>
 								<tr>
 									<th>Name</th>
 									<th>Username</th>
@@ -246,10 +246,10 @@ const Admin = (props) => {
 									<th>Payouts</th>
 									<th>Balance</th>
 								</tr>
-							</tbody>
-							{songPayouts.map((songPayout, key) => (
-								<tbody key={key}>
-									<tr>
+							</thead>
+							<tbody>
+								{songPayouts.map((songPayout, key) => (
+									<tr key={key}>
 										<td>{songPayout.name}</td>
 										<td>{songPayout.username}</td>
 										<td>{songPayout.amount}</td>
@@ -257,8 +257,8 @@ const Admin = (props) => {
 										<td>{songPayout.payouts}</td>
 										<td>{songPayout.balance}</td>
 									</tr>
-								</tbody>
-							))}
+								))}
+							</tbody>
 						</table>
 					</div>
 
@@ -268,26 +268,26 @@ const Admin = (props) => {
 
 					{/* Kopokopo Recipients */}
 					<h1>Kopokopo Recipients</h1>
-					<div className="table-responsive hidden-scroll">
-						<table className="table table-dark table-hover">
-							<tbody>
+					<div className="hidden-scroll">
+						<table>
+							<thead>
 								<tr>
 									<th>Name</th>
 									<th>Username</th>
 									<th>Phone</th>
 									<th>Destination Reference</th>
 								</tr>
-							</tbody>
-							{kopokopoRecipients.map((kopokopoRecipient, key) => (
-								<tbody key={key}>
-									<tr>
+							</thead>
+							<tbody>
+								{kopokopoRecipients.map((kopokopoRecipient, key) => (
+									<tr key={key}>
 										<td>{kopokopoRecipient.name}</td>
 										<td>{kopokopoRecipient.username}</td>
 										<td>{kopokopoRecipient.phone}</td>
 										<td>{kopokopoRecipient.destination_reference}</td>
 									</tr>
-								</tbody>
-							))}
+								))}
+							</tbody>
 						</table>
 					</div>
 					<br />

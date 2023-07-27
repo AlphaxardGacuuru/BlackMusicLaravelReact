@@ -137,7 +137,7 @@ const Videos = (props) => {
 				className="row"
 				style={{ display: main }}>
 				<div className="col-sm-4"></div>
-				<div className="col-sm-2">
+				<div className="col-sm-2 mb-3">
 					<center>
 						<Link
 							to="/video/album/create"
@@ -166,7 +166,7 @@ const Videos = (props) => {
 				className="row"
 				style={{ display: main }}>
 				<div className="col-sm-2">
-					<table className="table table-dark table-hover">
+					<table>
 						<thead>
 							<tr>
 								<th
@@ -176,7 +176,7 @@ const Videos = (props) => {
 								</th>
 							</tr>
 						</thead>
-						<tbody className="table-group-divider">
+						<tbody>
 							<tr>
 								<td>Videos</td>
 								<td>{videos}</td>
@@ -241,9 +241,9 @@ const Videos = (props) => {
 							{/* Album End */}
 
 							{/* Videos table */}
-							<div className="table-responsive hidden-scroll">
-								<table className="table table-dark table-hover">
-									<tbody>
+							<div className="hidden-scroll">
+								<table>
+									<thead>
 										<tr>
 											<th>#</th>
 											<th>Thumbnail</th>
@@ -258,8 +258,8 @@ const Videos = (props) => {
 											<th>Uploaded</th>
 											<th></th>
 										</tr>
-									</tbody>
-									<tbody className="table-group-divider">
+									</thead>
+									<tbody>
 										{artistVideos
 											.filter((video) => video.videoAlbumId == videoAlbum.id)
 											.map((albumItem, key) => (
@@ -269,8 +269,8 @@ const Videos = (props) => {
 														<Link to={`/video/edit/${albumItem.id}`}>
 															<Img
 																src={albumItem.thumbnail}
-																width="160px"
-																height="90px"
+																width="50px"
+																height="25px"
 																alt="thumbnail"
 															/>
 														</Link>

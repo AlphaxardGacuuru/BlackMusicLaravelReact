@@ -81,8 +81,8 @@ const Settings = (props) => {
 			<div className="col-sm-8">
 				<center>
 					<h1>Song Payouts</h1>
-					<div className="table-responsive">
-						<table className="table table-dark table-hover">
+					<div className="hidden-scroll">
+						<table>
 							<thead>
 								<tr>
 									<th>Amount</th>
@@ -215,8 +215,8 @@ const Settings = (props) => {
 				<br />
 
 				<h1 style={{ textAlign: "center" }}>Your Invites</h1>
-				<div className="table-responsive">
-					<table className="table table-dark table-hover">
+				<div className="hidden-scroll">
+					<table>
 						<thead>
 							<tr>
 								<th>Level</th>
@@ -249,8 +249,8 @@ const Settings = (props) => {
 				<br />
 
 				<h2 style={{ textAlign: "center" }}>Total Revenues</h2>
-				<div className="table-responsive">
-					<table className="table table-dark table-hover">
+				<div className="hidden-scroll">
+					<table>
 						<thead>
 							<tr>
 								<th>Level 1</th>
