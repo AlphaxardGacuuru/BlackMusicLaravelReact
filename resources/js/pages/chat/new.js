@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
+import BackSVG from "@/svgs/BackSVG"
 
 export default function NewChat(props) {
-	const [users, setUsers] = useState([])
 	const [search, setSearch] = useState("")
 
 	const searchInput = useRef(null)
@@ -12,11 +12,11 @@ export default function NewChat(props) {
 	setTimeout(() => searchInput.current.focus(), 100)
 
 	useEffect(() => {
-		props.get("users", setUsers)
+		props.get("users", props.setUsers)
 	}, [])
 
 	// Get user results
-	var userResults = users
+	var userResults = props.users
 		.filter((user) => user.username != props.auth.username)
 		.filter((user) => user.username.match(search) || user.name.match(search))
 
@@ -28,22 +28,25 @@ export default function NewChat(props) {
 				<header
 					style={{ backgroundColor: "#232323" }}
 					className="header-area">
-					<div className="container-fluid p-0">
-						<div className="row">
-							<div className="col-12 p-0">
-								{/* <!-- Contact form --> */}
-								<div className="mycontact-form">
-									<input
-										ref={searchInput}
-										className="my-form"
-										placeholder="Select user"
-										style={{ width: "100%" }}
-										onChange={(e) => {
-											var regex = new RegExp(e.target.value, "gi")
-											setSearch(regex)
-										}}
-									/>
-								</div>
+					<div className="d-flex p-2">
+						<div className="pt-3">
+							<Link to="/chat">
+								<BackSVG />
+							</Link>
+						</div>
+						<div className="flex-grow-1">
+							{/* <!-- Contact form --> */}
+							<div className="mycontact-form">
+								<input
+									ref={searchInput}
+									className="my-form"
+									placeholder="Select user"
+									style={{ width: "100%" }}
+									onChange={(e) => {
+										var regex = new RegExp(e.target.value, "gi")
+										setSearch(regex)
+									}}
+								/>
 							</div>
 						</div>
 					</div>

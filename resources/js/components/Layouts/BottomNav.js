@@ -93,7 +93,9 @@ const Bottomnav = (props) => {
 					{/* Audio Player */}
 					<div className="container-fluid menu-area d-flex text-white hidden px-1 border-bottom border-dark">
 						{/* <!-- Close Icon --> */}
-						<div className="px-0 align-self-center">
+						<div
+							className="px-0 align-self-center"
+							style={{ cursor: "pointer" }}>
 							<span
 								onClick={() => {
 									props.audioStates.pauseSong()

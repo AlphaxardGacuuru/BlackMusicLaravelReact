@@ -8,22 +8,21 @@ import ImageSVG from "@/svgs/ImageSVG"
 
 const Chat = (props) => {
 	const [blackMusic, setBlackMusic] = useState({})
-	const [chatThreads, setChatThreads] = useState([])
 
 	// Fetch Help Threads
 	useEffect(() => {
 		// Listen to New Chats
 		Echo.private(`chat-created`).listen("NewChatEvent", (e) => {
-			props.get("chats", setChatThreads, "chatThreads")
+			props.get("chats", props.setChatThreads, "chatThreads")
 		})
 
 		// Listen to Deleted Chats
 		Echo.private(`chat-deleted`).listen("ChatDeletedEvent", (e) => {
-			props.get("chats", setChatThreads, "chatThreads")
+			props.get("chats", props.setChatThreads, "chatThreads")
 		})
 
 		props.get("users/@blackmusic", setBlackMusic)
-		props.get("chats", setChatThreads, "chatThreads")
+		props.get("chats", props.setChatThreads, "chatThreads")
 
 		return () => {
 			Echo.leaveChannel(`chat-created`)
@@ -47,7 +46,7 @@ const Chat = (props) => {
 				</Link>
 
 				{/* Default Thread */}
-				{chatThreads.length == 0 && (
+				{props.chatThreads.length == 0 && (
 					<div className="d-flex">
 						<div className="p-2">
 							<Link to="/chat/show/@blackmusic">
@@ -80,7 +79,7 @@ const Chat = (props) => {
 				{/* Start Thread End */}
 
 				{/* Threads Start */}
-				{chatThreads.map((chatThread, key) => (
+				{props.chatThreads.map((chatThread, key) => (
 					<div
 						key={key}
 						className="d-flex">

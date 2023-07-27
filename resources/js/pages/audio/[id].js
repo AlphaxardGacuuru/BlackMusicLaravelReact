@@ -31,9 +31,7 @@ const AudioShow = (props) => {
 
 	// Set State
 	const [audio, setAudio] = useState({})
-	const [audios, setAudios] = useState([])
 	const [audioComments, setAudioComments] = useState([])
-	const [boughtAudios, setBoughtAudios] = useState([])
 	const [inCart, setInCart] = useState(false)
 	const [hasLiked, setHasLiked] = useState(false)
 	const [hasFollowed, setHasFollowed] = useState(false)
@@ -63,9 +61,9 @@ const AudioShow = (props) => {
 		}
 
 		// Fetch Audios
-		props.get("audios", setAudios, "audios")
+		props.get("audios", props.setAudios, "audios")
 		// Fetch Bought Audios
-		props.get("bought-audios", setBoughtAudios, "boughtAudios")
+		props.get("bought-audios", props.setBoughtAudios, "boughtAudios")
 	}, [id])
 
 	/*
@@ -624,9 +622,7 @@ const AudioShow = (props) => {
 				<div className="p-2 border-bottom border-dark">
 					<h5>Up next</h5>
 				</div>
-				{!boughtAudios.some(
-					(boughtAudio) => boughtAudio.username == props.auth.username
-				) && (
+				{!props.boughtAudios && (
 					<center>
 						<h6
 							className="mt-4"
@@ -636,21 +632,18 @@ const AudioShow = (props) => {
 					</center>
 				)}
 
-				{boughtAudios
-					.filter((boughtAudio) => {
-						return (
-							boughtAudio.username == props.auth.username &&
-							boughtAudio.audio_id != props.show
-						)
-					})
+				{props.boughtAudios
+					.filter(
+						(boughtAudio) => boughtAudio.id != props.audioStates.show.id
+					)
 					.map((boughtAudio, key) => (
 						<AudioMedia
 							{...props}
-							audio={audio}
+							audio={boughtAudio}
 							onBuyAudios={onBuyAudios}
 						/>
 					))}
-				{/* <!-- End of Up next Area --> */}
+				{/* End of Up next Area */}
 
 				{/* Song Suggestion Area */}
 				<div className="p-2 mt-5 border-bottom border-dark">
@@ -663,7 +656,7 @@ const AudioShow = (props) => {
 						<LoadingAudioMedia key={key} />
 					))}
 
-				{audios
+				{props.audios
 					.filter((audio) => {
 						return (
 							!audio.hasBoughtAudio &&

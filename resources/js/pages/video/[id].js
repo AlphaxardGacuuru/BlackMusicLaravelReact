@@ -22,9 +22,7 @@ const VideoShow = (props) => {
 	let { id } = useParams()
 
 	const [video, setVideo] = useState({})
-	const [videos, setVideos] = useState([])
 	const [videoComments, setVideoComments] = useState([])
-	const [boughtVideos, setBoughtVideos] = useState([])
 	const [inCart, setInCart] = useState(false)
 	const [hasLiked, setHasLiked] = useState(false)
 	const [hasFollowed, setHasFollowed] = useState(false)
@@ -50,9 +48,9 @@ const VideoShow = (props) => {
 		}
 
 		// Fetch Videos
-		props.get("videos", setVideos, "videos")
+		props.get("videos", props.setVideos, "videos")
 		// Fetch Bought Videos
-		props.get("bought-videos", setBoughtVideos, "boughtVideos")
+		props.get("bought-videos", props.setBoughtVideos, "boughtVideos")
 	}, [id])
 
 	/*
@@ -496,15 +494,13 @@ const VideoShow = (props) => {
 				<div className="p-2">
 					<h5>Up next</h5>
 				</div>
-				{!boughtVideos.some(
-					(boughtVideo) => boughtVideo.username == props.auth.username
-				) && (
+				{!props.boughtVideos && (
 					<center>
 						<h6 style={{ color: "grey" }}>You haven't bought any videos</h6>
 					</center>
 				)}
 
-				{boughtVideos
+				{props.boughtVideos
 					.filter((boughtVideo) => boughtVideo.video_id != id)
 					.map((boughtVideo, key) => (
 						<VideoMedia
@@ -521,7 +517,7 @@ const VideoShow = (props) => {
 				<div className="p-2 mt-5">
 					<h5>Songs to watch</h5>
 				</div>
-				{videos
+				{props.videos
 					.filter((video) => {
 						return (
 							!video.hasBoughtVideo &&

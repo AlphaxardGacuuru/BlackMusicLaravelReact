@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import Carousel from "@/components/Core/Carousel"
 import LoadingKaraokeMedia from "@/components/Karaoke/LoadingKaraokeMedia"
@@ -8,17 +8,14 @@ import KaraokeMedia from "@/components/Karaoke/KaraokeMedia"
 import PlusSVG from "@/svgs/PlusSVG"
 
 const KaraokeCharts = (props) => {
-	const router = useLocation()
-
-	const [karaokes, setKaraokes] = useState([])
 	const [week, setWeek] = useState(0)
 	const weeks = [0, 1, 2, 3, 4, 5]
 
 	useEffect(() => {
 		// Fetch Karaokes
-		props.get("karaokes", setKaraokes, "karaokes")
+		props.get("karaokes", props.setKaraokes, "karaokes")
 		// Load more on page bottom
-		window.onscroll = function(ev) {
+		window.onscroll = function (ev) {
 			if (location.pathname.match(/karaoke\/charts/)) {
 				const bottom =
 					window.innerHeight + window.scrollY >=
@@ -61,7 +58,9 @@ const KaraokeCharts = (props) => {
 			<br />
 
 			{/* <!-- Scroll menu - */}
-			<div id="chartsMenu" className="hidden-scroll mt-2">
+			<div
+				id="chartsMenu"
+				className="hidden-scroll mt-2">
 				<span>
 					<Link to="/karaoke/charts">
 						<h3 className="active-scrollmenu">Karaoke</h3>
@@ -80,7 +79,9 @@ const KaraokeCharts = (props) => {
 			</div>
 
 			{/* Week */}
-			<div id="chartsMenu" className="hidden-scroll m-0">
+			<div
+				id="chartsMenu"
+				className="hidden-scroll m-0">
 				{weeks.map((weekItem, key) => (
 					<span key={key}>
 						<a
@@ -111,13 +112,13 @@ const KaraokeCharts = (props) => {
 						onScroll={handleScroll}>
 						{/* Loading Karaoke Media */}
 						{dummyArray
-							.filter(() => karaokes.length < 1)
+							.filter(() => props.karaokes.length < 1)
 							.map((item, key) => (
 								<LoadingKaraokeMedia key={key} />
 							))}
 						{/* Loading Karaoke Media End */}
 
-						{karaokes.map((karaoke, key) => (
+						{props.karaokes.map((karaoke, key) => (
 							<KaraokeMedia
 								{...props}
 								key={key}

@@ -58,6 +58,7 @@ function App() {
 	)
 	const [cartAudios, setCartAudios] = useState(getLocalStorage("cartAudios"))
 	const [cartVideos, setCartVideos] = useState(getLocalStorage("cartVideos"))
+	const [chatThreads, setChatThreads] = useState(getLocalStorage("chatThreads"))
 	const [karaokes, setKaraokes] = useState(getLocalStorage("karaokes"))
 	const [posts, setPosts] = useState(getLocalStorage("posts"))
 	const [savedKaraokes, setSavedKaraokes] = useState(
@@ -262,6 +263,8 @@ function App() {
 		setCartAudios,
 		cartVideos,
 		setCartVideos,
+		chatThreads,
+		setChatThreads,
 		karaokes,
 		setKaraokes,
 		posts,

@@ -8,11 +8,9 @@ const StoryShow = (props) => {
 
 	const storyScroller = useRef()
 
-	const [stories, setStories] = useState(props.stories)
-
-	useEffect(() => props.get("stories", setStories, "stories"), [])
-
 	useEffect(() => {
+		props.get("stories", props.setStories, "stories")
+
 		// Scroll Karaoke to current one
 		var storyEl = document.getElementById(id)
 
@@ -27,12 +25,12 @@ const StoryShow = (props) => {
 					ref={storyScroller}
 					className="hidden-scroll m-0 p-0"
 					style={{ scrollSnapType: "x mandatory" }}>
-					{stories.map((story, key) => (
+					{props.stories.map((story, key) => (
 						<Story
 							{...props}
 							key={key}
 							story={story}
-							stories={stories}
+							stories={props.stories}
 							storyScroller={storyScroller}
 						/>
 					))}

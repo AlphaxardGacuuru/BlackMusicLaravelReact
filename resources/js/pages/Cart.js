@@ -9,18 +9,16 @@ import CloseSVG from "@/svgs/CloseSVG"
 
 const Cart = (props) => {
 	const [messages, setMessages] = useState([])
-	const [cartVideos, setCartVideos] = useState([])
-	const [cartAudios, setCartAudios] = useState([])
 	const [bottomMenu, setBottomMenu] = useState("")
 	const [receipt, setReceipt] = useState("")
 	const [receiptVideos, setReceiptVideos] = useState([])
 	const [receiptAudios, setReceiptAudios] = useState([])
 
 	// Calculate totals
-	const videoTotal = cartVideos.length
-	const videoTotalCash = cartVideos.length * 20
-	const audioTotal = cartAudios.length
-	const audioTotalCash = cartAudios.length * 10
+	const videoTotal = props.cartVideos.length
+	const videoTotalCash = props.cartVideos.length * 20
+	const audioTotal = props.cartAudios.length
+	const audioTotalCash = props.cartAudios.length * 10
 	const total = videoTotalCash + audioTotalCash
 
 	useEffect(() => {
@@ -30,8 +28,8 @@ const Cart = (props) => {
 			buyAudios()
 		})
 
-		props.get("cart-videos", setCartVideos)
-		props.get("cart-audios", setCartAudios)
+		props.get("cart-videos", props.setCartVideos)
+		props.get("cart-audios", props.setCartAudios)
 	}, [])
 
 	// Send STKPush
@@ -44,7 +42,7 @@ const Cart = (props) => {
 	// Buy Videos
 	const buyVideos = () => {
 		// Try and buy videos if any are in cart
-		cartVideos.length > 0 &&
+		props.cartVideos.length > 0 &&
 			Axios.post(`/api/bought-videos`)
 				.then((res) => {
 					// If videos are bought stop checking
@@ -57,7 +55,7 @@ const Cart = (props) => {
 					} bought`
 					setMessages([...messages, message])
 					// Update state
-					props.get("cart-videos", setCartVideos)
+					props.get("cart-videos", props.setCartVideos)
 				})
 				.catch((err) => props.getErrors(err))
 	}
@@ -65,7 +63,7 @@ const Cart = (props) => {
 	// Buy Audios
 	const buyAudios = () => {
 		// Try and buy audios if any are in cart
-		cartAudios.length > 0 &&
+		props.cartAudios.length > 0 &&
 			Axios.post(`/api/bought-audios`)
 				.then((res) => {
 					setReceiptAudios(res.data.data)
@@ -76,7 +74,7 @@ const Cart = (props) => {
 					} bought`
 					setMessages([...messages, message])
 					// Update states
-					props.get("cart-audios", setCartAudios, "cartAudios")
+					props.get("cart-audios", props.setCartAudios, "cartAudios")
 				})
 				.catch((err) => props.getErrors(err))
 	}
@@ -107,7 +105,7 @@ const Cart = (props) => {
 					<div className="mb-4">
 						<center>
 							{/* Cart Videos */}
-							{cartVideos.length > 0 && (
+							{props.cartVideos.length > 0 && (
 								<>
 									<h3 className="pt-4 pb-2 border-bottom border-dark">
 										Videos
@@ -115,15 +113,15 @@ const Cart = (props) => {
 									<hr />
 								</>
 							)}
-							{cartVideos.map((cartVideo, key) => (
+							{props.cartVideos.map((cartVideo, key) => (
 								<VideoMedia
 									{...props}
 									key={key}
 									video={cartVideo}
-									setCartVideos={setCartVideos}
+									setCartVideos={props.setCartVideos}
 								/>
 							))}
-							{cartVideos.length > 0 && (
+							{props.cartVideos.length > 0 && (
 								<div className="d-flex justify-content-between border-top border-dark">
 									<div className="p-2">
 										<h4 className="text-success">Sub Total</h4>
@@ -140,7 +138,7 @@ const Cart = (props) => {
 				<div className="col-sm-4">
 					<div className="mb-4">
 						{/* Cart Audios */}
-						{cartAudios.length > 0 && (
+						{props.cartAudios.length > 0 && (
 							<>
 								<center>
 									<h3 className="pt-4 pb-2 border-bottom border-dark">
@@ -150,15 +148,15 @@ const Cart = (props) => {
 								<hr />
 							</>
 						)}
-						{cartAudios.map((cartAudio, key) => (
+						{props.cartAudios.map((cartAudio, key) => (
 							<AudioMedia
 								{...props}
 								key={key}
 								audio={cartAudio}
-								setCartAudios={setCartAudios}
+								setCartAudios={props.setCartAudios}
 							/>
 						))}
-						{cartAudios.length > 0 && (
+						{props.cartAudios.length > 0 && (
 							<div className="d-flex justify-content-between border-top border-dark">
 								<div className="p-2">
 									<h4 className="text-success">Sub Total</h4>
