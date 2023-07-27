@@ -34,7 +34,7 @@ const Download = (props) => {
 					<br />
 
 					<button
-						className="mysonar-btn btn-2"
+						className="mysonar-btn white-btn"
 						style={{
 							display: props.downloadLink ? "inline" : "none",
 						}}

@@ -188,7 +188,7 @@ const TopNavLinks = (props) => {
 						</div>
 					</Link>
 					<Link
-						to="/download-app"
+						to="/download"
 						className="p-2 px-3 dropdown-item border-bottom border-dark"
 						style={{
 							display: props.downloadLink ? "block" : "none",

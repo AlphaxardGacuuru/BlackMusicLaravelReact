@@ -73,24 +73,25 @@ a:focus {
 	border-radius: 0px;
 	line-height: 64px;
 	padding: 0;
-	background-color: rgba(220, 220, 220, 1);
+	background-color: #fff;
 }
 
 .sonar-btn:hover,
 .sonar-btn:focus {
 	background-color: #2f2f2f;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .sonar-btn.white-btn {
-	border-color: rgba(220, 220, 220, 1);
-	color: rgba(220, 220, 220, 1);
+	border-color: #fff;
+	color: #fff;
 	background-color: transparent;
 }
 
+.sonar-btn:hover,
 .sonar-btn.white-btn:focus {
-	background-color: rgba(220, 220, 220, 1);
+	background-color: #fff;
 	color: #2f2f2f;
 }
 
@@ -109,18 +110,18 @@ a:focus {
 .sonar-btn.btn-2 {
 	background-color: #2f2f2f;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .sonar-btn.gold-btn.btn-2 {
 	background-color: gold;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .sonar-btn.btn-3 {
 	background-color: #232323;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .sonar-btn.btn-3::before {
@@ -138,7 +139,7 @@ a:focus {
 
 .sonar-btn.btn-3:focus {
 	background-color: #232323;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 /*My Sonar Button*/
@@ -167,13 +168,14 @@ a:focus {
 }
 
 .mysonar-btn.white-btn {
-	border-color: rgba(220, 220, 220, 1);
-	color: rgba(220, 220, 220, 1);
+	border-color: #fff;
+	color: #fff;
 	background-color: transparent;
 }
 
+.mysonar-btn.white-btn:hover,
 .mysonar-btn.white-btn:focus {
-	background-color: rgba(220, 220, 220, 1);
+	background-color: #fff;
 	color: #2f2f2f;
 }
 
@@ -192,12 +194,12 @@ a:focus {
 
 .mysonar-btn.green-btn:focus {
 	background-color: #006F3E;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn.green-btn:hover {
 	background-color: #006F3E;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn.gold-btn {
@@ -209,13 +211,13 @@ a:focus {
 .mysonar-btn.gold-btn:focus,
 .mysonar-btn.gold-btn:hover {
 	background-color: gold;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .poll-btn:focus,
 .poll-btn:hover {
 	background-color: transparent;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn-round {
@@ -229,8 +231,8 @@ a:focus {
 	letter-spacing: 1px;
 	border-radius: 0;
 	padding: 0;
-	border-color: rgba(220, 220, 220, 1);
-	color: rgba(220, 220, 220, 1);
+	border-color: #fff;
+	color: #fff;
 	background-color: transparent;
 }
 
@@ -244,32 +246,32 @@ a:focus {
 .mysonar-btn.btn-2 {
 	background-color: #232323;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .green-btn.btn-2 {
 	background-color: #006F3E;
 	border-color: #006F3E;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .poll-btn.btn-2 {
 	background-color: #232323;
 	border-color: #232323;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn-round.btn-2 {
 	background-color: #2f2f2f;
 	font-size: 12px;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn.btn-3 {
 	background-color: #232323;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 }
 
 .mysonar-btn.btn-3::before {
@@ -545,11 +547,11 @@ a:focus {
 	padding: 0 15px;
 	border: none;
 	border-bottom: 1px solid;
-	border-color: rgba(220, 220, 220, 1);
+	border-color: #fff;
 	border-radius: 0;
 	font-size: 12px;
 	font-style: italic;
-	color: rgba(220, 220, 220, 1);
+	color: #fff;
 	background-color: transparent;
 }
 

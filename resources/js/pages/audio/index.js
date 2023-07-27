@@ -75,7 +75,7 @@ const Audios = (props) => {
 					<center>
 						<Link
 							to="/audio/album/create"
-							className="btn sonar-btn">
+							className="btn sonar-btn btn-2">
 							create audio album
 						</Link>
 					</center>
@@ -84,7 +84,7 @@ const Audios = (props) => {
 					<center>
 						<Link
 							to="/audio/create"
-							className="btn sonar-btn">
+							className="btn sonar-btn btn-2">
 							upload audio
 						</Link>
 					</center>
@@ -188,15 +188,7 @@ const Audios = (props) => {
 												<tr key={key}>
 													<td></td>
 													<td>
-														<Link
-															to={`/audio/edit/${albumItem.id}`}
-															onClick={() => {
-																props.setShow(albumItem.id)
-																props.setLocalStorage("show", {
-																	id: albumItem.id,
-																	time: 0,
-																})
-															}}>
+														<Link to={`/audio/show/${albumItem.id}`}>
 															<Img
 																src={albumItem.thumbnail}
 																width="50px"
@@ -225,7 +217,7 @@ const Audios = (props) => {
 													<td>{audioAlbum.createdAt}</td>
 													<td>
 														<Link to={`/audio/edit/${albumItem.id}`}>
-															<button className="mysonar-btn white-btn">
+															<button className="mysonar-btn btn-2">
 																edit
 															</button>
 														</Link>

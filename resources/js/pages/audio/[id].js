@@ -633,12 +633,11 @@ const AudioShow = (props) => {
 				)}
 
 				{props.boughtAudios
-					.filter(
-						(boughtAudio) => boughtAudio.id != props.audioStates.show.id
-					)
+					.filter((boughtAudio) => boughtAudio.id != props.audioStates.show.id)
 					.map((boughtAudio, key) => (
 						<AudioMedia
 							{...props}
+							key={key}
 							audio={boughtAudio}
 							onBuyAudios={onBuyAudios}
 						/>

@@ -142,7 +142,9 @@ const VideoCreate = (props) => {
 										<br />
 										<br />
 
-										<label htmlFor="" className="text-light">
+										<label
+											htmlFor=""
+											className="text-light">
 											Featuring Artist
 											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
 										</label>
@@ -161,11 +163,15 @@ const VideoCreate = (props) => {
 											className="my-form"
 											required={true}
 											onChange={(e) => setVideoAlbumId(e.target.value)}>
-											<option defaultValue value="">
+											<option
+												defaultValue
+												value="">
 												Select Album
 											</option>
 											{artistVideoAlbums.map((videoAlbum, key) => (
-												<option key={key} value={videoAlbum.id}>
+												<option
+													key={key}
+													value={videoAlbum.id}>
 													{videoAlbum.name}
 												</option>
 											))}
@@ -179,12 +185,12 @@ const VideoCreate = (props) => {
 											placeholder="Select video genre"
 											required={true}
 											onChange={(e) => setGenre(e.target.value)}>
-											<option defaultValue value="">
+											<option
+												defaultValue
+												value="">
 												Select Genre
 											</option>
-											<option value="Afro">
-												Afro
-											</option>
+											<option value="Afro">Afro</option>
 											<option value="Benga">Benga</option>
 											<option value="Blues">Blues</option>
 											<option value="Boomba">Boomba</option>
@@ -291,7 +297,7 @@ const VideoCreate = (props) => {
 
 										{/* {{-- Collapse --}} */}
 										<button
-											className="sonar-btn"
+											className="sonar-btn white-btn"
 											type="button"
 											data-bs-toggle="collapse"
 											data-bs-target="#collapseExample"
@@ -299,7 +305,9 @@ const VideoCreate = (props) => {
 											aria-controls="collapseExample">
 											next
 										</button>
-										<div className="collapse" id="collapseExample">
+										<div
+											className="collapse"
+											id="collapseExample">
 											<div className="">
 												<br />
 												<h3>Before you upload</h3>
@@ -315,7 +323,10 @@ const VideoCreate = (props) => {
 													<b style={{ color: "green" }}>50% (KES 10)</b>.
 												</h6>
 												<br />
-												<Btn btnText="upload video" loading={loadingBtn} />
+												<Btn
+													btnText="upload video"
+													loading={loadingBtn}
+												/>
 											</div>
 										</div>
 										{/* {{-- Collapse End --}} */}
@@ -323,7 +334,9 @@ const VideoCreate = (props) => {
 									<br />
 									<br />
 
-									<Link to="/video" className="btn sonar-btn btn-2">
+									<Link
+										to="/video"
+										className="btn sonar-btn btn-2">
 										studio
 									</Link>
 								</div>

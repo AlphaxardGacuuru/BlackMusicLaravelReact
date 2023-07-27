@@ -139,7 +139,9 @@ const AudioCreate = (props) => {
 										<br />
 										<br />
 
-										<label htmlFor="" className="text-light">
+										<label
+											htmlFor=""
+											className="text-light">
 											Featuring Artist
 											<b className="text-danger"> (MUST HAVE AN ACCOUNT!)</b>
 										</label>
@@ -158,11 +160,15 @@ const AudioCreate = (props) => {
 											className="my-form"
 											required={true}
 											onChange={(e) => setAudioAlbumId(e.target.value)}>
-											<option defaultValue value="">
+											<option
+												defaultValue
+												value="">
 												Select Album
 											</option>
 											{artistAudioAlbums.map((audioAlbum, key) => (
-												<option key={key} value={audioAlbum.id}>
+												<option
+													key={key}
+													value={audioAlbum.id}>
 													{audioAlbum.name}
 												</option>
 											))}
@@ -176,7 +182,9 @@ const AudioCreate = (props) => {
 											placeholder="Select audio genre"
 											required={true}
 											onChange={(e) => setGenre(e.target.value)}>
-											<option defaultValue value="">
+											<option
+												defaultValue
+												value="">
 												Select Genre
 											</option>
 											<option value="Afro">Afro</option>
@@ -286,7 +294,7 @@ const AudioCreate = (props) => {
 
 										{/* {{-- Collapse --}} */}
 										<button
-											className="sonar-btn"
+											className="sonar-btn white-btn"
 											type="button"
 											data-bs-toggle="collapse"
 											data-bs-target="#collapseExample"
@@ -294,7 +302,9 @@ const AudioCreate = (props) => {
 											aria-controls="collapseExample">
 											next
 										</button>
-										<div className="collapse" id="collapseExample">
+										<div
+											className="collapse"
+											id="collapseExample">
 											<div className="">
 												<br />
 												<h3>Before you upload</h3>
@@ -303,33 +313,17 @@ const AudioCreate = (props) => {
 												</h6>
 												<h6>
 													Audios are sold at
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														KES 10
-													</b>
-													, Black Music takes
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														50% (KES 5)
-													</b>{" "}
-													and the musician takes
-													<b
-														style={{
-															color: "green",
-														}}>
-														{" "}
-														50% (KES 5)
-													</b>
-													.
+													<b style={{ color: "green" }}> KES 10</b>, Black Music
+													takes
+													<b style={{ color: "green" }}> 50% (KES 5)</b> and the
+													musician takes
+													<b style={{ color: "green" }}> 50% (KES 5)</b>.
 												</h6>
 												<br />
-												<Btn btnText="upload audio" loading={loadingBtn} />
+												<Btn
+													btnText="upload audio"
+													loading={loadingBtn}
+												/>
 											</div>
 										</div>
 										{/* {{-- Collapse End --}} */}
@@ -337,7 +331,9 @@ const AudioCreate = (props) => {
 									<br />
 									<br />
 
-									<Link to="/audio" className="btn sonar-btn btn-2">
+									<Link
+										to="/audio"
+										className="btn sonar-btn btn-2">
 										studio
 									</Link>
 								</div>

@@ -109,8 +109,14 @@ const VideoAlbumCreate = (props) => {
 										<br />
 
 										<label className="text-light">Upload Album Cover</label>
-										<div className="mb-2" style={{ overflow: "hidden" }}>
-											<img src={preview} width="100%" height="auto" />
+										<div
+											className="mb-2"
+											style={{ overflow: "hidden" }}>
+											<img
+												src={preview}
+												width="100%"
+												height="auto"
+											/>
 										</div>
 
 										{/* Hidden file input */}
@@ -144,7 +150,9 @@ const VideoAlbumCreate = (props) => {
 										<br />
 										<br />
 
-										<Link to="/video" className="btn sonar-btn btn-2">
+										<Link
+											to="/video"
+											className="btn sonar-btn btn-2">
 											studio
 										</Link>
 									</form>

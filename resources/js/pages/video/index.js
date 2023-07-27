@@ -102,10 +102,12 @@ const Videos = (props) => {
 	return (
 		<div className="sonar-call-to-action-area section-padding-0-100">
 			{/* Become musician button */}
-			<center className="mt-5 pt-5" style={{ display: button }}>
+			<center
+				className="mt-5 pt-5"
+				style={{ display: button }}>
 				<Btn
 					btnText="become a musician"
-					btnClass="sonar-btn btn-2"
+					btnClass="sonar-btn white-btn"
 					loading={loading}
 					onClick={onMusician}
 				/>
@@ -116,29 +118,39 @@ const Videos = (props) => {
 			<div className="backEnd-content">
 				<h2 style={{ color: "rgba(255, 255, 255, 0.1)" }}>Studio</h2>
 			</div>
-			<div className="row" style={{ display: main }}>
+			<div
+				className="row"
+				style={{ display: main }}>
 				<div className="col-sm-12">
 					<center>
 						<h1 style={{ fontSize: "5em", fontWeight: "100" }}>Videos</h1>
 						<br />
-						<Link to="/audio" className="btn sonar-btn btn-2">
+						<Link
+							to="/audio"
+							className="btn sonar-btn btn-2">
 							go to audios
 						</Link>
 					</center>
 				</div>
 			</div>
-			<div className="row" style={{ display: main }}>
+			<div
+				className="row"
+				style={{ display: main }}>
 				<div className="col-sm-4"></div>
 				<div className="col-sm-2">
 					<center>
-						<Link to="/video/album/create" className="btn sonar-btn">
+						<Link
+							to="/video/album/create"
+							className="btn sonar-btn btn-2">
 							create video album
 						</Link>
 					</center>
 				</div>
 				<div className="col-sm-2">
 					<center>
-						<Link to="/video/create" className="btn sonar-btn">
+						<Link
+							to="/video/create"
+							className="btn sonar-btn btn-2">
 							upload video
 						</Link>
 					</center>
@@ -150,12 +162,16 @@ const Videos = (props) => {
 			<br />
 
 			{/* Stats */}
-			<div className="row" style={{ display: main }}>
+			<div
+				className="row"
+				style={{ display: main }}>
 				<div className="col-sm-2">
 					<table className="table table-dark table-hover">
 						<thead>
 							<tr>
-								<th colSpan="2" className="display-">
+								<th
+									colSpan="2"
+									className="display-">
 									Stats
 								</th>
 							</tr>
@@ -275,7 +291,7 @@ const Videos = (props) => {
 													<td>{albumItem.createdAt}</td>
 													<td>
 														<Link to={`/video/edit/${albumItem.id}`}>
-															<button className="mysonar-btn white-btn">
+															<button className="mysonar-btn btn-2">
 																edit
 															</button>
 														</Link>

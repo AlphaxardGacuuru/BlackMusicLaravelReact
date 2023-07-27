@@ -20,7 +20,7 @@ const Btn = ({ btnStyle, btnClass, btnText, onClick, loading }) => (
 );
 
 Btn.defaultProps = {
-    btnClass: "sonar-btn",
+    btnClass: "sonar-btn white-btn",
     loading: false
 };
 
