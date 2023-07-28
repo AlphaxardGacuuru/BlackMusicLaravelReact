@@ -37,6 +37,11 @@ class VideoCommentLikeService extends Service
             $added = true;
         }
 
-        return [$added, $message, $videoCommentLike];
+		// Check if current user is owner of videos
+		$notCurrentUser = $videoCommentLike->comment->username != $this->username;
+		// Dispatch if comment is saved successfully and current user is not owner of audio
+		$canDispatch = $notCurrentUser && $added;
+
+        return [$canDispatch, $message, $videoCommentLike];
     }
 }

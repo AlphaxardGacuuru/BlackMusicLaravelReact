@@ -33,14 +33,17 @@ class AudioLikeController extends Controller
      */
     public function store(Request $request)
     {
-        [$added, $message] = $this->service->store($request);
+        [$canDispatch, $message, $audioLike] = $this->service->store($request);
 
-        $audio = Audio::find($request->input("audio"));
-
-        AudioLikedEvent::dispatchIf($added, $audio);
+        AudioLikedEvent::dispatchIf(
+            $canDispatch,
+            $audioLike->audio,
+            $audioLike->username
+        );
 
         return response([
             "message" => $message,
+			"data" => $audioLike
         ], 200);
     }
 

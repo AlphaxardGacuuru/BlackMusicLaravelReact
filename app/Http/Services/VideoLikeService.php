@@ -37,6 +37,11 @@ class VideoLikeService extends Service
             $added = true;
         }
 
-        return [$added, $message, $videoLike];
+		// Check if user is owner of video
+		$notCurrentUser = $videoLike->video->username != $this->username;
+		// Dispatch if like is saved successfully and user is not owner of video
+		$canDispatch = $notCurrentUser && $added;
+
+        return [$canDispatch, $message, $videoLike];
     }
 }

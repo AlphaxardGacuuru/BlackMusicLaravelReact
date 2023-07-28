@@ -13,15 +13,17 @@ class AudioCommentLikedNotification extends Notification implements ShouldBroadc
     use Queueable;
 
 	public $comment;
+	public $username;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($comment)
+    public function __construct($comment, $username)
     {
         $this->comment = $comment;
+        $this->username = $username;
     }
 
     /**
@@ -59,8 +61,8 @@ class AudioCommentLikedNotification extends Notification implements ShouldBroadc
     {
         return [
 			'url' => '/audio/' . $this->comment->audio->id,
-			'from' => auth('sanctum')->user()->username,
-			'message' => auth('sanctum')->user()->username . ' liked your comment on ' . $this->comment->audio->name,
+			'from' => $this->username,
+			'message' => $this->username . ' liked your comment on ' . $this->comment->audio->name,
         ];
     }
 }

@@ -26,8 +26,9 @@ class VideoCommentLikedListener implements ShouldQueue
      */
     public function handle(VideoCommentLikedEvent $event)
     {
-        if ($event->comment->user->username != auth("sanctum")->user()->username) {
-            $event->comment->user->notify(new VideoCommentLikedNotification($event->comment));
-        }
+        $event
+            ->comment
+            ->user
+            ->notify(new VideoCommentLikedNotification($event->comment, $event->username));
     }
 }

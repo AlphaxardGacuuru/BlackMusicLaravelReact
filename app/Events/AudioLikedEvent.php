@@ -15,15 +15,17 @@ class AudioLikedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	public $audio;
+	public $username;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($audio)
+    public function __construct($audio, $username)
     {
         $this->audio = $audio;
+        $this->username = $username;
     }
 
     /**

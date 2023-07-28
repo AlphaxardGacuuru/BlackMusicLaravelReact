@@ -37,6 +37,11 @@ class AudioCommentLikeService extends Service
             $added = true;
         }
 
-        return [$added, $message, $audioCommentLike];
+		// Check if user is owner of audio comment
+		$notCurrentUser = $audioCommentLike->comment->username != $this->username;
+		// Dispatch if comment is saved successfully and user is not owner of audio comment
+		$canDispatch = $notCurrentUser && $added;
+
+        return [$canDispatch, $message, $audioCommentLike];
     }
 }

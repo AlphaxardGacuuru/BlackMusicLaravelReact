@@ -13,15 +13,17 @@ class VideoCommentLikedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $comment;
+    public $username;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($comment)
+    public function __construct($comment, $username)
     {
         $this->comment = $comment;
+        $this->username = $username;
     }
 
     /**

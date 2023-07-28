@@ -14,8 +14,8 @@ class AudioLikeService extends Service
      */
     public function store($request)
     {
-		$audioLike = "data";
-		
+        $audioLike = "data";
+
         $hasLiked = AudioLike::where('audio_id', $request->input('audio'))
             ->where('username', auth('sanctum')->user()->username)
             ->exists();
@@ -37,6 +37,11 @@ class AudioLikeService extends Service
             $added = true;
         }
 
-        return [$added, $message, $audioLike];
+        // Check if user is owner of audios
+        $notCurrentUser = $audioLike->audio->username != $this->username;
+        // Dispatch if like is saved successfully and user is not owner of audio
+        $canDispatch = $notCurrentUser && $added;
+
+        return [$canDispatch, $message, $audioLike];
     }
 }
