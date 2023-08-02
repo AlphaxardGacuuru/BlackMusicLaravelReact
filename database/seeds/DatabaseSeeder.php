@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
 
             VideoAlbumSeeder::class,
             VideoSeeder::class,
-            BoughtVideoSeeder::class,
+            // BoughtVideoSeeder::class,
 
             AudioAlbumSeeder::class,
             AudioSeeder::class,
-            BoughtAudioSeeder::class,
+            // BoughtAudioSeeder::class,
 
             KaraokeSeeder::class,
 			

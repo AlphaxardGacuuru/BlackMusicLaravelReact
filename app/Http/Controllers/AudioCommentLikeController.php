@@ -22,7 +22,7 @@ class AudioCommentLikeController extends Controller
      */
     public function index()
     {
-        return phpinfo();
+		// 
     }
 
     /**

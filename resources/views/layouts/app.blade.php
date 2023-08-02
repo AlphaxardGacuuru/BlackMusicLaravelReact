@@ -91,7 +91,7 @@
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
 
-	{{-- Chat.js --}}
+	{{-- Chart.js --}}
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	@auth
